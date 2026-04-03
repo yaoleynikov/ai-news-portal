@@ -3,24 +3,21 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'SiliconFeed — Silicon Valley & Tech News', template: '%s | SiliconFeed' },
-  description: 'Autonomous tech news aggregator: AI, startups, cloud, cybersecurity, apps, crypto.',
-  keywords: ['Silicon Valley', 'tech news', 'startups', 'AI', 'artificial intelligence', 'cloud computing', 'cybersecurity', 'SaaS'],
-  authors: [{ name: 'SiliconFeed Team' }],
+  title: { default: 'siliconfeed — autonomous tech news', template: '%s // siliconfeed' },
+  description: 'Autonomous aggregator of tech intelligence: AI, startups, cloud, security.',
+  keywords: ['tech news', 'AI', 'startups', 'cloud', 'cybersecurity', 'crypto'],
+  authors: [{ name: 'SiliconFeed' }],
   creator: 'SiliconFeed',
   publisher: 'SiliconFeed',
   metadataBase: new URL('https://siliconfeed.online'),
   alternates: { canonical: 'https://siliconfeed.online' },
   openGraph: {
     type: 'website', locale: 'en_US', url: 'https://siliconfeed.online',
-    siteName: 'SiliconFeed', title: 'SiliconFeed — Silicon Valley & Tech News',
-    description: 'Autonomous tech news aggregator: AI, startups, cloud, cybersecurity, apps.',
+    siteName: 'siliconfeed', title: 'siliconfeed — autonomous tech news',
+    description: 'Autonomous tech news aggregator.',
   },
-  twitter: { card: 'summary_large_image', title: 'SiliconFeed', description: 'Silicon Valley & tech news.' },
+  twitter: { card: 'summary_large_image', title: 'siliconfeed', description: 'autonomous tech news' },
   robots: { index: true, follow: true },
-  verification: {
-    google: 'add-your-google-site-verification-code-here',
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,20 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="canonical" href="https://siliconfeed.online" />
-        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
-        <meta name="theme-color" content="#1c1917" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org', '@type': 'NewsMediaOrganization',
-            name: 'SiliconFeed', url: 'https://siliconfeed.online',
-            logo: { '@type': 'ImageObject', url: 'https://siliconfeed.online/logo.png' }, sameAs: [],
-          }),
-        }} />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100'/><text y='.9em' x='10' font-family='monospace' font-size='70' fill='white' font-weight='bold'>sf</text></svg>" />
+        <meta name="theme-color" content="#fafafa" />
       </head>
-      <body className="antialiased">
+      <body>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-0456HS5LSV" strategy="afterInteractive" />
-        <Script id="ga" strategy="afterInteractive" dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0456HS5LSV');`,
+        <Script id="gtag" strategy="afterInteractive" dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0456HS5LSV');`
         }} />
         {children}
       </body>

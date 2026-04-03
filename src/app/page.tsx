@@ -1,138 +1,130 @@
+import Link from 'next/link';
 import { getSortedPosts } from '@/lib/posts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Image from 'next/image';
 
-function fmtDate(date: string) {
-  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-function fmtShort(date: string) {
-  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+function fmtShortTime() {
+  return new Date().toLocaleString('en-US', {
+    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false,
+  }).toUpperCase();
 }
+
+const TICKERS = [
+  { slug: 'all', label: 'all' },
+  { slug: 'ai', label: 'ai' },
+  { slug: 'startups', label: 'startups' },
+  { slug: 'cloud', label: 'cloud' },
+  { slug: 'security', label: 'security' },
+  { slug: 'crypto', label: 'crypto' },
+  { slug: 'hardware', label: 'hardware' },
+];
 
 export default async function HomePage() {
   const allPosts = getSortedPosts();
-  const featured = allPosts[0];
-  const grid = allPosts.slice(1, 5);
-  const latest = allPosts.slice(5);
+  const hero = allPosts[0];
+  const sidePosts = allPosts.slice(1, 4);
+  const grid = allPosts.slice(4, 8);
+  const listItems = allPosts.slice(8);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       <Header />
-      <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
-
-        {/* FEATURED — full-width hero */}
-        {featured && (
-          <a href={`/news/${featured.slug}`} className="featured">
-            {featured.coverImage && (
-              <div className="featured-image">
-                <img src={featured.coverImage} alt={featured.title} />
-              </div>
-            )}
-            <div>
-              <div className="featured-meta">
-                <span className="featured-tag">{featured.tags?.[0] || 'Tech'}</span>
-                <span className="featured-date">{fmtDate(featured.date)}</span>
-              </div>
-              <h2>{featured.title}</h2>
-              <p className="featured-excerpt">{featured.excerpt}</p>
-            </div>
-          </a>
-        )}
-
-        {/* TWO COLUMN — grid + sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 mb-12">
-          {/* Articles Grid */}
-          <div>
-            <div className="section-label">
-              <h2>Top Stories</h2>
-              <span className="section-line" />
-            </div>
-            <div className="articles-grid">
-              {grid.map(post => (
-                <a key={post.slug} href={`/news/${post.slug}`} className="card">
-                  {post.coverImage ? (
-                    <div className="card-image">
-                      <img src={post.coverImage} alt={post.title} loading="lazy" />
-                    </div>
-                  ) : (
-                    <div className="card-image" style={{ background: 'linear-gradient(135deg,#fed7aa,#fbbf24)' }} />
-                  )}
-                  <div className="card-body">
-                    <div className="card-meta">
-                      <span className="card-tag">{post.tags?.[0] || 'News'}</span>
-                      <span className="card-date">{fmtShort(post.date)}</span>
-                    </div>
-                    <h3>{post.title}</h3>
-                    <p className="card-excerpt">{post.excerpt}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <aside>
-            <div className="sidebar-sticky">
-              <div className="sidebar-box">
-                <h4 className="sidebar-title">About SiliconFeed</h4>
-                <p className="sidebar-text">
-                  Autonomous tech news aggregator. 130+ sources, published in real-time. No humans required.
-                </p>
-                <a href="/about" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--accent)' }}>
-                  Learn more →
-                </a>
-              </div>
-              <div className="sidebar-box">
-                <h4 className="sidebar-title">Topics</h4>
-                <div className="topic-cloud">
-                  {['AI', 'Startups', 'Cloud', 'Security', 'Crypto', 'Google', 'OpenAI', 'Hardware'].map(t => (
-                    <a key={t} href={`/tag/${t.toLowerCase()}`} className="topic-chip">{t}</a>
-                  ))}
+      <div className="main-layout">
+        <div className="content-area">
+          {hero && (
+            <div className="bento-hero">
+              <a href={`/news/${hero.slug}`} className="hero-main">
+                {hero.coverImage ? (
+                  <div className="hero-main-img"><img src={hero.coverImage} alt={hero.title} /></div>
+                ) : <div className="hero-main-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}><span style={{ fontFamily: 'var(--mono)', fontSize: '48px', color: '#d4d4d4' }}>◆</span></div>}
+                <div className="hero-main-body">
+                  <div className="card-kicker">{hero.tags?.[0] || 'tech'}<span className="dot" />{fmtDate(hero.date)}</div>
+                  <h2 style={{ fontSize: '20px', fontWeight: 600, lineHeight: 1.3, margin: '0 0 6px 0' }}>{hero.title}</h2>
+                  <p className="card-excerpt" style={{ color: 'var(--text-sec)' }}>{hero.excerpt}</p>
                 </div>
+              </a>
+              <div className="hero-side">
+                {sidePosts.map(post => (
+                  <a key={post.slug} href={`/news/${post.slug}`} className="hero-side-item">
+                    <div className="card-kicker">{post.tags?.[0] || 'news'}<span className="dot" />{fmtDate(post.date)}</div>
+                    <h3 style={{ fontSize: '14px', fontWeight: 600, lineHeight: 1.35, margin: 0 }}>{post.title}</h3>
+                  </a>
+                ))}
               </div>
             </div>
-          </aside>
+          )}
+
+          {grid.length > 0 && (
+            <>
+              <div className="section-label"><span>latest</span><span className="count">{grid.length} stories</span></div>
+              <div className="grid-feed">
+                {grid.map(post => (
+                  <a key={post.slug} href={`/news/${post.slug}`} className="card">
+                    {post.coverImage ? (<div className="card-img"><img src={post.coverImage} alt="" loading="lazy" /></div>) : (<div className="card-img" style={{ backgroundColor: '#f5f5f5' }} />)}
+                    <div className="card-body">
+                      <div className="card-kicker">{post.tags?.[0] || 'news'}<span className="dot" />{fmtDate(post.date)}</div>
+                      <h3>{post.title}</h3>
+                      <p>{post.excerpt}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
+
+          {listItems.length > 0 && (
+            <>
+              <div className="section-label"><span>more</span></div>
+              <div className="list-feed">
+                {listItems.map(post => (
+                  <a key={post.slug} href={`/news/${post.slug}`} className="list-item">
+                    <div className="list-main">
+                      <div className="list-kicker">{post.tags?.[0] || 'news'}<span style={{ margin: '0 5px', color: 'var(--text-tertiary)' }}>·</span>{fmtDate(post.date)}</div>
+                      <h4>{post.title}</h4>
+                      <p>{post.excerpt}</p>
+                    </div>
+                    {post.coverImage && <div className="list-thumb"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
-        {/* LATEST — list layout */}
-        {latest.length > 0 && (
-          <div className="mb-12">
-            <div className="section-label">
-              <h2>Latest</h2>
-              <span className="section-line" />
-            </div>
-            <div className="latest-list">
-              {latest.map(post => (
-                <a key={post.slug} href={`/news/${post.slug}`} className="latest-item">
-                  <div className="latest-info">
-                    <div className="latest-meta">
-                      <span className="latest-tag">{post.tags?.[0] || 'News'}</span>
-                      <span className="latest-date">{fmtShort(post.date)}</span>
-                    </div>
-                    <h3>{post.title}</h3>
-                    <p>{post.excerpt}</p>
-                  </div>
-                  {post.coverImage && (
-                    <div className="latest-thumb">
-                      <img src={post.coverImage} alt="" loading="lazy" />
-                    </div>
-                  )}
-                </a>
+        <aside className="sidebar">
+          <div className="sidebar-section">
+            <p className="sidebar-label">topics</p>
+            <div className="tag-grid">
+              {['ai', 'startups', 'cloud', 'security', 'crypto', 'hardware'].map(t => (
+                <a key={t} href={`/tag/${t}`} className="tag-chip">{t}</a>
               ))}
             </div>
           </div>
-        )}
-      </main>
+          <div className="sidebar-section">
+            <p className="sidebar-label">about</p>
+            <p style={{ fontSize: '13px', color: 'var(--text-sec)', lineHeight: 1.6, margin: 0 }}>autonomous tech news aggregator. 130+ sources, published in real-time.</p>
+            <a href="/about" style={{ fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--text)', marginTop: '10px', display: 'inline-block' }}>read more →</a>
+          </div>
+          <div className="sidebar-section">
+            <p className="sidebar-label">recent</p>
+            <div className="as-related">
+              {allPosts.slice(0, 5).map(post => (
+                <a key={post.slug} href={`/news/${post.slug}`}>{post.title.length > 55 ? post.title.substring(0, 52) + '…' : post.title}<span className="related-date">{fmtDate(post.date)}</span></a>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+
       <Footer />
     </div>
   );
 }
 
 export function generateMetadata() {
-  return {
-    title: 'SiliconFeed — Silicon Valley & Tech News',
-    description: 'Autonomous aggregator of tech news: AI, startups, cloud, cybersecurity, crypto.',
-  };
+  return { title: 'siliconfeed — autonomous tech news', description: 'Autonomous aggregator of tech intelligence.' };
 }

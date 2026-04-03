@@ -1,39 +1,43 @@
 import Link from 'next/link';
 
+const TICKERS = [
+  { slug: 'all', label: 'all' },
+  { slug: 'ai', label: 'ai' },
+  { slug: 'startups', label: 'startups' },
+  { slug: 'cloud', label: 'cloud' },
+  { slug: 'security', label: 'security' },
+  { slug: 'crypto', label: 'crypto' },
+  { slug: 'hardware', label: 'hardware' },
+];
+
+function fmtShortTime() {
+  return new Date().toLocaleString('en-US', {
+    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false,
+  }).toUpperCase();
+}
+
 export default function Header() {
-  const dateStr = new Date().toLocaleDateString('en-US', {
-    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-  });
-
-  const cats = [
-    { slug: 'all', label: 'All', emoji: '🔥' },
-    { slug: 'ai', label: 'AI', emoji: '🤖' },
-    { slug: 'startups', label: 'Startups', emoji: '🚀' },
-    { slug: 'cloud', label: 'Cloud', emoji: '☁️' },
-    { slug: 'security', label: 'Security', emoji: '🔒' },
-    { slug: 'crypto', label: 'Crypto', emoji: '₿' },
-  ];
-
   return (
-    <header className="site-header">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="header-top">
-          <span className="header-date">{dateStr}</span>
-          <Link href="/" className="site-logo">Silicon<span>Feed</span></Link>
-          <nav className="site-nav">
-            <Link href="/about">About</Link>
-            <Link href="/rss.xml">RSS</Link>
-          </nav>
-        </div>
+    <div>
+      <header className="topbar">
+        <div className="topbar-time">{fmtShortTime()}</div>
+        <Link href="/" className="logo">siliconfeed</Link>
+        <nav className="topbar-nav">
+          <Link href="/about">about</Link>
+          <Link href="/rss.xml">rss</Link>
+        </nav>
+      </header>
 
-        <div className="categories-bar">
-          {cats.map(c => (
-            <a key={c.slug} href={`/tag/${c.slug}`} className="cat-pill">
-              <span>{c.emoji}</span><span>{c.label}</span>
+      <div className="ticker">
+        <div className="ticker-label">feed</div>
+        <div className="ticker-track">
+          {TICKERS.map(t => (
+            <a key={t.slug} href={`/tag/${t.slug}`} className="ticker-item">
+              {t.label}
             </a>
           ))}
         </div>
       </div>
-    </header>
+    </div>
   );
 }
