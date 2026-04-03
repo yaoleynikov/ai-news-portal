@@ -15,9 +15,9 @@ export default function AboutPage() {
         <h2>sources</h2>
         <p>TechCrunch, Ars Technica, VentureBeat, Reuters, Decrypt, Google AI Blog, OpenAI Blog, HuggingFace, AWS, HackerNews, Reddit, and 120+ more.</p>
         <h2>stack</h2>
-        <p>Next.js 15. Tailwind. TypeScript. Vercel Edge. Google Analytics. Schema.org. RSS.</p>
+        <p><code>Next.js 15</code> <code>Tailwind</code> <code>TypeScript</code> <code>Vercel Edge</code> <code>Google Analytics</code> <code>Schema.org</code> <code>RSS</code></p>
         <h2>contact</h2>
-        <p><a href="mailto:hello@siliconfeed.online" style={{ fontFamily: 'var(--mono)' }}>hello@siliconfeed.online</a></p>
+        <p><a href="mailto:hello@siliconfeed.online" style={{ fontFamily: 'var(--mono)', fontSize: '15px' }}>hello@siliconfeed.online</a></p>
       </div>
       <Footer />
     </div>

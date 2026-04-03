@@ -10,19 +10,24 @@ export default async function AllPage() {
   return (
     <div>
       <Header />
-      <div className="main">
-        <div className="seclbl">all stories ({all.length})</div>
-        <div className="llist">
-          {all.map(p => (
-            <a key={p.slug} href={`/news/${p.slug}`} className="lr">
-              <div className="lr-b">
-                <p className="lr-t">{p.title}</p>
-                <p className="lr-d">{p.tags?.[0] || 'news'} · {fd(p.date)}</p>
-              </div>
-              {p.coverImage && <div className="lr-i"><img src={p.coverImage} alt="" loading="lazy" /></div>}
-            </a>
-          ))}
+      <div className="shell">
+        <div className="content">
+          <div className="lbl"><span className="lbl-t">all stories</span><span className="lbl-c">{all.length}</span></div>
+          <div>
+            {all.map(p => (
+              <a key={p.slug} href={`/news/${p.slug}`} className="list-item">
+                <div className="li-b">
+                  <h4>{p.title}</h4>
+                  <p>{p.excerpt}</p>
+                </div>
+                {p.coverImage && <div className="li-i"><img src={p.coverImage} alt="" loading="lazy" /></div>}
+              </a>
+            ))}
+          </div>
         </div>
+        <aside className="sidebar">
+          <div className="sb"><p className="sb-l">topics</p><div className="tag-grid">{['ai', 'startups', 'cloud', 'security', 'crypto', 'hardware'].map(t => (<a key={t} href={`/tag/${t}`} className="tag-btn">{t}</a>))}</div></div>
+        </aside>
       </div>
       <Footer />
     </div>
