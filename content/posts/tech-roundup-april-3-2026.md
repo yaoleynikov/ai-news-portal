@@ -1,35 +1,38 @@
 ---
 title: "Tech Roundup: Microsoft $10B Japan Bet, SpaceX $75B IPO, Pentagon vs Anthropic"
 date: "2026-04-03"
-excerpt: "Microsoft invests $10B in Japan AI infra, SpaceX seeks $5B anchor for record $75B IPO, Trump admin appeals ruling blocking Pentagon action against Anthropic."
-tags: ["Microsoft", "SpaceX", "Anthropic", "IPO", "Policy"]
-coverImage: "https://picsum.photos/seed/tech-review/800/500"
+excerpt: "Microsoft invests $10B in Japan AI infra, SpaceX seeks record $75B IPO, Trump admin appeals ruling blocking action against Anthropic."
+tags: ["Microsoft", "SpaceX", "Anthropic", "Policy"]
+coverImage: "https://img.youtube.com/vi/7nJIGO9mfVE/sddefault.jpg"
+youtubeId: "7nJIGO9mfVE"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---
 
-## Microsoft $10B Japan Bet
+## Microsoft's $10B Japan Bet
 
-Microsoft will invest 1.6 trillion yen (~$10B) in Japan between 2026 and 2029 for AI infrastructure and cyber defense. The move ties AI investment to national resilience and digital sovereignty.
+Microsoft will invest 1.6 trillion yen (~$10B) in Japan between 2026 and 2029, targeting AI infrastructure and cyber defense. The move came during a Tokyo meeting with Prime Minister Sanae Takaichi, underscoring how AI investment is now tied to national resilience.
 
-## The AI Infrastructure Race
+> "AI infrastructure is becoming a state-level strategic priority, not just a private-sector growth bet."
 
-For Big Tech, winning AI depends as much on geopolitical alignment as on model quality. For startups, this creates tailwinds in security, sovereign cloud, and public-sector AI tooling.
+## SpaceX's Record-Breaking IPO Plans
 
-**Why It Matters:** AI infrastructure is becoming a state-level strategic priority.
+SpaceX is sounding out anchor investors for what could be the **largest IPO in history**. A $75 billion offering would eclipse Saudi Aramco and Alibaba's prior mega-listings. Saudi Arabia's Public Investment Fund is being courted for a $5B anchor position.
 
-## SpaceX's $75B IPO Plans
+### Why It Matters Beyond Space
 
-SpaceX is sounding out anchor investors for what could be the largest IPO in history. A $75 billion offering would eclipse Saudi Aramco and Alibaba's prior mega-listings.
-
-**Why It Matters:** A SpaceX IPO of this size would redraw the line between startup capital and sovereign-scale financing.
+SpaceX has become one of the clearest examples of a private company whose capital needs now resemble those of a nation-scale infrastructure project. A blockbuster IPO would reshape public markets entirely.
 
 ## Pentagon vs Anthropic
 
-The Trump administration appealed a federal judge's order blocking the Pentagon from taking punitive action against Anthropic over refusals to allow military use of Claude.
+The Trump administration has appealed a federal judge's order blocking the Pentagon from taking punitive action against Anthropic. The case centers on efforts to label Anthropic a supply-chain risk and phase out federal use of Claude after defense-use talks broke down.
 
-**Why It Matters:** This case could become a defining test of how much leverage Washington can exert over AI labs.
+> "This case could become a defining test of how much leverage Washington can exert over AI labs."
 
-## Monster Take 🤖
+## California's AI Contract Standards
 
-Three stories. Three levels of reality shift. Microsoft building AI as national infrastructure. SpaceX raising money like a country. The Pentagon fighting an AI company on constitutional grounds. Welcome to 2026.
+Governor Gavin Newsom ordered state agencies to develop AI contract standards addressing harms including CSAM generation, civil rights violations, and unlawful surveillance.
+
+## Monster Take
+
+Three stories. Three levels of reality shift. Microsoft building AI as national infrastructure. SpaceX raising sovereign-scale money. The Pentagon fighting an AI company on constitutional grounds. Welcome to 2026 — where tech isn't building apps anymore, it's reshaping geopolitics.

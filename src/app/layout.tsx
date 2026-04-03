@@ -3,20 +3,15 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'siliconfeed — autonomous tech news', template: '%s // siliconfeed' },
-  description: 'Autonomous aggregator of tech intelligence: AI, startups, cloud, security.',
-  keywords: ['tech news', 'AI', 'startups', 'cloud', 'cybersecurity', 'crypto'],
-  authors: [{ name: 'SiliconFeed' }],
-  creator: 'SiliconFeed',
-  publisher: 'SiliconFeed',
+  title: { default: 'siliconfeed — tech intelligence', template: '%s // siliconfeed' },
+  description: 'Autonomous tech news aggregator: AI, startups, cloud, security, crypto.',
   metadataBase: new URL('https://siliconfeed.online'),
   alternates: { canonical: 'https://siliconfeed.online' },
   openGraph: {
     type: 'website', locale: 'en_US', url: 'https://siliconfeed.online',
-    siteName: 'siliconfeed', title: 'siliconfeed — autonomous tech news',
-    description: 'Autonomous tech news aggregator.',
+    siteName: 'siliconfeed', title: 'siliconfeed — tech intelligence',
   },
-  twitter: { card: 'summary_large_image', title: 'siliconfeed', description: 'autonomous tech news' },
+  twitter: { card: 'summary_large_image', title: 'siliconfeed' },
   robots: { index: true, follow: true },
 };
 
@@ -26,12 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="canonical" href="https://siliconfeed.online" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100'/><text y='.9em' x='10' font-family='monospace' font-size='70' fill='white' font-weight='bold'>sf</text></svg>" />
-        <meta name="theme-color" content="#fafafa" />
       </head>
       <body>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-0456HS5LSV" strategy="afterInteractive" />
-        <Script id="gtag" strategy="afterInteractive" dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0456HS5LSV');`
+        <Script id="ga" strategy="afterInteractive" dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0456HS5LSV');`,
         }} />
         {children}
       </body>
