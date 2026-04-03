@@ -29,53 +29,35 @@ a:hover { color: var(--accent-hover); }
 .site-nav a:hover { color: var(--text); }
 
 /* Category pills */
-.category-pill {
-  display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px;
-  border-radius: 100px; font-size: 13px; font-weight: 500;
-  background: var(--surface); color: var(--text-muted);
-  text-decoration: none; transition: all 0.15s; white-space: nowrap; border: 1px solid transparent;
-}
+.category-pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 100px; font-size: 13px; font-weight: 500; background: var(--surface); color: var(--text-muted); text-decoration: none; white-space: nowrap; border: 1px solid transparent; }
 .category-pill:hover { background: var(--accent-bg); color: var(--accent); border-color: #fed7aa; }
 
 .tag { display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
 .tag:hover { text-decoration-line: underline; }
-.timestamp { font-size: 12px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.timestamp { font-size: 12px; color: var(--text-dim); }
 
 /* Section headers */
 .section-header { display: flex; align-items: center; gap: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--text); margin-bottom: 24px; }
 .section-header h2 { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; font-family: var(--font-body); }
 
-/* Featured - NYT style: image full-width on top, text below */
-.featured-article {
-  display: flex; flex-direction: column; border-bottom: 1px solid var(--border);
-  padding-bottom: 28px; margin-bottom: 32px; text-decoration: none; color: inherit;
-}
-.featured-article .featured-image { width: 100%; height: 380px; overflow: hidden; margin-bottom: 16px; background: #e7e5e4; border-radius: 2px; }
-.featured-article .featured-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.featured-article:hover .featured-image img { transform: scale(1.01); }
-.featured-article .featured-body { padding: 0 4px; }
+/* Featured — NYT editorial */
+.featured-article { display: flex; flex-direction: column; border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 28px; text-decoration: none; color: inherit; }
+.featured-article .featured-image { width: 100%; height: 380px; overflow: hidden; margin-bottom: 16px; background: var(--surface); }
+.featured-article .featured-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
 /* Article card */
-.article-card {
-  background: white; border: 1px solid var(--border); border-radius: 2px;
-  transition: border-color 0.15s, box-shadow 0.15s; text-decoration: none; color: inherit;
-  display: flex; flex-direction: column; overflow: hidden;
-}
+.article-card { background: white; border: 1px solid var(--border); border-radius: 2px; transition: border-color 0.15s, box-shadow 0.15s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
 .article-card:hover { border-color: #d6d3d1; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.article-card .card-image { aspect-ratio: 16/10; overflow: hidden; background: #e7e5e4; position: relative; }
-.article-card .card-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.article-card .card-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; background: var(--surface); }
+.article-card .card-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.3s ease; }
 .article-card:hover .card-image img { transform: scale(1.03); }
 .article-card .card-body { padding: 16px 20px 20px; flex: 1; display: flex; flex-direction: column; }
 
 /* Latest list */
-.latest-item {
-  display: flex; align-items: flex-start; gap: 20px; padding: 18px 0;
-  border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
-  transition: background 0.1s;
-}
+.latest-item { display: flex; align-items: flex-start; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: background 0.1s; }
 .latest-item:hover { background: var(--bg-muted); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 4px; }
-.latest-item .latest-image { flex-shrink: 0; width: 120px; height: 80px; overflow: hidden; border-radius: 4px; background: #e7e5e4; position: relative; }
-.latest-item .latest-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
+.latest-item .latest-image { flex-shrink: 0; width: 120px; height: 80px; overflow: hidden; border-radius: 4px; background: var(--surface); }
+.latest-item .latest-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.2s; }
 .latest-item:hover .latest-image img { transform: scale(1.05); }
 
 /* Footer */
@@ -91,7 +73,6 @@ a:hover { color: var(--accent-hover); }
 .prose strong { color: #1c1917; }
 .prose iframe { border-radius: 12px; margin: 32px 0; max-width: 100%; border: none; }
 
-/* Utilities */
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
