@@ -3,7 +3,7 @@ title: "AI дата-центры раскалывают энергетиков: 
 date: "2026-04-03"
 excerpt: "Axios сообщает: 30% мощности дата-центров может работать автономно. Chevron работает над сделкой с Microsoft в Техасе. Доступ к энергии стал стратегическим ресурсом на уровне чипов."
 tags: ["AI Infrastructure", "Energy", "Microsoft", "Data Centers", "Chevron"]
-coverImage: "https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=1200&q=80"
+coverImage: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---

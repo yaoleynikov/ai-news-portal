@@ -3,7 +3,7 @@ title: "California приказала госсектору учитывать р
 date: "2026-04-03"
 excerpt: "Губернатор Калифорнии Гэвин Ньюсом обязал госведомства разработать стандарты AI-контрактов: защита от генерации CSAM, нарушения гражданских прав, незаконная слежка и злоупотребления."
 tags: ["California AI Policy", "Regulation", "AI Safety", "Government"]
-coverImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=80"
+coverImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---
