@@ -1,37 +1,48 @@
+import { getSortedPosts } from '@/lib/posts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import NewsCard from '@/components/NewsCard';
-import { getSortedPosts } from '@/lib/posts';
 
-export const metadata = {
-  title: 'All News | SiliconFeed',
-  description: 'Full list of tech news on SiliconFeed.',
-};
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+export const metadata = { title: 'all stories // siliconfeed' };
 
 export default async function AllPostsPage() {
   const allPosts = getSortedPosts();
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <div>
       <Header />
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 flex items-center gap-3">
-          <span className="gradient-text">All News</span>
-          <span className="text-text-dim text-lg font-normal">({allPosts.length})</span>
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allPosts.map(post => (
-            <NewsCard key={post.slug} post={post} />
-          ))}
-        </div>
-        {allPosts.length === 0 && (
-          <div className="text-center py-20 text-text-muted">
-            <p className="text-6xl mb-4">📭</p>
-            <p className="text-xl">No news yet</p>
-            <p className="text-sm mt-2">Fresh tech stories coming soon</p>
+      <div className="main-layout">
+        <div className="content-area">
+          <div className="section-label">
+            <span>all stories</span>
+            <span className="count">{allPosts.length}</span>
           </div>
-        )}
-      </main>
+          <div className="list-feed">
+            {allPosts.map(post => (
+              <a key={post.slug} href={`/news/${post.slug}`} className="list-item">
+                <div className="list-main">
+                  <div className="list-kicker">{post.tags?.[0] || 'news'} <span style={{ margin: '0 5px', color: 'var(--text-tertiary)' }}>·</span> {fmtDate(post.date)}</div>
+                  <h4>{post.title}</h4>
+                  <p>{post.excerpt}</p>
+                </div>
+                {post.coverImage && <div className="list-thumb"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+              </a>
+            ))}
+          </div>
+        </div>
+        <aside className="sidebar">
+          <div className="sidebar-section">
+            <p className="sidebar-label">topics</p>
+            <div className="tag-grid">
+              {['ai', 'startups', 'cloud', 'security', 'crypto', 'hardware'].map(t => (
+                <a key={t} href={`/tag/${t}`} className="tag-chip">{t}</a>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
       <Footer />
     </div>
   );
