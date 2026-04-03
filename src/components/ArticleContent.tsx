@@ -18,54 +18,59 @@ export default function ArticleContent({ post }: { post: Post }) {
     description: post.excerpt,
     datePublished: post.date,
     dateModified: post.date,
-    author: { '@type': 'Person', name: post.author || 'AI-Insight' },
+    author: { '@type': 'Person', name: post.author || 'SiliconFeed' },
     publisher: {
       '@type': 'Organization',
-      name: 'AI-Insight 2026',
-      logo: { '@type': 'ImageObject', url: 'https://ai-insight-2026.vercel.app/logo.png' },
+      name: 'SiliconFeed',
+      logo: { '@type': 'ImageObject', url: 'https://siliconfeed.online/logo.png' },
     },
     ...(post.coverImage ? { image: [{ '@type': 'ImageObject', url: post.coverImage }] } : {}),
-    mainEntityOfPage: `https://ai-insight-2026.vercel.app/news/${post.slug}`,
+    mainEntityOfPage: `https://siliconfeed.online/news/${post.slug}`,
   };
+
+  const wordCount = Math.ceil((post.rawContent || '').length / 5);
+  const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <header className="mb-8">
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex gap-2 mb-4 flex-wrap">
-            {post.tags.map(tag => (
-              <span key={tag} className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-        <div className="flex items-center gap-4 text-text-muted text-sm flex-wrap">
-          <span>Автор: {post.author || 'AI-Insight'}</span>
-          <time>{new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
-          <span>{Math.ceil((post.rawContent || '').length / 1000)} мин чтения</span>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <header className="max-w-3xl mx-auto mb-10">
+        <div className="flex items-center gap-3 mb-4">
+          {post.tags && post.tags.length > 0 && (
+            <>
+              <a href={`/tag/${post.tags[0]}`} className="tag">{post.tags[0]}</a>
+              <span className="text-stone-300">·</span>
+            </>
+          )}
+          <time className="timestamp">
+            {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          <span className="text-stone-300">·</span>
+          <span className="timestamp">{readTime} min read</span>
+        </div>
+        <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+          {post.title}
+        </h1>
+        <div className="flex items-center gap-3 text-sm text-stone-500">
+          <span>By {post.author || 'SiliconFeed'}</span>
         </div>
       </header>
+
       {post.coverImage && (
-        <div className="relative h-64 md:h-96 mb-8 rounded-xl overflow-hidden bg-bg-lighter">
-          <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
-        </div>
+        <figure className="max-w-4xl mx-auto mb-10">
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="w-full rounded-lg object-cover"
+            style={{ maxHeight: '480px' }}
+          />
+        </figure>
       )}
+
       <div
-        className="prose prose-invert prose-lg max-w-none prose-a:text-accent prose-img:rounded-xl"
+        className="prose"
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
       />
-      <div className="mt-12 p-6 bg-bg-light rounded-xl border border-accent/20">
-        <h3 className="text-xl font-bold mb-3 gradient-text">🤖 Мнение Монстра</h3>
-        <p className="text-text-muted italic">
-          <em>Это наше мнение. Алгоритмы предсказывают: ИИ изменит всё. Даже то, как мы думаем об ИИ.</em>
-        </p>
-      </div>
     </>
   );
 }
