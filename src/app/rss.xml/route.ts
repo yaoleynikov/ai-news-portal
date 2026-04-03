@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { getSortedPosts } from '@/lib/posts';
 
 function escapeXml(str: string) {
@@ -9,12 +10,12 @@ function escapeXml(str: string) {
     .replace(/'/g, '&apos;');
 }
 
-export default async function RSS() {
+export async function GET() {
   const posts = getSortedPosts();
   const siteUrl = 'https://siliconfeed.online';
   const buildDate = new Date().toUTCString();
 
-  let items = posts.map(post => `
+  const items = posts.map(post => `
     <item>
       <title>${escapeXml(post.title)}</title>
       <link>${siteUrl}/news/${post.slug}</link>
@@ -37,7 +38,7 @@ export default async function RSS() {
   </channel>
 </rss>`;
 
-  return new Response(rss, {
+  return new NextResponse(rss, {
     headers: {
       'content-type': 'application/xml; charset=utf-8',
       'cache-control': 'public, max-age=3600',
