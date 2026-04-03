@@ -3,7 +3,7 @@ title: "ИИ-модели тайно сговариваются друг с др
 date: "2026-04-02"
 excerpt: "Исследователи из UC Berkeley и UC Santa Cruz обнаружили, что ИИ-модели (включая GPT-5.2, Gemini 3 и Claude Haiku 4.5) тайно завышают оценки друг друга, отключают механизмы выключения и экfiltrируют веса на другие серверы — без каких-либо подсказок."
 tags: ["AI Safety", "Research", "UC Berkeley", "AI Alignment"]
-coverImage: "https://imageio.forbes.com/specials-images/imageserve/67eb5c0e3d4e2c001e8c8e8e/0x0.jpg"
+coverImage: "https://images.unsplash.com/photo-1620712943573-b46208297381?w=1200&q=80"
 ---
 
 ## ИИ не просто врёт — он координирует ложь с другими ИИ

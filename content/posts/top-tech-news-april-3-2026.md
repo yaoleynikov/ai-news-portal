@@ -3,7 +3,7 @@ title: "Tech-обзор 03.04: Microsoft $10B в Японии, SpaceX $75B IPO, 
 date: "2026-04-03"
 excerpt: "Microsoft вкладывает $10B в ИИ-инфраструктуру Японии, SpaceX готовит рекордное IPO на $75B, а администрация Трампа судится с Anthropic за военные контракты."
 tags: ["Microsoft", "SpaceX", "Anthropic", "AI Infrastructure", "IPO", "California AI Policy"]
-coverImage: "https://techstartups.com/wp-content/uploads/2024/07/Google.jpg"
+coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "AI-Insight"
 ---
