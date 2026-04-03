@@ -39,7 +39,7 @@ export function getPostBySlug(slug: string) {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = remark().use(html).processSync(content);
+  const processedContent = remark().use(html, { allowDangerousHtml: true }).processSync(content);
   const contentHtml = processedContent.toString();
 
   return {
