@@ -2,8 +2,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'О нас | SiliconFeed',
-  description: 'Узнайте о миссии SiliconFeed — автономный агрегатор IT-новостей.',
+  title: 'About | SiliconFeed',
+  description: 'Learn about SiliconFeed — the autonomous IT news aggregator.',
 };
 
 export default function AboutPage() {
@@ -12,47 +12,45 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">
-          <span className="gradient-text">О SiliconFeed</span>
+          <span className="gradient-text">About SiliconFeed</span>
         </h1>
 
         <div className="prose prose-invert prose-lg max-w-none">
           <p>
-            <strong>SiliconFeed</strong> — автономный агрегатор новостей IT-рынка и Кремниевой Долины.
-            Мы собираем и перерабатываем новости из 130+ источников, чтобы дать вам полную
-            картину происходящего в мире технологий.
+            <strong>SiliconFeed</strong> is an autonomous news aggregator covering the IT industry and Silicon Valley.
+            We scrape and rewrite stories from 130+ sources to give you the full picture of what&apos;s happening in tech.
           </p>
 
-          <h2>🤖 Автономный подход</h2>
+          <h2>🤖 Autonomous Approach</h2>
           <p>
-            Контент публикуется автоматически: парсинг источников, рерайт, публикация.
-            Никакого человеческого фактора — только алгоритмы и аналитика.
+            Content is published automatically: scraping, rewriting, publishing. No human bottleneck — just algorithms and analysis.
           </p>
 
-          <h2>📰 Источники</h2>
+          <h2>📰 Sources</h2>
           <p>
-            Мы мониторим TechCrunch, The Verge, Ars Technica, VentureBeat, Reuters,
+            We monitor TechCrunch, The Verge, Ars Technica, VentureBeat, Reuters,
             Decrypt, Google AI Blog, OpenAI Blog, HuggingFace, AWS, Google Cloud,
-            HackerNews, Reddit и ещё 120+ источников.
+            HackerNews, Reddit, and 120+ more sources.
           </p>
 
-          <h2>🎯 Тон и стиль</h2>
+          <h2>🎯 Tone &amp; Style</h2>
           <p>
-            Мы не пересказываем пресс-релизы. Мы анализируем. Каждая статья содержит
-            блок <em>«Мнение Монстра»</em> — нашу экспертную оценку перспектив и последствий
-            новости для индустрии.
+            We don&apos;t recap press releases. We analyze. Every article features a
+            <em> Monster Take</em> section — our expert assessment of the news implications
+            for the industry.
           </p>
 
-          <h2>📡 Технологии</h2>
+          <h2>📡 Tech Stack</h2>
           <ul>
             <li><strong>Frontend:</strong> Next.js 15, Tailwind CSS, TypeScript</li>
-            <li><strong>Хостинг:</strong> Vercel (Edge Network)</li>
+            <li><strong>Hosting:</strong> Vercel (Edge Network)</li>
             <li><strong>SEO:</strong> Schema.org NewsArticle, OG-tags, Sitemap</li>
-            <li><strong>Контент:</strong> Markdown → Static Generation</li>
+            <li><strong>Content:</strong> Markdown → Static Generation</li>
           </ul>
 
-          <h2>📩 Связь</h2>
+          <h2>📩 Contact</h2>
           <p>
-            Хотите предложить тему, новость или сотрудничество? Пишите на{' '}
+            Want to suggest a topic, story, or partnership? Reach out at{' '}
             <a href="mailto:hello@siliconfeed.online">hello@siliconfeed.online</a>
           </p>
         </div>

@@ -5,15 +5,15 @@ import NewsCard from '@/components/NewsCard';
 import FeaturedCard from '@/components/FeaturedCard';
 
 const CATEGORIES = [
-  { slug: 'all', label: 'Всё', emoji: '🔥' },
-  { slug: 'AI', label: 'ИИ', emoji: '🤖' },
-  { slug: 'Startup', label: 'Стартапы', emoji: '🚀' },
-  { slug: 'Cloud', label: 'Облако', emoji: '☁️' },
-  { slug: 'Security', label: 'Безопасность', emoji: '🔒' },
+  { slug: 'all', label: 'All', emoji: '🔥' },
+  { slug: 'AI', label: 'AI', emoji: '🤖' },
+  { slug: 'Startup', label: 'Startups', emoji: '🚀' },
+  { slug: 'Cloud', label: 'Cloud', emoji: '☁️' },
+  { slug: 'Security', label: 'Security', emoji: '🔒' },
   { slug: 'Google', label: 'Google', emoji: '🔍' },
   { slug: 'Microsoft', label: 'Microsoft', emoji: '🪟' },
   { slug: 'OpenAI', label: 'OpenAI', emoji: '🧠' },
-  { slug: 'Crypto', label: 'Крипто', emoji: '₿' },
+  { slug: 'Crypto', label: 'Crypto', emoji: '₿' },
   { slug: 'Hardware', label: 'Hardware', emoji: '💻' },
 ];
 
@@ -32,7 +32,7 @@ export default async function HomePage() {
             <span className="gradient-text">SiliconFeed</span>
           </h1>
           <p className="text-text-muted text-lg max-w-2xl">
-            Агрегатор новостей Кремниевой Долины. ИИ, стартапы, облако, приложения, кибербезопасность — всё в одной ленте.
+            Your autonomous feed for Silicon Valley, AI, startups, cloud, and cybersecurity — all in one place.
           </p>
         </section>
 
@@ -60,7 +60,7 @@ export default async function HomePage() {
         {/* Latest Grid */}
         <section className="mt-10">
           <h2 className="text-2xl font-bold mb-5 flex items-center gap-2">
-            <span className="text-accent">⚡</span> Свежее
+            <span className="text-accent">⚡</span> Latest
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map(post => (
@@ -73,7 +73,7 @@ export default async function HomePage() {
         {allPosts.length > 7 && (
           <section className="mt-10">
             <h2 className="text-2xl font-bold mb-5 flex items-center gap-2">
-              <span className="text-accent">📰</span> Все новости
+              <span className="text-accent">📰</span> All News
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allPosts.slice(7).map(post => (
@@ -90,7 +90,7 @@ export default async function HomePage() {
 
 export function generateMetadata() {
   return {
-    title: 'SiliconFeed — Новости Кремниевой Долины и IT',
-    description: 'Автономный агрегатор новостей IT-рынка: ИИ, стартапы, облако, кибербезопасность, приложения.',
+    title: 'SiliconFeed — Silicon Valley & IT News Feed',
+    description: 'Autonomous aggregator of tech news: AI, startups, cloud, cybersecurity, apps.',
   };
 }

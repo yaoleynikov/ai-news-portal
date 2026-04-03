@@ -9,9 +9,9 @@ export default function Header() {
           <span className="gradient-text">SiliconFeed</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm text-text-muted">
-          <Link href="/" className="hover:text-text transition-colors">Лента</Link>
-          <Link href="/tag/all" className="hover:text-text transition-colors">Категории</Link>
-          <Link href="/about" className="hover:text-text transition-colors">О нас</Link>
+          <Link href="/" className="hover:text-text transition-colors">Feed</Link>
+          <Link href="/tag/all" className="hover:text-text transition-colors">Topics</Link>
+          <Link href="/about" className="hover:text-text transition-colors">About</Link>
           <Link href="/rss.xml" className="hover:text-text transition-colors flex items-center gap-1">
             <span>📡</span> RSS
           </Link>
