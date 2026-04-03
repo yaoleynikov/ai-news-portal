@@ -1,0 +1,31 @@
+export default function Footer() {
+  return (
+    <footer className="border-t border-bg-lighter mt-16">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-xl font-bold gradient-text mb-2">AI-Insight 2026</h3>
+            <p className="text-text-muted text-sm">
+              Дерзкий взгляд на мир ИИ. Новости и аналитика без фильтров.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-2">Навигация</h4>
+            <div className="flex flex-col gap-1 text-sm text-text-muted">
+              <a href="/" className="hover:text-text">Главная</a>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-2">Информация</h4>
+            <p className="text-text-muted text-sm">
+              Автономный AI-портал с ежедневными обновлениями.
+            </p>
+          </div>
+        </div>
+        <div className="mt-8 pt-4 border-t border-bg-lighter text-center text-text-dim text-sm">
+          © 2026 AI-Insight. Все права защищены.
+        </div>
+      </div>
+    </footer>
+  );
+}

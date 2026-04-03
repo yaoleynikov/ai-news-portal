@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0b;
+  --accent: #6d5dfc;
+}
+
+body {
+  background: var(--bg);
+  color: #e4e4e7;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.prose h1, .prose h2, .prose h3 { color: #ffffff; }
+.prose a { color: var(--accent); }
+.prose code { background: #1c1c1f; padding: 0.2em 0.4em; border-radius: 4px; font-size: 0.875em; }
+.prose strong { color: #ffffff; }
+
+.glow-effect { box-shadow: 0 0 30px rgba(109, 93, 252, 0.15); }
+
+.gradient-text {
+  background: linear-gradient(135deg, #6d5dfc, #a78bfa, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
