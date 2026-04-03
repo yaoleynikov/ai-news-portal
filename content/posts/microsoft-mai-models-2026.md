@@ -1,41 +1,35 @@
 ---
-title: "Microsoft больше не нуждается в OpenAI: три собственные модели, которые меняют правила игры"
+title: "Microsoft Declares Independence: Three New In-House Models Challenge OpenAI"
 date: "2026-04-02"
-excerpt: "Microsoft представила MAI-Transcribe-1, MAI-Voice-1 и MAI-Image-2 — три фундаментальные модели, разработанные internally. Мустафа Сулейман заявил, что пересмотр контракта с OpenAI «разблокировал способность Microsoft преследовать суперинтеллект»."
+excerpt: "Microsoft unveils MAI-Transcribe-1, MAI-Voice-1, and MAI-Image-2 — three foundational models built in-house, no OpenAI dependency. Suleyman calls it the first salvo from Microsoft's superintelligence team."
 tags: ["Microsoft", "AI Models", "OpenAI", "MAI"]
 coverImage: "https://picsum.photos/seed/msft-ai/800/500"
+source: "https://venturebeat.com/"
+author: "SiliconFeed"
 ---
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/VHQanHNB_fg" title="Microsoft AI Models" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;" class="mb-8"></iframe>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/VHQanHNB_fg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;" class="mb-8"></iframe>
 
-## Microsoft официально объявила независимость
+## Microsoft Officially Declares Independence
 
-Запомните этот день. Microsoft — компания, которая годами была крупнейшим инвестором OpenAI и, казалось бы, навсегда зависела от их технологий — представила **три полностью собственные фундаментальные модели**. Это не ребрендинг, не обёртка над GPT. Это с нуля разработанная MAI (Microsoft AI) линейка.
+Microsoft — the company that poured billions into OpenAI and seemed permanently dependent — just launched **three fully in-house foundational models**. Not a GPT wrapper. Not a rebrand. Built from scratch. Mustafa Suleyman called it the first salvo from Microsoft's superintelligence team.
 
-## Три удара по конкурентам
+## Three Strikes at the Competition
 
-### MAI-Transcribe-1 — Whisper, ты уволен
+**MAI-Transcribe-1** — lowest word error rate across 25 languages. Beats Whisper, GPT-Transcribe, and Gemini 3.1 Flash-Lite. Runs at 2.5x Azure's current transcription speed. Pricing: $0.36/hr.
 
-Транскрибация с наименьшим уровнем ошибок среди 25 языков. Модель побила Whisper от OpenAI, GPT-Transcribe и Gemini 3.1 Flash-Lite — при этом работает в **2.5 раза быстрее** текущих решений в Azure. Цена: $0.36 в час транскрибации.
+**MAI-Voice-1** — generates 60 seconds of audio in under one second. Custom voice cloning from a 10-second sample. Pricing: $22/1M characters.
 
-### MAI-Voice-1 — генерация голоса за секунды
+**MAI-Image-2** — already ranked #3 on Arena.ai. Rolling into Copilot Voice, Teams, Bing, and PowerPoint.
 
-60 секунд аудио генерируется **менее чем за одну секунду**. Клонирование голоса по 10-секундному сэмплу. Цена: $22 за миллион символов. Это меняет правила для подкастов, дубляжа и ассистентов.
+## The OpenAI Question
 
-### MAI-Image-2 — #3 на Arena.ai
+Suleyman said renegotiating the OpenAI contract **"unlocked Microsoft's ability to pursue superintelligence" himself." Read that again. Microsoft is openly talking about superintelligence, and they're saying they need OpenAI to do it.
 
-Генерация изображений, которая заняла третье место на независимом рейтинге. Цены от $5 до $33 за миллион токенов. Уже интегрируется в Copilot, Teams, Bing и PowerPoint.
+## Why This Matters
 
-## Что сказал Мустафа Сулейман
+AI coding assistants are becoming one of the most commercially important battlegrounds in generative AI. A code leak at a company that sells reliability and safety raises serious questions about internal controls and IP protection.
 
-> «Пересмотр контракта с OpenAI разблокировал нашу способность преследовать суперинтеллект»
+## Monster Take 🤖
 
-Это первое публичное признание, что Microsoft действительно двигалась в сторону независимости от OpenAI. И MAI — это результат.
-
-## Мнение Монстра 🤖
-
-Microsoft делает классический ход «вторая опция превращается в первую». Они финансировали OpenAI, изучали все паттерны, а теперь выстрелили своим стеком. Транскрибация бьёт Whisper. Голос генерируется мгновенно. Картинки — топ-3.
-
-Осталось только LLM. И если Microsoft выпустит свою конкурентоспособную языковую модель... OpenAI将面临 серьёзные вопросы от инвесторов: «А зачем вы нужны Microsoft, если у них уже есть всё?»
-
-Прогноз: Microsoft начнёт агрессивно продвигать MAI как экономичную альтернативу OpenAI-стеку для enterprise-клиентов Azure.
+Microsoft's three-model reveal isn't just about capability. It's a signal to the market: "We have our own stack now." When a company spends $10B+ on a partnership and then builds parallel capability, it means they were never comfortable with dependency. OpenAI should be reading this as a notice — not a competition announcement, but a graduation notice from their most important customer.

@@ -1,34 +1,39 @@
 ---
-title: "Google взорвала рынок: Gemma 4 под Apache 2.0 — ИИ теперь работает даже на Raspberry Pi"
+title: "Google Drops Gemma 4 Under Apache 2.0 — Now Runs on a Raspberry Pi"
 date: "2026-04-02"
-excerpt: "Google выпустила Gemma 4 — семейство ИИ-моделей с полностью открытой лицензией Apache 2.0. 31B модель, MoE-архитектура, edge-модели на 1.5GB RAM. 400 миллионов скачиваний за всё время — и это только начало."
+excerpt: "Google releases Gemma 4 — a family of AI models fully licensed under Apache 2.0. 31B model ranks #3 on open leaderboards, with edge models that run on 1.5GB RAM."
 tags: ["Google", "Gemma", "Open Source", "LLM"]
 coverImage: "https://picsum.photos/seed/gemma4/800/500"
-author: "AI-Insight"
+source: "https://www.theneuron.ai/"
+author: "SiliconFeed"
 ---
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/jZVBoFOJK-Q" title="Google Gemma 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;" class="mb-8"></iframe>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/jZVBoFOJK-Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;" class="mb-8"></iframe>
 
-## Google открыла Pandora's Box. Или, как они сами говорят, «сделала мир лучше».
+## Google Opened Pandora's Box
 
-Давайте будем честны: когда Google отдаёт свои наработки под лицензию Apache 2.0, это не акт благотворительности. Это заявление о доминировании. Предыдущие версии Gemma шли с кастомными лицензиями, которые создавали трение для корпоративного использования и коммерческого деплоя. Apache 2.0 стирает все барьеры — берите, форкайте, встраивайте куда угодно.
+Let's be honest: when Google releases under Apache 2.0, it's not charity. It's a dominance play. Previous Gemma releases came with restrictive licenses. Apache 2.0 erases all barriers — fork it, embed it, commercialize it, whatever.
 
-Семейство Gemma 4 — это четыре модели, каждая из которых бьёт по своим сегментам рынка:
+## The Gemma 4 Family
 
-- **Gemma 4 31B** — плотная модель, занявшая 3-е место на Arena AI среди открытых моделей
-- **Gemma 4 26B-A4B** — первый mixture-of-experts от Google: 128 экспертов, из которых активны только 3.8B параметров. Это значит — качество большой модели при скорости маленькой
-- **Gemma 4 E4B и E2B** — edge-модели, работающие на телефонах, Raspberry Pi и Jetson Nano. E2B запускается на **1.5GB RAM**. Да, на Raspberry Pi
+**Gemma 4 31B** — dense model, ranked #3 on open model leaderboards. Competitive with models twice its size.
 
-## Что всё это значит для индустрии
+**Gemma 4 26B-A4B** — Google's first mixture-of-experts: 128 experts, only 3.8B active parameters. Big model speed with small model compute.
 
-**Во-первых**, контекстное окно до 256K токенов для больших моделей и 128K для edge. Это позволяет скормить ИИ целую книгу и получить осмысленные ответы.
+**Edge models E4B and E2B** — run on phones, Raspberry Pi, and Jetson Nano. E2B runs under 1.5GB RAM.
 
-**Во-вторых**, нативный function-calling, структурированный JSON-вывод и системные промпты из коробки. Эти модели готовы к агентным воркфлоу без финетюнинга.
+## The Technical Specs Are Wild
 
-**В-третьих**, поддержка 140+ языков. Это не «мы перевели интерфейс» — это нативное понимание.
+- Context windows: 256K for large models, 128K for edge
+- Native function-calling, structured JSON output, system instructions
+- 140+ languages natively supported
+- NVIDIA optimizing for local RTX AI
+- Available on HuggingFace, Ollama, Google AI Studio
 
-## Мнение Монстра 🤖
+## Why This Matters
 
-Google не просто выпустила модели — она объявила войну Meta. Llama больше не единственный «открытый» вариант. И в отличие от Llama, Gemma 4 идёт без дурацкой лицензии, которая запрещает коммерческое использование при N пользователей. Apache 2.0 — это чистая свобода.
+Google just dropped four state-of-the-art models with zero licensing restrictions. 400 million downloads of previous Gemma versions. 100,000+ community fine-tunes already. Meta's Llama isn't the only "open" option anymore.
 
-Прогноз: через год 80% стартапов будут использовать Gemma 4 на edge-устройствах. NVIDIA уже оптимизирует модели под RTX, Ollama добавил все четыре варианта. Экосистема формируется прямо на ваших глазах.
+## Monster Take 🤖
+
+The real story here isn't open source — it's on-device AI. When a model runs 128K context on a $35 Raspberry Pi, everything changes. Edge computing just got its killer app. Startups building local-first AI have never had it this good.
