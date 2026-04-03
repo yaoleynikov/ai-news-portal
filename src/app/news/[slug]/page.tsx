@@ -12,8 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug);
   if (!post) return { title: 'not found' };
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.title, description: post.excerpt,
     openGraph: {
       title: post.title, description: post.excerpt, type: 'article', publishedTime: post.date,
       ...(post.coverImage ? { images: [{ url: post.coverImage }] } : {}),
@@ -31,13 +30,27 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const mins = Math.ceil(words / 200);
   const related = getSortedPosts().filter(p => p.slug !== slug).slice(0, 4);
 
-  // Parse Monster Take from raw markdown
-  const mtMatch = post.rawContent?.match(/## Monster Take\s*([\s\S]+)/);
-  const mtText = mtMatch ? mtMatch[1].trim() : '';
+  // Parse Monster Take from body (after frontmatter ---)
+  let mtText = '';
+  if (post.rawContent) {
+    const parts = post.rawContent.split('---');
+    const bodyOnly = parts.length >= 3 ? parts.slice(2).join('---') : post.rawContent;
+    const mtMatch = bodyOnly.match(/## Monster Take\s*([\s\S]+)/);
+    if (mtMatch) {
+      mtText = mtMatch[1]
+        .replace(/^[\n>]+/, '')
+        .replace(/^> /gm, '')
+        .trim();
+    }
+  }
 
-  // Remove Monster Take section from rendered HTML
-  let cleanHtml = post.contentHtml;
-  cleanHtml = cleanHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
+  // Parse Monster Take
+  const mtMatch = post.contentHtml.match(/<h2>[^<]*Monster Take<\/h2>([\s\S]*)/i);
+  const mtText = mtMatch ? mtMatch[1].replace(/<[^>]*>/g, '').trim() : '';
+
+  // Remove Monster Take from clean HTML
+  let cleanHtml = post.contentHtml.replace(/<h2>[^<]*Monster Take<\/h2>[\s\S]*$/, '');
+  cleanHtml = cleanHtml.replace(/<h2[^>]*>Monster Take<\/h2>[\s\S]*$/, '');
 
   return (
     <div>
@@ -63,10 +76,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <p className="a-sub">{post.excerpt}</p>
             <div className="rich" dangerouslySetInnerHTML={{ __html: cleanHtml }} />
 
-            {mtText && (
+            {mtText ? (
               <div className="mt">
                 <p className="mt-l">monster take</p>
-                <p>{mtText.replace(/\n\n+/g, '</p><p>').replace(/^[\n>]+/, '').trim()}</p>
+                <p>{mtText}</p>
+              </div>
+            ) : (
+              <div className="mt">
+                <p className="mt-l">monster take</p>
               </div>
             )}
           </div>
