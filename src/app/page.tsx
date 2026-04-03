@@ -1,86 +1,71 @@
 import { getSortedPosts } from '@/lib/posts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
-// Placeholder gradient backgrounds for articles without covers
-const gradients = [
-  'linear-gradient(135deg, #fef3c7, #fde68a)',
-  'linear-gradient(135deg, #dbeafe, #93c5fd)',
-  'linear-gradient(135deg, #fce7f3, #f9a8d4)',
-  'linear-gradient(135deg, #e0e7ff, #a5b4fc)',
-  'linear-gradient(135deg, #d1fae5, #6ee7b7)',
-];
+function fmtDate(date: string) {
+  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function fmtShort(date: string) {
+  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
 
 export default async function HomePage() {
   const allPosts = getSortedPosts();
   const featured = allPosts[0];
-  const secondary = allPosts.slice(1, 5);
+  const grid = allPosts.slice(1, 5);
   const latest = allPosts.slice(5);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
-        {/* Featured Article - full-width hero */}
+      <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+
+        {/* FEATURED — full-width hero */}
         {featured && (
-          <a
-            href={`/news/${featured.slug}`}
-            className="featured-article mb-10 group block text-inherit no-underline"
-          >
-            <div className="featured-image">
-              <img src={featured.coverImage} alt={featured.title} />
-            </div>
-            <div className="featured-body">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="tag">{featured.tags?.[0] || 'Technology'}</span>
-                <span className="timestamp">
-                  {new Date(featured.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </span>
+          <a href={`/news/${featured.slug}`} className="featured">
+            {featured.coverImage && (
+              <div className="featured-image">
+                <img src={featured.coverImage} alt={featured.title} />
               </div>
-              <h2 className="text-2xl md:text-4xl font-bold leading-tight mb-3 group-hover:text-orange-700 transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
-                {featured.title}
-              </h2>
-              <p className="text-stone-600 text-base md:text-lg leading-relaxed max-w-3xl line-clamp-3">
-                {featured.excerpt}
-              </p>
+            )}
+            <div>
+              <div className="featured-meta">
+                <span className="featured-tag">{featured.tags?.[0] || 'Tech'}</span>
+                <span className="featured-date">{fmtDate(featured.date)}</span>
+              </div>
+              <h2>{featured.title}</h2>
+              <p className="featured-excerpt">{featured.excerpt}</p>
             </div>
           </a>
         )}
 
-        {/* Two-column: secondary + sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {/* Secondary articles */}
-          <div className="lg:col-span-2">
-            <div className="section-header">
+        {/* TWO COLUMN — grid + sidebar */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 mb-12">
+          {/* Articles Grid */}
+          <div>
+            <div className="section-label">
               <h2>Top Stories</h2>
+              <span className="section-line" />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {secondary.map((post, i) => (
-                <a
-                  key={post.slug}
-                  href={`/news/${post.slug}`}
-                  className="article-card group block text-inherit no-underline"
-                >
-                  <div className="card-image">
-                    {post.coverImage && post.coverImage.startsWith('http') ? (
+            <div className="articles-grid">
+              {grid.map(post => (
+                <a key={post.slug} href={`/news/${post.slug}`} className="card">
+                  {post.coverImage ? (
+                    <div className="card-image">
                       <img src={post.coverImage} alt={post.title} loading="lazy" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center" style={{ background: gradients[i % gradients.length] }}>
-                        <span className="text-3xl opacity-30">📰</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="card-body">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="tag">{post.tags?.[0] || 'News'}</span>
-                      <span className="timestamp">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                     </div>
-                    <h3 className="text-lg font-bold leading-snug mb-2 group-hover:text-orange-700 transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
-                      {post.title}
-                    </h3>
-                    <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">
-                      {post.excerpt}
-                    </p>
+                  ) : (
+                    <div className="card-image" style={{ background: 'linear-gradient(135deg,#fed7aa,#fbbf24)' }} />
+                  )}
+                  <div className="card-body">
+                    <div className="card-meta">
+                      <span className="card-tag">{post.tags?.[0] || 'News'}</span>
+                      <span className="card-date">{fmtShort(post.date)}</span>
+                    </div>
+                    <h3>{post.title}</h3>
+                    <p className="card-excerpt">{post.excerpt}</p>
                   </div>
                 </a>
               ))}
@@ -88,23 +73,22 @@ export default async function HomePage() {
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-1">
-            <div className="sticky top-24">
-              <div className="bg-white border border-stone-200 p-6 mb-6">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-stone-700 mb-4">About SiliconFeed</h3>
-                <p className="text-sm text-stone-500 leading-relaxed mb-4">
-                  Autonomous tech news aggregator. 130+ sources, published in real-time.
+          <aside>
+            <div className="sidebar-sticky">
+              <div className="sidebar-box">
+                <h4 className="sidebar-title">About SiliconFeed</h4>
+                <p className="sidebar-text">
+                  Autonomous tech news aggregator. 130+ sources, published in real-time. No humans required.
                 </p>
-                <a href="/about" className="text-sm font-medium text-orange-700 hover:text-orange-800">Learn more →</a>
+                <a href="/about" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--accent)' }}>
+                  Learn more →
+                </a>
               </div>
-
-              <div className="bg-stone-50 border border-stone-200 p-6">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-stone-700 mb-4">Popular Topics</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['AI', 'Startups', 'Cloud', 'Security', 'Google', 'OpenAI', 'Funding'].map(tag => (
-                    <a key={tag} href={`/tag/${tag.toLowerCase()}`} className="px-3 py-1 text-xs bg-white border border-stone-200 rounded-full hover:border-orange-300 hover:text-orange-700 transition-all">
-                      {tag}
-                    </a>
+              <div className="sidebar-box">
+                <h4 className="sidebar-title">Topics</h4>
+                <div className="topic-cloud">
+                  {['AI', 'Startups', 'Cloud', 'Security', 'Crypto', 'Google', 'OpenAI', 'Hardware'].map(t => (
+                    <a key={t} href={`/tag/${t.toLowerCase()}`} className="topic-chip">{t}</a>
                   ))}
                 </div>
               </div>
@@ -112,32 +96,33 @@ export default async function HomePage() {
           </aside>
         </div>
 
-        {/* Latest */}
+        {/* LATEST — list layout */}
         {latest.length > 0 && (
-          <section>
-            <div className="section-header"><h2>Latest</h2></div>
-            <div>
-              {latest.map((post, i) => (
-                <a key={post.slug} href={`/news/${post.slug}`} className="latest-item group">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="tag text-xs">{post.tags?.[0] || 'News'}</span>
-                      <span className="timestamp">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+          <div className="mb-12">
+            <div className="section-label">
+              <h2>Latest</h2>
+              <span className="section-line" />
+            </div>
+            <div className="latest-list">
+              {latest.map(post => (
+                <a key={post.slug} href={`/news/${post.slug}`} className="latest-item">
+                  <div className="latest-info">
+                    <div className="latest-meta">
+                      <span className="latest-tag">{post.tags?.[0] || 'News'}</span>
+                      <span className="latest-date">{fmtShort(post.date)}</span>
                     </div>
-                    <h3 className="text-lg font-medium leading-snug group-hover:text-orange-700 transition-colors truncate" style={{ fontFamily: 'Georgia, serif' }}>
-                      {post.title}
-                    </h3>
-                    <p className="text-stone-500 text-sm mt-1 line-clamp-2">{post.excerpt}</p>
+                    <h3>{post.title}</h3>
+                    <p>{post.excerpt}</p>
                   </div>
                   {post.coverImage && (
-                    <div className="latest-image flex-shrink-0">
+                    <div className="latest-thumb">
                       <img src={post.coverImage} alt="" loading="lazy" />
                     </div>
                   )}
                 </a>
               ))}
             </div>
-          </section>
+          </div>
         )}
       </main>
       <Footer />
@@ -147,7 +132,7 @@ export default async function HomePage() {
 
 export function generateMetadata() {
   return {
-    title: 'SiliconFeed — Silicon Valley & IT News Feed',
-    description: 'Autonomous aggregator of tech news: AI, startups, cloud, cybersecurity, apps.',
+    title: 'SiliconFeed — Silicon Valley & Tech News',
+    description: 'Autonomous aggregator of tech news: AI, startups, cloud, cybersecurity, crypto.',
   };
 }

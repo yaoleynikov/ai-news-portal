@@ -1,57 +1,37 @@
 import Link from 'next/link';
 
-const CATEGORIES = [
-  { slug: 'all', label: 'All', emoji: '🔥' },
-  { slug: 'AI', label: 'AI', emoji: '🤖' },
-  { slug: 'Startup', label: 'Startups', emoji: '🚀' },
-  { slug: 'Cloud', label: 'Cloud', emoji: '☁️' },
-  { slug: 'Security', label: 'Security', emoji: '🔒' },
-  { slug: 'Google', label: 'Google', emoji: '🔍' },
-  { slug: 'Microsoft', label: 'Microsoft', emoji: '🪟' },
-  { slug: 'OpenAI', label: 'OpenAI', emoji: '🧠' },
-  { slug: 'Crypto', label: 'Crypto', emoji: '₿' },
-  { slug: 'Hardware', label: 'Hardware', emoji: '💻' },
-];
-
 export default function Header() {
+  const dateStr = new Date().toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+  });
+
+  const cats = [
+    { slug: 'all', label: 'All', emoji: '🔥' },
+    { slug: 'ai', label: 'AI', emoji: '🤖' },
+    { slug: 'startups', label: 'Startups', emoji: '🚀' },
+    { slug: 'cloud', label: 'Cloud', emoji: '☁️' },
+    { slug: 'security', label: 'Security', emoji: '🔒' },
+    { slug: 'crypto', label: 'Crypto', emoji: '₿' },
+  ];
+
   return (
     <header className="site-header">
-      <div className="border-b border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-          <span className="text-xs uppercase tracking-widest text-stone-400">
-            {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
-          </span>
-          <nav className="site-nav flex items-center gap-5">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="header-top">
+          <span className="header-date">{dateStr}</span>
+          <Link href="/" className="site-logo">Silicon<span>Feed</span></Link>
+          <nav className="site-nav">
             <Link href="/about">About</Link>
             <Link href="/rss.xml">RSS</Link>
           </nav>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-5 flex items-center justify-between">
-        <Link href="/" className="flex items-baseline gap-1 group">
-          <span className="text-3xl font-bold tracking-tight" style={{ fontFamily: 'Georgia, serif' }}>
-            Silicon<span className="text-orange-700">Feed</span>
-          </span>
-        </Link>
-        <nav className="site-nav hidden md:flex items-center gap-6">
-          <Link href="/tag/ai">AI</Link>
-          <Link href="/tag/startup">Startups</Link>
-          <Link href="/tag/cloud">Cloud</Link>
-          <Link href="/tag/security">Security</Link>
-          <Link href="/tag/all">All</Link>
-        </nav>
-      </div>
-
-      <div className="border-t border-b border-stone-100 bg-stone-50/50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
-            {CATEGORIES.map(cat => (
-              <a key={cat.slug} href={`/tag/${cat.slug}`} className="category-pill">
-                {cat.emoji} {cat.label}
-              </a>
-            ))}
-          </div>
+        <div className="categories-bar">
+          {cats.map(c => (
+            <a key={c.slug} href={`/tag/${c.slug}`} className="cat-pill">
+              <span>{c.emoji}</span><span>{c.label}</span>
+            </a>
+          ))}
         </div>
       </div>
     </header>
