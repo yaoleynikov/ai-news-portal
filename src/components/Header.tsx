@@ -1,36 +1,28 @@
 import Link from 'next/link';
 
 const T = [
-  { slug: 'all', label: '■ all' },
-  { slug: 'ai', label: '○ ai' },
-  { slug: 'startups', label: '○ startups' },
-  { slug: 'cloud', label: '○ cloud' },
-  { slug: 'security', label: '○ security' },
-  { slug: 'crypto', label: '○ crypto' },
-  { slug: 'hardware', label: '○ hardware' },
+  { slug: 'all', label: 'All' },
+  { slug: 'ai', label: 'AI' },
+  { slug: 'startups', label: 'Startups' },
+  { slug: 'cloud', label: 'Cloud' },
+  { slug: 'security', label: 'Security' },
+  { slug: 'crypto', label: 'Crypto' },
+  { slug: 'hardware', label: 'Hardware' },
 ];
-
-function tt() { return new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).toUpperCase(); }
 
 export default function Header() {
   return (
-    <div>
+    <header>
       <div className="top">
-        <div className="top-left">
-          <span className="live-dot" />
-          <span className="top-time">{tt()}</span>
-        </div>
-        <Link href="/" className="top-logo">silicon<span>feed</span></Link>
-        <div className="top-right">
-          <Link href="/about">about</Link>
-          <Link href="/rss.xml">rss</Link>
-        </div>
+        <Link href="/" className="logo">silicon<span>feed</span></Link>
       </div>
-      <div className="ticker">
+      <nav className="nav">
         {T.map(t => (
-          <a key={t.slug} href={`/tag/${t.slug}`} className="ticker-item">{t.label}</a>
+          <a key={t.slug} href={`/tag/${t.slug}`} style={{ order: t.slug === 'all' ? -1 : 0 }}>{t.label}</a>
         ))}
-      </div>
-    </div>
+        <a href="/about" style={{ marginLeft: 'auto', color: 'var(--text-d)', borderLeft: 'none' }}>About</a>
+        <a href="/rss.xml" style={{ borderLeft: 'none', borderRight: '1px solid var(--line)' }}>RSS</a>
+      </nav>
+    </header>
   );
 }

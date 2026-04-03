@@ -1,33 +1,33 @@
-import { getSortedPosts } from '@/lib/posts';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-function fd(d: string) { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
-
-export const metadata = { title: 'all // siliconfeed' };
 
 export default async function AllPage() {
+  const { getSortedPosts } = await import('@/lib/posts');
   const all = getSortedPosts();
+  function fd(d: string) { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+
   return (
     <div>
       <Header />
-      <div className="shell">
-        <div className="content">
-          <div className="lbl"><span className="lbl-t">all stories</span><span className="lbl-c">{all.length}</span></div>
-          <div>
-            {all.map(p => (
-              <a key={p.slug} href={`/news/${p.slug}`} className="list-item">
-                <div className="li-b">
-                  <h4>{p.title}</h4>
-                  <p>{p.excerpt}</p>
+      <div className="wrap">
+        <div className="sec"><span>All Stories</span><span>{all.length}</span></div>
+        <div className="ll">
+          {all.map(p => (
+            <Link key={p.slug} href={`/news/${p.slug}`} className="row">
+              <div className="row-b">
+                <h4>{p.title}</h4>
+                <p>{p.excerpt}</p>
+                <div className="meta" style={{ marginTop: '6px' }}>
+                  <span className="meta-t">{p.tags?.[0] || 'news'}</span>
+                  <span className="meta-dot" />
+                  <span className="meta-d">{fd(p.date)}</span>
                 </div>
-                {p.coverImage && <div className="li-i"><img src={p.coverImage} alt="" loading="lazy" /></div>}
-              </a>
-            ))}
-          </div>
+              </div>
+              {p.coverImage && <div className="row-i"><img src={p.coverImage} alt="" loading="lazy" /></div>}
+            </Link>
+          ))}
         </div>
-        <aside className="sidebar">
-          <div className="sb"><p className="sb-l">topics</p><div className="tag-grid">{['ai', 'startups', 'cloud', 'security', 'crypto', 'hardware'].map(t => (<a key={t} href={`/tag/${t}`} className="tag-btn">{t}</a>))}</div></div>
-        </aside>
       </div>
       <Footer />
     </div>
