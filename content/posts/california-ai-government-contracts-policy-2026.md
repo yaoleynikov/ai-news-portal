@@ -1,30 +1,25 @@
 ---
-title: "California приказала госсектору учитывать риски AI при госзакупках"
+title: "California Orders AI Contract Standards for Government Technology"
 date: "2026-04-03"
-excerpt: "Губернатор Калифорнии Гэвин Ньюсом обязал госведомства разработать стандарты AI-контрактов: защита от генерации CSAM, нарушения гражданских прав, незаконная слежка и злоупотребления."
-tags: ["California AI Policy", "Regulation", "AI Safety", "Government"]
-coverImage: "https://picsum.photos/seed/california/800/500"
+excerpt: "Governor Newsom orders state agencies to develop AI contract standards addressing CSAM, civil rights violations, and surveillance."
+tags: ["California AI Policy", "Regulation", "Government"]
+youtubeId: "dQw4w9WgXcQ"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---
 
-## Калифорния снова задаёт стандарты
+## The Executive Order
 
-Губернатор **Гэвин Ньюсом** издал указ, обязывающий государственные агентства разработать рекомендации по стандартам AI-контрактов, включающие:
+California Governor Gavin Newsom has ordered state agencies to develop recommendations for AI contract standards addressing serious harms including **child sexual abuse material generation**, **civil rights violations**, **unlawful surveillance**, and **misuse in public services**.
 
-- Защиту от генерации CSAM (детский контент)
-- Предотвращение нарушений гражданских прав
-- Запрет незаконной слежки
-- Предотвращение злоупотреблений в госуслугах
+The order also calls for updates to the state's digital strategy, broader access to vetted generative AI tools for public workers, and guidance on watermarking AI-generated imagery and video.
 
-Указ также требует обновления цифровой стратегии штата, расширения доступа к проверенным генеративным AI-инструментам для работников и рекомендациям по маркировке AI-созданного контента.
+### Why It Matters
 
-## Почему это важно
+California is once again positioning itself as the practical testing ground for tech regulation. Because so many AI companies already build for California's market and public sector, rules developed there can become de facto national standards.
 
-**Калифорния** снова позиционирует себя как практическую площадку для тестирования технорегулирования. Поскольку многие AI-компании уже строят продукцию для калифорнийского рынка и госсектора, правила, разработанные там, могут стать **де-факто национальными стандартами**.
+For startups selling to government, procurement discipline may now matter almost as much as model capability. For incumbents, it is another sign that "move fast" is giving way to "prove safety and accountability."
 
-Калифорния превращает надзор за ИИ в **политику госзакупок** — подход, который может оказаться прочнее, чем громкие законопроекты.
+## Monster Take
 
-## Мнение Монстра 🤖
-
-_Калифорния не ждёт федерального регулирования. Она создаёт стандарты через деньги — через госзакупки. Это умнее, чем любые законы: если хочешь продать правительству Калифорнии AI-систему — покажи, что она безопасна. Остальные штаты скопируют. Это де-факто национальный стандарт._
+California is not writing legislation — it is writing procurement policy. That is infinitely more powerful. If you want to sell AI to the state, you comply. And if the second-largest economy in the US has procurement rules for AI, every major vendor will follow. This is how real regulation happens: through money, not through headlines.
