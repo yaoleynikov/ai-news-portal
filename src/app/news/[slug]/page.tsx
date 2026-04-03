@@ -11,7 +11,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: 'not found' };
-  return { title: post.title, description: post.excerpt };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title, description: post.excerpt, type: 'article', publishedTime: post.date,
+      ...(post.coverImage ? { images: [{ url: post.coverImage }] } : {}),
+    },
+    twitter: { card: 'summary_large_image' },
+  };
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,12 +31,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const mins = Math.ceil(words / 200);
   const related = getSortedPosts().filter(p => p.slug !== slug).slice(0, 4);
 
-  // Parse frontmatter for YouTube ID
-  const ytMatch = post.rawContent?.match(/youtubeId:\s*"?([^"\n]+)"?/);
-  const youtubeId = ytMatch ? ytMatch[1].trim() : null;
+  // Parse Monster Take from raw markdown
+  const mtMatch = post.rawContent?.match(/## Monster Take\s*([\s\S]+)/);
+  const mtText = mtMatch ? mtMatch[1].trim() : '';
 
-  // Extract Monster Take from content if present
-  const contentHtml = post.contentHtml;
+  // Remove Monster Take section from rendered HTML
+  let cleanHtml = post.contentHtml;
+  cleanHtml = cleanHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
 
   return (
     <div>
@@ -45,31 +54,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
           {post.coverImage && (
             <figure className="aimg">
-              <img src={post.coverImage} alt={post.title} />
+              <img src={post.coverImage} alt="" />
             </figure>
-          )}
-
-          {youtubeId && (
-            <div style={{ maxWidth: '620px', margin: '0 auto', padding: '24px 4px 0' }}>
-              <div style={{ width: '100%', aspectRatio: '16/9', background: '#000', borderRadius: '4px', overflow: 'hidden' }}>
-                <iframe
-                  src={`https://www.youtube.com/embed/${youtubeId}`}
-                  style={{ width: '100%', height: '100%', border: 'none' }}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
           )}
 
           <div className="a-body">
             <h1>{post.title}</h1>
             <p className="a-sub">{post.excerpt}</p>
-            <div className="rich" dangerouslySetInnerHTML={{ __html: contentHtml }} />
-            <div className="mt">
-              <p className="mt-l">monster take</p>
-              {/* Monster Take is extracted from content by the article content */}
-            </div>
+            <div className="rich" dangerouslySetInnerHTML={{ __html: cleanHtml }} />
+
+            {mtText && (
+              <div className="mt">
+                <p className="mt-l">monster take</p>
+                <p>{mtText.replace(/\n\n+/g, '</p><p>').replace(/^[\n>]+/, '').trim()}</p>
+              </div>
+            )}
           </div>
         </article>
 
@@ -80,7 +79,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <div className="rel">
                 {related.map(p => (
                   <a key={p.slug} href={`/news/${p.slug}`}>
-                    {p.title.length > 55 ? p.title.substring(0, 52) + '…' : p.title}
+                    {p.title.length > 50 ? p.title.substring(0, 47) + '…' : p.title}
                     <span className="rel-d">{new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                   </a>
                 ))}
