@@ -7,97 +7,82 @@ function fd(d: string) { return new Date(d).toLocaleDateString('en-US', { month:
 export default async function HomePage() {
   const all = getSortedPosts();
   const hero = all[0];
-  const side = all.slice(1, 4);
-  const grid = all.slice(4, 8);
+  const hero2 = all.slice(1, 3);
+  const grid3 = all.slice(3, 6);
+  const grid2 = all.slice(6, 8);
   const list = all.slice(8);
 
   return (
     <div>
       <Header />
-      <div className="shell">
-        <div className="col">
-          {hero && (
-            <div className="hero">
-              <a href={`/news/${hero.slug}`} className="hero-big">
-                {hero.coverImage ? (
-                  <div className="hero-big-img"><img src={hero.coverImage} alt="" /></div>
-                ) : <div className="hero-big-img" />}
-                <div className="hero-big-body">
-                  <div className="meta"><span className="meta-t">{hero.tags?.[0] || 'tech'}</span><span className="meta-dot" /><span className="meta-d">{fd(hero.date)}</span></div>
-                  <h2>{hero.title}</h2>
-                </div>
+      <div className="main">
+
+        {/* HERO */}
+        {hero && (
+          <div className="mhero">
+            <a href={`/news/${hero.slug}`} className="mhero-main">
+              {hero.coverImage && <div className="mhero-img"><img src={hero.coverImage} alt="" /></div>}
+              <div className="mhero-tag">{hero.tags?.[0] || 'tech'}</div>
+              <h2>{hero.title}</h2>
+              <p>{hero.excerpt}</p>
+            </a>
+            <div className="mhero-side">
+              {hero2.map(p => (
+                <a key={p.slug} href={`/news/${p.slug}`} className="mside">
+                  <div className="mside-tag">{p.tags?.[0] || 'news'} · {fd(p.date)}</div>
+                  <h3>{p.title}</h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 3-COL */}
+        {grid3.length > 0 && (
+          <>
+            <div className="seclbl">latest</div>
+            <div className="grid3">
+              {grid3.map(post => (
+                <a key={post.slug} href={`/news/${post.slug}`} className="g3">
+                  {post.coverImage && <div className="g3-img"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+                  <div className="g3-tag">{post.tags?.[0] || 'news'}</div>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* 2-COL */}
+        {grid2.length > 0 && (
+          <div className="grid2">
+            {grid2.map(post => (
+              <a key={post.slug} href={`/news/${post.slug}`} className="g2">
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
               </a>
-              <div className="hero-sm">
-                {side.map(p => (
-                  <a key={p.slug} href={`/news/${p.slug}`} className="hero-sm">
-                    <div className="meta"><span className="meta-t">{p.tags?.[0] || 'news'}</span><span className="meta-dot" /><span className="meta-d">{fd(p.date)}</span></div>
-                    <h3>{p.title}</h3>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
+            ))}
+          </div>
+        )}
 
-          {grid.length > 0 && (
-            <>
-              <div className="lbl"><span>latest</span><span>{grid.length}</span></div>
-              <div className="g2">
-                {grid.map(post => (
-                  <a key={post.slug} href={`/news/${post.slug}`} className="c">
-                    {post.coverImage ? <div className="c-img"><img src={post.coverImage} alt="" loading="lazy" /></div> : <div className="c-img" />}
-                    <div className="c-b">
-                      <div className="meta"><span className="meta-t">{post.tags?.[0] || 'news'}</span><span className="meta-dot" /><span className="meta-d">{fd(post.date)}</span></div>
-                      <h3>{post.title}</h3>
-                      <p>{post.excerpt}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
-
-          {list.length > 0 && (
-            <>
-              <div className="lbl"><span>more</span></div>
-              <div className="lst">
-                {list.map(post => (
-                  <a key={post.slug} href={`/news/${post.slug}`} className="r">
-                    <div className="r-b">
-                      <div className="meta"><span className="meta-t">{post.tags?.[0] || 'news'}</span><span className="meta-dot" /><span className="meta-d">{fd(post.date)}</span></div>
-                      <h4>{post.title}</h4>
-                      <p>{post.excerpt}</p>
-                    </div>
-                    {post.coverImage && <div className="r-i"><img src={post.coverImage} alt="" loading="lazy" /></div>}
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-
-        <aside className="side">
-          <div className="sb">
-            <p className="sl">topics</p>
-            <div className="tb">
-              {['ai', 'startups', 'cloud', 'security', 'crypto', 'hardware'].map(t => (
-                <a key={t} href={`/tag/${t}`}>{t}</a>
+        {/* LIST */}
+        {list.length > 0 && (
+          <>
+            <div className="seclbl">{list.length} more stories</div>
+            <div className="llist">
+              {list.map(post => (
+                <a key={post.slug} href={`/news/${post.slug}`} className="lr">
+                  <div className="lr-b">
+                    <p className="lr-t">{post.title}</p>
+                    <p className="lr-d">{post.tags?.[0] || 'news'} · {fd(post.date)}</p>
+                  </div>
+                  {post.coverImage && <div className="lr-i"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+                </a>
               ))}
             </div>
-          </div>
-          <div className="sb">
-            <p className="sl">about</p>
-            <p style={{ fontSize: '13px', color: 'var(--text-m)', lineHeight: 1.5, margin: 0 }}>autonomous tech news. 130+ sources. real-time.</p>
-            <a href="/about" style={{ fontSize: '11px', fontFamily: 'var(--mono)', display: 'inline-block', marginTop: '6px' }}>more →</a>
-          </div>
-          <div className="sb">
-            <p className="sl">recent</p>
-            <div className="rl">
-              {all.slice(0, 5).map(p => (
-                <a key={p.slug} href={`/news/${p.slug}`}>{p.title.length > 50 ? p.title.substring(0, 47) + '…' : p.title}<span className="rl-d">{fd(p.date)}</span></a>
-              ))}
-            </div>
-          </div>
-        </aside>
+          </>
+        )}
       </div>
       <Footer />
     </div>

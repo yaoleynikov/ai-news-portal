@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <div className="foot">
-      <span>siliconfeed</span>
+      <span className="foot-logo">siliconfeed</span>
       <span>© {new Date().getFullYear()}</span>
     </div>
   );
