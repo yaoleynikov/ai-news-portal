@@ -1,0 +1,33 @@
+name: Auto-Publish AI News
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  publish-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch and publish new articles
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: node scripts/auto-publish.mjs
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "AI-Insight Bot"
+          git config user.email "bot@ai-insight.vercel.app"
+          git add -A
+          git diff --staged --quiet || git commit -m "feat: auto-published new articles ($(date '+%Y-%m-%d %H:%M'))"
+          git push
