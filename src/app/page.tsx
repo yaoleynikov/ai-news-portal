@@ -62,10 +62,12 @@ export default async function HomePage() {
                   className="article-card group block text-inherit no-underline"
                 >
                   <div className="card-image">
-                    {post.coverImage ? (
+                    {post.coverImage && post.coverImage.startsWith('http') ? (
                       <img src={post.coverImage} alt={post.title} loading="lazy" />
                     ) : (
-                      <div className="w-full h-full" style={{ background: gradients[i % gradients.length] }} />
+                      <div className="w-full h-full flex items-center justify-center" style={{ background: gradients[i % gradients.length] }}>
+                        <span className="text-3xl opacity-30">📰</span>
+                      </div>
                     )}
                   </div>
                   <div className="card-body">
