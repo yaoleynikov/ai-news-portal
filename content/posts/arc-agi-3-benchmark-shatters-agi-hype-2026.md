@@ -5,7 +5,6 @@ excerpt: "The ARC-AGI-3 benchmark tested whether AI agents can generalize in unk
 tags: ["AGI", "AI Benchmark", "ARC Prize", "OpenAI", "Anthropic", "Google"]
 youtubeId: "dQw4w9WgXcQ"
 source: "https://decrypt.co/362496/is-agi-here-not-even-close-ai-benchmark"
-date: "2026-04-04"
 author: "SiliconFeed"
 ---
 
