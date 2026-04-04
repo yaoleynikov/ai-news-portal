@@ -80,18 +80,12 @@ export function getPostBySlug(slug: string) {
   const customCover = (data.coverImage as string) || '';
   const youtubeId = (data.youtubeId as string) || '';
 
-  const finalYoutubeId = youtubeId || null;
   let finalContent = content;
 
-  // Add YouTube embed if youtubeId exists
-  if (finalYoutubeId) {
-    const firstH2 = content.indexOf('## ');
-    if (firstH2 > 0) {
-      const before = content.substring(0, firstH2);
-      const after = content.substring(firstH2);
-      finalContent = before + '\n<iframe width="100%" height="380" src="https://www.youtube.com/embed/' + finalYoutubeId + '?rel=0" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n' + after;
-    }
-  }
+  // Don't embed YouTube in content - use cover image instead
+  // Video embeds often fail due to embedding restrictions
+  // The youtubeId is used for the cover image (maxresdefault.jpg) only
+  let finalYoutubeId = null;
 
   const processedContent = remark().use(html, { allowDangerousHtml: true }).processSync(finalContent);
   const contentHtml = processedContent.toString();

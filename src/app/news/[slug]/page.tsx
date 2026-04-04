@@ -49,7 +49,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {post.coverImage && (
           <figure className="a-img">
-            <img src={post.coverImage} alt="" />
+            {post.youtubeId ? (
+              <a href={`https://www.youtube.com/watch?v=${post.youtubeId}`} target="_blank" rel="noopener noreferrer">
+                <img src={post.coverImage} alt="" />
+              </a>
+            ) : (
+              <img src={post.coverImage} alt="" />
+            )}
           </figure>
         )}
 
