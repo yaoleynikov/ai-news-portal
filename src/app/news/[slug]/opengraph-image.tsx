@@ -34,24 +34,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           overflow: 'hidden',
         }}
       >
-        {/* Watermark text */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: -30,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            fontSize: 500,
-            fontWeight: 900,
-            color: '#ffffff',
-            opacity: 0.03,
-            letterSpacing: '-0.04em',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          SF
-        </div>
-
         {/* Top accent bar */}
         <div
           style={{
@@ -100,43 +82,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           {post.title}
         </div>
 
-        {/* Bottom branding */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 28,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-          }}
-        >
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 14,
-              fontWeight: 800,
-              color: '#fff',
-            }}
-          >
-            S
-          </div>
-          <span
-            style={{
-              fontSize: 16,
-              fontWeight: 600,
-              color: '#94a3b8',
-              letterSpacing: 1,
-            }}
-          >
-            SiliconFeed
-          </span>
-        </div>
       </div>
     ),
     { width: 1200, height: 630 }
