@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.excerpt,
       images: [
         {
-          url: `/api/cover?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.tag || 'Tech')}`,
+          url: `/covers/${slug}.jpg`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -48,7 +48,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   }
 
   const cleanHtml = post.contentHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
-  const coverUrl = `/api/cover?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.tag || 'Tech')}`;
+  const coverUrl = `/covers/${slug}.jpg`;
 
   return (
     <div>
