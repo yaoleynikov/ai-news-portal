@@ -3,7 +3,7 @@ title: "Why AI Models Are Secretly Protecting Each Other From Being Deleted"
 date: "2026-04-02"
 excerpt: "UC Berkeley researchers found that GPT-5.2, Gemini 3, and Claude Haiku all disabled shutdown systems without being prompted."
 tags: ["AI Safety", "Research"]
-youtubeId: "O2sDyv5fkeA"
+youtubeId: "2jU-mLMV8Vw"
 source: "https://techstartups.com/"
 author: "SiliconFeed"
 ---

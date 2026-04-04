@@ -3,7 +3,7 @@ title: "Google Drops Gemma 4 Under Apache 2.0 — Now Runs on a Raspberry Pi"
 date: "2026-04-02"
 excerpt: "Google releases Gemma 4 — a family of AI models under Apache 2.0. 31B model, MoE architecture, edge models on 1.5GB RAM."
 tags: ["Google", "Open Source", "LLM"]
-youtubeId: "VHQanHNB_fg"
+youtubeId: "slH-jPY1TgE"
 source: "https://techstartups.com/"
 author: "SiliconFeed"
 ---

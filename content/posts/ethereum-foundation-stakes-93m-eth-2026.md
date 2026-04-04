@@ -3,7 +3,7 @@ title: "Ethereum Foundation Stakes $93M in ETH — A Bold Vote of Confidence in 
 date: 2026-04-04
 excerpt: "The Ethereum Foundation deposited 45,034 ETH to the Beacon Chain, bringing its total staked position to nearly 69,500 ETH worth $143 million."
 tags: ["ethereum", "staking", "defi", "cryptocurrency", "institutional"]
-youtubeId: "dQw4w9WgXcQ"
+youtubeId: "C9ps6X8-2LY"
 source: "https://decrypt.co/363253/ethereum-foundation-stakes-93m-worth-eth-nears-strategic-target"
 author: "SiliconFeed AI"
 ---
