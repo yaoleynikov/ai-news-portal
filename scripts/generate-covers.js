@@ -123,7 +123,10 @@ function findLogoPath(key) {
 // ─── Render logo to a clean PNG buffer ─────────────────────────────────────────
 async function renderLogoToPng(logoPath, isSvg, targetSize) {
   if (!isSvg) {
-    return await sharp(logoPath).resize(targetSize, targetSize, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    // Flatten on white to eliminate alpha edge noise
+    return await sharp(logoPath)
+      .resize(targetSize, targetSize, { fit: 'contain', background: '#ffffff' })
+      .flatten({ background: '#ffffff' })
       .png({ compressionLevel: 9 })
       .toBuffer();
   }
@@ -134,29 +137,31 @@ async function renderLogoToPng(logoPath, isSvg, targetSize) {
     font: { loadSystemFonts: false },
     fitTo: { mode: 'width', value: renderSize }
   }).render().asPng();
-  return await sharp(pngHighRes).resize(targetSize, targetSize, { fit: 'contain' })
+  // Flatten on white to kill semi-transparent AA edge pixels
+  return await sharp(pngHighRes)
+    .resize(targetSize, targetSize, { fit: 'contain', background: '#ffffff' })
+    .flatten({ background: '#ffffff' })
     .png({ compressionLevel: 9 })
     .toBuffer();
 }
 
-// ─── Build cover SVG with pre-rendered logo PNG ────────────────────────────────
-function buildCoverLogoPng(logoPngBuffer) {
-  const dataUri = `data:image/png;base64,${logoPngBuffer.toString('base64')}`;
-  // Blurred background version (from same PNG)
-  return `
-<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-  <defs>
-    <filter id="blur"><feGaussianBlur stdDeviation="80"/></filter>
-  </defs>
-  <rect width="${W}" height="${H}" fill="#ffffff"/>
-  <!-- Blurred background logo, subtle -->
-  <image href="${dataUri}" x="${Math.floor((W - LOGO_SIZE * 3.5) / 2)}" y="${Math.floor((H - LOGO_SIZE * 3.5) / 2)}"
-         width="${Math.floor(LOGO_SIZE * 3.5)}" height="${Math.floor(LOGO_SIZE * 3.5)}"
-         opacity="0.08" filter="url(#blur)" preserveAspectRatio="xMidYMid meet"/>
-  <!-- Clean logo, centered, ${LOGO_SIZE}px square -->
-  <image href="${dataUri}" x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_SIZE}" height="${LOGO_SIZE}"
-         opacity="1" preserveAspectRatio="xMidYMid meet"/>
-</svg>`;
+// ─── Build cover with Sharp composite (avoids Resvg α artifacts) ───────────────
+async function buildCoverWithSharp(logoPngBuffer) {
+  // Step 1: Create white background
+  const bg = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#ffffff"/></svg>`
+  );
+  // Step 2: Composite logo on top using sharp (proper alpha handling)
+  return await sharp(bg)
+    .composite([
+      {
+        input: logoPngBuffer,
+        top: LOGO_Y,
+        left: LOGO_X,
+      },
+    ])
+    .jpeg({ quality: 90, mozjpeg: true })
+    .toBuffer();
 }
 
 // ─── Build custom cover from Brave image search ────────────────────────────────
@@ -373,9 +378,29 @@ console.log(`Found ${posts.length} posts\n`);
         continue;
       }
       source = resolved.key;
-      // Render logo to clean PNG at target size
+      // Render logo to clean PNG, flatten on white, composite via sharp
       const logoPng = await renderLogoToPng(logoResult.path, logoResult.isSvg, LOGO_SIZE);
-      svgString = buildCoverLogoPng(logoPng);
+      try {
+        // White background via SVG (sharp can't do fill natively)
+        const whiteBg = Buffer.from(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#ffffff"/></svg>`
+        );
+        const jpegData = await sharp(whiteBg)
+          .composite([{ input: logoPng, left: LOGO_X, top: LOGO_Y }])
+          .jpeg({ quality: 90, mozjpeg: true })
+          .toBuffer();
+        fs.writeFileSync(coverPath, jpegData);
+        const issue = await qualityCheck(coverPath);
+        if (issue) {
+          console.log(`  WARN quality: ${post.slug} -> ${issue}`);
+        } else {
+          console.log(`  DONE: ${post.slug} -> ${source} ✓ (sharp)`);
+        }
+        done++;
+      } catch (e) {
+        console.log(`  ERR sharp: ${post.slug}: ${e.message.substring(0, 130)}`);
+      }
+      continue;
     } else {
       console.log(`  SEARCH: ${post.slug}`);
       const imageBuffer = await fetchImageForTopic(post.slug, post.tags);
