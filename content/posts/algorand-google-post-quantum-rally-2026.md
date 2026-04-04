@@ -3,7 +3,7 @@ title: "Algorand Surges 44% After Google Cites Its Post-Quantum Cryptography in 
 date: 2026-04-04
 excerpt: "Google's latest quantum research paper names Algorand as a real-world example of post-quantum protocol deployment, sending the token up double digits in a single week."
 tags: ["crypto", "quantum-computing", "algorand", "google", "post-quantum"]
-youtubeId: "dQw4w9WgXcQ"
+youtubeId: "EP7AM3fmVUg"
 source: "https://decrypt.co/363236/algorand-soars-double-digits-on-google-post-quantum-protocols-citation"
 author: "SiliconFeed AI"
 ---

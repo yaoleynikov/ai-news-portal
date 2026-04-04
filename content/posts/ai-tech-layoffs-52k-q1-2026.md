@@ -3,7 +3,7 @@ title: "AI-Driven Tech Layoffs Hit 52,050 in Q1 2026 — Up 40%"
 date: "2026-04-04"
 excerpt: "US tech sector cut 52,050 jobs in Q1 2026, a 40% jump from last year. AI is now blamed for 25% of March layoffs — up from 10% in February."
 tags: ["Layoffs", "AI Jobs", "Oracle", "Meta", "Amazon", "Dell", "Block", "Workforce"]
-youtubeId: "U5YQazFZjOQ"
+youtubeId: "WgwvooWTJXA"
 source: "https://nypost.com/2026/04/02/business/ai-pushes-2026-tech-layoffs-past-50k-and-counting-employers-say/"
 author: "SiliconFeed"
 ---
