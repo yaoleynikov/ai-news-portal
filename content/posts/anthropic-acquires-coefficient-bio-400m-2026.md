@@ -3,7 +3,7 @@ title: "Anthropic Acquires AI Biotech Startup Coefficient Bio for $400M"
 date: "2026-04-04"
 excerpt: "Anthropic is pushing beyond general-purpose AI with its $400M acquisition of Coefficient Bio, a startup applying AI to drug discovery and clinical workflows. The move signals AI's expansion into high-stakes scientific domains."
 tags: ["Anthropic", "Biotech", "AI Acquisition", "Drug Discovery", "Life Sciences"]
-youtubeId: "3JZ4pnNtyRQ"
+youtubeId: "3GMSY5TyWI8"
 source: "https://techstartups.com/2026/04/03/anthropic-acquires-ai-biotech-startup-coefficient-bio-for-400m-to-expand-into-drug-discovery-and-clinical-workflows/"
 author: "SiliconFeed"
 ---

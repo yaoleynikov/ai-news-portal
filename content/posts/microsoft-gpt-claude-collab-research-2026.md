@@ -1,5 +1,5 @@
 ---
-youtubeId: "Rzk1fFQKjXs"
+youtubeId: "iduDzLK5wfo"
 title: "Microsoft Pits GPT Against Claude—And the Winner Is Better Research"
 date: "2026-04-03"
 excerpt: "Microsoft's new Critique and Council modes make GPT and Claude work together on research tasks. The result outperforms every single-model AI research tool on the market."

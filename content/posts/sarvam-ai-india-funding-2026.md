@@ -5,6 +5,7 @@ excerpt: "Indian AI startup Sarvam AI is in negotiations for funding at a $1.5 b
 tags: ["Startup", "India", "AI", "Funding", "Investment"]
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
+youtubeId: "L8LlxtAsitw"
 ---
 
 ## India's AI Sovereignty Play

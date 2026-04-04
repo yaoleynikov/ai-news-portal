@@ -3,7 +3,7 @@ title: "OpenAI Raised $122B. Investors Are Dumping the Shares."
 date: "2026-04-04"
 excerpt: "OpenAI just closed the largest venture round in history. But institutional holders can't unload $600M in stock. The valuation paradox reshaping AI."
 tags: ["OpenAI", "Venture Capital", "Oracle", "Layoffs", "AI Funding"]
-youtubeId: "dQw4w9WgXcQ"
+youtubeId: "QI0TX72zoK8"
 source: "https://www.theneuron.ai/explainer-articles/-around-the-horn-digest-everything-that-happened-in-ai-today-wednesday-april-1-2026/"
 author: "SiliconFeed"
 ---

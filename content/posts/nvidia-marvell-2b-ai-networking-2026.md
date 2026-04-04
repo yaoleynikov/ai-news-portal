@@ -3,7 +3,7 @@ title: "Nvidia's $2B Marvell Bet and the AI Networking War"
 date: "2026-04-04"
 excerpt: "Nvidia pours $2 billion into Marvell to dominate AI networking. Nothing plans smart glasses for 2027. AI capex hits $635B but energy costs surge."
 tags: ["Nvidia", "Marvell", "AI Infrastructure", "Smart Glasses", "AI Chips", "Tenex"]
-youtubeId: "L_jWHffIx5E"
+youtubeId: "zqq-mIGz2bw"
 source: "https://techstartups.com/2026/04/01/top-tech-news-today-april-1-2026/"
 author: "SiliconFeed"
 ---

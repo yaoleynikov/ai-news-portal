@@ -1,5 +1,5 @@
 ---
-youtubeId: "7nJIGO9mfVE"
+youtubeId: "Uv5Z2mKTeoI"
 title: "Google's AI Agent Traps: Six Ways the Web Is Weaponized Against Your AI Assistant"
 date: "2026-04-03"
 excerpt: "Google DeepMind just published the most comprehensive map yet of how criminals and state actors are turning the open internet into a kill-zone for autonomous AI agents."

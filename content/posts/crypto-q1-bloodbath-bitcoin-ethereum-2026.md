@@ -3,7 +3,7 @@ title: "Crypto's Q1 Bloodbath: Bitcoin Drops 22%, But Infra Builds On"
 date: "2026-04-04"
 excerpt: "Bitcoin shed a quarter of its value in Q1 2026 — its worst quarter since 2018. Miners sold $250M in BTC. Ethereum Foundation staked $93M. The divergence signals a maturing market."
 tags: ["Bitcoin", "Ethereum", "Crypto", "AI Infrastructure", "Quantum Computing"]
-youtubeId: "oHg5SJYRHA0"
+youtubeId: "oEpvcvcYKO4"
 source: "https://decrypt.co/news"
 author: "SiliconFeed"
 ---
