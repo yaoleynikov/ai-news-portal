@@ -2,7 +2,7 @@
   "version": 1,
   "functions": {
     "/news/[slug]/opengraph-image": {},
-    "/api/cover": {},
-    "/api/og": {}
+    "/api/og": {},
+    "/api/cover": {}
   }
 }

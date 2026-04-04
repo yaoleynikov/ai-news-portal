@@ -5,5 +5,6 @@ const nextConfig = {
       { protocol: 'https', hostname: '**' },
     ],
   },
+  serverExternalPackages: ['@napi-rs/canvas'],
 };
 export default nextConfig;
