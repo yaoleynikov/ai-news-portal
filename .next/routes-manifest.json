@@ -28,6 +28,14 @@
       "namedRegex": "^/news/(?<nxtPslug>[^/]+?)(?:/)?$"
     },
     {
+      "page": "/news/[slug]/opengraph-image",
+      "regex": "^/news/([^/]+?)/opengraph\\-image(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/news/(?<nxtPslug>[^/]+?)/opengraph\\-image(?:/)?$"
+    },
+    {
       "page": "/tag/[slug]",
       "regex": "^/tag/([^/]+?)(?:/)?$",
       "routeKeys": {

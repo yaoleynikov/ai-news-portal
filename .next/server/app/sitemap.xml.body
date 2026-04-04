@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://ai-insight-2026.vercel.app</loc>
-<lastmod>2026-04-04T11:40:47.325Z</lastmod>
+<lastmod>2026-04-04T15:24:34.210Z</lastmod>
 <changefreq>daily</changefreq>
 <priority>1</priority>
 </url>
@@ -26,6 +26,12 @@
 </url>
 <url>
 <loc>https://ai-insight-2026.vercel.app/news/anthropic-acquires-coefficient-bio-400m-2026</loc>
+<lastmod>2026-04-04T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://ai-insight-2026.vercel.app/news/anthropic-locks-garden-claude-openclaw-subscriptions-2026</loc>
 <lastmod>2026-04-04T00:00:00.000Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>

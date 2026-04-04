@@ -10,31 +10,31 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 const logoMap: Record<string, string> = {
-  'openai': 'openai.svg',
-  'anthropic': 'anthropic.svg',
-  'google': 'google.svg',
-  'microsoft': 'microsoft.svg',
-  'nvidia': 'nvidia.svg',
-  'meta': 'meta.svg',
-  'amazon': 'amazon.svg',
-  'bitcoin': 'bitcoin.svg',
-  'crypto': 'bitcoin.svg',
-  'ethereum': 'ethereum.svg',
-  'coinbase': 'coinbase.svg',
-  'stripe': 'stripe.svg',
-  'cloudflare': 'cloudflare.svg',
-  'spacex': 'spacex.svg',
-  'oracle': 'oracle.svg',
-  'wikipedia': 'wikipedia.svg',
-  'freebsd': 'freebsd.svg',
-  'claude': 'anthropic.svg',
-  'chatgpt': 'openai.svg',
-  'gemma': 'google.svg',
-  'gpt': 'openai.svg',
-  'copilot': 'microsoft.svg',
-  'gemini': 'google.svg',
+  'openai': 'openai.png',
+  'anthropic': 'anthropic.png',
+  'google': 'google.png',
+  'microsoft': 'microsoft.png',
+  'nvidia': 'nvidia.png',
+  'meta': 'meta.png',
+  'amazon': 'amazon.png',
+  'bitcoin': 'bitcoin.png',
+  'crypto': 'bitcoin.png',
+  'ethereum': 'ethereum.png',
+  'coinbase': 'coinbase.png',
+  'stripe': 'stripe.png',
+  'cloudflare': 'cloudflare.png',
+  'spacex': 'spacex.png',
+  'oracle': 'oracle.png',
+  'wikipedia': 'wikipedia.png',
+  'freebsd': 'freebsd.png',
+  'claude': 'anthropic.png',
+  'chatgpt': 'openai.png',
+  'gemma': 'google.png',
+  'gpt': 'openai.png',
+  'copilot': 'microsoft.png',
+  'gemini': 'google.png',
   'algorand': 'algorand.png',
-  'tesla': 'tesla.svg',
+  'tesla': 'tesla.png',
 };
 
 function getLogoFile(tag: string): string | null {
@@ -51,7 +51,7 @@ async function getLogoBuffer(logoFile: string): Promise<string | null> {
     const filePath = path.join(logosDir, logoFile);
     if (!fs.existsSync(filePath)) return null;
     const file = fs.readFileSync(filePath);
-    return `data:image/${logoFile.endsWith('.svg') ? 'svg+xml' : 'png'};base64,${file.toString('base64')}`;
+    return `data:image/png;base64,${file.toString('base64')}`;
   } catch {
     return null;
   }

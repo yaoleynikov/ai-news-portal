@@ -1,13 +1,16 @@
 {
   "/_not-found/page": "/_not-found",
-  "/robots.txt/route": "/robots.txt",
   "/rss.xml/route": "/rss.xml",
   "/sitemap.xml/route": "/sitemap.xml",
-  "/page": "/",
-  "/contact/page": "/contact",
+  "/robots.txt/route": "/robots.txt",
+  "/api/cover/route": "/api/cover",
+  "/news/[slug]/opengraph-image/route": "/news/[slug]/opengraph-image",
   "/about/page": "/about",
-  "/news/[slug]/page": "/news/[slug]",
-  "/editorial-policy/page": "/editorial-policy",
   "/privacy-policy/page": "/privacy-policy",
-  "/tag/[slug]/page": "/tag/[slug]"
+  "/news/[slug]/page": "/news/[slug]",
+  "/contact/page": "/contact",
+  "/tag/[slug]/page": "/tag/[slug]",
+  "/editorial-policy/page": "/editorial-policy",
+  "/page": "/",
+  "/api/og/route": "/api/og"
 }

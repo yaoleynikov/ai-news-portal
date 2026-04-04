@@ -1,4 +1,8 @@
 {
   "version": 1,
-  "functions": {}
+  "functions": {
+    "/news/[slug]/opengraph-image": {},
+    "/api/cover": {},
+    "/api/og": {}
+  }
 }
