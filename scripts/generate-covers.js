@@ -23,10 +23,11 @@ const BRAVE_KEY = 'BSAuzT5f6qJnM1FNts_-LYkacF6yuKV';
 // Canvas dimensions
 const W = 1200;
 const H = 630;
-// Logo: centered square, 80% of canvas width
-const LOGO_SIZE = Math.round(W * 0.8); // 960
-const LOGO_X = (W - LOGO_SIZE) / 2;
-const LOGO_Y = (H - LOGO_SIZE) / 2;
+// Logo: centered, 80% of canvas (bounding box); preserveAspectRatio="meet" ensures fit
+const LOGO_W = Math.round(W * 0.8);  // 960
+const LOGO_H = Math.round(H * 0.8);  // 504
+const LOGO_X = (W - LOGO_W) / 2;     // 120
+const LOGO_Y = (H - LOGO_H) / 2;     // 63
 
 // Fill color for SVGs that lack it
 const SVG_FILL = '#000000';
@@ -497,7 +498,7 @@ console.log(`Found ${posts.length} posts\n`);
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="#ffffff"/>
   <image href="data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgContent)))}"
-         x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_SIZE}" height="${LOGO_SIZE}"
+         x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_W}" height="${LOGO_H}"
          preserveAspectRatio="xMidYMid meet"/>
 </svg>`;
         const renderSize = Math.round(W * 3);
