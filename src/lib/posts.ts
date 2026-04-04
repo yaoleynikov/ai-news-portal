@@ -108,3 +108,25 @@ export function getPostBySlug(slug: string) {
 export function getAllPostSlugs() {
   return getPostFiles().map(f => f.replace(/\.mdx?$/, ''));
 }
+
+// Get related articles based on shared tags
+export function getRelatedPosts(currentSlug: string, limit: number = 3) {
+  const all = getSortedPosts();
+  const current = all.find(p => p.slug === currentSlug);
+  if (!current || !current.tags || current.tags.length === 0) {
+    // No tags — return latest posts
+    return all.filter(p => p.slug !== currentSlug).slice(0, limit);
+  }
+  const related = all
+    .filter(p => p.slug !== currentSlug)
+    .map(p => ({
+      ...p,
+      sharedTags: p.tags?.filter(t => current.tags!.includes(t)).length || 0,
+    }))
+    .sort((a, b) => {
+      if (b.sharedTags !== a.sharedTags) return b.sharedTags - a.sharedTags;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    })
+    .slice(0, limit);
+  return related;
+}
