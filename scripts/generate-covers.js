@@ -296,6 +296,7 @@ async function qualityCheck(coverPath) {
   try {
     const meta = await sharp(coverPath).metadata();
     if (!meta.width || meta.width < 800) return `too small (${meta.width}x${meta.height})`;
+    // Check the central 60%x50% area where the logo/image should be
     const center = await sharp(coverPath)
       .extract({
         left: Math.floor(W * 0.2),
@@ -303,21 +304,40 @@ async function qualityCheck(coverPath) {
         width: Math.floor(W * 0.6),
         height: Math.floor(H * 0.5),
       })
-      .resize(50, 50)
+      .resize(32, 32)
       .raw()
       .toBuffer();
+    // Calculate average brightness
     let sum = 0;
     for (let i = 0; i < center.length; i += 3) sum += (center[i] + center[i+1] + center[i+2]) / 3;
     const avg = sum / (center.length / 3);
-    const mean = avg;
-    let variance = 0;
+    // Calculate contrast: average absolute deviation from mean
+    let totalDev = 0;
     for (let i = 0; i < center.length; i += 3) {
       const px = (center[i] + center[i+1] + center[i+2]) / 3;
-      variance += Math.pow(px - mean, 2);
+      totalDev += Math.abs(px - avg);
     }
-    variance = variance / (center.length / 3);
-    if (avg > 252 && variance < 30) return `blank/white (avg:${avg.toFixed(0)},var:${variance.toFixed(0)})`;
-    if (avg < 5 && variance < 30) return 'blank/black';
+    const contrast = totalDev / (center.length / 3);
+    // Calculate pixel-to-pixel edge strength (Sobel-like)
+    // If adjacent pixels barely change, it's a flat image
+    let edgeSum = 0, edgeCount = 0;
+    const w = 32;
+    for (let y = 0; y < 31; y++) {
+      for (let x = 0; x < 31; x++) {
+        const idx = (y * w + x) * 3;
+        const diff = Math.abs(
+          (center[idx] + center[idx+1] + center[idx+2]) / 3 -
+          (center[idx+3] + center[idx+4] + center[idx+5]) / 3
+        );
+        edgeSum += diff;
+        edgeCount++;
+      }
+    }
+    const edgeStrength = edgeCount > 0 ? edgeSum / edgeCount : 0;
+    // A blank or nearly-blank image will have very low edge strength and low contrast
+    if (avg > 250 && contrast < 5) return `blank-near-white (avg:${avg.toFixed(0)}, contrast:${contrast.toFixed(1)})`;
+    if (avg < 8 && contrast < 5) return 'blank-near-black';
+    if (contrast < 3 && edgeStrength < 3) return `flat-no-content (avg:${avg.toFixed(0)}, contrast:${contrast.toFixed(1)}, edge:${edgeStrength.toFixed(1)})`;
     return null; // OK
   } catch (e) {
     return 'check error: ' + e.message.substring(0, 60);
