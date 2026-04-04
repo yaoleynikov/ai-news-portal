@@ -133,16 +133,8 @@ async function downloadLogo(company, query) {
 async function main() {
   // Download missing company logos
   const logoMap = {
-    'openai': 'OpenAI logo transparent png',
-    'anthropic': 'Anthropic logo transparent png',
-    'google': 'Google logo icon transparent png',
-    'microsoft': 'Microsoft logo transparent png',
-    'nvidia': 'NVIDIA logo transparent png',
-    'meta': 'Meta logo transparent png',
-    'amazon': 'Amazon logo transparent png',
-    'bitcoin': 'Bitcoin logo transparent png',
-    'ethereum': 'Ethereum logo transparent png',
-    'algorand': 'Algorand logo transparent png',
+    'baidu': 'Baidu logo transparent png',
+    'startup': 'VC seed funding startup investment logo icon',
   };
 
   for (const [company, query] of Object.entries(logoMap)) {
