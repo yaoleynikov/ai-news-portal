@@ -2,7 +2,8 @@
  * Generate cover images for all posts.
  * Features:
  *   - Auto-fix SVG logos without fill (white-on-white issue)
- *   - Logo displayed at 80% of canvas width (960px / 1200px)
+ *   - Render SVG at 4x, downscale for clean anti-aliased edges (no pixel noise)
+ *   - Logo centered at ~50% of canvas width
  *   - Smart tag-to-logo resolution (longest tag = most specific = wins)
  *   - Fallback to Brave image search, then text-based cover
  *   - Post-generation quality audit with auto-retry
@@ -22,12 +23,13 @@ const BRAVE_KEY = 'BSAuzT5f6qJnM1FNts_-LYkacF6yuKV';
 // Canvas dimensions
 const W = 1200;
 const H = 630;
-// Logo at 80% of canvas width
-const LOGO_SCALE = 0.85;
-const LOGO_W = W * LOGO_SCALE;
-const LOGO_SIZE = W * LOGO_SCALE;
+// Logo: centered square, 50% of canvas width
+const LOGO_SIZE = 600;
 const LOGO_X = (W - LOGO_SIZE) / 2;
 const LOGO_Y = (H - LOGO_SIZE) / 2;
+
+// Fill color for SVGs that lack it
+const SVG_FILL = '#000000';
 
 // ─── 1. Company logo map ───────────────────────────────────────────────────────
 const companyLogos = {
@@ -61,18 +63,17 @@ const productToCompany = {
 };
 
 // ─── Auto-fix SVG fill ────────────────────────────────────────────────────────
-function fixSvgFillIfMissing(svgPath, color = '#1a1a1a') {
+function fixSvgFillIfMissing(svgPath) {
   const svg = fs.readFileSync(svgPath, 'utf8');
   const paths = svg.match(/<path[^>]*\/?>/g) || [];
   const needsFill = paths.some(p => !/fill\s*=/.test(p));
-  // Skip if already has colors elsewhere
   if (!needsFill || /fill\s*=\s*["']#[0-9a-fA-F]/.test(svg) || /style\s*=\s*["'][^"']*fill\s*:/.test(svg)) return false;
 
   const fixed = svg.replace(
     /(<path\b)([^>]*?)(\/?>)/g,
     (m, open, attrs, close) => {
       if (/fill\s*=/.test(attrs)) return m;
-      return `${open} fill="${color}"${attrs}${close}`;
+      return `${open} fill="${SVG_FILL}"${attrs}${close}`;
     }
   );
   fs.writeFileSync(svgPath, fixed, 'utf8');
@@ -109,39 +110,50 @@ function resolveLogoKey(tags) {
 }
 
 // ─── Find logo file ────────────────────────────────────────────────────────────
-function findLogoBuffer(key) {
+function findLogoPath(key) {
   const svgP = path.join(logosDir, key + '.svg');
-  if (fs.existsSync(svgP)) {
-    fixSvgFillIfMissing(svgP);
-    return { buffer: fs.readFileSync(svgP), isSvg: true };
-  }
+  if (fs.existsSync(svgP)) { fixSvgFillIfMissing(svgP); return { path: svgP, isSvg: true }; }
   for (const ext of ['.png', '.jpg', '.jpeg', '.webp']) {
     const p = path.join(logosDir, key + ext);
-    if (fs.existsSync(p)) return { buffer: fs.readFileSync(p), isSvg: false };
+    if (fs.existsSync(p)) return { path: p, isSvg: false };
   }
   return null;
 }
 
-// ─── Build cover SVG with logo at 80% ──────────────────────────────────────────
-function buildCoverSVG(imageBuffer, isSvg) {
-  const mime = isSvg ? 'svg+xml' : 'png';
-  const dataUri = `data:image/${mime};base64,${imageBuffer.toString('base64')}`;
+// ─── Render logo to a clean PNG buffer ─────────────────────────────────────────
+async function renderLogoToPng(logoPath, isSvg, targetSize) {
+  if (!isSvg) {
+    return await sharp(logoPath).resize(targetSize, targetSize, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+  }
+  // Render SVG at 4x then downscale — prevents pixel noise on edges
+  const svgContent = fs.readFileSync(logoPath, 'utf8');
+  const renderSize = targetSize * 4;
+  const pngHighRes = new Resvg(svgContent, {
+    font: { loadSystemFonts: false },
+    fitTo: { mode: 'width', value: renderSize }
+  }).render().asPng();
+  return await sharp(pngHighRes).resize(targetSize, targetSize, { fit: 'contain' })
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+}
+
+// ─── Build cover SVG with pre-rendered logo PNG ────────────────────────────────
+function buildCoverLogoPng(logoPngBuffer) {
+  const dataUri = `data:image/png;base64,${logoPngBuffer.toString('base64')}`;
+  // Blurred background version (from same PNG)
   return `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="35%" stop-color="#8b5cf6"/>
-      <stop offset="65%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#ec4899"/>
-    </linearGradient>
-    <filter id="blur"><feGaussianBlur stdDeviation="100"/></filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="80"/></filter>
   </defs>
   <rect width="${W}" height="${H}" fill="#ffffff"/>
-  <!-- Background: blurred and scaled up -->
-  <image href="${dataUri}" x="-800" y="-1400" width="2800" height="2800"
-         opacity="0.2" filter="url(#blur)" preserveAspectRatio="xMidYMid meet"/>
-  <!-- Logo: square, centered, up to 80% of canvas width -->
+  <!-- Blurred background logo, subtle -->
+  <image href="${dataUri}" x="${Math.floor((W - LOGO_SIZE * 3.5) / 2)}" y="${Math.floor((H - LOGO_SIZE * 3.5) / 2)}"
+         width="${Math.floor(LOGO_SIZE * 3.5)}" height="${Math.floor(LOGO_SIZE * 3.5)}"
+         opacity="0.08" filter="url(#blur)" preserveAspectRatio="xMidYMid meet"/>
+  <!-- Clean logo, centered, ${LOGO_SIZE}px square -->
   <image href="${dataUri}" x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_SIZE}" height="${LOGO_SIZE}"
          opacity="1" preserveAspectRatio="xMidYMid meet"/>
 </svg>`;
@@ -153,12 +165,6 @@ function buildCustomCoverSVG(imageBuffer) {
   return `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="35%" stop-color="#8b5cf6"/>
-      <stop offset="65%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#ec4899"/>
-    </linearGradient>
     <filter id="blur"><feGaussianBlur stdDeviation="100"/></filter>
   </defs>
   <rect width="${W}" height="${H}" fill="#ffffff"/>
@@ -183,11 +189,6 @@ function buildTextCoverSVG(title, tags) {
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#f8fafc"/>
       <stop offset="100%" stop-color="#e2e8f0"/>
-    </linearGradient>
-    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="${tagColor}"/>
-      <stop offset="50%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#ec4899"/>
     </linearGradient>
     <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
       <circle cx="20" cy="20" r="1.5" fill="#cbd5e1"/>
@@ -297,7 +298,7 @@ async function qualityCheck(coverPath) {
   try {
     const meta = await sharp(coverPath).metadata();
     if (!meta.width || meta.width < 800) return `too small (${meta.width}x${meta.height})`;
-    // Check the central 60%x50% area where the logo/image should be
+    // Check center area
     const center = await sharp(coverPath)
       .extract({
         left: Math.floor(W * 0.2),
@@ -308,19 +309,15 @@ async function qualityCheck(coverPath) {
       .resize(32, 32)
       .raw()
       .toBuffer();
-    // Calculate average brightness
     let sum = 0;
     for (let i = 0; i < center.length; i += 3) sum += (center[i] + center[i+1] + center[i+2]) / 3;
     const avg = sum / (center.length / 3);
-    // Calculate contrast: average absolute deviation from mean
     let totalDev = 0;
     for (let i = 0; i < center.length; i += 3) {
       const px = (center[i] + center[i+1] + center[i+2]) / 3;
       totalDev += Math.abs(px - avg);
     }
     const contrast = totalDev / (center.length / 3);
-    // Calculate pixel-to-pixel edge strength (Sobel-like)
-    // If adjacent pixels barely change, it's a flat image
     let edgeSum = 0, edgeCount = 0;
     const w = 32;
     for (let y = 0; y < 31; y++) {
@@ -335,11 +332,21 @@ async function qualityCheck(coverPath) {
       }
     }
     const edgeStrength = edgeCount > 0 ? edgeSum / edgeCount : 0;
-    // A blank or nearly-blank image will have very low edge strength and low contrast
-    if (avg > 250 && contrast < 5) return `blank-near-white (avg:${avg.toFixed(0)}, contrast:${contrast.toFixed(1)})`;
-    if (avg < 8 && contrast < 5) return 'blank-near-black';
-    if (contrast < 3 && edgeStrength < 3) return `flat-no-content (avg:${avg.toFixed(0)}, contrast:${contrast.toFixed(1)}, edge:${edgeStrength.toFixed(1)})`;
-    return null; // OK
+    // Sample top-left corner (canvas area, should be white)
+    const corner = await sharp(coverPath)
+      .extract({ left: 10, top: 20, width: 100, height: 100 })
+      .resize(16, 16)
+      .raw()
+      .toBuffer();
+    let cornerSum = 0;
+    for (let i = 0; i < corner.length; i += 3) cornerSum += (corner[i] + corner[i+1] + corner[i+2]) / 3;
+    const cornerAvg = cornerSum / (corner.length / 3);
+
+    if (avg > 250 && contrast < 5) return `blank-near-white (avg:${avg.toFixed(0)})`;
+    if (avg < 8 && contrast < 5 && cornerAvg < 20) return `blank-near-black (avg:${avg.toFixed(0)})`;
+    if (contrast < 3 && edgeStrength < 3 && cornerAvg > 200) return `flat-no-content (avg:${avg.toFixed(0)}, edge:${edgeStrength.toFixed(1)})`;
+    if (avg < 30 && contrast < 5 && cornerAvg < 30) return `blank-dark (avg:${avg.toFixed(0)})`;
+    return null;
   } catch (e) {
     return 'check error: ' + e.message.substring(0, 60);
   }
@@ -356,44 +363,39 @@ console.log(`Found ${posts.length} posts\n`);
   for (const post of posts) {
     const coverPath = path.join(coversDir, post.slug + '.jpg');
     const resolved = resolveLogoKey(post.tags);
-    let logoBuffer, isSvg, source;
+    let svgString, source;
 
     if (resolved) {
-      const logoResult = findLogoBuffer(resolved.key);
-      if (!logoResult || !logoResult.buffer) {
+      const logoResult = findLogoPath(resolved.key);
+      if (!logoResult) {
         console.log(`  SKIP (no logo): ${post.slug} -> ${resolved.key}`);
         skipped++;
         continue;
       }
-      logoBuffer = logoResult.buffer;
-      isSvg = logoResult.isSvg;
       source = resolved.key;
+      // Render logo to clean PNG at target size
+      const logoPng = await renderLogoToPng(logoResult.path, logoResult.isSvg, LOGO_SIZE);
+      svgString = buildCoverLogoPng(logoPng);
     } else {
       console.log(`  SEARCH: ${post.slug}`);
-      logoBuffer = await fetchImageForTopic(post.slug, post.tags);
-      isSvg = false;
-      source = logoBuffer ? 'custom-image' : 'text-fallback';
+      const imageBuffer = await fetchImageForTopic(post.slug, post.tags);
+      source = imageBuffer ? 'custom-image' : 'text-fallback';
+      svgString = source === 'custom-image'
+        ? buildCustomCoverSVG(imageBuffer)
+        : buildTextCoverSVG(post.title, post.tags);
     }
 
-    const svg = source === 'custom-image'
-      ? buildCustomCoverSVG(logoBuffer)
-      : source === 'text-fallback'
-        ? buildTextCoverSVG(post.title, post.tags)
-        : buildCoverSVG(logoBuffer, isSvg);
-
     try {
-      const resvg = new Resvg(svg, { font: { loadSystemFonts: true } });
+      const resvg = new Resvg(svgString, { font: { loadSystemFonts: true } });
       const pngData = resvg.render().asPng();
       await sharp(pngData).jpeg({ quality: 90 }).toFile(coverPath);
 
-      // Quality check — if blank, retry with text fallback
       const issue = await qualityCheck(coverPath);
       if (issue && source !== 'text-fallback') {
         console.log(`  RETRY (${issue}): ${post.slug}`);
-        // Delete old file to avoid Windows file-lock issues
         try { fs.unlinkSync(coverPath); } catch {}
-        const fallbackSvg = buildTextCoverSVG(post.title, post.tags);
-        const fbPng = new Resvg(fallbackSvg, { font: { loadSystemFonts: true } }).render().asPng();
+        const fbSvg = buildTextCoverSVG(post.title, post.tags);
+        const fbPng = new Resvg(fbSvg, { font: { loadSystemFonts: true } }).render().asPng();
         await sharp(fbPng).jpeg({ quality: 90 }).toFile(coverPath);
         const retry = await qualityCheck(coverPath);
         if (retry) {
