@@ -59,26 +59,22 @@ function buildSVG(logoBuffer, isSvg) {
       <stop offset="50%" stop-color="#8b5cf6"/>
       <stop offset="100%" stop-color="#ec4899"/>
     </linearGradient>
-    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="#f1f5f9"/>
-      <stop offset="100%" stop-color="#ffffff"/>
-    </radialGradient>
     <filter id="blur">
       <feGaussianBlur stdDeviation="80"/>
     </filter>
   </defs>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="#ffffff"/>
   <rect width="1200" height="6" fill="url(#bar)"/>
 
-  <!-- Blurred background: hugely overscaled to fill canvas -->
+  <!-- Blurred background: overscaled, 25% opacity -->
   <image href="${dataUri}" x="-1000" y="-1200" width="3200" height="3200"
          opacity="0.25" filter="url(#blur)"
          preserveAspectRatio="xMidYMid meet"/>
 
-  <!-- Clear logo: 55% of canvas, centered -->
+  <!-- Clear logo on top: 100% opaque, no transparency -->
   <image href="${dataUri}" x="270" y="136" width="660" height="346"
-         opacity="0.70"
+         opacity="1"
          preserveAspectRatio="xMidYMid meet"/>
 </svg>`;
 }
