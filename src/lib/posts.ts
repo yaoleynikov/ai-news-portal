@@ -11,7 +11,38 @@ function getPostFiles() {
   return fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
 }
 
-
+// Generate cover image URL
+function getCoverImage(youtubeId: string, _title: string, tags: string[], slug: string): string {
+  // 1. YouTube video thumbnail (1280x720) — primary source
+  if (youtubeId) {
+    return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+  }
+  // 2. Fallback: loremflickr with category-based keywords
+  const tagMap: Record<string, string> = {
+    'AI': 'technology',
+    'Google': 'google',
+    'Microsoft': 'microsoft',
+    'OpenAI': 'technology',
+    'Crypto': 'cryptocurrency',
+    'Security': 'cybersecurity',
+    'Energy': 'energy',
+    'Data Centers': 'datacenter',
+    'Policy': 'politics',
+    'India': 'india',
+    'SpaceX': 'space',
+    'Startups': 'startup',
+    'Cloud': 'cloud',
+    'Hardware': 'processor',
+    'Agents': 'robotics',
+    'Wikipedia': 'book',
+  };
+  let category = 'technology';
+  for (const tag of tags) {
+    if (tagMap[tag]) { category = tagMap[tag]; break; }
+  }
+  const slugHash = slug.split('').reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 5381);
+  return `https://loremflickr.com/g/800/500/${category}?lock=${Math.abs(slugHash)}`;
+}
 
 export function getSortedPosts() {
   const files = getPostFiles();
