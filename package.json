@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.97",
+    "@resvg/resvg-js": "^2.6.2",
     "gray-matter": "^4.0.3",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
