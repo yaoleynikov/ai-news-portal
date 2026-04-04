@@ -3,7 +3,7 @@ import { getSortedPosts } from '@/lib/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getSortedPosts();
-  const base = 'https://ai-insight-2026.vercel.app';
+  const base = 'https://siliconfeed.online';
   return [
     { url: base, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
     ...posts.map(p => ({
