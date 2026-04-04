@@ -1,66 +1,159 @@
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
+const { URL } = require('url');
 
-const LOGOS_DIR = path.join(__dirname, '..', 'public', 'logos');
+const BRAVE_KEY = 'BSAuzT5f6qJnM1FNts_-LYkacF6yuKV';
+const logosDir = path.join(__dirname, '..', 'public', 'logos');
 
-const LOGOS = {
-  'openai': 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
-  'anthropic': 'https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg',
-  'google': 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
-  'microsoft': 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg',
-  'nvidia': 'https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg',
-  'meta': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1024px-Meta_Platforms_Inc._logo.svg.png',
-  'amazon': 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
-  'bitcoin': 'https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg',
-  'ethereum': 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum_logo_2014.svg',
-  'coinbase': 'https://upload.wikimedia.org/wikipedia/commons/1/12/Coinbase_Wordmark.svg',
-  'stripe': 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg',
-  'cloudflare': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Cloudflare_Logo.svg/1024px-Cloudflare_Logo.svg.png',
-  'spacex': 'https://upload.wikimedia.org/wikipedia/commons/d/de/SpaceX_logo_black.svg',
-  'oracle': 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg',
-  'wikipedia': 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg',
-  'freebsd': 'https://upload.wikimedia.org/wikipedia/en/7/7b/FreeBSD_logo.svg',
-  'algorand': 'https://upload.wikimedia.org/wikipedia/commons/7/74/Algorand%2C_2019.png',
-  'tesla': 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg',
-};
+// Companies that need fresh logos
+const companies = [
+  'openai', 'anthropic', 'google', 'microsoft', 'nvidia',
+  'meta', 'amazon', 'bitcoin', 'ethereum', 'coinbase',
+  'stripe', 'cloudflare', 'spacex', 'oracle', 'wikipedia',
+  'freebsd', 'algorand', 'tesla', 'brave', 'duckduckgo',
+  'x', 'twitter', 'tiktok', 'instagram', 'youtube', 'apple',
+  'samsung', 'intel', 'amd', 'qualcomm', 'arm', 'tencent',
+  'baidu', 'bytedance', 'openrouter', 'vercel', 'cloudflare',
+];
 
-function download(url, dest) {
+function fetchUrl(url) {
   return new Promise((resolve, reject) => {
-    const lib = url.startsWith('https') ? https : require('http');
-    const req = lib.get(url, { headers: { 'User-Agent': 'SiliconFeed/1.0 (logo-collector)' }, timeout: 15000 }, (res) => {
+    const client = url.startsWith('https') ? https : http;
+    client.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        download(res.headers.location, dest).then(resolve).catch(reject);
-        return;
+        return resolve(fetchUrl(res.headers.location));
       }
-      if (res.statusCode !== 200) { reject(new Error(`HTTP ${res.statusCode}`)); return; }
-      const file = fs.createWriteStream(dest);
-      res.pipe(file);
-      file.on('finish', () => { file.close(); resolve(); });
+      const chunks = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () => resolve({ statusCode: res.statusCode, data: Buffer.concat(chunks), headers: res.headers }));
     }).on('error', reject);
-    req.on('timeout', () => { req.destroy(); reject(new Error('timeout')); });
   });
 }
 
-async function main() {
-  if (!fs.existsSync(LOGOS_DIR)) fs.mkdirSync(LOGOS_DIR, { recursive: true });
-  let ok = 0, skip = 0, fail = 0;
-  for (const [key, url] of Object.entries(LOGOS)) {
-    const ext = url.endsWith('.svg') ? 'svg' : 'png';
-    const dest = path.join(LOGOS_DIR, `${key}.${ext}`);
-    if (fs.existsSync(dest)) { skip++; console.log(`⏭ ${key}.${ext}`); continue; }
-    try {
-      await download(url, dest);
-      ok++;
-      console.log(`✅ ${key}.${ext}`);
-    } catch (e) {
-      fail++;
-      console.log(`❌ ${key}: ${e.message}`);
-    }
-    // Rate limiting: wait 2s between requests
-    await new Promise(r => setTimeout(r, 2000));
-  }
-  console.log(`\n📊 Done: ${ok} fetched, ${skip} skipped, ${fail} failed`);
+async function braveSearchImages(query) {
+  const url = new URL('https://api.search.brave.com/res/v1/images/search');
+  url.searchParams.set('q', query);
+  url.searchParams.set('count', '10');
+  url.searchParams.set('search_type', 'images');
+
+  return new Promise((resolve, reject) => {
+    https.get(url, {
+      headers: {
+        'X-Subscription-Token': BRAVE_KEY,
+        'Accept': 'application/json',
+        'User-Agent': 'Mozilla/5.0'
+      }
+    }, (res) => {
+      const chunks = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(Buffer.concat(chunks));
+          resolve(json.results || []);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }).on('error', reject);
+  });
 }
 
-main();
+function isTransparentOrGoodType(headers) {
+  const contentType = headers['content-type'] || '';
+  return contentType.includes('png') || contentType.includes('svg') || contentType.includes('webp');
+}
+
+function isSquareOrIcon(width, height) {
+  if (!width || !height) return false;
+  const ratio = Math.min(width, height) / Math.max(width, height);
+  return ratio >= 0.5 && width >= 128 && height >= 128 && width <= 2000 && height <= 2000;
+}
+
+async function downloadLogo(company, query) {
+  const existingPng = path.join(logosDir, company + '.png');
+  const existingSvg = path.join(logosDir, company + '.svg');
+  if (fs.existsSync(existingSvg) || fs.existsSync(existingPng)) {
+    console.log(`  SKIP: ${company} (already exists)`);
+    return;
+  }
+
+  console.log(`  Searching: ${query}`);
+  const results = await braveSearchImages(query);
+
+  for (const img of results) {
+    const props = img.properties;
+    if (!props || !props.url || !props.url.startsWith('https')) continue;
+
+    // Skip thumbnails
+    if (props.url.includes('brave.com') || props.url.includes('imgs.search.brave.com')) continue;
+
+    const w = props.width || 0;
+    const h = props.height || 0;
+    const goodShape = isSquareOrIcon(w, h);
+    const isGoodType = isTransparentOrGoodType({ 'content-type': img.source?.includes('.png') ? 'image/png' : 
+                                                   img.source?.includes('.svg') ? 'image/svg+xml' : '' });
+
+    try {
+      const response = await fetchUrl(props.url);
+      if (response.statusCode !== 200 || response.data.length < 500 || response.data.length > 5 * 1024 * 1024) continue;
+
+      // Detect type from content-type header or URL
+      const ct = response.headers['content-type'] || '';
+      let ext, filename;
+
+      if (ct.includes('svg') || props.url.endsWith('.svg')) {
+        ext = '.svg';
+        filename = company + ext;
+      } else if (ct.includes('png') || props.url.endsWith('.png')) {
+        ext = '.png';
+        filename = company + ext;
+      } else {
+        // Convert to PNG via sharp
+        ext = '.png';
+        filename = company + ext;
+        const converted = await sharp(response.data).resize(512, 512, { fit: 'inside', withoutEnlargement: true }).png().toBuffer();
+        fs.writeFileSync(path.join(logosDir, filename), converted);
+        console.log(`  SAVED: ${filename} (${converted.length} bytes) from ${query}`);
+        return;
+      }
+
+      fs.writeFileSync(path.join(logosDir, filename), response.data);
+      console.log(`  SAVED: ${filename} (${response.data.length} bytes) from ${query}`);
+      return;
+    } catch (e) {
+      // Continue to next result
+    }
+  }
+  console.log(`  FAILED: ${company} - no download succeeded`);
+}
+
+async function main() {
+  // Download missing company logos
+  const logoMap = {
+    'openai': 'OpenAI logo transparent png',
+    'anthropic': 'Anthropic logo transparent png',
+    'google': 'Google logo icon transparent png',
+    'microsoft': 'Microsoft logo transparent png',
+    'nvidia': 'NVIDIA logo transparent png',
+    'meta': 'Meta logo transparent png',
+    'amazon': 'Amazon logo transparent png',
+    'bitcoin': 'Bitcoin logo transparent png',
+    'ethereum': 'Ethereum logo transparent png',
+    'algorand': 'Algorand logo transparent png',
+  };
+
+  for (const [company, query] of Object.entries(logoMap)) {
+    try {
+      await downloadLogo(company, query);
+      // Small delay to avoid rate limits
+      await new Promise(r => setTimeout(r, 500));
+    } catch (e) {
+      console.log(`  ERROR: ${company}: ${e.message}`);
+    }
+  }
+}
+
+main().catch(e => console.error(e));
