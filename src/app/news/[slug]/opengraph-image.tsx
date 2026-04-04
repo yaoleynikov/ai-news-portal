@@ -3,6 +3,7 @@ import { getPostBySlug, getAllPostSlugs } from '@/lib/posts';
 import { createCanvas, loadImage } from '@napi-rs/canvas';
 import fs from 'fs';
 import path from 'path';
+import type { Canvas } from '@napi-rs/canvas';
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'nodejs';
@@ -14,6 +15,7 @@ const tagCompanyMap: Record<string, string> = {
   openai: 'openai',
   anthropic: 'anthropic',
   google: 'google',
+  apple: 'apple',
   microsoft: 'microsoft',
   nvidia: 'nvidia',
   meta: 'meta',
@@ -74,6 +76,98 @@ function wrapText(ctx: any, text: string, maxW: number): string[] {
   return lines;
 }
 
+async function renderCanvas(
+  post: { title: string; tag?: string; tags?: string[] }
+): Promise<Canvas> {
+  const tag = post.tag || post.tags?.[0] || 'Tech';
+  const company = resolveCompany(tag);
+
+  const canvas = createCanvas(1200, 630);
+  const ctx = canvas.getContext('2d');
+
+  // White background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, 1200, 630);
+
+  // Top accent bar
+  const grad = ctx.createLinearGradient(0, 0, 1200, 0);
+  grad.addColorStop(0, '#3b82f6');
+  grad.addColorStop(0.5, '#8b5cf6');
+  grad.addColorStop(1, '#ec4899');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1200, 6);
+
+  // Company logo: blurred background (center)
+  if (company) {
+    try {
+      const logo = await loadLogo(company);
+      if (logo) {
+        // Blurred background logo — 6% opacity with simulated blur
+        ctx.save();
+        ctx.globalAlpha = 0.06;
+        // Simple blur by drawing multiple offset copies
+        const blurSize = 500;
+        const offsetX = (1200 - blurSize) / 2;
+        const offsetY = (630 - blurSize) / 2;
+        const offsets = [-4, -2, 0, 2, 4];
+        for (const dx of offsets) {
+          for (const dy of offsets) {
+            ctx.drawImage(logo, offsetX + dx, offsetY + dy, blurSize, blurSize);
+          }
+        }
+        ctx.restore();
+
+        // Clear logo at 40% opacity, centered-right
+        ctx.save();
+        ctx.globalAlpha = 0.40;
+        const clearSize = 450;
+        ctx.drawImage(
+          logo,
+          1200 - clearSize - 40,
+          (630 - clearSize) / 2,
+          clearSize,
+          clearSize
+        );
+        ctx.restore();
+      }
+    } catch {}
+  }
+
+  // Tag badge
+  ctx.font = 'bold 18px system-ui, -apple-system, sans-serif';
+  const tagText = tag.toUpperCase();
+  const tw = ctx.measureText(tagText).width + 48;
+  const bx = 40;
+  const by = 28;
+  const bh = 34;
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.06)';
+  roundRect(ctx, bx, by, tw, bh, bh / 2);
+  ctx.fill();
+  ctx.fillStyle = '#475569';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(tagText, bx + tw / 2, by + bh / 2);
+
+  // Title
+  ctx.font = 'bold 52px system-ui, -apple-system, sans-serif';
+  ctx.fillStyle = '#0f172a';
+  ctx.textAlign = 'left';
+  const lines = wrapText(ctx, post.title, 560);
+  const lh = 62;
+  const startY = 180;
+  for (let i = 0; i < lines.length; i++) {
+    ctx.fillText(lines[i], 40, startY + i * lh);
+  }
+
+  // "siliconfeed.online" branding bottom
+  ctx.font = '600 16px system-ui, -apple-system, sans-serif';
+  ctx.fillStyle = '#9ca3af';
+  ctx.textAlign = 'left';
+  ctx.fillText('siliconfeed.online', 40, 600);
+
+  return canvas;
+}
+
 function roundRect(ctx: any, x: number, y: number, w: number, h: number, r: number) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
@@ -95,97 +189,19 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return fallback();
-
-  const tag = post.tag || post.tags?.[0] || 'Tech';
-  const company = resolveCompany(tag);
-
-  const canvas = createCanvas(1200, 630);
-  const ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = '#0f172a';
-  ctx.fillRect(0, 0, 1200, 630);
-
-  const grad = ctx.createLinearGradient(0, 0, 1200, 0);
-  grad.addColorStop(0, '#3b82f6');
-  grad.addColorStop(0.5, '#8b5cf6');
-  grad.addColorStop(1, '#ec4899');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 1200, 6);
-
-  if (company) {
-    try {
-      const logo = await loadLogo(company);
-      if (logo) {
-        ctx.globalAlpha = 0.07;
-        ctx.drawImage(logo, 250, 150, 700, 700);
-        ctx.globalAlpha = 0.22;
-        ctx.drawImage(logo, 996, 426, 180, 180);
-        ctx.globalAlpha = 1;
-      }
-    } catch {}
+  if (!post) {
+    const canvas = await renderCanvas({ title: 'SiliconFeed', tag: 'Tech' });
+    const buf = canvas.toBuffer('image/png');
+    return new ImageResponse(
+      <img src={`data:image/png;base64,${buf.toString('base64')}`}
+        style={{ width: '100%', height: '100%' }} />
+    );
   }
 
-  ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
-  const tagText = tag.toUpperCase();
-  const tw = ctx.measureText(tagText).width + 56;
-  const bx = (1200 - tw) / 2;
-  const by = 100;
-  const bh = 42;
-  ctx.fillStyle = 'rgba(59,130,246,0.12)';
-  roundRect(ctx, bx, by, tw, bh, bh / 2);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(59,130,246,0.3)';
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, bx, by, tw, bh, bh / 2);
-  ctx.stroke();
-  ctx.fillStyle = '#60a5fa';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(tagText, 600, by + bh / 2);
-
-  ctx.font = 'bold 52px system-ui, -apple-system, sans-serif';
-  ctx.fillStyle = '#f1f5f9';
-  ctx.textAlign = 'center';
-  const lines = wrapText(ctx, post.title, 900);
-  const lh = 64;
-  const blockH = lines.length * lh;
-  const sy = (630 - blockH) / 2 + 20;
-  for (let i = 0; i < lines.length; i++) {
-    ctx.fillText(lines[i], 600, sy + i * lh);
-  }
-
-  // Return ImageResponse with the canvas rendered as data URI
+  const canvas = await renderCanvas(post);
   const buf = canvas.toBuffer('image/png');
   return new ImageResponse(
-    <img
-      src={`data:image/png;base64,${buf.toString('base64')}`}
-      style={{ width: '100%', height: '100%' }}
-    />,
-    { width: 1200, height: 630 }
-  );
-}
-
-function fallback() {
-  const canvas = createCanvas(1200, 630);
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#0f172a';
-  ctx.fillRect(0, 0, 1200, 630);
-  const grad = ctx.createLinearGradient(0, 0, 1200, 0);
-  grad.addColorStop(0, '#3b82f6');
-  grad.addColorStop(1, '#ec4899');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 1200, 6);
-  ctx.font = 'bold 64px system-ui';
-  ctx.fillStyle = '#f1f5f9';
-  ctx.textAlign = 'center';
-  ctx.fillText('SiliconFeed', 600, 315);
-  const buf = canvas.toBuffer('image/png');
-  return new ImageResponse(
-    <img
-      src={`data:image/png;base64,${buf.toString('base64')}`}
-      style={{ width: '100%', height: '100%' }}
-    />,
-    { width: 1200, height: 630 }
+    <img src={`data:image/png;base64,${buf.toString('base64')}`}
+      style={{ width: '100%', height: '100%' }} />
   );
 }

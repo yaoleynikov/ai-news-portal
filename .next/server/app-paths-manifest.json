@@ -1,16 +1,16 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/rss.xml/route": "app/rss.xml/route.js",
-  "/robots.txt/route": "app/robots.txt/route.js",
   "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/rss.xml/route": "app/rss.xml/route.js",
   "/api/cover/route": "app/api/cover/route.js",
   "/news/[slug]/opengraph-image/route": "app/news/[slug]/opengraph-image/route.js",
-  "/contact/page": "app/contact/page.js",
-  "/editorial-policy/page": "app/editorial-policy/page.js",
-  "/tag/[slug]/page": "app/tag/[slug]/page.js",
-  "/news/[slug]/page": "app/news/[slug]/page.js",
-  "/privacy-policy/page": "app/privacy-policy/page.js",
   "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/privacy-policy/page": "app/privacy-policy/page.js",
   "/page": "app/page.js",
+  "/news/[slug]/page": "app/news/[slug]/page.js",
+  "/tag/[slug]/page": "app/tag/[slug]/page.js",
+  "/editorial-policy/page": "app/editorial-policy/page.js",
   "/api/og/route": "app/api/og/route.js"
 }
