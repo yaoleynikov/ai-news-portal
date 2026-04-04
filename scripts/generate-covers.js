@@ -23,8 +23,8 @@ const BRAVE_KEY = 'BSAuzT5f6qJnM1FNts_-LYkacF6yuKV';
 // Canvas dimensions
 const W = 1200;
 const H = 630;
-// Logo: centered square, 50% of canvas width
-const LOGO_SIZE = 600;
+// Logo: centered square, 80% of canvas width
+const LOGO_SIZE = Math.round(W * 0.8); // 960
 const LOGO_X = (W - LOGO_SIZE) / 2;
 const LOGO_Y = (H - LOGO_SIZE) / 2;
 
@@ -204,6 +204,87 @@ function buildCustomCoverSVG(imageBuffer) {
 </svg>`;
 }
 
+// ─── Watermark / stock-photo detector ──────────────────────────────────────
+const STOCK_KEYWORDS = [
+  'shutterstock', 'gettyimages', 'istockphoto', 'alamy', 'dreamstime',
+  'depositphotos', '123rf', 'stock.adobe', 'pngtree', 'cleanpng',
+  'pngguru', 'pngwing', 'pngtree', 'freepik',
+];
+
+/**
+ * Quick checks for watermarked / low-quality stock images.
+ * Returns true if the image should be REJECTED.
+ */
+async function isWatermarkedOrStock(buffer, url = '') {
+  // 1) URL-level check
+  const urlLower = url.toLowerCase();
+  if (urlLower.includes('shutterstock') || urlLower.includes('gettyimages') ||
+      urlLower.includes('istock') || urlLower.includes('alamy') ||
+      urlLower.includes('dreamstime') || urlLower.includes('depositphotos') ||
+      urlLower.includes('pngtree') || urlLower.includes('pngwing') ||
+      urlLower.includes('pngguru') || urlLower.includes('cleanpng') ||
+      urlLower.includes('watermark') || urlLower.includes('preview.')) {
+    return true;
+  }
+
+  try {
+    const meta = await sharp(buffer).metadata();
+    const w = meta.width || 0, h = meta.height || 0;
+    if (w < 400 || h < 300) return true; // too small = likely thumbnail
+
+    // 2) Convert to 8-bit grayscale for analysis
+    const raw = await sharp(buffer)
+      .grayscale()
+      .resize(64, 64, { fit: 'inside' })
+      .raw()
+      .toBuffer();
+
+    // 3) Repeated-pattern (grid) detection — diagonal variance
+    //    Watermarks form diagonal streaks; measure row-to-row and col-to-col diffs
+    let rowVar = 0, colVar = 0;
+    const s = 64;
+    for (let y = 0; y < s - 1; y++) {
+      for (let x = 0; x < s; x++) {
+        rowVar += Math.abs(raw[y * s + x] - raw[(y + 1) * s + x]);
+      }
+    }
+    for (let y = 0; y < s; y++) {
+      for (let x = 0; x < s - 1; x++) {
+        colVar += Math.abs(raw[y * s + x] - raw[y * s + (x + 1)]);
+      }
+    }
+    const total = rowVar + colVar;
+    const maxPossible = s * (s - 1) * 2 * 255;
+    const uniformity = 1 - total / maxPossible;
+
+    // High uniformity + mid-range avg → repeating grid/watermark pattern
+    const avgPxl = raw.reduce((a, b) => a + b, 0) / raw.length;
+    if (uniformity > 0.96 && avgPxl > 80 && avgPxl < 180) return true;
+
+    // 4) Edge-to-content ratio — watermarked images have many tiny high-freq edges
+    //    but low actual structure (edge strength / contrast ratio)
+    let edgeSum = 0;
+    for (let y = 1; y < s - 1; y++) {
+      for (let x = 1; x < s - 1; x++) {
+        const i = y * s + x;
+        const gx = Math.abs(raw[i + 1] - raw[i - 1]);
+        const gy = Math.abs(raw[i + s] - raw[i - s]);
+        edgeSum += gx + gy;
+      }
+    }
+    const edgeDensity = edgeSum / ((s - 2) * (s - 2) * 2 * 255);
+    if (edgeDensity > 0.15 && uniformity > 0.94) return true;
+
+    // 5) Check for stock keyword text by looking at color variance in small patches
+    //    Watermark text creates localized high-contrast patches in otherwise uniform areas
+    //    (already covered by uniformity check, but additional check on full-res)
+  } catch {
+    return true; // can't analyze → reject
+  }
+
+  return false;
+}
+
 // в”Ђв”Ђв”Ђ Fallback: text-based cover when image search fails в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function buildTextCoverSVG(title, tags) {
   const display = title.length > 80 ? title.substring(0, 77) + '\u2026' : title;
@@ -267,6 +348,10 @@ async function downloadImage(url, maxW = 800, maxH = 600) {
       res.on('end', async () => {
         try {
           const buf = Buffer.concat(chunks);
+          // Block watermarked/stock images before using them
+          if (await isWatermarkedOrStock(buf, url)) {
+            return reject(new Error('watermarked or stock-photo'));
+          }
           const img = sharp(buf).resize(maxW, maxH, { fit: 'inside', background: '#ffffff' })
             .flatten({ background: '#ffffff' })
             .jpeg({ quality: 85 });
