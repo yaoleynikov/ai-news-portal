@@ -2,8 +2,14 @@ import { getSortedPosts } from '@/lib/posts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 function fd(d: string) { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+
+export const metadata: Metadata = {
+  title: 'siliconfeed — tech intelligence',
+  description: 'Autonomous tech news aggregator.',
+};
 
 export default async function HomePage() {
   const all = getSortedPosts();
@@ -22,7 +28,7 @@ export default async function HomePage() {
         {hero && (
           <div className="hero">
             <Link href={`/news/${hero.slug}`} className="hero-big">
-              {hero.coverImage && <div className="hero-img"><img src={hero.coverImage} alt="" /></div>}
+              <div className="hero-img"><img src={hero.coverImage} alt={hero.coverAlt || ''} loading="eager" /></div>
               <div className="meta"><span className="meta-t">{hero.tags?.[0] || 'tech'}</span><span className="meta-dot" /><span className="meta-d">{fd(hero.date)}</span></div>
               <h2>{hero.title}</h2>
               <p>{hero.excerpt}</p>
@@ -45,7 +51,7 @@ export default async function HomePage() {
             <div className="g3">
               {grid3.map(post => (
                 <Link key={post.slug} href={`/news/${post.slug}`} className="c">
-                  {post.coverImage && <div className="c-img"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+                  <div className="c-img"><img src={post.coverImage} alt={post.coverAlt || ''} loading="lazy" /></div>
                   <div className="c-b">
                     <div className="meta"><span className="meta-t">{post.tags?.[0] || 'news'}</span><span className="meta-dot" /><span className="meta-d">{fd(post.date)}</span></div>
                     <h3>{post.title}</h3>
@@ -82,7 +88,7 @@ export default async function HomePage() {
             <div className="llist">
               {list.map(post => (
                 <Link key={post.slug} href={`/news/${post.slug}`} className="row">
-                  {post.coverImage && <div className="ll-img"><img src={post.coverImage} alt="" loading="lazy" /></div>}
+                  <div className="ll-img"><img src={post.coverImage} alt={post.coverAlt || ''} loading="lazy" /></div>
                   <div className="ll-b">
                     <h4>{post.title}</h4>
                     <p>{post.excerpt}</p>
@@ -101,8 +107,4 @@ export default async function HomePage() {
       <Footer />
     </div>
   );
-}
-
-export function generateMetadata() {
-  return { title: 'siliconfeed — tech intelligence', description: 'Autonomous tech news aggregator.' };
 }

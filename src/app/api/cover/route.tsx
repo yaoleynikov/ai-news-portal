@@ -1,13 +1,9 @@
-// src/app/news/[slug]/opengraph-image.tsx — Dynamic OG images
-import { getPostBySlug, getAllPostSlugs } from '@/lib/posts';
+// src/app/api/cover/route.tsx — Dynamic cover image (article cards + sharing)
 import { ImageResponse } from 'next/og';
 import fs from 'fs';
 import path from 'path';
 
 export const runtime = 'nodejs';
-export const alt = 'SiliconFeed';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
 const logoMap: Record<string, string> = {
   'openai': 'openai.svg',
@@ -15,18 +11,17 @@ const logoMap: Record<string, string> = {
   'google': 'google.svg',
   'microsoft': 'microsoft.svg',
   'nvidia': 'nvidia.svg',
-  'meta': 'meta.svg',
+  'meta': 'meta.png',
   'amazon': 'amazon.svg',
   'bitcoin': 'bitcoin.svg',
   'crypto': 'bitcoin.svg',
-  'ethereum': 'ethereum.svg',
+  'ethereum': 'ethereum.png',
   'coinbase': 'coinbase.svg',
   'stripe': 'stripe.svg',
   'cloudflare': 'cloudflare.svg',
   'spacex': 'spacex.svg',
   'oracle': 'oracle.svg',
   'wikipedia': 'wikipedia.svg',
-  'freebsd': 'freebsd.svg',
   'claude': 'anthropic.svg',
   'chatgpt': 'openai.svg',
   'gemma': 'google.svg',
@@ -35,6 +30,7 @@ const logoMap: Record<string, string> = {
   'gemini': 'google.svg',
   'algorand': 'algorand.png',
   'tesla': 'tesla.svg',
+  'freebsd': 'freebsd.svg',
 };
 
 function getLogoFile(tag: string): string | null {
@@ -52,21 +48,14 @@ async function getLogoBuffer(logoFile: string): Promise<string | null> {
     if (!fs.existsSync(filePath)) return null;
     const file = fs.readFileSync(filePath);
     return `data:image/${logoFile.endsWith('.svg') ? 'svg+xml' : 'png'};base64,${file.toString('base64')}`;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
-export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
-}
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const title = searchParams.get('title') || 'SiliconFeed';
+  const tag = searchParams.get('tag') || 'Tech';
 
-export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return null;
-
-  const tag = post.tag || post.tags?.[0] || 'Tech';
   const logoFile = getLogoFile(tag);
   let logoDataUrl: string | null = null;
   if (logoFile) logoDataUrl = await getLogoBuffer(logoFile);
@@ -75,7 +64,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     (
       <div
         style={{
-          background: '#0a0a0a',
+          background: '#0f172a',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -87,9 +76,9 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           overflow: 'hidden',
         }}
       >
-        {logoDataUrl ? (
+        {/* Logo watermark (blurred + clear) */}
+        {logoDataUrl && (
           <>
-            {/* Blurred background logo */}
             <img
               src={logoDataUrl}
               style={{
@@ -97,61 +86,39 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '40%',
-                height: '40%',
+                width: '35%',
+                height: '35%',
                 objectFit: 'contain',
-                opacity: 0.08,
-                filter: 'blur(20px)',
-                zIndex: 0,
-              }}
-            />
-            {/* Clear foreground logo at 40% height */}
-            <img
-              src={logoDataUrl}
-              style={{
-                position: 'absolute',
-                top: '55%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '55%',
-                height: '55%',
-                objectFit: 'contain',
-                opacity: 0.15,
-                zIndex: 1,
+                opacity: 0.07,
+                filter: 'blur(25px)',
               }}
             />
           </>
-        ) : null}
+        )}
 
         {/* Top accent bar */}
         <div
           style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 6,
+            top: 0, left: 0, right: 0,
+            height: 4,
             background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899)',
           }}
         />
 
-        {/* Tag badge */}
+        {/* Tag */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '8px 24px',
+            padding: '6px 20px',
             borderRadius: 9999,
-            background: 'rgba(31, 41, 55, 0.8)',
-            border: '1px solid #374151',
-            marginBottom: 28,
-            fontSize: 22,
+            background: 'rgba(59,130,246,0.1)',
+            border: '1px solid rgba(59,130,246,0.2)',
+            marginBottom: 24,
+            fontSize: 18,
             fontWeight: 600,
-            color: '#9ca3af',
+            color: '#60a5fa',
             letterSpacing: 2,
             textTransform: 'uppercase',
-            zIndex: 10,
           }}
         >
           {tag}
@@ -160,27 +127,20 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         {/* Title */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            maxWidth: 1000,
+            maxWidth: 960,
             padding: '0 40px',
-            fontSize: 52,
+            fontSize: 48,
             fontWeight: 800,
-            color: '#ffffff',
+            color: '#e2e8f0',
             lineHeight: 1.2,
             textAlign: 'center',
-            letterSpacing: '-0.02em',
-            zIndex: 10,
+            letterSpacing: '-0.01em',
           }}
         >
-          {post.title}
+          {title}
         </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    { width: 1200, height: 630 }
   );
 }

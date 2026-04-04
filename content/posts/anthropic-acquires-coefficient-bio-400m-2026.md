@@ -13,15 +13,15 @@ author: "SiliconFeed"
 
 Anthropic just bought its way into biology. The AI company acquired **Coefficient Bio**, a startup focused on applying artificial intelligence to drug development and clinical strategy, in a deal valued at approximately $400 million, according to The Information.
 
-Coefficient Bio was founded just last fall. Its entire team вЂ” including CEO Aris Theologis and CTO Nathan Frey вЂ” is joining Anthropic's healthcare and life sciences group.
+Coefficient Bio was founded just last fall. Its entire team в— including CEO Aris Theologis and CTO Nathan Frey в— is joining Anthropic's healthcare and life sciences group.
 
 ## What Coefficient Bio Does
 
 The startup was building an AI platform to tackle the most complex parts of biotech:
 
-- **R&D pipeline planning** вЂ” deciding which drug candidates to pursue
-- **Clinical and regulatory strategy** вЂ” navigating FDA approval pathways
-- **Drug opportunity identification** вЂ” surfacing promising therapeutic targets
+- **R&D pipeline planning** в— deciding which drug candidates to pursue
+- **Clinical and regulatory strategy** в— navigating FDA approval pathways
+- **Drug opportunity identification** в— surfacing promising therapeutic targets
 
 This isn't chatbot territory. Drug development is expensive, slow, and drowning in data. A single failed clinical trial can cost hundreds of millions. AI that can improve decision-making at any stage is worth serious money.
 

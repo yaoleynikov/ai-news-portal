@@ -13,9 +13,9 @@ youtubeId: "L8LlxtAsitw"
 
 **Sarvam AI**, an Indian startup building AI models tailored for Indian languages and culture, is close to a major funding round at a valuation of **$1.5 billion**.
 
-India has 1.4 billion people and dozens of languages вЂ” a massive addressable market for AI solutions that actually understand local context, not just English translations.
+India has 1.4 billion people and dozens of languages в— a massive addressable market for AI solutions that actually understand local context, not just English translations.
 
-> "India's AI startups are the next wave вЂ” building solutions for a market Western companies are ignoring."
+> "India's AI startups are the next wave в— building solutions for a market Western companies are ignoring."
 
 ## Why It Matters
 

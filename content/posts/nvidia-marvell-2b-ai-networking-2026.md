@@ -21,9 +21,9 @@ Marvell already dominated the data center networking stack, but this deal pushes
 
 Training frontier models now depends on how efficiently **thousands of chips can communicate** with one another. The winners in this cycle will be companies that solve:
 
-- **Bandwidth bottlenecks** вЂ” getting data where it needs to go
-- **Latency reduction** вЂ” milliseconds matter at scale
-- **Power efficiency** вЂ” every watt counts in 100MW+ data centers
+- **Bandwidth bottlenecks** в— getting data where it needs to go
+- **Latency reduction** в— milliseconds matter at scale
+- **Power efficiency** в— every watt counts in 100MW+ data centers
 
 Nvidia's bet shows the AI infrastructure spend is widening **beyond GPUs** into the connective tissue of the stack.
 
@@ -69,7 +69,7 @@ Apple patched a vulnerability in Spotlight plugins that could have exposed:
 
 The flaw was highlighted by Microsoft Threat Intelligence and patched March 31. As Apple pushes more AI features on-device, the security surface around cached model outputs becomes a bigger target.
 
-AI on the device reduces cloud risks вЂ” but creates **new local attack paths**.
+AI on the device reduces cloud risks в— but creates **new local attack paths**.
 
 ## Salesforce Deploys 30 AI Features Across Slack
 
@@ -95,4 +95,4 @@ If enacted, pressure will grow on platforms to build stronger age verification a
 
 ## Monster Take
 
-Four infrastructure stories. One theme. Nvidia is betting $2B on networking because compute alone isn't enough. Tenex raised $250M because AI without security is a time bomb. Big Tech's $635B capex is hitting a wall called electricity. And Nothing is betting the next consumer AI frontier lives on your face, not in your phone. The AI stack is widening вЂ” and every layer is getting crowded fast.
+Four infrastructure stories. One theme. Nvidia is betting $2B on networking because compute alone isn't enough. Tenex raised $250M because AI without security is a time bomb. Big Tech's $635B capex is hitting a wall called electricity. And Nothing is betting the next consumer AI frontier lives on your face, not in your phone. The AI stack is widening в— and every layer is getting crowded fast.

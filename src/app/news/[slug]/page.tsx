@@ -3,13 +3,29 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 export async function generateStaticParams() { return getAllPostSlugs().map(slug => ({ slug })); }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const post = getPostBySlug(slug);
-  if (!post) return { title: 'not found' };
-  return { title: post.title, description: post.excerpt };
+  if (!post) return { title: 'Not Found' };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [
+        {
+          url: `/api/cover?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.tag || 'Tech')}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+  };
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,6 +48,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   }
 
   const cleanHtml = post.contentHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
+  const coverUrl = `/api/cover?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.tag || 'Tech')}`;
 
   return (
     <div>
@@ -47,16 +64,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <span>{mins} min read</span>
         </div>
 
-        {post.coverImage && (
-          <figure className="a-img">
-            {post.youtubeId ? (
-              <a href={`https://www.youtube.com/watch?v=${post.youtubeId}`} target="_blank" rel="noopener noreferrer">
-                <img src={post.coverImage} alt="" />
-              </a>
-            ) : (
-              <img src={post.coverImage} alt="" />
-            )}
-          </figure>
+        {/* Cover image */}
+        <figure className="a-img">
+          <img src={coverUrl} alt={post.coverAlt || post.title} />
+        </figure>
+
+        {/* YouTube video embed below cover */}
+        {post.youtubeId && (
+          <iframe
+            width="100%"
+            height="380"
+            src={`https://www.youtube.com/embed/${post.youtubeId}?rel=0`}
+            title="YouTube video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ borderRadius: 'var(--r-2)', marginBottom: 'var(--sp-2)', border: 'none' }}
+          />
         )}
 
         <div className="rich" dangerouslySetInnerHTML={{ __html: cleanHtml }} />
@@ -72,3 +96,4 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     </div>
   );
 }
+

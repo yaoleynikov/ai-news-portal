@@ -11,7 +11,7 @@ author: "SiliconFeed"
 
 ## The $122 Billion Paradox
 
-OpenAI just raised **$122 billion** at an $852 billion valuation вЂ” the largest venture investment in history. The round cements OpenAI as the best-funded startup ever, with an IPO on the horizon.
+OpenAI just raised **$122 billion** at an $852 billion valuation в— the largest venture investment in history. The round cements OpenAI as the best-funded startup ever, with an IPO on the horizon.
 
 But there's a catch.
 
@@ -24,7 +24,7 @@ Bloomberg reports that institutional holders are struggling to unload roughly **
 The secondary market freeze tells a deeper story:
 
 - **Forbes cataloged OpenAI's graveyard of dead products**, from Sora to hundreds of billions in announced partnerships that never materialized
-- **Competition is heating up** вЂ” Anthropic and Google are winning developer mindshare
+- **Competition is heating up** в— Anthropic and Google are winning developer mindshare
 - **Policy restrictions tightened**, with OpenAI warning that unauthorized sales (including SPVs and tokenized offerings) are void
 
 The company has more capital than any startup in history, but cracks in investor confidence are showing in real time.
@@ -33,7 +33,7 @@ The company has more capital than any startup in history, but cracks in investor
 
 While OpenAI raises record sums, Oracle is taking a different approach. On March 31, an estimated **20,000вЂ“30,000 employees** (~18% of its 162K workforce) received termination emails at 6am, losing badge access before sunrise.
 
-The layoffs free up an estimated **$8вЂ“10 billion in annual cash flow** вЂ” all redirected to fund Oracle's massive AI data center buildout and Stargate partnership.
+The layoffs free up an estimated **$8вЂ“10 billion in annual cash flow** в— all redirected to fund Oracle's massive AI data center buildout and Stargate partnership.
 
 > "Reduce headcount. Free cash. Redirect into compute."
 
@@ -55,7 +55,7 @@ JPMorgan CEO Jamie Dimon predicted AI will:
 - Extend lifespans to **100 years**
 - Cure cancers and prevent car crashes
 
-But he warned rapid adoption could **disrupt labor markets** and requires scaled public-private retraining programs. The workforce transformation is already here вЂ” Oracle just showed us what it looks like.
+But he warned rapid adoption could **disrupt labor markets** and requires scaled public-private retraining programs. The workforce transformation is already here в— Oracle just showed us what it looks like.
 
 ## Monster Take
 

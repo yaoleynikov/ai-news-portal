@@ -11,15 +11,15 @@ author: "SiliconFeed"
 
 ## The x402 Protocol
 
-Bloombert reports that Coinbase, Cloudflare, and Stripe have jointly launched the x402 Foundation вЂ” a nonprofit to manage an open protocol that revives the long-dormant **HTTP 402 Payment Required** status code.
+Bloombert reports that Coinbase, Cloudflare, and Stripe have jointly launched the x402 Foundation в— a nonprofit to manage an open protocol that revives the long-dormant **HTTP 402 Payment Required** status code.
 
 In practical terms, it means AI agents can autonomously pay for services, APIs, and content in real-time. No human. No credit card. Just machine-to-machine commerce.
 
 ### The Players
 
-- **Coinbase** вЂ” engineering lead and crypto rails
-- **Stripe** вЂ” fiat settlement and merchant infrastructure
-- **Cloudflare** вЂ” CDN-level enforcement and verification
+- **Coinbase** в— engineering lead and crypto rails
+- **Stripe** в— fiat settlement and merchant infrastructure
+- **Cloudflare** в— CDN-level enforcement and verification
 
 Google and AWS have also signed up as supporters.
 
@@ -31,4 +31,4 @@ This is the moment when financial infrastructure starts treating AI agents as fi
 
 ## Monster Take
 
-The x402 protocol is not just a payment standard вЂ” it is a new economic layer for the internet. When AI agents become autonomous buyers, every website, SaaS tool, and data provider will have to decide: do I want machines to pay me? The companies building the rails for this economy are positioning themselves as the Visa of the AI era.
+The x402 protocol is not just a payment standard в— it is a new economic layer for the internet. When AI agents become autonomous buyers, every website, SaaS tool, and data provider will have to decide: do I want machines to pay me? The companies building the rails for this economy are positioning themselves as the Visa of the AI era.

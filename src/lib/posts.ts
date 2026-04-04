@@ -11,37 +11,8 @@ function getPostFiles() {
   return fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
 }
 
-// Generate cover image URL
-function getCoverImage(youtubeId: string, _title: string, tags: string[], slug: string): string {
-  // 1. YouTube video thumbnail (1280x720) — primary source
-  if (youtubeId) {
-    return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
-  }
-  // 2. Fallback: loremflickr with category-based keywords
-  const tagMap: Record<string, string> = {
-    'AI': 'technology',
-    'Google': 'google',
-    'Microsoft': 'microsoft',
-    'OpenAI': 'technology',
-    'Crypto': 'cryptocurrency',
-    'Security': 'cybersecurity',
-    'Energy': 'energy',
-    'Data Centers': 'datacenter',
-    'Policy': 'politics',
-    'India': 'india',
-    'SpaceX': 'space',
-    'Startups': 'startup',
-    'Cloud': 'cloud',
-    'Hardware': 'processor',
-    'Agents': 'robotics',
-    'Wikipedia': 'book',
-  };
-  let category = 'technology';
-  for (const tag of tags) {
-    if (tagMap[tag]) { category = tagMap[tag]; break; }
-  }
-  const slugHash = slug.split('').reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 5381);
-  return `https://loremflickr.com/g/800/500/${category}?lock=${Math.abs(slugHash)}`;
+function buildCoverUrl(title: string, tag: string): string {
+  return `/api/cover?title=${encodeURIComponent(title)}&tag=${encodeURIComponent(tag)}`;
 }
 
 export function getSortedPosts() {
@@ -52,16 +23,18 @@ export function getSortedPosts() {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data } = matter(fileContents);
     const tags = (data.tags as string[]) || [];
-    const customCover = (data.coverImage as string) || '';
-    const youtubeId = (data.youtubeId as string) || '';
+    const tag = tags[0] || 'Tech';
+    const coverUrl = buildCoverUrl(data.title as string, tag);
     
     return {
       slug,
       title: (data.title as string) || slug,
       date: (data.date as string) || '',
       excerpt: (data.excerpt as string) || '',
-      coverImage: customCover || getCoverImage(youtubeId, data.title as string, tags, slug),
-      youtubeId: youtubeId || null,
+      coverImage: coverUrl,
+      coverAlt: data.title as string,
+      tag,
+      youtubeId: (data.youtubeId as string) || null,
       tags,
     };
   });
@@ -77,15 +50,23 @@ export function getPostBySlug(slug: string) {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
   const tags = (data.tags as string[]) || [];
+  const tag = tags[0] || 'Tech';
+  const coverUrl = buildCoverUrl(data.title as string, tag);
+
+  // Parse coverImage from frontmatter if present
   const customCover = (data.coverImage as string) || '';
-  const youtubeId = (data.youtubeId as string) || '';
 
   let finalContent = content;
 
-  // Don't embed YouTube in content - use cover image instead
-  // Video embeds often fail due to embedding restrictions
-  // The youtubeId is used for the cover image (maxresdefault.jpg) only
-  let finalYoutubeId = null;
+  const youtubeId = (data.youtubeId as string) || null;
+  if (youtubeId) {
+    const firstH2 = content.indexOf('## ');
+    if (firstH2 > 0) {
+      const before = content.substring(0, firstH2);
+      const after = content.substring(firstH2);
+      finalContent = before + '\n<iframe width="100%" height="380" src="https://www.youtube.com/embed/' + youtubeId + '?rel=0" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n\n' + after;
+    }
+  }
 
   const processedContent = remark().use(html, { allowDangerousHtml: true }).processSync(finalContent);
   const contentHtml = processedContent.toString();
@@ -95,38 +76,18 @@ export function getPostBySlug(slug: string) {
     title: (data.title as string) || slug,
     date: data.date as string,
     excerpt: (data.excerpt as string) || '',
-    coverImage: customCover || getCoverImage(youtubeId, data.title as string, tags, slug),
+    coverImage: customCover || coverUrl,
+    coverAlt: data.title as string,
+    tag,
     tags,
     author: (data.author as string) || 'SiliconFeed',
     source: (data.source as string) || '',
     contentHtml,
     rawContent: content,
-    youtubeId: finalYoutubeId,
+    youtubeId,
   };
 }
 
 export function getAllPostSlugs() {
   return getPostFiles().map(f => f.replace(/\.mdx?$/, ''));
-}
-
-// Get related articles based on shared tags
-export function getRelatedPosts(currentSlug: string, limit: number = 3) {
-  const all = getSortedPosts();
-  const current = all.find(p => p.slug === currentSlug);
-  if (!current || !current.tags || current.tags.length === 0) {
-    // No tags — return latest posts
-    return all.filter(p => p.slug !== currentSlug).slice(0, limit);
-  }
-  const related = all
-    .filter(p => p.slug !== currentSlug)
-    .map(p => ({
-      ...p,
-      sharedTags: p.tags?.filter(t => current.tags!.includes(t)).length || 0,
-    }))
-    .sort((a, b) => {
-      if (b.sharedTags !== a.sharedTags) return b.sharedTags - a.sharedTags;
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    })
-    .slice(0, limit);
-  return related;
 }

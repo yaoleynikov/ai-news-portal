@@ -23,4 +23,4 @@ For startups selling to government, procurement discipline may now matter almost
 
 ## Monster Take
 
-California is not writing legislation вЂ” it is writing procurement policy. That is infinitely more powerful. If you want to sell AI to the state, you comply. And if the second-largest economy in the US has procurement rules for AI, every major vendor will follow. This is how real regulation happens: through money, not through headlines.
+California is not writing legislation в— it is writing procurement policy. That is infinitely more powerful. If you want to sell AI to the state, you comply. And if the second-largest economy in the US has procurement rules for AI, every major vendor will follow. This is how real regulation happens: through money, not through headlines.

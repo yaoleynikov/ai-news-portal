@@ -25,7 +25,7 @@ This isn't a trivia quiz or a coding exam. The benchmark, built by FranГ§ois C
 - Zero stated goals
 - No rule descriptions
 
-The agent has to explore, figure out what to do, form a plan, and execute it. Think of it as testing whether an AI can learn a brand-new game from scratch вЂ” the way any five-year-old can.
+The agent has to explore, figure out what to do, form a plan, and execute it. Think of it as testing whether an AI can learn a brand-new game from scratch в— the way any five-year-old can.
 
 ## The Scores Are Brutal
 
@@ -37,7 +37,7 @@ The agent has to explore, figure out what to do, form a plan, and execute it. Th
 | Grok-4.20 | 0.00% |
 | **Humans** | **100%** |
 
-Scoring uses **RHAE** (Relative Human Action Efficiency). An AI that takes 10x more actions than a human scores 1%. The penalty squares inefficiency вЂ” wandering around and guessing gets punished hard.
+Scoring uses **RHAE** (Relative Human Action Efficiency). An AI that takes 10x more actions than a human scores 1%. The penalty squares inefficiency в— wandering around and guessing gets punished hard.
 
 ## Why Previous Benchmarks Failed
 
@@ -53,11 +53,11 @@ The foundation's response: perception isn't the bottleneck. Reasoning and genera
 
 ## The Verdict
 
-> "If a normal human with no instructions can do it, and your system can't, then you don't have AGI вЂ” you have a very expensive autocomplete that needs a lot of help."  
-> вЂ” FranГ§ois Chollet, ARC Prize Foundation
+> "If a normal human with no instructions can do it, and your system can't, then you don't have AGI в— you have a very expensive autocomplete that needs a lot of help."  
+> в— FranГ§ois Chollet, ARC Prize Foundation
 
 The $2M ARC Prize 2026 competition is live on Kaggle. Every winning solution must be open-sourced. The clock is running, and the machines aren't close.
 
 ## Monster Take
 
-The AGI hype machine is running at full throttle while the actual evidence points in the opposite direction. CEOs declare victory for marketing purposes. Benchmark designers build tests that expose the gap. ARC-AGI-3 isn't just a reality check вЂ” it's a challenge. The best AI agent in a month-long developer preview scored 12.58%. Frontier models cracked 1%. Humans solved everything on the first try with zero training. Until that gap closes, AGI is a marketing term, not a technical achievement.
+The AGI hype machine is running at full throttle while the actual evidence points in the opposite direction. CEOs declare victory for marketing purposes. Benchmark designers build tests that expose the gap. ARC-AGI-3 isn't just a reality check в— it's a challenge. The best AI agent in a month-long developer preview scored 12.58%. Frontier models cracked 1%. Humans solved everything on the first try with zero training. Until that gap closes, AGI is a marketing term, not a technical achievement.
