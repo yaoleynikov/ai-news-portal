@@ -111,17 +111,13 @@ function buildSVG(post) {
       const innerMatch = raw.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
       if (innerMatch) {
         logoElements = `
-          <!-- Blurred background logo (6% opacity, 40% size center) -->
-          <g opacity="0.06" filter="url(#blur)">
-            <g transform="translate(350, 65)">
-              ${innerMatch[1]}
-            </g>
+          <!-- Blurred logo watermark — stays on right half -->
+          <g opacity="0.05" filter="url(#blur)" transform="translate(700, 140)">
+            ${innerMatch[1]}
           </g>
-          <!-- Clear logo at 40% opacity, bottom-right area -->
-          <g opacity="0.40">
-            <g transform="translate(800, 120) scale(1.5)">
-              ${innerMatch[1]}
-            </g>
+          <!-- Clear logo — bottom-right, below text -->
+          <g opacity="0.35" transform="translate(860, 380) scale(0.55)">
+            ${innerMatch[1]}
           </g>
         `;
       }
