@@ -180,45 +180,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           />
         ) : null}
 
-        {/* Bottom branding */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 36,
-            left: 48,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            zIndex: 1,
-          }}
-        >
-          <div
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: 8,
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 18,
-              fontWeight: 900,
-              color: '#fff',
-            }}
-          >
-            S
-          </div>
-          <span
-            style={{
-              fontSize: 20,
-              fontWeight: 700,
-              color: '#6b7280',
-              letterSpacing: 1,
-            }}
-          >
-            siliconfeed.online
-          </span>
-        </div>
+
       </div>
     ),
     {
