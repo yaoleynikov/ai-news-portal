@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Generate cover images for all posts.
  * Features:
  *   - Auto-fix SVG logos without fill (white-on-white issue)
@@ -31,7 +31,7 @@ const LOGO_Y = (H - LOGO_SIZE) / 2;
 // Fill color for SVGs that lack it
 const SVG_FILL = '#000000';
 
-// ─── 1. Company logo map ───────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ 1. Company logo map в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 const companyLogos = {
   'openai': 'openai', 'anthropic': 'anthropic', 'google': 'google',
   'microsoft': 'microsoft', 'nvidia': 'nvidia', 'meta': 'meta',
@@ -43,7 +43,7 @@ const companyLogos = {
   'claude-code': 'claude-code',
 };
 
-// ─── 2. Product → Logo key map ─────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ 2. Product в†’ Logo key map в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 const productToCompany = {
   'chatgpt': 'openai', 'gpt': 'openai', 'sora': 'openai', 'dall-e': 'openai',
   'dalle': 'openai', 'o1': 'openai', 'o3': 'openai',
@@ -62,7 +62,7 @@ const productToCompany = {
   'freebsd': 'freebsd',
 };
 
-// ─── Auto-fix SVG fill ────────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Auto-fix SVG fill в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function fixSvgFillIfMissing(svgPath) {
   const svg = fs.readFileSync(svgPath, 'utf8');
   const paths = svg.match(/<path[^>]*\/?>/g) || [];
@@ -88,7 +88,7 @@ function fixSvgFillIfMissing(svgPath) {
   if (fixed > 0) console.log(`[FIX] Added fill to ${fixed} SVG logo(s)\n`);
 }
 
-// ─── Resolve topic → logo key ──────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Resolve topic в†’ logo key в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function resolveLogoKey(tags) {
   const matches = [];
   for (const tag of tags) {
@@ -109,7 +109,7 @@ function resolveLogoKey(tags) {
   return { key: matches[0].key, type: 'company' };
 }
 
-// ─── Find logo file ────────────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Find logo file в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function findLogoPath(key) {
   const svgP = path.join(logosDir, key + '.svg');
   if (fs.existsSync(svgP)) { fixSvgFillIfMissing(svgP); return { path: svgP, isSvg: true }; }
@@ -120,32 +120,58 @@ function findLogoPath(key) {
   return null;
 }
 
-// ─── Render logo to a clean PNG buffer ─────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Render logo to a clean PNG buffer (no alpha noise) в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 async function renderLogoToPng(logoPath, isSvg, targetSize) {
   if (!isSvg) {
-    // Flatten on white to eliminate alpha edge noise
+    // CRITICAL: flatten BEFORE resize to eliminate fake transparency
+    // (checkerboard patterns that some PNG sites embed)
     return await sharp(logoPath)
-      .resize(targetSize, targetSize, { fit: 'contain', background: '#ffffff' })
       .flatten({ background: '#ffffff' })
+      .resize(targetSize, targetSize, { fit: 'contain' })
       .png({ compressionLevel: 9 })
       .toBuffer();
   }
-  // Render SVG at 4x then downscale — prevents pixel noise on edges
+  // Render SVG at 4x, then apply binary alpha mask to eliminate gray edge noise
   const svgContent = fs.readFileSync(logoPath, 'utf8');
   const renderSize = targetSize * 4;
-  const pngHighRes = new Resvg(svgContent, {
+  const hiRes = new Resvg(svgContent, {
     font: { loadSystemFonts: false },
     fitTo: { mode: 'width', value: renderSize }
   }).render().asPng();
-  // Flatten on white to kill semi-transparent AA edge pixels
-  return await sharp(pngHighRes)
-    .resize(targetSize, targetSize, { fit: 'contain', background: '#ffffff' })
-    .flatten({ background: '#ffffff' })
+
+  // Step 1: downscale first (keeps semi-transparent edges)
+  const downscaled = await sharp(hiRes)
+    .resize(targetSize, targetSize, { fit: 'contain' })
+    .raw()
+    .toBuffer();
+  const hiResMeta = await sharp(hiRes).metadata();
+  const scale = targetSize / hiResMeta.width;
+  const newW = targetSize;
+  const newH = targetSize;
+
+  // Step 2: binary threshold alpha вЂ” if alpha > 0, make it opaque (RGB = fill color)
+  // This eliminates all semi-transparent gray fringe pixels
+  const clean = Buffer.alloc(downscaled.length);
+  const fill = 0; // black
+  for (let i = 0; i < downscaled.length; i += 4) {
+    if (downscaled[i + 3] > 0) {
+      clean[i] = fill;
+      clean[i + 1] = fill;
+      clean[i + 2] = fill;
+      clean[i + 3] = 255;
+    } else {
+      clean[i] = 255;     // white bg
+      clean[i + 1] = 255;
+      clean[i + 2] = 255;
+      clean[i + 3] = 255;
+    }
+  }
+  return sharp(clean, { raw: { width: newW, height: newH, channels: 4 } })
     .png({ compressionLevel: 9 })
     .toBuffer();
 }
 
-// ─── Build cover with Sharp composite (avoids Resvg α artifacts) ───────────────
+// в”Ђв”Ђв”Ђ Build cover with Sharp composite (avoids Resvg О± artifacts) в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 async function buildCoverWithSharp(logoPngBuffer) {
   // Step 1: Create white background
   const bg = Buffer.from(
@@ -164,7 +190,7 @@ async function buildCoverWithSharp(logoPngBuffer) {
     .toBuffer();
 }
 
-// ─── Build custom cover from Brave image search ────────────────────────────────
+// в”Ђв”Ђв”Ђ Build custom cover from Brave image search в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function buildCustomCoverSVG(imageBuffer) {
   const dataUri = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
   return `
@@ -178,7 +204,7 @@ function buildCustomCoverSVG(imageBuffer) {
 </svg>`;
 }
 
-// ─── Fallback: text-based cover when image search fails ────────────────────────
+// в”Ђв”Ђв”Ђ Fallback: text-based cover when image search fails в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function buildTextCoverSVG(title, tags) {
   const display = title.length > 80 ? title.substring(0, 77) + '\u2026' : title;
   const tag = (tags[0] || 'Tech').toUpperCase();
@@ -211,7 +237,7 @@ function escXml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// ─── Brave image search ────────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Brave image search в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function braveSearchImages(query, count = 10) {
   return new Promise((resolve, reject) => {
     const url = new URL('https://api.search.brave.com/res/v1/images/search');
@@ -281,7 +307,7 @@ async function fetchImageForTopic(slug, tags) {
   return null;
 }
 
-// ─── Parse posts ───────────────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Parse posts в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function getAllPosts() {
   const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
   return files.map(filename => {
@@ -298,7 +324,7 @@ function getAllPosts() {
   }).filter(Boolean);
 }
 
-// ─── Post-render quality check ────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Post-render quality check в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 async function qualityCheck(coverPath) {
   try {
     const meta = await sharp(coverPath).metadata();
@@ -357,7 +383,7 @@ async function qualityCheck(coverPath) {
   }
 }
 
-// ─── Main ──────────────────────────────────────────────────────────────────────
+// в”Ђв”Ђв”Ђ Main в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 const posts = getAllPosts();
 console.log(`Found ${posts.length} posts\n`);
 
@@ -378,27 +404,36 @@ console.log(`Found ${posts.length} posts\n`);
         continue;
       }
       source = resolved.key;
-      // Render logo to clean PNG, flatten on white, composite via sharp
-      const logoPng = await renderLogoToPng(logoResult.path, logoResult.isSvg, LOGO_SIZE);
+      // Render ENTIRE cover (white bg + logo) at 3x via resvg, downscale with sharp
+      const svgContent = fs.readFileSync(logoResult.path, 'utf8');
       try {
-        // White background via SVG (sharp can't do fill natively)
-        const whiteBg = Buffer.from(
-          `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#ffffff"/></svg>`
-        );
-        const jpegData = await sharp(whiteBg)
-          .composite([{ input: logoPng, left: LOGO_X, top: LOGO_Y }])
+        // Wrap logo in a full-cover SVG
+        const coverSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="#ffffff"/>
+  <image href="data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgContent)))}"
+         x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_SIZE}" height="${LOGO_SIZE}"
+         preserveAspectRatio="xMidYMid meet"/>
+</svg>`;
+        const renderSize = Math.round(W * 3);
+        const hiResPng = new Resvg(coverSvg, {
+          font: { loadSystemFonts: false },
+          fitTo: { mode: 'width', value: renderSize }
+        }).render().asPng();
+        // Downscale with lanczos вЂ” clean anti-aliasing from high-res source
+        await sharp(hiResPng)
+          .resize(W, H, { kernel: 'lanczos3' })
           .jpeg({ quality: 90, mozjpeg: true })
-          .toBuffer();
-        fs.writeFileSync(coverPath, jpegData);
+          .toFile(coverPath);
         const issue = await qualityCheck(coverPath);
         if (issue) {
           console.log(`  WARN quality: ${post.slug} -> ${issue}`);
         } else {
-          console.log(`  DONE: ${post.slug} -> ${source} ✓ (sharp)`);
+          console.log(`  DONE: ${post.slug} -> ${source} вњ“ (3x)`);
         }
         done++;
       } catch (e) {
-        console.log(`  ERR sharp: ${post.slug}: ${e.message.substring(0, 130)}`);
+        console.log(`  ERR cover: ${post.slug}: ${e.message.substring(0, 130)}`);
       }
       continue;
     } else {
@@ -424,14 +459,14 @@ console.log(`Found ${posts.length} posts\n`);
         await sharp(fbPng).jpeg({ quality: 90 }).toFile(coverPath);
         const retry = await qualityCheck(coverPath);
         if (retry) {
-          console.log(`  FAIL: ${post.slug} — ${retry}`);
+          console.log(`  FAIL: ${post.slug} вЂ” ${retry}`);
           continue;
         }
-        console.log(`  DONE (fallback): ${post.slug} ✓`);
+        console.log(`  DONE (fallback): ${post.slug} вњ“`);
       } else if (issue) {
-        console.log(`  WARN: ${post.slug} — ${issue}`);
+        console.log(`  WARN: ${post.slug} вЂ” ${issue}`);
       } else {
-        console.log(`  DONE: ${post.slug} -> ${source} ✓`);
+        console.log(`  DONE: ${post.slug} -> ${source} вњ“`);
       }
       done++;
     } catch (e) {
