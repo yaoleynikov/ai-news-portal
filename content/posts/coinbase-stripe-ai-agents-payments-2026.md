@@ -3,7 +3,7 @@ title: "Coinbase, Cloudflare & Stripe Build Payment Rails for AI Agents"
 date: "2026-04-03"
 excerpt: "The financial giants are racing to build the infrastructure for a future where AI agents handle internet transactions themselves."
 tags: ["AI Agents", "Crypto", "Fintech"]
-youtubeId: "dQw4w9WgXcQ"
+youtubeId: "jZVBoFOJK-Q"
 source: "https://techstartups.com/"
 author: "SiliconFeed"
 ---

@@ -1,9 +1,9 @@
 ---
+youtubeId: "W4T2nX7LMkQ"
 title: "Индийская Sarvam AI близка к финансированию с оценкой $1.5B"
 date: "2026-04-03"
 excerpt: "Индийский AI-стартап Sarvam AI ведёт переговоры о финансировании с оценкой $1.5 млрд. Страна строит собственный технологический суверенитет в области ИИ."
 tags: ["Startup", "India", "AI", "Funding", "Investment"]
-coverImage: "https://picsum.photos/seed/india-ai/800/500"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---

@@ -3,7 +3,7 @@ title: "Tech Roundup: Microsoft $10B Japan Bet, SpaceX $75B IPO, Pentagon vs Ant
 date: "2026-04-03"
 excerpt: "Microsoft invests $10B in Japan AI infra, SpaceX seeks record $75B IPO, Trump admin appeals ruling blocking action against Anthropic."
 tags: ["Microsoft", "SpaceX", "Anthropic", "Policy"]
-youtubeId: "7nJIGO9mfVE"
+youtubeId: "q3M5jJqjJnI"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 author: "SiliconFeed"
 ---

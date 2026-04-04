@@ -3,7 +3,7 @@ title: "Brain-Inspired Chip Promises 2000x AI Energy Efficiency Breakthrough"
 date: "2026-04-04"
 excerpt: "Researchers at Loughborough University built a brain-inspired chip that processes time-series data directly in hardware, slashing energy use by up to 2000x compared to traditional AI systems."
 tags: ["AI Hardware", "Energy Efficiency", "Neuromorphic Computing", "Research", "Brain-Inspired AI"]
-youtubeId: "dQw4w9WgXcQ"
+youtubeId: "61Dy1kzjKsQ"
 source: "https://decrypt.co/363164/ai-could-become-2000-times-more-efficient-by-copying-the-brain-study"
 author: "SiliconFeed"
 ---

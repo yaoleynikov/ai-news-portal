@@ -1,9 +1,9 @@
 ---
+youtubeId: "jZVBoFOJK-Q"
 title: "Wikipedia Bans AI-Generated Text: The Internet's Last Human Stronghold Strikes Back"
 date: "2026-04-04"
 excerpt: "Wikipedia editors have banned large language models from writing or rewriting articles, citing violations of verifiability and sourcing standards. The decision marks a pivotal moment in the fight for human-curated knowledge."
 tags: ["Wikipedia", "AI Policy", "LLM", "Content Moderation", "Open Knowledge"]
-coverImage: "https://picsum.photos/seed/wikipedia-ai-ban/800/500"
 source: "https://decrypt.co/363531/wikipedia-bans-ai-generated-text-articles-new-editing-policy"
 author: "SiliconFeed"
 ---

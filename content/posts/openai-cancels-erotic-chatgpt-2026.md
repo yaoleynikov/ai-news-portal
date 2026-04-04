@@ -1,9 +1,9 @@
 ---
+youtubeId: "W4T2nX7LMkQ"
 title: "OpenAI Kills Its Erotic Chatbot: Even AI Has Lines It Won't Cross"
 date: "2026-04-04"
 excerpt: "OpenAI has shelved plans to launch an erotic ChatGPT mode, backing away from a controversial expansion that would have allowed adult users to generate sexual content. Internal concerns about societal impact drove the reversal."
 tags: ["OpenAI", "ChatGPT", "Content Policy", "AI Ethics", "Sora"]
-coverImage: "https://picsum.photos/seed/openai-erotic-chatbot-cancelled/800/500"
 source: "https://decrypt.co/363529/first-sora-now-sexy-chat-openai-cancels-erotic-chatgpt-mode"
 author: "SiliconFeed"
 ---
