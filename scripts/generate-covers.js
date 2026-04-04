@@ -137,7 +137,6 @@ function buildCoverSVG(imageBuffer, isSvg) {
     <filter id="blur"><feGaussianBlur stdDeviation="100"/></filter>
   </defs>
   <rect width="${W}" height="${H}" fill="#ffffff"/>
-  <rect width="${W}" height="5" fill="url(#bar)"/>
   <!-- Background: blurred and scaled up -->
   <image href="${dataUri}" x="-800" y="-1400" width="2800" height="2800"
          opacity="0.2" filter="url(#blur)" preserveAspectRatio="xMidYMid meet"/>
@@ -162,7 +161,6 @@ function buildCustomCoverSVG(imageBuffer) {
     <filter id="blur"><feGaussianBlur stdDeviation="100"/></filter>
   </defs>
   <rect width="${W}" height="${H}" fill="#ffffff"/>
-  <rect width="${W}" height="5" fill="url(#bar)"/>
   <image href="${dataUri}" x="-200" y="-300" width="1600" height="1230"
          opacity="0.15" filter="url(#blur)" preserveAspectRatio="xMidYMid slice"/>
 </svg>`;
@@ -196,7 +194,6 @@ function buildTextCoverSVG(title, tags) {
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <rect width="${W}" height="${H}" fill="url(#dots)"/>
-  <rect width="${W}" height="5" fill="url(#bar)"/>
   <rect x="120" y="100" width="140" height="32" rx="16" fill="${tagColor}" opacity="0.15"/>
   <text x="190" y="122" font-family="sans-serif" font-size="13" font-weight="700" fill="${tagColor}" text-anchor="middle">${escXml(tag)}</text>
   <text x="600" y="340" font-family="Georgia, serif" font-size="48" font-weight="900" fill="#1e293b" text-anchor="middle" letter-spacing="-0.5">${escXml(display)}</text>
