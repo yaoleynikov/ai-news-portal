@@ -3,7 +3,7 @@ title: "ARC-AGI-3 Benchmark Shatters AGI Hype: Top Models Score Below 1%"
 date: "2026-04-04"
 excerpt: "The ARC-AGI-3 benchmark tested whether AI agents can generalize in unknown environments. Top models scored under 1% while humans solved 100%. The verdict: AGI is nowhere near here."
 tags: ["AGI", "AI Benchmark", "ARC Prize", "OpenAI", "Anthropic", "Google"]
-youtubeId: "gsZmNklX68I"
+youtubeId: "tcsRDkawe4A"
 source: "https://decrypt.co/362496/is-agi-here-not-even-close-ai-benchmark"
 author: "SiliconFeed"
 ---
