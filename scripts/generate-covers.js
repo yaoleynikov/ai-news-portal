@@ -23,10 +23,11 @@ const BRAVE_KEY = 'BSAuzT5f6qJnM1FNts_-LYkacF6yuKV';
 const W = 1200;
 const H = 630;
 // Logo at 80% of canvas width
-const LOGO_W = 960;
-const LOGO_H = 468;
-const LOGO_X = (W - LOGO_W) / 2;  // 120, centered
-const LOGO_Y = 81;
+const LOGO_SCALE = 0.85;
+const LOGO_W = W * LOGO_SCALE;
+const LOGO_SIZE = W * LOGO_SCALE;
+const LOGO_X = (W - LOGO_SIZE) / 2;
+const LOGO_Y = (H - LOGO_SIZE) / 2;
 
 // ─── 1. Company logo map ───────────────────────────────────────────────────────
 const companyLogos = {
@@ -140,8 +141,8 @@ function buildCoverSVG(imageBuffer, isSvg) {
   <!-- Background: blurred and scaled up -->
   <image href="${dataUri}" x="-800" y="-1400" width="2800" height="2800"
          opacity="0.2" filter="url(#blur)" preserveAspectRatio="xMidYMid meet"/>
-  <!-- Logo: 80% width, centered -->
-  <image href="${dataUri}" x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_W}" height="${LOGO_H}"
+  <!-- Logo: square, centered, up to 80% of canvas width -->
+  <image href="${dataUri}" x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_SIZE}" height="${LOGO_SIZE}"
          opacity="1" preserveAspectRatio="xMidYMid meet"/>
 </svg>`;
 }
