@@ -1,16 +1,17 @@
----
+﻿---
 title: "Microsoft Declares Independence: Three New In-House AI Models"
 date: "2026-04-02"
-excerpt: "Microsoft unveils MAI-Transcribe-1, MAI-Voice-1, and MAI-Image-2 — three foundational models built in-house."
+excerpt: "Microsoft unveils MAI-Transcribe-1, MAI-Voice-1, and MAI-Image-2 вЂ” three foundational models built in-house."
 tags: ["Microsoft", "AI Models", "OpenAI"]
 youtubeId: "nqOSznyJ7aU"
 source: "https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals/"
+coverImage: "/covers/microsoft-mai-models-2026.jpg"
 author: "SiliconFeed"
 ---
 
 ## The Announcement
 
-Microsoft — the company that poured billions into OpenAI — just launched **three fully in-house foundational models**. Not wrappers. Not fine-tunes. Built from scratch.
+Microsoft вЂ” the company that poured billions into OpenAI вЂ” just launched **three fully in-house foundational models**. Not wrappers. Not fine-tunes. Built from scratch.
 
 Mustafa Suleyman called it the first salvo from Microsoft's superintelligence team and said renegotiating the OpenAI contract **"unlocked Microsoft's ability to pursue superintelligence"**.
 

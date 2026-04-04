@@ -1,10 +1,11 @@
----
+﻿---
 title: "California Orders AI Contract Standards for Government Technology"
 date: "2026-04-03"
 excerpt: "Governor Newsom orders state agencies to develop AI contract standards addressing CSAM, civil rights violations, and surveillance."
 tags: ["California AI Policy", "Regulation", "Government"]
 youtubeId: "Ee8UPruvn0c"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
+coverImage: "/covers/california-ai-government-contracts-policy-2026.jpg"
 author: "SiliconFeed"
 ---
 
@@ -22,4 +23,4 @@ For startups selling to government, procurement discipline may now matter almost
 
 ## Monster Take
 
-California is not writing legislation — it is writing procurement policy. That is infinitely more powerful. If you want to sell AI to the state, you comply. And if the second-largest economy in the US has procurement rules for AI, every major vendor will follow. This is how real regulation happens: through money, not through headlines.
+California is not writing legislation вЂ” it is writing procurement policy. That is infinitely more powerful. If you want to sell AI to the state, you comply. And if the second-largest economy in the US has procurement rules for AI, every major vendor will follow. This is how real regulation happens: through money, not through headlines.

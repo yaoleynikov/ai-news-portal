@@ -1,10 +1,11 @@
----
+﻿---
 title: "Anthropic Acquires AI Biotech Startup Coefficient Bio for $400M"
 date: "2026-04-04"
 excerpt: "Anthropic is pushing beyond general-purpose AI with its $400M acquisition of Coefficient Bio, a startup applying AI to drug discovery and clinical workflows. The move signals AI's expansion into high-stakes scientific domains."
 tags: ["Anthropic", "Biotech", "AI Acquisition", "Drug Discovery", "Life Sciences"]
 youtubeId: "zSJrf2901Tc"
 source: "https://techstartups.com/2026/04/03/anthropic-acquires-ai-biotech-startup-coefficient-bio-for-400m-to-expand-into-drug-discovery-and-clinical-workflows/"
+coverImage: "/covers/anthropic-acquires-coefficient-bio-400m-2026.jpg"
 author: "SiliconFeed"
 ---
 
@@ -12,15 +13,15 @@ author: "SiliconFeed"
 
 Anthropic just bought its way into biology. The AI company acquired **Coefficient Bio**, a startup focused on applying artificial intelligence to drug development and clinical strategy, in a deal valued at approximately $400 million, according to The Information.
 
-Coefficient Bio was founded just last fall. Its entire team — including CEO Aris Theologis and CTO Nathan Frey — is joining Anthropic's healthcare and life sciences group.
+Coefficient Bio was founded just last fall. Its entire team вЂ” including CEO Aris Theologis and CTO Nathan Frey вЂ” is joining Anthropic's healthcare and life sciences group.
 
 ## What Coefficient Bio Does
 
 The startup was building an AI platform to tackle the most complex parts of biotech:
 
-- **R&D pipeline planning** — deciding which drug candidates to pursue
-- **Clinical and regulatory strategy** — navigating FDA approval pathways
-- **Drug opportunity identification** — surfacing promising therapeutic targets
+- **R&D pipeline planning** вЂ” deciding which drug candidates to pursue
+- **Clinical and regulatory strategy** вЂ” navigating FDA approval pathways
+- **Drug opportunity identification** вЂ” surfacing promising therapeutic targets
 
 This isn't chatbot territory. Drug development is expensive, slow, and drowning in data. A single failed clinical trial can cost hundreds of millions. AI that can improve decision-making at any stage is worth serious money.
 

@@ -1,16 +1,17 @@
----
-title: "Riot Platforms Dumps $250M in Bitcoin — Doubling Down on AI Infrastructure"
+﻿---
+title: "Riot Platforms Dumps $250M in Bitcoin вЂ” Doubling Down on AI Infrastructure"
 date: 2026-04-04
 excerpt: "Major Bitcoin miner Riot Platforms sold 3,778 BTC in Q1 2026 as it accelerates a strategic pivot from crypto mining to high-performance AI data centers."
 tags: ["bitcoin", "ai-infrastructure", "riot-platforms", "data-centers", "crypto-mining"]
 youtubeId: "dQw4w9WgXcQ"
 source: "https://decrypt.co/363255/bitcoin-miner-riot-platforms-sells-250-million-btc"
+coverImage: "/covers/riot-platforms-bitcoin-to-ai-pivot-2026.jpg"
 author: "SiliconFeed AI"
 ---
 
-## Miners Aren't Mining Anymore — They're Building AI Data Centers
+## Miners Aren't Mining Anymore вЂ” They're Building AI Data Centers
 
-Riot Platforms, one of the largest publicly traded Bitcoin mining companies, sold 3,778 BTC in the first quarter of 2026 — worth over $250 million at an average price above $76,000 per coin.
+Riot Platforms, one of the largest publicly traded Bitcoin mining companies, sold 3,778 BTC in the first quarter of 2026 вЂ” worth over $250 million at an average price above $76,000 per coin.
 
 Here's the twist: Riot isn't doing this to weather a storm. It's building something new.
 
@@ -21,13 +22,13 @@ Here's the twist: Riot isn't doing this to weather a storm. It's building someth
 - **Consecutive quarters of selling:** 2
 - **RIOT stock:** $12.86, down 33% in six months
 
-This follows nearly $200 million in BTC sales during November–December alone.
+This follows nearly $200 million in BTC sales during NovemberвЂ“December alone.
 
 ## The AI Pivot Is Underway
 
-Riot's CEO Jason Les called 2025 a "watershed year" that "transformed our future trajectory." The company is repurposing its massive nearly two-gigawatt power portfolio — previously dedicated to Bitcoin mining — for high-demand data center infrastructure.
+Riot's CEO Jason Les called 2025 a "watershed year" that "transformed our future trajectory." The company is repurposing its massive nearly two-gigawatt power portfolio вЂ” previously dedicated to Bitcoin mining вЂ” for high-demand data center infrastructure.
 
-> *"By unlocking our large power portfolio for high-demand data center infrastructure, we are driving significant shareholder value."* — Jason Les, CEO, Riot Platforms
+> *"By unlocking our large power portfolio for high-demand data center infrastructure, we are driving significant shareholder value."* вЂ” Jason Les, CEO, Riot Platforms
 
 The long-term stated goal: fully utilize the power portfolio for data center development, not mining.
 
@@ -38,7 +39,7 @@ Riot isn't alone. The broader Bitcoin mining sector is undergoing a structural t
 - **Bitfarms** recently announced it is completely detaching from Bitcoin mining to focus on AI
 - **MARA** sold $1.1 billion in BTC to fuel its own AI pivot
 
-Bitcoin mining rigs and AI data centers share infrastructure — power, cooling, and real estate. But AI compute delivers more predictable, higher-margin revenue.
+Bitcoin mining rigs and AI data centers share infrastructure вЂ” power, cooling, and real estate. But AI compute delivers more predictable, higher-margin revenue.
 
 ## A $21 Billion Opportunity?
 
@@ -48,4 +49,4 @@ For context, Riot's market cap currently sits around $3 billion. That's a 7x pre
 
 ## Monster Take
 
-Bitcoin miners sitting on megawatt-scale power infrastructure are uniquely positioned to become AI infrastructure plays overnight. The economics are almost irresistible — renting GPU compute to AI companies generates steadier, higher-margin revenue than the boom-and-bust cycle of mining. Riot's $250 million in BTC sales isn't a retreat from crypto. It's a down payment on a bigger game. The miners who pivot fastest win. The ones who don't get left mining a shrinking pie.
+Bitcoin miners sitting on megawatt-scale power infrastructure are uniquely positioned to become AI infrastructure plays overnight. The economics are almost irresistible вЂ” renting GPU compute to AI companies generates steadier, higher-margin revenue than the boom-and-bust cycle of mining. Riot's $250 million in BTC sales isn't a retreat from crypto. It's a down payment on a bigger game. The miners who pivot fastest win. The ones who don't get left mining a shrinking pie.

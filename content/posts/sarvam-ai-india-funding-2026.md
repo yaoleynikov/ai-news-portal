@@ -1,9 +1,10 @@
----
+﻿---
 title: "Indian Startup Sarvam AI Nears Funding at $1.5B Valuation"
 date: "2026-04-03"
 excerpt: "Indian AI startup Sarvam AI is in negotiations for funding at a $1.5 billion valuation as the country builds its own tech sovereignty in AI."
 tags: ["Startup", "India", "AI", "Funding", "Investment"]
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
+coverImage: "/covers/sarvam-ai-india-funding-2026.jpg"
 author: "SiliconFeed"
 youtubeId: "L8LlxtAsitw"
 ---
@@ -12,9 +13,9 @@ youtubeId: "L8LlxtAsitw"
 
 **Sarvam AI**, an Indian startup building AI models tailored for Indian languages and culture, is close to a major funding round at a valuation of **$1.5 billion**.
 
-India has 1.4 billion people and dozens of languages — a massive addressable market for AI solutions that actually understand local context, not just English translations.
+India has 1.4 billion people and dozens of languages вЂ” a massive addressable market for AI solutions that actually understand local context, not just English translations.
 
-> "India's AI startups are the next wave — building solutions for a market Western companies are ignoring."
+> "India's AI startups are the next wave вЂ” building solutions for a market Western companies are ignoring."
 
 ## Why It Matters
 

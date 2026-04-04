@@ -1,10 +1,11 @@
----
-title: "Google Drops Gemma 4 Under Apache 2.0 — Now Runs on a Raspberry Pi"
+﻿---
+title: "Google Drops Gemma 4 Under Apache 2.0 вЂ” Now Runs on a Raspberry Pi"
 date: "2026-04-02"
-excerpt: "Google releases Gemma 4 — a family of AI models under Apache 2.0. 31B model, MoE architecture, edge models on 1.5GB RAM."
+excerpt: "Google releases Gemma 4 вЂ” a family of AI models under Apache 2.0. 31B model, MoE architecture, edge models on 1.5GB RAM."
 tags: ["Google", "Open Source", "LLM"]
 youtubeId: "slH-jPY1TgE"
 source: "https://techstartups.com/"
+coverImage: "/covers/google-gemma-4-apache-2026.jpg"
 author: "SiliconFeed"
 ---
 
@@ -14,9 +15,9 @@ Let's be honest: when Google releases its models under Apache 2.0, it's not char
 
 The family spans **four models**:
 
-- **Gemma 4 31B** — dense model, ranked #3 on open leaderboards
-- **Gemma 4 26B-A4B** — Google's first mixture-of-experts: 128 experts, only 3.8B active parameters
-- **Gemma 4 E4B and E2B** — phones, Raspberry Pi, Jetson Nano. E2B runs under 1.5GB RAM
+- **Gemma 4 31B** вЂ” dense model, ranked #3 on open leaderboards
+- **Gemma 4 26B-A4B** вЂ” Google's first mixture-of-experts: 128 experts, only 3.8B active parameters
+- **Gemma 4 E4B and E2B** вЂ” phones, Raspberry Pi, Jetson Nano. E2B runs under 1.5GB RAM
 
 ### Technical Specs
 
@@ -30,4 +31,4 @@ Gemma has now passed **400 million downloads** and 100,000+ community variants. 
 
 ## Monster Take
 
-The real story isn't "open source" — it's on-device AI. When a model runs 128K context on a $35 Raspberry Pi, everything changes. Edge computing just got its killer app.
+The real story isn't "open source" вЂ” it's on-device AI. When a model runs 128K context on a $35 Raspberry Pi, everything changes. Edge computing just got its killer app.

@@ -1,10 +1,11 @@
----
+﻿---
 title: "Nvidia's $2B Marvell Bet and the AI Networking War"
 date: "2026-04-04"
 excerpt: "Nvidia pours $2 billion into Marvell to dominate AI networking. Nothing plans smart glasses for 2027. AI capex hits $635B but energy costs surge."
 tags: ["Nvidia", "Marvell", "AI Infrastructure", "Smart Glasses", "AI Chips", "Tenex"]
 youtubeId: "zqq-mIGz2bw"
 source: "https://techstartups.com/2026/04/01/top-tech-news-today-april-1-2026/"
+coverImage: "/covers/nvidia-marvell-2b-ai-networking-2026.jpg"
 author: "SiliconFeed"
 ---
 
@@ -20,9 +21,9 @@ Marvell already dominated the data center networking stack, but this deal pushes
 
 Training frontier models now depends on how efficiently **thousands of chips can communicate** with one another. The winners in this cycle will be companies that solve:
 
-- **Bandwidth bottlenecks** — getting data where it needs to go
-- **Latency reduction** — milliseconds matter at scale
-- **Power efficiency** — every watt counts in 100MW+ data centers
+- **Bandwidth bottlenecks** вЂ” getting data where it needs to go
+- **Latency reduction** вЂ” milliseconds matter at scale
+- **Power efficiency** вЂ” every watt counts in 100MW+ data centers
 
 Nvidia's bet shows the AI infrastructure spend is widening **beyond GPUs** into the connective tissue of the stack.
 
@@ -68,7 +69,7 @@ Apple patched a vulnerability in Spotlight plugins that could have exposed:
 
 The flaw was highlighted by Microsoft Threat Intelligence and patched March 31. As Apple pushes more AI features on-device, the security surface around cached model outputs becomes a bigger target.
 
-AI on the device reduces cloud risks — but creates **new local attack paths**.
+AI on the device reduces cloud risks вЂ” but creates **new local attack paths**.
 
 ## Salesforce Deploys 30 AI Features Across Slack
 
@@ -94,4 +95,4 @@ If enacted, pressure will grow on platforms to build stronger age verification a
 
 ## Monster Take
 
-Four infrastructure stories. One theme. Nvidia is betting $2B on networking because compute alone isn't enough. Tenex raised $250M because AI without security is a time bomb. Big Tech's $635B capex is hitting a wall called electricity. And Nothing is betting the next consumer AI frontier lives on your face, not in your phone. The AI stack is widening — and every layer is getting crowded fast.
+Four infrastructure stories. One theme. Nvidia is betting $2B on networking because compute alone isn't enough. Tenex raised $250M because AI without security is a time bomb. Big Tech's $635B capex is hitting a wall called electricity. And Nothing is betting the next consumer AI frontier lives on your face, not in your phone. The AI stack is widening вЂ” and every layer is getting crowded fast.

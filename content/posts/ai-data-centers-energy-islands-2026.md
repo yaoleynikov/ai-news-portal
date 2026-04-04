@@ -1,10 +1,11 @@
----
+﻿---
 title: "AI Data Centers vs Power Grid: Who Controls the Energy?"
 date: "2026-04-03"
 excerpt: "AI data centers split the power industry. Chevron is working with Microsoft on a Texas deal where 30% of data center power could be on-site."
 tags: ["AI Infrastructure", "Energy"]
 youtubeId: "YdySswIbgyE"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
+coverImage: "/covers/ai-data-centers-energy-islands-2026.jpg"
 author: "SiliconFeed"
 ---
 
