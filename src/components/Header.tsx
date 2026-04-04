@@ -8,11 +8,15 @@ const T = [
   { slug: 'hardware', label: 'Hardware' },
 ];
 
-export default function Header() {
+export default function Header({ query }: { query?: string }) {
   return (
     <header>
       <div className="top">
         <Link href="/" className="logo">silicon<span>feed</span></Link>
+        <form action="/" method="GET" className="search-form" style={{ marginLeft: 16, order: 10 }}>
+          <input name="q" type="text" placeholder="Search…" defaultValue={query} aria-label="Search" />
+          <button type="submit">Search</button>
+        </form>
       </div>
       <nav className="nav">
         <Link href="/tag/all" style={{ order: 1 }}>All</Link>

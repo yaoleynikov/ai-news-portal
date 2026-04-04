@@ -25,7 +25,7 @@ const companyLogos = {
 const productToCompany = {
   'chatgpt': 'openai', 'gpt': 'openai', 'sora': 'openai', 'dall-e': 'openai',
   'dalle': 'openai', 'o1': 'openai', 'o3': 'openai',
-  'claude': 'anthropic', 'claude code': 'anthropic', 'claude opus': 'anthropic',
+  'claude': 'anthropic', 'claude code': 'claude-code', 'claude opus': 'anthropic',
   'claude sonnet': 'anthropic',
   'gemini': 'google', 'gemma': 'google', 'bard': 'google',
   'copilot': 'microsoft', 'github copilot': 'microsoft', 'azure': 'microsoft',

@@ -5,14 +5,21 @@ import { remark } from 'remark';
 import html from 'remark-html';
 
 const postsDir = path.join(process.cwd(), 'content/posts');
+const coversDir = path.join(process.cwd(), 'public/covers');
+
+function resolveCover(slug: string, title: string, tag: string): string {
+  // 1) Pre-generated JPG in public/covers/
+  const jpgPath = path.join(coversDir, `${slug}.jpg`);
+  if (fs.existsSync(jpgPath)) {
+    return `/covers/${slug}.jpg`;
+  }
+  // 2) Dynamic SVG fallback
+  return `/api/cover?title=${encodeURIComponent(title)}&tag=${encodeURIComponent(tag)}`;
+}
 
 function getPostFiles() {
   if (!fs.existsSync(postsDir)) return [];
   return fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
-}
-
-function buildCoverUrl(title: string, tag: string): string {
-  return `/api/cover?title=${encodeURIComponent(title)}&tag=${encodeURIComponent(tag)}`;
 }
 
 export function getSortedPosts() {
@@ -24,7 +31,7 @@ export function getSortedPosts() {
     const { data } = matter(fileContents);
     const tags = (data.tags as string[]) || [];
     const tag = tags[0] || 'Tech';
-    const coverUrl = buildCoverUrl(data.title as string, tag);
+    const coverUrl = resolveCover(slug, data.title as string, tag);
     
     return {
       slug,
@@ -51,7 +58,7 @@ export function getPostBySlug(slug: string) {
   const { data, content } = matter(fileContents);
   const tags = (data.tags as string[]) || [];
   const tag = tags[0] || 'Tech';
-  const coverUrl = buildCoverUrl(data.title as string, tag);
+  const coverUrl = resolveCover(slug, data.title as string, tag);
 
   // Parse coverImage from frontmatter if present
   const customCover = (data.coverImage as string) || '';
@@ -90,4 +97,17 @@ export function getPostBySlug(slug: string) {
 
 export function getAllPostSlugs() {
   return getPostFiles().map(f => f.replace(/\.mdx?$/, ''));
+}
+
+export function getAllTags(): string[] {
+  const files = getPostFiles();
+  const tagSet = new Set<string>();
+  for (const filename of files) {
+    const fullPath = path.join(postsDir, filename);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data } = matter(fileContents);
+    const tags = (data.tags as string[]) || [];
+    tags.forEach(t => tagSet.add(t));
+  }
+  return Array.from(tagSet).sort();
 }
