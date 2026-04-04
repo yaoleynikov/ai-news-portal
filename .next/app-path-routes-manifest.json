@@ -5,12 +5,12 @@
   "/robots.txt/route": "/robots.txt",
   "/api/cover/route": "/api/cover",
   "/news/[slug]/opengraph-image/route": "/news/[slug]/opengraph-image",
+  "/editorial-policy/page": "/editorial-policy",
   "/about/page": "/about",
-  "/privacy-policy/page": "/privacy-policy",
+  "/page": "/",
+  "/tag/[slug]/page": "/tag/[slug]",
   "/news/[slug]/page": "/news/[slug]",
   "/contact/page": "/contact",
-  "/tag/[slug]/page": "/tag/[slug]",
-  "/editorial-policy/page": "/editorial-policy",
-  "/page": "/",
+  "/privacy-policy/page": "/privacy-policy",
   "/api/og/route": "/api/og"
 }

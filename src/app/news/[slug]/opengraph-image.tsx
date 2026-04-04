@@ -1,61 +1,11 @@
 // src/app/news/[slug]/opengraph-image.tsx — Dynamic OG images
 import { getPostBySlug, getAllPostSlugs } from '@/lib/posts';
 import { ImageResponse } from 'next/og';
-import fs from 'fs';
-import path from 'path';
 
 export const runtime = 'nodejs';
 export const alt = 'SiliconFeed';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-
-const logoMap: Record<string, string> = {
-  'openai': 'openai.png',
-  'anthropic': 'anthropic.png',
-  'google': 'google.png',
-  'microsoft': 'microsoft.png',
-  'nvidia': 'nvidia.png',
-  'meta': 'meta.png',
-  'amazon': 'amazon.png',
-  'bitcoin': 'bitcoin.png',
-  'crypto': 'bitcoin.png',
-  'ethereum': 'ethereum.png',
-  'coinbase': 'coinbase.png',
-  'stripe': 'stripe.png',
-  'cloudflare': 'cloudflare.png',
-  'spacex': 'spacex.png',
-  'oracle': 'oracle.png',
-  'wikipedia': 'wikipedia.png',
-  'freebsd': 'freebsd.png',
-  'claude': 'anthropic.png',
-  'chatgpt': 'openai.png',
-  'gemma': 'google.png',
-  'gpt': 'openai.png',
-  'copilot': 'microsoft.png',
-  'gemini': 'google.png',
-  'algorand': 'algorand.png',
-  'tesla': 'tesla.png',
-};
-
-function getLogoFile(tag: string): string | null {
-  const key = tag.toLowerCase();
-  for (const [k, file] of Object.entries(logoMap)) {
-    if (key.includes(k)) return file;
-  }
-  return null;
-}
-
-async function getLogoBuffer(logoFile: string): Promise<string | null> {
-  try {
-    const logosDir = path.join(process.cwd(), 'public', 'logos');
-    const filePath = path.join(logosDir, logoFile);
-    if (!fs.existsSync(filePath)) return null;
-    const file = fs.readFileSync(filePath);
-    return `data:image/png;base64,${file.toString('base64')}`;
-  } catch {
-    return null;
-  }
-}
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -67,15 +17,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   if (!post) return null;
 
   const tag = post.tag || post.tags?.[0] || 'Tech';
-  const logoFile = getLogoFile(tag);
-  let logoDataUrl: string | null = null;
-  if (logoFile) logoDataUrl = await getLogoBuffer(logoFile);
 
   return new ImageResponse(
     (
       <div
         style={{
-          background: '#0a0a0a',
+          background: '#0f172a',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -87,41 +34,23 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           overflow: 'hidden',
         }}
       >
-        {logoDataUrl ? (
-          <>
-            {/* Blurred background logo */}
-            <img
-              src={logoDataUrl}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '40%',
-                height: '40%',
-                objectFit: 'contain',
-                opacity: 0.08,
-                filter: 'blur(20px)',
-                zIndex: 0,
-              }}
-            />
-            {/* Clear foreground logo at 40% height */}
-            <img
-              src={logoDataUrl}
-              style={{
-                position: 'absolute',
-                top: '55%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '55%',
-                height: '55%',
-                objectFit: 'contain',
-                opacity: 0.15,
-                zIndex: 1,
-              }}
-            />
-          </>
-        ) : null}
+        {/* Watermark text */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -30,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            fontSize: 500,
+            fontWeight: 900,
+            color: '#ffffff',
+            opacity: 0.03,
+            letterSpacing: '-0.04em',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          SF
+        </div>
 
         {/* Top accent bar */}
         <div
@@ -140,18 +69,16 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '8px 24px',
+            padding: '10px 28px',
             borderRadius: 9999,
-            background: 'rgba(31, 41, 55, 0.8)',
-            border: '1px solid #374151',
-            marginBottom: 28,
-            fontSize: 22,
-            fontWeight: 600,
-            color: '#9ca3af',
-            letterSpacing: 2,
+            background: 'rgba(59, 130, 246, 0.12)',
+            border: '1.5px solid rgba(59, 130, 246, 0.3)',
+            marginBottom: 32,
+            fontSize: 20,
+            fontWeight: 700,
+            color: '#60a5fa',
+            letterSpacing: 3,
             textTransform: 'uppercase',
-            zIndex: 10,
           }}
         >
           {tag}
@@ -160,27 +87,58 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         {/* Title */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             maxWidth: 1000,
-            padding: '0 40px',
+            padding: '0 50px',
             fontSize: 52,
             fontWeight: 800,
-            color: '#ffffff',
-            lineHeight: 1.2,
+            color: '#f1f5f9',
+            lineHeight: 1.25,
             textAlign: 'center',
             letterSpacing: '-0.02em',
-            zIndex: 10,
           }}
         >
           {post.title}
         </div>
+
+        {/* Bottom branding */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 28,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <div
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 6,
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 14,
+              fontWeight: 800,
+              color: '#fff',
+            }}
+          >
+            S
+          </div>
+          <span
+            style={{
+              fontSize: 16,
+              fontWeight: 600,
+              color: '#94a3b8',
+              letterSpacing: 1,
+            }}
+          >
+            SiliconFeed
+          </span>
+        </div>
       </div>
     ),
-    {
-      width: 1200,
-      height: 630,
-    }
+    { width: 1200, height: 630 }
   );
 }
