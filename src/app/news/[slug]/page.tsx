@@ -7,9 +7,12 @@ import { Metadata } from 'next';
 
 export async function generateStaticParams() { return getAllPostSlugs().map(slug => ({ slug })); }
 
+export const COVER_V = 'v2';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const post = getPostBySlug(slug);
   if (!post) return { title: 'Not Found' };
+  const coverUrl = `/covers/${slug}.jpg?v=${COVER_V}`;
   return {
     title: post.title,
     description: post.excerpt,
@@ -18,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.excerpt,
       images: [
         {
-          url: `/covers/${slug}.jpg`,
+          url: coverUrl,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -48,7 +51,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   }
 
   const cleanHtml = post.contentHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
-  const coverUrl = `/covers/${slug}.jpg`;
+  const coverUrl = `/covers/${slug}.jpg?v=${COVER_V}`;
 
   return (
     <div>
