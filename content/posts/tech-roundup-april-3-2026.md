@@ -5,6 +5,7 @@ excerpt: "Microsoft invests $10B in Japan AI infra, SpaceX seeks record $75B IPO
 tags: ["Microsoft", "SpaceX", "Anthropic", "Policy"]
 youtubeId: "q3M5jJqjJnI"
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
+coverImage: "/covers/tech-roundup-april-3-2026.jpg"
 author: "SiliconFeed"
 ---
 

@@ -5,6 +5,7 @@ date: "2026-04-04"
 excerpt: "OpenAI has shelved plans to launch an erotic ChatGPT mode, backing away from a controversial expansion that would have allowed adult users to generate sexual content. Internal concerns about societal impact drove the reversal."
 tags: ["OpenAI", "ChatGPT", "Content Policy", "AI Ethics", "Sora"]
 source: "https://decrypt.co/363529/first-sora-now-sexy-chat-openai-cancels-erotic-chatgpt-mode"
+coverImage: "/covers/openai-cancels-erotic-chatgpt-2026.jpg"
 author: "SiliconFeed"
 ---
 
