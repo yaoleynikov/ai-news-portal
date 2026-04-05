@@ -16,7 +16,7 @@ People would rather have an Amazon warehouse in their backyard than a data cente
 Another survey, conducted last month and published earlier this week by Quinnipiac University, found much more opposition to data center construction. That poll found 65% of Americans oppose building an AI data center in their community. Only 24% of the 1,397 U.S. adults surveyed supported one being built. The new polls suggest that the debate over data centers is far from settled, and continued discontent from such a large swathe of the electorate is likely to continue spilling over into.
 
 
-## Opinion 📡
+## Opinion
 
 _Technology evolves fast — staying informed is the best competitive advantage._
 

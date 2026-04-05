@@ -14,18 +14,18 @@ The anonymous social app that thinks it can work in Saudi Arabia. When Fizz quie
 
 ## Key Details
 
-After raising $40 million and launching on 700 campuses, the app has been pushing beyond its college roots with Fizz Feed, a feature that opens the platform to non-students through location-based communities. Think of it as similar to Reddit, but without the ability to create or join topic-specific communities. Saudi Arabia &#8212; where Fizz currently holds the No. 1 spot in the news category &#8212; is its first overseas test of that ambition. &#8220;We&#8217;ve always known that our big goal.
+After raising $40 million and launching on 700 campuses, the app has been pushing beyond its college roots with Fizz Feed, a feature that opens the platform to non-students through location-based communities. Think of it as similar to Reddit, but without the ability to create or join topic-specific communities. Saudi Arabia — where Fizz currently holds the No. 1 spot in the news category — is its first overseas test of that ambition. "We've always known that our big goal.
 
 ## Context
 
-Soon after, Fizz marketing analyst Michael Fonseca moved to Saudi Arabia to make connections in the area and better understand the culture, which paved the way for Fizz&#8217;s international launch. &#8220;Mike was really welcomed with open arms,&#8221; Solomon said. &#8220;I think [Saudi Arabia] changed quite a bit in recent years.&#8221; The country is &#8220;jumping right now,&#8221; said Solomon. &#8220;Business is booming. The social scene and social landscape is booming. Snapchat’s huge there.
+Soon after, Fizz marketing analyst Michael Fonseca moved to Saudi Arabia to make connections in the area and better understand the culture, which paved the way for Fizz's international launch. "Mike was really welcomed with open arms," Solomon said. "I think [Saudi Arabia] changed quite a bit in recent years." The country is "jumping right now," said Solomon. "Business is booming. The social scene and social landscape is booming. Snapchat’s huge there.
 
 ## What's Next
 
-And social apps are just massive in the region, whether it&#8217;s Snap, or WhatsApp, or TikTok &#8212; whatever other app it might be.&#8221; This shift in the country’s image is intentional. In 2016, Crown Prince Mohammed bin Salman launched a government plan called Saudi Vision 2030 , which aims to decrease the country’s financial dependence on oil. This strategy involves modernizing the country’s image — women can now legally drive , for instance — and investing in Western technology companies,.
+And social apps are just massive in the region, whether it's Snap, or WhatsApp, or TikTok — whatever other app it might be." This shift in the country’s image is intentional. In 2016, Crown Prince Mohammed bin Salman launched a government plan called Saudi Vision 2030 , which aims to decrease the country’s financial dependence on oil. This strategy involves modernizing the country’s image — women can now legally drive , for instance — and investing in Western technology companies,.
 
 
-## Opinion SiliconFeed 📡
+## Opinion
 
 _In a sea of daily tech news, what matters is separating signal from noise._
 

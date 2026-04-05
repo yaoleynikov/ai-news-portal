@@ -31,7 +31,7 @@ To our customers, we deeply apologize for the inconveniences caused.”
 TechCrunch has reached out to Y Combinator and DeepDelver for any response to Delve’s comments.
 
 
-## Opinion SiliconFeed 📡
+## Opinion
 
 _In a sea of daily tech news, what matters is separating signal from noise._
 

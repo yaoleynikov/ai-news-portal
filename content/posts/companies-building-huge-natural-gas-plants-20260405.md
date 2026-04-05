@@ -13,7 +13,7 @@ AI companies are building huge natural gas plants to power data centers. What co
 
 ## Key Details
 
-Microsoft said on Tuesday that it&#8217;s working with Chevron and Engine No. 1 to build a natural gas power plant in West Texas that could grow to produce 5 gigawatts of electricity. This week Google confirmed that it&#8217;s working with Crusoe to build a 933 MW natural gas power plant in North Texas. And last week, Meta announced that it was adding another seven natural gas power plants to its Hyperion data center in Louisiana, bringing the site to 7.46.
+Microsoft said on Tuesday that it's working with Chevron and Engine No. 1 to build a natural gas power plant in West Texas that could grow to produce 5 gigawatts of electricity. This week Google confirmed that it's working with Crusoe to build a 933 MW natural gas power plant in North Texas. And last week, Meta announced that it was adding another seven natural gas power plants to its Hyperion data center in Louisiana, bringing the site to 7.46.
 
 ## Context
 
@@ -24,7 +24,7 @@ Every data center operator seems to want a part of it. The scramble for natural 
 Your next breakout opportunity. Find it at TechCrunch Disrupt 2026, where 10,000+ founders, investors, and tech leaders gather for three days of 250+ tactical sessions, powerful introductions, and market-defining innovation. Register now to save up to $400. Save up to $300 or 30% to TechCrunch Founder Summit 1,000+ founders and investors come together at TechCrunch Founder Summit 2026 for a full day focused on growth, execution, and real-world scaling. Learn from founders and investors who have shaped the industry. Connect.
 
 
-## Opinion 📡
+## Opinion
 
 _Every headline tells a bigger story. We connect the dots so you don't have to._
 

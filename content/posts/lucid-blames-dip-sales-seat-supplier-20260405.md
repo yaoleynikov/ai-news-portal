@@ -22,10 +22,10 @@ Lucid built 18,378 EVs in 2025. That would represent an increase of as much as 4
 
 ## What's Next
 
-Save up to $300 or 30% to TechCrunch Founder Summit 1,000+ founders and investors come together at TechCrunch Founder Summit 2026 for a full day focused on growth, execution, and real-world scaling. Learn from founders and investors who have shaped the industry. Connect with peers navigating similar growth stages. Walk away with tactics you can apply immediately Offer ends March 13. San Francisco, CA | October 13-15, 2026 REGISTER NOW Lucid&#8217;s seat supplier troubles come as the company prepares to.
+Save up to $300 or 30% to TechCrunch Founder Summit 1,000+ founders and investors come together at TechCrunch Founder Summit 2026 for a full day focused on growth, execution, and real-world scaling. Learn from founders and investors who have shaped the industry. Connect with peers navigating similar growth stages. Walk away with tactics you can apply immediately Offer ends March 13. San Francisco, CA | October 13-15, 2026 REGISTER NOW Lucid's seat supplier troubles come as the company prepares to.
 
 
-## Opinion SiliconFeed 📡
+## Opinion
 
 _Technology evolves fast — staying informed is the best competitive advantage._
 

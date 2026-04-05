@@ -166,10 +166,18 @@ function stripHtml(html) {
     .replace(/<[^>]*>/g, ' ')
     .replace(/\s+/g, ' ')
     .replace(/&nbsp;/g, ' ')
+    .replace(/&#8217;|&#39;/g, "'")
+    .replace(/&#8220;|&#8221;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8212;/g, '—')
+    .replace(/&#8211;/g, '–')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
+    // Generic numeric entity decoder (&#NNNN;)
+    .replace(/&#(\d+);/g, (_, num) => String.fromCharCode(parseInt(num, 10)))
     .trim();
 }
 
