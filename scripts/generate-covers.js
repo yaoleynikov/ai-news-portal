@@ -288,31 +288,73 @@ async function isWatermarkedOrStock(buffer, url = '') {
 
 // в”Ђв”Ђв”Ђ Fallback: text-based cover when image search fails в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function buildTextCoverSVG(title, tags) {
-  const display = title.length > 80 ? title.substring(0, 77) + '\u2026' : title;
   const tag = (tags[0] || 'Tech').toUpperCase();
   const tagColors = {
     'AI': '#8b5cf6', 'STARTUPS': '#10b981', 'CLOUD': '#0ea5e9',
     'SECURITY': '#ef4444', 'CRYPTO': '#f59e0b', 'HARDWARE': '#6366f1',
     'POLICY': '#ec4899', 'REGULATION': '#f97316', 'GOVERNMENT': '#06b6d4',
+    'ROBOTICS': '#f472b6', 'GAMING': '#22d3ee', 'GADGETS': '#a78bfa',
+    'AUTOMOTIVE': '#34d399', 'BIOTECH': '#fb7185', 'ENERGY': '#fbbf24',
   };
   const tagColor = tagColors[tag] || '#6366f1';
+
+  // Compute a subtle background gradient from tag color
+  const bgLight = hexToRGBA(tagColor, 0.04);
+  const bgMid = hexToRGBA(tagColor, 0.08);
+
+  // Capitalize tag for display
+  const displayTag = tag.split('-').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+
+  // Clean title for display (truncate nicely)
+  const words = title.replace(/\?.*$/, '').replace(/[\u2014\u2013\u2010\u2012\u2013\u2014]/g, '|').split(/\||\s+/).filter(w => w.length > 0);
+  let lines = [];
+  let line = '';
+  for (const word of words) {
+    const test = line ? line + ' ' + word : word;
+    if (test.length > 45 && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  lines = lines.slice(0, 3); // max 3 lines
+
+  // Build text SVG elements
+  const textElements = lines.map((l, i) =>
+    `<text x="${W/2}" y="${H/2 - 30 + i * 48}" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="-0.5">${escXml(l)}</text>`
+  ).join('\n    ');
+
   return `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#e2e8f0"/>
+      <stop offset="50%" stop-color="${bgLight}"/>
+      <stop offset="100%" stop-color="${bgMid}"/>
     </linearGradient>
-    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="1.5" fill="#cbd5e1"/>
+    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="16" cy="16" r="1.2" fill="${hexToRGBA(tagColor, 0.12)}"/>
     </pattern>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <rect width="${W}" height="${H}" fill="url(#dots)"/>
-  <rect x="120" y="100" width="140" height="32" rx="16" fill="${tagColor}" opacity="0.15"/>
-  <text x="190" y="122" font-family="sans-serif" font-size="13" font-weight="700" fill="${tagColor}" text-anchor="middle">${escXml(tag)}</text>
-  <text x="600" y="340" font-family="Georgia, serif" font-size="48" font-weight="900" fill="#1e293b" text-anchor="middle" letter-spacing="-0.5">${escXml(display)}</text>
+  <!-- Tag pill -->
+  <rect x="${W/2 - 70}" y="${H/2 - 90}" width="140" height="34" rx="17" fill="${tagColor}" opacity="0.12"/>
+  <text x="${W/2}" y="${H/2 - 66}" font-family="'Inter', Arial, sans-serif" font-size="14" font-weight="700" fill="${tagColor}" text-anchor="middle" letter-spacing="1">${escXml(displayTag)}</text>
+  <!-- Title lines -->
+    ${textElements}
+  <!-- SiliconFeed watermark -->
+  <text x="${W/2}" y="${H - 30}" font-family="'Inter', Arial, sans-serif" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="middle" letter-spacing="0.5">SILICONFEED</text>
 </svg>`;
+}
+
+function hexToRGBA(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 function escXml(s) {
