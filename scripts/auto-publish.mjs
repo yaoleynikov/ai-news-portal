@@ -313,12 +313,35 @@ async function scrapeSource(src) {
 
 // ─── Fetch Full Article Content ──────────────────────────────────────────
 
+/** Strip HTML to text, focusing on article body — skip nav/footer/sidebar noise */
+function extractArticleText(html) {
+  // Try to extract from common article containers
+  const patterns = [
+    /<article[^>]*>([\s\S]*?)<\/article>/gi,
+    /<div[^>]*class="[^"]*(?:article|post|entry|content|story-body|post-body|article-body)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    /<div[^>]*id="[^"]*(?:article|post|entry|content|story)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+  ];
+  for (const pat of patterns) {
+    const m = pat.exec(html);
+    if (m && m[1]) {
+      // Strip HTML from the article body only
+      return stripHtml(m[1])
+        .substring(0, 10000);
+    }
+  }
+  // Fallback: full page strip but remove common noise
+  return stripHtml(html)
+    // Remove navigation/footer fragments
+    .replace(/\b(skip to|main menu|navigation|footer|sidebar|cookie|subscribe|newsletter|popular|related stories|trending|share this|comments\b)[^.]*/gi, '')
+    .substring(0, 10000);
+}
+
 async function fetchArticleContent(article) {
   try {
     const res = await httpFetch(article.url);
     if (!res.body || res.status !== 200) return null;
 
-    const text = stripHtml(res.body);
+    const text = extractArticleText(res.body);
     if (text.length < 300) return null;
 
     const coverImage = extractImage(res.body);
@@ -326,7 +349,7 @@ async function fetchArticleContent(article) {
     const articleTitle = extractMetaTag(res.body, 'og:title');
 
     return {
-      text: text.substring(0, 12000), // cap
+      text,
       fullHtml: res.body,
       coverImage,
       description,
@@ -525,9 +548,9 @@ function generateSmartSlug(title, date) {
   return slug + '-' + dateSuffix;
 }
 
-function smartTags(title, description) {
-  // Only use title and description for tagging — full text has too many false positives
-  const combined = `${title} ${description || ''}`;
+function smartTags(title, description, textSample) {
+  // Use title + description + first 500 chars of cleaned text
+  const combined = `${title} ${description || ''} ${(textSample || '').substring(0, 500)}`;
   const matched = [];
 
   for (const { tag, re } of TAG_MAP) {
@@ -618,7 +641,8 @@ function generateArticleContent(article) {
   const excerpt = trimToWords(`${leadSentences}`, 150);
 
   // --- Tags ---
-  const tags = smartTags(text, title, description || '');
+  // Pass the first 500 chars of cleaned text for better tagging
+  const tags = smartTags(title, description || '', rawText);
 
   // --- Slug ---
   const slug = generateSmartSlug(title, date);
