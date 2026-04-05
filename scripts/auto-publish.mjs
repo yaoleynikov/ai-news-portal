@@ -122,6 +122,14 @@ const TAG_MAP = [
   { tag: 'Fintech', re: /\bfintech|coinbase|stripe|payment|digital\s+wallet\b/gi, category: 'Crypto' },
   // Policy
   { tag: 'Policy', re: /\bregulation|policy|law|europe|eu\s+act|ai\s+act|antitrust|eu\b|china\s+law|ban|commission\b/gi, category: 'Policy' },
+  // Automotive / EV
+  { tag: 'Automotive', re: /\bev|electric\s+vehicle|tesla|lucid|rivian|hyundai\s+motor|ford\s+motor|gm\s+|general\s+motors|autonomous\s+driv|self.driv|waymo|cruise\b/gi, category: 'Automotive' },
+  // Biotech / Health
+  { tag: 'Biotech', re: /\bbiotech|drug\s+discovery|clinical\s+trial|pharmaceutical|genomics|precision\s+medicine\b/gi, category: 'Biotech' },
+  // Energy
+  { tag: 'Energy', re: /\bsolar\s+power|wind\s+energy|battery\s+tech|fusion\s+energy|renewable\s+energy|grid\b|nuclear\s+fus/gi, category: 'Energy' },
+  // Social Media
+  { tag: 'Social', re: /\bsocial\s+media|tiktok|x\.com|threads\s+app|instagram\b|snapchat|reddit\b/gi, category: 'Social' },
 ];
 
 // ─── Utilities ────────────────────────────────────────────────────────────
@@ -313,27 +321,65 @@ async function scrapeSource(src) {
 
 // ─── Fetch Full Article Content ──────────────────────────────────────────
 
-/** Strip HTML to text, focusing on article body — skip nav/footer/sidebar noise */
+/** Extract paragraphs from article body — robust across site templates */
 function extractArticleText(html) {
-  // Try to extract from common article containers
-  const patterns = [
+  // Strategy: find article container, then extract <p> blocks from within
+  const containerPatterns = [
     /<article[^>]*>([\s\S]*?)<\/article>/gi,
-    /<div[^>]*class="[^"]*(?:article|post|entry|content|story-body|post-body|article-body)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
-    /<div[^>]*id="[^"]*(?:article|post|entry|content|story)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi,
+    /<div[^>]*class="[^"]*(?:entry-content|post-content|article-body|story-body|article-body__inner)[^"]*"/gi,
+    /<div[^>]*class="[^"]*(?:article|post-content|story-body|post-body)[^"]*"/gi,
   ];
-  for (const pat of patterns) {
+
+  let articleHtml = 'FULL'; // fallback marker
+
+  for (const pat of containerPatterns) {
     const m = pat.exec(html);
-    if (m && m[1]) {
-      // Strip HTML from the article body only
-      return stripHtml(m[1])
-        .substring(0, 10000);
+    if (m) {
+      if (m[1]) {
+        // Pattern with capture group (article tag)
+        articleHtml = m[1];
+        break;
+      } else {
+        // Pattern without capture — extract from match offset to reasonable end
+        // Find the matching div and track nesting
+        const startIdx = m.index;
+        let depth = 0;
+        let endIdx = startIdx;
+        for (let i = startIdx; i < html.length && i < startIdx + 80000; i++) {
+          if (html.substring(i, i + 5) === '<div ') depth++;
+          if (html.substring(i, i + 6) === '</div>') { depth--; if (depth <= 0) { endIdx = i + 6; break; } }
+        }
+        articleHtml = html.substring(startIdx, endIdx);
+        break;
+      }
     }
   }
-  // Fallback: full page strip but remove common noise
-  return stripHtml(html)
-    // Remove navigation/footer fragments
-    .replace(/\b(skip to|main menu|navigation|footer|sidebar|cookie|subscribe|newsletter|popular|related stories|trending|share this|comments\b)[^.]*/gi, '')
-    .substring(0, 10000);
+
+  // Extract paragraphs from the article container
+  if (articleHtml === 'FULL') {
+    // Fallback: strip everything but clean aggressively
+    return stripHtml(html)
+      .replace(/\b(skip to|main menu|navigation|footer|sidebar|cookie|subscribe|newsletter|popular|related\s+stories|trending|share this|comments)\b[^.]*/gi, '')
+      .substring(0, 10000);
+  }
+
+  // Extract <p> tags and join
+  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
+  const paragraphs = [];
+  let pm;
+  while ((pm = pRegex.exec(articleHtml)) !== null) {
+    const text = stripHtml(pm[1]);
+    if (text.length > 30 && text.length < 2000) {
+      paragraphs.push(text);
+    }
+    if (paragraphs.length >= 30) break; // cap
+  }
+
+  if (paragraphs.length === 0) {
+    return stripHtml(articleHtml).substring(0, 10000);
+  }
+
+  return paragraphs.join('\n\n');
 }
 
 async function fetchArticleContent(article) {
@@ -560,7 +606,7 @@ function smartTags(title, description, textSample) {
   }
 
   // Minimum 2 tags, max 5
-  if (matched.length === 0) return ['AI', 'Tech'];
+  if (matched.length === 0) return ['Tech'];
   return matched.slice(0, 5);
 }
 
@@ -599,26 +645,26 @@ function generateArticleContent(article) {
   // --- Build sections ---
   const sections = [];
 
-  // Section 1: Главное (Lead)
+  // Section 1: The Lead
   if (leadSentences) {
-    sections.push(`## Главное\n\n${leadSummary}\n`);
+    sections.push(`## The Lead\n\n${leadSummary}\n`);
   }
 
-  // Section 2: Ключевые детали
+  // Section 2: Key Details
   if (detailSentences) {
-    sections.push(`## Ключевые детали\n\n${trimToWords(detailSentences, 80)}\n`);
+    sections.push(`## Key Details\n\n${trimToWords(detailSentences, 80)}\n`);
   } else if (description) {
-    sections.push(`## Ключевые детали\n\n${description}\n`);
+    sections.push(`## Key Details\n\n${description}\n`);
   }
 
-  // Section 3: Контекст
+  // Section 3: Context
   if (contextSentences) {
-    sections.push(`## Контекст\n\n${trimToWords(contextSentences, 80)}\n`);
+    sections.push(`## Context\n\n${trimToWords(contextSentences, 80)}\n`);
   }
 
-  // Section 4: Последствия
+  // Section 4: What's Next
   if (implicationSentences) {
-    sections.push(`## Последствия\n\n${trimToWords(implicationSentences, 80)}\n`);
+    sections.push(`## What's Next\n\n${trimToWords(implicationSentences, 80)}\n`);
   }
 
   // If we don't have enough structured content, fall back to first N paragraphs
@@ -630,14 +676,14 @@ function generateArticleContent(article) {
       return acc;
     }, []);
 
+    const fallbackHeadings = ['The Lead', 'Key Details', 'Context', "What's Next"];
     for (let i = 0; i < Math.min(paragraphs.length, 4); i++) {
-      const headings = ['Главное', 'Ключевые детали', 'Контекст', 'Последствия'];
-      const heading = headings[i] || `Подробнее`;
+      const heading = fallbackHeadings[i] || 'Details';
       sections.push(`## ${heading}\n\n${paragraphs[i].join('. ')}.\n`);
     }
   }
 
-  // --- Extract ---
+// --- Extract ---
   const excerpt = trimToWords(`${leadSentences}`, 150);
 
   // --- Tags ---
@@ -649,11 +695,11 @@ function generateArticleContent(article) {
 
   // --- Opinion section ---
   const opinionTemplates = [
-    `Развитие технологий идёт без пауз — следить важно, чтобы не остаться на обочине.`,
-    `Каждый день появляются новости, которые меняют рынок. Главное — отделять сигнал от шума.`,
-    `Обновления приходят быстрее, чем мы успеваем их осмыслить. Мы в SiliconFeed следим за трендами за вас.`,
-    `Технологический ландшафт трансформируется. Мы собираем значимые изменения в одном месте.`,
-    `Мир технологий ускоряется, и то, что вчера было инновацией, сегодня уже норма.`,
+    "Technology evolves fast — staying informed is the best competitive advantage.",
+    "In a sea of daily tech news, what matters is separating signal from noise.",
+    "SiliconFeed keeps you ahead of the curve, tracking the shifts that shape your industry.",
+    "The tech landscape moves quickly. What was cutting-edge yesterday is baseline today.",
+    "Every headline tells a bigger story. We connect the dots so you don't have to.",
   ];
   const opinion = opinionTemplates[Math.floor(Math.random() * opinionTemplates.length)];
 
@@ -672,7 +718,7 @@ author: "SiliconFeed Editorial Team"
 
 ${sections.join('\n')}
 
-## Мнение SiliconFeed 📡
+## Opinion SiliconFeed 📡
 
 _${opinion}_
 
