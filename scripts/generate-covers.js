@@ -92,32 +92,45 @@ function fixSvgFillIfMissing(svgPath) {
 // в”Ђв”Ђв”Ђ Resolve topic в†’ logo key в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
 function resolveLogoKey(tags, slug) {
   const matches = [];
-  const slugWords = slug.replace(/-/g, ' ')
-    .replace(/[&#]\d{2,5};/g, ' ')  // remove HTML entities (with space)
-    .replace(/\d{3,}/g, ' ')  // remove embedded digit sequences like 8217
-    .replace(/[^a-z\s]/gi, ' ')
+
+  // Clean slug: remove digit sequences (&#8217; → tesla8217s → tesla s)
+  // and extract meaningful words for company matching
+  const cleanSlug = slug
+    .replace(/-/g, ' ')
+    .replace(/([a-z])\d{2,}([a-z])/gi, '$1 $2') // tesla8217s → tesla s
+    .replace(/\d+/g, '')  // remove all digits
+    .replace(/[^a-z\s]/gi, ' ')  // remove any remaining special chars
     .split(/\s+/)
-    .map(w => w.replace(/\d+$/, ''))  // strip trailing digits
+    .map(w => w.length > 2 && w.endsWith('s') ? [w.slice(0, -1), w] : w)
+    .flat()
     .filter(w => w.length > 2);
-  // Check slug words for company/product names (also try singular: teslas → tesla)
-  for (const word of slugWords) {
+
+  // 1. Match company/product names from slug words (highest score = most reliable)
+  for (const word of cleanSlug) {
     const key = word.toLowerCase();
-    if (productToCompany[key]) matches.push({ key: productToCompany[key], score: key.length + 20 });
-    if (companyLogos[key]) matches.push({ key, score: key.length + 15 });
+    if (companyLogos[key]) matches.push({ key, score: 100 + key.length });
+    if (productToCompany[key]) matches.push({ key: productToCompany[key], score: 90 + key.length });
   }
+
+  // 2. Match from tags
   for (const tag of tags) {
     const key = tag.toLowerCase();
-    if (productToCompany[key]) matches.push({ key: productToCompany[key], score: key.length + 10 });
-    if (companyLogos[key]) matches.push({ key: companyLogos[key], score: key.length + 5 });
+    if (companyLogos[key]) matches.push({ key, score: 80 + key.length });
+    if (productToCompany[key]) matches.push({ key: productToCompany[key], score: 70 + key.length });
   }
+
+  // 3. Substring match: tag contains company name
   for (const [company] of Object.entries(companyLogos)) {
     if (tags.some(t => t.toLowerCase().includes(company)))
       matches.push({ key: company, score: company.length });
   }
+
+  // 4. Substring match: tag contains product name
   for (const [product, co] of Object.entries(productToCompany)) {
     if (tags.some(t => t.toLowerCase().includes(product)))
       matches.push({ key: co, score: product.length });
   }
+
   if (matches.length === 0) return null;
   matches.sort((a, b) => b.score - a.score);
   return { key: matches[0].key, type: 'company' };
