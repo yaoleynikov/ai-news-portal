@@ -1,7 +1,7 @@
 ---
 title: "Peter Thiel's big bet on solar-powered cow collars"
 date: "2026-04-05"
-excerpt: "Founders Fund has made its name backing what Peter Thiel calls "zero to one" companies — businesses that don't just improve on existing ideas but create something entirely new. Its portfolio includes Facebook, SpaceX, and Palantir. Its latest bet is a New Zealand startup that"
+excerpt: "Founders Fund has made its name backing what Peter Thiel calls 'zero to one' companies — businesses that don't just improve on existing ideas but create something entirely new. Its portfolio includes Facebook, SpaceX, and Palantir. Its latest bet is a New Zealand startup that"
 tags: ["Space", "Startups"]
 coverImage: ""
 source: "https://techcrunch.com/2026/04/04/unpacking-peter-thiels-big-bet-on-solar-powered-cow-collars/"
