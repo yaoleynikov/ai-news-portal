@@ -11,6 +11,33 @@ export async function generateStaticParams() { return getAllPostSlugs().map(slug
 
 const COVER_V = 'v5';
 
+function getRelatedPosts(currentSlug: string, tags: string[], date: string, limit = 4) {
+  const allPosts = getSortedPosts();
+  const now = Date.now();
+  const refDate = new Date(date).getTime();
+
+  return allPosts
+    .map(post => {
+      if (post.slug === currentSlug) return { ...post, score: -1 };
+      const postTags = (post.tags || []).map((t: string) => t.toLowerCase());
+      const searchTags = tags.map(t => t.toLowerCase());
+      let score = 0;
+      for (const t of searchTags) {
+        if (postTags.includes(t)) score += 10;
+      }
+      const postDate = new Date(post.date).getTime();
+      const diffDays = Math.abs(refDate - postDate) / (1000 * 60 * 60 * 24);
+      if (diffDays < 3) score += 5;
+      else if (diffDays < 7) score += 3;
+      else if (diffDays < 30) score += 1;
+      return { ...post, score };
+    })
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ slug, title, date, tag }) => ({ slug, title, date, tag }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const post = getPostBySlug(slug);
   if (!post) return { title: 'Not Found' };
@@ -18,9 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: post.title,
     description: post.excerpt,
-    robots: {
-      other: ['max-image-preview:large'],
-    },
+    robots: 'max-image-preview:large',
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -200,7 +225,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </article>
 
       {/* Related Articles */}
-      <RelatedArticles currentSlug={post.slug} tags={post.tags || []} date={post.date} limit={4} />
+      <RelatedArticles posts={getRelatedPosts(post.slug, post.tags || [], post.date)} />
 
       <Footer />
     </div>

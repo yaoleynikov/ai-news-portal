@@ -1,45 +1,20 @@
 'use client';
 
-import { getSortedPosts } from '@/lib/posts';
 import Link from 'next/link';
 
-interface RelatedProps {
-  currentSlug: string;
-  tags: string[];
+interface Post {
+  slug: string;
+  title: string;
   date: string;
-  limit?: number;
+  tag: string;
 }
 
-function scorePost(post: any, tags: string[], currentSlug: string, currentDate: string): number {
-  if (post.slug === currentSlug) return -1;
-  let score = 0;
-  const postTags = (post.tags || []).map((t: string) => t.toLowerCase());
-  const searchTags = tags.map(t => t.toLowerCase());
-  for (const t of searchTags) {
-    if (postTags.includes(t)) score += 10;
-  }
-  // Recency bonus
-  const postDate = new Date(post.date).getTime();
-  const currentDate = new Date(currentDate).getTime();
-  const diffDays = Math.abs(postDate - currentDate) / (1000 * 60 * 60 * 24);
-  if (diffDays < 3) score += 5;
-  else if (diffDays < 7) score += 3;
-  else if (diffDays < 30) score += 1;
-  return score;
+interface RelatedProps {
+  posts: Post[];
 }
 
-export default function RelatedArticles({ currentSlug, tags, date, limit = 4 }: RelatedProps) {
-  const allPosts = getSortedPosts();
-  const related = allPosts
-    .map(post => ({
-      ...post,
-      score: scorePost(post, tags, currentSlug, date),
-    }))
-    .filter(p => p.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
-
-  if (related.length === 0) return null;
+export default function RelatedArticles({ posts }: RelatedProps) {
+  if (posts.length === 0) return null;
 
   return (
     <section className="related" style={{ maxWidth: 1200, margin: '0 auto 60px', padding: '0 20px' }}>
@@ -47,7 +22,7 @@ export default function RelatedArticles({ currentSlug, tags, date, limit = 4 }: 
         Related Articles
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
-        {related.map(post => (
+        {posts.map(post => (
           <Link key={post.slug} href={`/news/${post.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div
               style={{

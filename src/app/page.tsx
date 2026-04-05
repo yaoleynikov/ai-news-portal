@@ -48,9 +48,7 @@ function ArticleRow({ post }: { post: { slug: string; title: string; excerpt: st
 export const metadata: Metadata = {
   title: 'SiliconFeed — Tech Intelligence',
   description: 'Breaking tech news, AI deep dives, hardware reviews, startup analysis, crypto updates, and cybersecurity intelligence. Coverage from 15+ sources, published every 2 hours.',
-  robots: {
-    other: ['max-image-preview:large'],
-  },
+  robots: 'max-image-preview:large',
   alternates: {
     canonical: 'https://siliconfeed.online/',
   },
