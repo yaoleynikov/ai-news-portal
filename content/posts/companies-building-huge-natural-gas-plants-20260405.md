@@ -2,7 +2,7 @@
 title: "AI companies are building huge natural gas plants to power data centers. What could go wrong?"
 date: "2026-04-05"
 excerpt: "Who doesn’t love a good round of FOMO? From dot-com to Web 2.0, virtual reality to blockchain, the tech industry has had its share of being too afraid to miss out on a trend. The AI bubble is the big daddy of them all. Its first offspring — the rush to lock down power for data centers — is now beget"
-tags: ["AI", "Big-Tech", "Crypto"]
+tags: ["AI"]
 source: "https://techcrunch.com/2026/04/03/ai-companies-are-building-huge-natural-gas-plants-to-power-data-centers-what-could-go-wrong/"
 author: "SiliconFeed Editorial Team"
 ---

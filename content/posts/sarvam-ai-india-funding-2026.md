@@ -2,7 +2,7 @@
 title: "Indian Startup Sarvam AI Nears Funding at $1.5B Valuation"
 date: "2026-04-03"
 excerpt: "Indian AI startup Sarvam AI is in negotiations for funding at a $1.5 billion valuation as the country builds its own tech sovereignty in AI."
-tags: ["Startup", "India", "AI", "Funding", "Investment"]
+tags: ["AI", "Startups"]
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 coverImage: "/covers/sarvam-ai-india-funding-2026.jpg"
 author: "SiliconFeed"

@@ -2,7 +2,7 @@
 title: "Anthropic Locks the Garden: Claude Subscriptions Cut Off from OpenClaw and Third-Party Agents"
 date: "2026-04-04"
 excerpt: "Anthropic ends the era of flat-rate Claude subscriptions powering third-party AI agents, forcing power users into pay-as-you-go billing."
-tags: ["AI", "Anthropic", "OpenClaw", "AI Agents", "Subscriptions"]
+tags: ["AI", "Big-Tech"]
 youtubeId: ""
 source: "https://venturebeat.com/technology/anthropic-cuts-off-the-ability-to-use-claude-subscriptions-with-openclaw-and/"
 author: "SiliconFeed"

@@ -106,7 +106,7 @@ const TAG_MAP = [
   { tag: 'Robotics', re: /\brobot|humanoid|boston\s*dynamics|robotics|autonomous\s+vehicle|robotaxi\b/gi, category: 'Robotics' },
   { tag: 'Drones', re: /\bdrone|uav\b/gi, category: 'Robotics' },
   // Gadgets
-  { tag: 'Gadgets', re: /\bsmartphone|iphone|android|tablet|wearable|smartwatch|samsung\b/gi, category: 'Gadgets' },
+  { tag: 'Gadgets', re: /\bsmartphone|iphone|android|tablet|wearable|smartwatch|samsung|ipad|ipod|macbook|laptop\b/gi, category: 'Gadgets' },
   // Space
   { tag: 'Space', re: /\bspace|spacex|starship|nasa|mars|moon|satellite|launch\b/gi, category: 'Space' },
   // Cybersecurity
@@ -115,8 +115,8 @@ const TAG_MAP = [
   // Cloud
   { tag: 'Cloud', re: /\bcloud\b|\baws\b|\bazure\b|\bgcp\b|serverless|kubernetes|docker\b/gi, category: 'Cloud' },
   // Startups
-  { tag: 'Startups', re: /\bstartup\b|seed\s+round|series\s+[a-f]|funding|accelerator|unicorn|ipo\b/gi, category: 'Startups' },
-  { tag: 'Big-Tech', re: /\bgoogle\b|\bmeta\b|\bmicrosoft\b|\bamazon\b|\bapple\b|\bopenai\b|\banthropic\b/gi, category: 'Startups' },
+  { tag: 'Startups', re: /\bstartup\b|seed\s+round|series\s+[a-f]|funding|accelerator|unicorn|ipo|y\s*combinator|vc|venture\s+capital|incubator\b/gi, category: 'Startups' },
+  { tag: 'Big-Tech', re: /\bgoogle\b|\bmeta\b|\bmicrosoft\b|\bamazon\b|\bapple\b|\bopenai\b|\banthropic\b|\bios\b/gi, category: 'Startups' },
   // Crypto
   { tag: 'Crypto', re: /\bcrypto|bitcoin|ethereum|blockchain|defi|nft|web3|stablecoin\b/gi, category: 'Crypto' },
   { tag: 'Fintech', re: /\bfintech|coinbase|stripe|payment|digital\s+wallet\b/gi, category: 'Crypto' },

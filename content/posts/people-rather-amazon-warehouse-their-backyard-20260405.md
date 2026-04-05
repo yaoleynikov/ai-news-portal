@@ -2,7 +2,7 @@
 title: "People would rather have an Amazon warehouse in their backyard than a data center"
 date: "2026-04-05"
 excerpt: "As data centers have grown and proliferated, so too has the backlash. A new Harvard/MIT poll found 40% of people supported the building of a data center in their area, with 32% opposed when asked about the building of different industrial facilities in their neighborhoods. One fun tidbit from the su"
-tags: ["Tech"]
+tags: ["Big-Tech"]
 source: "https://techcrunch.com/2026/04/03/people-would-rather-have-an-amazon-warehouse-in-their-backyard-than-a-data-center/"
 author: "SiliconFeed Editorial Team"
 ---

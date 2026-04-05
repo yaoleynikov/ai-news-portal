@@ -2,7 +2,7 @@
 title: "The anonymous social app that thinks it can work in Saudi Arabia"
 date: "2026-04-05"
 excerpt: "When Fizz quietly debuted in Saudi Arabia in the middle of March, founder and CEO Teddy Solomon wasn’t expecting the app to catch on like it did. Within 48 hours, the app hit No. 1 overall on the App Store charts, and users in the country have since sent more than 1 million messages. For an anonymou"
-tags: ["Tech"]
+tags: ["Software", "Social"]
 coverImage: ""
 source: "https://techcrunch.com/2026/04/03/the-anonymous-social-app-that-thinks-it-can-work-in-saudi-arabia/"
 author: "SiliconFeed Editorial Team"
