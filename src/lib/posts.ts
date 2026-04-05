@@ -45,7 +45,12 @@ export function getSortedPosts() {
       tags,
     };
   });
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort((a, b) => {
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    // Same date — sort by slug (filename) so later articles appear first
+    return b.slug.localeCompare(a.slug);
+  });
 }
 
 export function getPostBySlug(slug: string) {
