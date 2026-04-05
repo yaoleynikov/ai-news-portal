@@ -3,11 +3,13 @@ title: "Microsoft Declares Independence: Three New In-House AI Models"
 date: "2026-04-02"
 excerpt: "Microsoft unveils MAI-Transcribe-1, MAI-Voice-1, and MAI-Image-2 в— three foundational models built in-house."
 tags: ["Microsoft", "AI Models", "OpenAI"]
-youtubeId: "nqOSznyJ7aU"
+
 source: "https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals/"
 coverImage: "/covers/microsoft-mai-models-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:nqOSznyJ7aU}}
 
 ## The Announcement
 

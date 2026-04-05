@@ -3,10 +3,12 @@ title: "Anthropic Forms AnthroPAC — The AI Company Goes Political"
 date: "2026-04-04"
 excerpt: "Anthropic files with the FEC to launch a political action committee, escalating the AI policy wars as the company battles the Trump administration in federal court."
 tags: ["Anthropic", "AI Policy", "Politics", "PAC", "Government"]
-youtubeId: "WI2T5N7yqFQ"
+
 source: "https://decrypt.co/363355/ai-giant-anthropic-anthropac-clash-trump-administration"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:WI2T5N7yqFQ}}
 
 ## Anthropic Is Building a War Chest
 

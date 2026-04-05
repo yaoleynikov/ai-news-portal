@@ -1,5 +1,5 @@
 ﻿---
-youtubeId: "FFtOI5HQ6VA"
+
 title: "Claude Mythos Leaked: Anthropic's Secret 'Most Capable' Model Exposed Online"
 date: "2026-04-04"
 excerpt: "Unpublished files describing Anthropic's Claude Mythos, internally dubbed the company's most capable AI model, leaked online this week, raising questions about internal security and the competitive AI model race."
@@ -8,6 +8,8 @@ source: "https://decrypt.co/363530/anthropics-most-capable-ai-model-claude-mytho
 coverImage: "/covers/claude-mythos-leak-anthropic-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:FFtOI5HQ6VA}}
 
 ## The Leak
 

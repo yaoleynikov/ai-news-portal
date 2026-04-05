@@ -119,18 +119,28 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const words = Math.max(1, Math.ceil((post.rawContent || '').length / 5));
   const mins = Math.ceil(words / 200);
 
-  // Parse Monster Take
-  let mtText = '';
-  if (post.rawContent) {
-    const fmEnd = post.rawContent.indexOf('---', 3);
-    if (fmEnd > -1) {
-      const body = post.rawContent.substring(fmEnd + 3);
-      const mtM = body.match(/## Monster Take\s*([\s\S]+)/);
-      if (mtM) mtText = mtM[1].replace(/^[\n\r]+/, '').replace(/^> /gm, '').trim();
-    }
+  // Parse YouTube video and split content
+  let youtubeId = '';
+  let contentHtml = post.contentHtml;
+  const ytMatch = post.rawContent?.match(/\{\{YOUTUBE:(\w+)\}\}/);
+  if (ytMatch) {
+    youtubeId = ytMatch[1];
+    // Remove the YouTube marker from the HTML
+    contentHtml = contentHtml.replace(/<h2[^>]*>\{\{YOUTUBE:\w+\}\}<\/h2>\n?/, '').trim();
   }
 
-  const cleanHtml = post.contentHtml.replace(/<h2[^>]*>\s*Monster Take\s*<\/h2>[\s\S]*$/, '');
+  // Split content at the midpoint to insert YouTube
+  let htmlBefore = contentHtml;
+  let htmlAfter = '';
+  if (youtubeId) {
+    const h2Matches = [...contentHtml.matchAll(/<h2[^>]*>/g)];
+    if (h2Matches.length >= 2) {
+      // Insert after first H2 (after The Lead section)
+      const midIndex = contentHtml.indexOf(h2Matches[1][0]);
+      htmlBefore = contentHtml.substring(0, midIndex);
+      htmlAfter = contentHtml.substring(midIndex);
+    }
+  }
   const coverUrl = `/covers/${slug}.jpg?v=${COVER_V}`;
 
   return (
@@ -161,27 +171,31 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(post)) }}
         />
 
-        {/* YouTube video embed below cover */}
-        {post.youtubeId && (
-          <iframe
-            width="100%"
-            height="380"
-            src={`https://www.youtube.com/embed/${post.youtubeId}?rel=0`}
-            title="YouTube video"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ borderRadius: 'var(--r-2)', marginBottom: 'var(--sp-2)', border: 'none' }}
-          />
+        {/* Content before video */}
+        <div className="rich" dangerouslySetInnerHTML={{ __html: htmlBefore }} />
+
+        {/* YouTube video — middle of article */}
+        {youtubeId && (
+          <figure style={{ margin: 'var(--sp-3) 0' }}>
+            <iframe
+              width="100%"
+              height="380"
+              src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ borderRadius: 'var(--r-2)', border: 'none' }}
+            />
+            <figcaption style={{ fontSize: 12, color: 'var(--text-d)', marginTop: 8, textAlign: 'center' }}>
+              📺 Related video
+            </figcaption>
+          </figure>
         )}
 
-        <div className="rich" dangerouslySetInnerHTML={{ __html: cleanHtml }} />
-
-        {mtText && (
-          <div className="mt">
-            <p className="mt-l">SiliconFeed Take</p>
-            <p>{mtText}</p>
-          </div>
+        {/* Content after video */}
+        {htmlAfter && (
+          <div className="rich" dangerouslySetInnerHTML={{ __html: htmlAfter }} />
         )}
       </article>
 

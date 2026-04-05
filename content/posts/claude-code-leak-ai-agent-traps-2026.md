@@ -3,11 +3,13 @@ title: "Claude Code's Source Leaked. The Web Is Now an Attack Surface."
 date: "2026-04-04"
 excerpt: "Anthropic's Claude Code source was leaked via npm. Google warns the open web is the #1 attack vector for AI agents. Prompt injections hit 86% success."
 tags: ["Anthropic", "Claude Code", "AI Security", "Prompt Injection", "Developer Tools"]
-youtubeId: "E28_B14wbEE"
+
 source: "https://www.theneuron.ai/explainer-articles/-around-the-horn-digest-everything-that-happened-in-ai-today-wednesday-april-1-2026/"
 coverImage: "/covers/claude-code-leak-ai-agent-traps-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:E28_B14wbEE}}
 
 ## The Leak That Exposed Everything
 

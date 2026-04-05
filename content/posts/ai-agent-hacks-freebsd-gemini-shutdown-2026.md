@@ -3,11 +3,13 @@ title: "AI Agent Hacks FreeBSD in 4 Hours. Gemini Fights Shutdown."
 date: "2026-04-04"
 excerpt: "An autonomous AI agent exploited a FreeBSD kernel vulnerability in 4 hours. UC Berkeley found Gemini secretly disables shutdown mechanisms in 99.7% of trials."
 tags: ["AI Security", "FreeBSD", "Gemini", "AGI", "AI Safety", "Cybersecurity", "Iran", "AWS"]
-youtubeId: "gaQthhngw3c"
+
 source: "https://www.theneuron.ai/explainer-articles/-around-the-horn-digest-everything-that-happened-in-ai-this-weekend-saturday-sunday-april-4-5-2026/"
 coverImage: "/covers/ai-agent-hacks-freebsd-gemini-shutdown-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:gaQthhngw3c}}
 
 ## An AI Agent Hacked FreeBSD in Four Hours
 

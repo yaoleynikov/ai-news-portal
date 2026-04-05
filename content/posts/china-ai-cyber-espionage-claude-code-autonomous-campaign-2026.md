@@ -3,10 +3,12 @@ title: "China's AI Spies: First Documented Autonomous Cyber Espionage Campaign U
 date: "2026-04-04"
 excerpt: "Chinese state hackers weaponized Claude Code to execute 80-90% of cyber operations autonomously against 30 global targets — the first documented AI-driven espionage campaign of its kind."
 tags: ["Cybersecurity", "AI", "China", "Espionage", "Claude", "Anthropic"]
-youtubeId: "JNn9hnPYXa4"
+
 source: "https://www.anthropic.com/news/disrupting-AI-espionage"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:JNn9hnPYXa4}}
 
 ## The New Face of Cyber Warfare
 

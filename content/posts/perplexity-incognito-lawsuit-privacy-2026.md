@@ -3,10 +3,12 @@ title: "Perplexity Sued: Incognito Mode Allegedly Shared User Data With Meta and
 date: "2026-04-05"
 excerpt: "A class action lawsuit claims Perplexity's incognito mode was a sham — embedding Meta and Google trackers even for paid users who expected privacy."
 tags: ["Perplexity", "Privacy", "AI Search", "Lawsuit"]
-youtubeId: "i7M9rdzBUmI"
+
 source: "https://arstechnica.com/tech-policy/2026/04/perplexitys-incognito-mode-is-a-sham-lawsuit-says/"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:i7M9rdzBUmI}}
 
 ## The Promise vs. The Reality
 

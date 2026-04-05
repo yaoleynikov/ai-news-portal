@@ -3,11 +3,13 @@ title: "California Orders AI Contract Standards for Government Technology"
 date: "2026-04-03"
 excerpt: "Governor Newsom orders state agencies to develop AI contract standards addressing CSAM, civil rights violations, and surveillance."
 tags: ["California AI Policy", "Regulation", "Government"]
-youtubeId: "Ee8UPruvn0c"
+
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 coverImage: "/covers/california-ai-government-contracts-policy-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:Ee8UPruvn0c}}
 
 ## The Executive Order
 

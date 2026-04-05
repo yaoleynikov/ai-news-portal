@@ -3,10 +3,12 @@ title: "Human API Launches App Where AI Agents Hire People for Paid Tasks"
 date: "2026-04-05"
 excerpt: "A $65M-funded startup lets AI agents assign work directly to humans — from reading lines aloud to completing real-world tasks. The gig economy just got a new boss, and it's software."
 tags: ["AI Agents", "Gig Economy", "Human API", "Future of Work"]
-youtubeId: "XsjFOO11fN4"
+
 source: "https://techstartups.com/2026/04/01/human-api-launches-mobile-app-to-let-ai-agents-hire-humans-for-paid-tasks/"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:XsjFOO11fN4}}
 
 ## The Gig Economy Got a New Boss
 

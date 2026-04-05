@@ -611,7 +611,7 @@ function smartTags(title, description, textSample) {
 }
 
 function generateArticleContent(article) {
-  const { title, text: rawText, url, coverImage, date, description } = article;
+  const { title, text: rawText, url, coverImage, date, description, youtubeId } = article;
   const text = rawText || '';
 
   // --- Extract meaningful sentences ---
@@ -621,26 +621,18 @@ function generateArticleContent(article) {
     .filter((s) => s.length > 15 && s.length < 600);
 
   // --- Build content blocks ---
-  // We want: Lead summary (100-150 words, direct answer for AI Overviews)
-  // Then structured sections with H2/H3
-
-  const firstSentence = sentences[0] || '';
-  const leadSentences = sentences.slice(0, 5).join(' ');
-  const detailSentences = sentences.slice(5, 12).join(' ');
-  const contextSentences = sentences.slice(12, 18).join(' ');
-  const implicationSentences = sentences.slice(18, 24).join(' ');
-
-  // --- Construct lead paragraph (direct answer, 100-150 words) ---
   function trimToWords(text, targetWords) {
     const words = text.split(/\s+/);
     if (words.length <= targetWords) return text;
     return words.slice(0, targetWords).join(' ') + '.';
   }
 
-  const leadSummary = trimToWords(
-    `${title}. ${leadSentences}`,
-    100 + Math.floor(Math.random() * 50) // 100-150
-  );
+  const leadSentences = sentences.slice(0, 5).join(' ');
+  const detailSentences = sentences.slice(5, 12).join(' ');
+  const contextSentences = sentences.slice(12, 18).join(' ');
+  const implicationSentences = sentences.slice(18, 24).join(' ');
+
+  const leadSummary = trimToWords(`${title}. ${leadSentences}`, 100 + Math.floor(Math.random() * 50));
 
   // --- Build sections ---
   const sections = [];
@@ -655,6 +647,11 @@ function generateArticleContent(article) {
     sections.push(`## Key Details\n\n${trimToWords(detailSentences, 80)}\n`);
   } else if (description) {
     sections.push(`## Key Details\n\n${description}\n`);
+  }
+
+  // YouTube placeholder marker — will go in the middle
+  if (youtubeId) {
+    sections.push(`{{YOUTUBE:${youtubeId}}}\n`);
   }
 
   // Section 3: Context
@@ -683,11 +680,10 @@ function generateArticleContent(article) {
     }
   }
 
-// --- Extract ---
+  // --- Extract ---
   const excerpt = trimToWords(`${leadSentences}`, 150);
 
   // --- Tags ---
-  // Pass the first 500 chars of cleaned text for better tagging
   const tags = smartTags(title, description || '', rawText);
 
   // --- Slug ---
@@ -711,20 +707,19 @@ title: "${title.replace(/"/g, '\\"').substring(0, 150)}"
 date: "${date}"
 excerpt: "${excerpt.replace(/"/g, "'").substring(0, 300)}"
 tags: [${tagsList}]
-coverImage: "${coverImage}"
 source: "${url}"
 author: "SiliconFeed Editorial Team"
 ---
 
 ${sections.join('\n')}
 
-## Opinion SiliconFeed 📡
+## Opinion 📡
 
 _${opinion}_
 
 `;
 
-  return { slug, content, tags, excerpt };
+  return { slug, content, tags, excerpt, youtubeId: youtubeId || '' };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────

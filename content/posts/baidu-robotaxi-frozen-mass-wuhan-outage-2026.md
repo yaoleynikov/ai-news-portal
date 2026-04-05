@@ -3,10 +3,12 @@ title: "Baidu's Robotaxis Froze En Masse in Wuhan — Stranding Passengers on Hi
 date: "2026-04-04"
 excerpt: "A system failure hit over 100 of Baidu's Apollo Go robotaxis in Wuhan, stopping them mid-traffic, stranding riders, and sparking fresh safety concerns for autonomous vehicles."
 tags: ["Robotaxi", "Baidu", "Autonomous Vehicles", "Self-Driving", "China"]
-youtubeId: "cq7jQT9lbB8"
+
 source: "https://www.theverge.com/ai-artificial-intelligence/905012/baidu-apollo-robotaxi-freeze-china"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:cq7jQT9lbB8}}
 
 ## The Night the Cars Stopped
 

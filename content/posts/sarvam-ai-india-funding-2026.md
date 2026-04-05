@@ -6,8 +6,10 @@ tags: ["Startup", "India", "AI", "Funding", "Investment"]
 source: "https://techstartups.com/2026/04/03/top-tech-news-today-april-3-2026/"
 coverImage: "/covers/sarvam-ai-india-funding-2026.jpg"
 author: "SiliconFeed"
-youtubeId: "L8LlxtAsitw"
+
 ---
+
+{{YOUTUBE:L8LlxtAsitw}}
 
 ## India's AI Sovereignty Play
 

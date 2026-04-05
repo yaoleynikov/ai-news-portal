@@ -1,5 +1,5 @@
 ﻿---
-youtubeId: "iduDzLK5wfo"
+
 title: "Microsoft Pits GPT Against Claudeв—And the Winner Is Better Research"
 date: "2026-04-03"
 excerpt: "Microsoft's new Critique and Council modes make GPT and Claude work together on research tasks. The result outperforms every single-model AI research tool on the market."
@@ -8,6 +8,8 @@ source: "https://decrypt.co/362805/microsoft-gpt-claude-work-together-ai-researc
 coverImage: "/covers/microsoft-gpt-claude-collab-research-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:iduDzLK5wfo}}
 
 ## The End of the Mono-Model Research Era
 

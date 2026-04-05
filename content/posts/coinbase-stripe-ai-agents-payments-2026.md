@@ -3,11 +3,13 @@ title: "Coinbase, Cloudflare & Stripe Build Payment Rails for AI Agents"
 date: "2026-04-03"
 excerpt: "The financial giants are racing to build the infrastructure for a future where AI agents handle internet transactions themselves."
 tags: ["AI Agents", "Crypto", "Fintech"]
-youtubeId: "ZxsQnKPaQ18"
+
 source: "https://techstartups.com/"
 coverImage: "/covers/coinbase-stripe-ai-agents-payments-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:ZxsQnKPaQ18}}
 
 ## The x402 Protocol
 

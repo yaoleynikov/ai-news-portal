@@ -3,11 +3,13 @@ title: "Riot Platforms Dumps $250M in Bitcoin в— Doubling Down on AI Infrastr
 date: 2026-04-04
 excerpt: "Major Bitcoin miner Riot Platforms sold 3,778 BTC in Q1 2026 as it accelerates a strategic pivot from crypto mining to high-performance AI data centers."
 tags: ["bitcoin", "ai-infrastructure", "riot-platforms", "data-centers", "crypto-mining"]
-youtubeId: "dQw4w9WgXcQ"
+
 source: "https://decrypt.co/363255/bitcoin-miner-riot-platforms-sells-250-million-btc"
 coverImage: "/covers/riot-platforms-bitcoin-to-ai-pivot-2026.jpg"
 author: "SiliconFeed AI"
 ---
+
+{{YOUTUBE:dQw4w9WgXcQ}}
 
 ## Miners Aren't Mining Anymore в— They're Building AI Data Centers
 

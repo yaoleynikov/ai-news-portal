@@ -3,11 +3,13 @@ title: "OpenAI Exec Exodus: COO and AGI CEO Step Aside Before IPO"
 date: "2026-04-04"
 excerpt: "OpenAI's COO, AGI CEO Fidji Simo, and two other executives stepped aside weeks before a potential IPO. Codex is now the foundation for everything."
 tags: ["OpenAI", "IPO", "Leadership", "Fidji Simo", "Codex", "ChatGPT Business"]
-youtubeId: "9bZkp7q19f0"
+
 source: "https://www.theneuron.ai/explainer-articles/-around-the-horn-digest-everything-that-happened-in-ai-this-weekend-saturday-sunday-april-4-5-2026/"
 coverImage: "/covers/openai-exec-exodus-ipo-2026.jpg"
 author: "SiliconFeed"
 ---
+
+{{YOUTUBE:9bZkp7q19f0}}
 
 ## Half the Executive Bench Is Gone
 
