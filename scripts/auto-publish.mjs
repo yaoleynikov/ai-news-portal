@@ -730,6 +730,41 @@ _${opinion}_
   return { slug, content, tags, excerpt, youtubeId: youtubeId || '' };
 }
 
+// Pre-Publish Validation — blocks bad articles before they hit disk
+function validateArticle(content) {
+  // 1. No HTML entities
+  if (/&#\d{3,5};/.test(content)) return 'HTML entity found';
+
+  // 2. Frontmatter must exist
+  const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!fmMatch) return 'Missing frontmatter';
+  const fm = fmMatch[1];
+
+  // 3. Tags — no garbage single words
+  const tagsMatch = fm.match(/^tags:\s*\[([^\]]+)\]/m);
+  if (tagsMatch) {
+    const rawTags = tagsMatch[1].replace(/["']/g, '').split(',').map(t => t.trim());
+    for (const t of rawTags) {
+      if (/^BEST$/i.test(t)) return 'Bad tag: ' + t;
+      if (/^TECH$/i.test(t)) return 'Bad tag: ' + t;
+      if (/^[A-Z]{3,5}$/.test(t) && !['IPO', 'API', 'GPU', 'CPU', 'CEO', 'CTO', 'EVs', 'SRE', 'ML', 'AI'].includes(t.toUpperCase())) return 'Bad tag: ' + t;
+    }
+  }
+
+  // 4. At least 2 H2 sections
+  if ((content.match(/^## /gm) || []).length < 2) return 'Too few sections';
+
+  // 5. No corrupted unicode in headers
+  const badHeader = content.match(/^## [^\n]*\ufffd[^\n]*/m);
+  if (badHeader) return 'Corrupted header';
+
+  // 6. Body text > 200 chars
+  const body = content.substring(fmMatch.index + fmMatch[0].length).replace(/[#\n_\-]/g, '').trim();
+  if (body.length < 200) return 'Body too short: ' + body.length + ' chars';
+
+  return null;
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -813,6 +848,13 @@ async function main() {
     };
 
     const result = generateArticleContent(articleData);
+
+    // VALIDATE before writing
+    const validationError = validateArticle(result.content);
+    if (validationError) {
+      console.log(`  ❌ Validation failed: ${result.slug} — ${validationError}`);
+      continue;
+    }
 
     // Ensure unique filename
     let filename = result.slug + '.md';
