@@ -90,8 +90,21 @@ function fixSvgFillIfMissing(svgPath) {
 }
 
 // в”Ђв”Ђв”Ђ Resolve topic в†’ logo key в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
-function resolveLogoKey(tags) {
+function resolveLogoKey(tags, slug) {
   const matches = [];
+  const slugWords = slug.replace(/-/g, ' ')
+    .replace(/[&#]\d{2,5};/g, ' ')  // remove HTML entities (with space)
+    .replace(/\d{3,}/g, ' ')  // remove embedded digit sequences like 8217
+    .replace(/[^a-z\s]/gi, ' ')
+    .split(/\s+/)
+    .map(w => w.replace(/\d+$/, ''))  // strip trailing digits
+    .filter(w => w.length > 2);
+  // Check slug words for company/product names (also try singular: teslas → tesla)
+  for (const word of slugWords) {
+    const key = word.toLowerCase();
+    if (productToCompany[key]) matches.push({ key: productToCompany[key], score: key.length + 20 });
+    if (companyLogos[key]) matches.push({ key, score: key.length + 15 });
+  }
   for (const tag of tags) {
     const key = tag.toLowerCase();
     if (productToCompany[key]) matches.push({ key: productToCompany[key], score: key.length + 10 });
@@ -521,7 +534,7 @@ console.log(`Found ${posts.length} posts\n`);
 
   for (const post of posts) {
     const coverPath = path.join(coversDir, post.slug + '.jpg');
-    const resolved = resolveLogoKey(post.tags);
+    const resolved = resolveLogoKey(post.tags, post.slug);
     let svgString, source;
 
     if (resolved) {
