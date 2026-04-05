@@ -8,6 +8,20 @@ const POSTS_PER_PAGE = 10;
 
 function fd(d: string) { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 
+// Score posts for trending (recency + tag diversity)
+function getTrendingPosts(posts: any[], limit: number = 5): any[] {
+  const now = Date.now();
+  return [...posts]
+    .map(p => {
+      const age = (now - new Date(p.date).getTime()) / (1000 * 60 * 60);
+      const recencyScore = Math.max(0, 100 - age / 24); // 100 if <24h, decays
+      const tagBonus = (p.tags?.length || 1) * 5;
+      return { ...p, score: recencyScore + tagBonus };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
 // Article row for pagination list
 function ArticleRow({ post }: { post: { slug: string; title: string; excerpt: string; coverImage: string; coverAlt: string; tags?: string[]; date: string } }) {
   return (
@@ -32,8 +46,18 @@ function ArticleRow({ post }: { post: { slug: string; title: string; excerpt: st
 }
 
 export const metadata: Metadata = {
-  title: 'siliconfeed — tech intelligence',
-  description: 'Autonomous tech news aggregator.',
+  title: 'SiliconFeed — Tech Intelligence',
+  description: 'Breaking tech news, AI deep dives, hardware reviews, startup analysis, crypto updates, and cybersecurity intelligence. Coverage from 15+ sources, published every 2 hours.',
+  robots: {
+    other: ['max-image-preview:large'],
+  },
+  alternates: {
+    canonical: 'https://siliconfeed.online/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SiliconFeed — Tech Intelligence',
+  },
 };
 
 export default async function HomePage({
@@ -88,7 +112,7 @@ export default async function HomePage({
         {hero && (
           <div className="hero">
             <Link href={`/news/${hero.slug}`} className="hero-big">
-              <div className="hero-img"><img src={hero.coverImage} alt={hero.coverAlt || ''} loading="eager" /></div>
+              <div className="hero-img"><img src={hero.coverImage} alt={hero.coverAlt || ''} loading="eager" width="800" height="420" /></div>
               <div className="meta"><span className="meta-t">{hero.tags?.[0] || 'tech'}</span><span className="meta-dot" /><span className="meta-d">{fd(hero.date)}</span></div>
               <h2>{hero.title}</h2>
               <p>{hero.excerpt}</p>
@@ -120,6 +144,29 @@ export default async function HomePage({
                 </Link>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* TRENDING — only page 1, no search */}
+        {page === 1 && !query && (
+          <div className="sec">
+            <span>Trending </span>
+            <span>14 days</span>
+          </div>
+        )}
+        {page === 1 && !query && (
+          <div style={{ display: 'flex', gap: 16, marginBottom: 40, overflowX: 'auto', paddingBottom: 8 }}>
+            {getTrendingPosts(all, 6).map(post => (
+              <Link key={post.slug} href={`/news/${post.slug}`} style={{ minWidth: 220, flex: '0 0 220px', textDecoration: 'none', color: 'inherit' }}>
+                <div style={{ position: 'relative', borderRadius: 12, overflow: 'hidden', border: '1px solid #27272a', height: 180 }}>
+                  <img src={`/covers/${post.slug}.jpg?v=v5`} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '12px 12px 10px', background: 'linear-gradient(transparent, rgba(0,0,0,0.85))' }}>
+                    <div style={{ fontSize: 10, color: '#8b5cf6', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>{post.tag}</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3, color: '#fafafa' }}>{post.title.length > 70 ? post.title.substring(0, 67) + '...' : post.title}</div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         )}
 
