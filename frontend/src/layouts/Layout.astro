@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -38,8 +38,8 @@ const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
-    <!-- View Transitions -->
-    <ViewTransitions />
+    <!-- View Transitions (Astro 5+) -->
+    <ClientRouter />
 
     <!-- JSON-LD -->
     {jsonLd && (
