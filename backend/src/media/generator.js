@@ -32,9 +32,9 @@ async function generateCompanyCover(domain) {
   const width = 1200;
   const height = 630;
 
-  // Enhance the logo size and center it
+  // Enhance the logo size and center it (80% of 1200x630 is 960x504)
   const processedLogo = await sharp(Buffer.from(logoBuffer))
-    .resize(400, 400, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(960, 504, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } })
     .toBuffer();
 
   // Create a base WebP cover
@@ -43,7 +43,7 @@ async function generateCompanyCover(domain) {
       width,
       height,
       channels: 4,
-      background: { r: 15, g: 23, b: 42, alpha: 1 } // Tailwind slate-900 like dark tone
+      background: { r: 255, g: 255, b: 255, alpha: 1 } // Pure White background
     }
   })
     .composite([
