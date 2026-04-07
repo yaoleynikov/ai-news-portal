@@ -1,0 +1,22 @@
+{
+  "totalLinks": 3,
+  "articleUrls": [
+    "https://openai.com/blog/dall-e/",
+    "https://openai.com/blog/openai-scholars-spring-2020-final-projects/"
+  ],
+  "allLinks": [
+    {
+      "url": "https://openai.com/blog"
+    },
+    {
+      "url": "https://openai.com/blog/dall-e/",
+      "title": "DALL·E: Creating images from text",
+      "description": "We've trained a neural network called DALL·E that creates images from text captions for a wide range of concepts expressible in natural ..."
+    },
+    {
+      "url": "https://openai.com/blog/openai-scholars-spring-2020-final-projects/",
+      "title": "OpenAI Scholars 2020: Final projects",
+      "description": "Our third class of OpenAI Scholars presented their final projects at virtual Demo Day, showcasing their research results from over the past five ..."
+    }
+  ]
+}

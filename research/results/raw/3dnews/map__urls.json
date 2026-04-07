@@ -1,0 +1,525 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://3dnews.ru/1137853/resident-evil-requiem-review",
+    "https://3dnews.ru/1132398/televizori-tcl-seriy-x-c-i-p-obzor-aktualnoy-lineyki",
+    "https://3dnews.ru/1120888/rossiyane-rasprobovali-otechestvennie-monitori-prodagi-vzleteli-na-50-za-2024-god",
+    "https://3dnews.ru/1135151",
+    "https://3dnews.ru/1139522/masshtabniy-sboy-runeta-rossiyane-galuyutsya-na-problemi-v-rabote-rostelekoma-discord-steam-i-drugih-servisov",
+    "https://3dnews.ru/1123156/narodnie-videokarti-geforce-rtx-5060-postupili-v-prodagu-v-rossii-ot-39-999-rubley",
+    "https://3dnews.ru/1130028/obzor-honor-x7d",
+    "https://3dnews.ru/1138341/obzor-huawei-matebook-gt-14-enzh32",
+    "https://3dnews.ru/1137414/len-britanskih-uchyonih-obernulas-otkritiem-luchshih-v-mire-natriyionnih-akkumulyatorov",
+    "https://3dnews.ru/1138160/obzor-vivo-x300-fe",
+    "https://3dnews.ru/1137856/populyarnogo-kitayskogo-proizvoditelya-dostupnih-pk-ulichili-v-podmene-protsessorov-vnoutbukah",
+    "https://3dnews.ru/1133997/samie-ogidaemie-igri-2026-goda",
+    "https://3dnews.ru/1137286/tverdotelniy-akkumulyator-donut-lab-zaryadilsya-na-80-menee-chem-za-5-minut-v-nezavisimih-testah",
+    "https://3dnews.ru/1138479/na-bolshom-adronnom-kollaydere-otkrili-novuyu-chastitsu-proton-na-steroidah",
+    "https://3dnews.ru/1130123/mintrans-rf-reshil-kto-budet-vinovat-v-dtp-s-bespilotnimi-avto",
+    "https://3dnews.ru/1138578/v-rossii-startovali-prodagi-noutbukov-asus-proart-px13-i-proart-p16-kagdiy-stoit-bez-malogo-300-tis-rubley",
+    "https://3dnews.ru/1137629/noveyshaya-iimodel-deepseek-v4-dolgna-bit-optimizirovana-pod-kitayskie-uskoriteli-vichisleniy",
+    "https://3dnews.ru/1130746"
+  ],
+  "allLinks": [
+    {
+      "url": "https://3dnews.ru/1137853/resident-evil-requiem-review",
+      "title": "Resident Evil Requiem — два шага вперёд, три назад. Рецен...",
+      "description": "Capcom на 30-летний юбилей «резидента» решила не мелочиться и выпустила свежую, весьма амбициозную номерную часть. Правда, в своём желании смешать и старое, ..."
+    },
+    {
+      "url": "https://3dnews.ru/tags/%D0%BF%D0%B5%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D1%82",
+      "title": "Новости по тегу перовскит, страница 1 из 1",
+      "description": "Самые интересные и оперативные новости из мира высоких технологий. На нашем портале - все о компьютерном железе, гаджетах, ноутбуках и других цифровых устрой..."
+    },
+    {
+      "url": "https://3dnews.ru/1132398/televizori-tcl-seriy-x-c-i-p-obzor-aktualnoy-lineyki",
+      "title": "Телевизоры TCL серий X, C и P: обзор актуальной линейки",
+      "description": "TCL предлагает широкий ассортимент телевизоров, от бескомпромиссных флагманских решений до более доступных моделей, которые тем не менее обладают продвинутым..."
+    },
+    {
+      "url": "https://3dnews.ru/1120888/rossiyane-rasprobovali-otechestvennie-monitori-prodagi-vzleteli-na-50-za-2024-god",
+      "title": "Россияне распробовали отечественные мониторы — продажи вз...",
+      "description": "Продажи мониторов для ПК российских брендов увеличились в прошлом году в 1,5 раза, а в этом году отечественные компании продолжают удерживать свои позиции. П..."
+    },
+    {
+      "url": "https://3dnews.ru/1135151",
+      "title": "Масштабная китайская консолидация: Realme вернулась «под ...",
+      "description": "В начале 2026 года компания Realme официально вернулась в группу Oppo в качестве суббренда и интегрировалась с другим суббрендом — OnePlus. Реструктуризация ..."
+    },
+    {
+      "url": "https://3dnews.ru/1139522/masshtabniy-sboy-runeta-rossiyane-galuyutsya-na-problemi-v-rabote-rostelekoma-discord-steam-i-drugih-servisov",
+      "title": "Масштабный сбой Рунета — россияне массово жалуются на про...",
+      "description": "В Рунете наблюдается масштабный сбой, затронувший работу целого ряда популярных сервисов и интернет-площадок. По данным мониторинговых сервисов, пользователи..."
+    },
+    {
+      "url": "https://3dnews.ru/1123156/narodnie-videokarti-geforce-rtx-5060-postupili-v-prodagu-v-rossii-ot-39-999-rubley",
+      "title": "«Народные» видеокарты GeForce RTX 5060 поступили в продаж...",
+      "description": "Сегодня в России начались продажи &laquo;народных&raquo; видеокарт Nvidia 50-й серии &mdash; GeForce RTX 5060. На данный момент реальные предложения новинок ..."
+    },
+    {
+      "url": "https://3dnews.ru/1130028/obzor-honor-x7d",
+      "title": "Обзор смартфона HONOR X7d: прочнее, дольше и с искусствен...",
+      "description": "HONOR по-прежнему делает ставку на прочность своих бюджетных смартфонов – буквально вся X-серия выделяется улучшенной защитой от внешних воздействий. Продолж..."
+    },
+    {
+      "url": "https://3dnews.ru/1138341/obzor-huawei-matebook-gt-14-enzh32",
+      "title": "Обзор ноутбука HUAWEI MateBook GT 14 (ENZH-32): свежие ид...",
+      "description": "Этот рабочий лэптоп здорово напоминает игровые модели, и неспроста: из интеловского чипа Core Ultra здесь выжали максимум. А еще у MateBook GT 14 почти безуп..."
+    },
+    {
+      "url": "https://3dnews.ru/1137414/len-britanskih-uchyonih-obernulas-otkritiem-luchshih-v-mire-natriyionnih-akkumulyatorov",
+      "title": "Лень британских учёных обернулась открытием лучших в мире...",
+      "description": "Исследователи из Университета Суррея (Англия) совершили неожиданное открытие в области натрий-ионных аккумуляторов. Традиционно при производстве катода на ос..."
+    },
+    {
+      "url": "https://3dnews.ru/1138160/obzor-vivo-x300-fe",
+      "title": "Обзор смартфона vivo X300 FE: маленький принц / Смартфоны",
+      "description": "Каждый уважающий себя бренд должен выпустить свой субфлагман — смартфон с именем почти как у старшего (но с буквами FE, R, e или термином Lite в названии) и ..."
+    },
+    {
+      "url": "https://3dnews.ru/1137856/populyarnogo-kitayskogo-proizvoditelya-dostupnih-pk-ulichili-v-podmene-protsessorov-vnoutbukah",
+      "title": "Популярного китайского производителя доступных ПК уличили...",
+      "description": "Популярного китайского производителя компьютерной техники и электроники, компанию Chuwi, поймали на подмене и обмане клиентов. В продаваемом компанией ноутбу..."
+    },
+    {
+      "url": "https://3dnews.ru/1133997/samie-ogidaemie-igri-2026-goda",
+      "title": "Самые ожидаемые игры 2026 года / Игры",
+      "description": "Для игровой индустрии 2026/наступивший год станет годом GTA VI, но это не значит, что кроме неё геймерам, будет нечем заняться. Рассказываем о самых интересн..."
+    },
+    {
+      "url": "https://3dnews.ru/1137286/tverdotelniy-akkumulyator-donut-lab-zaryadilsya-na-80-menee-chem-za-5-minut-v-nezavisimih-testah",
+      "title": "Твердотельный аккумулятор Donut Lab зарядился на 80 % мен...",
+      "description": "Компания Donut Lab опубликовала отчёт о тестировании своей твердотельной батареи, в котором подтверждается возможность отказа от сложных систем жидкостного о..."
+    },
+    {
+      "url": "https://3dnews.ru/1138479/na-bolshom-adronnom-kollaydere-otkrili-novuyu-chastitsu-proton-na-steroidah",
+      "title": "На Большом адронном коллайдере открыли новую частицу — «п...",
+      "description": "Коллаборация LHCb на Большом адронном коллайдере в CERN объявила об обнаружении новой субатомной частицы &mdash; тяжёлого бариона, состоящего из двух очарова..."
+    },
+    {
+      "url": "https://3dnews.ru/1130123/mintrans-rf-reshil-kto-budet-vinovat-v-dtp-s-bespilotnimi-avto",
+      "title": "Минтранс РФ решил, кто будет виноват в ДТП с беспилотными...",
+      "description": "Минтранс разработал законопроект, в котором устанавливаются правила и разграничивается ответственность в области высокоавтоматизированных транспортных средст..."
+    },
+    {
+      "url": "https://3dnews.ru/1138578/v-rossii-startovali-prodagi-noutbukov-asus-proart-px13-i-proart-p16-kagdiy-stoit-bez-malogo-300-tis-rubley",
+      "title": "В России стартовали продажи ноутбуков Asus ProArt PX13 и ...",
+      "description": "В России начались продажи ноутбуков Asus ProArt PX13 и ProArt P16, адресованных представителям творческих профессий. Компьютеры предназначены для работы с гр..."
+    },
+    {
+      "url": "https://3dnews.ru/1137629/noveyshaya-iimodel-deepseek-v4-dolgna-bit-optimizirovana-pod-kitayskie-uskoriteli-vichisleniy",
+      "title": "Новейшая ИИ-модель DeepSeek V4 должна быть оптимизирована...",
+      "description": "На этой неделе, как сообщает Financial Times, китайская DeepSeek должна представить долгожданную мультимодальную ИИ-модель V4, которая была оптимизирована по..."
+    },
+    {
+      "url": "https://3dnews.ru/1130746",
+      "title": "Vivo представила беспроводные наушники TWS 5 и TWS 5 Hi-F...",
+      "description": "Компания Vivo представила беспроводные наушники с лаконичным названием TWS 5 и их продвинутую версию TWS 5 Hi-Fi. Версия Hi-Fi является результатом тесного с..."
+    },
+    {
+      "url": "https://3dnews.ru/1113611/kompyuter-mesyatsa-pc-po-tsene-playstation-5-pro",
+      "title": "Компьютер месяца, спецвыпуск: собираем игровой ПК по цене...",
+      "description": "Продажи PlayStation 5 Pro стартовали. Все это время игровую консоль Sony много критиковали — особенно ей досталось за неадекватно высокую стоимость. Однако в..."
+    },
+    {
+      "url": "https://3dnews.ru/news",
+      "title": "Технологии и рынок IT. Новости , страница 1",
+      "description": "Самые интересные и оперативные новости из мира высоких технологий. На нашем портале - все о компьютерном железе, гаджетах, ноутбуках и других цифровых устрой..."
+    },
+    {
+      "url": "https://3dnews.ru/1122760/obzor-nvidia-geforce-rtx-5060-ti",
+      "title": "Обзор видеокарты NVIDIA GeForce RTX 5060 Ti: не ошибись с...",
+      "description": "Старшие модели GeForce 5000-го семейства уже задали мрачный тон всему поколению «зеленых» видеокарт, но у GeForce RTX 5060 Ti есть особенность — 8 либо 16 Гб..."
+    },
+    {
+      "url": "https://3dnews.ru/1135015/itogi-2025-kosmos",
+      "title": "Итоги 2025 года: космос / Аналитика",
+      "description": "Ушедший 2025 год оказался богатым на самые разнообразные космические события: рекордные, драматичные, прорывные и даже политико-бюрократические"
+    },
+    {
+      "url": "https://3dnews.ru/1137013/obzor-honor-magicbook-x16-2026",
+      "title": "Обзор ноутбука HONOR MagicBook X16 2026: как раньше, толь...",
+      "description": "Произошло очередное обновление рабочей лошадки от HONOR — недорогой и относительно компактный, но с большим экраном и в крепком корпусе с полноразмерной клав..."
+    },
+    {
+      "url": "https://3dnews.ru/935609/perviy-polet-soyuz-ms-polveka-evolyutsii",
+      "title": "Первый полет «Союз МС»: полвека эволюции / Offсянка",
+      "description": "7 июля с Байконура стартовала ракета-носитель «Союз-ФГ» с модифицированным транспортным кораблём «Союз МС». А 28 ноября 1966 года с того же стартового компле..."
+    },
+    {
+      "url": "https://3dnews.ru/1139385/mts-zapustila-polnotsennuyu-set-5g-v-masshtabah-strani-no-ne-v-rossii",
+      "title": "МТС запустила полноценную сеть 5G, но не в России",
+      "description": "Операторы МТС и Life сообщили о запуске в Беларуси сетей мобильной связи пятого поколения — они заработали в Минске, Бресте, Витебске, Гомеле и Могилеве. В с..."
+    },
+    {
+      "url": "https://3dnews.ru/1131998/globalnaya-versiya-oneplus-15-budet-identichna-kitayskoy-vklyuchaya-ogromnuyu-batareyu",
+      "title": "Глобальная версия OnePlus 15 будет идентична китайской, в...",
+      "description": "Флагманский смартфон OnePlus 15 был представлен в Китае в прошлом месяце. Его глобальный релиз состоится 13 ноября. Перед мировой премьерой производитель под..."
+    },
+    {
+      "url": "https://3dnews.ru/1139310/astronavti-artemis-ii-nachali-polyot-k-lune-s-ekstrennogo-remonta-tualeta-v-nyom-zaklinil-ventilyator",
+      "title": "Астронавты Artemis II начали полёт к Луне с экстренного р...",
+      "description": "В самом начале полёта корабля Orion после выхода на орбиту Земли в ходе исторического запуска к Луне в миссии Artemis 2 возникла неожиданная проблема с систе..."
+    },
+    {
+      "url": "https://3dnews.ru/1127765/obzor-huawei-pura-80-pro",
+      "title": "Обзор смартфона HUAWEI Pura 80 Pro: разумный флагман с мо...",
+      "description": "Huawei выпуском Pura 80 Ultra подтвердила свою репутацию компании, которая решается на самые технологически отчаянные и по-хорошему впечатляющие ходы при соз..."
+    },
+    {
+      "url": "https://3dnews.ru/1103611/obzor-samsung-odyssey-oled-g9-g95sc",
+      "title": "Обзор QD-OLED DQHD-монитора Samsung Odyssey OLED G9 G95SC...",
+      "description": "Компания Samsung всегда выделялась особым подходом к созданию настольных дисплеев, а подразделение Samsung Display, занимающееся разработкой и производством ..."
+    },
+    {
+      "url": "https://3dnews.ru/1139453/obzor-realme-16-pro",
+      "title": "Обзор смартфона realme 16 Pro: поменьше амбиций, чем у «п...",
+      "description": "Немного странная история — писать подряд про два смартфона одной серии, различающихся только знаком «плюс» в названии: realme 16 Pro+ и realme 16 Pro. Но на ..."
+    },
+    {
+      "url": "https://3dnews.ru/1135818/obzor-msi-geforce-rtx-5060-8g-gaming-oc",
+      "title": "Обзор видеокарты MSI GeForce RTX 5060 8G Gaming OC: брак ...",
+      "description": "Не исключено, что совсем скоро на полках компьютерных магазинов останутся только 8-гигабайтные версии игровых ускорителей. Прочие модели или исчезнут из прод..."
+    },
+    {
+      "url": "https://3dnews.ru/1137497/ryzen-i-16-gbayt-ddr5-kak-sekonomit-na-pamyati",
+      "title": "Ryzen и 16 Гбайт DDR5: как сэкономить на памяти так, чтоб...",
+      "description": "Дорогая DDR5 заставляет искать способы экономии, и самое время посмотреть, как чувствуют себя системы с 16 Гбайт ОЗУ. Мы сравнили подсистемы памяти с конфигу..."
+    },
+    {
+      "url": "https://3dnews.ru/1087374/obzor-xiaomi-redmi-note-12",
+      "title": "Обзор смартфона Xiaomi Redmi Note 12: уже не торт / Смарт...",
+      "description": "Redmi Note можно считать главными народными смартфонами. Сочетание крупного экрана и достойной аппаратной начинки всегда было беспроигрышным. Но в последние ..."
+    },
+    {
+      "url": "https://3dnews.ru/1126402/poddergka-ddr6-nachnyot-vnedryatsya-v-sleduyushchem-godu-no-postavki-novoy-pamyati-naladyatsya-tolko-v-2027m",
+      "title": "Поддержка DDR6 начнёт внедряться в следующем году, но пос...",
+      "description": "Комитет JEDEC опубликовал стандарт LPDDR6 в начале этого месяца, а крупнейшие производители микросхем памяти уже завершили разработку прототипов DDR6. Поэтом..."
+    },
+    {
+      "url": "https://3dnews.ru/1136559/chelovekopodobnie-roboti-stanovyatsya-novoy-neftyu-kitay-uge-vperedi-i-eto-bespokoit-ssha",
+      "title": "Человекоподобные роботы становятся новой нефтью — Китай у...",
+      "description": "Миллиардер Илон Маск (Elon Musk) утверждает, что человекоподобный робот Tesla Optimus произведёт революцию в мире и с его использованием будет создана новая ..."
+    },
+    {
+      "url": "https://3dnews.ru/1124606/corsair-obyasnila-pochemu-eyo-bloki-pitaniya-gromko-shchyolkayut-eto-ne-opasno-no-bp-zamenyat",
+      "title": "Corsair объяснила, почему её блоки питания громко щёлкают...",
+      "description": "Компания Corsair сообщила, что нашла решение проблемы раздражающих щелчков в блоках питания серии RMe. Все устройства с таким дефектом будут заменены. Компан..."
+    },
+    {
+      "url": "https://3dnews.ru/1112242/moderatsiya-instagram-i-threads-vishla-izpod-kontrolya-polzovateley-banyat-za-pustyaki",
+      "title": "Модерация Instagram✴ и Threads вышла из-под контроля — ба...",
+      "description": "В социальной платформе Threads набирает популярность тема &laquo;Ошибки с модерацией в Threads&raquo;. Пользователи массово жалуются на чрезмерно строгую мод..."
+    },
+    {
+      "url": "https://3dnews.ru/1131710/kak-privyazat-elektronnuyu-pochtu-k-telegram-chtobi-ne-poteryat-akkaunt-izza-blokirovki-sms-s-kodami",
+      "title": "Как привязать электронную почту к Telegram, чтобы не поте...",
+      "description": "Коллеги с портала &laquo;Код Дурова&raquo; подготовили инструкцию для пользователей Telegram, которая разъясняет, как сохранить доступ к мессенджеру при блок..."
+    },
+    {
+      "url": "https://3dnews.ru/1136202/iitogi-yanvarya-2026",
+      "title": "ИИтоги января 2026 г.: будет триллион! / Искусственный ин...",
+      "description": "Строго говоря, не одни только связанные с развитием ИИ-инфраструктуры заказы обеспечат мировой полупроводниковой отрасли в наступившем году выручку, которая ..."
+    },
+    {
+      "url": "https://3dnews.ru/1119750/google-gotovit-desktop-view-regim-rabochego-stola-dlya-smartfonov-na-android",
+      "title": "Google готовит Desktop View — режим рабочего стола для см...",
+      "description": "Передовые смартфоны на Android уже обладают достаточной производительностью, чтобы служить единственными компьютерами для большинства пользователей. Однако м..."
+    },
+    {
+      "url": "https://3dnews.ru/1093409/10-android-automatization-apps",
+      "title": "Вкалывают роботы: 10 приложений для автоматизации задач н...",
+      "description": "Пользуясь смартфоном, мы часто совершаем на мобильном устройстве одни и те же действия, делегировать выполнение которых можно специализированным программам. ..."
+    },
+    {
+      "url": "https://3dnews.ru/1137711/alibaba-predstavila-malie-iimodeli-qwen35-kotorie-rabotayut-na-noutbuke-i-obhodyat-analogi-openai",
+      "title": "Alibaba представила малые ИИ-модели Qwen3.5, которые рабо...",
+      "description": "Специализирующееся на технологиях искусственного интеллекта подразделение Alibaba Qwen представило новую линейку моделей &mdash; их отличают небольшие размер..."
+    },
+    {
+      "url": "https://3dnews.ru/1130371/obzor-google-pixel-10-pro-xl",
+      "title": "Обзор смартфона Google Pixel 10 Pro XL: магнитная аномали...",
+      "description": "Осень – время американских флагманов: друг за другом выходят новые «пиксели» и айфоны. Теперь они в одной лодке, плывущей по волнам серого импорта. Про новин..."
+    },
+    {
+      "url": "https://3dnews.ru/1016208/obzor-huawei-wifi-ax3",
+      "title": "Обзор роутера Huawei WiFi AX3: совсем недорого и очень бы...",
+      "description": "Четырёхъядерный процессор и технология Wi-Fi 6 Plus – новейшие продукты собственной разработки компании Huawei — обеспечивают суммарную скорость передачи дан..."
+    },
+    {
+      "url": "https://3dnews.ru/1106586/obzor-huawei-matebook-14-2024-flmhw5611t",
+      "title": "Обзор ноутбука HUAWEI MateBook 14 2024 (FLMH-W5611T): пол...",
+      "description": "Кроме процессора Core Ultra, созданного по чиплетной технологии, MateBook 14 может похвастаться новым дизайном корпуса, а также сенсорным OLED-экраном с длин..."
+    },
+    {
+      "url": "https://3dnews.ru/1133226/teamgroup-predupredila-defitsit-dram-i-nand-tolko-nachinaetsya-tseni-budut-rasti-ves-2026-god",
+      "title": "TeamGroup предупредила: дефицит DRAM и NAND только начина...",
+      "description": "Продолжающиеся структурные изменения рынка DRAM, вызванные перераспределением производственных мощностей на выпуск высокоскоростной памяти HBM для ускорителе..."
+    },
+    {
+      "url": "https://3dnews.ru/1113273/microsoft-predstavila-novuyu-funktsiyu-windows-dlya-upravleniya-faylami-na-androidustroystvah-po-wifi",
+      "title": "Windows научилась управлять файлами на Android прямо из «...",
+      "description": "Microsoft представила новую функцию для Windows, которая существенно упростит работу с мобильными устройствами на Android. Теперь пользователи Windows смогут..."
+    },
+    {
+      "url": "https://3dnews.ru/1139166/v-mintsifri-rf-zadumali-isklyuchat-iz-belih-spiskov-sayti-kotorie-dostupni-cherez-vpn",
+      "title": "В Минцифры РФ задумали исключать из «белых списков» сайты...",
+      "description": "Минцифры направило письмо в адрес крупнейших цифровых платформ с новыми условиями доступа к «белым спискам» сайтов, которые сохраняют доступность при огранич..."
+    },
+    {
+      "url": "https://3dnews.ru/1112339/vk-sokrashchaet-sotrudnikov-no-ne-govorit-ob-etom",
+      "title": "VK не привлекая внимания уволила сотни сотрудников",
+      "description": "Холдинг VK в сентябре и начале октября уволил несколько сотен сотрудников, а в общей сложности под сокращение попадут до двух тысяч работников, узнал Forbes...."
+    },
+    {
+      "url": "https://3dnews.ru/1135872/alibaba-vipustila-novuyu-rassugdayushchuyu-model-qwen3maxthinking-v-testah-ona-ne-ustupaet-zapadnim-konkurentam",
+      "title": "Alibaba выпустила рассуждающую модель Qwen3-Max-Thinking,...",
+      "description": "Компания Alibaba Cloud открыла публичный доступ к своей новейшей флагманской модели логического рассуждения Qwen3-Max-Thinking. Модель показала производитель..."
+    },
+    {
+      "url": "https://3dnews.ru/1116440/top10-smartfonov-do-35k-rubley",
+      "title": "Топ-10 смартфонов до 35 тысяч рублей (2025 год) / Смартфоны",
+      "description": "Завершающая подборка смартфонов в 2025-м — в этот раз к концу года, а не в начале следующего. Как обычно, мы останавливаемся на среднем ценовом сегменте, а п..."
+    },
+    {
+      "url": "https://3dnews.ru/1116353/nvidia-anonsirovala-mobilnie-varianti-videokart-geforce-rtx-5090-rtx-5080-rtx-5070-ti-i-rtx-5070",
+      "title": "Nvidia представила мобильные видеокарты GeForce RTX 5090,...",
+      "description": "В дополнение к новейшим видеокартам для настольных компьютеров Nvidia представила графические ускорители GeForce RTX 5090, RTX 5080, RTX 5070 Ti и RTX 5070 д..."
+    },
+    {
+      "url": "https://3dnews.ru/1138554/obzor-apple-macbook-neo",
+      "title": "Обзор Apple MacBook Neo: удивительно хороший ноутбук с пр...",
+      "description": "Apple врывается в сегмент, где раньше почти безраздельно правили ноутбуки на Windows. И делает это в свойственной ей манере — MacBook Neo стал одним из самых..."
+    },
+    {
+      "url": "https://3dnews.ru/1070322/obzor-amazfit-trex-2",
+      "title": "Обзор часов Amazfit T-Rex 2: большой шаг вперёд / Умные вещи",
+      "description": "Обновлённая модель самых неубиваемых часов от Amazfit не только получила максимально полный набор разнообразных датчиков, но и работает на новой Zepp OS. Это..."
+    },
+    {
+      "url": "https://3dnews.ru/1131002/obzor-realme-15-pro",
+      "title": "Обзор смартфона realme 15 Pro: светит, но не греется / См...",
+      "description": "В последнее время «номерные» смартфоны realme могли похвастать разными достоинствами, но не выдающейся мощью. С realme 15 Pro другая история — этот смартфон ..."
+    },
+    {
+      "url": "https://3dnews.ru/1111949/u-aktualnih-modeley-sgo-mogut-vozniknut-problemi-s-ohlagdeniem-novih-protsessorov-intel-arrow-lakes",
+      "title": "Процессоры Intel Arrow Lake-S подбросят проблем владельца...",
+      "description": "Ранее сообщалось, что актуальные модели систем охлаждения для процессорного разъёма Intel LGA 1700 будут совместимы с новым сокетом LGA 1851 для настольных п..."
+    },
+    {
+      "url": "https://3dnews.ru/1130283/keenetic-ushyol-iz-rossii-vmesto-nego-teper-netcraze-no-dlya-polzovateley-nichego-ne-pomenyalos",
+      "title": "Keenetic ушёл из России — вместо него теперь Netcraze, но...",
+      "description": "Компания &laquo;Неткрейз&raquo;, прежде известная как &laquo;Кинетик&raquo;, сообщила о ребрендинге. Она начала поставлять в Россию и остальные страны Еврази..."
+    },
+    {
+      "url": "https://3dnews.ru/1060447/obzor-honor-magicbook-16-hym-w56",
+      "title": "Обзор ноутбука HONOR MagicBook 16 (HYM-W56): больше дюймо...",
+      "description": "HONOR MagicBook 16 — с виду обычный тонкий ультрабук, только с большим экраном, но у него есть кое-что общее с мощными игровыми и рабочими машинами: процессо..."
+    },
+    {
+      "url": "https://3dnews.ru/1131087/predstavlena-tvpristavka-sberbox-max-noviy-protsessor-i-iiuluchshatel-video-za7990-rubley",
+      "title": "Представлена ТВ-приставка SberBox Max — новый процессор и...",
+      "description": "&laquo;Сбер&raquo; представил новый медиацентр SberBox Max, который ускорит работу телевизора за счёт того, что разработчикам удалось почти втрое ускорить об..."
+    },
+    {
+      "url": "https://3dnews.ru/1137971/kompyuter-mesyatsa-mart-2026",
+      "title": "Компьютер месяца — март 2026 года / Ноутбуки и ПК",
+      "description": "Сложившаяся на рынке компьютерной техники ситуация очень напоминает затишье перед бурей. С одной стороны, железо для игровых ПК, использующее различную памят..."
+    },
+    {
+      "url": "https://3dnews.ru/1133477/yandeks-brauzer-teper-budet-potreblyat-menshe-operativnoy-pamyati-blagodarya-iioptimizatsii",
+      "title": "«Яндекс Браузер» теперь будет потреблять меньше оперативн...",
+      "description": "Десктопная версия &laquo;Яндекс Браузера&raquo; начала использовать модель машинного обучения для выявления неактивных вкладок, которые не понадобятся пользо..."
+    },
+    {
+      "url": "https://3dnews.ru/1106254/predstavlena-ekologichnaya-bezlitievaya-batareya-s-anodom-iz-drevesnoy-tsellyulozi",
+      "title": "Представлен экологичный аккумулятор без лития и с анодом ...",
+      "description": "Шведский разработчик натрий-ионных батарей Altris предложил способ сделать безлитиевые батареи ещё более экологичными. В партнёрстве с Stora Enso разработана..."
+    },
+    {
+      "url": "https://3dnews.ru/1000692/itogi-2019-goda-igrovie-videokarti",
+      "title": "Итоги 2019 года: игровые видеокарты / Видеокарты",
+      "description": "Ушедший год запомнится энтузиастам игровой 3D-графики как поворотное время для компании AMD, сменившей курс развития «красных» чипов с устаревшей архитектуры..."
+    },
+    {
+      "url": "https://3dnews.ru/1119720/rossiyskiy-analog-starlink-protestiruyut-v-surovih-usloviyah-arktiki",
+      "title": "Российский аналог Starlink протестируют в суровых условия...",
+      "description": "Российская аэрокосмическая компания &laquo;Бюро 1440&raquo; (входит в &laquo;ИКС-холдинг&raquo;) запустит в 2026 году в Ненецком автономном округе (НАО) пило..."
+    },
+    {
+      "url": "https://3dnews.ru/1108595/ostorognee-so-smartfonami-siniy-svet-vliyaet-na-kogu",
+      "title": "Синий свет от экрана смартфона пагубно влияет на кожу, вы...",
+      "description": "Четыре года назад весь мир оказался в плену страха перед синим светом экранов гаджетов. Причиной для опасений стало обоснованное наукой угнетение выработки м..."
+    },
+    {
+      "url": "https://3dnews.ru/1137865/reportag-so-stenda-cubot-na-mwc-2026-samiy-malenkiy-zashchishchyonniy-smartfon-modeli-pobolshe-i-drugie-dostupnie-novinki",
+      "title": "Репортаж со стенда Cubot на MWC 2026: самый маленький защ...",
+      "description": "На выставке MWC 2026 компания Cubot показала обновлённую линейку защищённых устройств, сделав основной акцент на практичности, высокой автономности и традици..."
+    },
+    {
+      "url": "https://3dnews.ru/1133400/top10-smartfonov-do-20-tisyach-rubley",
+      "title": "Топ-10 смартфонов до 20 тысяч рублей (2025 год) / Смартфоны",
+      "description": "Несмотря на стабилизировавшийся курс рубля, прорыва ни в бюджетном, ни в низком-среднем сегментах смартфонов не произошло, обстановка по доступным технология..."
+    },
+    {
+      "url": "https://3dnews.ru/1134682/obzor-huawei-matepad-115-s-2026",
+      "title": "Обзор планшета HUAWEI MatePad 11,5 S (2026): базовый вари...",
+      "description": "Huawei — это, пожалуй, самая динамичная компания на рынке планшетов. Как с точки зрения внедрения новых технологий (один матовый экран PaperMatte чего стоит)..."
+    },
+    {
+      "url": "https://3dnews.ru/1139125/messendger-max-stolknulsya-s-massovim-sboem-prilogenie-ne-rabotaet-soobshcheniya-ne-otpravlyayutsya",
+      "title": "Мессенджер Max столкнулся с массовым сбоем — приложение н...",
+      "description": "Пользователи из России сообщили о масштабных неполадках в работе отечественного мессенджера Max. Утром 30 марта, после 9:00 по московскому времени, количеств..."
+    },
+    {
+      "url": "https://3dnews.ru/1138345/multimodalnaya-iimodel-deepseekv4-s-milliardami-parametrov-i-kontekstnim-oknom-v-1-mln-tokenov-viydet-v-aprele",
+      "title": "Мультимодальная ИИ-модель DeepSeek-V4 с контекстным окном...",
+      "description": "С тех пор, как в январе прошлого года DeepSeek выпустила рассуждающую ИИ-модель DeepSeek-R1, которая получила широкую известность, крупных обновлений не выхо..."
+    },
+    {
+      "url": "https://3dnews.ru/1137217/whatsapp-nauchitsya-skrivat-soobshcheniya-pod-spoyleri-pryamo-kak-drugoy-populyarniy-messendger",
+      "title": "WhatsApp научится скрывать сообщения под спойлеры — прямо...",
+      "description": "WhatsApp работает над новой опцией форматирования текста, которая позволит скрывать содержимое текстовых сообщений. Функция была обнаружена в последней тесто..."
+    },
+    {
+      "url": "https://3dnews.ru/1137947/v-rossii-sozdali-prototip-kvantovoy-operativnoy-pamyati-dlya-kompyuterov-radarov-i-teleskopov-neveroyatnoy-chuvstvitelnosti",
+      "title": "В России создали прототип квантовой оперативной памяти — ...",
+      "description": "В феврале 2026 года в журнале Physical Review Letters вышла статья группы российских учёных кластера &laquo;Квантум Парк&raquo; МГТУ им. Н. Э."
+    },
+    {
+      "url": "https://3dnews.ru/150044",
+      "title": "Чистящие средства для КПК / Ноутбуки и ПК",
+      "description": "Defender - Psion - 1    \tПерво-наперво хочу заметить, что КПК Psion у меня эксплуатируется весьма много и в очень разных условиях. Одно дело домашняя обстано..."
+    },
+    {
+      "url": "https://3dnews.ru/1121490/obzor-gigabyte-geforce-rtx-5070-ti-gaming-oc",
+      "title": "Обзор видеокарты GIGABYTE GeForce RTX 5070 Ti GAMING OC /...",
+      "description": "GeForce RTX 5070 Ti под маркой GAMING OC работает на повышенных тактовых частотах и имеет большой задел для дальнейшего разгона, а система охлаждения на осно..."
+    },
+    {
+      "url": "https://3dnews.ru/1099347/v-rossii-do-sih-por-ne-legalizovan-diapazon-6-ggts-dlya-wifi-6e",
+      "title": "В России до сих пор не легализовали частотный диапазон дл...",
+      "description": "Год назад Госкомиссия по радиочастотам (ГКРЧ) выделила для стандарта Wi-Fi 6E диапазон 6 ГГц, но соответствующие документы до сих пор не приведены в соответс..."
+    },
+    {
+      "url": "https://3dnews.ru/1137868/reportag-so-stenda-blackview-na-mwc-2026-neubivaemiy-flagman-igrovoy-noutbuk-i-planshet-dlya-raboti",
+      "title": "Репортаж со стенда Blackview на MWC 2026: неубиваемый фла...",
+      "description": "На выставке MWC 2026 в Барселоне компания Blackview представила свои новейшие устройства &mdash; от защищённых смартфонов до планшетов и игровых ноутбуков. Э..."
+    },
+    {
+      "url": "https://3dnews.ru/1138311/hakeri-nachali-zapolonyat-github-proektami-s-nevidimim-vredonosnim-kodom",
+      "title": "Хакеры начали заполонять GitHub проектами с «невидимым» в...",
+      "description": "Исследователи в области кибербезопасности обнаружили крупномасштабную кампанию по публикации в популярных репозиториях проектов, содержащих вредоносный код, ..."
+    },
+    {
+      "url": "https://3dnews.ru/1103068/kompyuter-mesyatsa-igrovoy-pk-deshevle-30-000-rubley",
+      "title": "Компьютер месяца. Спецвыпуск: собираем игровой ПК дешевле...",
+      "description": "Для этой статьи мы подобрали несколько конфигураций системных блоков, собранных из палок и… комплектующих, заказанных в Китае и на «Авито». Только так — с ря..."
+    },
+    {
+      "url": "https://3dnews.ru/973155/obzor-full-hdmonitora-benq-ew277hdr-po-zakonam-ganra",
+      "title": "Обзор Full HD-монитора BenQ EW277HDR: по законам жанра / ...",
+      "description": "C каждым годом интерес к Full HD-моделям неуклонно падает, и чтобы поддерживать спрос, производители идут на хитрости и экспериментируют. Например, покупател..."
+    },
+    {
+      "url": "https://3dnews.ru/1118680/5-features-camera-honor-magic7-pro",
+      "title": "Пять главных фишек камеры HONOR Magic 7 Pro",
+      "description": "Кажется, просто хорошо снимать для современного смартфона — маловато. Производители ищут не только способы сделать качественные камеры, но и научить их особе..."
+    },
+    {
+      "url": "https://3dnews.ru/1136712/obzor-smartfona-realme-c85-pro-nepotoplyaemiy",
+      "title": "Обзор смартфона realme C85 Pro: непотопляемый / Смартфоны",
+      "description": "Битва за лавры создателя самого неубиваемого смартфона продолжается — и realme находится в соревновании в статусе постоянного участника. Ровно год назад мы р..."
+    },
+    {
+      "url": "https://3dnews.ru/1097960/obzor-tecno-spark-20",
+      "title": "Обзор смартфона TECNO SPARK 20: попытка удивить / Смартфоны",
+      "description": "Под конец года TECNO внезапно решила обновить свою бюджетную линейку, представив модели SPARK 20, SPARK 20C и SPARK 20 Go 2024. В этом материале мы поговорим..."
+    },
+    {
+      "url": "https://3dnews.ru/1110726/roskomnadzor-potratit-59-milliardov-na-obnovlenie-oborudovaniya-dlya-blokirovki-saytov",
+      "title": "Роскомнадзор потратит 59 млрд рублей на обновление оборуд...",
+      "description": "Около 60 млрд руб. Роскомнадзор потратит на обновление технических средств противодействия угрозам (ТСПУ) &mdash; оборудования, которое устанавливается у инт..."
+    },
+    {
+      "url": "https://3dnews.ru/about",
+      "title": "About 3DNews",
+      "description": "Самые интересные и оперативные новости из мира высоких технологий. На нашем портале - все о компьютерном железе, гаджетах, ноутбуках и других цифровых устрой..."
+    },
+    {
+      "url": "https://3dnews.ru/1138698/obzor-predator-bifrost-radeon-rx-9070-xt-oc",
+      "title": "Обзор видеокарты Predator BiFrost Radeon RX 9070 XT OC: м...",
+      "description": "Дебют Radeon RX 9070 XT на российском рынке был испорчен дефицитом и завышенными ценами, но эти проблемы остались в прошлом. Пора бросить свежий взгляд на иг..."
+    },
+    {
+      "url": "https://3dnews.ru/1135816/gid-po-viboru-umnih-chasov",
+      "title": "Гид по выбору умных часов (2026 год) / Носимая электроника",
+      "description": "Рынок носимой электроники застыл в некотором стазисе — умные часы так и не стали по-настоящему всеобъемлющим продуктом. Но все же стали продуктом массовым. П..."
+    },
+    {
+      "url": "https://3dnews.ru/1138266/apple-macbook-neo-protestirovali-v-igrah-vsyo-ne-tak-ploho",
+      "title": "Apple MacBook Neo протестировали в играх — всё не так плохо",
+      "description": "Новый ноутбук Apple MacBook Neo с ценником от $599 и процессором от iPhone в недорогом корпусе с пассивным охлаждением оказался вполне производительным компь..."
+    },
+    {
+      "url": "https://3dnews.ru/1138515/v-seti-vsplila-zagadochnaya-moshchnaya-iimodel-v-ney-zapodozrili-razrabotku-deepseek",
+      "title": "В Сети всплыла «ничейная» мощная ИИ-модель — в ней заподо...",
+      "description": "Мощная ИИ-модель без указания авторства, появившаяся недавно на платформе OpenRouter, породила слухи о том, что китайский стартап DeepSeek может в скрытом ре..."
+    },
+    {
+      "url": "https://3dnews.ru/tags/core%20ultra/page-2.html",
+      "title": "Новости по тегу core ultra, страница 2 из 3",
+      "description": "Самые интересные и оперативные новости из мира высоких технологий. На нашем портале - все о компьютерном железе, гаджетах, ноутбуках и других цифровых устрой..."
+    },
+    {
+      "url": "https://3dnews.ru/1127294/obzor-infinix-xpad-20",
+      "title": "Обзор планшета Infinix XPAD 20: с новосельем! / Планшеты",
+      "description": "Infinix уже превосходно известна своими смартфонами. Настолько, что в маркетплейсах уже можно найти подделки – например, под именем Imfinix – чем не успех? Т..."
+    },
+    {
+      "url": "https://3dnews.ru/1000567/itogi-2019-goda-kompyuter-mesyatsa",
+      "title": "Итоги 2019 года: компьютер месяца / Ноутбуки и ПК",
+      "description": "Прочитав эту статью, вы поймете, что 2019 год оказался очень богатым на всевозможные события и весьма интересным. Развернувшаяся между AMD, Intel и NVIDIA ко..."
+    },
+    {
+      "url": "https://3dnews.ru/1118878/alibaba-vypustila-konkurenta-dlya-sora-moshhnyj-besplatnyj-ii-generator-video-wan-21",
+      "title": "Alibaba снова ударила по OpenAI — вышел бесплатный ИИ-ген...",
+      "description": "Китайский гигант в области электронной коммерции Alibaba сделал общедоступной разработанную им модель искусственного интеллекта для создания видео и статичес..."
+    },
+    {
+      "url": "https://3dnews.ru/1138423/predstavlen-moshchniy-smartfon-poco-x8-pro-s-trassirovkoy-luchey-i-yomkoy-batareey",
+      "title": "Представлен мощный смартфон Poco X8 Pro с трассировкой лу...",
+      "description": "Бренд Poco компании Xiaomi представил серию флагманских смартфонов Poco X8, в которую вошли модели Poco X8 Pro и X8 Pro Max. Новинки, по словам производителя..."
+    },
+    {
+      "url": "https://3dnews.ru/1139394/iimodeli-okazalis-sklonni-lgat-i-izvorachivatsya-dlya-zashchiti-sebe-podobnih",
+      "title": "ИИ-модели оказались склонны лгать и изворачиваться для за...",
+      "description": "Модели искусственного интеллекта склонны к обману пользователей и прочим манипуляциям для защиты других моделей, которым грозит удаление. Такое открытие сдел..."
+    },
+    {
+      "url": "https://3dnews.ru/1106498/bespilotnie-avto-i-robotidostavshchiki-yandeksa-zarabotayut-pod-brendom-avtonomniy-transport",
+      "title": "Беспилотные авто и роботы-доставщики «Яндекса» заработают...",
+      "description": "&laquo;Яндекс&raquo; намеревается выделить проекты, связанные с роботами-доставщиками и беспилотными автомобилями, в самостоятельный бренд &laquo;Автономный ..."
+    },
+    {
+      "url": "https://3dnews.ru/1100446/honor-magicbook-x-16-2024-review",
+      "title": "Обзор доступного ноутбука HONOR MagicBook X 16 2024 (BRN-...",
+      "description": "Вопреки традиции, MagicBook X 16 2024 стал не заменой, а альтернативой прошлогодней модели. Новинка по-прежнему комплектуется восьмиядерным процессором Core ..."
+    },
+    {
+      "url": "https://3dnews.ru/1120025/ustanovleni-samie-strogie-ogranicheniya-na-kvantovuyu-gravitatsiyu-eto-klyuch-dlya-teorii-vsego",
+      "title": "Установлены самые строгие ограничения на квантовую гравит...",
+      "description": "Новая научная работа устанавливает самые строгие ограничения на квантовую гравитацию, которая считается ключом к созданию &laquo;теории всего&raquo; — универ..."
+    },
+    {
+      "url": "https://3dnews.ru/1139372/kitayskiy-proizvoditel-robotov-ubtech-gotov-platit-iispetsialistam-do-18-mln-v-god",
+      "title": "Китайский производитель роботов UBTech готов платить ИИ-с...",
+      "description": "В сфере программного обеспечения особой щедростью при поиске необходимых сотрудников по искусственному интеллекту в последнее время отличается американская M..."
+    },
+    {
+      "url": "https://3dnews.ru/1132127/luchshiy-protsessor-za-20-tisyach-rubley",
+      "title": "Лучший процессор за 20 тысяч рублей — сравнение и тесты /...",
+      "description": "Выбор CPU за 20 тысяч рублей не выглядит простой задачей: разные архитектуры, четыре платформы и заметные различия как в производительности, так и в энергопо..."
+    }
+  ]
+}

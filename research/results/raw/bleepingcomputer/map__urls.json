@@ -1,0 +1,487 @@
+{
+  "totalLinks": 95,
+  "articleUrls": [
+    "https://www.bleepingcomputer.com/news/security/new-acoustic-attack-steals-data-from-keystrokes-with-95-percent-accuracy",
+    "https://www.bleepingcomputer.com/news/microsoft/how-to-download-a-windows-10-iso-by-impersonating-other-devices",
+    "https://www.bleepingcomputer.com/news/microsoft/microsoft-entra-brings-phishing-resistant-sign-in-to-windows",
+    "https://www.bleepingcomputer.com/news/security/critical-react2shell-flaw-in-react-nextjs-lets-hackers-run-javascript-code",
+    "https://www.bleepingcomputer.com/news/microsoft/new-windows-11-kb5086672-emergency-update-fixes-install-issues"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/new-acoustic-attack-steals-data-from-keystrokes-with-95-percent-accuracy",
+      "title": "New acoustic attack steals data from keystrokes with 95% ...",
+      "description": "A team of researchers from British universities has trained a deep learning model that can steal data from keyboard keystrokes recorded using a microphone wi..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/how-to-download-a-windows-10-iso-by-impersonating-other-devices",
+      "title": "How to Download a Windows 10 ISO By Impersonating Other D...",
+      "description": "Microsoft allows you to download the latest Windows 10 ISOs from their site, but only if you are using a non-Windows browser user agent. This article will ex..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-entra-brings-phishing-resistant-sign-in-to-windows",
+      "title": "Microsoft brings phishing-resistant Windows sign-ins via ...",
+      "description": "Microsoft is rolling out passkey support for Microsoft Entra on Windows devices, adding phishing-resistant passwordless authentication via Windows Hello."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/critical-react2shell-flaw-in-react-nextjs-lets-hackers-run-javascript-code",
+      "title": "Critical React, Next.js flaw lets hackers execute code on...",
+      "description": "A maximum severity vulnerability, dubbed 'React2Shell', in the React Server Components (RSC) 'Flight' protocol allows remote code execution without authentic..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/new-windows-11-kb5086672-emergency-update-fixes-install-issues",
+      "title": "New Windows 11 emergency update fixes preview update inst...",
+      "description": "Microsoft released an emergency update to fix the March 2026 KB5079391 non-security preview update, which was pulled over the weekend due to installation iss..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/813984/visited-scamsketchy-website",
+      "title": "Visited scam/sketchy website - Virus, Trojan, Spyware, an...",
+      "description": "Page 1 of 3 - Visited scam/sketchy website - posted in Virus, Trojan, Spyware, and Malware Removal Help: Hi, so Ive opened about up to 30m ago a website my m..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/google-warns-of-new-ai-powered-malware-families-deployed-in-the-wild",
+      "title": "Google warns of new AI-powered malware families deployed ...",
+      "description": "Google's Threat Intelligence Group (GTIG) has identified a major shift this year, with adversaries leveraging artificial intelligence to deploy new malware f..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/new-dark-web-markets-claim-association-with-criminal-cartels",
+      "title": "New dark web markets claim association with criminal cartels",
+      "description": "Several new marketplaces have appeared on the dark web, claiming to be the dedicated online portals for notorious criminal cartels from Mexico."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/critical-cisco-imc-auth-bypass-gives-attackers-admin-access",
+      "title": "Critical Cisco IMC auth bypass gives attackers Admin access",
+      "description": "Cisco has patched several critical and high-severity vulnerabilities, including an Integrated Management Controller (IMC) authentication bypass that enables ..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/49",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/apple/eltima-website-hacked-to-spread-proton-rat-with-popular-video-player-app",
+      "title": "Eltima Website Hacked to Spread Proton RAT With Popular V...",
+      "description": "The website of Eltima, a maker of macOS and Windows apps, has been compromised by an unknown actor to spread a trojanized version of Elmedia Player, a multim..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/809280/random-black-desktop",
+      "title": "Random black desktop - Windows 11",
+      "description": "Page 1 of 2 - Random black desktop - posted in Windows 11: System Asus Tuf 32GB RAM, AMD Ryzen 9 7940HS w/ Radeon 780M Graphic card 6GB RAM. Running Win 11 A..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/axios-npm-hack-used-fake-teams-error-fix-to-hijack-maintainer-account",
+      "title": "Axios npm hack used fake Teams error fix to hijack mainta...",
+      "description": "The maintainers of the popular Axios HTTP client have published a detailed post-mortem describing how one of its developers was targeted by a social engineer..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/france-interior-ministry-confirms-cyberattack-on-email-servers",
+      "title": "French Interior Ministry confirms cyberattack on email se...",
+      "description": "The French Interior Minister confirmed on Friday that the country's Ministry of the Interior was breached in a cyberattack that compromised e-mail servers."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-now-lets-admins-remove-pre-installed-microsoft-store-apps-via-policy",
+      "title": "Microsoft: New policy removes pre-installed Microsoft Sto...",
+      "description": "Microsoft now allows IT administrators to remove pre-installed Microsoft Store apps (also known as in-box apps) using a new app management policy."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/804828/windows-cannot-load-the-extensible-counter-dll",
+      "title": "Windows cannot load the extensible counter DLL - Windows 11",
+      "description": "Windows cannot load the extensible counter DLL - posted in Windows 11: Does anyone know why this is happening and how to fix it?\nThis does exist in this loca..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/popular-javascript-library-expr-eval-vulnerable-to-rce-flaw",
+      "title": "Popular JavaScript library expr-eval vulnerable to RCE flaw",
+      "description": "A critical vulnerability in the popular expr-eval JavaScript library, with over 800,000 weekly downloads on NPM, can be exploited to execute code remotely th..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/ransomware",
+      "title": "Latest Ransomware news",
+      "description": "The latest news about  Ransomware"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/european-dyi-chain-manomano-data-breach-impacts-38-million-customers",
+      "title": "European DYI chain ManoMano data breach impacts 38 millio...",
+      "description": "DIY store chain ManoMano is notifying customers of a data breach personal data, which was caused by hackers compromising a third-party service provider."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-powertoys-adds-new-cursorwrap-mouse-teleport-tool",
+      "title": "Microsoft PowerToys adds new CursorWrap mouse 'teleport' ...",
+      "description": "Microsoft has released PowerToys 0.97, with a new mouse utility for multi-monitor setups and significant improvements to the Command Palette quick launcher."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tutorials/create-usb-recovery-drive-in-windows-8",
+      "title": "How to create a bootable USB Flash Recovery Drive in Wind...",
+      "description": "Windows 8 has the ability to create a bootable USB flash recovery drive that can be used to troubleshoot a Windows 8 computer that is unable to start. A reco..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/windows-10-gets-dns-over-https-support-how-to-test",
+      "title": "Windows 10 gets DNS over HTTPS support, how to test",
+      "description": "Microsoft announced that initial support for DNS over HTTPS (DoH) is now available in Windows 10 Insider Preview Build 19628 for Windows Insiders in the Fast..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/spyware-grade-coruna-ios-exploit-kit-now-used-in-crypto-theft-attacks",
+      "title": "Spyware-grade Coruna iOS exploit kit now used in crypto t...",
+      "description": "A previously undocumented set of 23 iOS exploits named"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5077241-update-improves-bitlocker-adds-sysmon-tool",
+      "title": "Windows 11 KB5077241 update improves BitLocker, adds Sysm...",
+      "description": "Microsoft has released the KB5077241 optional cumulative update for Windows 11, which comes with 29 changes, including improvements to BitLocker, a new netwo..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/search/",
+      "title": "Search Results",
+      "description": "BleepingComputer is a premier destination for cybersecurity news for over 20 years, delivering breaking stories on the latest hacks, malware threats, and how..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/607377/recovering-deleted-shadow-copies",
+      "title": "Recovering deleted shadow copies - Ransomware Help & Tech...",
+      "description": "Recovering deleted shadow copies - posted in Ransomware Help & Tech Support: https://www.kazamiya.net/en/artifact/wipe/deletedsc\n \nThat article is almost a y..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/malicious-chrome-extensions-with-17m-installs-found-on-web-store",
+      "title": "Malicious Chrome extensions with 1.7M installs found on W...",
+      "description": "Almost a dozen malicious extensions with 1.7 million downloads in Google's Chrome Web Store could track users, steal browser activity, and redirect to potent..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/energy-giant-shell-discloses-data-breach-after-accellion-hack",
+      "title": "Energy giant Shell discloses data breach after Accellion ...",
+      "description": "Energy giant Shell has disclosed a data breach after attackers compromised the company's secure file-sharing system powered by Accellion's File Transfer Appl..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/week-in-ransomware",
+      "title": "Latest Week in Ransomware news",
+      "description": "The latest news about  Week in Ransomware"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/new-malware-service-guarantees-phishing-extensions-on-chrome-web-store",
+      "title": "New malware service guarantees phishing extensions on Chr...",
+      "description": "A new malware-as-a-service (MaaS) called 'Stanley' promises malicious Chrome extensions that can clear Google's review process and publish them to the Chrome..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/487698/asus-p8h77-i-bios-issues",
+      "title": "Asus P8H77-I Bios Issues - Internal Hardware",
+      "description": "Asus P8H77-I Bios Issues - posted in Internal Hardware: Hey all.  New member here.  \n \nIm having an issue with a new build Ive just created.  Its an ASUS P8H..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/51",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/offer/page/146",
+      "title": "All Offers",
+      "description": "BleepingComputer is a premier destination for cybersecurity news for over 20 years, delivering breaking stories on the latest hacks, malware threats, and how..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5065789-update-released-with-41-changes-and-fixes",
+      "title": "Windows 11 KB5065789 update released with 41 changes and ...",
+      "description": "​​Microsoft has released the KB5065789 preview cumulative update for Windows 11 24H2, which includes 41 improvements, including new AI actions in File Explor..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/interlock-ransomware-exploited-secure-fmc-flaw-in-zero-day-attacks-since-january",
+      "title": "Ransomware gang exploits Cisco flaw in zero-day attacks s...",
+      "description": "The Interlock ransomware gang has been exploiting a maximum severity remote code execution (RCE) vulnerability in Cisco's Secure Firewall Management Center (..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/cyberattack",
+      "title": "Latest Cyberattack news",
+      "description": "The latest news about  Cyberattack"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/vpn/guides/best-vpns-chatgpt",
+      "title": "Best VPNs for ChatGPT (working in 2025)",
+      "description": "We've tested the best VPNs for ChatGPT, so you can access it from anywhere in the world and bypass pesky restrictions with ease."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/cisa-vmware-esxi-flaw-now-exploited-in-ransomware-attacks",
+      "title": "CISA: VMware ESXi flaw now exploited in ransomware attacks",
+      "description": "CISA confirmed on Wednesday that ransomware gangs have begun exploiting a high-severity VMware ESXi sandbox escape vulnerability that was used in zero-day at..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/snowblind-malware-abuses-android-security-feature-to-bypass-security",
+      "title": "Snowblind malware abuses Android security feature to bypa...",
+      "description": "A novel Android attack vector from a piece of malware tracked as Snowblind is abusing a security feature to bypass existing anti-tampering protections in app..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/tp-link-warns-users-to-patch-critical-router-auth-bypass-flaw",
+      "title": "TP-Link warns users to patch critical router auth bypass ...",
+      "description": "TP-Link has patched several vulnerabilities in its Archer NX router series, including a critical-severity flaw that may allow attackers to bypass authenticat..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/crunchyroll-probes-breach-after-hacker-claims-to-steal-68m-users-data",
+      "title": "Crunchyroll probes breach after hacker claims to steal 6....",
+      "description": "Popular anime streaming platform Crunchyroll is investigating a breach after hackers claimed to have stolen personal information for approximately 6.8 millio..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/volvo-group-north-america-customer-data-exposed-in-conduent-hack",
+      "title": "Volvo Group North America customer data exposed in Condue...",
+      "description": "Volvo Group North America disclosed that it suffered an indirect data breach stemming from the compromise of IT systems at American business services giant C..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/technology/new-algorithms-can-repair-corrupted-images-enhance-low-res-photos",
+      "title": "New Algorithms Can Repair Corrupted Images, Enhance Low-R...",
+      "description": "Deep convolutional neural networks (CNN) have become a popular tool for image generation and restoration, with a few algorithms released in the last months o..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/3-key-takeaways-from-the-scattered-spider-attacks-on-insurance-firms",
+      "title": "3 key takeaways from the Scattered Spider attacks on insu...",
+      "description": "Scattered Spider recently pivoted from targeting worldwide retailers to U.S. based insurance firms, with no signs of slowing down. Learn about Scattered Spid..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/4",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/sysadmin/guides/best-patch-management-tools",
+      "title": "The best patch management tools to protect and maintain c...",
+      "description": "Keeping applications up to date is an important function for security and performance. We explore the best application patch management tools."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/unc4736",
+      "title": "Latest unc4736 news",
+      "description": "The latest news about  unc4736"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/756245/windows-2016-not-allowing-for-updates",
+      "title": "Windows 2016 not allowing for updates - Windows Server",
+      "description": "Windows 2016 not allowing for updates - posted in Windows Server: So a popup shows that says Updates are available but when try to do updates, the whole Upda..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/770023/dell-optiplex-980-no-boot-no-post-no-display",
+      "title": "Dell Optiplex 980 - No Boot No Post No Display - Internal...",
+      "description": "Page 1 of 2 - Dell Optiplex 980 - No Boot No Post No Display - posted in Internal Hardware: Up until yesterday this PC was working well - but now it wont sta..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/these-windows-10-tools-give-you-complete-control-over-privacy",
+      "title": "These Windows 10 tools give you complete control over pri...",
+      "description": "If you are concerned about how Windows 10 tracks your activity, these two tools allow you to take complete control over the operating system's privacy settings."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-classic-outlook-bug-causing-email-delivery-issues",
+      "title": "Microsoft fixes Classic Outlook bug causing email deliver...",
+      "description": "Microsoft has resolved a known issue that was preventing some Classic Outlook users from sending emails via Outlook.com."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/traffic-violation",
+      "title": "Latest Traffic Violation news",
+      "description": "The latest news about  Traffic Violation"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/google-patches-android-zero-day-actively-exploited-in-attacks",
+      "title": "Android gets patches for Qualcomm zero-day exploited in a...",
+      "description": "Google has released security updates to patch 129 Android security vulnerabilities, including an actively exploited zero-day flaw in a Qualcomm display compo..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/critical-citrix-netscaler-memory-flaw-actively-exploited-in-attacks",
+      "title": "Critical Citrix NetScaler memory flaw actively exploited ...",
+      "description": "Hackers are exploiting a critical severity vulnerability, tracked as CVE-2026-3055, in Citrix  NetScaler ADC and NetScaler Gateway appliances to obtain sensi..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/google/google-paid-171-million-for-vulnerability-reports-in-2025",
+      "title": "Google paid $17.1 million for vulnerability reports in 2025",
+      "description": "Google paid over $17 million to 747 security researchers who reported security bugs through its Vulnerability Reward Program (VRP) in 2025."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/massive-psaux-ransomware-attack-targets-22-000-cyberpanel-instances",
+      "title": "Massive PSAUX ransomware attack targets 22,000 CyberPanel...",
+      "description": "Over 22,000 CyberPanel instances exposed online to a critical remote code execution (RCE) vulnerability were mass-targeted in a PSAUX ransomware attack that ..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/cloudflare-makes-dnssec-activation-easy",
+      "title": "Cloudflare Makes DNSSEC Activation Easy",
+      "description": "A boost is expected in the near future in the adoption of the DNSSEC technology that establishes trust in the Domain Name System (DNS) - the mechanism respon..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/815284/lenovo-chromebook-c-340-15-youtube-videos-stopping-and-starting-etc",
+      "title": "Lenovo Chromebook C-340-15 Youtube videos stopping and st...",
+      "description": "Lenovo Chromebook C-340-15 Youtube videos stopping and starting, etc. - posted in Chrome OS: Hi,\n \nA client brought me their Lenovo Chromebook C-340-15 with ..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/microsoft-adds-windows-10-dns-over-https-settings-section",
+      "title": "Microsoft adds Windows 10 DNS over HTTPS settings section",
+      "description": "Microsoft has announced that Windows 10 customers can now configure DNS over HTTPS (DoH) directly from the Settings app starting with the release of Windows ..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11",
+      "title": "BlackLotus bootkit bypasses UEFI Secure Boot on patched W...",
+      "description": "The developers of the BlackLotus UEFI bootkit have improved the malware with Secure Boot bypass capabilities that allow it to infect even fully patched Windo..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/german-authorities-identify-revil-and-gangcrab-ransomware-bosses",
+      "title": "German authorities identify REvil and GandCrab ransomware...",
+      "description": "The Federal Police in Germany (BKA) has identified two Russian nationals as the leaders of GandCrab and REvil ransomware operations between 2019 and 2021."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/autospill-attack-steals-credentials-from-android-password-managers",
+      "title": "AutoSpill attack steals credentials from Android password...",
+      "description": "Security researchers developed a new attack, which they named AutoSpill, to steal account credentials on Android during the autofill operation."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/telegram-s-blogging-platform-abused-in-phishing-attacks",
+      "title": "Telegram’s blogging platform abused in phishing attacks",
+      "description": "Telegram's anonymous blogging platform, Telegraph, is being actively exploited by phishing actors who take advantage of the platform's lax policies to set up..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/810190/salted2020-ransomware-20dfs-aksx-crypt-le0",
+      "title": "Salted2020 Ransomware (.20dfs, .aksx, .crypt, .le0) - Ran...",
+      "description": "Page 1 of 2 - Salted2020 Ransomware (.20dfs, .aksx, .crypt, .le0) - posted in Ransomware Help & Tech Support: \nAny files that are encrypted with Salted2020 R..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-march-2026-patch-tuesday-fixes-2-zero-days-79-flaws",
+      "title": "Microsoft March 2026 Patch Tuesday fixes 2 zero-days, 79 ...",
+      "description": "Today is Microsoft's March 2026 Patch Tuesday with security updates for 79 flaws, including 2 publicly disclosed zero-day vulnerabilities."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/beyondtrust-warns-of-critical-rce-flaw-in-remote-support-software",
+      "title": "BeyondTrust warns of critical RCE flaw in remote support ...",
+      "description": "BeyondTrust warned customers to patch a critical security flaw in its Remote Support (RS) and Privileged Remote Access (PRA) software that could allow unauth..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/microsoft-links-medusa-ransomware-affiliate-to-zero-day-attacks/amp",
+      "title": "Microsoft links Medusa ransomware affiliate to zero-day a...",
+      "description": "Microsoft says that Storm-1175, a China-based financially motivated cybercriminal group known for deploying Medusa ransomware payloads, has been deploying n-..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/6",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/hundreds-of-hp-printer-models-vulnerable-to-remote-code-execution",
+      "title": "Hundreds of HP printer models vulnerable to remote code e...",
+      "description": "HP has published security advisories for three critical-severity vulnerabilities affecting hundreds of its LaserJet Pro, Pagewide Pro, OfficeJet, Enterprise,..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/cisco-source-code-stolen-in-trivy-linked-dev-environment-breach",
+      "title": "Cisco source code stolen in Trivy-linked dev environment ...",
+      "description": "Cisco has suffered a cyberattack after threat actors used stolen credentials from the recent Trivy supply chain attack to breach its internal development env..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/windows-10-kb5065429-update-includes-14-changes-and-fixes",
+      "title": "Windows 10 KB5065429 update includes 14 changes and fixes",
+      "description": "Microsoft has released the KB5065429 cumulative update for Windows 10 22H2 and Windows 10 21H2, with fourteen fixes or changes, including fixes for unexpecte..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/712515/network-discovery-not-working",
+      "title": "Network Discovery not working - Networking",
+      "description": "Network Discovery not working - posted in Networking: Hi everyone\n \nDoers anyone have a setup guide  for win 10 network sharing.\n \nI have a 10 machine home n..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/google-fixes-fourth-chrome-zero-day-exploited-in-attacks-in-2026",
+      "title": "Google fixes fourth Chrome zero-day exploited in attacks ...",
+      "description": "Google has fixed the fourth Chrome vulnerability exploited in zero-day attacks since the start of the year."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-bounty-program-now-includes-any-flaw-impacting-its-services",
+      "title": "Microsoft bounty program now includes any flaw impacting ...",
+      "description": "Microsoft now pays security researchers for finding critical vulnerabilities in any of its online services, regardless of whether the code was written by Mic..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-may-2025-patch-tuesday-fixes-5-exploited-zero-days-72-flaws",
+      "title": "Microsoft May 2025 Patch Tuesday fixes 5 exploited zero-d...",
+      "description": "Today is Microsoft's May 2025 Patch Tuesday, which includes security updates for 72 flaws, including five actively exploited and two publicly disclosed zero-..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/telegram-desktop-saves-conversations-locally-in-plain-text",
+      "title": "Telegram Desktop Saves Conversations Locally in Plain Text",
+      "description": "The desktop variant for Telegram secure messaging app fails to protect chat content locally, offering access to plain text conversations and media that other..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/5",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/3",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/startups/26064/pcasvc.dll",
+      "title": "Program Compatibility Assistant Service - pcasvc.dll - Pr...",
+      "description": "This entry has information about the Windows startup entry named Program Compatibility Assistant Service that points to the pcasvc.dll file. Please visit thi..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/814055/highly-intermittent-seemingly-random-shutdowns-event-viewer-event-volmgr-162/page-3",
+      "title": "Highly intermittent seemingly random shutdowns (Event vie...",
+      "description": "Page 3 of 5 - Highly intermittent seemingly random shutdowns (Event viewer event: volmgr 162) - posted in Windows Crashes and Blue Screen of Death (BSOD) Hel..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/data-breach/page/67",
+      "title": "Latest Data Breach news",
+      "description": "The latest news about  Data Breach"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/google-chrome",
+      "title": "Latest Google Chrome news",
+      "description": "The latest news about  Google Chrome"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/die-linke-german-political-party-confirms-data-stolen-by-qilin-ransomware",
+      "title": "Die Linke German political party confirms data stolen by ...",
+      "description": "The Qilin ransomware group has claimed responsibility for an attack against Die Linke ('The Left'), forcing an IT systems outage at the political party, and ..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/784007/virtual-disk-manager-incorrect-function-after-installing-ventoy",
+      "title": "Virtual Disk Manager Incorrect Function after installing ...",
+      "description": "Page 1 of 3 - Virtual Disk Manager Incorrect Function after installing Ventoy - posted in Windows 10 Support: I have a 1TB nvme (Micron) SSD in an external U..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/2026-browser-data-reveals-major-enterprise-security-blind-spots",
+      "title": "2026 Browser Data Reveals Major Enterprise Security Blind...",
+      "description": "The browser is becoming the operating system for modern work, yet many enterprises still treat it as an extension of network or endpoint security. Keep Aware..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/scattered-spider-is-running-a-vmware-esxi-hacking-spree",
+      "title": "Scattered Spider is running a VMware ESXi hacking spree",
+      "description": "Scattered Spider hackers have been aggressively targeting virtualized environments by attacking VMware ESXi hypervisors at U.S. companies in the retail, airl..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/shadowserver",
+      "title": "Latest Shadowserver news",
+      "description": "The latest news about  Shadowserver"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/claimants-in-celsius-crypto-bankruptcy-targeted-in-phishing-attack",
+      "title": "Claimants in Celsius crypto bankruptcy targeted in phishi...",
+      "description": "Scammers are impersonating the bankruptcy claim agent for crypto lender Celsius in phishing attacks that attempt to steal funds from cryptocurrency wallets."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/fake-mas-windows-activation-domain-used-to-spread-powershell-malware",
+      "title": "Fake MAS Windows activation domain used to spread PowerSh...",
+      "description": "A typosquatted domain impersonating the Microsoft Activation Scripts (MAS) tool was used to distribute malicious PowerShell scripts that infect Windows syste..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/nso-group-used-another-whatsapp-zero-day-after-being-sued-court-docs-say",
+      "title": "NSO Group used another WhatsApp zero-day after being sued...",
+      "description": "Israeli surveillance firm NSO Group reportedly used multiple zero-day exploits, including an unknown one named"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/forums/t/772782/issue-tinywall-is-blocking-all-outgoing-connections-regardless-of-exceptions",
+      "title": "Issue: TinyWall is blocking all outgoing connections rega...",
+      "description": "Issue: TinyWall is blocking all outgoing connections regardless of exceptions - posted in Firewall Software and Hardware: Hi, Im new on this forum, its a ple..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-critical-azure-cli-flaw-that-leaked-credentials-in-logs",
+      "title": "Microsoft fixes critical Azure CLI flaw that leaked crede...",
+      "description": "Microsoft has fixed a critical security vulnerability that could let attackers steal credentials from GitHub Actions or Azure DevOps logs created using Azure..."
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/openclaw",
+      "title": "Latest OpenClaw news",
+      "description": "The latest news about  OpenClaw"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/tag/cve-2026-35616",
+      "title": "Latest CVE-2026-35616 news",
+      "description": "The latest news about  CVE-2026-35616"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/new-ai-attack-hides-data-theft-prompts-in-downscaled-images",
+      "title": "New AI attack hides data-theft prompts in downscaled images",
+      "description": "Researchers have developed a novel attack that steals user data by injecting malicious prompts in images processed by AI systems before delivering them to a ..."
+    }
+  ]
+}

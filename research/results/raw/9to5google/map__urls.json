@@ -1,0 +1,517 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://9to5google.com/2026/03/27/google-pixel-launcher-automatically-design-home-screens",
+    "https://9to5google.com/2025/12/16/smartphone-market-expectations-decline-2026",
+    "https://9to5google.com/2026/02/10/samsung-galaxy-s26-launch-date-confirmed",
+    "https://9to5google.com/2026/03/26/android-17-beta-3-everything-new",
+    "https://9to5google.com/2024/11/05/samsung-galaxy-tab-s10-trade-in-deal",
+    "https://9to5google.com/2026/01/05/tcl-upgrades-nxtpaper-series-new-phone-and-tablet",
+    "https://9to5google.com/2026/02/17/youtube-outage-february-2026",
+    "https://9to5google.com/2026/04/06/metas-smart-glasses-will-watch-what-you-eat-to-track-nutrition-data",
+    "https://9to5google.com/2026/03/03/chrome-two-week-updates",
+    "https://9to5google.com/2021/10/26/pixel-6-partnerships",
+    "https://9to5google.com/2026/03/30/samsung-built-a-motion-sickness-app-for-galaxy-buds",
+    "https://9to5google.com/2026/04/06/april-2026-google-system-updates",
+    "https://9to5google.com/2025/10/10/pixel-watch-4-teardown",
+    "https://9to5google.com/2023/12/15/firefox-for-android-now-supports-over-450-extensions",
+    "https://9to5google.com/2026/04/06/april-2026-google-system-updates/",
+    "https://9to5google.com/2026/04/06/samsung-weather-app-updates-tweaks-pollen",
+    "https://9to5google.com/2025/08/27/google-vids-free",
+    "https://9to5google.com/2023/05/10/best-android-trade-in-value-spring-2023"
+  ],
+  "allLinks": [
+    {
+      "url": "https://9to5google.com/2026/03/27/google-pixel-launcher-automatically-design-home-screens",
+      "title": "Google's Pixel Launcher could auto-design your next home ...",
+      "description": "Google is working on a way for Pixel users to automatically populate their home screen with related apps, widgets, and more."
+    },
+    {
+      "url": "https://9to5google.com/2025/12/16/smartphone-market-expectations-decline-2026",
+      "title": "Smartphone market expected to shrink in 2026 due to risin...",
+      "description": "According to a new report, the smartphone market as a whole is expected to shrink in 2026 due to the..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/10/samsung-galaxy-s26-launch-date-confirmed",
+      "title": "Samsung confirms Galaxy S26 launch date, teases $900 off",
+      "description": "Samsung has confirmed the official launch date for the Galaxy S26 series, with reservations now open and up to $900 off, too."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/26/android-17-beta-3-everything-new",
+      "title": "Here's everything new in Android 17 Beta 3 [Gallery]",
+      "description": "Google today rolled out Android 17 Beta 3 for Pixel devices. This comes a month after the second release. Over..."
+    },
+    {
+      "url": "https://9to5google.com/2024/11/05/samsung-galaxy-tab-s10-trade-in-deal",
+      "title": "Samsung offers $300 for any tablet trade towards Galaxy T...",
+      "description": "Samsung has a deal ongoing for the Galaxy Tab S10 which offers at least $300 for any old tablet towards the latest models."
+    },
+    {
+      "url": "https://9to5google.com/2026/01/05/tcl-upgrades-nxtpaper-series-new-phone-and-tablet",
+      "title": "TCL's eye-friendly NXTPAPER series adds the 70 Pro and No...",
+      "description": "The NXTPAPER lineup from TCL is getting more love, with a new Android phone and tablet with better quality-of-life features..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/17/youtube-outage-february-2026",
+      "title": "It's not just you, YouTube is partially down in outage",
+      "description": "If you’re trying to access YouTube right now and running into problems, you’re not alone, as a widespread outage appears..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/metas-smart-glasses-will-watch-what-you-eat-to-track-nutrition-data",
+      "title": "Meta's smart glasses will watch what you eat to track nut...",
+      "description": "Meta has revealed a new update for its smart glasses – Ray-Ban and Oakley – that allow you to track..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/03/chrome-two-week-updates",
+      "title": "Google Chrome is switching to a two-week release cycle",
+      "description": "Google will soon release a major update for its Chrome browser on all platforms every four weeks to \"get features [out] faster.\""
+    },
+    {
+      "url": "https://9to5google.com/2021/10/26/pixel-6-partnerships",
+      "title": "Google signed Pixel 6 partnerships with 45 carriers, reta...",
+      "description": "Sundar Pichai kicked off Alphabet's Q3 2021 call by citing the Pixel 6 as an example of becoming an AI-first company, and partnerships..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/30/samsung-built-a-motion-sickness-app-for-galaxy-buds",
+      "title": "Samsung built a motion sickness app for Galaxy Buds and more",
+      "description": "Samsung just released a new app called “Hearapy” to reduce motion sickness. It works by playing specific audio frequencies, quelling..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/april-2026-google-system-updates",
+      "title": "What’s new in Android's April 2026 Google System Updates",
+      "description": "The monthly “Google System Release Notes” primarily detail what’s new in Play services, Play Store, and Play system update across..."
+    },
+    {
+      "url": "https://9to5google.com/2025/10/10/pixel-watch-4-teardown",
+      "title": "Pixel Watch 4 gets easy teardown & official repair manuals",
+      "description": "Google designed the Pixel Watch 4 to be serviceable (or repairable) and an iFixit teardown today shows how easy it is to do so."
+    },
+    {
+      "url": "https://9to5google.com/2023/12/15/firefox-for-android-now-supports-over-450-extensions",
+      "title": "Firefox for Android now supports over 450 extensions",
+      "description": "Mozilla has opened up access to over 450 extensions on the Android version of the Firefox browser, adding new functionality and more."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/april-2026-google-system-updates/",
+      "title": "What’s new in Android's April 2026 Google System Updates",
+      "description": "The monthly “Google System Release Notes” primarily detail what’s new in Play services, Play Store, and Play system update across..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/samsung-weather-app-updates-tweaks-pollen",
+      "title": "Samsung Weather update improves pollen counts, more",
+      "description": "As Spring has sprung, The Pollening has also arrived and, just in time, Samsung has made some welcome updates to..."
+    },
+    {
+      "url": "https://9to5google.com/2025/08/27/google-vids-free",
+      "title": "Google Vids rolling out to free users",
+      "description": "Since last year, Google Vids has only been available to Workspace customers, and it's now available to free users..."
+    },
+    {
+      "url": "https://9to5google.com/2023/05/10/best-android-trade-in-value-spring-2023",
+      "title": "Best Android trade-in values for spring 2023",
+      "description": "Looking for the best Android trade-in values? Check out Decluttr for an easy way to get cash for your smartphone."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/18/google-pixel-10a-trade-in-values",
+      "title": "Pixel 10a trade-in values: Boosted for iPhone, Galaxy, Pi...",
+      "description": "The Pixel 10a has arrived and, as per usual, boosted trade-in values are among the best way to score a..."
+    },
+    {
+      "url": "https://9to5google.com/2024/04/11/youtube-sidebar-redesign-test",
+      "title": "YouTube tests moving title and comments to sidebar; no on...",
+      "description": "YouTube is testing a new website design that pushes the video title and comments to the sidebar, and no one likes it."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/12/gemini-overlay-tools-redesign",
+      "title": "Gemini rolls out overlay redesign that adds full Tools me...",
+      "description": "The latest Gemini overlay redesign gives you access to more of the prompt box and Tools menu anywhere on Android."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/06/pixel-10a-vs-pixel-10-a-slim-gap-is-now-a-chasm-video",
+      "title": "Pixel 10a vs. Pixel 10: A slim gap is now a chasm [Video]",
+      "description": "In years gone by, the A-series has encroached on the base Pixel, but that isn’t the case in 2026. How..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/22/android-sideloading-compromise",
+      "title": "Android isn't killing sideloading, but the compromise is ...",
+      "description": "Sideloading has been a key part of Android since the beginning, not only delivering a lot of flexibility to Android,..."
+    },
+    {
+      "url": "https://9to5google.com/2024/01/17/galaxy-s24-trade-in-deals-breakdown",
+      "title": "Galaxy S24 trade-in values are solid, especially for old ...",
+      "description": "Samsung is giving some solid trade-in values when you upgrade to the Galaxy S24 series, especially if you're still a Note owner."
+    },
+    {
+      "url": "https://9to5google.com/post-sitemap.xml"
+    },
+    {
+      "url": "https://9to5google.com/2026/01/22/a-renewed-pixel-10-pro-is-a-steal-at-just-570-right-now",
+      "title": "A renewed Pixel 10 Pro is a steal at just $570 right now",
+      "description": "The Pixel 10 Pro is a steal on Amazon right now as the price drops below $600. A significant discount for those seeking the latest flagship."
+    },
+    {
+      "url": "https://9to5google.com/2025/05/02/a-renewed-pixel-8-is-well-worth-it-for-just-300-on-amazon-right-now",
+      "title": "A renewed Pixel 8 is well worth it for just $300 on Amazo...",
+      "description": "Google's past base model flagship Pixel 8 is a great pickup as it's just $305 right now on Amazon's renewed device storefront."
+    },
+    {
+      "url": "https://9to5google.com/2024/03/20/google-contacts-custom-ringtones-android",
+      "title": "Google Contacts makes it easier to manage custom ringtones",
+      "description": "In a new update, the Google Contacts app is making it much easier to manage and set custom ringtones for your contacts on Android."
+    },
+    {
+      "url": "https://9to5google.com/android-find-my-device-trackers",
+      "title": "These trackers support Android's 'Find My' network",
+      "description": "The new \"Find My Device\" network on Android makes it possible to find things everywhere, and these trackers are compatible."
+    },
+    {
+      "url": "https://9to5google.com/2025/09/02/deals-galaxy-flip-7-fold-7-s25-edge",
+      "title": "Deals: Galaxy Flip 7/Fold 7 $300 off, S25 Edge $400 off, ...",
+      "description": "Today’s 9to5Toys Lunch Break is ready to roll alongside a host of hangover Labor Day deals you’ll find right here...."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/03/corning-gorilla-glass-ceramic-3-razr-fold",
+      "title": "Gorilla Glass Ceramic 3 survives years of drops, starts o...",
+      "description": "Corning has announced Gorilla Glass Ceramic 3, a new upgrade to smartphone cover glass that promises protection against years of..."
+    },
+    {
+      "url": "https://9to5google.com/post-sitemap4.xml"
+    },
+    {
+      "url": "https://9to5google.com/2021/05/03/fast-charging-android-auto-dongle-15",
+      "title": "$15 gadget enables fast charging while using Android Auto...",
+      "description": "One person has come up with a clever way to bring fast charging to essentially any Android Auto user for just $15."
+    },
+    {
+      "url": "https://9to5google.com/2025/08/04/newpipe-youtube-app-android-auto-support",
+      "title": "This YouTube app alternative just added Android Auto support",
+      "description": "NewPipe is an open-source YouTube app for Android and, now, it has Android Auto support. The idea of NewPipe is..."
+    },
+    {
+      "url": "https://9to5google.com/2024/10/17/you-should-change-these-android-15-features-now-video",
+      "title": "You should change these Android 15 features now [Video]",
+      "description": "Here are some features that we think you should enable or change right away to improve, secure, and enhance your Android 15 experience."
+    },
+    {
+      "url": "https://9to5google.com/2020/09/09/new-google-finance",
+      "title": "New Google Finance redesigned for desktop and mobile web",
+      "description": "The new Google Finance features desktop and mobile redesign today focused on making it easier to \"find data for stocks you’re interested in, market..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/pixel-10a-after-one-month-more-than-the-sum-of-its-parts-video",
+      "title": "Pixel 10a after one month: More than the sum of its parts...",
+      "description": "The Pixel 10a is a month old, but it's just the Pixel 9a again, right? While that's a fair assumption, but there's more to this phone."
+    },
+    {
+      "url": "https://9to5google.com/2015/07/02/swappa-releases-app-to-quickly-evaluate-the-value-of-your-phone-or-tablet",
+      "title": "Swappa releases app to quickly evaluate the value of your...",
+      "description": "Swappa is a relatively small player in the online marketplace space, only dealing in mobile phones and tablets, but it’s quite..."
+    },
+    {
+      "url": "https://9to5google.com/2025/08/27/google-pixel-10-tensor-g5-chip-benchmarks-heat",
+      "title": "Pixel 10's Tensor G5 chip runs cool, unimpressive on benc...",
+      "description": "Google's new Pixel 10 series ushers in Tensor G5 which, while still unimpressive on benchmarks, seems to largely solve overheating problems."
+    },
+    {
+      "url": "https://9to5google.com/2024/11/06/samsung-shipments-beat-apple-q3-2024",
+      "title": "Samsung barely beats Apple in Q3 2024 shipments",
+      "description": "Samsung beats Apple in single-quarter shipments in 2024. The total number is still a decrease in annual growth for the company."
+    },
+    {
+      "url": "https://9to5google.com/2024/04/04/how-to-access-public-wi-fi-login-page",
+      "title": "How to manually access a public Wi-Fi login page on Android",
+      "description": "Public Wi-Fi is easy to connect to and generally doesn’t cost you a cent. However, the process isn’t always fluid..."
+    },
+    {
+      "url": "https://9to5google.com/2024/01/26/calculating-calculator-critiques-android-iphone",
+      "title": "Calculating critiques of the Android and iPhone Calculato...",
+      "description": "To be blunt, the default Calculator app on the iPhone is really bad. Apple just replicated a standard/scientific calculator without..."
+    },
+    {
+      "url": "https://9to5google.com/2025/12/01/samsung-galaxy-z-trifold-specs-launch-us-confirmed",
+      "title": "Samsung reveals Galaxy Z TriFold, confirms US launch in 2026",
+      "description": "Samsung has officially revealed the Galaxy Z TriFold, which is set to launch in the US early next year. After..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/google-photos-adding-ai-enhance-video-playback-speed-control",
+      "title": "Google Photos adds 'AI Enhance' and video playback speed ...",
+      "description": "Google announced two new additions to Google Photos for all Android users, and they’ve already begun rolling out. Google posted..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/11/the-galaxy-s26-series-is-now-officially-on-sale-and-the-trade-in-values-have-plummeted",
+      "title": "The Galaxy S26 series is now officially on sale, and the ...",
+      "description": "You’ve had two weeks to pre-order Samsung’s new Galaxy S26 lineup, but if you missed your chance, you might’ve also..."
+    },
+    {
+      "url": "https://9to5google.com/2011/11/23/google-abandons-green-tech-initiative-axes-knol-wave-friend-connect-and-other-services",
+      "title": "Google abandons green tech initiative, axes Knol, Wave, F...",
+      "description": "Google Wave is no more. Google already shut down Android developer forums, closed Labs, phased out Google Desktop, killed off questions and answer..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/24/apple-music-5-2-android",
+      "title": "Apple Music 5.2 for Android adds iOS 26.4 Playlist Playgr...",
+      "description": "Following the first iOS 26.4 preview, Apple Music 5.2 entered beta earlier this week with three new features."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/17/google-ai-pro-ultra-features",
+      "title": "What Gemini features you get with Google AI Pro [Feb 2026]",
+      "description": "At I/O 2025, Google One AI Premium (and Gemini Advanced) became Google AI Pro, while a more expensive tier was introduced with AI Ultra."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/12/chrome-arm64-linux",
+      "title": "Google Chrome for ARM64 Linux devices coming Q2 2026",
+      "description": "Following Mac and Windows versions, Google Chrome will soon support ARM64 Linux devices. This will result in..."
+    },
+    {
+      "url": "https://9to5google.com/2021/10/19/google-launches-pixel-6",
+      "title": "Google launches $599 Pixel 6, available October 28",
+      "description": "The Google Pixel 6 is now official and available for pre-order, with the all-new Google-made Tensor chip and a 50MP camera in tow."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/05/oppo-findn-n6-new-king-of-foldables",
+      "title": "Oppo Find N6 is the new king of foldables, but who follows?",
+      "description": "Foldables have matured a lot since their debut less than a decade ago, and following last year’s big leap with..."
+    },
+    {
+      "url": "https://9to5google.com/2026/01/28/gemini-app-google-ai-plus",
+      "title": "Gemini details AI Plus limits, rolls out iOS NotebookLM i...",
+      "description": "Google brought the AI Plus subscription to the US yesterday, and here’s how it upgrades usage limits in the Gemini app."
+    },
+    {
+      "url": "https://9to5google.com/2025/06/26/google-chrome-android-versions-no-longer-supported-2025",
+      "title": "Google Chrome drops support for these Android versions in...",
+      "description": "Google has announced that its Chrome browser will stop supporting a few older versions of Android in the next few..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/23/pixel-all-colors-10",
+      "title": "Google touts ‘Pixel Colors Through the Years’ – here's a ...",
+      "description": "Before the next cycle begins, Google posted a fun “Pixel Colors Through the Years” infographic today that..."
+    },
+    {
+      "url": "https://9to5google.com/2021/03/30/nest-hub-2nd-gen-review",
+      "title": "Review: Nest Hub (2nd gen) sleep tracking makes a new Goo...",
+      "description": "After using Google's Nest Hub (2nd gen) for the past week, I experienced the next level of computers passively suggesting improvements..."
+    },
+    {
+      "url": "https://9to5google.com/2023/02/06/pixel-7-trade-in-google-store",
+      "title": "Pixel 7 trade-in values skyrocket at the Google Store",
+      "description": "Trade-in values towards the Pixel 7 and Pixel 7 Pro have jumped up significantly at the Google Store in line with new discounts."
+    },
+    {
+      "url": "https://9to5google.com/2024/12/11/google-maps-dash-cam-footage-road-data-updates",
+      "title": "Google Maps using dash cam footage to update road data",
+      "description": "Google Maps is now using footage pulled from vehicle dash cams to update road data, but in a privacy-conscious way."
+    },
+    {
+      "url": "https://9to5google.com/2023/10/17/google-pixel-8-charging",
+      "title": "Pixel 8 charging lasts longer into charging cycle too",
+      "description": "Google has upgraded charging speeds on the Pixel 8 and Pixel 8 Pro, and those faster speeds also last longer into the cycle too."
+    },
+    {
+      "url": "https://9to5google.com/2024/07/18/googl-links",
+      "title": "Google's goo.gl links will stop working in August 2025",
+      "description": "After Google stopped generating new goo.gl URLs in March of 2019, those links will stop working on August 25, 2025..."
+    },
+    {
+      "url": "https://9to5google.com/2020/12/14/2020-material-design-award-winners",
+      "title": "2020 Material Design Awards winners: dark theme, more - 9...",
+      "description": "Now in its sixth year, the 2020 Material Design Award winners were announced this morning. There are three categories this year covering..."
+    },
+    {
+      "url": "https://9to5google.com/2024/08/13/google-pixel-9-trade-in-values",
+      "title": "Pixel 9 trade-in deals on the Google Store are better tha...",
+      "description": "Google is offering some of its highest trade-in values to date on the Pixel 9 series, with deals on the..."
+    },
+    {
+      "url": "https://9to5google.com/2024/04/02/chrome-cookie-theft-dbsc",
+      "title": "Chrome working to combat cookie theft with new web standard",
+      "description": "Cookie theft malware steals authentication cookies to gain access to web accounts, and Chrome is proposing DBSC to counter it..."
+    },
+    {
+      "url": "https://9to5google.com/2020/10/15/cyberpunk-2077-to-launch-on-stadia-on-nov-19-same-day-as-consoles",
+      "title": "Cyberpunk 2077 to launch on Stadia on Nov. 19, same day a...",
+      "description": "Long before the launch of Google Stadia, the one game many players have been looking forward to enjoying is Cyberpunk..."
+    },
+    {
+      "url": "https://9to5google.com/2022/12/12/google-pixel-trade-in-store",
+      "title": "Google Pixel trade-in values drastically lowered",
+      "description": "The Google Store has just drastically lowered the trade-in value of older Google Pixel phones following the launch of the Pixel 7."
+    },
+    {
+      "url": "https://9to5google.com/post-sitemap3.xml"
+    },
+    {
+      "url": "https://9to5google.com/2026/02/28/youtube-shorts-ai-remix-test",
+      "title": "YouTube test lets AI remix your Shorts",
+      "description": "YouTube has a new test ongoing which allows users to remix Shorts using AI, but creators can opt-out if they wish."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/25/gemini-lyria-3-pro",
+      "title": "Gemini app now lets you create 3-minute songs with Lyria ...",
+      "description": "Google today announced Lyria 3 Pro with support for songs that are up to 3 minutes long. Available in the Gemini app..."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/01/motorola-confirms-grapheneos-partnership-for-a-future-smartphone-porting-features",
+      "title": "Motorola confirms GrapheneOS support for a future phone, ...",
+      "description": "Motorola has announced a partnership with GrapheneOS which will see a phone with support, as well as features ported to other devices."
+    },
+    {
+      "url": "https://9to5google.com/2025/12/23/youtube-tv-verizon-discount",
+      "title": "YouTube TV gets a $20/month discount through Verizon",
+      "description": "Verizon customers can save $20/month on YouTube TV by linking their accounts, assuming you've not used YouTube TV before."
+    },
+    {
+      "url": "https://9to5google.com/how-to-disable-default-frame-rates-for-games",
+      "title": "How to disable Android's 60Hz frame rate limit for games",
+      "description": "Some games set a limit on frame rates, leaving you with a stuttering 60fps experience when your device can handle..."
+    },
+    {
+      "url": "https://9to5google.com/turn-on-android-private-app-space",
+      "title": "Android 15 lets you create a 'Private Space' for apps; he...",
+      "description": "Pixel users can hide apps and data inside a new Private Space made available through Android 15. The section keeps..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/04/google-pixel-10a-blue-color-leak",
+      "title": "Pixel 10a leaks in unexpected blue color [Gallery]",
+      "description": "Ahead of its launch, the Google Pixel 10a has just leaked in a collection of official-looking images that show off..."
+    },
+    {
+      "url": "https://9to5google.com/2025/11/03/pixel-10-discount-trade-in",
+      "title": "Pixel 10 series gets deep discounts, boosted trade-in",
+      "description": "Ahead of Black Friday 2025, the US Google Store is unexpectedly running a deep sale on the Pixel 10 series."
+    },
+    {
+      "url": "https://9to5google.com/2025/06/09/gemini-veo-3-fast",
+      "title": "Gemini app Pro subscribers now get ‘Veo 3 Fast’ videos pe...",
+      "description": "Google is now giving AI Pro subscribers in the Gemini app more video generations with Veo 3 Fast after previously providing a 10-pack trial."
+    },
+    {
+      "url": "https://9to5google.com/2024/09/23/google-photos-video-editor-redesign",
+      "title": "Google Photos rolling out video editor redesign with AI ‘...",
+      "description": "After the Collections tab revamp and search updates, Google Photos is now rolling out a redesign of its mobile video editor..."
+    },
+    {
+      "url": "https://9to5google.com/2025/09/22/youtube-music-new-features-2025-2nd",
+      "title": "YouTube Music recaps five months of new features",
+      "description": "Compared to previous years, new feature recaps from the YouTube Music team have slowed down in 2025, but the April to August edition..."
+    },
+    {
+      "url": "https://9to5google.com/2023/12/13/gemini-google-ai-studio",
+      "title": "Gemini now live for devs with free access via Google AI S...",
+      "description": "Following last week's consumer-facing announcement, Google is launching Gemini Pro for developers and enterprises through AI Studio..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/google-ai-edge-eloquent-app",
+      "title": "Google AI Edge Eloquent is an offline voice dictation app",
+      "description": "Google today released a new app on iOS called “Google AI Edge Eloquent” that’s rather curious. It's somewhere between an experiment..."
+    },
+    {
+      "url": "https://9to5google.com/2023/10/17/pixel-8-trade-in-value-google-store-after-launch",
+      "title": "Pixel 8 trade-in values drop dramatically after launch",
+      "description": "The Pixel 8 and Pixel 8 Pro are more expensive, which means good trade-in values are more important than ever...."
+    },
+    {
+      "url": "https://9to5google.com/2024/10/15/android-15-every-new-feature",
+      "title": "Android 15: Every single new function and feature added [...",
+      "description": "Android 15 has officially launched for eligible Pixel phones from the Pixel 6 onwards, and here's every new function and feature."
+    },
+    {
+      "url": "https://9to5google.com/2025/08/20/best-buy-launches-marketplace",
+      "title": "Best Buy expands products beyond tech and brings Blu-Ray ...",
+      "description": "Best Buy is launching a new digital marketplace, moving away from its long-standing, narrow tech-focused approach. The new store will..."
+    },
+    {
+      "url": "https://9to5google.com/2025/06/23/android-studio-gemini-agent-mode",
+      "title": "Gemini in Android Studio adding ‘Agent Mode’",
+      "description": "Following the preview at I/O 2025, Google is releasing an “Agent Mode” for Gemini in Android Studio to let..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/02/gemini-nano-4-android",
+      "title": "Google previews Gemini Nano 4 for Android AICore, coming ...",
+      "description": "In addition to Gemma 4, Google today also detailed Gemini Nano 4 for Android. Gemma 4 is the “foundation for the..."
+    },
+    {
+      "url": "https://9to5google.com/post-sitemap2.xml"
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/nothings-limited-edition-yellow-headphones-go-live-199",
+      "title": "Nothing's limited-edition yellow headphones go live, $199",
+      "description": "The budget-focused Nothing Headphone (a) series is now available in its yellow colorway. This limited-edition was advertised prior to release..."
+    },
+    {
+      "url": "https://9to5google.com/2025/03/18/deals-s25-fold-6-trades-galaxy-book-5-pro-more",
+      "title": "Deals: $1,000 off S25/Fold 6 trades, Galaxy Book 5 Pro, more",
+      "description": "Samsung has now launched a wide-ranging March Madness sale event to combat the wild price drops we are tracking across..."
+    },
+    {
+      "url": "https://9to5google.com/2025/10/08/pixel-10-pro-fold-review",
+      "title": "Pixel 10 Pro Fold Review: Small changes make 'Pro' more f...",
+      "description": "Where Android foldables are making massive jumps in form factor, the Google Pixel 10 Pro Fold seemingly sits stagnant. That’s..."
+    },
+    {
+      "url": "https://9to5google.com/2025/06/17/these-are-the-currently-best-google-pixel-deals-on-amazon",
+      "title": "These are currently the best Google Pixel deals on Amazon",
+      "description": "If you want the best deal on a Google Pixel phone, then here are some of the best prices right now on Amazon plus other sites."
+    },
+    {
+      "url": "https://9to5google.com/2026/03/05/nothing-phone-4a-specs-price-release-date",
+      "title": "Nothing Phone (4a) goes official with major upgrades from...",
+      "description": "Nothing has just launched its new Phone (4a) and Phone (4a) Pro with a slightly higher starting price, but some..."
+    },
+    {
+      "url": "https://9to5google.com/2025/10/10/deals-galaxy-s25-edge-moto-edge-nest-thermostat",
+      "title": "Deals: Galaxy S25 Edge, Moto Edge, Nest Thermostat, more",
+      "description": "Today’s 9to5Toys Lunch Break marks the return of the gigantic $490 price drop on the Samsung Galaxy S25 Edge. After..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/11/google-pixel-one-percent-of-active-smartphones",
+      "title": "Google Pixel made up a tiny slice of active smartphones i...",
+      "description": "Google Pixel is undoubtedly a small player in the overall smartphone market, but it’s steadily growing and, thanks to a..."
+    },
+    {
+      "url": "https://9to5google.com/2025/07/14/a-renewed-pixel-8-pro-is-a-steal-at-just-340-right-now",
+      "title": "[Update: Back again] A renewed Pixel 8 Pro is a steal at ...",
+      "description": "While there are lots of new and upcoming phones vying for your hard-earned money, you can get some serious bang..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/galaxy-z-fold-wide-one-ui-9-leaks",
+      "title": "Galaxy Z Fold 'Wide' size shown in One UI 9 leaks",
+      "description": "Samsung’s Galaxy Z Fold “Wide” has been touched on in previous leaks, though recent One UI 9 screenshots add some..."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/25/samsung-sending-credit-to-users-before-galaxy-s26-launch",
+      "title": "Samsung sending $50 credit out right before Galaxy S26 la...",
+      "description": "Check your Samsung account – some users have reported that Samsung sent them store credit to use at its online..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/02/google-vids-ai-avatars",
+      "title": "Google Vids adds AI avatars that you can customize and di...",
+      "description": "Google Vids is Workspace’s video editing suite. Google is giving Vids a number of capability updates, especially around AI avatars..."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/lg-rollable-teardown-hands-on-video",
+      "title": "LG Rollable feels more real than ever if new video [Gallery]",
+      "description": "This past weekend was the 5-year anniversary of the death of LG’s smartphone business, and yet, we’re just now seeing..."
+    },
+    {
+      "url": "https://9to5google.com/2025/08/22/magsafe-accessories-work-on-pixel-10-series-without-a-case",
+      "title": "Yes, your MagSafe accessories work on the Pixel 10 series",
+      "description": "The Pixel 10 series brings Qi2 into the fray, which means your MagSafe accessories will work even without a case."
+    },
+    {
+      "url": "https://9to5google.com/2026/04/06/anthropic-inks-deal-with-google-to-power-claude-with-next-gen-tpus",
+      "title": "Anthropic signs deal with Google to power Claude",
+      "description": "Anthropic has inked a deal with Google and Broadcom to power the future of Claude with next-gen TPU capacity."
+    },
+    {
+      "url": "https://9to5google.com/2022/07/23/galaxy-s22-ultra-trade-in-horror-story",
+      "title": "Galaxy S22 Ultra trade-in horror story leaves over $35,00...",
+      "description": "Samsung has great trade-in offers for devices, but a horror story with the Galaxy S22 Ultra has left a business with $35,000 owed by Samsung."
+    },
+    {
+      "url": "https://9to5google.com/2026/02/02/youtube-background-playback-workarounds-not-working-third-party-browsers",
+      "title": "YouTube is killing free background play workarounds on An...",
+      "description": "Samsung Internet, Brave, and other third-party browser users on Android have noticed their non-Premium workaround is no longer functioning."
+    }
+  ]
+}

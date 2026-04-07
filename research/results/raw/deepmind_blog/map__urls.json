@@ -1,0 +1,470 @@
+{
+  "totalLinks": 92,
+  "articleUrls": [
+    "https://deepmind.google/research/publications",
+    "https://deepmind.google/research/publications/44717",
+    "https://deepmind.google/research/publications/121987",
+    "https://deepmind.google/research/publications/39768",
+    "https://deepmind.google/research/publications/61382"
+  ],
+  "allLinks": [
+    {
+      "url": "https://deepmind.google/blog/alphastar-mastering-the-real-time-strategy-game-starcraft-ii",
+      "title": "AlphaStar: Mastering the real-time strategy game StarCraf...",
+      "description": "Games have been used for decades as an important way to test and evaluate the performance of artificial intelligence systems. As capabilities have increased,..."
+    },
+    {
+      "url": "https://deepmind.google/science/alphafold",
+      "title": "AlphaFold — Google DeepMind",
+      "description": "AlphaFold has revealed millions of intricate 3D protein structures, and is helping scientists understand how all of life’s molecules interact."
+    },
+    {
+      "url": "https://deepmind.google/blog/facts-benchmark-suite-systematically-evaluating-the-factuality-of-large-language-models",
+      "title": "FACTS Benchmark Suite: a new way to systematically evalua...",
+      "description": "The FACTS Benchmark Suite provides a systematic evaluation of Large Language Models (LLMs) factuality across three areas: Parametric, Search, and Multimodal ..."
+    },
+    {
+      "url": "https://deepmind.google/models/lyria/prompt-guide",
+      "title": "How to create effective prompts with Lyria — Google DeepMind",
+      "description": "Share detailed prompts with Lyria 3 to shape the music you want to hear. Or upload images to capture a musical mood."
+    },
+    {
+      "url": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models",
+      "title": "Genie 3: A new frontier for world models — Google DeepMind",
+      "description": "Today we are announcing Genie 3, a general purpose world model that can generate an unprecedented diversity of interactive environments. Given a text prompt,..."
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-image",
+      "title": "Gemini 3.1 Flash Image - Model Card — Google DeepMind",
+      "description": "Google DeepMind"
+    },
+    {
+      "url": "https://deepmind.google/blog/how-ai-is-helping-advance-the-science-of-bioacoustics-to-save-endangered-species",
+      "title": "How AI is helping advance the science of bioacoustics to ...",
+      "description": "Our new Perch model helps conservationists analyze audio faster to protect endangered species, from Hawaiian honeycreepers to coral reefs."
+    },
+    {
+      "url": "https://deepmind.google/blog/wavenet-a-generative-model-for-raw-audio",
+      "title": "WaveNet: A generative model for raw audio — Google DeepMind",
+      "description": "This post presents WaveNet, a deep generative model of raw audio waveforms. We show that WaveNets are able to generate speech which mimics any human voice an..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma/gemmaverse",
+      "title": "Gemmaverse — Google DeepMind",
+      "description": "Welcome to the Gemmaverse: Explore Gemma models crafted by the community."
+    },
+    {
+      "url": "https://deepmind.google/blog/generating-audio-for-video",
+      "title": "Generating audio for video — Google DeepMind",
+      "description": "Video-to-audio research uses video pixels and text prompts to generate rich soundtracks"
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro",
+      "title": "Gemini 3.1 Pro - Model Card — Google DeepMind",
+      "description": "Gemini 3.1 Pro is the next iteration in the Gemini 3 series of models, a suite of highly capable, natively multimodal reasoning models."
+    },
+    {
+      "url": "https://deepmind.google/blog/population-based-training-of-neural-networks",
+      "title": "Population based training of neural networks — Google Dee...",
+      "description": "Neural networks have shown great success in everything from playing Go and Atari games to image recognition and language translation. But often overlooked is..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-audio",
+      "title": "Gemini Audio — Google DeepMind",
+      "description": "Gemini Audio is a family of advanced real-time audio models, built on Gemini"
+    },
+    {
+      "url": "https://deepmind.google/blog/safety-first-ai-for-autonomous-data-centre-cooling-and-industrial-control",
+      "title": "Safety-first AI for autonomous data centre cooling and in...",
+      "description": "Many of society’s most pressing problems have grown increasingly complex, so the search for solutions can feel overwhelming. At DeepMind and Google, we belie..."
+    },
+    {
+      "url": "https://deepmind.google/blog/accelerating-fusion-science-through-learned-plasma-control",
+      "title": "Accelerating fusion science through learned plasma contro...",
+      "description": "Successfully controlling the nuclear fusion plasma in a tokamak with deep reinforcement learning"
+    },
+    {
+      "url": "https://deepmind.google/blog/rss.xml"
+    },
+    {
+      "url": "https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world",
+      "title": "Introducing Gemini Robotics and Gemini Robotics-ER, AI mo...",
+      "description": "Introducing Gemini Robotics and Gemini Robotics-ER, AI models designed for robots to understand, act and react to the physical world."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/page/7",
+      "title": "Publications — Google DeepMind",
+      "description": "Explore a selection of our recent research on some of the most complex and interesting challenges in AI."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-image/prompt-guide",
+      "title": "How to create effective image prompts with Nano Banana — ...",
+      "description": "Give Nano Banana detailed prompts to take control over the images you generate – from the characters and setting, to the style and overall feel."
+    },
+    {
+      "url": "https://deepmind.google/blog/taking-a-responsible-path-to-agi",
+      "title": "Taking a responsible path to AGI — Google DeepMind",
+      "description": "We’re exploring the frontiers of AGI, prioritizing technical safety, proactive risk assessment, and collaboration with the AI community."
+    },
+    {
+      "url": "https://deepmind.google/careers",
+      "title": "Careers at Google DeepMind — Google DeepMind",
+      "description": "Collaborate with leading thinkers at Google DeepMind. Build AI that benefits humanity."
+    },
+    {
+      "url": "https://deepmind.google/blog/accelerating-discovery-in-india-through-ai-powered-science-and-education",
+      "title": "Google DeepMind Partnerships in India: scaling AI in scie...",
+      "description": "Google DeepMind announces new AI partnerships in India to advance scientific research, empower students with interactive Gemini-powered learning, and support..."
+    },
+    {
+      "url": "https://deepmind.google/blog/specifying-ai-safety-problems-in-simple-environments",
+      "title": "Specifying AI safety problems in simple environments — Go...",
+      "description": "As AI systems become more general and more useful in the real world, ensuring they behave safely will become even more important. To date, the majority of te..."
+    },
+    {
+      "url": "https://deepmind.google/models/project-mariner",
+      "title": "Project Mariner — Google DeepMind",
+      "description": "Project Mariner is a research prototype exploring the future of human-agent interaction, starting with browsers. It automates tasks to help boost productivity."
+    },
+    {
+      "url": "https://deepmind.google/research/publications",
+      "title": "Publications — Google DeepMind",
+      "description": "Explore a selection of our recent research on some of the most complex and interesting challenges in AI."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/page/4",
+      "title": "Publications — Google DeepMind",
+      "description": "Explore a selection of our recent research on some of the most complex and interesting challenges in AI."
+    },
+    {
+      "url": "https://deepmind.google/blog/how-alphachip-transformed-computer-chip-design",
+      "title": "How AlphaChip transformed computer chip design — Google D...",
+      "description": "Our AI method has accelerated and optimized chip design, and its superhuman chip layouts are used in hardware around the world. AlphaChip was one of the firs..."
+    },
+    {
+      "url": "https://deepmind.google/models",
+      "title": "Models — Google DeepMind",
+      "description": "Build with our next generation AI systems including Gemini, Nano Banana, Veo and Lyria."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphagenome-ai-for-better-understanding-the-genome",
+      "title": "AlphaGenome: AI for better understanding the genome — Goo...",
+      "description": "Introducing a new, unifying DNA sequence model that advances regulatory variant-effect prediction and promises to shed new light on genome function — now ava..."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/44717",
+      "title": "A Distributional Analogue to the Successor Representation...",
+      "description": "This paper contributes a new approach for distributional reinforcement learning which elucidates a clean separation of transition structure and reward in the..."
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards",
+      "title": "Model cards — Google DeepMind",
+      "description": "Simple, structured overviews of how an advanced AI model was designed and evaluated."
+    },
+    {
+      "url": "https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think",
+      "title": "Gemini Deep Think: Redefining the Future of Scientific Re...",
+      "description": "Gemini Deep Think is accelerating discovery in maths, physics, and computer science by acting as a powerful scientific companion for researchers."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/121987",
+      "title": "QuestBench: Can LLMs ask the right question to acquire in...",
+      "description": "Recently, a large amount of work has focused on improving large language models' (LLMs') performance on reasoning benchmarks such as math and logic. However,..."
+    },
+    {
+      "url": "https://deepmind.google/blog/updating-the-frontier-safety-framework",
+      "title": "Updating the Frontier Safety Framework — Google DeepMind",
+      "description": "Our next iteration of the FSF sets out stronger security protocols on the path to AGI"
+    },
+    {
+      "url": "https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds",
+      "title": "SIMA 2: A Gemini-Powered AI Agent for 3D Virtual Worlds —...",
+      "description": "Introducing SIMA 2, the next milestone in our research creating general and helpful AI agents. By integrating the advanced capabilities of our Gemini models,..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-robotics",
+      "title": "Gemini Robotics — Google DeepMind",
+      "description": "Our advanced Gemini 2.0-based models designed for the next generation of helpful robots. Gemini Robotics brings Gemini’s capacity for multimodal reasoning an..."
+    },
+    {
+      "url": "https://deepmind.google/models/synthid",
+      "title": "SynthID — Google DeepMind",
+      "description": "SynthID is a tool to watermark and identify AI-generated content, helping to foster transparency and trust in generative AI."
+    },
+    {
+      "url": "https://deepmind.google/blog/google-deepmind-supports-us-department-of-energy-on-genesis",
+      "title": "Google DeepMind & DOE Partner on Genesis: AI for Science ...",
+      "description": "Google DeepMind supports U.S. Department of Energy on Genesis: a national mission to accelerate innovation and scientific discovery."
+    },
+    {
+      "url": "https://deepmind.google/blog/gencast-predicts-weather-and-the-risks-of-extreme-conditions-with-sota-accuracy",
+      "title": "GenCast predicts weather and the risks of extreme conditi...",
+      "description": "New AI model advances the prediction of weather uncertainties and risks, delivering faster, more accurate forecasts up to 15 days ahead"
+    },
+    {
+      "url": "https://deepmind.google/blog",
+      "title": "News — Google DeepMind",
+      "description": "Discover our latest AI breakthroughs, projects, and updates."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphafold-using-ai-for-scientific-discovery-2020",
+      "title": "AlphaFold: Using AI for scientific discovery — Google Dee...",
+      "description": "In our study published in Nature, we demonstrate how artificial intelligence research can drive and accelerate new scientific discoveries. We’ve built a dedi..."
+    },
+    {
+      "url": "https://deepmind.google/blog/shaping-the-future-of-advanced-robotics",
+      "title": "Shaping the future of advanced robotics — Google DeepMind",
+      "description": "AutoRT, SARA-RT, and RT-Trajectory build on our historic Robotics Transformers work to help robots make decisions faster, and better understand and navigate ..."
+    },
+    {
+      "url": "https://deepmind.google/blog/wavenet-launches-in-the-google-assistant",
+      "title": "WaveNet launches in the Google Assistant — Google DeepMind",
+      "description": "Just over a year ago we presented WaveNet, a new deep neural network for generating raw audio waveforms that is capable of producing better and more realisti..."
+    },
+    {
+      "url": "https://deepmind.google/blog/tackling-multiple-tasks-with-a-single-visual-language-model",
+      "title": "Tackling multiple tasks with a single visual language mod...",
+      "description": "We introduce Flamingo, a single visual language model (VLM) that sets a new state of the art in few-shot learning on a wide range of open-ended multimodal ta..."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphago-zero-starting-from-scratch",
+      "title": "AlphaGo Zero: Starting from scratch — Google DeepMind",
+      "description": "Artificial intelligence research has made rapid progress in a wide variety of domains from speech recognition and image classification to genomics and drug d..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma/gemma-3",
+      "title": "Gemma 3 — Google DeepMind",
+      "description": "Gemma 3 is a family of lightweight models capable of multimodal understanding, with unparalleled multilingual capabilities for more intelligent applications"
+    },
+    {
+      "url": "https://deepmind.google/research/publications/39768",
+      "title": "Language Modeling Is Compression — Google DeepMind",
+      "description": "The established correlation between predictive ability andcompression in models forms the cornerstone of this research. Given that languagemodels exhibit str..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini/flash-lite",
+      "title": "Gemini 3.1 Flash-Lite — Google DeepMind",
+      "description": "Gemini 3.1 Flash-Lite is a scalable thinking model for high-volume tasks at low cost and latency."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-diffusion",
+      "title": "Gemini Diffusion — Google DeepMind",
+      "description": "Gemini Diffusion is our state-of-the-art research model exploring what diffusion means for language – and text generation."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/61382",
+      "title": "Neural Fields as Distributions: Signal Processing Beyond ...",
+      "description": "Neural fields have emerged as a powerful and broadly applicable method for representing signals. While there has been much work on applying these representat..."
+    },
+    {
+      "url": "https://deepmind.google/models/veo/prompt-guide",
+      "title": "How to create effective prompts with Veo 3 — Google DeepMind",
+      "description": "Veo 3 is our state-of-the-art video generation model. Learn how to get the best results – and bring your imagination to life."
+    },
+    {
+      "url": "https://deepmind.google/blog/introducing-codemender-an-ai-agent-for-code-security",
+      "title": "Introducing CodeMender: an AI agent for code security — G...",
+      "description": "Using advanced AI to fix critical software vulnerabilities"
+    },
+    {
+      "url": "https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action",
+      "title": "RT-2: New model translates vision and language into actio...",
+      "description": "Introducing Robotic Transformer 2 (RT-2), a novel vision-language-action (VLA) model that learns from both web and robotics data, and translates this knowled..."
+    },
+    {
+      "url": "https://deepmind.google/public-policy/ai-for-science",
+      "title": "A new golden age of discovery — Google DeepMind",
+      "description": "In this essay, we take a tour of how AI is transforming scientific disciplines from genomics to computer science to weather forecasting. Some scientists are ..."
+    },
+    {
+      "url": "https://deepmind.google/blog/the-ethics-of-advanced-ai-assistants",
+      "title": "The ethics of advanced AI assistants — Google DeepMind",
+      "description": "Exploring the promise and risks of a future with more capable AI"
+    },
+    {
+      "url": "https://deepmind.google/models/project-astra",
+      "title": "Project Astra — Google DeepMind",
+      "description": "Project Astra is a research prototype exploring breakthrough capabilities for Google products — on the way to building a universal AI assistant. Its current ..."
+    },
+    {
+      "url": "https://deepmind.google/research/projects",
+      "title": "Projects — Google DeepMind",
+      "description": "Explore some of the biggest innovations in AI, many of which underpin the modern AI industry."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma",
+      "title": "Gemma — Google DeepMind",
+      "description": "Gemma is a collection of lightweight, open models built from the same technology that powers our Gemini models."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphafold-five-years-of-impact",
+      "title": "AlphaFold: Five Years of Impact — Google DeepMind",
+      "description": "Explore five years of AlphaFold’s impact on biology. Learn how this Nobel Prize-winning AI is accelerating scientific discovery globally"
+    },
+    {
+      "url": "https://deepmind.google/models/veo",
+      "title": "Veo — Google DeepMind",
+      "description": "Introducing our state of the art video generation model Veo 3, and new capabilities for Veo 2."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/102792",
+      "title": "Rethinking Example Selection in the Era of Million-Token ...",
+      "description": "The advent of long-context large language models (LLMs) has enabled  LLMs to use hundreds and thousands of demonstrations for in-context learning (ICL), a pr..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-image/flash",
+      "title": "Gemini 3.1 Flash Image – Nano Banana 2 — Google DeepMind",
+      "description": "Pro-level image generation and editing – with the speed you expect from Flash."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-image/pro",
+      "title": "Gemini 3 Pro Image – Nano Banana Pro — Google DeepMind",
+      "description": "Create and edit images with Nano Banana Pro, for studio-quality levels of precision and control."
+    },
+    {
+      "url": "https://deepmind.google",
+      "title": "Google DeepMind",
+      "description": "Artificial intelligence could be one of humanity’s most useful inventions. We research and build safe artificial intelligence systems. We're committed to sol..."
+    },
+    {
+      "url": "https://deepmind.google/science/weathernext",
+      "title": "WeatherNext 2 — Google DeepMind",
+      "description": "WeatherNext 2 is our most accurate AI weather forecasting technology."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphadev-discovers-faster-sorting-algorithms",
+      "title": "AlphaDev discovers faster sorting algorithms — Google Dee...",
+      "description": "In our paper published today in Nature, we introduce AlphaDev, an artificial intelligence (AI) system that uses reinforcement learning to discover enhanced c..."
+    },
+    {
+      "url": "https://deepmind.google/blog/dm-control-software-and-tasks-for-continuous-control",
+      "title": "dm_control: Software and Tasks for Continuous Control — G...",
+      "description": "The dm_control software package is a collection of Python libraries and task suites for reinforcement learning agents in an articulated-body simulation. A Mu..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini-robotics/gemini-robotics-er",
+      "title": "Gemini Robotics-ER — Google DeepMind",
+      "description": "Our Gemini-based model gives advanced world understanding to robots."
+    },
+    {
+      "url": "https://deepmind.google/models/genie",
+      "title": "Genie 3 — Google DeepMind",
+      "description": "Genie 3 is a new frontier for world models, using simple text descriptions to generate photorealistic environments that can be explored in real-time."
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-live",
+      "title": "Gemini 3.1 Flash Live - Model Card — Google DeepMind",
+      "description": "Gemini 3.1 Flash Live can comprehend input from different information sources, including text, images, audio and video. Audio and text output is generated in..."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphazero-shedding-new-light-on-chess-shogi-and-go",
+      "title": "AlphaZero: Shedding new light on chess, shogi, and Go — G...",
+      "description": "In late 2017 we introduced AlphaZero, a single system that taught itself from scratch how to master the games of chess, shogi (Japanese chess), and Go, beati..."
+    },
+    {
+      "url": "https://deepmind.google/about",
+      "title": "About Google DeepMind — Google DeepMind",
+      "description": "We live in a time in which AI research and technology is advancing exponentially. In the coming years, AI — and ultimately artificial general intelligence — ..."
+    },
+    {
+      "url": "https://deepmind.google/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail",
+      "title": "AlphaEarth Foundations helps map our planet in unpreceden...",
+      "description": "New AI model integrates petabytes of Earth observation data to generate a unified data representation that revolutionizes global mapping and monitoring"
+    },
+    {
+      "url": "https://deepmind.google/blog/innovations-of-alphago",
+      "title": "Innovations of AlphaGo — Google DeepMind",
+      "description": "One of the great promises of AI is its potential to help us unearth new knowledge in complex domains. We’ve already seen exciting glimpses of this, when our ..."
+    },
+    {
+      "url": "https://deepmind.google/blog/using-jax-to-accelerate-our-research",
+      "title": "Using JAX to accelerate our research — Google DeepMind",
+      "description": "DeepMind engineers accelerate our research by building tools, scaling up algorithms, and creating challenging virtual and physical worlds for training and te..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma/gemma-4",
+      "title": "Gemma 4 — Google DeepMind",
+      "description": "Gemma 4 is a family of open models, purpose-built for advanced reasoning and agentic workflows."
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite",
+      "title": "Gemini 3.1 Flash-Lite - Model Card — Google DeepMind",
+      "description": "Google DeepMind"
+    },
+    {
+      "url": "https://deepmind.google/blog/deepmind-papers-at-icml-2018",
+      "title": "DeepMind papers at ICML 2018 — Google DeepMind",
+      "description": "The 2018 International Conference on Machine Learning will take place in Stockholm, Sweden from 10-15 July. For those attending and planning the week ahead, ..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemini",
+      "title": "Gemini 3 — Google DeepMind",
+      "description": "Gemini 3 is our most intelligent model yet. With state-of-the-art reasoning to help you learn, build, and plan anything."
+    },
+    {
+      "url": "https://deepmind.google/research/alphazero-and-muzero",
+      "title": "AlphaZero and MuZero — Google DeepMind",
+      "description": "Powerful, general AI systems that mastered a range of board games and video games — and are now helping us solve real-world problems."
+    },
+    {
+      "url": "https://deepmind.google/blog/discovering-novel-algorithms-with-alphatensor",
+      "title": "Discovering novel algorithms with AlphaTensor — Google De...",
+      "description": "In our paper, published today in Nature, we introduce AlphaTensor, the first artificial intelligence (AI) system for discovering novel, efficient, and provab..."
+    },
+    {
+      "url": "https://deepmind.google/blog/watermarking-ai-generated-text-and-video-with-synthid",
+      "title": "Watermarking AI-generated text and video with SynthID — G...",
+      "description": "Announcing our novel watermarking method for AI-generated text and video, and how we’re bringing SynthID to key Google products"
+    },
+    {
+      "url": "https://deepmind.google/models/gemini/flash",
+      "title": "Gemini 3 Flash — Google DeepMind",
+      "description": "Gemini 3 Flash is our model with frontier intelligence that helps you bring any idea to life – faster."
+    },
+    {
+      "url": "https://deepmind.google/research",
+      "title": "Research — Google DeepMind",
+      "description": "Explore our research on some of the most complex and interesting challenges in AI."
+    },
+    {
+      "url": "https://deepmind.google/blog/open-sourcing-mujoco",
+      "title": "Open-sourcing MuJoCo — Google DeepMind",
+      "description": "In October 2021, we announced that we acquired the MuJoCo physics simulator, and made it freely available for everyone to support research everywhere. We als..."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/42697",
+      "title": "Imitation Learning is Probably Existentially Safe — Googl...",
+      "description": "We examine arguments that have been put forward that  that a sufficiently advanced supervised learning algorithm, trained to imitate humans, present an extin..."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma/medgemma",
+      "title": "MedGemma — Google DeepMind",
+      "description": "MedGemma is a collection of open models optimized for medical text and image comprehension"
+    },
+    {
+      "url": "https://deepmind.google/models/gemini/pro",
+      "title": "Gemini 3.1 Pro — Google DeepMind",
+      "description": "Our most intelligent model yet. Learn, build, and plan like never before with Gemini 3.1 Pro’s incredible reasoning powers."
+    },
+    {
+      "url": "https://deepmind.google/blog/identifying-ai-generated-images-with-synthid",
+      "title": "Identifying AI-generated images with SynthID — Google Dee...",
+      "description": "Today, in partnership with Google Cloud, we’re beta launching SynthID, a new tool for watermarking and identifying AI-generated images. It’s being released t..."
+    },
+    {
+      "url": "https://deepmind.google/student-researcher-program",
+      "title": "Student Researcher Program — Google DeepMind",
+      "description": "Hands-on collaboration with leading minds in AI."
+    },
+    {
+      "url": "https://deepmind.google/blog/10-years-of-alphago",
+      "title": "AlphaGo at 10: How AI Innovation Is Paving the Path to AG...",
+      "description": "Ten years since AlphaGo, we explore how its search and learning methods are catalyzing scientific discovery and paving a path to AGI."
+    },
+    {
+      "url": "https://deepmind.google/models/gemma/embeddinggemma",
+      "title": "EmbeddingGemma — Google DeepMind",
+      "description": "Google DeepMind"
+    }
+  ]
+}

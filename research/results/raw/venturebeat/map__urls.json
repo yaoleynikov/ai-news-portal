@@ -1,0 +1,485 @@
+{
+  "totalLinks": 98,
+  "articleUrls": [
+    "https://venturebeat.com/business/pixverse-updates-r1-real-time-world-model-with-shared-worlds-and-personalized-avatars",
+    "https://venturebeat.com/infrastructure/how-to-make-your-e-commerce-product-visible-to-ai-agents-use-this-new-system",
+    "https://venturebeat.com/data/databricks-built-a-rag-agent-it-says-can-handle-every-kind-of-enterprise",
+    "https://venturebeat.com/business/why-bitcoin-keeps-moving-closer-to-financial-infrastructure",
+    "https://venturebeat.com/orchestration/claude-code-just-got-updated-with-one-of-the-most-requested-user-features",
+    "https://venturebeat.com/security/closing-the-data-security-maturity-gap-embedding-protection-into-enterprise",
+    "https://venturebeat.com/technology/softr-launches-ai-native-platform-to-help-nontechnical-teams-build-business",
+    "https://venturebeat.com/ai/vayyar-unveils-a-new-sensor-for-capturing-your-life-in-3d",
+    "https://venturebeat.com/technology/from-lab-to-market-rose-rock-bridge-fast-tracks-energy-innovation-in-tulsa",
+    "https://venturebeat.com/infrastructure/nvidia-introduces-vera-rubin-a-seven-chip-ai-platform-with-openai-anthropic",
+    "https://venturebeat.com/technology/three-ways-ai-is-learning-to-understand-the-physical-world",
+    "https://venturebeat.com/ai/bot-mitigation-company-human-security-raises-100m",
+    "https://venturebeat.com/technology/openais-devday-2025-preview-will-sam-altman-launch-the-chatgpt-browser",
+    "https://venturebeat.com/ai/navers-large-language-model-is-powering-shopping-recommendations",
+    "https://venturebeat.com/ai/echo-show-camera-can-identify-items-thanks-to-alexas-show-and-tell",
+    "https://venturebeat.com/technology/memrl-outperforms-rag-on-complex-agent-benchmarks-without-fine-tuning",
+    "https://venturebeat.com/orchestration/anthropic-says-claude-code-transformed-programming-now-claude-cowork-is",
+    "https://venturebeat.com/orchestration/intuits-ai-agents-hit-85-repeat-usage-the-secret-was-keeping-humans-involved"
+  ],
+  "allLinks": [
+    {
+      "url": "https://venturebeat.com/business/pixverse-updates-r1-real-time-world-model-with-shared-worlds-and-personalized-avatars",
+      "title": "PixVerse Updates R1 Real-time World Model with Shared Wor...",
+      "description": "For the first time, users can enter an AI-generated world as themselves and explore it alongside others in real time, with no session limits.\n\nSINGAPO"
+    },
+    {
+      "url": "https://venturebeat.com/infrastructure/how-to-make-your-e-commerce-product-visible-to-ai-agents-use-this-new-system",
+      "title": "How to make your e-commerce product visible to AI agents?...",
+      "description": "Azoma has unveiled the Agentic Merchant Protocol (AMP).  This new framework is designed to provide brands with a 'brand-friendly' anchor in an ecosystem incr..."
+    },
+    {
+      "url": "https://venturebeat.com/data/databricks-built-a-rag-agent-it-says-can-handle-every-kind-of-enterprise",
+      "title": "Databricks built a RAG agent it says can handle every kin...",
+      "description": "Databricks' KARL agent uses reinforcement learning to generalize across six enterprise search behaviors — the problem that breaks most RAG pipelines."
+    },
+    {
+      "url": "https://venturebeat.com/business/why-bitcoin-keeps-moving-closer-to-financial-infrastructure",
+      "title": "Why bitcoin keeps moving closer to financial infrastructu..."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/claude-code-just-got-updated-with-one-of-the-most-requested-user-features",
+      "title": "Claude Code just got updated with one of the most-request..."
+    },
+    {
+      "url": "https://venturebeat.com/security/closing-the-data-security-maturity-gap-embedding-protection-into-enterprise",
+      "title": "Closing the data security maturity gap: Embedding protect...",
+      "description": "Protection must be embedded throughout the full data lifecycle, grounded in a robust inventory, clear classification, and scalable mechanisms that translate ..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/softr-launches-ai-native-platform-to-help-nontechnical-teams-build-business",
+      "title": "Softr launches AI-native platform to help nontechnical te...",
+      "description": "Berlin startup Softr has launched an AI-native no-code platform that turns plain English into reliable, production-ready business apps for nontechnical teams."
+    },
+    {
+      "url": "https://venturebeat.com/ai/vayyar-unveils-a-new-sensor-for-capturing-your-life-in-3d",
+      "title": "Vayyar unveils a new sensor for capturing your life in 3D..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/from-lab-to-market-rose-rock-bridge-fast-tracks-energy-innovation-in-tulsa",
+      "title": "From lab to market: Rose Rock Bridge fast-tracks energy i...",
+      "description": "A non-profit based in Tulsa, Rose Rock Bridge is a pilot deployment studio that connects early-stage energy startups with corporate energy partners, non-dilu..."
+    },
+    {
+      "url": "https://venturebeat.com/infrastructure/nvidia-introduces-vera-rubin-a-seven-chip-ai-platform-with-openai-anthropic",
+      "title": "Nvidia introduces Vera Rubin, a seven-chip AI platform wi...",
+      "description": "Nvidia debuts Vera Rubin, a seven-chip AI platform designed to deliver cheaper, faster AI infrastructure with support from OpenAI, Anthropic and Meta."
+    },
+    {
+      "url": "https://venturebeat.com/technology/three-ways-ai-is-learning-to-understand-the-physical-world",
+      "title": "Three ways AI is learning to understand the physical worl...",
+      "description": "Large language models lack grounding in physical causality — a gap world models are designed to fill. Here's how three distinct architectural approaches (JEP..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/bot-mitigation-company-human-security-raises-100m",
+      "title": "Bot mitigation company Human Security raises $100M | Vent...",
+      "description": "Human Security, a bot mitigation and fraud detection company for enterprises, has raised $100 million in a growth round of funding."
+    },
+    {
+      "url": "https://venturebeat.com/technology/openais-devday-2025-preview-will-sam-altman-launch-the-chatgpt-browser",
+      "title": "OpenAI's DevDay 2025 preview: Will Sam Altman launch the ..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/navers-large-language-model-is-powering-shopping-recommendations",
+      "title": "Naver's large language model is powering shopping recomme...",
+      "description": "In an interview with VentureBeat, South Korea search giant Naver explained how it's using large language models to power new user experiences."
+    },
+    {
+      "url": "https://venturebeat.com/ai/echo-show-camera-can-identify-items-thanks-to-alexas-show-and-tell",
+      "title": "Echo Show camera can identify items thanks to Alexa's Sho...",
+      "description": "Alexa's new Show and Tell feature, which was designed with low vision and blind users in mind, identifies items placed in front of the Echo Show's camera."
+    },
+    {
+      "url": "https://venturebeat.com/technology/memrl-outperforms-rag-on-complex-agent-benchmarks-without-fine-tuning",
+      "title": "MemRL outperforms RAG on complex agent benchmarks without...",
+      "description": "MemRL separates stable reasoning from dynamic memory, giving AI agents continual learning abilities without model fine-tuning."
+    },
+    {
+      "url": "https://venturebeat.com/sitemap.xml"
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/anthropic-says-claude-code-transformed-programming-now-claude-cowork-is",
+      "title": "Anthropic says Claude Code transformed programming. Now C...",
+      "description": "Anthropic is making its boldest enterprise push yet with Claude Cowork, rolling out private plug-in marketplaces, deep integrations, and AI agent tools that ..."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/intuits-ai-agents-hit-85-repeat-usage-the-secret-was-keeping-humans-involved",
+      "title": "Intuit's AI agents hit 85% repeat usage. The secret was k...",
+      "description": "Intuit shipped AI agents to 3 million customers and hit 85% repeat usage — but the key to adoption wasn't better models. It was keeping human accounting, tax..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/project-alias-feeds-smart-speakers-white-noise-to-preserve-privacy",
+      "title": "Project Alias feeds smart speakers white noise to preserv...",
+      "description": "Project Alias is a crowdsourced privacy shield for smart speakers that prevents intelligent assistants from listening in on conversations inadvertently."
+    },
+    {
+      "url": "https://venturebeat.com/category/security",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/ai/stack-overflow-data-reveals-the-hidden-productivity-tax-of-almost-right-ai-code",
+      "title": "Stack Overflow data reveals the hidden productivity tax o...",
+      "description": "Stack Overflow survey shows that as more enterprise developers actually use AI tools, their expectations aren't being met by reality."
+    },
+    {
+      "url": "https://venturebeat.com/business/langsmart-publishes-industrys-first-p95-semantic-cache-benchmarks-for-on-premises-ai-gateway-challenges-market-show-me-the-p95",
+      "title": "Langsmart Publishes Industry’s First p95 Semantic Cache B...",
+      "description": "Testing Confirms 10.2x Faster Response Times, Exceeding Cloud-Hosted Alternatives\n\nSAN JOSE, Calif.--(BUSINESS WIRE)--March 17, 2026--\n\nNVIDIA GTC 202"
+    },
+    {
+      "url": "https://venturebeat.com/business/stop-repairing-start-manufacturing",
+      "title": "Stop repairing. Start manufacturing.  | VentureBeat"
+    },
+    {
+      "url": "https://venturebeat.com/business/horizon-quantum-a-leading-quantum-software-infrastructure-company-closes-its-business-combination-with-dmy-squared",
+      "title": "Horizon Quantum, a Leading Quantum Software Infrastructur...",
+      "description": "Transaction provides nearly $120 million of gross proceeds\n\nHorizon to begin trading on March 20 on Nasdaq under the ticker symbol “HQ”\n\nSINGAPORE & L"
+    },
+    {
+      "url": "https://venturebeat.com/technology/microsoft-says-ungoverned-ai-agents-could-become-corporate-double-agents-its",
+      "title": "Microsoft says ungoverned AI agents could become corporat...",
+      "description": "Microsoft is launching Agent 365 and the new Microsoft 365 Enterprise E7 on May 1 to govern and secure enterprise AI agents—adding agent identities, observab..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/quizlet",
+      "title": "How a teen-founded company won the Node Jam | VentureBeat"
+    },
+    {
+      "url": "https://venturebeat.com/ai/venturebeat-launches-a-genai-tour-for-2024",
+      "title": "VentureBeat launches a GenAI tour for 2024 | VentureBeat"
+    },
+    {
+      "url": "https://venturebeat.com/ai/googles-new-neural-net-architecture-separates-memory-components-to-control-exploding-costs",
+      "title": "Google's new neural-net LLM architecture separates memory...",
+      "description": "Titans architecture complements attention layers with neural memory modules that select bits of information worth saving in the long term."
+    },
+    {
+      "url": "https://venturebeat.com/business/aippy-aims-to-end-doomscrolling-by-transforming-social-media-users-into",
+      "title": "Aippy aims to end 'doomscrolling' by transforming social ..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/telegram-delivers-12b-messages-a-day-ceo-pavel-durov-says-whatsapp-sucks",
+      "title": "Telegram delivers 12B messages a day, CEO Pavel Durov say..."
+    },
+    {
+      "url": "https://venturebeat.com/business/verisoul-raises-88m-series-a-to-fight-fraud-fake-users-and-bots-in-the-ai-era",
+      "title": "Verisoul Raises $8.8M Series A to Fight Fraud, Fake Users...",
+      "description": "* The round was led by High Alpha with participation from new and existing investors including Lookout Ventures, Bain Future Back Ventures, Bitkraft,"
+    },
+    {
+      "url": "https://venturebeat.com/ai/mit-study-finds-systematic-labeling-errors-in-popular-ai-benchmark-datasets",
+      "title": "MIT study finds 'systematic' labeling errors in popular A...",
+      "description": "In a new study, researchers at MIT find evidence of mislabeled data in corpora popularly used to benchmark AI systems."
+    },
+    {
+      "url": "https://venturebeat.com/ai/google-launches-first-android-p-developer-preview",
+      "title": "Google launches first Android P developer preview | Ventu..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/google-antigravity-introduces-agent-first-architecture-for-asynchronous",
+      "title": "Google Antigravity introduces agent-first architecture fo...",
+      "description": "Google launches new agent builder Antigravity in public preview."
+    },
+    {
+      "url": "https://venturebeat.com/ai/anthropic-hits-back-at-music-publishers-in-ai-copyright-lawsuit-accusing-them-of-volitional-conduct",
+      "title": "Anthropic hits back at music publishers in AI copyright l...",
+      "description": "Gen AI companies like OpenAI and Anthropic rely heavily on scraping massive amounts of publicly available data, including copyrighted works."
+    },
+    {
+      "url": "https://venturebeat.com/ai/how-linkedin-released-new-chatgpt-based-ai-tools-in-just-3-months",
+      "title": "How LinkedIn released new ChatGPT-based AI tools in just ...",
+      "description": "A sprint to develop LinkedIn’s recently-released generative AI tools took only three months, head of data and AI Ya Xu told VentureBeat."
+    },
+    {
+      "url": "https://venturebeat.com/security/how-to-test-openclaw-without-giving-an-autonomous-agent-shell-access-to-your",
+      "title": "How to test OpenClaw without giving an autonomous agent s...",
+      "description": "OpenClaw jumped from 1,000 to 21,000 exposed deployments in a week. Here's how to evaluate it in Cloudflare's Moltworker sandbox for $10/month — without touc..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/when-product-managers-ship-code-ai-just-broke-the-software-org-chart",
+      "title": "When product managers ship code: AI just broke the softwa..."
+    },
+    {
+      "url": "https://venturebeat.com/video/windsurfs-varun-mohan-teaches-enterprises-about-ai-driven-development-or-vb",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/langchains-ceo-argues-that-better-models-alone-wont-get-your-ai-agent-to",
+      "title": "LangChain's CEO argues that better models alone won't get...",
+      "description": "LangChain co-founder and CEO Harrison Chase explains why harness engineering — not just smarter models — is what gets AI agents from prototype to production."
+    },
+    {
+      "url": "https://venturebeat.com/technology/vibe-coding-is-dead-agentic-swarm-coding-is-the-new-enterprise-moat",
+      "title": "Vibe coding is dead: Agentic swarm coding is the new ente...",
+      "description": "The era of \"vibe coding\" – the conversational, often exploratory practice of prompting an AI for code, coined by Andrej Karpathy – has given way to a more di..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/gms-super-cruise-can-now-make-lane-changes-automatically",
+      "title": "GM's Super Cruise can now make lane changes automatically...",
+      "description": "GM's Super Cruise is getting a major upgrade, with the ability to make lane changes automatically on compatible highways."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/mistral-ai-just-released-a-text-to-speech-model-it-says-beats-elevenlabs-and",
+      "title": "Mistral AI just released a text-to-speech model it says b...",
+      "description": "Mistral AI launches Voxtral TTS, an open-weight enterprise voice model that runs on a smartphone and challenges ElevenLabs in the fast-growing voice AI market."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/how-massmutual-and-mass-general-brigham-turned-ai-pilot-sprawl-into",
+      "title": "How MassMutual and Mass General Brigham turned AI pilot s...",
+      "description": "Technology leaders from MassMutual and Mass General Brigham share how they shut down ungoverned AI pilots and got to production — with results including 30% ..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/openai-returns-to-open-source-roots-with-new-models-gpt-oss-120b-and-gpt-oss-20b",
+      "title": "OpenAI returns to open source roots with new models gpt-o...",
+      "description": "Enterprises can use a powerful, near topline OpenAI LLM on their hardware totally privately and securely, without sending data to the cloud."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/anthropic-gives-claude-shared-context-across-microsoft-excel-and-powerpoint",
+      "title": "Anthropic gives Claude shared context across Microsoft Ex..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/microsoft-announces-generative-ai-powered-copilot-365-to-change-work-as-we-know-it",
+      "title": "Microsoft announces generative AI-powered Copilot 365 to ...",
+      "description": "Capping an epic week in generative AI, Microsoft released Copilot 365, combining LLMs like GPT-4 with Microsoft 365 apps and Graph data."
+    },
+    {
+      "url": "https://venturebeat.com/",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/ai/z-ai-debuts-open-source-glm-4-6v-a-native-tool-calling-vision-model-for",
+      "title": "Z.ai debuts open source GLM-4.6V, a native tool-calling v..."
+    },
+    {
+      "url": "https://venturebeat.com/business/dont-delay-make-post-accident-medical-care-a-priority-now",
+      "title": "Don’t delay: Make post-accident medical care a priority n..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/claude-openclaw-and-the-new-reality-ai-agents-are-here-and-so-is-the-chaos",
+      "title": "Claude, OpenClaw and the new reality: AI agents are here ..."
+    },
+    {
+      "url": "https://venturebeat.com/business",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/business/edena-capital-partners-on-building-regulated-market-rails-for-the-ai-era",
+      "title": "EDENA Capital partners on building regulated market rails..."
+    },
+    {
+      "url": "https://venturebeat.com/business/meta-says-its-anonymous-credentials-service-acs-will-help-reduce-data-collection-activities",
+      "title": "Meta says its Anonymous Credentials Service (ACS) will he...",
+      "description": "Meta’s ACS is designed to enable it to authenticate users in a “de-identified manner,” permitting access to services without gathering any data that could be..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/microsoft-announces-expanded-copilot-capabilities-at-ignite-for-sales-and-service",
+      "title": "Microsoft announces expanded Copilot capabilities at Igni...",
+      "description": "Microsoft introduces new AI-powered Copilot experiences for sales and service teams, enabling seamless integration of CRM data and Microsoft 365 tools."
+    },
+    {
+      "url": "https://venturebeat.com/business/crash-course-how-new-tech-is-changing-accident-claims",
+      "title": "Crash course: How new tech is changing accident claims | ..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/slack-is-giving-ai-unprecedented-access-to-your-workplace-conversations",
+      "title": "Slack is giving AI unprecedented access to your workplace...",
+      "description": "Slack launches new AI platform giving developers unprecedented access to workplace conversations, positioning itself against Microsoft Teams in the enterpris..."
+    },
+    {
+      "url": "https://venturebeat.com/security/browser-security-gap-ciso-enterprise-breaches",
+      "title": "Browser-based attacks hit 95% of enterprises — and tradit...",
+      "description": "Omdia research shows 95% of organizations faced browser-based attacks last year. CrowdStrike's CTO and Clearwater Analytics' CISO explain why traditional sec..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/the-70-factuality-ceiling-why-googles-new-facts-benchmark-is-a-wake-up-call",
+      "title": "The 70% factuality ceiling: why Google’s new ‘FACTS’ benc...",
+      "description": "The 70% factuality ceiling: why Google’s new ‘FACTS’ benchmark is a wake-up call"
+    },
+    {
+      "url": "https://venturebeat.com/ai/record-labels-sue-ai-music-generator-startups-suno-udio-for-copyright-infringement",
+      "title": "Record labels sue AI music generator startups Suno, Udio ...",
+      "description": "Major music labels like Universal Music, Sony Music and Warner Music claim AI music generation platforms Suno and Udio trained AI models on copyrighted mater..."
+    },
+    {
+      "url": "https://venturebeat.com/business/huskeys-exits-stealth-as-the-first-to-modernize-existing-legacy-wafs-with-agentic-ai",
+      "title": "Huskeys Exits Stealth as the First to Modernize Existing ...",
+      "description": "The first Edge Security Management (ESM) to modernize 30-year-old legacy WAF technology, with TikTok and global brands as early enterprise customers"
+    },
+    {
+      "url": "https://venturebeat.com/ai/scaling-smarter-how-enterprise-it-teams-can-right-size-their-compute-for-ai",
+      "title": "Scaling smarter: How enterprise IT teams can right-size t...",
+      "description": "How wisely IT and business leaders plan and choose infrastructure can keep them from being doomed to pilot purgatory or AI damnation."
+    },
+    {
+      "url": "https://venturebeat.com/business/latent-y-the-autonomous-ai-agent-for-drug-design-at-scale",
+      "title": "Latent-Y: The Autonomous AI Agent for Drug Design at Scal...",
+      "description": "* Scalable, parallel drug design: one researcher can run multiple campaigns simultaneously across targets and modalities\n * From research goal to lab"
+    },
+    {
+      "url": "https://venturebeat.com/ai/qwen3-max-arrives-in-preview-with-1-trillion-parameters-blazing-fast",
+      "title": "Qwen3-Max arrives in preview with 1 trillion parameters, ..."
+    },
+    {
+      "url": "https://venturebeat.com/infrastructure/stop-calling-it-the-ai-bubble-its-actually-multiple-bubbles-each-with-a",
+      "title": "Stop calling it 'The AI bubble': It's actually multiple b..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it",
+      "title": "Microsoft’s Copilot can now build apps and automate your ...",
+      "description": "Microsoft has added powerful no-code tools to Copilot, enabling Microsoft 365 users to build apps, automate workflows, and create AI agents using natural lan..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/perplexity-launches-computer-ai-agent-that-coordinates-19-models-priced-at",
+      "title": "Perplexity launches 'Computer' AI agent that coordinates ...",
+      "description": "Perplexity launches Computer, a $200-per-month AI agent that orchestrates 19 models from OpenAI, Anthropic, and Google — raising big questions about profitab..."
+    },
+    {
+      "url": "https://venturebeat.com/business/micwares-dynamic-share-map-brings-city-scale-digital-twins-thinks-maps-are",
+      "title": "Micware's ‘Dynamic Share Map’ brings city-scale digital t..."
+    },
+    {
+      "url": "https://venturebeat.com/data/imagine-if-your-teams-or-slack-messages-automatically-turned-into-secure",
+      "title": "Imagine if your Teams or Slack messages automatically tur...",
+      "description": "Capturing tribal knowledge organically and creating a living metadata store that informs every AI interaction with company-specific reasoning."
+    },
+    {
+      "url": "https://venturebeat.com/ai/astronomer-93m-raise-underscores-a-new-reality-orchestration-is-king-in-ai-infrastructure",
+      "title": "Astronomer’s $93M raise underscores a new reality: Orches...",
+      "description": "Astronomer secures $93 million in Series D funding to solve the AI implementation gap through data orchestration, helping enterprises streamline complex work..."
+    },
+    {
+      "url": "https://venturebeat.com/security/cx-security-gaps-ai-stack-blind-spots",
+      "title": "How attackers hit 700 organizations through CX platforms ...",
+      "description": "CX platforms process billions of interactions yearly — but no security tool monitors what their AI engines ingest. Six blind spots attackers are already expl..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/base10-backed-throxy-challenges-ai-sales-giants-with-pay-per-meeting-model",
+      "title": "Base10-backed Throxy challenges AI sales giants with pay-...",
+      "description": "London-based startup Throxy raises $6.2 million to replace AI sales tools with a human-first outbound model targeting manufacturing, logistics, and tradition..."
+    },
+    {
+      "url": "https://venturebeat.com/business/enterprise-argo-company-akuity-raises-20m-to-power-kubernetes-app-delivery",
+      "title": "Enterprise Argo company Akuity raises $20M to power Kuber...",
+      "description": "Akuity, a company that's setting out to be the \"Argo enterprise\" company for Kubernetes app delivery, has raised $20 million."
+    },
+    {
+      "url": "https://venturebeat.com/technology/alibabas-qwen-3-5-397b-a17-beats-its-larger-trillion-parameter-model-at-a",
+      "title": "Alibaba's Qwen 3.5 397B-A17 beats its larger trillion-par...",
+      "description": "These speed gains are substantial. At 256K context lengths, Qwen 3.5 decodes 19 times faster than Qwen3-Max and 7.2 times faster than Qwen 3's 235B-A22B model."
+    },
+    {
+      "url": "https://venturebeat.com/ai/deepseeks-new-v3-2-exp-model-cuts-api-pricing-in-half-to-less-than-3-cents",
+      "title": "DeepSeek's new V3.2-Exp model cuts API pricing in half to..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/huaweis-new-open-source-technique-shrinks-llms-to-make-them-run-on-less",
+      "title": "Huawei's new open source technique shrinks LLMs to make t..."
+    },
+    {
+      "url": "https://venturebeat.com/business/qwen-image-edit-gives-photoshop-a-run-for-its-money-with-ai-powered-text-to-image-edits-that-work-in-seconds",
+      "title": "Qwen-Image Edit gives Photoshop a run for its money with ...",
+      "description": "Qwen-Image-Edit caters to professionals who need control while remaining approachable for casual experimentation."
+    },
+    {
+      "url": "https://venturebeat.com/business/damon-harman-and-the-rise-of-streamerdap-powering-the-livestream-economy",
+      "title": "Damon Harman and the rise of StreamerDap: Powering the li..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/midjourney-adds-pinterest-like-moodboards-and-support-for-multiple-custom-ai-image-models",
+      "title": "Midjourney adds Pinterest-like 'moodboards' and support f...",
+      "description": "Midjourney's new moodboards enable users to upload curated collections of images that act as inspiration for generating new art."
+    },
+    {
+      "url": "https://venturebeat.com/ai/marble-enters-the-race-to-bring-ai-to-tax-work-armed-with-usd9-million-and-a",
+      "title": "Marble enters the race to bring AI to tax work, armed wit...",
+      "description": "Marble raises $9 million to bring AI agents to tax professionals as the accounting industry faces a labor crisis, with 340,000 workers lost since 2019."
+    },
+    {
+      "url": "https://venturebeat.com/about",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/video/the-identity-security-shake-up",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    },
+    {
+      "url": "https://venturebeat.com/business/from-ghosting-to-gut-instincts-claritycheck-and-the-rituals-of-digital-trust",
+      "title": "From ghosting to gut instincts: ClarityCheck and the ritu..."
+    },
+    {
+      "url": "https://venturebeat.com/ai/a-weekend-vibe-code-hack-by-andrej-karpathy-quietly-sketches-the-missing",
+      "title": "A weekend ‘vibe code’ hack by Andrej Karpathy quietly ske...",
+      "description": "Andrej Karpathy’s weekend “vibe code” LLM Council project shows how a simple multi‑model AI hack can become a blueprint for enterprise AI orchestration, reve..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/karpathys-march-of-nines-shows-why-90-ai-reliability-isnt-even-close-to",
+      "title": "Karpathy’s March of Nines shows why 90% AI reliability is..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/artificial-analysis-overhauls-its-ai-intelligence-index-replacing-popular",
+      "title": "Artificial Analysis overhauls its AI Intelligence Index, ...",
+      "description": "Artificial Analysis overhauls its AI Intelligence Index, replacing saturated benchmarks with real-world tests measuring economic productivity across 44 occup..."
+    },
+    {
+      "url": "https://venturebeat.com/dev/openai-adds-powerful-but-dangerous-support-for-mcp-in-chatgpt-dev-mode",
+      "title": "OpenAI adds 'powerful but dangerous' support for MCP in C..."
+    },
+    {
+      "url": "https://venturebeat.com/business/writer-triples-revenue-and-expands-to-250-customers-as-demand-for-enterprise-ai-soars",
+      "title": "Writer triples revenue and expands to 250 customers as de...",
+      "description": "Writer, an AI writing platform, triples revenue and expands to 250 customers as demand for enterprise generative AI soars, delivering tangible business value..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/indexcache-a-new-sparse-attention-optimizer-delivers-1-82x-faster-inference",
+      "title": "IndexCache, a new sparse attention optimizer, delivers 1....",
+      "description": "Researchers at Tsinghua University and Z.ai built IndexCache to eliminate redundant computation in sparse attention models like DeepSeek and GLM. The trainin..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/anthropic-rolls-out-claude-ai-for-finance-integrates-with-excel-to-rival",
+      "title": "Anthropic rolls out Claude AI for finance, integrates wit...",
+      "description": "Anthropic launches Claude for Excel, bringing powerful AI tools to financial analysts and Wall Street firms as it expands into the trillion-dollar finance in..."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/how-xmemory-cuts-token-costs-and-context-bloat-in-ai-agents",
+      "title": "How xMemory cuts token costs and context bloat in AI agen...",
+      "description": "When standard RAG pipelines retrieve redundant conversational data, long-term AI agents lose coherence and burn tokens. xMemory, from researchers at King's C..."
+    },
+    {
+      "url": "https://venturebeat.com/technology/anthropics-claude-cowork-finally-lands-on-windows-and-it-wants-to-automate",
+      "title": "Anthropic’s Claude Cowork finally lands on Windows — and ...",
+      "description": "Anthropic has launched Claude Cowork for Windows, bringing its AI agent’s file access and task automation to most desktop users as Microsoft deepens its part..."
+    },
+    {
+      "url": "https://venturebeat.com/orchestration/testing-autonomous-agents-or-how-i-learned-to-stop-worrying-and-embrace",
+      "title": "Testing autonomous agents (Or: how I learned to stop worr..."
+    },
+    {
+      "url": "https://venturebeat.com/business/former-liveperson-ceo-launches-kid-a-safe-creative-ai-device-amid-alarming-ai-toy-safety-findings",
+      "title": "Former LivePerson CEO Launches KID®, a Safe Creative AI D...",
+      "description": "LOS ALTOS, Calif.--(BUSINESS WIRE)--December 3, 2025--\n\nKID Company today announced the launch of KID®, a creative AI device built specifically for ch"
+    },
+    {
+      "url": "https://venturebeat.com/security/identity-theft-hits-1-1m-reports-and-authentication-fatigue-is-only-getting-worse",
+      "title": "Identity theft hits 1.1M reports — and authentication fat...",
+      "description": "Why the authentication tug-of-war between friction and freedom will be won by those who can walk the tightrope between both."
+    },
+    {
+      "url": "https://venturebeat.com/technology/how-gv-handles-the-unsexy-part-of-growing-startups",
+      "title": "How GV handles the unsexy part of growing startups | Vent..."
+    },
+    {
+      "url": "https://venturebeat.com/video/the-enterprise-moment-of-ai-ran-has-arrived",
+      "title": "VentureBeat | Transformative tech coverage that matters",
+      "description": "VentureBeat delivers news, analysis, and insights on AI, data, and security—helping business leaders stay ahead in the rapidly evolving tech landscape."
+    }
+  ]
+}

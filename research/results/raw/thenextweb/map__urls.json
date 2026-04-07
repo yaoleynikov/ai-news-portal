@@ -1,0 +1,480 @@
+{
+  "totalLinks": 99,
+  "articleUrls": [
+    "https://thenextweb.com/news/qover-12m-cibc-innovation-banking",
+    "https://thenextweb.com/news/berlin-startup-cloover-bags-114m-consumers-switch-solar",
+    "https://thenextweb.com/news/tinyrx-brings-the-pharmacy-and-all-your-medication-right-to-you",
+    "https://thenextweb.com/news/ai-hallucinate-why-human-tech-users-pitfall",
+    "https://thenextweb.com/news/keeperdb-zero-trust-database-access",
+    "https://thenextweb.com/news/openai-robot-taxes-wealth-fund-superintelligence-policy",
+    "https://thenextweb.com/news/tencent-clawpro-openclaw-enterprise-ai-agents",
+    "https://thenextweb.com/news/uffizi-cyberattack-museums-digital-vulnerability",
+    "https://thenextweb.com/news/south-korea-russian-naphtha-chip-supply-squeeze",
+    "https://thenextweb.com/news/ninjaone-unified-it-operations",
+    "https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network",
+    "https://thenextweb.com/news/quora-acquires-qa-startup-parlio-co-founded-figurehead-egypts-democratic-revolution",
+    "https://thenextweb.com/news/whoop-series-g-575m-valuation-ipo-health-platform",
+    "https://thenextweb.com/news/openai-gpt-54-launch-computer-use-benchmarks",
+    "https://thenextweb.com/news/check-this-a-stop-motion-video-made-with-2335-printed-photos",
+    "https://thenextweb.com/news/ai-tools-job-search-2025",
+    "https://thenextweb.com/news/facts-you-didnt-know-about-the-next-web-team",
+    "https://thenextweb.com/news/oracle-layoffs-march-2026"
+  ],
+  "allLinks": [
+    {
+      "url": "https://thenextweb.com/news/qover-12m-cibc-innovation-banking",
+      "title": "Qover closes $12M growth round from CIBC",
+      "description": "The Belgian embedded insurance orchestration platform, which backs Revolut, Mastercard, BMW, and Monzo, has tripled revenue over four years and now covers 15..."
+    },
+    {
+      "url": "https://thenextweb.com/news/berlin-startup-cloover-bags-114m-consumers-switch-solar",
+      "title": "Berlin startup Cloover bags $114M to help consumers switc...",
+      "description": "Climate and fintech startup Cloover has raised $114mn to speed up Europe's transition to residential solar power., Climate and fintech startup Cloover has ra..."
+    },
+    {
+      "url": "https://thenextweb.com/news/tinyrx-brings-the-pharmacy-and-all-your-medication-right-to-you",
+      "title": "TinyRx brings the pharmacy (and all your medication) righ...",
+      "description": "In a world where you can order practically anything from your phone, the process of obtaining and fulfilling a prescription is full of red tape. Not only are..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ai-hallucinate-why-human-tech-users-pitfall",
+      "title": "AI doesn’t hallucinate — why attributing human traits to ...",
+      "description": "AI expert Amr Awadallah shares why AI hallucinations are controversial and what businesses need to know when adopting generative AI., AI expert Amr Awadallah..."
+    },
+    {
+      "url": "https://thenextweb.com/news/keeperdb-zero-trust-database-access",
+      "title": "KeeperDB brings zero-trust database access to privileged ...",
+      "description": "KeeperDB integrates database access into a zero-trust PAM platform, reducing credential sprawl and improving security, compliance, and visibility., KeeperDB ..."
+    },
+    {
+      "url": "https://thenextweb.com/masthead",
+      "title": "TNW Masthead",
+      "description": "TNW brings you ideas to better understand the ever-changing world of technology, and excel at your tech job."
+    },
+    {
+      "url": "https://thenextweb.com/news/openai-robot-taxes-wealth-fund-superintelligence-policy",
+      "title": "OpenAI calls for robot taxes, a public wealth fund, and a...",
+      "description": "OpenAI is calling for robot taxes, a public wealth fund, and a 32-hour workweek. Altman says superintelligence is close enough to need all three., OpenAI is ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-21.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/tencent-clawpro-openclaw-enterprise-ai-agents",
+      "title": "Tencent launches ClawPro enterprise AI agent platform bui...",
+      "description": "Tencent has launched ClawPro, an enterprise AI agent platform built on OpenClaw, the fastest-growing GitHub project in history. Over 200 organisations triall..."
+    },
+    {
+      "url": "https://thenextweb.com/news/uffizi-cyberattack-museums-digital-vulnerability",
+      "title": "The Uffizi cyberattack should worry every museum in Europe",
+      "description": "The Uffizi cyberattack reveals a sector structurally unprepared for digital threats, even as physical heists hit the Louvre and museums across Italy., The Uf..."
+    },
+    {
+      "url": "https://thenextweb.com/news/south-korea-russian-naphtha-chip-supply-squeeze",
+      "title": "South Korea turns to Russian naphtha as chip supply chain...",
+      "description": "South Korea imports 27,000 tonnes of Russian naphtha as the Strait of Hormuz closure disrupts petrochemical supplies critical to semiconductor manufacturing ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ninjaone-unified-it-operations",
+      "title": "How NinjaOne became a $5B challenger in unified IT operat...",
+      "description": "NinjaOne’s rise to a $5B valuation highlights the shift toward unified IT platforms, AI-driven operations, and the end of tool sprawl., NinjaOne’s rise to a ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-26.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network",
+      "title": "Anthropic commits $100M to Claude Partner Network",
+      "description": "Anthropic launches the Claude Partner Network with $100m in 2026 funding, bringing Accenture, Deloitte, Cognizant and Infosys into its enterprise channel., A..."
+    },
+    {
+      "url": "https://thenextweb.com/news/quora-acquires-qa-startup-parlio-co-founded-figurehead-egypts-democratic-revolution",
+      "title": "Quora’s first-ever acquisition is discussion platform Parlio",
+      "description": "Cairo-born Wael Ghonim is best known for kickstarting the Arab Spring in Egypt with a prominent Facebook page, for which he was secretly jailed for 11 days. ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-13.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/whoop-series-g-575m-valuation-ipo-health-platform",
+      "title": "WHOOP raises $575m at $10.1bn valuation, signals IPO ahead",
+      "description": "WHOOP's $575m Series G triples its 2021 valuation to $10.1bn. Backed by Mayo Clinic, Abbott, and Cristiano Ronaldo, the health wearable company says an IPO i..."
+    },
+    {
+      "url": "https://thenextweb.com/news/openai-gpt-54-launch-computer-use-benchmarks",
+      "title": "OpenAI’s GPT-5.4 sets new records on professional benchmarks",
+      "description": "OpenAI released GPT-5.4 today with native computer use, a 1M-token context window, and new professional benchmarks. Find what's genuinely new., OpenAI releas..."
+    },
+    {
+      "url": "https://thenextweb.com/news/check-this-a-stop-motion-video-made-with-2335-printed-photos",
+      "title": "Check this: A stop motion video made with 2,335 printed p...",
+      "description": "Dave Wallace, a freelance videographer, put together a stop motion video consisting of 2,335 photographs. Stop motion videos are nothing new, but Wallace’s v..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ai-tools-job-search-2025",
+      "title": "AI tools to elevate your job search in 2025",
+      "description": "This is the year generative AI is reaching large scale adoption, with job hunters in particular winning big. Here's how., This is the year generative AI is r..."
+    },
+    {
+      "url": "https://thenextweb.com/news/facts-you-didnt-know-about-the-next-web-team",
+      "title": "Facts You Didn't Know About The Next Web Team - The Next Web",
+      "description": "Here, we delve into the pasts of The Next Web team to find out what they got up to before our 'New Post' screen became their best friend., Here, we delve int..."
+    },
+    {
+      "url": "https://thenextweb.com/news/oracle-layoffs-march-2026",
+      "title": "Oracle is cutting up to 30,000 employees to pay for AI da...",
+      "description": "Oracle began laying off thousands of employees on 31 March 2026 via 6 a.m. termination emails across the US, India, Canada, and Mexico., Oracle began laying ..."
+    },
+    {
+      "url": "https://thenextweb.com:443/sitemap-articles-index.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/adobe-flash-is-dying-here-are-the-viral-classics-it-brought-to-life",
+      "title": "Adobe Flash Is dying – here are the viral classics it bro...",
+      "description": "Here are the stone-cold classics of the Flash viral video age, all of which have since migrated, but whose raw aesthetic speaks of a time before., Here are t..."
+    },
+    {
+      "url": "https://thenextweb.com/news/vibe-coding-apple-app-store-surge-crackdown",
+      "title": "Vibe coding drove an 84% jump in App Store submissions. A...",
+      "description": "AI vibe coding tools drove an 84% quarterly surge in App Store submissions, straining review times to 30 days. Apple has started pulling apps that violate it..."
+    },
+    {
+      "url": "https://thenextweb.com/news/netflix-playground-kids-games-app",
+      "title": "Netflix launches Playground, a standalone games app for y...",
+      "description": "Netflix Playground is a free, offline-ready kids gaming app included in all memberships — no ads, no in-app purchases, featuring Peppa Pig, Sesame Street, an..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ubtech-18m-chief-scientist-humanoid-robot-salary",
+      "title": "UBTech is offering $18M to hire a chief AI scientist",
+      "description": "UBTech is offering up to $18M for a chief AI scientist as its humanoid robot revenue grew twenty-fold in 2025., UBTech is offering up to $18M for a chief AI ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ibm-arm-mainframe-ai-software",
+      "title": "IBM and Arm partner to run AI software on mainframes, no ...",
+      "description": "IBM and Arm announced a collaboration to run Arm-based AI software on IBM Z mainframes via virtualisation. No shipping date given, this is a roadmap, not a p..."
+    },
+    {
+      "url": "https://thenextweb.com/news/klarna-srt-lending-deal-stock-decline",
+      "title": "Klarna strikes $1.7B deal to support $40B lending as stoc...",
+      "description": "Klarna announced its largest significant risk transfer with Värde Partners, freeing capital for $40 billion in lending. Six months after its NYSE debut at $4..."
+    },
+    {
+      "url": "https://thenextweb.com/news/operator-circle-vc-europe-scaleup-executives-decacorn",
+      "title": "Operator Circle launches to back Europe's next decacorn",
+      "description": "Operator Circle, a new European VC fund backed by dozens of tech scaleup executives, has launched to identify and back the continent's next decacorn., Operat..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-index.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/nexus-4-3m-seed",
+      "title": "Nexus raises $4.3M to make enterprise AI agent deployment",
+      "description": "Nexus raises $4.3M seed from General Catalyst and Y Combinator to enable non-technical enterprise teams to deploy AI agents in weeks., Nexus raises $4.3M see..."
+    },
+    {
+      "url": "https://thenextweb.com/news/youd-be-surprised-how-many-vpns-are-owned-by-the-same-company",
+      "title": "You’d be surprised how many VPNs are owned by the same co...",
+      "description": "The VPN market is consolidating, The VPN market is consolidating"
+    },
+    {
+      "url": "https://thenextweb.com/news/google-turboquant-ai-compression-memory-stocks",
+      "title": "Google's TurboQuant compresses AI memory by 6x, rattles c...",
+      "description": "Google's TurboQuant algorithm compresses LLM key-value caches to 3 bits with no accuracy loss. Memory stocks fell within hours of the announcement., Google's..."
+    },
+    {
+      "url": "https://thenextweb.com/news/europes-top-funding-rounds-week-16-22-march",
+      "title": "Recap: Europe’s top funding rounds this week (16 -22 March)",
+      "description": "Upvest's $125M, Partech's €300M impact fund, Parallel's hospital AI agents. Here are Europe's most significant funding rounds, 16-22 March., Upvest's $125M, ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/wonderful-series-b-enterprise-ai-agents",
+      "title": "Wonderful raises $150M Series B",
+      "description": "Wonderful raises $150M Series B, valuing the enterprise AI agent platform at a reported $1.7B just eight months after emerging from stealth., Wonderful raise..."
+    },
+    {
+      "url": "https://thenextweb.com/news/satellites-on-fire-wildfire-ai-raises-2-7m",
+      "title": "Climate-tech startup Satellites on Fire has raised $2.7M",
+      "description": "Climate-tech startup Satellites on Fire has raised $2.7M led by Dalus Capital. Its AI platform detects wildfires 35 minutes ahead of NASA's system., Climate-..."
+    },
+    {
+      "url": "https://thenextweb.com/news/epoch-biodesign-12m-nylon-recycling",
+      "title": "Epoch Biodesign raises $12M",
+      "description": "Epoch Biodesign has raised $12M to scale its enzymatic nylon recycling process toward a 20,000-tonne commercial plant by 2028., Epoch Biodesign has raised $1..."
+    },
+    {
+      "url": "https://thenextweb.com/news/wearable-robotics-5m-series-a",
+      "title": "Wearable Robotics raises €5M to expand its arm exoskeleton",
+      "description": "Wearable Robotics raises €5M led by CDP Venture Capital for its ALEX RS bilateral arm exoskeleton, deployed in 20 countries., Wearable Robotics raises €5M le..."
+    },
+    {
+      "url": "https://thenextweb.com/news/monzo-us-exit-europe-ipo",
+      "title": "Monzo quits the US to focus on Europe ahead of a London I...",
+      "description": "Monzo is closing its US accounts by June 2026 and cutting 50 jobs. Three months after getting an EU banking licence, the UK fintech is focused on a London IP..."
+    },
+    {
+      "url": "https://thenextweb.com/news/done-deal-microsofts-acquisition-of-interactive-design-company-perceptive-pixel-is-finalized",
+      "title": "Microsoft's Perceptive Pixel Acquisition: Done Deal",
+      "description": "Microsoft's acquisition of interactive design company Perceptive Pixel is now a done deal., Microsoft's acquisition of interactive design company Perceptive ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/bolt-expands-its-hopp-ride-hailing-brand-into-canadian-corporate-travel",
+      "title": "Bolt expands its Hopp ride-hailing brand into Canadian co...",
+      "description": "Hopp for Business has launched across 17 GTA municipalities, as Bolt moves on corporate accounts a year after its Toronto consumer debut., Hopp for Business ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/microsoft-copilot-entertainment-only-disclaimer-adoption",
+      "title": "Microsoft's own ToS calls Copilot 'entertainment only' am...",
+      "description": "Microsoft's Copilot Terms of Use label it \"for entertainment purposes only\", yet the company charges up to $30/user/month and has spent $80bn on AI. Only 3.3..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ackman-pershing-square-universal-music-56-billion-proposal",
+      "title": "Bill Ackman proposes buying Universal Music Group for €56B",
+      "description": "Pershing Square has submitted a non-binding proposal to buy Universal Music Group at €30.40 per share, a 78% premium., Pershing Square has submitted a non-bi..."
+    },
+    {
+      "url": "https://thenextweb.com/news/synthesias-valuation-jumps-to-4b-after-200m-raise",
+      "title": "Synthesia’s valuation jumps to $4B after $200M raise",
+      "description": "UK AI startup Synthesia raises $200M led by Google Ventures, doubling its valuation to $4B as enterprise use of AI video tools accelerates., UK AI startup Sy..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-x.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/which-telegram-growth-service-is-worth-it",
+      "title": "Which Telegram growth service is worth it in 2026. Smart ...",
+      "description": "Learn which Telegram growth services actually work in 2026. Explore smart automation, engagement strategies, and hybrid growth approaches that scale sustaina..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-19.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/meet-willow-garages-new-turtlebot-robot",
+      "title": "Meet Willow Garage’s new TurtleBot Robot",
+      "description": "Amid a deep discussion of advanced telemetric robotics last night, NYTimes’ Nick Bilton broke the pace with, “Have you seen the TurtleBot?”\nBut no, oh, marve..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ceos-arent-buying-freelance-economy-hype",
+      "title": "Why some CEOs aren't buying the freelance economy hype",
+      "description": "Despite the hype of this freelance economy, some CEOs are actually returning to traditional employment arrangements., Despite the hype of this freelance econ..."
+    },
+    {
+      "url": "https://thenextweb.com/author/dylanlove",
+      "title": "Dylan Love | Author at TNW"
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-spaces.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/slack-slackbot-30-ai-features-agentic",
+      "title": "Slack's biggest AI update turns Slackbot into a desktop a...",
+      "description": "Salesforce unveiled 30+ new AI features for Slackbot on 31 March 2026, including meeting intelligence, a desktop agent, a native CRM, and MCP client integrat..."
+    },
+    {
+      "url": "https://thenextweb.com/news/covalo-3-5m-hi-inov-personal-care-data-infrastructure",
+      "title": "Zurich-based Covalo has raised a €3.5M funding extension",
+      "description": "Zurich-based Covalo has raised a €3.5M funding extension to evolve from ingredient marketplace to shared data infrastructure for personal care., Zurich-based..."
+    },
+    {
+      "url": "https://thenextweb.com/news/squarespace-adds-commerce-tools-to-its-website-builder-allowing-users-to-manage-and-sell-goods-online",
+      "title": "Squarespace Adds Commerce Tools To Its Website Builder",
+      "description": "Website builder and hosting platform Squarespace has launched a new integrated commerce solution today that will allow users to manage, sell and accept payme..."
+    },
+    {
+      "url": "https://thenextweb.com/news/heres-our-pick-of-startups-from-day-one-of-the-launch-festival",
+      "title": "Here's Our Pick of Startups From Day One of The Launch Fe...",
+      "description": "At day one of the Launch Festival, 18 stealth startups made their debut to the world. Here are six companies that we've highlighted., At day one of the Launc..."
+    },
+    {
+      "url": "https://thenextweb.com/news/gougle-googer-goolgle-google-wins-32-typo-squatted-domain-names",
+      "title": "Google Wins 32 Typo-Squatted Domain Names",
+      "description": "A small but noteworthy victory for Google as it has won 32 typo-squatted domain names, including Gougle.com, Go0gle.com and Googer.com., A small but notewort..."
+    },
+    {
+      "url": "https://thenextweb.com/news/ion-x-french-startup-electric-thrusters",
+      "title": "Propelling satellites with electricity and salt? No probl...",
+      "description": "French startup ION-X hopes to build the most efficient propulsion system ever put in space — and its electric., French startup ION-X hopes to build the most ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-25.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/iran-threatens-stargate-openai-abu-dhabi",
+      "title": "Iran threatens to destroy OpenAI's Stargate data centre i...",
+      "description": "Iran's IRGC has threatened 'complete annihilation' of OpenAI's $30bn Stargate AI campus in Abu Dhabi if the US strikes Iranian civilian infrastructure., Iran..."
+    },
+    {
+      "url": "https://thenextweb.com/news/nvidia-marvell-nvlink-fusion-ecosystem-lock-in",
+      "title": "Nvidia’s $2 billion Marvell bet is not an investment. It ...",
+      "description": "Nvidia's $2 billion Marvell investment deepens the NVLink Fusion ecosystem, ensuring every custom AI chip built for hyperscalers still generates Nvidia reven..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-2.xml"
+    },
+    {
+      "url": "https://thenextweb.com",
+      "title": "TNW | The heart of tech",
+      "description": "We inform, inspire, and connect people who love tech"
+    },
+    {
+      "url": "https://thenextweb.com/news/irex-ai-fire-detection",
+      "title": "IREX launches AI fire detection that works on existing ca...",
+      "description": "IREX upgrades its FireTrack AI to detect fire and smoke in real time using existing CCTV systems, improving accuracy and response speed., IREX upgrades its F..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-1.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/musk-wants-a-million-data-centre-satellites-bezos-wants-51600-scientists-want-to-know-why",
+      "title": "Space data centres: SpaceX and Blue Origin race to orbit ...",
+      "description": "SpaceX filed for 1 million data centre satellites, Blue Origin for 51,600. Scientists say the physics of cooling, radiation, and cost make orbital computing ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/corti-symphony-medical-coding-ai",
+      "title": "Corti’s new Symphony AI beats OpenAI and Anthropic on med...",
+      "description": "Corti has launched Symphony for Medical Coding, an agentic AI system built on EMNLP 2025 research that treats coding as a form of reasoning., Corti has launc..."
+    },
+    {
+      "url": "https://thenextweb.com/news/businessman-pornstar-scam",
+      "title": "Businessman and a legendary pornstar implicated in a $300...",
+      "description": "There has been a long upstanding debate in India about celebrities being held liable for the brands they endorse, and some of them are now learning their les..."
+    },
+    {
+      "url": "https://thenextweb.com/news/europes-top-funding-rounds-30-march-5-april",
+      "title": "Recap: Europe’s top funding rounds this week (30 March – ...",
+      "description": "From Mistral’s $830M data centre debt raise to a €1.1M Swiss workpod pre-seed, Europe’s most notable funding rounds for the week of 30 March - 5 April 2026.,..."
+    },
+    {
+      "url": "https://thenextweb.com/news/the-guardians-gpt-3-generated-article-is-everything-wrong-with-ai-media-hype",
+      "title": "The Guardian’s GPT-3-generated article is everything wron...",
+      "description": "The Guardian today published an article purportedly written \"entirely\" by OpenAI's GPT-3. But the the newspaper's grand claims aren't all they seem., The Gua..."
+    },
+    {
+      "url": "https://thenextweb.com/news/enervenue-300m-series-b-metal-hydrogen-batteries",
+      "title": "EnerVenue raises $300M to scale NASA-proven metal-hydroge...",
+      "description": "California startup EnerVenue has raised $300M led by Full Vision Capital to scale its nickel-hydrogen battery tech from space to grid-scale energy storage., ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/linkedin-browsergate-extension-scanning-privacy-fingerprint",
+      "title": "LinkedIn secretly scans 6,000+ browser extensions and fin...",
+      "description": "LinkedIn runs a hidden JavaScript script called Spectroscopy that silently probes over 6,000 Chrome extensions and collects 48 device data points, none of it..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-tnwConf.xml"
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-24.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/russia-tech-services-banned-ukraine-war-list",
+      "title": "All the apps and services you can’t use in Russia right now",
+      "description": "After Russia invaded Ukraine, a hoard of tech companies have pulled out of the country., After Russia invaded Ukraine, a hoard of tech companies have pulled ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/anthropic-google-broadcom-compute-deal",
+      "title": "Anthropic signs biggest compute deal yet with Google and ...",
+      "description": "Anthropic's run rate hit $30bn as the company signs a 3.5GW TPU deal with Google and Broadcom the biggest compute commitment in its history, online from 2027..."
+    },
+    {
+      "url": "https://thenextweb.com/news/anthropic-just-paid-400-million-for-a-startup-with-fewer-than-10-people",
+      "title": "Anthropic acquires biotech AI startup Coefficient Bio for...",
+      "description": "Anthropic has acquired Coefficient Bio, a stealth biotech startup with fewer than 10 people, for $400 million in stock. The former Genentech researchers join..."
+    },
+    {
+      "url": "https://thenextweb.com/news/google-gemma-4-open-models-apache-2-launch",
+      "title": "Google has launched Gemma 4",
+      "description": "Google has launched Gemma 4, four open-weight models from E2B edge to 31B Dense, built from Gemini 3 research, released under Apache 2.0., Google has launche..."
+    },
+    {
+      "url": "https://thenextweb.com/news/the-unreleased-ai-metas-model",
+      "title": "What we can learn from Avocado: The unreleased AI Meta’s ...",
+      "description": "In the competitive landscape of AI agents, where businesses are closing investment deals everyday to build and expand their AI infrastructure and software, t..."
+    },
+    {
+      "url": "https://thenextweb.com/news/baidu-partners-with-qualcomm-to-provide-free-cloud-storage-to-snapdragon-powered-android-phones",
+      "title": "Baidu Offers Cloud Storage to Phones with Qualcomm's Snap...",
+      "description": "Baidu has today announced a strategic partnership with Qualcomm to offer free storage to Android devices powered by Qualcomm's Snapdragon processors., Baidu ..."
+    },
+    {
+      "url": "https://thenextweb.com/news/openai-safety-fellowship",
+      "title": "OpenAI launched a safety fellowship",
+      "description": "OpenAI announced an external Safety Fellowship, hours after a New Yorker investigation reported it had dissolved its superalignment., OpenAI announced an ext..."
+    },
+    {
+      "url": "https://thenextweb.com/news/anthropic-openclaw-claude-subscription-ban-cost",
+      "title": "Anthropic blocks OpenClaw from Claude subscriptions in co...",
+      "description": "Anthropic has banned Claude Pro and Max subscribers from using OpenClaw and other third-party agents on flat plans. Users now face costs up to 50x higher und..."
+    },
+    {
+      "url": "https://thenextweb.com/news/french-startup-adcreative-launches-llm-for-advertising-copy",
+      "title": "French startup launches first LLM built exclusively for a...",
+      "description": "AdCreative.ai has built an new LLM that generates ad text. It promises copy with high conversion rates on every major advertising platform., AdCreative.ai ha..."
+    },
+    {
+      "url": "https://thenextweb.com/news/elaia-dts3-deep-tech-seed-fund-134m",
+      "title": "Elaia closes its third deep-tech seed fund at €134M",
+      "description": "French VC Elaia has closed its third deep-tech seed fund, DTS3, at €134M, above its original €120M target, to back 40 European science B2B startups., French ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-18.xml"
+    },
+    {
+      "url": "https://thenextweb.com/latest",
+      "title": "Latest tech news | TNW"
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-23.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/kupando-series-a-kup101-phase-1b-innate-immunity",
+      "title": "Kupando raises €10M more to take its immunity drug into t...",
+      "description": "Kupando has raised an additional €10M in Series A financing, bringing its total to €23M, to fund Phase 1b trials of KUP101., Kupando has raised an additional..."
+    },
+    {
+      "url": "https://thenextweb.com/news/mistral-ai-830m-debt-data-centre-paris",
+      "title": "Mistral secures $830M from seven banks to build its own A...",
+      "description": "Mistral AI has raised $830M in its first-ever debt financing to buy 13,800 Nvidia chips for a data centre at Bruyères-le-Châtel near Paris., Mistral AI has r..."
+    },
+    {
+      "url": "https://thenextweb.com/news/13-tips-for-shooting-low-light-photos-on-your-phone-like-a-pro",
+      "title": "13 tips for taking better low light pictures with your sm...",
+      "description": "With July 4th coming up, you'll want to make sure you can eke the best out of your phone's camera for those nighttime fireworks. We're here to help., With Ju..."
+    },
+    {
+      "url": "https://thenextweb.com/news/french-fintech-pennylane-raises-e175m",
+      "title": "French fintech Pennylane raises €175M",
+      "description": "Paris fintech Pennylane raises €175M, to expand AI products and scale its financial platform across Europe at a €3.6bn valuation., Paris fintech Pennylane ra..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-11.xml"
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-12.xml"
+    },
+    {
+      "url": "https://thenextweb.com/news/valar-atomics-nuclear-ai-data-centre-funding",
+      "title": "Valar Atomics raises $450M at $2B valuation to power AI w...",
+      "description": "Palmer Luckey-backed Valar Atomics raised $450 million at a $2 billion valuation to build clusters of small reactors for AI data centres, five months after a..."
+    },
+    {
+      "url": "https://thenextweb.com/news/openai-open-source-teen-safety-policies-developers",
+      "title": "OpenAI releases open-source teen safety tools for AI deve...",
+      "description": "OpenAI released prompt-based safety policies for developers building AI apps used by teens, covering violence, self-harm, & age-restricted content., OpenAI r..."
+    },
+    {
+      "url": "https://thenextweb.com/news/meta-mercor-breach-ai-training-secrets-risk",
+      "title": "Meta freezes AI data work after breach puts training secr...",
+      "description": "Meta has indefinitely paused work with $10B AI data startup Mercor after a LiteLLM supply chain attack exposed training methodologies used by Meta, OpenAI, a..."
+    },
+    {
+      "url": "https://thenextweb.com/news/apple-buys-silent-speech-ai-startup-for-2b-because-talking-is-so-2025",
+      "title": "Apple buys Q.ai to help devices read our faces",
+      "description": "Apple acquires Israeli AI startup Q.ai for nearly $2 billion to advance silent speech tech, betting on the future of human-tech interaction., Apple acquires ..."
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-14.xml"
+    },
+    {
+      "url": "https://thenextweb.com/sitemap-articles-10.xml"
+    }
+  ]
+}

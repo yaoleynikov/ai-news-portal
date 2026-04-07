@@ -1,0 +1,512 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.ixbt.com/news/2026/01/20/iskusstvennyj-intellekt-izuchajut-kak-mozg-novyj-jetap-v-ponimanii-chjornyh-jashikov.html",
+    "https://www.ixbt.com/news/2026/02/17/foto-evropejskaja-juzhnaja-observatorija-zavershaet-kljuchevoj-jetap-stroitelstva-teleskopa-elt-v-chili.html",
+    "https://www.ixbt.com/news/2026/02/23/13-21-9-64-8-ssd-ryzen-ai-9-hx-370-keebmon-800-000-kickstarter.html",
+    "https://www.ixbt.com/news/2024/09/23/samsung-1-8-oled.html",
+    "https://www.ixbt.com/news/2025/04/23/toyota-land-cruiser-geely-galaxy-cruiser.html"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.ixbt.com/news/2026/01/20/iskusstvennyj-intellekt-izuchajut-kak-mozg-novyj-jetap-v-ponimanii-chjornyh-jashikov.html",
+      "title": "Искусственный интеллект изучают как мозг: новый этап в по...",
+      "description": "Подорожал только Tenet T4"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/kak-skachat-bravl-stars-i-klesh-royal-na-ayfon-v-rossii.html",
+      "title": "Как скачать Бравл Старс и Клеш Рояль на Айфон в России / ...",
+      "description": "В интернете полно статей на тему «как скачать Brawl Stars или Clash Royale на iPhone», но там обычно всё сводится"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/02/17/foto-evropejskaja-juzhnaja-observatorija-zavershaet-kljuchevoj-jetap-stroitelstva-teleskopa-elt-v-chili.html",
+      "title": "Фото: Европейская Южная Обсерватория завершает ключевой э...",
+      "description": "По цене от 17 000 руб."
+    },
+    {
+      "url": "https://www.ixbt.com/live/science/postoyanno-holodnye-ruki-obyasnili-osobennostyami-krovoobrascheniya.html",
+      "title": "Постоянно холодные руки объяснили особенностями кровообра...",
+      "description": "Исследователи в области физиологии описали механизм, объясняющий, почему у части людей руки остаются холодными даже при умеренной температуре воздуха. Основная"
+    },
+    {
+      "url": "https://www.ixbt.com/car/haval-jolion-2024-review.html",
+      "title": "Тестирование Haval Jolion 2024 (рестайлинг): точечные изм...",
+      "description": "Автомобиль Haval Jolion стал, пожалуй, первой наиболее известной широкому кругу автолюбителей маркой китайского автопрома. Новый Haval Jolion сохранил ценовы..."
+    },
+    {
+      "url": "https://www.ixbt.com/portopc/battery-benchmark-1.0.shtml",
+      "title": "Методика тестирования ноутбуков iXBT.com 2014 года, часть...",
+      "description": "В этой заключительной статье мы рассмотрели нашу новую методику измерения времени автономной работы ноутбуков, а также вкратце описали, каким образом произво..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/instruments/poleznyy-instrument-dlya-hobbi-obzor-izmeritelya-vlazhnosti-fnirsi-wmt-10.html",
+      "title": "Полезный инструмент для хобби: обзор измерителя влажности...",
+      "description": "Речь пойдет про устройство для измерения влажности FNIRSI WMT-10&nbsp;&mdash; компактный прибор для бесконтактной (индуктивной) оценки древесины и не только...."
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/vyshla-neyroset-qwen-36-plus-s-podderzhkoy-konteksta-do-1-mln-tokenov.amp.html",
+      "title": "Вышла нейросеть Qwen 3.6 Plus с поддержкой контекста до 1...",
+      "description": "В конце марта 2026 года команда Alibaba объявила о выпуске модели Qwen 3.6 Plus в предварительной версии. Новая система стала"
+    },
+    {
+      "url": "https://www.ixbt.com/mobile/iqoo-11-pro-review.html",
+      "title": "Обзор топового смартфона iQoo 11 Pro с экраном AMOLED 144...",
+      "description": "Смартфон получил мощнейшую аппаратную платформу и по производительности находится на самой высокой ступени. У него максимально качественный экран, высококлас..."
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/02/23/13-21-9-64-8-ssd-ryzen-ai-9-hx-370-keebmon-800-000-kickstarter.html",
+      "title": "13-дюймовый экран 21:9, до 64 ГБ ОЗУ и 8 ТБ SSD, механиче...",
+      "description": "Анализ 200 000+ диалогов Microsoft и Salesforce показал, что LLM «запоминают ошибки»"
+    },
+    {
+      "url": "https://www.ixbt.com/live/car/razve-tak-mozhno-bylo-nomera-mashin-vidny-dazhe-nochyu-obzor-videoregistratora-70mai-dash-cam-4k-a810.html",
+      "title": "Разве так можно было? Номера машин видны даже ночью. Обзо...",
+      "description": "В современном мире технологии играют важнейшую роль в повышении безопасности вождения. Видеорегистратор 70mai A810 Dash Cam является примером устройства, кот..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/7-bystryh-m2-ssd-ot-1-tbayt-s-aliekspress-aktualnyh-v-2025-do-rub10000-i-7000-mb-s-a-tier-brendy.html",
+      "title": "7 быстрых m.2 SSD от 1 Тбайт с Алиэкспресс, актуальных в ...",
+      "description": "Обычно на «Алиэкспресс» заглядывают в поисках «твердотельников», сделанных слепыми китайцами из ржавых вилок и рыболовных сетей&nbsp;&mdash; лишь&nbsp;бы раб..."
+    },
+    {
+      "url": "https://www.ixbt.com/home/top-5-cordless-upright-vacuum-cleaners-2024.html",
+      "title": "Топ-5 вертикальных беспроводных пылесосов для сухой уборк...",
+      "description": "Вертикальные беспроводные пылесосы — приборы, без которых уже сложно представить современный уход за домом. Производители делают их всё более навороченными и..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/offtopic/voinskie-zvaniya-i-pogony-v-armii-rossii-kak-chitat-i-kto-na-kakoy-stupeni.html",
+      "title": "Воинские звания и погоны российской армии: как быстро пон...",
+      "description": "Военные звания в армии России&nbsp;&mdash; это основа структуры, которая определяет порядок иерархии среди военнослужащих. Каждое звание отображается на пого..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/podborka-byudzhetnyh-smartfonov-aktualnyh-na-2026-god-stoimostyu-do-20000-rubley.html",
+      "title": "Подборка бюджетных смартфонов актуальных на 2026 год стои...",
+      "description": "Если вы ищете лучшие бюджетные смартфоны с супер автономностью до 20000 рублей в 2026 году, эта подборка станет настоящей находкой."
+    },
+    {
+      "url": "https://www.ixbt.com/live/gadgets/mesyac-bez-podzaryadki-yarkiy-fonarik-v-chasah-ip68-za-2000-rubley-obzor-smart-chasov-blackview-w50-pro.html",
+      "title": "Месяц без подзарядки, яркий фонарик в часах, IP68 за 2000...",
+      "description": "Компания Blackview выпустила новую версию фитнес часов, в которой усовершенствовали многие функции, расширили отслеживаемые алгоритмы, увеличили автономность..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/korotkie-serialy-ot-netflix-dlya-otdyha-mozga-8-legkih-komediy-do-30-minut.html",
+      "title": "Короткие сериалы от Netflix для отдыха мозга: 8 лёгких ко...",
+      "description": "Короткие комедийные сериалы&nbsp;&mdash; это как кофе с печенькой для вашего мозга: бодрят, но не перегружают. На Netflix таких «мини-развлечений» всё"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/korotko-no-moschno-10-rossiyskih-mini-serialov-detektivov-do-12-seriy.html",
+      "title": "Коротко, но мощно: 10 российских мини-сериалов-детективов...",
+      "description": "Иногда так хочется погрузиться в закрученный сюжет, но без марафона на десятки серий. И тут на помощь приходят мини-сериалы&nbsp;&mdash; компактные,"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/odnazhdy-v-irlandii-shedevr-irlandskogo-yumora-s-dushoy-i-atmosferoy.html",
+      "title": "\"Однажды в Ирландии\": шедевр ирландского юмора с душой и ...",
+      "description": "«Однажды в Ирландии» (2011)&nbsp;&mdash; дебютная полнометражная работа режиссера и сценариста Джона Майкла Макдоны, ставшая неожиданным и приятным сюрпризом..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-filmov-pro-supersposobnosti-ot-uzhasa-do-komedii.html",
+      "title": "10 фильмов про суперспособности: от ужаса до комедии / Ки...",
+      "description": "Тема сверхспособностей в кино всегда привлекала зрителей&nbsp;&mdash; ведь в основе таких историй лежит желание выйти за пределы обычного, почувствовать силу,"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-fantasticheskih-filmov-pro-kosmos-2024-2026-kotorye-uzhe-vyshli-i-ne-trebuyut-prodolzheniya.html",
+      "title": "10 фантастических фильмов про космос 2024–2026, которые у...",
+      "description": "Космос в кино за последние годы заметно изменился. Если раньше это были бесконечные саги о спасении галактики, то теперь всё"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2024/09/23/samsung-1-8-oled.html",
+      "title": "Samsung вложит ещё 1,8 млрд долларов в производство OLED-...",
+      "description": "До этого предлагались только дизельные машины"
+    },
+    {
+      "url": "https://www.ixbt.com/live/games/radar-hak-istoriya-chita-2010-h-kotoryy-edva-ne-ubil-sorevnovatelnye-igry.html",
+      "title": "Радар-хак: история чита 2010-х, который едва не убил соре...",
+      "description": "Борьба с читерами в онлайн-играх&nbsp;&mdash; вечная сага, не знающая финала. Сценарий её всегда одинаков: хитроумные разработчики запрещённого софта находят..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/games/7-lekarstvennyh-igr-na-pk-i-konsoli-ot-igrovogo-vygoraniya.html",
+      "title": "7 \"лекарственных\" игр на ПК и консоли от игрового выгоран...",
+      "description": "О термине «игровое выгорание» знают многие геймеры. Или хотя&nbsp;бы слышали о нем. О том, почему это происходит, можно говорить долго,"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/kak-smenit-region-apple-id-app-store-na-ayfone-poshagovoe-rukovodstvo-i-otvety-na-chastye-voprosy.html",
+      "title": "Как сменить регион Apple ID (App Store) на iPhone. Пошаго...",
+      "description": "Сейчас с российским Apple&nbsp;ID всё стало сложнее. Просто взять и пополнить баланс, как раньше, уже не получится. Поэтому если вы"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2025/04/23/toyota-land-cruiser-geely-galaxy-cruiser.html",
+      "title": "Toyota Land Cruiser устарел. Новый внедорожник Geely Gala...",
+      "description": "Доступны два варианта двигателей"
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/podborka-dinamikov-dlya-sozdaniya-samodelnoy-portativnoy-kolonki-kalibr-2-4.html",
+      "title": "Подборка динамиков для создания самодельной портативной к...",
+      "description": "Не всех устраивают серийные решения в сфере портативной акустики, да и желание сделать что-то своими руками подталкивает к самодельной реализации."
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/3-prichiny-pochemu-neznakomcy-prosyat-pozvonit-s-vashego-telefona-i-pochemu-luchshe-otkazat.html",
+      "title": "3 причины, почему незнакомцы просят \"позвонить с вашего т...",
+      "description": "Вы стоите на улице, к вам подходит человек&nbsp;&mdash; приветливый, улыбается, аккуратно одет: «Извините, можно позвонить с вашего телефона? Очень срочно»."
+    },
+    {
+      "url": "https://www.ixbt.com/live/chome/ionizaciya-v-fene-kak-rabotaet-i-dlya-kakih-volos-prednaznachena.html",
+      "title": "Ионизация в фене: как работает и для каких волос предназн...",
+      "description": "Фен для волос&nbsp;&mdash; привычный прибор для повседневного использования. Он может быть оснащен разными функциями. Попробуем разобраться с одной из наиболее"
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/10-akkumulyatornyh-ushm-s-aliexpress.html",
+      "title": "10 аккумуляторных УШМ для автономной работы с Aliexpress ...",
+      "description": "УШМ уже давно стала практически неотъемлемой частью каждого мастера, это удобный и практичный инструмент, однако не всегда рационально и удобно"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-svezhih-detektivnyh-serialov-ot-netflix-2024-2026-goda.html",
+      "title": "10 свежих детективных сериалов от Netflix 2024-2026 года ...",
+      "description": "Netflix предлагает разнообразный выбор свежих детективных сериалов за 2024-2026 годы, сочетающих напряжённые расследования, неожиданные повороты и глубокие п..."
+    },
+    {
+      "url": "https://www.ixbt.com/3dv/titan-army-g2785s-review.html",
+      "title": "Обзор 27-дюймового игрового QD-OLED-монитора Titan Army G...",
+      "description": "Это игровой монитор высокого класса. Технология OLED в ее разновидности QD-OLED, с помощью которой формируется изображение на экране данного монитора, позвол..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/tv/obzor-dune-hd-solo-8k-solnyy-nomer.html",
+      "title": "Обзор Dune HD Solo 8K. Сольный номер / ТВ, мультимедиа и ...",
+      "description": "Dune&nbsp;HD Solo 8K&nbsp;&mdash; это медиаплеер на мощном чипсете нового поколения Amlogic S928X-K/J с поддержкой Dolby Vision и Dolby Atmos и"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobilepc/snapdragon-8-elite-gen-5-12450-mach-i-ips-ekran-na-165-gc-predstavlen-planshet-honor-magicpad-3-pro.html",
+      "title": "Snapdragon 8 Elite Gen 5, 12450 мАч и IPS-экран на 165 Гц...",
+      "description": "Кроме смартфонов серии Magic 8 компания Honor показала на презентации планшет Honor MagicPad 3 Pro. Новинка стала первым подобным гаджетом"
+    },
+    {
+      "url": "https://www.ixbt.com/live/digs/obzor-besprovodnyh-naushnikov-haylou-s35-anc-aktivnoe-shumopodavlenie-i-avtonomnost-do-60ch.html",
+      "title": "Обзор беспроводных наушников Haylou S35 ANC: активное шум...",
+      "description": "Haylou S35 ANC&nbsp;&mdash; бюджетные беспроводные полноразмерные наушники, которые получили активное шумоподавление и «прозрачный» режим работы. Устройство ..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/podborka-modeley-avtomobilnyh-videoregistratorov-do-15000-rubley-aktualnyh-vesnoy-2025-goda.html",
+      "title": "Подборка моделей автомобильных видеорегистраторов до 1500...",
+      "description": "Весна&nbsp;&mdash; время обновлений и подготовки автомобиля к новому сезону. Чтобы обезопасить себя и свое транспортное средство от неприятных ситуаций на"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/01/19/prodazhi-jetogo-otechestvennogo-minivjena-ischisljajutsja-poka-edinicami-no-sollers-sp7-uzhe-podorozhal-v-rossii.html",
+      "title": "Продажи этого отечественного минивэна исчисляются пока ед...",
+      "description": "Все это в компактном корпусе и с экраном диагональю 6,31 дюйма"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-filmov-v-duhe-amerikanskogo-piroga-legkie-komedii-s-molodezhnym-yumorom.html",
+      "title": "10 фильмов в духе «Американского пирога»: лёгкие комедии ...",
+      "description": "Если вам понравился «Американский пирог» и хочется посмотреть что-то похожее&nbsp;&mdash; с дружбой, неловкими ситуациями, подростковым юмором и романтикой, ..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/gadgets/predstavlen-portativnyy-5g-router-zte-u30-pro-sensornyy-ekran-i-wi-fi-6-dlya-maksimalnoy-proizvoditelnosti.html",
+      "title": "Представлен портативный 5G-роутер ZTE U30 Pro: Сенсорный ...",
+      "description": "В Китае состоялся официальный анонс нового портативного Wi-Fi-устройства U30 Pro 5G от ZTE. 5G-роутер ZTE U30 ProАвтор: ZTE Источник:"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-svezhih-detektivnyh-mini-serialov-2026-goda-kotorye-uzhe-dostupny-k-prosmotru.html",
+      "title": "10 свежих детективных мини‑сериалов 2026 года, которые уж...",
+      "description": "В туманных улочках, где каждый фонарь скрывает ложь, а каждый шёпот может быть уликой, таится правда. Любители детективов 2026 года"
+    },
+    {
+      "url": "https://www.ixbt.com/live/chome/ezhednevnaya-moyka-pola-promyvka-i-sushka-shvabr-obzor-robota-pylesosa-trouver-e30-aqua.html",
+      "title": "Ежедневная мойка пола, промывка и сушка швабр: обзор робо...",
+      "description": "Роботы-пылесосы настолько прочно вошли в нашу жизнь, что уже просто невозможно представить поддержание чистоты в доме без них. Достаточно, уходя"
+    },
+    {
+      "url": "https://www.ixbt.com/live/instruments/germetizaciya-rezby-kogda-vybrat-len-a-kogda-fum-lentu.html",
+      "title": "Герметизация резьбы: когда выбрать лён, а когда ФУМ-ленту...",
+      "description": "При монтаже любых сантехнических систем нужно стыковать трубы, подключать краны, насосы, фильтры и иные приборы. При этом используются резьбовые фитинги."
+    },
+    {
+      "url": "https://www.ixbt.com/home/honor-choice-robot-cleaner-r3-plus-review.html",
+      "title": "Обзор робота-пылесоса Honor Choice Robot Cleaner R3 Plus",
+      "description": "Робот-пылесос Honor Choice Robot Cleaner R3 Plus по результатам наших тестов продемонстрировал высокое качество уборки и отличные способности по ориентирован..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-napryazhennyh-filmov-gde-geroi-zaperty-v-ogranichennom-prostranstve.html",
+      "title": "10 напряжённых фильмов, где герои заперты в ограниченном ...",
+      "description": "Тема ограниченного пространства всегда манила кинематографистов, начиная с древних мифов о заточении и заканчивая современными триллерами. В этих фильмах про..."
+    },
+    {
+      "url": "https://www.ixbt.com/home/two-basket-air-fryers-2026.html",
+      "title": "Аэрогрили с двумя чашами: хорошо ли готовят и имеет ли см...",
+      "description": "Для больших семей и для раздельного одновременного приготовления разных продуктов есть аэрогрили с двумя корзинами (или чашами). В них можно готовить, не сме..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/car/kak-vosstanovit-plastik-v-mashine-svoimi-rukami-neskolko-rabochih-sovetov.html",
+      "title": "Как восстановить пластик в машине своими руками: нескольк...",
+      "description": "В каждом автомобиле имеются детали, которые не влияют на ходовые качества, однако, такие детали, как пластиковые элементы салона или декоративные"
+    },
+    {
+      "url": "https://www.ixbt.com/live/platform/vozdushnoe-ohlazhdenie-ili-szho-kogda-bashennyy-kuler-spravlyaetsya-luchshe.html",
+      "title": "Воздушное охлаждение или СЖО: когда башенный кулер справл...",
+      "description": "Современный рынок систем охлаждения для процессоров предлагает огромный выбор: от компактных воздушных кулеров до сложных систем жидкостного охлаждения (СЖО)..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/10-beskontaktnyh-testerov-napryazheniya-s-aliexpress---bystryy-poisk-fazy-i-proverka-provodki.html",
+      "title": "10 бесконтактных тестеров напряжения с AliExpress - быстр...",
+      "description": "В этой подборке&nbsp;&mdash; 10 бесконтактных детекторов напряжения с AliExpress, предназначенных для быстрой проверки наличия фазы и напряжения без прямого ..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/chome/chto-takoe-ekorezhim-i-zachem-on-nuzhen-v-stiralnoy-mashine.html",
+      "title": "Что такое экорежим и зачем он нужен в стиральной машине /...",
+      "description": "Огромное количество хозяек практически каждый день стирают одежду и белье в стиральных машинках. Современные машинки предлагают нам широкий спектр функций,"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2025/11/09/8000-165-oneplus-ace-6-pro-max-snapdragon-8-gen-5.html",
+      "title": "Аккумулятор ёмкостью около 8000 мА·ч и 165-герцевый экран...",
+      "description": "Столько в России стоит базовая Lada Iskra"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/01/30/vpervye-v-evrope-prodazhi-jelektromobilej-prevysili-prodazhi-mashin-s-benzinovymi-dvigateljami.html",
+      "title": "Впервые в Европе продажи электромобилей превысили продажи...",
+      "description": "Лидерами стали модели от Anbernic, Ayn Thor и Data Frog"
+    },
+    {
+      "url": "https://www.ixbt.com/live/instruments/kompaktnyy-no-moschnyy-akkumulyatornyy-graver-obzor-komplekta-greenworks-gpt-8vrt.html",
+      "title": "Компактный, но мощный аккумуляторный гравер: обзор компле...",
+      "description": "Данная модель поставляется в удобном кейсе с горстью расходников, так что после покупки можно доставать из коробки и сразу пользоваться."
+    },
+    {
+      "url": "https://www.ixbt.com/home/aerogrill-or-multicooker-2025.html",
+      "title": "Что лучше выбрать: аэрогриль или мультиварку? Объясняем н...",
+      "description": "Аэрогриль и мультиварка — два популярных устройства, которые помогают готовить вкусные и полезные блюда, но делают это принципиально разными способами: мульт..."
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/03/30/tesla-model-s-model-x.html",
+      "title": "«Спасибо, что были частью нашего пути». Tesla раньше срок...",
+      "description": "Больше всего жалоб на работу Max — из Москвы и Московской области, а также Санкт-Петербурга"
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/vybiraem-zvukovuyu-panel-s-dolby-atmos-i-sabvuferom-v-2026-godu-9-modeley-na-lyuboy-byudzhet.html",
+      "title": "Выбираем звуковую панель с Dolby Atmos и сабвуфером в 202...",
+      "description": "С хорошим телевизором обычно всё понятно. Экран большой, цвета нормальные, картинка радует. А вот звук&hellip; с ним почти всегда какая-то"
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/vybiraem-portativnuyu-kolonku-8-populyarnyh-modeley-s-horoshim-zvukom-do-10-000-rub.html",
+      "title": "Выбираем портативную колонку: 8 популярных моделей с хоро...",
+      "description": "Портативные колонки до 10 000 рублей это один из самых массовых и востребованных сегментов: их берут для дома, поездок, дачи"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/03/12/ryzen-5-7430u-ryzen-5-5500u-chuwi-amd.html",
+      "title": "Вместо Ryzen 5 7430U — Ryzen 5 5500U: компанию Chuwi улич...",
+      "description": "В Counterpoint Research считают, что дефицит чипов продлится как минимум до второй половины 2027 года"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/04/06/anthropic-coefficient-bio.html",
+      "title": "Anthropic приобрела стартап Coefficient Bio для развития ...",
+      "description": "На космодроме проверили системы корабля, включая раскрытие солнечных батарей"
+    },
+    {
+      "url": "https://www.ixbt.com/live/chome/nuzhna-li-vam-stiralnaya-mashina-s-sushilkoy-plyusy-i-minusy-kombinirovannoy-stiralki.html",
+      "title": "Cтиральная машина с сушилкой: плюсы и минусы комбинирован...",
+      "description": "Благодаря сушке вещей в стиральной машинке можно после отжима их не развешивать, а получить в состоянии, готовом к глажке. Стирально-сушильные"
+    },
+    {
+      "url": "https://www.ixbt.com/mobile/xiaomi-14t-pro-review.html",
+      "title": "Обзор субфлагманского смартфона Xiaomi 14T Pro",
+      "description": "Xiaomi 14T Pro получился сбалансированным субфлагманским смартфоном за 75 тысяч рублей. У него хорошо практически всё: отличный экран, крепкий надежный корпу..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/platform/ochen-tihiy-ochen-malenkiy-ochen-obzor-mini-pk-firebat-t2.html",
+      "title": "Очень тихий, очень маленький, очень...: обзор мини-ПК Fir...",
+      "description": "Firebat T2&nbsp;&mdash; данный мини-ПК данного производителя очень частый гость, разного рода скидочных каналов и сайтов, так как очень часто предлагается"
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/messendzher-max-tak-li-on-strashen-na-samom-dele-kak-o-nem-govoryat-i-pochemu-ne-stoit-ego-demonizirovat.html",
+      "title": "Мессенджер MAX: так ли он страшен на самом деле, как о не...",
+      "description": "В марте 2025 года компания&nbsp;VK запустила мессенджер MAX, который позиционируется как российский аналог популярных иностранных платформ, с амбициозной целью"
+    },
+    {
+      "url": "https://www.ixbt.com/live/science/priroda-izobrela-slozhnyy-glaz-dvazhdy-pochemu-glaza-lyudey-i-osminogov-ustroeny-absolyutno-po-raznomu.html",
+      "title": "Природа изобрела сложный глаз дважды: почему глаза людей ...",
+      "description": "Позвоночные животные и головоногие моллюски&nbsp;&mdash; две совершенно разные ветви жизни. Их эволюционные пути разошлись так давно, что у их последнего"
+    },
+    {
+      "url": "https://www.ixbt.com/live/market/item/xcomshop/blog/117381.html",
+      "title": "Топ лучших мониторов 32 дюйма / Блог компании XCOM-SHOP /...",
+      "description": "32 дюйма&nbsp;&mdash; один из самых востребованных форматов на рынке мониторов сегодня. Его выбирают и для работы, и для игр, и"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-kinokartin-o-manipulyatorah-kotorye-pereigryvayut-vseh-dazhe-zritelya.html",
+      "title": "10 кинокартин о манипуляторах, которые переигрывают всех ...",
+      "description": "Иногда экран подкидывает таких героев, что хочется невольно оглянуться по сторонам&nbsp;&mdash; уж слишком уверенно они двигают людьми, будто фигурами на"
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/obzor-cachyos---novyy-vzglyad-na-arch-linux-bez-slozhnostey.html",
+      "title": "Обзор CachyOS - новый взгляд на Arch Linux без сложностей...",
+      "description": "CachyOS это молодой дистрибутив Linux, созданный на базе Arch, но он значительно отличается от своего предка. Основная цель разработчиков&nbsp;&mdash; предос..."
+    },
+    {
+      "url": "https://www.ixbt.com/news/2023/09/06/jekspressmarshrut-do-mks-sojuz-ms24-otpravit-astronavta-nasa-na-mezhdunarodnuju-kosmicheskuju-stanciju-po-sverhkorotkoj.html",
+      "title": "Экспресс-маршрут до МКС: «Союз МС-24» отправит астронавта...",
+      "description": "В рамках Kickstarter"
+    },
+    {
+      "url": "https://www.ixbt.com/live/platform/pochemu-luchshe-otkazatsya-ot-idei-sobirat-kompyuter-na-xeon-lga2011-3-i-sobirat-na-ryzen-am4.html",
+      "title": "Почему лучше отказаться от идеи собирать компьютер на Xeo...",
+      "description": "Несколько лет назад системные блоки, собранные на китайских материнских платах с серверными процессорами Xeon и оперативной памятью с поддержкой ECC"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobilepc/kak-kupit-macbook-na-avito-i-ne-narvatsya-na-moshennikov.html",
+      "title": "Как купить MacBook на «Авито» и не попасть на мошенников ...",
+      "description": "Скажу честно, сам я никогда не покупал MacBook с рук, но зато продавал. Зимой 2022 года я купил MacBook"
+    },
+    {
+      "url": "https://www.ixbt.com/live/games/4-igry-igry-do-300-rubley-kotorye-uvlekut-nadolgo-vo-chto-mozhno-poigrat-vo-vremya-letney-rasprodazhi-v-stime.html",
+      "title": "4 игры разных жанров до 300 рублей: во что можно поиграть...",
+      "description": "Каждый сезон компания Valve проводит распродажи в своём магазине Steam. Это отличный повод приобщиться к ранее не замеченным проектам по"
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/zachem-hakeram-vash-akkaunt-v-telegram-i-kak-zaschitit-sebya.html",
+      "title": "Зачем хакерам ваш аккаунт в Telegram и как защитить себя ...",
+      "description": "Многие уверены, что их аккаунт в Telegram никому не интересен. «Я не публичный человек, у меня нет канала, зачем я"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/04/03/rossijskie-uchenye-razrabotali-sistemu-kotoraja-predskazyvaet-problemy-s-kachestvom-interneta.html",
+      "title": "Российские ученые разработали систему, которая предсказыв...",
+      "description": "Около 4000 жалоб за час только на сайте detector404"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/03/14/64-cinebench-minecraft.html",
+      "title": "Энтузиаст запустил настольный компьютер на 64 батарейках ...",
+      "description": "А не только игровой ускоритель с 12 ГБ памяти"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/04/03/sboj-v-metro-moskvy-bankovskie-karty-chastichno-ne-rabotajut-passazhirov-propuskajut-besplatno.amp.html",
+      "title": "Сбой в метро Москвы. Банковские карты частично не работаю...",
+      "description": "Сотрудники ссылаются на массовый глобальный сбой"
+    },
+    {
+      "url": "https://www.ixbt.com/printers/brother-dcp-t520w-inkbenefit-plus-review.html",
+      "title": "Обзор цветного струйного МФУ Brother DCP-T520W InkBenefit...",
+      "description": "Новая линейка Brother включает ряд бюджетных моделей бескартриджных МФУ, предоставляющих потенциальному покупателю выбор между самыми простыми аппаратами и п..."
+    },
+    {
+      "url": "https://www.ixbt.com/platform/intel-core-ultra-9-285k-arrow-lake-review.html",
+      "title": "Тестирование процессора Intel Core Ultra 9 285K (Arrow La...",
+      "description": "Процессор Core Ultra 9 285K открыл для настольных решений Intel эпоху многокристальной компоновки, использования сторонних техпроцессов и отказа от Hyper-Thr..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/science/svetovye-vihri-novyy-podhod-k-peredache-dannyh-v-optovolokne.html",
+      "title": "Световые вихри: новый подход к передаче данных в оптоволо...",
+      "description": "Информационный век требует всё большей пропускной способности каналов связи. Мы привыкли к тому, что данные текут по оптоволоконным кабелям, закодированные"
+    },
+    {
+      "url": "https://www.ixbt.com/live/periphery/obzor-igrovogo-rulya-sven-gc-w1000-kogda-rul-pedali-i-kpp-rabotayut-vmeste.html",
+      "title": "Обзор игрового руля Sven GC-W1000 — когда руль, педали и ...",
+      "description": "Что на самом деле дает игровой руль с педалями и механической коробкой передач и способен&nbsp;ли он изменить восприятие вождения в"
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/whatsapp-zapuskaet-novuyu-funkciyu-filtry-chata.html",
+      "title": "WhatsApp запускает новую функцию «Фильтры чата» / ИИ, сер...",
+      "description": "WhatsApp недавно добавил несколько новых функций, которые упрощают использование приложения и одновременно защищают конфиденциальность. За последние нескольк..."
+    },
+    {
+      "url": "https://www.ixbt.com/ds/edifier-mr4-review.html",
+      "title": "Обзор бюджетных студийных мониторов Edifier MR4",
+      "description": "Особый акцент производитель делает на том, что настройка акустики осуществлялась с использованием измерительного оборудования немецкой компании Klippel — мол..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/sw/obyazany-li-stavit-max-po-trebovaniyu-rabotodatelya-chto-govorit-zakon-i-kak-zaschitit-svoi-prava.html",
+      "title": "Обязаны ли ставить MAX по требованию работодателя: что го...",
+      "description": "Ситуация знакома многим: начальник или&nbsp;HR пишут&nbsp;&mdash; «ставь MAX, будем общаться только там». На кону ваш личный смартфон, переписка, фото, конта..."
+    },
+    {
+      "url": "https://www.ixbt.com/news/2021/12/01/whatsapp-whatsapp-imessage.html",
+      "title": "WhatsApp и iMessage сливают ФБР больше всего информации —...",
+      "description": "В нём можно будет закрепить больше приложений или вывести больше рекомендаций"
+    },
+    {
+      "url": "https://www.ixbt.com/live/games/neyronnyy-apgreyd-kak-kompyuternye-igry-uluchshayut-rabotu-mozga.html",
+      "title": "Нейронный апгрейд: Как компьютерные игры улучшают работу ...",
+      "description": "На протяжении десятилетий политики и общественные деятели клеймили видеоигры во всех возможных и невозможных грехах, называя их оружием дьявола или,"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/svezhie-postapokalipticheskie-novinki-kino-i-serialy-kotorye-vyshli-v-nachale-2026-i-konce-2025-goda.html",
+      "title": "Свежие постапокалиптические новинки: кино и сериалы, кото...",
+      "description": "Новые фильмы и сериалы показывают конец цивилизации с разных сторон: от элитных убежищ и разрушенных мегаполисов до эпидемий, космических катастроф"
+    },
+    {
+      "url": "https://www.ixbt.com/news/2026/01/29/tak-zhe-prosto-kak-poisk-kafe-ili-apteki-2gis-zapustili-poisk-vakansij-po-karte.html",
+      "title": "Так же просто, как поиск кафе или аптеки: 2ГИС запустили ...",
+      "description": "В США стоимость нового флагмана Apple стартует от 1200 долларов"
+    },
+    {
+      "url": "https://www.ixbt.com/mobile/iqoo-15-review.html",
+      "title": "Обзор смартфона iQoo 15",
+      "description": "iQoo 15 — это флагманский смартфон собственной линейки бренда, но до истинных флагманов по меркам рынка он не дотягивает по уровню съемки. Зато он отличается..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/do-murashek-po-kozhe-vybiraem-besprovodnye-tws-naushniki-do-5000-rub.html",
+      "title": "До мурашек по коже: выбираем беспроводные TWS-наушники до...",
+      "description": "Предложений TWS-наушников в ценовом диапазоне до 5000 рублей довольно много и «отделить зёрна от плевел» может стать довольно непростой задачей."
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-luchshih-serialov-vesternov-po-reytingu-s-kinopoiska.html",
+      "title": "10 лучших сериалов-вестернов по рейтингу с Кинопоиска / К...",
+      "description": "Вестерн&nbsp;&mdash; это жанр, олицетворяющий дух Дикого Запада и ставший неотъемлемой частью американского кинематографа. С момента своего появления в начал..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/vybiraem-android-tv-box-v-2026-godu-5-udachnyh-pristavok-ot-5000-rub-do-10-000-rub.html",
+      "title": "Выбираем Android TV Box в 2026 году: 5 удачных приставок ...",
+      "description": "Продолжаем выбирать Android&nbsp;TV приставку в 2026 году и на очереди у нас подборка моделей из среднего сегмента, где цена имеет"
+    },
+    {
+      "url": "https://www.ixbt.com/live/movie/10-serialov-osnovannyh-na-realnyh-sobytiyah-s-vysokimi-ocenkami-na-imdb.html",
+      "title": "10 сериалов, основанных на реальных событиях с высокими о...",
+      "description": "Реальные истории обладают особой силой воздействия, ведь они действительно произошли. Документальная основа придаёт сериалам дополнительную ценность, позволя..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/data/obzor-smartbuy-stream-e14-512-gb---byudzhetnyy-ssd-na-sekretnom-kitayskom-kontrollere-hg2283.html",
+      "title": "Обзор SmartBuy Stream E14 512 ГБ – бюджетный SSD на секре...",
+      "description": "Недавно мы знакомились с очередным недорогим SSD под маркой SmartBuy. Знакомой многим&nbsp;&mdash; равно как и то, что непосредственно к разработке"
+    },
+    {
+      "url": "https://www.ixbt.com/live/topcompile/vybiraem-ulichnye-ip-kamery-do-5500-rubley-8-modeley-s-wi-fi-i-povorotnym-obektivom.html",
+      "title": "Выбираем уличные IP-камеры до 5500 рублей: 8 моделей с Wi...",
+      "description": "В этой подборке вы сможете найти 8 достаточно популярных камер наружного наблюдения с поворотным механизмом. Поворотный объектив позволит одним устройством"
+    },
+    {
+      "url": "https://www.ixbt.com/live/offtopic/chto-takoe-kaloriynost-i-kak-proizvoditeli-ee-rasschityvayut.html",
+      "title": "Что такое калорийность и как производители её рассчитываю...",
+      "description": "Маркировка числа калорий на упаковках пищевых продуктов давно стала привычным явлением, однако далеко не все знают, что на самом деле"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobilepc/obzor-elektronnoy-knigi-pocketbook-618-basic-lux-4-nestydnyy-6-dyuymovyy-byudzhetnik-s-sensornym-ekranom.html",
+      "title": "Обзор электронной книги PocketBook 618 Basic Lux 4: несты...",
+      "description": "В прошлом году я опубликовал обзоры пары флагманских ридеров PocketBook: 743G InkPad 4 и 743С InkPad Color 2. Обе модели"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/xiaomi-redmi-k90-ultra-poluchit-vstroennyy-ventilyator-dlya-aktivnogo-ohlazhdeniya.html",
+      "title": "Xiaomi REDMI K90 Ultra получит встроенный вентилятор для ...",
+      "description": "Компания Xiaomi готовит к выпуску смартфон REDMI K90 Ultra со встроенной активной системой охлаждения на основе миниатюрного вентилятора. Информацию об"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/obzor-realme-15-pro-5g-12-gb-operativnoy-pamyati-ip69-i-akkumulyator-na-7000-mah.html",
+      "title": "Обзор Realme 15 Pro 5G: 12 Гб оперативной памяти, IP69 и ...",
+      "description": "В конце лета 2025 года была представлена новинка от Realme. Это Realme 15 Pro 5G построенный на процессоре Qualcomm Snapdragon"
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/gizmochina-nazval-pyat-luchshih-igrovyh-smartfonov-na-mart-2026-goda.html",
+      "title": "Gizmochina назвал пять лучших игровых смартфонов на март ...",
+      "description": "Редакция Gizmochina опубликовала список смартфонов, которые, по результатам тестирования, лучше всего подходят для мобильного гейминга на начало марта 2026 г..."
+    },
+    {
+      "url": "https://www.ixbt.com/live/mobile/v-rossiyu-priehali-samsung-galaxy-a26-a36-i-a56-ceny-i-dostupnost.html",
+      "title": "В Россию приехали Samsung Galaxy A26, A36 и A56: цены и в...",
+      "description": "В российских магазинах электроники появились странички, посвящённые смартфонам Samsung Galaxy A26, A36 и A56. Купить новинки пока что нельзя (их"
+    },
+    {
+      "url": "https://www.ixbt.com/live/offtopic/turluchnye-doma---gde-i-kak-na-rusi-v-starinu-stroili-takie-zhilischa.html",
+      "title": "Турлучные дома – где и как на Руси в старину строили таки...",
+      "description": "В различных регионах нашей страны в зависимости от наличия местных стройматериалов, климата и природных условий строились самые разнообразные типы жилищ."
+    },
+    {
+      "url": "https://www.ixbt.com/live/flora_and_fauna/pochemu-u-koshki-visit-zhivot----i-vsegda-li-eto-povod-dlya-bespokoystva.html",
+      "title": "Почему у кошки висит живот — и всегда ли это повод для бе...",
+      "description": "Если просто посмотреть на кошку, она может выглядеть вполне стройной и собранной. Спина ровная, движения уверенные, прыжки точные. Она без"
+    }
+  ]
+}

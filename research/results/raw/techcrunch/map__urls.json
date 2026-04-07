@@ -1,0 +1,523 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://techcrunch.com/2025/04/28/ixi-raises-36-5m-from-amazon-and-more-to-bring-the-concept-of-autofocus-to-prescription-glasses",
+    "https://techcrunch.com/2021/04/15/sales-scheduling-platform-chili-piper-raises-33m-series-b-funding-led-by-tiger-global",
+    "https://techcrunch.com/2024/04/27/climate-startup-valley-of-death",
+    "https://techcrunch.com/2024/11/12/tiktok-is-integrating-with-influencer-shopping-app-ltk-videos-show",
+    "https://techcrunch.com/2023/02/14/ouster-velodyne-merger-lidar-smart-infrastructure",
+    "https://techcrunch.com/2026/02/19/general-catalyst-commits-5b-to-india-over-five-years",
+    "https://techcrunch.com/2025/02/14/elon-musks-ai-company-xai-said-to-be-in-talks-to-raise-10b",
+    "https://techcrunch.com/2026/01/30/openclaws-ai-assistants-are-now-building-their-own-social-network",
+    "https://techcrunch.com/2021/11/14/mimica-which-automates-rpa-raises-6m-series-a-funding-led-by-khosla-ventures",
+    "https://techcrunch.com/2025/10/08/elon-musk-will-settle-128m-lawsuit-with-former-twitter-execs",
+    "https://techcrunch.com/2023/05/01/ann-lai-says-she-was-fired-from-bullpen-capital-after-helping-deliver-a-145m-fund",
+    "https://techcrunch.com/2022/08/25/crypto-developer-infrastructure-alchemy-acquisition-deal-ma-chainshot-coding-bootcamp",
+    "https://techcrunch.com/2023/07/28/pollen-is-a-new-professional-development-platform-for-tech-workers",
+    "https://techcrunch.com/2026/02/08/crypto-com-places-70m-bet-on-ai-com-domain-ahead-of-super-bowl",
+    "https://techcrunch.com/2026/01/06/a-viral-reddit-post-alleging-fraud-from-a-food-delivery-app-turned-out-to-be-ai-generated",
+    "https://techcrunch.com/2021/03/11/spain-agrees-on-labor-reform-that-will-recognize-delivery-platform-riders-as-employees",
+    "https://techcrunch.com/2025/04/14/chinese-marketplace-dhgate-becomes-a-top-us-app-as-trade-war-intensifies",
+    "https://techcrunch.com/2023/01/03/breathe-along-with-the-robot-pillow"
+  ],
+  "allLinks": [
+    {
+      "url": "https://techcrunch.com/video/a-deep-dive-on-ai-safety-and-ethics-with-databricks-and-elevenlabs",
+      "title": "A deep dive on AI safety and ethics with Databricks and E...",
+      "description": "As AI tools become cheaper and more accessible, the stakes for safety and ethics have never been higher, which is why we hosted this panel at TechCrunch Sess..."
+    },
+    {
+      "url": "https://techcrunch.com/2025/04/28/ixi-raises-36-5m-from-amazon-and-more-to-bring-the-concept-of-autofocus-to-prescription-glasses",
+      "title": "IXI raises $36.5M from Amazon and others to bring autofoc...",
+      "description": "Blink and you’ll miss it: A startup out of Finland is taking a new look at the market for prescription eyewear. Tapping into innovations in eye-tracking"
+    },
+    {
+      "url": "https://techcrunch.com/2021/04/15/sales-scheduling-platform-chili-piper-raises-33m-series-b-funding-led-by-tiger-global",
+      "title": "Sales scheduling platform Chili Piper raises $33M Series ...",
+      "description": "Chili Piper, which has a sophisticated SaaS appointment scheduling platform for sales teams, has raised a $33 million B round led by Tiger Global."
+    },
+    {
+      "url": "https://techcrunch.com/latest/page/42",
+      "title": "Latest News | TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/video/sec-starts-regulating-icos-crunch-report",
+      "title": "SEC Starts Regulating ICOs | Crunch Report | TechCrunch",
+      "description": "Recorded on July 26, 2017. Smallest spacecraft ever launched makes it into low-earth orbit, the SEC starts regulating ICOs and a new dating app only for veri..."
+    },
+    {
+      "url": "https://techcrunch.com/2024/04/27/climate-startup-valley-of-death",
+      "title": "The 'valley of death' for climate lies between early-stag...",
+      "description": "It's easier for climate companies to get enough funding to get started. It's much harder once they need money to scale."
+    },
+    {
+      "url": "https://techcrunch.com/2024/11/12/tiktok-is-integrating-with-influencer-shopping-app-ltk-videos-show",
+      "title": "TikTok is integrating with influencer shopping app LTK, v...",
+      "description": "An integration with LTK, an app that lets consumers shop from creator and influencers' recommendations, is rolling out on TikTok, according to videos by"
+    },
+    {
+      "url": "https://techcrunch.com/2023/02/14/ouster-velodyne-merger-lidar-smart-infrastructure",
+      "title": "Fresh off its merger, Ouster-Velodyne make a bet on smart...",
+      "description": "Ouster CEO Angus Pacala says the next big industry for lidar will be smart infrastructure, not autonomous vehicles."
+    },
+    {
+      "url": "https://techcrunch.com/2026/02/19/general-catalyst-commits-5b-to-india-over-five-years",
+      "title": "General Catalyst commits $5B to India over five years | T...",
+      "description": "The pledge marks a sharp jump from General Catalyst's earlier $500 million–$1 billion India earmark."
+    },
+    {
+      "url": "https://techcrunch.com/video/growth-hacking-product-fit-and-pricing",
+      "title": "Growth Hacking, Product Fit and Pricing | TechCrunch",
+      "description": "Recorded on July 8, 2021. Superhuman’s Rahul Vohra shares strategies for early-stage founders on topics like hacking your way to product-market fit, driving ..."
+    },
+    {
+      "url": "https://techcrunch.com/tag/mistral-ai",
+      "title": "Mistral AI news and analysis | TechCrunch",
+      "description": "Read the latest news and analysis about Mistral AI, a French artificial intelligence startup producing open source LLMs, on TechCrunch."
+    },
+    {
+      "url": "https://techcrunch.com/2025/02/14/elon-musks-ai-company-xai-said-to-be-in-talks-to-raise-10b",
+      "title": "Elon Musk's AI company, xAI, said to be in talks to raise...",
+      "description": "Elon Musk's AI company, xAI, is said to be in talks to raise $10 billion in a round that would value xAI at $75 billion."
+    },
+    {
+      "url": "https://techcrunch.com/author/john-rampton",
+      "title": "John Rampton, Author at TechCrunch",
+      "description": "Read more from John Rampton at TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/30/openclaws-ai-assistants-are-now-building-their-own-social-network",
+      "title": "OpenClaw's AI assistants are now building their own socia...",
+      "description": "The viral personal AI assistant formerly known as Clawdbot has a new shell — again. After briefly rebranding as Moltbot, it has now picked OpenClaw as its ne..."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/page/9/",
+      "title": "AI News & Artificial Intelligence | Page 9 of 474 | TechC...",
+      "description": "Read the latest on artificial intelligence and machine learning tech, the companies that are building them, and the ethical issues AI raises today."
+    },
+    {
+      "url": "https://techcrunch.com/2021/11/14/mimica-which-automates-rpa-raises-6m-series-a-funding-led-by-khosla-ventures",
+      "title": "Mimica, which automates RPA, raises $6M Series A funding ...",
+      "description": "Mimica, which (perhaps oddly enough) automates robotic process automation, has raised a $6 million Series A funding from Khosla Ventures. The company will"
+    },
+    {
+      "url": "https://techcrunch.com/2025/10/08/elon-musk-will-settle-128m-lawsuit-with-former-twitter-execs",
+      "title": "Elon Musk will settle $128M lawsuit with former Twitter e...",
+      "description": "The four executives never received severance payments, which they claim is because they tried to hold Musk to his $44 billion commitment when he tried to bac..."
+    },
+    {
+      "url": "https://techcrunch.com/video/tc-top-picks-trio",
+      "title": "TC Top Picks: Trio | TechCrunch",
+      "description": "Recorded on October 22, 2019. Trio Financial invest your entire checking account balance in ETFs with instant access to your funds. The TC Top Picks program ..."
+    },
+    {
+      "url": "https://techcrunch.com/2023/05/01/ann-lai-says-she-was-fired-from-bullpen-capital-after-helping-deliver-a-145m-fund",
+      "title": "Ann Lai says she was fired from Bullpen Capital after hel...",
+      "description": "Ann Lai, a general partner at Bullpen Capital, has been fired from the firm, she says. She had just become an equal GP partner."
+    },
+    {
+      "url": "https://techcrunch.com/2022/08/25/crypto-developer-infrastructure-alchemy-acquisition-deal-ma-chainshot-coding-bootcamp",
+      "title": "Crypto developer platform Alchemy buys coding bootcamp",
+      "description": "Alchemy CEO Nikil Viswanathan teased more M&A plans for the web3 infrastructure startup in an exclusive interview with TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2023/07/28/pollen-is-a-new-professional-development-platform-for-tech-workers",
+      "title": "Pollen is a professional development platform for tech wo...",
+      "description": "Pollen is a new French startup that wants to provide a better way to learn new skills by inviting tech executives to host a class."
+    },
+    {
+      "url": "https://techcrunch.com/video/how-glid-won-startup-battlefield-2025-mentorship-mission-focus-and-meditation",
+      "title": "How Glīd won Startup Battlefield 2025: Mentorship, missio...",
+      "description": "Glīd CEO and founder Kevin De shares what it takes to win Startup Battlefield 2025 and build a company solving real infrastructure problems. Fresh off his vi..."
+    },
+    {
+      "url": "https://techcrunch.com/2026/02/08/crypto-com-places-70m-bet-on-ai-com-domain-ahead-of-super-bowl",
+      "title": "Crypto.com places $70M bet on AI.com domain ahead of Supe...",
+      "description": "The purchase rewrites the domain record books -- not that the crypto industry has ever been accused of restraint when it comes to spending."
+    },
+    {
+      "url": "https://techcrunch.com/latest/page/33",
+      "title": "Latest News | TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/06/a-viral-reddit-post-alleging-fraud-from-a-food-delivery-app-turned-out-to-be-ai-generated",
+      "title": "A viral Reddit post alleging fraud from a food delivery a...",
+      "description": "When fake content goes viral, the damage has already been done, even if the post is debunked."
+    },
+    {
+      "url": "https://techcrunch.com/video/the-world-according-to-waymo",
+      "title": "The World According to Waymo | TechCrunch",
+      "description": "Recorded on May 18, 2022. Waymo, Alphabet’s self-driving arm, has reached significant milestones recently, from launching a robotaxi service in San Francisco..."
+    },
+    {
+      "url": "https://techcrunch.com/2021/03/11/spain-agrees-on-labor-reform-that-will-recognize-delivery-platform-riders-as-employees",
+      "title": "Spain agrees on labor reform that will recognize delivery...",
+      "description": "Spain's government has reached an agreement with trade unions and business associations over labor reforms that will see delivery platform couriers"
+    },
+    {
+      "url": "https://techcrunch.com/2025/04/14/chinese-marketplace-dhgate-becomes-a-top-us-app-as-trade-war-intensifies",
+      "title": "Chinese marketplace DHgate becomes a top US app as trade ...",
+      "description": "The Trump trade war has gone viral on TikTok, pushing a Chinese e-commerce app, DHgate, to the top of the Apple App Store in the U.S."
+    },
+    {
+      "url": "https://techcrunch.com/2023/01/03/breathe-along-with-the-robot-pillow",
+      "title": "Breathe along with the robot pillow | TechCrunch",
+      "description": "Japanese boutique robotics firm Yukai Engineering returns to CES with Fufuly, which follows in Qoobo’s footsteps."
+    },
+    {
+      "url": "https://techcrunch.com/video/seez-provides-an-ai-driven-car-buying-tool",
+      "title": "Seez provides an AI driven car buying tool | TechCrunch",
+      "description": "Recorded on December 12, 2018. Seez uses AI to automate the car-searching process by searching all car websites, negotiating price down and estimating fair m..."
+    },
+    {
+      "url": "https://techcrunch.com/2011/02/03/tripadvisor-buys-trip-planning-service-everytrail-to-expand-mobile-offering",
+      "title": "TripAdvisor Buys Trip Planning Service EveryTrail To Expa...",
+      "description": "TripAdvisor, the Expedia-owned travel site, this morning announced it has boosted its mobile travel offering with the acquisition of EveryTrail. The latter, ..."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/page/226/",
+      "title": "AI News & Artificial Intelligence | Page 226 of 474 | Tec...",
+      "description": "Read the latest on artificial intelligence and machine learning tech, the companies that are building them, and the ethical issues AI raises today."
+    },
+    {
+      "url": "https://techcrunch.com/2025/03/07/health-expert-warns-of-leaning-too-heavily-on-ai-for-social-connections",
+      "title": "Health expert warns of leaning too heavily on AI for soci...",
+      "description": "With the rise of AI companions who serve as online friends or romantic interests, experts are questioning how the technology affects our real-world social"
+    },
+    {
+      "url": "https://techcrunch.com/2024/09/06/how-a-cold-email-to-a-vc-helped-salon-software-startup-mangomint-raise-35m",
+      "title": "How a cold email to a VC helped salon software startup Ma...",
+      "description": "Mangomint seeks to make it easier for spa and salon owners to run their businesses."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/hardware/page/172",
+      "title": "Hardware | Page 172 of 2247 | Read the latest product rev...",
+      "description": "Read the latest hardware news and reviews focusing on tech products from the latest startups to the biggest players like Apple, Amazon, Google, Microsoft."
+    },
+    {
+      "url": "https://techcrunch.com/2025/01/19/meta-announces-a-new-video-editing-app-called-edits-amidst-tiktok-and-capcut-ban",
+      "title": "Meta announces a new CapCut rival called Edits | TechCrunch",
+      "description": "Meta Sunday announced a new video editing app called Edits, after ByteDance’s video editing app CapCut was removed from Apple's App Store and the Google"
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/29/satya-nadella-insists-people-are-using-microsofts-copilot-ai-a-lot",
+      "title": "Satya Nadella insists people are using Microsoft’s Copilo...",
+      "description": "With Microsoft spending many billions on data centers, and rumors that no one is using its AI, CEO Satya Nadella shared some usage numbers."
+    },
+    {
+      "url": "https://techcrunch.com/2025/01/09/doorbox-debuts-its-new-and-improved-smart-delivery-box-at-ces-2025",
+      "title": "DoorBox debuts its new and improved smart delivery box at...",
+      "description": "Millions of packages are stolen each year. DoorBox aims to change how packages are delivered with its smart package box that features a theft-proof design Sm..."
+    },
+    {
+      "url": "https://techcrunch.com/tag/san-francisco",
+      "title": "San Francisco | TechCrunch",
+      "description": "Read the latest news about San Francisco on TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2017/07/25/abc-news-teams-up-with-attn-to-produce-original-news-videos-for-social-media",
+      "title": "ABC News teams up with ATTN: to produce original news vid...",
+      "description": "ABC News announced today it's teaming up with digital media company ATTN: to develop original news videos that will be distributed across social media"
+    },
+    {
+      "url": "https://techcrunch.com/2010/02/18/cardpool-wants-to-buy-and-sell-your-unused-gift-cards",
+      "title": "CardPool Wants To Buy And Sell Your Unused Gift Cards | T...",
+      "description": "Gift cards can be a double edged sword. I recently got married and received a number of gift cards to stores where I never shop. But at the same time, I don'..."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/",
+      "title": "AI News & Artificial Intelligence | TechCrunch",
+      "description": "Read the latest on artificial intelligence and machine learning tech, the companies that are building them, and the ethical issues AI raises today."
+    },
+    {
+      "url": "https://techcrunch.com/category/startups/page/82",
+      "title": "Startups | Page 82 of 1761 | TechCrunch",
+      "description": "Read more about tech startup news that breaks down funding, growth, and long-term trajectory of companies across every stage and industry."
+    },
+    {
+      "url": "https://techcrunch.com/2018/11/28/ubers-bill-for-2016-breach-and-cover-up-rises-by-1m-on-eu-fines",
+      "title": "Uber's bill for 2016 breach and cover-up rises by $1M+ on...",
+      "description": "The legal bill for Uber's 2016 data breach, which affected some 57 million customers, revealing names, email address and phone numbers, has increased by"
+    },
+    {
+      "url": "https://techcrunch.com/2024/12/23/yoasts-former-ceo-calls-for-a-federated-approach-to-wordpress-repository",
+      "title": "Yoast's former CEO calls for a 'federated' approach to Wo...",
+      "description": "Days after web hosting provider WP Engine won a preliminary injunction against WordPress co-creator Matt Mullenweg and rival hosting provider Automattic,"
+    },
+    {
+      "url": "https://techcrunch.com/2025/03/03/creator-monetization-platform-passes-sued-over-alleged-distribution-of-csam",
+      "title": "Creator monetization platform Passes sued over alleged di...",
+      "description": "Passes, a direct-to-fan monetization platform for creators backed by $40 million in Series A funding, has been sued for allegedly distributing Child"
+    },
+    {
+      "url": "https://techcrunch.com/2025/07/02/microsoft-will-lay-off-9000-employees-or-less-than-4-of-the-company",
+      "title": "Microsoft will lay off 9,000 employees, or less than 4% o...",
+      "description": "Microsoft is leveraging another round of layoffs despite posting consistent growth."
+    },
+    {
+      "url": "https://techcrunch.com/2025/06/09/ipados-26-will-make-the-ipad-feel-more-like-a-mac",
+      "title": "iPadOS 26 will make the iPad feel more like a Mac | TechC...",
+      "description": "Given the updates to iOS 26 and macOS Tahoe, it's no wonder that iPadOS 26 is getting its own makeover, too. But Apple is calling this update \"the biggest"
+    },
+    {
+      "url": "https://techcrunch.com/2023/09/20/legit-security-lands-40m-to-lock-down-apps-and-dev-environments",
+      "title": "Legit Security lands $40M to lock down apps and dev envir...",
+      "description": "Legit Security, a startup developing a platform to monitor and protect apps from exploits and vulnerabilities, has raised $40 million in funding."
+    },
+    {
+      "url": "https://techcrunch.com/2025/01/30/deepseek-exposed-internal-database-containing-chat-histories-and-sensitive-data",
+      "title": "DeepSeek exposed internal database containing chat histor...",
+      "description": "The internal DeepSeek database was exposed to the internet without a password."
+    },
+    {
+      "url": "https://techcrunch.com/tag/wind-power",
+      "title": "Wind power | TechCrunch",
+      "description": "Read the latest news about Wind power on TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2025/10/23/openai-backed-wonder-studios-raised-12m-to-bring-ai-content-to-hollywood",
+      "title": "Wonder Studios, backed by OpenAI, DeepMind execs, raised ...",
+      "description": "Wonder will use the fresh funds to double its engineering team and accelerate its push into IP ownership and original content production."
+    },
+    {
+      "url": "https://techcrunch.com/video/building-and-leading-a-sales-team",
+      "title": "Building and Leading a Sales Team | TechCrunch",
+      "description": "Recorded on April 2, 2021. Contrary to popular opinion, even the very best products don’t sell themselves. Salespeople do. Hear from Zoom’s Chief Revenue Off..."
+    },
+    {
+      "url": "https://techcrunch.com/events/tc-disrupt-2025/attendee-portal/",
+      "title": "Attendee Portal - Disrupt 2025 | TechCrunch",
+      "description": "TechCrunch Disrupt 2025 is the startup epicenter for tech and VC leaders. Taking place at Moscone West in San Francisco from October 27-29, 2025."
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/12/at-least-36-new-tech-unicorns-were-minted-in-2025-so-far",
+      "title": "More than 100 new tech unicorns were minted in 2025 — her...",
+      "description": "Using data from Crunchbase and PitchBook, TechCrunch tracked down the VC-backed startups that became unicorns so far this year."
+    },
+    {
+      "url": "https://techcrunch.com/video/engineering-for-the-red-planet-tc-sessions-robotics-ai-2020",
+      "title": "Engineering for the Red Planet | TC Sessions: Robotics + ...",
+      "description": "Recorded on March 4, 2020. Maxar Technologies has been involved with U.S. space efforts for decades, and is about to send its 6th (!) robotic arm to Mars abo..."
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/02/clicks-debuts-its-own-take-on-the-blackberry-smartphone-plus-a-79-snap-on-mobile-keyboard",
+      "title": "Clicks debuts its own take on the BlackBerry smartphone, ...",
+      "description": "The company behind the add-on mobile keyboards with physical buttons is now doing its own phone."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/hardware/page/170",
+      "title": "Hardware | Page 170 of 2247 | Read the latest product rev...",
+      "description": "Read the latest hardware news and reviews focusing on tech products from the latest startups to the biggest players like Apple, Amazon, Google, Microsoft."
+    },
+    {
+      "url": "https://techcrunch.com/2025/03/12/meta-faces-publisher-copyright-ai-lawsuit-in-france",
+      "title": "Meta faces publisher copyright AI lawsuit in France | Tec...",
+      "description": "Meta is facing an AI copyright lawsuit in France that's been brought by authors and publishers who are accusing it of economic \"parasitism,\" Reuters"
+    },
+    {
+      "url": "https://techcrunch.com/2022/05/12/terra-halts-its-blockchain-to-prevent-hacks-ust",
+      "title": "Terra resumes blockchain production after halting to prev...",
+      "description": "The halt means no new blocks are being generated on the blockchain network after its block height of 7603700, and holders can’t move their Terra assets until..."
+    },
+    {
+      "url": "https://techcrunch.com/2024/09/15/insight-partners-is-closing-in-on-a-whopping-10b-new-fund",
+      "title": "Insight Partners is closing in on a whopping $10B+ new fu...",
+      "description": "Insight Partners is reportedly on the cusp of closing on more than $10 billion in capital commitments for its 13th fund, per the FT.  The FT report notes"
+    },
+    {
+      "url": "https://techcrunch.com/2025/02/25/how-much-does-chatgpt-cost-everything-you-need-to-know-about-openais-pricing-plans",
+      "title": "How much does ChatGPT cost? Everything you need to know a...",
+      "description": "How much does it cost to use OpenAI's ChatGPT? Do you even need a subscription? Our comprehensive article dives in."
+    },
+    {
+      "url": "https://techcrunch.com/video/innovating-with-fuel-cells",
+      "title": "Innovating with Fuel Cells | TechCrunch",
+      "description": "Recorded on September 15, 2020. James Kast demonstrates how Toyota continues to navigate the innovation of fuel cells and the implementation across numerous ..."
+    },
+    {
+      "url": "https://techcrunch.com/2024/01/11/hyundai-motor-india-data-exposed",
+      "title": "Hyundai Motor India fixes bug that exposed customers' per...",
+      "description": "A very simple bug allowed anyone to access Hyundai Motor India customer records, which the car maker has now fixed."
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/06/wearable-health-devices-could-generate-a-million-tons-of-e-waste-by-2050",
+      "title": "Wearable health devices could generate a million tons of ...",
+      "description": "The most surprising part is that the plastic isn't the biggest problem."
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/13/elevenlabs-ceo-says-the-voice-ai-startup-crossed-330-million-arr-last-year",
+      "title": "ElevenLabs CEO says the voice AI startup crossed $330M AR...",
+      "description": "The company said it took only five months to go from $200 million to $330 million in annual recurring revenue."
+    },
+    {
+      "url": "https://techcrunch.com/video/infrastructure-and-connectivity-a-regional-perspective-with-imad-kreidieh-ogero-telecom-and-ari-kesisoglu-facebook",
+      "title": "Infrastructure and Connectivity: A Regional Perspective w...",
+      "description": "Recorded on October 3, 2018. Access to the internet and connectivity is the driving force for the 4th industrial revolution. Join a conversation about how th..."
+    },
+    {
+      "url": "https://techcrunch.com/video/taking-earth-observation-to-enterprise-scale",
+      "title": "Taking Earth Observation to Enterprise Scale | TechCrunch",
+      "description": "Recorded on December 14, 2021. We’re not short of eyes in the sky, but that doesn’t mean it’s easy to collect and use the data that Earth observation network..."
+    },
+    {
+      "url": "https://techcrunch.com/2026/03/30/ai-chip-startup-rebellions-raises-400-million-at-2-3b-valuation-in-pre-ipo-round",
+      "title": "AI chip startup Rebellions raises $400 million at $2.3B v...",
+      "description": "The startup, which is planning to go public later this year, designs chips specifically for AI inference, another challenger to Nvidia's dominance."
+    },
+    {
+      "url": "https://techcrunch.com/video/the-changing-landscape-of-property-tech",
+      "title": "The Changing Landscape of Property Tech | TechCrunch",
+      "description": "Recorded on September 16, 2020. Connie, Chan, general partner at Andreessen Horowitz, Merritt Hummer, partner at Bain Capital Ventures and Brendan Wallace, c..."
+    },
+    {
+      "url": "https://techcrunch.com/video/empowering-the-future-of-robotics-with-boston-dynamics-and-mits-leg-lab-techcrunch-disrupt-2023",
+      "title": "Empowering the Future of Robotics With Boston Dynamics an...",
+      "description": "Marc Raibert and Gill Pratt go way back. Raibert founded MIT’s highly influential Leg Lab, while Pratt served as director. In recent years, the pair’s work h..."
+    },
+    {
+      "url": "https://techcrunch.com/2025/07/28/new-york-state-cyber-chief-calls-out-trump-for-cybersecurity-cuts",
+      "title": "Trump's cybersecurity cuts putting nation at risk, warns ...",
+      "description": "The top cybersecurity official in New York told TechCrunch in an interview that Trump's budget cuts are going to put the government at risk from cyberattacks..."
+    },
+    {
+      "url": "https://techcrunch.com/video/how-to-build-a-service-marketplace",
+      "title": "How to Build a Service Marketplace | TechCrunch",
+      "description": "Recorded on September 16, 2020. Building service marketplaces require companies to serve all sides of the ecosystem, or at least have an understanding of the..."
+    },
+    {
+      "url": "https://techcrunch.com/2025/05/29/tesla-pleads-for-senate-to-spare-its-booming-energy-business",
+      "title": "Tesla pleads for Senate to spare its booming energy busin...",
+      "description": "If the Senate were to pass it with those repeals in tact, it could have a devastating impact on Tesla’s energy division."
+    },
+    {
+      "url": "https://techcrunch.com/video/softbank-buys-boston-dynamics-crunch-report",
+      "title": "SoftBank Buys Boston Dynamics | Crunch Report | TechCrunch",
+      "description": "Recorded on June 9, 2017. SoftBank is buying Boston Dynamics, Pandora sells 16% of company to SiriusXM and Taylor Swift is coming back to music streaming. Al..."
+    },
+    {
+      "url": "https://techcrunch.com/2025/02/28/alkami-is-buying-fintech-mantl-for-400-million",
+      "title": "Alkami is buying fintech Mantl for $400M | TechCrunch",
+      "description": "Digital banking services provider Alkami Technology is acquiring Mantl, which has been described as “the Shopify of account opening,” for $400 million."
+    },
+    {
+      "url": "https://techcrunch.com/2023/04/28/reddit-is-testing-discord-like-channels-for-community-chat",
+      "title": "Reddit is testing Discord-like channels for community cha...",
+      "description": "Reddit is not the only company launching ways for communities to host conversations."
+    },
+    {
+      "url": "https://techcrunch.com/2017/12/05/hope-grows-that-a-larger-sec-crackdown-on-icos-is-coming-and-soon",
+      "title": "Hope grows that a larger SEC crackdown on ICOs is coming ...",
+      "description": "More than $3 billion has been raised through so-called initial coin offerings so far in 2017. Yet while numerous of these have already proven to be good old-..."
+    },
+    {
+      "url": "https://techcrunch.com/2024/06/03/dont-miss-strictlyvc-in-dc-next-week",
+      "title": "Don't miss StrictlyVC in DC next week | TechCrunch",
+      "description": "The StrictlyVC roadtrip continues! Coming off of sold-out events in London, Los Angeles, and San Francisco, we're heading to Washington, D.C. for a"
+    },
+    {
+      "url": "https://techcrunch.com/video/so-you-want-to-build-a-space-business",
+      "title": "So You Want to Build a Space Business? | TechCrunch",
+      "description": "Recorded on September 21, 2021. The space industry is changing faster than ever, with new technologies and lower launch costs democratizing access to space a..."
+    },
+    {
+      "url": "https://techcrunch.com/video/aurelius-disrupt-2020",
+      "title": "Aurelius | Disrupt 2020 | TechCrunch",
+      "description": "Recorded on September 10, 2020. Aurelius is a user research and insights platform that helps people tag, organize, search and share what they learned from cu..."
+    },
+    {
+      "url": "https://techcrunch.com/2022/03/30/the-best-logos-of-ycs-winter-22-cohort",
+      "title": "The best logos of YC's Winter '22 cohort",
+      "description": "Hundreds of companies presented at Y Combinator's Winter 2022 Demo Day. Here's a list of the best logos for your pleasure and edification."
+    },
+    {
+      "url": "https://techcrunch.com/2023/11/08/upciti-helps-cities-level-up-their-data-strategy",
+      "title": "Upciti helps cities level up their data strategy | TechCr...",
+      "description": "Upciti is a French startup that has been working on a hardware sensor for city centers that is easy to install and maintain."
+    },
+    {
+      "url": "https://techcrunch.com/2025/02/19/nih-funding-uncertainty-spurs-new-biotech-venture-fund",
+      "title": "NIH funding uncertainty spurs new biotech venture fund | ...",
+      "description": "Earlier this month, the Trump administration directed the National Institutes of Health (NIH) to impose limits on specific types of funding it provides to"
+    },
+    {
+      "url": "https://techcrunch.com/tag/buoyant-ventures",
+      "title": "Buoyant Ventures | TechCrunch",
+      "description": "Read the latest news about Buoyant Ventures on TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2025/03/10/open-web-initiatives-project-liberty-and-solid-could-be-teaming-up",
+      "title": "Open web initiatives Project Liberty and Solid could be t...",
+      "description": "Two initiatives to create a more open web, where users are in control of their own digital identities and data, may be coming together. At SXSW 2025,"
+    },
+    {
+      "url": "https://techcrunch.com/2024/08/29/intuitive-machines-wins-116-9m-contract-for-a-moon-mission-in-2027",
+      "title": "Intuitive Machines wins $116.9M contract for a moon missi...",
+      "description": "Intuitive Machines, the venture-backed startup that went public last year, will send a moon lander to the lunar south pole in 2027 as part of a $116.9"
+    },
+    {
+      "url": "https://techcrunch.com/2023/03/29/that-was-fast-microsoft-slips-ads-into-ai-powered-bing-chat",
+      "title": "That was fast! Microsoft slips ads into AI-powered Bing C...",
+      "description": "Microsoft is \"exploring\" putting ads in the responses given by its GPT-4-powered Bing Chat, the company confirmed today."
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/20/humans-a-human-centric-ai-startup-founded-by-anthropic-xai-google-alums-raised-480m-seed-round",
+      "title": "Humans&, a 'human-centric' AI startup founded by Anthropi...",
+      "description": "Humans&, a startup that believes AI should empower people, not replace them, has reportedly raised a $480 million seed round at a $4.48 billion valuation."
+    },
+    {
+      "url": "https://techcrunch.com/2022/01/24/gillmor-gang-culture-clubs",
+      "title": "Gillmor Gang: Culture Clubs | TechCrunch",
+      "description": "I’ve spent the last few weeks diving into the world of crypto, and lo and behold, there might be something to it. Part of the problem is I rarely sense an"
+    },
+    {
+      "url": "https://techcrunch.com/tag/paypal",
+      "title": "PayPal | TechCrunch",
+      "description": "Read the latest news about PayPal on TechCrunch"
+    },
+    {
+      "url": "https://techcrunch.com/2026/01/15/spotify-raises-its-subscription-prices-in-the-u-s-again",
+      "title": "Spotify raises its subscription prices in the US again | ...",
+      "description": "Spotify raised prices for its subscription plan in the U.S. for the third time in three years, as it hiked the monthly plan from $11.99 per month to $12.99 p..."
+    },
+    {
+      "url": "https://techcrunch.com/category/artificial-intelligence/hardware/page/135",
+      "title": "Hardware | Page 135 of 2247 | Read the latest product rev...",
+      "description": "Read the latest hardware news and reviews focusing on tech products from the latest startups to the biggest players like Apple, Amazon, Google, Microsoft."
+    },
+    {
+      "url": "https://techcrunch.com/video/vyrill",
+      "title": "Vyrill | TechCrunch",
+      "description": "Recorded on July 9, 2021. With the most powerful AI driven, in-video search, Vyrill is a fan video discovery, insights and content marketing platform enablin..."
+    },
+    {
+      "url": "https://techcrunch.com/2021/10/26/tiktok-snap-youtube-hearing-congress",
+      "title": "In hearing with Snap, TikTok and YouTube, lawmakers tout ...",
+      "description": "Fallout from revelations around teen mental health on Instagram continues — and not just for Facebook. On Tuesday, policy reps from YouTube, Snap and"
+    },
+    {
+      "url": "https://techcrunch.com/video/youme-iphone-app-first-look",
+      "title": "You&Me iPhone App | First Look | TechCrunch",
+      "description": "Recorded on April 30, 2014. The founders of HowAboutWe have expanded into making relationships novel and exciting, and continue on that path with the new iPh..."
+    },
+    {
+      "url": "https://techcrunch.com/2026/02/23/anthropic-accuses-chinese-ai-labs-of-mining-claude-as-us-debates-ai-chip-exports",
+      "title": "Anthropic accuses Chinese AI labs of mining Claude as US ...",
+      "description": "Anthropic accuses DeepSeek, Moonshot, and MiniMax of using 24,000 fake accounts to distill Claude’s AI capabilities, as U.S. officials debate export controls..."
+    },
+    {
+      "url": "https://techcrunch.com/2024/07/19/what-we-know-about-crowdstrikes-update-fail-thats-causing-global-outages-and-travel-chaos",
+      "title": "What we know about CrowdStrike's update fail that's causi...",
+      "description": "Here's everything you need to know so far about the global outages caused by CrowdStrike's buggy software update."
+    },
+    {
+      "url": "https://techcrunch.com/2025/09/18/bumble-bffs-revamped-app-is-here-focusing-on-friend-groups-and-community-building",
+      "title": "Bumble BFF’s revamped app is here, focusing on friend gro...",
+      "description": "Bumble BFF's revamped app introduces a new groups feature to help users connect with new friends beyond one-on-one matching."
+    },
+    {
+      "url": "https://techcrunch.com/2024/11/21/future-google-supplier-kairos-gets-approval-to-build-two-small-nuclear-reactors",
+      "title": "Future Google supplier Kairos gets approval to build two ...",
+      "description": "The reactors are scaled down versions of what Kairos hopes to ultimately build to supply Google with electricity."
+    }
+  ]
+}

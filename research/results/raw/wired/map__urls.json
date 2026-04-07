@@ -1,0 +1,522 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.wired.com/story/out-of-control-spread-of-crowd-control-tech",
+    "https://www.wired.com/story/n26-review",
+    "https://www.wired.com/story/how-to-write-your-own-browser-extension",
+    "https://www.wired.com/story/monzo-if-this-then-that-integration-ifttt-bank",
+    "https://www.wired.com/story/zoom-backlash-zero-days",
+    "https://www.wired.com/story/bounty-hunters-are-here-to-save-academia-bug-bounty",
+    "https://www.wired.com/story/they-helped-plan-the-january-6-rally-now-their-events-company-is-raking-in-millions-in-government-contracts",
+    "https://www.wired.com/story/how-to-sync-your-data-everywhere",
+    "https://www.wired.com/story/google-pixel-watch-4-is-finally-repairable",
+    "https://www.wired.com/story/the-righteous-ev-owners-who-wont-let-their-broken-cars-die",
+    "https://www.wired.com/story/sephora-promo-code",
+    "https://www.wired.com/story/darpa-grand-challenge-2004-oral-history",
+    "https://www.wired.com/story/sobering-message-future-ai-party",
+    "https://www.wired.com/story/iran-fordow-nuclear-site-satellite-images-damage",
+    "https://www.wired.com/story/uber-track-location-data-update-turn-off",
+    "https://www.wired.com/story/your-vape-wants-to-know-how-old-you-are",
+    "https://www.wired.com/story/85-million-accounts-dailymotion-hacked",
+    "https://www.wired.com/story/instacart-promo/code"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.wired.com/story/out-of-control-spread-of-crowd-control-tech",
+      "title": "The Out-of-Control Spread of Crowd-Control Tech | WIRED",
+      "description": "Broken bones. Eye trauma. Brain injuries. How America’s sketchy “less-lethal” weapons industry exports its insidious brand of violence around the world."
+    },
+    {
+      "url": "https://www.wired.com/story/n26-review",
+      "title": "N26 review: a challenger bank lacking key features | WIRED",
+      "description": "N26 is rapidly expanding, but it is still lacking some features traditional banks have. It is ideal if you want to dip your toe into modern banking"
+    },
+    {
+      "url": "https://www.wired.com/story/how-to-write-your-own-browser-extension",
+      "title": "How to Create Your Own Browser Extension | WIRED",
+      "description": "This DIY coding project can add useful utility to Chrome, Firefox, or your daily web browser."
+    },
+    {
+      "url": "https://www.wired.com/story/monzo-if-this-then-that-integration-ifttt-bank",
+      "title": "Monzo's big smart bank move links your money to Alexa, Tw...",
+      "description": "Monzo has launched an integration with If This Then That, letting people connect their bank accounts to hundreds of apps and services"
+    },
+    {
+      "url": "https://www.wired.com/story/zoom-backlash-zero-days",
+      "title": "The Zoom Privacy Backlash Is Only Getting Started | WIRED",
+      "description": "A class action lawsuit. Rampant zoombombing. And as of today, two new zero-day vulnerabilities."
+    },
+    {
+      "url": "https://www.wired.com/2009/05/imeem-store-music-in-the-cloud-access-it-on-the-iphone",
+      "title": "Imeem: Store Music in the Cloud, Access It on the iPhone ...",
+      "description": "The iPhone can’t compare to the iPod when it comes to storing all your music, but imeem’s new streaming music app could change that by turning the smartphone..."
+    },
+    {
+      "url": "https://www.wired.com/sponsored/story/a-path-to-breaking-up-forever-chemicals",
+      "title": "WIRED Brand Lab | A Path to Breaking Up Forever Chemicals...",
+      "description": "WIRED Brand Lab | Good Chemistry uses high performance computing in the cloud to accelerate research on removing hazards from the environment"
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-bluetooth-speakers",
+      "title": "15 Best Bluetooth Speakers Our Testers Jammed With in 202...",
+      "description": "Discover the best Bluetooth speakers of all shapes and sizes, from waterproof clip-ons to a massive boom box. Find the perfect WIRED-tested speaker today."
+    },
+    {
+      "url": "https://www.wired.com/story/bounty-hunters-are-here-to-save-academia-bug-bounty",
+      "title": "Science Is Full of Errors. Bounty Hunters Are Here to Fin...",
+      "description": "A new project is paying researchers to find errors in other scientists’ work. The only problem? Even error hunters make mistakes."
+    },
+    {
+      "url": "https://www.wired.com/story/they-helped-plan-the-january-6-rally-now-their-events-company-is-raking-in-millions-in-government-contracts",
+      "title": "A Trumpworld Events Company Is Raking In Millions in Fede...",
+      "description": "The Trump administration has awarded Event Strategies several contracts—including one that could be worth up to $100 million—with little competition, accordi..."
+    },
+    {
+      "url": "https://www.wired.com/story/how-to-sync-your-data-everywhere",
+      "title": "How to Sync and Access Your Data Across Devices | WIRED",
+      "description": "Here's how to open all your files—so you can switch between your phone and laptop seamlessly."
+    },
+    {
+      "url": "https://www.wired.com/story/google-pixel-watch-4-is-finally-repairable",
+      "title": "Exclusive: Google Pixel Watch 4 Teardown Shows Easy Repai...",
+      "description": "Watch our exclusive teardown of the Pixel Watch 4 to see just how easy it is to remove the battery and display on Google’s latest smartwatch."
+    },
+    {
+      "url": "https://www.wired.com/story/the-righteous-ev-owners-who-wont-let-their-broken-cars-die",
+      "title": "The Righteous EV Owners Who Won’t Let Their Broken Cars D...",
+      "description": "Fisker went out of business in 2024, but its biggest fans want to bring the “right to repair” to the masses."
+    },
+    {
+      "url": "https://www.wired.com/story/sephora-promo-code",
+      "title": "20% Off Sephora Promo Code | April 2026 | WIRED",
+      "description": "Use our Sephora coupon for 20% off and save on your purchase of top makeup, skincare, perfume, and more."
+    },
+    {
+      "url": "https://www.wired.com/2009/04/kindle-2-displa",
+      "title": "Kindle 2's Fuzzy Fonts Have Users Seeing Red | WIRED",
+      "description": "Amazon’s Kindle 2 is slimmer, faster and has longer battery life than its predecessor. But the newly launched e-book reader falls short when it comes to how ..."
+    },
+    {
+      "url": "https://www.wired.com/story/darpa-grand-challenge-2004-oral-history",
+      "title": "An Oral History of the 2004 Darpa Grand Challenge | WIRED",
+      "description": "The legendary competition created the self-­driving community as we know it, the men and women in too-big polo shirts who would dominate an automotive revolu..."
+    },
+    {
+      "url": "https://www.wired.com/story/sobering-message-future-ai-party",
+      "title": "A Sobering Message About the Future at AI's Biggest Party...",
+      "description": "Leaders in artificial intelligence warn that progress is slowing, big challenges remain, and simply throwing more computers at a problem isn't sustainable."
+    },
+    {
+      "url": "https://www.wired.com/2009/04/kremlin-20-russian-prez-discovers-social-media",
+      "title": "Kremlin 2.0: Russian Prez Discovers Social Media | WIRED",
+      "description": "Russian President Dmitry Medvedev may not have the supervillain appeal of his predecessor, Vladimir Putin. But he is staking his claim to be Russia’s fearles..."
+    },
+    {
+      "url": "https://www.wired.com/story/iran-fordow-nuclear-site-satellite-images-damage",
+      "title": "What Satellite Images Reveal About the US Bombing of Iran...",
+      "description": "The US concentrated its attack on Fordow, an enrichment plant built hundreds of feet underground. Aerial photos give important clues about what damage the “b..."
+    },
+    {
+      "url": "https://www.wired.com/2012/06/urbanears-tanto-headphones",
+      "title": "Product Review: UrbanEars Tanto Headphones | WIRED",
+      "description": "Over the past few weeks my sons have been using the UrbanEars Tanto headphones, which are designed to pay homage to the old school Sony Walkman headphones. A..."
+    },
+    {
+      "url": "https://www.wired.com/story/uber-track-location-data-update-turn-off",
+      "title": "Uber can now constantly track your location. Here's how t...",
+      "description": "An update to Uber gives the app permission to track location data at all times, but the company says it will only use it to improve pickup and drop-off accuracy"
+    },
+    {
+      "url": "https://www.wired.com/2003/05/blogger-catch-me-if-you-can",
+      "title": "Blogger: Catch Me If You Can | WIRED",
+      "description": "A mysterious weblog purporting to be the journal of an anonymous heiress on the run from her wealthy family appears to be a hoax. But the site and offline el..."
+    },
+    {
+      "url": "https://www.wired.com/review/steelseries-apex-pro-mini-gen-3",
+      "title": "SteelSeries Apex Pro Mini Gen 3: A Hall Effect 60% Keyboa...",
+      "description": "This could’ve been the apex of compact gaming keyboards, but it has a few too many flaws and a high price."
+    },
+    {
+      "url": "https://www.wired.com/review/n-bikes-mercedes-amg-f1-track-edition-750-electric-bike",
+      "title": "N+ Bikes Mercedes-AMG F1 Track Edition 750 Electric Bike ...",
+      "description": "For those who want to drive like George Russell but don’t have the bucks for a Benz, this blingy electric bike might be the next best thing."
+    },
+    {
+      "url": "https://www.wired.com/story/your-vape-wants-to-know-how-old-you-are",
+      "title": "Your Vape Wants to Know How Old You Are | WIRED",
+      "description": "Companies hope that biometric age-verification tech in cartridges could put flavored vapes back in business. But it's unlikely to solve the real problems."
+    },
+    {
+      "url": "https://www.wired.com/story/85-million-accounts-dailymotion-hacked",
+      "title": "Dailymotion accounts hit by data hack | WIRED",
+      "description": "How to check if your Dailymotion account has been hacked"
+    },
+    {
+      "url": "https://www.wired.com/2015/09/know-dog-owner-needs-help",
+      "title": "Putting a Chip in Your Dog Might Save Your Life | WIRED",
+      "description": "Taffy is a 15-year-old mutt with red fur, bad joints and cataracts. But she and a bit of tech that costs less than dinner helped her owner just when she need..."
+    },
+    {
+      "url": "https://www.wired.com/story/instacart-promo/code",
+      "title": "Instacart Promo Code: Save on Groceries in April 2026 | W...",
+      "description": "Looking for an Instacart promo code? Save on your first 3 deliveries, get $50 in credits, and find exclusive store discounts for April 2026."
+    },
+    {
+      "url": "https://www.wired.com/story/buy-it-for-life",
+      "title": "72 'Buy It for Life' Products: Cast-Iron, Tools, Speakers...",
+      "description": "From cast-iron pans to mechanical watches, we’ve rounded up products that are made to last for decades."
+    },
+    {
+      "url": "https://www.wired.com/story/trump-administration-refuses-to-say-it-wont-take-further-action-against-anthropic",
+      "title": "Trump Administration Won’t Rule Out Further Action Agains...",
+      "description": "The White House is preparing an executive order targeting the AI startup, even as its earlier actions against the company face a major test in court."
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-smart-christmas-lights",
+      "title": "6 Best Smart Christmas Lights (2025): Twinkly, Govee, Cyn...",
+      "description": "Control these smart lights with a voice command or a tap on your phone. It'll feel like a Christmas miracle when you use our top pick, the Twinkly Strings."
+    },
+    {
+      "url": "https://www.wired.com/story/google-ai-mode-search",
+      "title": "With AI Mode, Google Search Is About to Get Even Chattier...",
+      "description": "Google’s new chatbot-style AI Mode search experience, previously an experiment, is launching for US users. Publishers and marketers will have to adjust their..."
+    },
+    {
+      "url": "https://www.wired.com/story/uncanny-valley-podcast-iran-targets-us-tech-polymarket-pop-up-trump-midterms",
+      "title": "‘Uncanny Valley’: Iran’s Threats on US Tech, Trump’s Plan...",
+      "description": "In this episode, we discuss Iran’s threats to target US tech firms, gear up for the midterm elections, and get a scene report from the Polymarket pop-up bar ..."
+    },
+    {
+      "url": "https://www.wired.com/2009/05/back-to-the-arctic-in-a-solar-car",
+      "title": "Back to the Arctic in a Solar Car | WIRED",
+      "description": "Marcelo da Luz, who set a world record when he drove 14,000 miles to the Arctic Circle in a solar car, is headed back to the Great White North to continue ev..."
+    },
+    {
+      "url": "https://www.wired.com/story/openai-chatgpt-pro-subscription",
+      "title": "Here's What OpenAI's $200 Monthly ChatGPT Pro Subscriptio...",
+      "description": "OpenAI just unveiled a new subscription tier called ChatGPT Pro. Users can pay $200 a month for almost unlimited access to ChatGPT’s tools, and an exclusive ..."
+    },
+    {
+      "url": "https://www.wired.com/story/4-internal-apple-emails-helped-doj-build-antitrust-case",
+      "title": "4 Internal Apple Emails That Helped the DOJ Build Its Cas...",
+      "description": "The Department of Justice alleges in its antitrust lawsuit that internal Apple emails show the company intentionally locks in users, forcing them to spend mo..."
+    },
+    {
+      "url": "https://www.wired.com/story/factor-meal-delivery-service-2026",
+      "title": "Factor Offers High-Protein Meal Delivery Options (2026) |...",
+      "description": "Even if you’re incredibly busy, you can maintain your gains by eating the equivalent of the microwavable chicken in The Fifth Element."
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-laptop-stands",
+      "title": "Best Laptop Stands (2026): After Testing 25+ Models, Thes...",
+      "description": "Our top picks for laptop stands and risers are your path to better posture, fewer backaches, and a more ergonomic desk setup."
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-laptop-docking-stations",
+      "title": "7 Laptop Docking Stations to Unlock the Full Desktop Expe...",
+      "description": "With the right docking station, you can make one easy connection and have everything automatically connect. Like magic, you enjoy the portability of a laptop..."
+    },
+    {
+      "url": "https://www.wired.com/2009/05/le-mans-is-the-lab-creating-greener-cars",
+      "title": "Le Mans Is the Lab Creating Greener Cars | WIRED",
+      "description": "Epsilon Euskadi, a race car company based in the Basque region of Spain, is working with a bunch of masters students at Cranfield University in England to de..."
+    },
+    {
+      "url": "https://www.wired.com/review/elliq-ai-companion-robot",
+      "title": "ElliQ Review: An AI Companion Bot for Lonely Elders | WIRED",
+      "description": "The AI-powered ElliQ robot and smart display aim to improve life for older folks living alone."
+    },
+    {
+      "url": "https://www.wired.com/story/twitchs-new-dj-program-may-be-doomed-but-its-the-best-there-is",
+      "title": "Twitch’s New DJ Program Has Flaws, But It’s the Best Ther...",
+      "description": "Twitch is finally giving DJs a place to get paid for streaming their sets—and compensate the artists they spin. Its limited catalog of songs and opaque earni..."
+    },
+    {
+      "url": "https://www.wired.com/2007/04/april-1-1976-the-steves-establish-a-company-called-apple",
+      "title": "April 1, 1976: The Steves Establish a Company Called Appl...",
+      "description": "All that messing around in the garage pays off for Steve Wozniak and Steve Jobs, with the founding of Apple Computer."
+    },
+    {
+      "url": "https://www.wired.com/story/content-moderation-language-artificial-intelligence",
+      "title": "The Dire Defect of ‘Multilingual’ AI Content Moderation |...",
+      "description": "Social media companies claim new language models can remove harmful content in every language. But those systems’ shortcomings can have vast consequences."
+    },
+    {
+      "url": "https://www.wired.com/2016/01/quantum-links-in-time-and-space-may-form-the-universes-foundation",
+      "title": "Quantum Links in Time and Space May Form the Universe's F...",
+      "description": "Bizarre quantum bonds connect distinct moments in time, suggesting that quantum links—not space-time—constitute the fundamental structure of the universe."
+    },
+    {
+      "url": "https://www.wired.com/story/best-id-protection-services",
+      "title": "Identity Theft Protection Services: Do You Actually Need ...",
+      "description": "Here's the best advice I have for protecting your identity online."
+    },
+    {
+      "url": "https://www.wired.com/story/the-best-pajamas-brands-for-women",
+      "title": "Best Pajamas for Women (2026), WIRED Tested and Reviewed ...",
+      "description": "Tired of uncomfortable and cheap sleepwear? After testing 100-plus sets, these are the best pajamas that won’t let you down."
+    },
+    {
+      "url": "https://www.wired.com/story/ai-agent-rentahuman-bots-hire-humans",
+      "title": "The Rise of RentAHuman, the Marketplace Where Bots Put Pe...",
+      "description": "WIRED spoke with the Zoomer founders of a platform where AI agents hire humans to do real-world tasks. Their pitch: \"People would love to have a clanker as t..."
+    },
+    {
+      "url": "https://www.wired.com/tag/customer-service",
+      "title": "Customer Service | Latest News, Photos & Videos | WIRED",
+      "description": "Find the latest Customer Service news from WIRED. See related science and technology articles, photos, slideshows and videos."
+    },
+    {
+      "url": "https://www.wired.com/story/iranian-hackers-breached-the-fbi-directors-personal-email-but-not-the-fbi",
+      "title": "Iranian Hackers Breached Kash Patel’s Email—but Not the F...",
+      "description": "Plus: Apple makes big claims about the effectiveness of its Lockdown Mode anti-spyware feature, Russia moves to implement homegrown encryption for 5G, and more."
+    },
+    {
+      "url": "https://www.wired.com/review/apple-iphone-17-pro-and-iphone-17-pro-max",
+      "title": "Apple iPhone 17 Pro and iPhone 17 Pro Max Review: Level U...",
+      "description": "Big, beefy batteries mean you might not have to charge your iPhone every day anymore."
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-bone-conduction-headphones",
+      "title": "Best Bone Conduction Headphones (2026): Shokz, Suunto, Mo...",
+      "description": "Everyone needs a safe way to listen to music on outdoor runs. We’ve found the bone conduction headphones to grab on your way out the door."
+    },
+    {
+      "url": "https://www.wired.com/v2/offers/wira01032",
+      "title": "WIRED - The Latest in Technology, Science, Culture and Bu...",
+      "description": "Unlock a world of benefits, only for WIRED subscribers.\t\t| Best-in-class reporting that's too important to ignore - plus gear reviews, podcasts, and more"
+    },
+    {
+      "url": "https://www.wired.com/2011/01/ibm-watson-jeopardy",
+      "title": "IBM's Watson Supercomputer Wins Practice Jeopardy Round |...",
+      "description": "YORKTOWN HEIGHTS, NY – It’s man vs. machine — for real. IBM’s celebrated supercomputer Watson will square off against Jeopardy champions Ken Jennings and Bra..."
+    },
+    {
+      "url": "https://www.wired.com/contributors-sitemap.xml"
+    },
+    {
+      "url": "https://www.wired.com/podcasts",
+      "title": "WIRED Podcasts | WIRED",
+      "description": "WIRED’s audio offerings pull back the curtain on the ways technology is changing our lives–from culture to business, science to design—providing meaning and ..."
+    },
+    {
+      "url": "https://www.wired.com/story/dyson-new-lineup-2026",
+      "title": "Meet Dyson’s Brand-New Lineup: V8 Cyclone, V16 Piston Ani...",
+      "description": "From an AI-driven robot vacuum to self-emptying stations for its next-gen stick vacuums, Dyson’s lineup will never be the same. You’ll have to wait until 202..."
+    },
+    {
+      "url": "https://www.wired.com/story/tp-link-router-ban-investigation",
+      "title": "The US Is Considering a TP-Link Router Ban—Should You Wor...",
+      "description": "Several government departments are investigating TP-Link routers over Chinese cyberattack fears, but the company denies links."
+    },
+    {
+      "url": "https://www.wired.com/story/doordash-promo-code",
+      "title": "50% Off DoorDash Promo Code | April 2026 | WIRED",
+      "description": "Get 50% off with top DoorDash promo code for April 2026. Browse today’s codes for 30% off $12 for existing customers, 60% off 2 orders + free delivery coupons."
+    },
+    {
+      "url": "https://www.wired.com/review/hp-elitebook-6-g1q",
+      "title": "HP EliteBook 6 G1q Review: An Always-Connected Laptop | W...",
+      "description": "This laptop’s built-in cellular radio is a standout feature in a device that's otherwise not worth the cost."
+    },
+    {
+      "url": "https://www.wired.com/story/age-verification-is-reaching-a-global-tipping-point-is-tiktoks-strategy-a-good-compromise",
+      "title": "Age Verification Is Reaching a Global Tipping Point. Is T...",
+      "description": "TikTok’s new age-detection tech seems like a better solution than automatically banning youth accounts. But experts say it still requires social platforms to..."
+    },
+    {
+      "url": "https://www.wired.com/story/security-news-this-week-a-hacker-accidentally-broke-into-the-fbis-epstein-files",
+      "title": "A Hacker Accidentally Broke Into the FBI’s Epstein Files ...",
+      "description": "Plus: A porn-quitting app exposed the masturbation habits of hundreds of thousands of users, Russian hackers are trying to take over people’s Signal accounts..."
+    },
+    {
+      "url": "https://www.wired.com/story/david-attenborough-climate-crisis",
+      "title": "David Attenborough’s Unending Mission to Save Our Planet ...",
+      "description": "“We tend to think we are the be all and end all—but we’re not. The sooner we can realize that the natural world goes its way, not our way, the better.”"
+    },
+    {
+      "url": "https://www.wired.com/story/hellofresh-coupon",
+      "title": "HelloFresh Coupon Codes: 55% Off + Free Meals | WIRED",
+      "description": "Use a HelloFresh promo code to save on your meal kits. Up to 55% off for new or returning customers, free shipping, free meals, and more."
+    },
+    {
+      "url": "https://www.wired.com/story/binance-coinbase-regulatory-turf-war",
+      "title": "Binance and Coinbase Have Been Sucked Into a Regulatory T...",
+      "description": "US agencies are sparring over who gets to oversee the crypto industry, and companies are stuck in the middle."
+    },
+    {
+      "url": "https://www.wired.com/story/apple-t2-security-chip-macbook-microphone",
+      "title": "Apple's T2 Security Chip Makes It Harder to Tap MacBook M...",
+      "description": "By cutting off the microphone at the hardware level, recent MacBook devices minimize the chance that someone can eavesdrop"
+    },
+    {
+      "url": "https://www.wired.com/2012/09/the-vagina-scientist-strikes-back-dr-jim-pfauss-defense-of-naomi-wolf-fact-checked",
+      "title": "The \"Vagina\" Scientist Strikes Back: Dr. Jim Pfaus's Defe...",
+      "description": "Earlier this week, I wrote a post criticizing Naomi Wolf’s use of science in her book “Vagina: A New Biography.” (See Naomi Wolf’s “Vagina” and the Perils of..."
+    },
+    {
+      "url": "https://www.wired.com/story/openai-president-greg-brockman-political-donations-trump-humanity",
+      "title": "OpenAI’s President Gave Millions to Trump. He Says It’s f...",
+      "description": "In an interview with WIRED, Greg Brockman says his political donations support OpenAI's mission—even if some employees at the company disagree."
+    },
+    {
+      "url": "https://www.wired.com/story/the-promise-of-woke-2-is-fueling-a-leftist-fever-dream",
+      "title": "Woke Isn't Back | WIRED",
+      "description": "Progressives are dreaming about “Woke 2”—a new political order that rights the wrongs of the Trump administration. Does it have a shot?"
+    },
+    {
+      "url": "https://www.wired.com/story/these-startups-are-building-advanced-ai-models-over-the-internet-with-untapped-data",
+      "title": "These Startups Are Building Advanced AI Models Without Da...",
+      "description": "A new crowd-trained way to develop LLMs over the internet could shake up the AI industry with a giant 100 billion-parameter model later this year."
+    },
+    {
+      "url": "https://www.wired.com/story/the-great-neutrino-mystery-could-point-to-missing-particles",
+      "title": "The Great Neutrino Mystery Could Point to Missing Particl...",
+      "description": "Years of conflicting measurements have led physicists to propose a “dark sector” of invisible particles that could explain dark matter and the universe’s exp..."
+    },
+    {
+      "url": "https://www.wired.com/story/depop-uk-selling",
+      "title": "Secondhand clothing used to be uncool. Apps like Depop ar...",
+      "description": "Fashion is cyclical. Younger generations are embracing vintage fashion and environmentally friendly clothes - in a new way"
+    },
+    {
+      "url": "https://www.wired.com/tag/comedy",
+      "title": "Comedy | Latest News, Photos & Videos | WIRED",
+      "description": "Find the latest Comedy news from WIRED. See related science and technology articles, photos, slideshows and videos."
+    },
+    {
+      "url": "https://www.wired.com/story/us-border-patrol-challenge-coins-nonprofits",
+      "title": "Border Patrol Agents Sold Challenge Coins With ‘Charlotte...",
+      "description": "Nonprofits run out of US Border Patrol stations are also selling other “operation”-themed coins that include a phrase popularized by the Proud Boys, potentia..."
+    },
+    {
+      "url": "https://www.wired.com/story/the-computer-game-that-destroys-your-files",
+      "title": "The computer game that destroys your files | WIRED",
+      "description": "Lose/Lose plays just like a classic arcade shooter, but there's a twist: for every enemy obliterated, so is a file on your hard drive. Are you game?"
+    },
+    {
+      "url": "https://www.wired.com/story/uncanny-valley-podcast-iran-war-artificial-intelligence-prediction-markets-paramount-warner-bros",
+      "title": "‘Uncanny Valley’: Iran War in the AI Era, Prediction Mark...",
+      "description": "In this episode, our hosts unpack the ongoing conflict in the Middle East, particularly as the AI industry has been entrenching itself with the Department of..."
+    },
+    {
+      "url": "https://www.wired.com/story/how-to-responsibly-dispose-electronics",
+      "title": "How to Responsibly Dispose of Your Electronics (2026) | W...",
+      "description": "Get rid of old, broken, and unused devices—even Lightning cables—without adding to the e-waste problem."
+    },
+    {
+      "url": "https://www.wired.com/story/how-to-use-chatgpt-create-custom-gpt-openai",
+      "title": "How to Use OpenAI’s ChatGPT to Create Your Own Custom GPT...",
+      "description": "I created an experimental chatbot with 50 of my WIRED articles. Try it out for yourself."
+    },
+    {
+      "url": "https://www.wired.com/story/best-paper-planners",
+      "title": "The 4 Best Planners of 2026: Roterunner, Hobonichi, Cloth...",
+      "description": "Looking for 2026’s best planners? Here are some WIRED-tested favorites, from Roterunner's Purpose Planner to the Hobonichi Techo."
+    },
+    {
+      "url": "https://www.wired.com/sitemap/2026/4/6",
+      "title": "Sitemap - April 6, 2026 | WIRED"
+    },
+    {
+      "url": "https://www.wired.com/video/watch/google-autocomplete-inverviews-bts-bangtansonyeondan-answer-the-webs-most-searched-questions",
+      "title": "Watch BTS (방탄소년단) Answer The Web's Most Searched Question...",
+      "description": "Jin, Suga, J-Hope, RM, Jimin, V, and Jung Kook of BTS (방탄소년단) visit WIRED to answer their most searched for questions!"
+    },
+    {
+      "url": "https://www.wired.com/story/best-portable-external-storage-drives",
+      "title": "Best External Hard Drive (2026): SSD to Store Data, Video...",
+      "description": "Need an ultrafast best external hard drive for backing up data, video editing, or backing up your photos in the field? We’ve got a solution for every situation."
+    },
+    {
+      "url": "https://www.wired.com/story/10-things-you-can-do-while-waiting-in-the-tsa-line",
+      "title": "10 Things You Can Do While Waiting in the TSA Line | WIRED",
+      "description": "As Washington wrangles over the future of federal employees’ pay, here are some ideas for passing the time."
+    },
+    {
+      "url": "https://www.wired.com/story/samsung-galaxy-s26-series-galaxy-unpacked",
+      "title": "Samsung Galaxy S26, S26+, and S26 Ultra: Specs, Features,...",
+      "description": "Samsung’s new phones all get AI enhancements, and the flagship Galaxy S26 Ultra has a Privacy Display that can block the screen from nosy neighbors."
+    },
+    {
+      "url": "https://www.wired.com/story/uncanny-valley-podcast-ai-researcher-resignations-bots-hiring-humans-evie-magazines-party",
+      "title": "‘Uncanny Valley’: AI Researcher Resignations, Bots Hiring...",
+      "description": "This episode of “Uncanny Valley” covers the people resigning from AI companies and the people getting hired by AI agents—plus, one of our hosts discusses her..."
+    },
+    {
+      "url": "https://www.wired.com/tag/streaming",
+      "title": "Streaming | Latest News, Photos & Videos | WIRED",
+      "description": "Find the latest Streaming news from WIRED. See related science and technology articles, photos, slideshows and videos."
+    },
+    {
+      "url": "https://www.wired.com/story/inside-the-hack-that-exposed-syrias-security-failures",
+      "title": "The Hack That Exposed Syria’s Sweeping Security Failures ...",
+      "description": "When Syrian government accounts were hijacked in March, the breach looked chaotic. But it revealed something more troubling: a state struggling with the most..."
+    },
+    {
+      "url": "https://www.wired.com/review/superkop-espresso-machine",
+      "title": "Superkop Espresso Maker Review: Great Espresso Without th...",
+      "description": "This ingenious hand-pumped machine is easy to use and makes some of the best espresso I've tried."
+    },
+    {
+      "url": "https://www.wired.com/story/samsung-promo-codes",
+      "title": "30% Off Samsung Promo Code | April 2026 | WIRED",
+      "description": "Get 30% + 15% off TVs with top Samsung promo codes today. Use coupons for a free $100+ giftcard or $1,000 off appliances and Galaxy phones in April 2026."
+    },
+    {
+      "url": "https://www.wired.com/story/scientific-breakthroughs",
+      "title": "16 scientific breakthroughs that happened in 2016 | WIRED",
+      "description": "There were breakthroughs in cloning, space exploration and gene-editing"
+    },
+    {
+      "url": "https://www.wired.com/2012/07/interplanetary-reentry-tests-1966",
+      "title": "Project FIRE Redux: Interplanetary Reentry Tests (1966) |...",
+      "description": "The 1964-1965 Project FIRE tests gave engineers confidence that the Apollo Command Module would survive Earth atmosphere reentry when it returned from the mo..."
+    },
+    {
+      "url": "https://www.wired.com/story/how-to-eat-free-all-year",
+      "title": "How to eat free all year | WIRED",
+      "description": "Step-by-step instructions to getting free food, with minimal risk to your health and personal safety"
+    },
+    {
+      "url": "https://www.wired.com/story/what-happens-if-iran-shuts-down-the-strait-of-hormuz",
+      "title": "What Happens If Iran Shuts Down the Strait of Hormuz? | W...",
+      "description": "The Strait of Hormuz is one of the most sensitive pressure points in the global economy. Conflict in Iran could put it at risk indefinitely."
+    },
+    {
+      "url": "https://www.wired.com/story/openais-fidji-simo-is-taking-a-leave-of-absence",
+      "title": "OpenAI’s Fidji Simo Is Taking Medical Leave Amid an Execu...",
+      "description": "The company is undergoing major leadership restructuring as its CEO of AGI deployment goes on leave for “several weeks.”"
+    },
+    {
+      "url": "https://www.wired.com/story/anthropic-settles-copyright-lawsuit-authors",
+      "title": "Anthropic Settles High-Profile AI Copyright Lawsuit Broug...",
+      "description": "Anthropic faced the prospect of more than $1 trillion in damages, a sum that could have threatened the company’s survival if the case went to trial."
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-portable-chargers-power-banks",
+      "title": "5 Best Power Banks (2026); I’ve Tested More Than 100  | W...",
+      "description": "Discover the best power banks to keep your phone, tablet, laptop, and other electronics running. Top picks like the Anker Laptop Power Bank and Nimble Champ ..."
+    },
+    {
+      "url": "https://www.wired.com/story/emotion-machines",
+      "title": "Welcome to Rosalind Picard's touchy-feely world of empath...",
+      "description": "Instead of computers that can replace us, why not make ones that understand us?"
+    },
+    {
+      "url": "https://www.wired.com/sponsored/story/ai-is-booming-but-the-debates-are-just-beginning-ibm",
+      "title": "AI is booming - but the debates are just beginning | WIRED",
+      "description": "The generative AI era is increasingly defined by questions more than answers. We put four to IBM's UK and Ireland Chief Executive, Leon Butler"
+    },
+    {
+      "url": "https://www.wired.com/gallery/best-outdoor-security-cameras",
+      "title": "9 Best Outdoor Security Cameras (2026): Battery-Powered, ...",
+      "description": "These weatherproof outdoor security cams keep a watchful eye on your property while you get on with life. Our list includes battery-powered and LTE cameras t..."
+    },
+    {
+      "url": "https://www.wired.com/tag/business",
+      "title": "Business | Latest News, Photos & Videos | WIRED",
+      "description": "Find the latest Business news from WIRED. See related science and technology articles, photos, slideshows and videos."
+    }
+  ]
+}

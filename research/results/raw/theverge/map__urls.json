@@ -1,0 +1,512 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.theverge.com/2020/4/15/21221830/google-play-kids-section-teacher-approved-educational-apps",
+    "https://www.theverge.com/2023/7/26/23808899/sony-wh-1000xm5-update-head-tracking-multipoint-ldac",
+    "https://www.theverge.com/2022/9/7/23340603/microsoft-xbox-elite-wireless-controller-series-2-core-white-controller-release-date-price",
+    "https://www.theverge.com/2023/9/28/23895150/linda-yaccarino-code-conference-2023-x-twitter",
+    "https://www.theverge.com/2015/8/18/9173627/tbs-intel-reality-tv-series-wearable-inventors",
+    "https://www.theverge.com/2024/7/22/24200536/windows-xp-ipad-pc-emulation-utm-se",
+    "https://www.theverge.com/2024/11/13/24295865/amazon-has-made-it-easier-to-sideload-books-onto-kindles-from-macs",
+    "https://www.theverge.com/2025/1/10/24341117/mark-zuckerberg-facebook-joe-rogan-lies",
+    "https://www.theverge.com/2025/1/13/24342631/mercedes-benz-will-use-googles-new-automotive-ai-agent-in-the-upcoming-cla",
+    "https://www.theverge.com/2024/9/13/24244018/anker-magnetic-card-reader-usb-c-iphone-prores-4k",
+    "https://www.theverge.com/2017/5/4/15541016/china-wikipedia-encyclopedia-online-censorship"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.theverge.com/archives/7",
+      "title": "The Verge",
+      "description": "The Verge is about technology and how it makes us feel. Founded in 2011, we offer our audience everything from breaking news to reviews to award-winning feat..."
+    },
+    {
+      "url": "https://www.theverge.com/21431103/fujifilm-instax-square-sq1-instant-camera-review-price-specs-features",
+      "title": "Fujifilm’s new Instax Square SQ1: the instant camera back...",
+      "description": "The Instax Square SQ1 is Fujifilm’s newest point-and-shoot Instax camera that prints photos onto Polaroid-framed film. Instead of adding more tech, Fujifilm ..."
+    },
+    {
+      "url": "https://www.theverge.com/news/622452/xiaomi-buds-5-pro-are-the-first-to-deliver-on-qualcomms-promise-of-wi-fi-earbuds",
+      "title": "Xiaomi Buds 5 Pro are the first to deliver on Qualcomm’s ...",
+      "description": "Xiaomi Buds 5 Pro Wi-Fi earbuds use Qualcomm’s S7 Pro chip."
+    },
+    {
+      "url": "https://www.theverge.com/24239739/apple-iphone-16-event-announcements-watch-series-10-airpods",
+      "title": "Apple’s iPhone 16 event: the 8 biggest announcements | Th...",
+      "description": "Apple revealed the new iPhone 16 during the “It’s Glowtime” event, along with a Watch Series 10 and some new AirPods."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/809326/pinterest-ai-shopping-assistant-ceo-ready",
+      "title": "Pinterest’s new AI shopping assistant helps you pick a fi...",
+      "description": "Pinterest CEO Bill Ready says the company’s AI assistant is the next stage of the platform’s resurgence."
+    },
+    {
+      "url": "https://www.theverge.com/rss/index.xml"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/902085/google-gemini-import-memory-chat-history",
+      "title": "Google is making it easier to import another AI’s memory ...",
+      "description": "Gemini’s new memory importing tools could help attract new users by making it easier to copy their preferences and history from other chatbots with a few pro..."
+    },
+    {
+      "url": "https://www.theverge.com/circuitbreaker/2018/8/15/17692280/samsung-5g-exynos-5100-modem-chipset-mmwave-3gpp-standard",
+      "title": "Samsung joins the 5G party with its own Exynos 5100 modem...",
+      "description": "Samsung is getting in on the 5G game with its own Exynos 5100 modem, which supports the industry’s latest 5G standards on both the sub-6GHz and mmWave portio..."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/899850/openai-sora-ai-chatgpt",
+      "title": "OpenAI just gave up on Sora and its billion-dollar Disney...",
+      "description": "OpenAI will wind down its Sora video generating AI model and app, and end a recently-announced deal with disney."
+    },
+    {
+      "url": "https://www.theverge.com/2020/4/15/21221830/google-play-kids-section-teacher-approved-educational-apps",
+      "title": "Google Play is getting a new Kids section filled with ‘Te...",
+      "description": "Google is launching a new Kids section for the Google Play Store, which will offer a selection of “Teacher Approved” apps. These are apps that meet certain q..."
+    },
+    {
+      "url": "https://www.theverge.com/news/716385/nintendo-reverses-course-on-mario-kart-world-intermission-track-change",
+      "title": "Nintendo reverses course on Mario Kart World’s “intermiss...",
+      "description": "The latest Mario Kart World update increases “the frequency of lap-type courses” that appear during online races.\nThe change seems to address concerns over N..."
+    },
+    {
+      "url": "https://www.theverge.com/2023/7/26/23808899/sony-wh-1000xm5-update-head-tracking-multipoint-ldac",
+      "title": "Sony brings head-tracking spatial audio to its 1000XM5 he...",
+      "description": "Sony has released a firmware update for its WH-1000XM5 noise-canceling headphones that adds support for dynamic head tracking. You can also now use LDAC and ..."
+    },
+    {
+      "url": "https://www.theverge.com/games/816118/valve-steam-frame-vr-headset-streaming-arm-steamos-hands-on",
+      "title": "The Steam Frame is a surprising new twist on VR | The Verge",
+      "description": "Valve’s Steam Frame is a new VR headset that can play games locally on Arm and streamed from a PC using a wireless adapter."
+    },
+    {
+      "url": "https://www.theverge.com/tech/849742/how-to-tune-algorithms-recommendations-online-platforms",
+      "title": "How to tweak your online platform algorithms | The Verge",
+      "description": "Everythiing you need to know about adjusting what content is recommended to you on facebook, Instagram, X, TikTok, YouTube, and more."
+    },
+    {
+      "url": "https://www.theverge.com/news/790285/apple-smart-glasses-vision-pro",
+      "title": "Apple sidelines lighter Vision Pro to prioritize smart gl...",
+      "description": "Apple is speeding up work on smart glasses that would compete with similar offerings from Meta and halting plans for a lighter Vision Pro headset, Bloomberg ..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/639837/apple-airpods-pro-2-usb-c-wireless-earbuds-deal-sale",
+      "title": "Apple’s latest AirPods Pro are down to their best price o...",
+      "description": "Apple’s second-gen AirPods Pro with USB-C are down to $169 at Amazon, which nearly matches the best price we’ve seen on the premium wireless earbuds."
+    },
+    {
+      "url": "https://www.theverge.com/tech/907292/linux-usage-surged-to-a-new-all-time-high-on-steam-in-march",
+      "title": "Linux usage surged to a new all-time high on Steam in Mar...",
+      "description": "Steam’s hardware and software survey says Linux users more than doubled from 2.23 percent in February, jumping to a record high of 5.33 percent of Steam user..."
+    },
+    {
+      "url": "https://www.theverge.com/2022/9/7/23340603/microsoft-xbox-elite-wireless-controller-series-2-core-white-controller-release-date-price",
+      "title": "Microsoft’s new Xbox Elite 2 ‘Core’ controller is more af...",
+      "description": "Microsoft is making its Xbox Elite 2 controller more affordable with a new Core model. The $129.99 controller ships without interchangeable components and is..."
+    },
+    {
+      "url": "https://www.theverge.com/news/829492/house-energy-commerce-kids-online-safety-package",
+      "title": "House overhauls KOSA in a new kids online safety package ...",
+      "description": "The House Energy and Commerce Committee is set to consider a new package of bills meant to protect kids from online harms."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/893270/grammarly-ai-expert-review-disabled",
+      "title": "Grammarly is turning off the expert review AI feature tha...",
+      "description": "Superhuman is disabling Grammarly’s “expert review” AI feature that used real writers’ names and information to give AI-generated editing advice."
+    },
+    {
+      "url": "https://www.theverge.com/tech/839294/chamberlain-myq-garage-door-opener-update-blocks-aftermarket-controllers",
+      "title": "Chamberlain’s new technology blocks aftermarket controlle...",
+      "description": "Security+ 3.0 kills compatibility with popular smart home platforms enabled by controllers from Tailwind, Meross, and Ratgdo."
+    },
+    {
+      "url": "https://www.theverge.com/news/627648/anker-nano-travel-adapter-5-in-1-us-europe-australia",
+      "title": "Anker’s Nano Travel Adapter works in over 200 countries |...",
+      "description": "Anker’s new Nano Travel Adapter is less than an inch thick but includes four USB ports and works in over 200 different countries."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/895130/openai-chatgpt-adult-mode-text-smut-written-erotica",
+      "title": "OpenAI’s adult mode will reportedly be smutty, not pornog...",
+      "description": "OpenAI’s adult mode for ChatGPT is expected to support saucy text conversations at launch, but not the chatbot’s ability to generate images, voice, or video."
+    },
+    {
+      "url": "https://www.theverge.com/news/839007/netflix-warner-acquisition",
+      "title": "Netflix isn’t buying Warner Bros, Paramount is | The Verge",
+      "description": "Netflix has struck a deal to buy Warner Bros., including HBO and HBO Max, but Paramount isn’t giving up."
+    },
+    {
+      "url": "https://www.theverge.com/tech/851573/bosch-unlimited-9-10-cordless-stick-vacuum-ces-2026",
+      "title": "Bosch is taking on Dyson with its first cordless stick va...",
+      "description": "Bosch has launched its first ever cordless stick vacuum in the US. The Bosch Unlimited 10 and 9 start at $599 and $499 respectively."
+    },
+    {
+      "url": "https://www.theverge.com/news/756980/openai-chatgpt-users-mourn-gpt-5-4o",
+      "title": "ChatGPT is bringing back 4o as an option because people m...",
+      "description": "OpenAI is bringing back GPT-4o as an option within ChatGPT just one day after making GPT-5 the default, sparking disappointment among users."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/907810/anthropic-has-signed-a-big-ai-infrastructure-deal-with-google-and-broadcom",
+      "title": "Anthropic has signed a big AI infrastructure deal with Go...",
+      "description": "The “multiple gigawatts of next-generation TPU capacity” are expected to come online beginning in 2027 to “power our frontier Claude models.” The company als..."
+    },
+    {
+      "url": "https://www.theverge.com/news/862938/us-taiwan-chipmaking-deal-250-billion-investment-tsmc",
+      "title": "The US claims it just strong-armed Taiwan into spending $...",
+      "description": "The US has announced a new deal that will lower tariffs on Taiwan in exchange for a $250 billion investment into US-based chipmaking facilities."
+    },
+    {
+      "url": "https://www.theverge.com/2023/9/28/23895150/linda-yaccarino-code-conference-2023-x-twitter",
+      "title": "Watch Linda Yaccarino’s wild interview at the Code Confer...",
+      "description": "Linda Yaccarino, CEO of X, the company formerly known as Twitter, appeared at the 2023 Code Conference. But the interview started off wild, as it was precede..."
+    },
+    {
+      "url": "https://www.theverge.com/news/634603/nintendo-switch-2-price-release-date-details",
+      "title": "The Nintendo Switch 2 arrives on June 5th for $449.99 | T...",
+      "description": "After a reveal event in January, Nintendo held another Direct to share the price and release date for the Switch 2."
+    },
+    {
+      "url": "https://www.theverge.com/transportation/898881/donut-lab-solid-state-battery-damage-test",
+      "title": "Donut Lab’s solid-state battery could barely hold a charg...",
+      "description": "Donut Lab says its solid-state battery failed gracefully after sustaining damage, rather than bursting into flames like a traditional EV battery."
+    },
+    {
+      "url": "https://www.theverge.com/games/905958/playstation-is-acquiring-cinemersive-labs-a-machine-learning-and-computer-vision-company",
+      "title": "PlayStation is acquiring Cinemersive Labs, a “machine lea...",
+      "description": "Sony says the team at Cinemersive Labs will join Sony Interactive Entertainment’s Visual Computing Group and “contribute to our broader efforts in advancing ..."
+    },
+    {
+      "url": "https://www.theverge.com/2015/8/18/9173627/tbs-intel-reality-tv-series-wearable-inventors",
+      "title": "TBS and Intel are developing a reality TV series about we...",
+      "description": "The Verge is about technology and how it makes us feel. Founded in 2011, we offer our audience everything from breaking news to reviews to award-winning feat..."
+    },
+    {
+      "url": "https://www.theverge.com/2024/7/22/24200536/windows-xp-ipad-pc-emulation-utm-se",
+      "title": "My iPad runs Windows XP now, and it’s all I ever wanted |...",
+      "description": "Windows XP may be mostly pointless on an iPad, but it works surprisingly well and illustrates the benefits of Apple’s recent moves to open things up."
+    },
+    {
+      "url": "https://www.theverge.com/sitemaps/entries/2025/4"
+    },
+    {
+      "url": "https://www.theverge.com/news/815389/wbd-is-getting-ready-to-launch-tnt-sports-as-a-standalone-streaming-service",
+      "title": "WBD is getting ready to launch TNT Sports as a standalone...",
+      "description": "The company said in its Q3 2025 earnings report that it’s “making progress” on the new service, which it initially teased in September. Upon launch, WBD will..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/905946/windows-11-forced-obsolescence-linux-thinkpad",
+      "title": "I saved a doomed Windows laptop by embracing Linux | The ...",
+      "description": "My laptop was supposed to be obsolete without Windows 11, but Linux helped me rescue it from the landfill — and you can use it to save your laptop, too."
+    },
+    {
+      "url": "https://www.theverge.com/news/637222/audio-technica-star-wars-celebration-japan-wireless-earbuds",
+      "title": "Audio-Technica’s Star Wars R2-D2 earbuds play beeps and b...",
+      "description": "Audio-Technica has announced new limited edition versions of its ATH-CKS50TW2 wireless earbuds themed around Star Wars characters including R2-D2 and Grogu."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/906740/its-fuck-those-guys",
+      "title": "“It’s ‘Fuck those guys.’” | The Verge",
+      "description": "A fascinating profile on litigator Jay Edelson, a longtime tech adversary who’s been filing cases against OpenAI and Google over their LLMs. “Courts are fed ..."
+    },
+    {
+      "url": "https://www.theverge.com/news/758906/pixel-10-qi2-charging-pixelsnap-case-leak",
+      "title": "Another Pixel 10 leak points to wireless Qi2 charging | T...",
+      "description": "It looks like Google’s rumored ‘Pixelsnap’ case could come with a ring for magnetic charging."
+    },
+    {
+      "url": "https://www.theverge.com/policy/886632/pentagon-designates-anthropic-supply-chain-risk-ai-standoff",
+      "title": "Defense secretary Pete Hegseth designates Anthropic a sup...",
+      "description": "The Pentagon is designating Anthropic a supply-chain risk over its AI stance, banning it from doing business with military contractors and suppliers."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/862402/openai-safety-lead-model-policy-departs-for-anthropic-alignment-andrea-vallone",
+      "title": "An OpenAI safety research lead departed for Anthropic | T...",
+      "description": "Andrea Vallone has joined Anthropic’s alignment team."
+    },
+    {
+      "url": "https://www.theverge.com/tech/897396/meta-vr-horizon-worlds-metaverse-andrew-bosworth",
+      "title": "Meta is actually keeping its VR metaverse running, for no...",
+      "description": "Meta had planned to shut down Horizon Worlds in VR on June 15th, but now, the company will let players continue to jump into existing VR experiences on the p..."
+    },
+    {
+      "url": "https://www.theverge.com/news/756720/google-finance-ai-makeover-chatbot",
+      "title": "The Google Finance page is getting an AI makeover | The V...",
+      "description": "Google’s in its AI era, of course its Finance page is getting a chatbot!"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/894293/metas-avocado-ai-needs-more-time-to-ripen",
+      "title": "Meta’s Avocado AI needs more time to ripen. | The Verge",
+      "description": "The company postponed its next AI model, codenamed Avocado, from this month until at least May, the NYT reports. Performance apparently falls short of rivals..."
+    },
+    {
+      "url": "https://www.theverge.com/news/757341/paramount-plus-ufc-deal-sports-streaming",
+      "title": "Paramount Plus will soon become the exclusive home to the...",
+      "description": "The sports streaming land grab continues."
+    },
+    {
+      "url": "https://www.theverge.com/news/846618/displace-hub-wireless-tv-mounting-system-suction-battery-powered",
+      "title": "You can stick any TV to your wall using the Displace Hub ...",
+      "description": "Displace’s $5,999 wireless TV with a battery-powered suction mount is only available with a 55-inch 4K OLED panel. But at CES 2026, the company will be intro..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/879267/polymarket-popup-free-grocery-store",
+      "title": "Polymarket ran a popup ‘free grocery store’ in NYC becaus...",
+      "description": "Curbed described the scene as “bleak” and noted that many waiting in line for the promised free Tide Pods and milk (which was apparently purchased at an Aldi..."
+    },
+    {
+      "url": "https://www.theverge.com/transportation/846783/rivian-ai-autonomy-day-self-driving-lidar-chip-tesla",
+      "title": "Rivian’s AI pivot is about more than chasing Tesla | The ...",
+      "description": "Rivian surprised many with its shift to AI and self-driving cars. After all, the EV maker was known for its outdoor-themed off-roaders. Why is it now chasing..."
+    },
+    {
+      "url": "https://www.theverge.com/news/763341/gulikit-tt-pro-max-wireless-switch-2-wake-controllers-adjustable-tension",
+      "title": "You can adjust the joystick resistance on GuliKit’s new c...",
+      "description": "The new GuliKit TT Pro and TT Max controllers let you fine tune the resistance of their anti-drift TMR joysticks."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/619255/pew-research-poll-ai-chatbot-workers-poll-october-2024",
+      "title": "Pew Research poll asks what workers are doing with AI cha...",
+      "description": "Responses from 5,273 employed adults in the US show that 52 percent are worried about the use of AI in the workplace. People who reported using AI were more ..."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/904776/anthropic-claude-source-code-leak",
+      "title": "Claude Code leak exposes a Tamagotchi-style ‘pet’ and an ...",
+      "description": "Anthropic says “human error” resulted in a leak that exposed Claude Code’s source code. The leaked code, which has since been copied to GitHub, offers a look..."
+    },
+    {
+      "url": "https://www.theverge.com/2024/11/13/24295865/amazon-has-made-it-easier-to-sideload-books-onto-kindles-from-macs",
+      "title": "Amazon has made it easier to sideload books onto Kindles ...",
+      "description": "[Image: Amazon has made it easier for Mac users to sideload books and documents onto some Kindles. https://platform.theverge.com/wp-content/uploads/sites/2/c..."
+    },
+    {
+      "url": "https://www.theverge.com/news/635940/porsche-2026-911-taycan-infotainment-pcm-alexa-carplay",
+      "title": "Porsche’s next Taycan gets an infotainment upgrade — but ...",
+      "description": "Porsche is launching Apps an Alexa on the 2026 Taycan, 911, Panamera, and Cayenne with upgraded infotainment software."
+    },
+    {
+      "url": "https://www.theverge.com/news/674823/nintendo-switch-2-scalpers-third-party-retailers-japan-only",
+      "title": "Nintendo partners with third-party websites to stop Switc...",
+      "description": "Nintendo has teamed up with Mercari, Yahoo!, and Rakuten to combat Switch 2 scalpers in Japan."
+    },
+    {
+      "url": "https://www.theverge.com/news/792444/gen-z-is-rebelling-against-the-algorithm-by-embracing-college-radio",
+      "title": "Gen Z is rebelling against the algorithm by embracing col...",
+      "description": "Terrestrial radio might seem like a relic of a bygone era, but it’s actually enjoying a bit of a resurgence with the younger generations. Driven by a combina..."
+    },
+    {
+      "url": "https://www.theverge.com/news/850067/us-sanctions-thierry-breton-content-moderation-censorship",
+      "title": "Trump administration bans five people from the US over on...",
+      "description": "The US State Department issued sanctions barring five people from the US, including Thierry Breton and CCDH leader Imran Ahmed, over online content moderation."
+    },
+    {
+      "url": "https://www.theverge.com/tech/898992/google-pixel-10-ads-moving-on-stalker-lying-beach-view-100-zoom",
+      "title": "Google’s new Pixel 10 ads made me go ‘Wait, WHAT are they...",
+      "description": "Google has two new ad spots for its six-month-old Pixel 10 phones, and they seem… wrong."
+    },
+    {
+      "url": "https://www.theverge.com/tech/902558/flighty-airport-bait-show-notion-installer",
+      "title": "Flighty is the app you need to navigate the airport right...",
+      "description": "Plus: the new show Bait, Super Mario Bros. Wonder, Notion 3.4, and more in this week’s Installer newsletter."
+    },
+    {
+      "url": "https://www.theverge.com/streaming/847992/last-samurai-standing-netflix-interview-junichi-okada",
+      "title": "How Last Samurai Standing adds kinetic action to the Batt...",
+      "description": "Action planner Junichi Okada talks about the work that goes into the combat scenes in Netflix’s Squid Game–style series Last Samurai Standing."
+    },
+    {
+      "url": "https://www.theverge.com/23769840/best-bluetooth-trackers",
+      "title": "The best Bluetooth trackers for Apple and Android phones ...",
+      "description": "Location trackers help you keep tabs on valuables. Here are the best options from Tile, Apple, and others, including models that support Apple Find My and Go..."
+    },
+    {
+      "url": "https://www.theverge.com/authors/monica-chin/archives/34",
+      "title": "Monica Chin Profile and Activity - Page 34 | The Verge",
+      "description": "Author profile for Monica Chin on The Verge."
+    },
+    {
+      "url": "https://www.theverge.com/news/811122/fortnite-is-getting-pets",
+      "title": "Fortnite is getting pets. | The Verge",
+      "description": "The new Sidekicks are “friendly cosmetics that stay by your side,” Epic says. The first one you can get is a banana-themed dog named Peels that’s available i..."
+    },
+    {
+      "url": "https://www.theverge.com/2025/1/10/24341117/mark-zuckerberg-facebook-joe-rogan-lies",
+      "title": "Mark Zuckerberg lies about content moderation to Joe Roga...",
+      "description": "In a nearly three-hour interview with Rogan, Zuckerberg attempts to rewrite history. Conveniently, this aligns him with the Trump administration. But it’s no..."
+    },
+    {
+      "url": "https://www.theverge.com/news/851259/gamesir-switch-turbo-drive-controller-steering-wheel-wireless-force-feedback",
+      "title": "GameSir put a tiny steering wheel on its new Swift Drive ...",
+      "description": "Motors in the wheel and triggers provide resistance in response to what’s happening in-game."
+    },
+    {
+      "url": "https://www.theverge.com/2025/1/13/24342631/mercedes-benz-will-use-googles-new-automotive-ai-agent-in-the-upcoming-cla",
+      "title": "Mercedes-Benz will use Google’s new Automotive AI Agent i...",
+      "description": "[Link: Google Cloud’s Automotive AI Agent arrives for Mercedes-Benz | https://blog.google/feed/mercedes-google-cloud-automotive-ai-agent/ | Google]\nThe autom..."
+    },
+    {
+      "url": "https://www.theverge.com/science/881135/ai-astroturfing-pollution-gas-appliances",
+      "title": "AI-generated comments helped derail a plan to cut polluti...",
+      "description": "California regulators killed a proposal that would have imposed fees on gas-burning furnaces and water heaters that release smog-forming pollutants. More tha..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/905175/tim-cook-knows-the-trump-administration-isnt-listening",
+      "title": "Tim Cook knows the Trump administration isn’t listening. ...",
+      "description": "For Apple’s 50th anniversary, Cook did an interview with Esquire’s Ryan D’Agostino, who heroically attempts to get Cook to say anything of consequence and ge..."
+    },
+    {
+      "url": "https://www.theverge.com/news/872091/openclaw-moltbot-clawdbot-ai-agent-news",
+      "title": "OpenClaw: all the news about the trending AI agent | The ...",
+      "description": "OpenClaw is the third name after Moltbot and Clawdbot for an AI agent that “actually does things,” taking off inside tech circles as an assistant for managin..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/786897/robot-vacuum-mop-early-deals-amazon-october-prime-day-2025",
+      "title": "The best robot vacuum deals you can get ahead of Amazon’s...",
+      "description": "If you don’t want to wait until Amazon’s fall Prime Day sale to buy a robovac, there are plenty of deals available from Roborock, Roomba, Eufy, and other bra..."
+    },
+    {
+      "url": "https://www.theverge.com/news/801832/8bitdo-nintendo-nes-ultimate-2-controller-retro-keyboard-bluetooth-cube-speaker",
+      "title": "8BitDo’s new collection celebrates the NES’s 40th anniver...",
+      "description": "8BitDo’s new NES40 collection celebrates Nintendo’s iconic 8-bit console with updated versions of its controllers, keyboards, and speakers."
+    },
+    {
+      "url": "https://www.theverge.com/archives/6",
+      "title": "The Verge",
+      "description": "The Verge is about technology and how it makes us feel. Founded in 2011, we offer our audience everything from breaking news to reviews to award-winning feat..."
+    },
+    {
+      "url": "https://www.theverge.com/23025168/habitat-for-humanity-mmo-game",
+      "title": "Habitat for humanity: how a classic MMO got a second life...",
+      "description": "Habitat, developed by Lucasarts in the late ’80s for the Commodore 64, was the world’s first MMO. Thirty years after going offline, a group of video game pre..."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/875563/anthropics-super-bowl-ad-has-a-change-that-made-it-less-directly-about-openai-and-chatgpt",
+      "title": "Anthropic’s Super Bowl ad has a change that made it less ...",
+      "description": "The round of Big Game ads Anthropic previewed earlier this week set Sam Altman off, as he called them “clearly dishonest.”\nNow, while the original ad says, “..."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/814659/the-human-behind-ai-music-artist-xania-monet-revealed",
+      "title": "The human behind AI music artist Xania Monet, revealed. |...",
+      "description": "In September, we wrote about the record deal scored by the human creator of a popular AI-generated R&B artist called “Xania Monet.” (And the copyright mess t..."
+    },
+    {
+      "url": "https://www.theverge.com/podcast/802771/decoder-is-now-a-video-podcast",
+      "title": "Decoder is now a video podcast. | The Verge",
+      "description": "We’re very excited to announce that Decoder is now officially on YouTube. So if you prefer to watch and not just listen to your podcasts, you can head over t..."
+    },
+    {
+      "url": "https://www.theverge.com/column/672505/jony-ive-sam-altman-smart-glasses-ai-hardware-wearables-gadgets",
+      "title": "What in the world are Jony Ive and Sam Altman building? |...",
+      "description": "Google and Open AI have hinted at where they think AI hardware will go — and so far, it looks like Jony Ive and Sam Altman aren’t betting on glasses."
+    },
+    {
+      "url": "https://www.theverge.com/news/831760/openai-google-rate-limit-sora-nano-banana-pro",
+      "title": "Sora and Nano Banana Pro throttled amid soaring demand | ...",
+      "description": "Google cites ‘high demand,’ while OpenAI says users can always buy more generations."
+    },
+    {
+      "url": "https://www.theverge.com/notepad-microsoft-newsletter/637496/microsoft-satya-nadella-deepseek-chatgpt-ai-investments-notepad",
+      "title": "Satya Nadella: DeepSeek is the new bar for Microsoft’s AI...",
+      "description": "Microsoft’s senior leadership have been answering questions from employees about the future of AI. CEO Satya Nadella sees Muse as a new bar for AI success."
+    },
+    {
+      "url": "https://www.theverge.com/tech/831379/microsoft-developer-ai-usage-stats-notepad",
+      "title": "How Microsoft’s developers are using AI | The Verge",
+      "description": "Microsoft is pushing its software developers to use AI internally. It’s part of an effort to get more AI agents doing the boring developer tasks."
+    },
+    {
+      "url": "https://www.theverge.com/circuitbreaker/2017/10/26/16552622/nvidia-geforce-gtx-1070-ti-1080-449-graphics-card-gpu",
+      "title": "Nvidia’s new $449 GTX 1070 Ti graphics card is a more pow...",
+      "description": "But not quite as good as the 1080"
+    },
+    {
+      "url": "https://www.theverge.com/archives/tech/2026/4/5",
+      "title": "Tech Archive for April 2026 - Page 5 | The Verge",
+      "description": "The Verge is about technology and how it makes us feel. Founded in 2011, we offer our audience everything from breaking news to reviews to award-winning feat..."
+    },
+    {
+      "url": "https://www.theverge.com/sitemaps/entries/2025/6"
+    },
+    {
+      "url": "https://www.theverge.com/news/810656/apple-jon-prosser-lawsuit-ios-26-leaker-michael-ramacciotti-paid",
+      "title": "iOS 26 leak co-defendant says Jon Prosser paid him $650 |...",
+      "description": "Michael Ramacciotti, who is being sued by Apple for allegedly stealing trade secrets, says Jon Prosser paid him $650 after he showed Prosser iOS 26 features."
+    },
+    {
+      "url": "https://www.theverge.com/news/849648/some-amazon-fire-tvs-get-xbox-cloud-gaming",
+      "title": "Some Amazon Fire TVs get Xbox Cloud Gaming. | The Verge",
+      "description": "“The newest models of the Fire TV 4-Series and Fire TV Omni QLED Series now feature the Xbox app built right in, with additional models coming in the future,..."
+    },
+    {
+      "url": "https://www.theverge.com/news/670954/volvo-google-gemini-ai-cars-android-automotive",
+      "title": "Volvo will be the first to install Google’s Gemini in its...",
+      "description": "Volvo said it would be the first automaker to install Google’s Gemini generative AI in its vehicles."
+    },
+    {
+      "url": "https://www.theverge.com/tech/886135/trump-mobile-t1-phone-htc-u24-pro",
+      "title": "The Trump phone sure looks a lot like this HTC handset | ...",
+      "description": "The 2024 HTC U24 Pro looks uncannily like our latest look at the Trump phone, from its angled body to unique front sensor array."
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/787227/openais-parental-controls-are-out-heres-what-you-should-know",
+      "title": "OpenAI’s ChatGPT parental controls are rolling out — here...",
+      "description": "Parental controls for teen use of ChatGPT recently announced by Sam Altman and OpenAI are starting to roll out to the chatbot’s users."
+    },
+    {
+      "url": "https://www.theverge.com/news/809956/threads-reply-approvals-posts-filter-people-you-follow",
+      "title": "Threads is giving you more control over your replies | Th...",
+      "description": "Threads will now let users individually approve or ignore replies to their posts, and filter which replies appear in their activity tab."
+    },
+    {
+      "url": "https://www.theverge.com/news/823887/adobe-semrush-acquisition-digital-marketing",
+      "title": "Adobe to acquire digital marketing platform Semrush for $...",
+      "description": "Adobe has announced plans to acquire the digital marketing platform Semrush for $1.9 billion, allowing the companies to give brands more insight into how the..."
+    },
+    {
+      "url": "https://www.theverge.com/tech/848256/asus-rog-xreal-r1-smart-glasses-specs-release-date",
+      "title": "Asus ROG’s next ally is Xreal, with 240Hz AR glasses comi...",
+      "description": "Xreal and Asus announced the ROG Xreal R1 AR glasses at CES 2026. These gamer-focused glasses support USB-C video and include a dock with HDMI and DisplayPort."
+    },
+    {
+      "url": "https://www.theverge.com/news/766522/london-tfl-headphone-campaign-noisy-passengers",
+      "title": "London targets noisy commuters with headphone campaign | ...",
+      "description": "London’s public transport authority has started scolding noisy passengers who subject everyone to music and calls blasting out of their phones."
+    },
+    {
+      "url": "https://www.theverge.com/news/761259/intel-softbank-2-billion-investment",
+      "title": "Intel will receive a $2 billion lifeline from SoftBank | ...",
+      "description": "The news comes amid reports of the US government taking a stake in Intel."
+    },
+    {
+      "url": "https://www.theverge.com/tech/904176/samsung-galaxy-s26-ai-photo-assist-slop",
+      "title": "The Galaxy S26’s photo app can sloppify your memories | T...",
+      "description": "Samsung’s S26 series offers some new AI photo editing capabilities to transform your photos. But where’s the line between acceptable edits and slop?"
+    },
+    {
+      "url": "https://www.theverge.com/2024/9/13/24244018/anker-magnetic-card-reader-usb-c-iphone-prores-4k",
+      "title": "Anker’s new $35 MagSafe gadget sticks SD cards to your iP...",
+      "description": "The MagGo USB-C Adapter supports SD and microSD cards for storage and is MagSafe compatible to stay out of the way while your iPhone is recording."
+    },
+    {
+      "url": "https://www.theverge.com/tech/894372/big-12-basketball-t-mobile-center-led-glass-floor-hardwood",
+      "title": "The Big 12 basketball tournament is ditching slippery LED...",
+      "description": "The T-Mobile Center will be replacing its LED floors with hardwood for the Big 12 tournament as players find the glass-covered floors too slippery."
+    },
+    {
+      "url": "https://www.theverge.com/science/907682/nasa-artemis-ii-distance-record-crater-names",
+      "title": "Artemis II astronauts break a record, name a crater | The...",
+      "description": "After breaking Apollo 13’s distance record on Monday, the crew of Artemis II proposed names for two Moon craters, including one named after a lost loved one."
+    },
+    {
+      "url": "https://www.theverge.com/2017/5/4/15541016/china-wikipedia-encyclopedia-online-censorship",
+      "title": "China is building its own version of Wikipedia | The Verge",
+      "description": "Digitized Chinese Encyclopedia will include 300,000 entries compiled by 20,000 scholars"
+    },
+    {
+      "url": "https://www.theverge.com/news/712217/google-ai-photo-video-youtube-shorts",
+      "title": "Google brings its AI-powered photo-to-video capability to...",
+      "description": "Google is adding new AI-powered features to Google Photos and YouTube Shorts that allow users to transform their photos into videos."
+    },
+    {
+      "url": "https://www.theverge.com/tech/907581/more-open-source-ai-models-from-meta-though-not-right-away",
+      "title": "More open source AI models from Meta, though not right aw...",
+      "description": "Meta will “eventually” offer open source versions of its new AI models Alexandr Wang is in charge of, but first, the company “wants to keep some pieces propr..."
+    }
+  ]
+}

@@ -1,0 +1,470 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.computerworld.com/article/4153733/ai-project-failure-has-little-to-do-with-ai.html",
+    "https://www.computerworld.com/article/1609389/fave-raves-22-it-pros-name-their-favorite-products.html",
+    "https://www.computerworld.com/article/1371286/workload-stress-rise-for-it-firms-respond.html",
+    "https://www.computerworld.com/article/1368035/nortel-to-acquire-coretek-for-1-43-billion.html",
+    "https://www.computerworld.com/article/4152487/euro-office-billed-as-europes-sovereign-alternative-to-microsoft-office.html"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.computerworld.com/article/4153733/ai-project-failure-has-little-to-do-with-ai.html",
+      "title": "AI project ‘failure’ has little to do with AI – Computerw...",
+      "description": "Vendors are deliberately misinterpreting AI’s high failure rate. While failures do happen, it’s usually because management sets objectives without having a c..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1609389/fave-raves-22-it-pros-name-their-favorite-products.html",
+      "title": "Fave raves: 22 IT pros name their favorite products – Com...",
+      "description": "We asked, and IT pros answered. Their favorite IT products keep people productive and enterprise assets safe. Check out the list."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1371286/workload-stress-rise-for-it-firms-respond.html",
+      "title": "Workload, Stress Rise for IT; Firms Respond – Computerworld",
+      "description": "A recent Meta Group survey shows that companies have increased training spending and are addressing other quality-of-work issues for IT employees. But anothe..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1368035/nortel-to-acquire-coretek-for-1-43-billion.html",
+      "title": "Nortel to acquire CoreTek for $1.43 billion – Computerworld",
+      "description": "Nortel Networks Corp. has agreed to acquire optical component manufacturer CoreTek Inc. for $1.43 billion. This marks Nortel's third large recent purchase in..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4152487/euro-office-billed-as-europes-sovereign-alternative-to-microsoft-office.html",
+      "title": "Euro-Office billed as Europe’s sovereign alternative to M...",
+      "description": "The new open-source initiative is led by European vendors including Nextcloud, Proton, and Ionos, and built on existing open-source project OnlyOffice."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154231/ai-chatbot-use-can-hinder-students-knowledge-retention.html",
+      "title": "AI chatbot use can hinder students’ knowledge retention –...",
+      "description": "Educators should be wary of extensive use of AI, researchers warn."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1614307/a-safe-cloud-modernization-plan-begins-behind-the-firewall.html",
+      "title": "A Safe Cloud Modernization Plan Begins Behind the Firewal...",
+      "description": "IBM Managed Private Cloud IaaS offers full control over data integrity and security, visibility into development operations, and smooth migration with public..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1714087/how-to-use-google-drive-for-collaboration.html",
+      "title": "How to collaborate in Google Drive (and Docs, Sheets, and...",
+      "description": "Sharing Google Docs, Sheets, and Slides files from Drive or the individual apps makes it easy to collaborate with colleagues on documents, presentations, and..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1638368/how-to-migrate-to-a-new-windows-pc.html",
+      "title": "How to migrate to a new Windows PC – Computerworld",
+      "description": "All your files, apps, and settings are on your old computer. Here’s how to move them to your new Windows PC, from either Windows or macOS."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-video-episodes-en.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1461678/used-ipad-trade-in-values-tumble-after-apple-unveils-new-tablet.html",
+      "title": "Used iPad trade-in values tumble after Apple unveils new ...",
+      "description": "Trade-in values for used Apple iPads plummeted as much as 26% after the company launched its newest tablet Wednesday and began taking pre-orders for delivery..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154440/anthropic-cuts-openclaw-access-from-claude-subscriptions-offers-credits-to-ease-transition-2.html",
+      "title": "Anthropic cuts OpenClaw access from Claude subscriptions,...",
+      "description": "OpenClaw co-creator says he managed to delay the move by a week; subscribers raise cost and competition concerns."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1630514/scriptrock-changes-name-branches-out-to-security-delivers-cybersecurity-scoring.html",
+      "title": "ScriptRock changes name, branches out to security, delive...",
+      "description": "FICO scores are the standard measure for credit worthiness. ScriptRock is attempting to create its own standard measure for security: CSTAR"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-8.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/4153338/as-cheap-pcs-vanish-enterprises-might-still-find-value-in-upgrades.html",
+      "title": "As cheap PCs vanish, enterprises might still find value i...",
+      "description": "Dell and HP are among the PC makers unveiling new hardware equipped to handle AI tools and services while delivering better battery life and improved security."
+    },
+    {
+      "url": "https://www.computerworld.com/au/artificial-intelligence",
+      "title": "Artificial Intelligence – Computerworld",
+      "description": "Artificial Intelligence | News, analysis, features, how-tos and videos"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1672155/g-suite-vs-office-365-whats-the-best-office-suite-for-business.html",
+      "title": "Google Workspace vs. Microsoft 365: What’s the best offic...",
+      "description": "Google Workspace has become a powerful, feature-filled alternative to Microsoft Office, and both suites are charging full steam ahead with AI features. We br..."
+    },
+    {
+      "url": "https://www.computerworld.com/uk/artificial-intelligence",
+      "title": "Artificial Intelligence – Computerworld",
+      "description": "Artificial Intelligence | News, analysis, features, how-tos and videos"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-10.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-podcast-episodes-en.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1644058/7-digital-whiteboard-solutions-for-ipad-and-mac.html",
+      "title": "7 digital whiteboard solutions for iPad and Mac – Compute...",
+      "description": "What tools can your teams use to collaborate remotely to develop complex ideas? These will help."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1617815/how-to-speed-up-windows-11.html",
+      "title": "How to speed up Windows 11 – Computerworld",
+      "description": "Windows 11 is generally faster than Windows 10, but that doesn’t mean it couldn’t be better. Try these tips to speed up and stabilize your Windows 11 PC."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154282/a-core-infrastructure-engineer-pleads-guilty-to-federal-charges-in-insider-attack-2.html",
+      "title": "A core infrastructure engineer pleads guilty to federal c...",
+      "description": "Analysts say CISOs and IT leaders can do a better job of preventing such attacks via what should be standard security procedures."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1720976/android-keyboard-apps-for-on-the-go-productivity.html",
+      "title": "The best Android keyboard apps for on-the-go productivity...",
+      "description": "Heads up, busy professionals: The right Android keyboard app can save you precious time and unlock your performance potential. So what are you waiting for?"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1564428/complete-coverage-bill-gates-moves-on.html",
+      "title": "Complete coverage: Bill Gates Moves On – Computerworld",
+      "description": "Complete Computerworld coverage of the end of the Bill Gates era at Microsoft."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1588210/credit-reporting-firm-sues-lifelock-over-fraud-alerts-in-consumer-history.html",
+      "title": "Credit reporting firm sues LifeLock over fraud alerts in ...",
+      "description": "Experian, one of the three big credit reporting firms in the U.S., filed a lawsuit claiming that LifeLock is illegally placing hundreds of thousands of fraud..."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-blog-series.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-3.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-podcast-series.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1629974/m365-copilot-microsofts-generative-ai-tool-explained.html",
+      "title": "Microsoft 365 Copilot explained: GenAI meets Office apps ...",
+      "description": "Microsoft’s generative AI assistant is integrated within a host of the company's workplace apps. Here’s what enterprises need to know about M365 Copilot."
+    },
+    {
+      "url": "https://www.computerworld.com/article/3816579/tech-layoffs-this-year-a-timeline.html",
+      "title": "Tech layoffs: A 2026 timeline – Computerworld",
+      "description": "Technology companies have continued to lay off staff in 2025 and 2026, despite the support of the new US administration. Here's an updated timeline of notabl..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4015023/openai-latest-news-and-insights.html",
+      "title": "OpenAI: Latest news and insights – Computerworld",
+      "description": "Everything you need to know about the artificial intelligence organization’s latest product and company news."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4149925/openais-sora-exit-signals-enterprise-first-ai-shift.html",
+      "title": "OpenAI’s Sora exit signals enterprise-first AI shift – Co...",
+      "description": "Rising competition and cost pressures drive OpenAI’s enterprise pivot, say analysts."
+    },
+    {
+      "url": "https://www.computerworld.com/uk/generative-ai",
+      "title": "Generative AI – Computerworld",
+      "description": "Generative AI | News, analysis, features, how-tos, and videos"
+    },
+    {
+      "url": "https://www.computerworld.com/article/4001026/the-ins-and-outs-of-apple-identity-management-in-the-enterprise.html",
+      "title": "The ins and outs of Apple identity management in the ente...",
+      "description": "In today’s cloud-enabled world, enterprise identity management is a fact of life — and in the Apple ecosystem, particularly for macOS, it can get confusing. ..."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-profiles.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1691110/microsoft-365-explained.html",
+      "title": "Microsoft 365 explained: Office 365, rebranded and expand...",
+      "description": "With the integration of Copilot and autonomous agents, Microsoft 365 is no longer just a productivity suite: it’s an AI-driven service. Here’s everything you..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1553410/lifelock-ceo-said-to-be-victim-of-identity-theft-13-times.html",
+      "title": "LifeLock CEO said to be victim of identity theft 13 times...",
+      "description": "A CEO who publicly posted his Social Security number on billboards and TV commercials as part of a campaign to promote his company's credit monitoring servic..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/3843138/agentic-ai-ongoing-coverage-of-its-impact-on-the-enterprise.html",
+      "title": "Agentic AI – Ongoing coverage of its impact on the enterp...",
+      "description": "Agentic AI has given rise to autonomous systems that learn, adapt, and even communicate with each other. Follow this page for coverage of its impact on work ..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4076455/data-amazon-to-replace-600000-workers-with-robots.html",
+      "title": "Amazon to replace 600,000 US workers by 2033 with robots ...",
+      "description": "Amazon says the leaked data, reported on by The New York Times, does not reflect the company's full strategy."
+    },
+    {
+      "url": "https://www.computerworld.com",
+      "title": "Computerworld – Making technology work for business",
+      "description": "Computerworld covers a range of technology topics, with a focus on these core areas of IT: generative AI, Windows, mobile, Apple/enterprise, office suites, p..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1611322/make-custom-business-templates-google-docs.html",
+      "title": "Make your own business templates in Google Docs – Compute...",
+      "description": "Give your team a head start on business documents by creating a set of custom templates they can use over and over again."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-2.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1716957/microsoft-wants-to-use-blockchain-to-secure-your-identity.html",
+      "title": "Microsoft wants to use blockchain to secure your identity...",
+      "description": "Microsoft plans to pilot a blockchain-based digital ID platform that would allow users to control access to sensitive online information via an encrypted dat..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154525/us-tech-sector-lost-jobs-in-march-stalling-growth.html",
+      "title": "US tech sector lost jobs in March, stalling growth – Comp...",
+      "description": "Analysts expect to see more losses during the year as AI's influence in the workplace drives personnel decisions."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-pages-uk.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1618700/factory-resetting-android-doesnt-entirely-wipe-it-do-this-instead.html",
+      "title": "Factory resetting Android doesn’t entirely wipe it. Do th...",
+      "description": "Android's factory reset feature has a security problem, but you can easily protect yourself before selling or recycling your phone"
+    },
+    {
+      "url": "https://www.computerworld.com/generative-ai",
+      "title": "Generative AI – Computerworld",
+      "description": "Generative AI | News, analysis, features, how-tos, and videos"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1488222/android-4-2-jelly-bean-the-complete-faq.html",
+      "title": "Android 4.2, Jelly Bean: The complete FAQ – Computerworld"
+    },
+    {
+      "url": "https://www.computerworld.com/article/4122149/microsoft-handed-over-bitlocker-keys-to-law-enforcement-raising-enterprise-data-control-concerns.html",
+      "title": "Microsoft handed over BitLocker keys to law enforcement, ...",
+      "description": "The disclosure underscores how recovery keys stored in Microsoft’s cloud can be accessed under warrant, even when enterprise data is encrypted."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1536416/baidu-offers-free-cloud-storage-to-qualcomm-chip-based-devices.html",
+      "title": "Baidu offers free cloud storage to Qualcomm chip-based de...",
+      "description": "China's largest search engine Baidu said on Monday the company would provide 30GB of free cloud storage to Android devices built with certain Qualcomm chips,..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4086197/qa-andela-ceo-talks-about-the-need-for-borderless-talent-amid-work-visa-limitations.html",
+      "title": "Q&A: Andela CEO talks about the need for ‘borderless tale...",
+      "description": "With the US government planning to raise the price of H-1B visa applications, companies are scrambling to revamp their hiring practices. Andela’s Carrol Chan..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1466599/book-review-hacking-the-art-of-exploitation-2nd-edition.html",
+      "title": "Book Review– Hacking: The Art of Exploitation, 2nd Editio..."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-4.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1640512/genai-is-highly-inaccurate-for-business-use-and-getting-more-opaque.html",
+      "title": "GenAI is highly inaccurate for business use — and getting...",
+      "description": "As generative AI platforms ingest greater oceans of data and get connected to more and more corporate databases, researchers are sounding an alarm: the tools..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1634947/healthy-smartwatch-growth-seen-after-slow-2015-2.html",
+      "title": "Healthy smartwatch growth seen after slow 2015 – Computer...",
+      "description": "Despite slower than expected sales last year, smartwatch sales will grow at a healthy rate and will have the highest revenue potential of all wearables throu..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154119/microsoft-builds-its-own-ai-stack-to-help-wean-it-from-its-reliance-on-openai.html",
+      "title": "Microsoft builds its own AI stack to help wean it from it...",
+      "description": "New proprietary models reduce Microsoft's dependence on its biggest AI partner, even as the two maintain a fragile alliance."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1612972/how-to-use-dropbox-for-team-collaboration.html",
+      "title": "How to use Dropbox for team collaboration – Computerworld",
+      "description": "Shared folders in Dropbox give teams a common work area to gather key files, create to-do lists, edit and comment on documents, and more."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4119411/11-cool-things-copilot-can-do-in-excel.html",
+      "title": "11 cool things Copilot can do in Excel – Computerworld",
+      "description": "As Microsoft ramps up Copilot’s capabilities in Excel, the AI tool is becoming genuinely useful for spreadsheet work."
+    },
+    {
+      "url": "https://www.computerworld.com/profile/galen-gruman",
+      "title": "Galen Gruman – Computerworld",
+      "description": "Enterprises have untold numbers of endpoints, which can be on-premises or remote. Cloud access security brokers (CASBs) sit between those endpoints and cloud..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4047019/ai-pcs-to-surge-claiming-over-half-the-market-by-2026.html",
+      "title": "AI PCs to surge, claiming over half the market by 2026 – ...",
+      "description": "Despite some market hurdles, AI PC adoption is taking hold, with about 143 million units expected to ship next year."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4056366/anthropic-adds-memory-to-claude-for-team-and-enterprise-plan-users.html",
+      "title": "Anthropic adds Memory to Claude for Team and Enterprise p...",
+      "description": "Memory is designed to help enterprise users retain the context of a project or a business division, driving better output and increasing productivity."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1631342/windows-11-productivity-tips.html",
+      "title": "8 ways to be more productive in Windows 11 – Computerworld",
+      "description": "Think Windows 11 can’t give you a productivity boost? Think again. Try these tips to get more accomplished in less time."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1693331/built-to-last.html",
+      "title": "Built to Last – Computerworld",
+      "description": "Encouraged by improved reliability and durability, enterprises are keeping systems longer than ever."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1331259/from-arms-violations-to-gathering-dust-the-strange-history-of-pgp.html",
+      "title": "From arms violations to gathering dust: The strange histo...",
+      "description": "The history of Pretty Good Privacy could come to an end if the code doesn't find a new home and support from users and vendors."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4082654/gartner-ai-budgets-are-going-to-projects-that-demonstrate-value-real-world-impact.html",
+      "title": "Gartner: AI budgets are going to projects that demonstrat...",
+      "description": "The research firm found that IT leaders want to see results before committing big bucks."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4132725/openai-hires-openclaw-founder-as-ai-agent-race-intensifies.html",
+      "title": "OpenAI hires OpenClaw founder as AI agent race intensifie...",
+      "description": "Peter Steinberger will lead personal agent development, while the viral open-source project will continue under an open-source foundation."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1620568/ultimate-guide-to-privacy-on-android.html",
+      "title": "The ultimate Android privacy guide – Computerworld",
+      "description": "Take back control and decide exactly how information is used on your Android device."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1715316/how-to-securely-erase-your-android-device-in-4-steps.html",
+      "title": "How to securely erase your Android device in 3 simple ste...",
+      "description": "Securely wiping an Android device isn't difficult, but there are some critical steps you don't want to overlook."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4093224/microsoft-drops-m365-copilot-price-for-smbs-upgrades-free-copilot-chat.html",
+      "title": "Microsoft drops M365 Copilot price for SMBs, upgrades fre...",
+      "description": "Beginning next month, companies with fewer than 300 employees will pay less for Microsoft 365 Copilot for Business."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1412985/new-tablets-spark-trade-in-frenzy.html",
+      "title": "New tablets spark trade-in frenzy – Computerworld",
+      "description": "Consumers are trading in their iPads and other tablets at an \"unprecedented rate\" to buy the newest offerings from Apple, Google and Microsoft, according to ..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1618073/even-a-factory-reset-in-android-phones-leaves-user-data-behind.html",
+      "title": "Even a factory reset in Android phones leaves user data b...",
+      "description": "Resetting an Android phone to its factory state before getting rid of it often fails to properly wipe all sensitive user data."
+    },
+    {
+      "url": "https://www.computerworld.com/article/3811399/text-expansion-windows.html",
+      "title": "3 exceptional text expansion tools for Windows – Computer...",
+      "description": "These text expanders will bring a big productivity upgrade to any Windows setup."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4142603/its-an-ai-boom-not-a-bubble-but-is-that-true-at-microsoft.html",
+      "title": "It’s an AI boom, not a bubble…, but is that true at Micro...",
+      "description": "The company has clearly had success rolling out a variety of useful genAI tools and services. But the enterprise uptake rate remains stubbornly low."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1623324/google-pixel-calculator-app.html",
+      "title": "10 powerful tricks for your Google Pixel Calculator app –...",
+      "description": "Your Pixel phone's calculator can do much more than you realize."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-index.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-video-series.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154447/ai-shutdown-controls-may-not-work-as-expected-new-study-suggests.html",
+      "title": "AI shutdown controls may not work as expected, new study ...",
+      "description": "Researchers observed AI models sabotaging shutdown mechanisms and inflating evaluations to protect peer systems, highlighting emerging risks for enterprise A..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1524675/tablets-still-got-a-first-gen-ipad-don-t-ditch-it-yet.html",
+      "title": "Still got a first-gen iPad? Don’t ditch it yet – Computer...",
+      "description": "In the life of every device, there's a moment when you wonder whether it's finally obsolete. If you're wondering that about the original iPad, columnist Mich..."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-9.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/2098794/google-pixel-8a.html",
+      "title": "Why Google's Pixel 8a may be the most important phone of ...",
+      "description": "Don't be fooled: This unassuming midranger holds some outsized significance for Android and for you — regardless of whether you ever intend to buy it."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4049928/top-ai-certifications-that-will-get-you-hired-and-promoted.html",
+      "title": "Here are the top AI certifications that will get you hire...",
+      "description": "As AI reshapes industries, CIOs are prioritizing certifications over college degrees to quickly validate tech skills and drive digital transformation."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1695660/what-is-the-epic-browser-and-what-makes-it-different.html",
+      "title": "What is the Epic browser (and what makes it different)? –...",
+      "description": "Privacy is the top priority for the Chromium-based web browser."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4081167/apple-watch-series-11-the-things-you-dont-see.html",
+      "title": "Apple Watch Series 11: The things you don’t see – Compute...",
+      "description": "The 24-hour battery life makes for a much better experience than using an older Apple Watch."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1619804/how-to-make-image-backup-windows-10-windows-11.html",
+      "title": "How to make a Windows 10 or 11 image backup – Computerworld",
+      "description": "Making a full system image backup preserves not only your files, but Windows and all its settings as well. Here are the best free Windows backup and recovery..."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-1.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-5.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/3537129/how-to-securely-wipe-a-windows-pc.html",
+      "title": "How to securely wipe a Windows PC – Computerworld",
+      "description": "These are the steps you should take before passing off your PC to someone else or disposing of it entirely."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1718454/privacy-and-security-apps-for-android.html",
+      "title": "16 recommended privacy and security apps for Android – Co...",
+      "description": "Forget malware scanners or over-the-top security suites: These are the apps that'll actually improve your security and protect your privacy on Android."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-pages-nz.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-articles-en-6.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/1671968/hp-recalls-101000-more-laptop-batteries-for-fire-hazard.html",
+      "title": "HP recalls 101,000 more laptop batteries for fire hazard ...",
+      "description": "HP is recalling more laptop batteries that pose a fire hazard and could cause computer damage."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1629582/opera-rolls-out-ai-infused-browser.html",
+      "title": "Opera rolls out AI-infused browser – Computerworld",
+      "description": "Opera One is an extensive makeover of the Chrome-based web browser that allows ChatGPT natural language processing and offers a new, more modular UI design."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4143010/apples-macbook-neo-first-reviews-and-analyst-reactions.html",
+      "title": "Apple's MacBook Neo: First reviews and analyst reactions ...",
+      "description": "The inexpensive laptop marks a shift in the history of the Mac and could help Apple gain share in the lower end of the PC market."
+    },
+    {
+      "url": "https://www.computerworld.com/sitemap-pages.xml"
+    },
+    {
+      "url": "https://www.computerworld.com/article/4025903/as-ai-agents-go-mainstream-companies-lean-into-confidential-computing-for-data-security.html",
+      "title": "As AI agents go mainstream, companies lean into confident...",
+      "description": "If agentic AI is to be successful, companies will have to figure out how to protect data. With that in mind, several big tech players now offer their own fla..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1343392/goner-worm-spreads-tries-to-delete-firewalls.html",
+      "title": "Goner worm spreads, tries to delete firewalls – Computerw...",
+      "description": "A new high-risk worm, called Goner, that attempts to delete a number of program files on infected computers, including firewall applications, is spreading qu..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/1723681/why-microsoft-is-building-a-bitcoin-based-id-verification-system.html",
+      "title": "Why Microsoft is building a Bitcoin-based ID verification...",
+      "description": "Microsoft has taken another step toward creating a secure identification platform that will allow users to own their personal data and keep it from the pryin..."
+    },
+    {
+      "url": "https://www.computerworld.com/article/4154153/apple-leans-into-the-component-crisis-storm.html",
+      "title": "Apple leans into the component crisis storm – Computerworld",
+      "description": "Rising costs are strengthening Apple's hand while weakening its rivals."
+    }
+  ]
+}

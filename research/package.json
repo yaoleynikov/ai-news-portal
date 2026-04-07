@@ -1,0 +1,14 @@
+{
+  "name": "siliconfeed-research",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Competitor analysis pipeline for SiliconFeed",
+  "scripts": {
+    "scrape": "node scraper.mjs",
+    "analyze": "node analyzer.mjs",
+    "report": "node report.mjs"
+  },
+  "dependencies": {
+    "@mendable/firecrawl-js": "^1.15.0"
+  }
+}

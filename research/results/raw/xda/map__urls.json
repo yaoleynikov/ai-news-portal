@@ -1,0 +1,508 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.xda-developers.com/replaced-putty-with-ssh-client-managing-servers-never-felt-smooth/#:~:text=Server%20organization%20is%20one%20of,workflow%20improves%20productivity%20and%20multitasking."
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.xda-developers.com/open-source-graphics-tool-dont-want-to-pay-adobe-subscription",
+      "title": "This is the open-source graphics tool you need if you don...",
+      "description": "It's lighter and easier to use, too"
+    },
+    {
+      "url": "https://www.xda-developers.com/run-android-apps-raspberry-pi-how",
+      "title": "Yes, I run Android apps on my Raspberry Pi; here’s how",
+      "description": "This one addition to my Pi opens up the ability to run thousands more apps than I ever thought possible"
+    },
+    {
+      "url": "https://www.xda-developers.com/gemini-transform-android-auto-experience-complex-tasks",
+      "title": "4 ways Gemini transforms my Android Auto experience for t...",
+      "description": "Finally, automation that actually does more than spit facts."
+    },
+    {
+      "url": "https://www.xda-developers.com/how-to-check-and-change-bluetooth-codec-android",
+      "title": "How to check supported Bluetooth Audio Codecs on Android,...",
+      "description": "Changing the Bluetooth audio codec on your Android phone may enhance the sound quality and reduce latency. Here's how to do it."
+    },
+    {
+      "url": "https://www.xda-developers.com/qualcomm-snapdragon-x35-modem",
+      "title": "Qualcomm unveils Snapdragon X35 modem for 5G wearable and...",
+      "description": "Qualcomm has unveiled the Snapdragon X35 modem aimed at bringing 5G to devices such as wearables and Chromebooks."
+    },
+    {
+      "url": "https://www.xda-developers.com/speculative-decoding-made-local-llm-usable",
+      "title": "Speculative decoding made my local LLM actually usable",
+      "description": "The problem wasn't the brain, but how it was being forced to think"
+    },
+    {
+      "url": "https://www.xda-developers.com/xbox-app-now-available-on-arm-based-windows-pcs",
+      "title": "The Xbox app is now available on Arm-based Windows PCs",
+      "description": "The architecture’s reputation of not being great for gaming is about to change."
+    },
+    {
+      "url": "https://www.xda-developers.com/self-hosted-location-tracking-service-its-better-than-google-maps",
+      "title": "I self-hosted my own location tracking service, and it's ...",
+      "description": "The self-hosted app that's giving Google Timeline a run for its money."
+    },
+    {
+      "url": "https://www.xda-developers.com/im-quitting-discord-and-heres-what-im-moving-to-instead",
+      "title": "I'm quitting Discord, and here's what I'm moving to instead",
+      "description": "This self-hosted app has the potential to be a strong alternative to Discord"
+    },
+    {
+      "url": "https://www.xda-developers.com/troubleshoot-network-issues-in-proxmox",
+      "title": "The definitive guide to troubleshooting common network is...",
+      "description": "Is your Proxmox home lab plagued by network issues? Don't worry, we're here to help out!"
+    },
+    {
+      "url": "https://www.xda-developers.com/how-i-use-kanban-boards-in-obsidian-to-manage-my-personal-projects",
+      "title": "How I use Kanban boards in Obsidian to manage my personal...",
+      "description": "Stay organized and focused by using Kanban boards in Obsidian"
+    },
+    {
+      "url": "https://www.xda-developers.com/the-ultimate-guide-to-using-microsoft-phone-link-on-your-windows-pc",
+      "title": "The ultimate guide to using Microsoft Phone Link on your ...",
+      "description": "Link your phone and PC for seamless connectivity"
+    },
+    {
+      "url": "https://www.xda-developers.com/microsoft-quietly-buried-for-entertainment-purposes-only-copilots-terms-of-use",
+      "title": "Microsoft quietly buried 'for entertainment purposes only...",
+      "description": "It's not what the ads want you to think."
+    },
+    {
+      "url": "https://www.xda-developers.com/im-tired-of-pretending-8gb-vram-is-not-enough-for-most-gamers",
+      "title": "8GB VRAM is actually enough for most gamers, and I'm tire...",
+      "description": "It's time we all remembered what real PC gaming still looks like."
+    },
+    {
+      "url": "https://www.xda-developers.com/finally-started-using-rustdesk-and-should-have-sooner",
+      "title": "I finally started using RustDesk and I should have sooner",
+      "description": "The remote desktop tool I wish I found earlier"
+    },
+    {
+      "url": "https://www.xda-developers.com/why-i-switched-from-zfs-to-btrfs",
+      "title": "I ditched ZFS for Btrfs on my home NAS and I’m never goin...",
+      "description": "What living with both taught me over time"
+    },
+    {
+      "url": "https://www.xda-developers.com/why-having-wi-fi-protected-setup-wps-enabled-is-bad",
+      "title": "4 reasons you should turn off Wi-Fi Protected Setup (WPS)...",
+      "description": "WPS used to be a quick way to pair Wi-Fi devices, but you shouldn't use it anymore."
+    },
+    {
+      "url": "https://www.xda-developers.com/projects-recycled-disposable-vape-batteries",
+      "title": "4 projects that use recycled disposable vape batteries",
+      "description": "Recycling has never been this cool."
+    },
+    {
+      "url": "https://www.xda-developers.com/contact",
+      "title": "Contact Us | XDA",
+      "description": "The world’s best source for computing news, reviews, editorials guides, and more."
+    },
+    {
+      "url": "https://www.xda-developers.com/peripherals-youre-plugging-into-wrong-usb-port",
+      "title": "4 peripherals you're probably plugging into the wrong USB...",
+      "description": "Don't let the wrong port hold your peripherals back"
+    },
+    {
+      "url": "https://www.xda-developers.com/microsoft-may-be-moving-away-web-based-wrappers",
+      "title": "Microsoft might be moving away from web-based wrappers as...",
+      "description": "Here's hoping it pays off."
+    },
+    {
+      "url": "https://www.xda-developers.com/your-ssd-is-fine-probably-these-are-the-4-smart-attributes-you-should-actually-care-about",
+      "title": "4 SMART attributes on your SSD you should actually care a...",
+      "description": "Discover the 4 crucial SSD SMART attributes that indicate your drive's health and when it's time to replace it."
+    },
+    {
+      "url": "https://www.xda-developers.com/dual-display-travel-setup-aurzen-zip-fits-in-envelope-not-macbook",
+      "title": "My dual-display travel setup fits in an envelope and it's...",
+      "description": "Two small displays work better than one 16-incher"
+    },
+    {
+      "url": "https://www.xda-developers.com/can-steam-deck-output-4k",
+      "title": "Can the Steam Deck output 4k?",
+      "description": "From docks to display capabilities, we have all the information you need regarding the Steam Deck and 4k output."
+    },
+    {
+      "url": "https://www.xda-developers.com/claude-cowork-freed-up-60gb-on-my-pc",
+      "title": "Claude Cowork freed up 60GB on my laptop by finding files...",
+      "description": "All without me opening Finder once!"
+    },
+    {
+      "url": "https://www.xda-developers.com/how-save-file-iphone-ipad",
+      "title": "How to save a file on an iPhone or iPad",
+      "description": "Saving app and web files on iOS and iPadOs is quite easy, and we've highlighted how to do so."
+    },
+    {
+      "url": "https://www.xda-developers.com/run-os-on-ram",
+      "title": "I ran an operating system from the RAM - here's how it went",
+      "description": "You may run out of memory if you try this on a weaker system..."
+    },
+    {
+      "url": "https://www.xda-developers.com/fedora-kde-features-stop-me-going-back-windows",
+      "title": "3 Fedora KDE Plasma features that stop me going back to W...",
+      "description": "Things have gotten too comfortable for me to return to Microsoft."
+    },
+    {
+      "url": "https://www.xda-developers.com/reasons-should-get-perpetual-office-2024-license-instead-microsoft-365",
+      "title": "4 reasons you should get a perpetual Office 2024 license ...",
+      "description": "With Microsoft Office 2024 releasing soon, there are a few good reasons to get it instead of paying for Microsoft 365."
+    },
+    {
+      "url": "https://www.xda-developers.com/perplexity-browser-learning",
+      "title": "Perplexity Browser turned my random Google searches into ...",
+      "description": "What used to be scattered Googling now feels like guided exploration—and Perplexity Browser is the reason why"
+    },
+    {
+      "url": "https://www.xda-developers.com/notebooklm-to-obsidian-markdown",
+      "title": "I finally found a seamless way to bring NotebookLM insigh...",
+      "description": "Discover how a small Chrome extension, NotebookLM to LaTeX & MD, seamlessly integrates NotebookLM insights into Obsidian for enhanced knowledge management an..."
+    },
+    {
+      "url": "https://www.xda-developers.com/your-ssd-might-be-running-less-pcie-lanes-and-heres-how-to-check",
+      "title": "Your SSD might be running at PCIE x2 speeds instead of x4...",
+      "description": "You might not be getting the speeds you paid for"
+    },
+    {
+      "url": "https://www.xda-developers.com/ways-reduce-memory-usage-windows-11-without-buying-more-ram",
+      "title": "7 ways I reduce memory usage on Windows 11 without buying...",
+      "description": "If your Windows computer is using too much memory, there are a few steps you can take to clean it up and potentially improve your PC's performance."
+    },
+    {
+      "url": "https://www.xda-developers.com/tried-cutting-windows-out-my-life-with-winboat",
+      "title": "I tried cutting Windows out of my life with WinBoat, but ...",
+      "description": "If you can't live without Windows apps on Linux, WinBoat could be a great solution. But it's got a few problems that need to be worked out."
+    },
+    {
+      "url": "https://www.xda-developers.com/found-a-free-open-source-alternative-to-claude-code",
+      "title": "I found a free, open-source alternative to Claude Code, a...",
+      "description": "Same energy for completely free."
+    },
+    {
+      "url": "https://www.xda-developers.com/get-the-most-out-of-self-hosted-llm-limited-by-vram",
+      "title": "Maximizing self-hosted LLM performance with limited VRAM",
+      "description": "Discover techniques for running large language models on hardware with limited VRAM, including model compression, quantization, and pruning."
+    },
+    {
+      "url": "https://www.xda-developers.com/save-money-and-the-planet-by-recycling-your-pc-accessories-logitech",
+      "title": "Save money (and the planet) by recycling your PC accessories",
+      "description": "The only thing better than recycling your e-waste is getting sweet Logitech discounts for doing so"
+    },
+    {
+      "url": "https://www.xda-developers.com/reasons-esp32-display-beats-old-tablet-for-smart-home-dashboard",
+      "title": "4 reasons an ESP32 display beats an old tablet for a smar...",
+      "description": "Discover why ESP32-powered displays outperform old tablets for creating interactive smart home dashboards, offering customization, cost-effectiveness, and po..."
+    },
+    {
+      "url": "https://www.xda-developers.com/debloating-windows-11-handheld-gaming",
+      "title": "7 steps to debloat Windows 11 for handheld gaming",
+      "description": "De-bloat Windows 11 for handheld gaming."
+    },
+    {
+      "url": "https://www.xda-developers.com/set-up-perfect-voice-pipeline-home-assistant",
+      "title": "I set up the perfect voice pipeline in Home Assistant, an...",
+      "description": "With custom add-ons available for free, Home Assistant gives me the power to control my entire voice pipeline."
+    },
+    {
+      "url": "https://www.xda-developers.com/self-hosted-vpn-works-where-wireguard-gets-blocked",
+      "title": "I found a self-hosted VPN that works in countries where W...",
+      "description": "Obfuscation is the name of the game"
+    },
+    {
+      "url": "https://www.xda-developers.com/every-game-canceled-by-the-massive-xbox-layoffs",
+      "title": "Every game canceled by the massive Xbox layoffs",
+      "description": "Microsoft laid off a staggering amount of Xbox employees, resulting in several canceled games."
+    },
+    {
+      "url": "https://www.xda-developers.com/how-enable-virtualization-windows-11",
+      "title": "How to enable virtualization on Windows 11",
+      "description": "You'll need to enable virtualization if you want to run virtual machines on Windows 11 or use the Windows Subsystem for Linux. Here's how."
+    },
+    {
+      "url": "https://www.xda-developers.com/replaced-putty-with-ssh-client-managing-servers-never-felt-smooth/#:~:text=Server%20organization%20is%20one%20of,workflow%20improves%20productivity%20and%20multitasking.",
+      "title": "I replaced PuTTY with a modern SSH client and managing my...",
+      "description": "My server workflow finally feels modern."
+    },
+    {
+      "url": "https://www.xda-developers.com/nvidia-introduces-new-app-feature-designed-to-reduce-game-load-times",
+      "title": "Nvidia introduces new app feature designed to reduce game...",
+      "description": "\"Auto Shader Compilation\" aims to get you into games more quickly."
+    },
+    {
+      "url": "https://www.xda-developers.com/pitfalls-i-fell-for-moving-from-windows-to-linux",
+      "title": "5 pitfalls I fell for when moving from Windows to Linux",
+      "description": "Learn from my mistakes."
+    },
+    {
+      "url": "https://www.xda-developers.com/build-karaoke-machine-raspberry-pi",
+      "title": "I built a karaoke machine using a Raspberry Pi: Here’s ho...",
+      "description": "Want to host a karaoke party, but don't want to buy an expensive karaoke rig? Build your own using a Raspberry Pi."
+    },
+    {
+      "url": "https://www.xda-developers.com/classic-game-mods-to-make-old-games-feel-like-new",
+      "title": "12 classic game mods to make old games feel like new",
+      "description": "PC gaming has a long history of game modding, and here are some of our favorites."
+    },
+    {
+      "url": "https://www.xda-developers.com/i-ditched-my-4k-monitor-for-1440p-and-im-not-going-back",
+      "title": "I ditched my 4K monitor for 1440p, and I'm not going back",
+      "description": "The best gaming experience is the one that works for you."
+    },
+    {
+      "url": "https://www.xda-developers.com/apollo-replacement-for-sunshine-game-streaming",
+      "title": "Apollo is the game streaming service your PC gaming handh...",
+      "description": "You still have to use Moonlight as the client for now, though."
+    },
+    {
+      "url": "https://www.xda-developers.com/harmony-os-huawei-announce",
+      "title": "Huawei officially reveals Harmony OS, its first party ope...",
+      "description": "Huawei finally shared details about its new operating system called Harmony OS. We've heard rumors for some time, but now we have real information."
+    },
+    {
+      "url": "https://www.xda-developers.com/tailscale-features-you-didnt-know-existed",
+      "title": "5 Tailscale features you didn't know existed",
+      "description": "Look, I didn't know about these either."
+    },
+    {
+      "url": "https://www.xda-developers.com/kindle-paperwhite-11th-gen-review",
+      "title": "Amazon Kindle Paperwhite 11th Gen review: The best e-read...",
+      "description": "The latest Paperwhite is a marked improvement over its predecessor, offering a big display, a comfortable reading experience, and insane battery life."
+    },
+    {
+      "url": "https://www.xda-developers.com/ways-host-obsidian-online",
+      "title": "4 ways to host Obsidian online",
+      "description": "You can access your Obsidian vault anywhere when you host it online. See how."
+    },
+    {
+      "url": "https://www.xda-developers.com/oppo-enco-m31-review",
+      "title": "OPPO Enco M31 Review - The Budget Wireless Earphone Champion",
+      "description": "In this review, we take a thorough look at OPPO's budget wireless earphones, the OPPO Enco M31, which are beyond impressive for the price."
+    },
+    {
+      "url": "https://www.xda-developers.com/how-turn-old-pc-into-smart-home-hub",
+      "title": "How you can turn an old PC into a smart home hub",
+      "description": "Your old PC can become useful in a whole new way, while reducing your reliance on cloud services to control your smart home."
+    },
+    {
+      "url": "https://www.xda-developers.com/lenovos-legion-glasses-gen-2-review",
+      "title": "Lenovo’s Legion Glasses Gen 2 are the best handheld acces...",
+      "description": "Handheld gaming PCs are great for gaming on the go, but a pair of AR glasses can make any handheld your new favorite gaming device even at home."
+    },
+    {
+      "url": "https://www.xda-developers.com/ryzen-7-9800x3d-vs-ryzen-7-9700x",
+      "title": "Ryzen 7 9800X3D vs. Ryzen 7 9700X: Which Zen 5 CPU is bet...",
+      "description": "The Ryzen 7 9800X3D and 9700X are both shining examples of AMD's new Zen 5 lineup, but there are some notable differences. Here's how they compare."
+    },
+    {
+      "url": "https://www.xda-developers.com/apple-ipad-10-external-display-support",
+      "title": "Can you connect the Apple iPad 10 to an external display?",
+      "description": "In this article, we'll tell you whether you can connect Apple's new 10th-generation iPad to an external display."
+    },
+    {
+      "url": "https://www.xda-developers.com/how-to-unzip-files-android",
+      "title": "How to unzip files on Android through third-party apps",
+      "description": "Not sure how to unzip a file on Android? In this guide, we'll tell you how to unzip or extract a file using a file manager or an archiver."
+    },
+    {
+      "url": "https://www.xda-developers.com/action-launcher-brings-ios-style-widget-stacks-android",
+      "title": "Action Launcher v47 update brings iOS-style widget stacks...",
+      "description": "The latest Action Launcher v47 update has brought iOS 14-style widget stacks to Android smartphones. Read on to know more!"
+    },
+    {
+      "url": "https://www.xda-developers.com/why-android-tv-is-hard-to-mod",
+      "title": "Android TV is the least moddable version of Android — her...",
+      "description": "Despite sharing Android's roots, Android TV is surprisingly hard to mod"
+    },
+    {
+      "url": "https://www.xda-developers.com/notebooklm-self-hosted-alternative-keep-data-control",
+      "title": "I replaced NotebookLM with a self-hosted alternative",
+      "description": "I prefer to keep my AI usage local"
+    },
+    {
+      "url": "https://www.xda-developers.com/microsofts-plan-to-improve-windows-11-might-actually-win-me-back",
+      "title": "Microsoft’s plan to improve Windows 11 might actually win...",
+      "description": "Microsoft listens to user feedback, will restore some of the most-requested legacy OS elements, and ease up on the Copilot infusion in Windows."
+    },
+    {
+      "url": "https://www.xda-developers.com/i-built-a-second-brain-using-only-obsidian-and-a-local-llm",
+      "title": "I built a second brain using only Obsidian and a local LLM",
+      "description": "Discover how combining Obsidian with a local LLM can supercharge your second brain, enabling faster data analysis, effortless note summarization, and powerfu..."
+    },
+    {
+      "url": "https://www.xda-developers.com/this-linux-distro-runs-better-than-windows-on-old-pc",
+      "title": "This Linux distro runs better than Windows on every old P...",
+      "description": "Reviving old PCs with a lightweight OS that outperforms Windows on limited hardware."
+    },
+    {
+      "url": "https://www.xda-developers.com/brave-best-ai-browser-ive-tried",
+      "title": "I didn’t think I’d say this, but Brave might just be the ...",
+      "description": "AI browsing without sacrificing your privacy."
+    },
+    {
+      "url": "https://www.xda-developers.com/does-your-cpu-matter-for-4k-gaming",
+      "title": "Does your CPU matter for 4K gaming? The answer might surp...",
+      "description": "CPUs apparently don't matter as much at 4K resolution. But there are many cases where a high-end CPU will deliver better gaming performance."
+    },
+    {
+      "url": "https://www.xda-developers.com/i-made-claude-slower-and-it-completely-changed-how-i-use-it",
+      "title": "I made Claude slower and it completely changed how I use it",
+      "description": "Speed was never the actual problem"
+    },
+    {
+      "url": "https://www.xda-developers.com/ssd-vs-hdd-2024",
+      "title": "SSD vs HDD in 2024: What kind of storage do you really need?",
+      "description": "While both SSDs and HDDs have their use cases, you might need more storage than you think you do"
+    },
+    {
+      "url": "https://www.xda-developers.com/mathgpt-is-notebooklm-for-math-problems",
+      "title": "This tool is basically NotebookLM for math problems",
+      "description": "Think NotebookLM, but smarter when it comes to math."
+    },
+    {
+      "url": "https://www.xda-developers.com/free-portable-apps-always-keep-ready-usb-drive",
+      "title": "10 free portable apps you should always keep ready in you...",
+      "description": "Equip your USB drive with these 10 essential free portable apps to tackle security, maintenance, and productivity on any computer in a flash!"
+    },
+    {
+      "url": "https://www.xda-developers.com/ways-free-up-macos-memory-apple-silicon",
+      "title": "7 ways to free up macOS unified memory on Apple silicon",
+      "description": "There's no way to upgrade memory on Apple silicon Macs, but you can free up space using these tips and tricks."
+    },
+    {
+      "url": "https://www.xda-developers.com/linux-distributions-resurrect-your-old-laptop",
+      "title": "5 Linux distros that will make your old laptop feel brand...",
+      "description": "Give your aging hardware a fresh start with Linux using these top five distributions."
+    },
+    {
+      "url": "https://www.xda-developers.com/automate-read-it-later-workflow-with-local-llm-to-summarize-articles",
+      "title": "I automated my entire read-it-later workflow with a local...",
+      "description": "No more fighting an endless article backlog."
+    },
+    {
+      "url": "https://www.xda-developers.com/your-old-router-becomes-treasure-from-one-piece-of-software-openwrt",
+      "title": "Your old router isn't trash, and one piece of software tu...",
+      "description": "OpenWrt has been keeping routers from becoming e-waste since 2004"
+    },
+    {
+      "url": "https://www.xda-developers.com/author/mahnoor-faisal",
+      "title": "Mahnoor Faisal | XDA",
+      "description": "Mahnoor Faisal is a journalist at XDA, covering AI tools, productivity, and the companies behind them."
+    },
+    {
+      "url": "https://www.xda-developers.com/run-local-llms-one-worlds-priciest-energy-markets",
+      "title": "I run local LLMs in one of the world's priciest energy ma...",
+      "description": "They really don't cost as much as you think to run."
+    },
+    {
+      "url": "https://www.xda-developers.com/arm-based-home-servers-are-finally-starting-to-hit-the-home-lab-sweet-spot",
+      "title": "Arm-based home servers are finally starting to hit the ho...",
+      "description": "Arm is no longer a niche platform for home server use"
+    },
+    {
+      "url": "https://www.xda-developers.com/the-10-best-games-made-by-a-single-person",
+      "title": "The 10 best games that were made by a single person",
+      "description": "In a medium that often thrives on scale and spectacle, these games prove how far heart, grit, and creativity can take you."
+    },
+    {
+      "url": "https://www.xda-developers.com/swapping-from-windows-to-linux-on-my-laptop-was-a-huge-mistake",
+      "title": "Swapping from Windows to Linux on my laptop was a huge mi...",
+      "description": "Linux isn't ready for primetime on some laptops"
+    },
+    {
+      "url": "https://www.xda-developers.com/core-ultra-5-245k-vs-core-i5-14600k",
+      "title": "Intel Core Ultra 5 245K vs. Core i5-14600K: The newer the...",
+      "description": "Is Intel's cheapest Arrow Lake CPU enough to topple one of its best processors?"
+    },
+    {
+      "url": "https://www.xda-developers.com/smart-attributes-that-predict-drive-failure",
+      "title": "5 S.M.A.R.T. attributes that actually predict HDD and SSD...",
+      "description": "Always double-check these values after running S.M.A.R.T. tests on your storage drives"
+    },
+    {
+      "url": "https://www.xda-developers.com/microsoft-voice-activated-copilot-same-way-cortana",
+      "title": "Microsoft's voice-activated Copilot will go the same way ...",
+      "description": "And not in a good way."
+    },
+    {
+      "url": "https://www.xda-developers.com/pairing-whisper-and-notebooklm",
+      "title": "I automated my meeting notes with NotebookLM and Whisper,...",
+      "description": "The NotebookLM workflow that’s saved me countless hours."
+    },
+    {
+      "url": "https://www.xda-developers.com/set-up-remote-game-streaming",
+      "title": "How to set up remote game streaming using Moonlight and S...",
+      "description": "Here's how you can create a personal video game streaming server with the help of Moonlight and Sunshine"
+    },
+    {
+      "url": "https://www.xda-developers.com/these-are-the-best-raid-levels-for-nas-servers-and-home-labs",
+      "title": "These are the best RAID levels for NAS servers and home labs",
+      "description": "Choosing the wrong RAID mode can make your data irrecoverable"
+    },
+    {
+      "url": "https://www.xda-developers.com/this-free-open-source-tool-great-for-monitoring-network-traffic-with-ease",
+      "title": "This free and open-source tool is great for monitoring yo...",
+      "description": "Keep an eye on the packets exchanged"
+    },
+    {
+      "url": "https://www.xda-developers.com/flexispot-c7-ergonomic-office-chair-review",
+      "title": "FlexiSpot C7 Ergonomic Office Chair review: For those who...",
+      "description": "The FlexiSpot C7 Ergonomic Chair is designed to reduce back pain and facilitate good posture, but its aggressive lumbar support won't be for everyone."
+    },
+    {
+      "url": "https://www.xda-developers.com/nvidia-control-panel-replacement-must-have-for-enthusiasts",
+      "title": "This Nvidia Control Panel replacement is a must-have for ...",
+      "description": "It's the jailbreak that your GPU needs."
+    },
+    {
+      "url": "https://www.xda-developers.com/please-stop-buying-qlc-nand-ssds-and-how-to-check-if-you-have-one",
+      "title": "Please stop buying QLC NAND SSDs (and how to check if you...",
+      "description": "Despite it's low cost, QLC NAND is not something anyone should be using for important storage anymore."
+    },
+    {
+      "url": "https://www.xda-developers.com/kilo-is-vs-code-extension-works-with-every-local-llm-i-throw-at-it",
+      "title": "Kilo is the VS Code extension that actually works with ev...",
+      "description": "Designed for how developers actually work."
+    },
+    {
+      "url": "https://www.xda-developers.com/why-i-stuck-around-despite-claude-limits",
+      "title": "I almost ditched Claude over its brutal rate limits, but ...",
+      "description": "Claude's output consistently outperforms other tools."
+    },
+    {
+      "url": "https://www.xda-developers.com/the-best-amd-gpu-for-local-ai-performs-as-well-as-the-rtx-3090-and-costs-far-less",
+      "title": "The best AMD GPU for Local AI performs as well as the RTX...",
+      "description": "AMD already has a worthy candidate for local AI, but most people don't know it"
+    },
+    {
+      "url": "https://www.xda-developers.com/cpu-coolers-socket-lga-1700",
+      "title": "CPU coolers for Intel socket LGA 1700: Everything you nee...",
+      "description": "We're coming up to the end of the LGA 1700 socket's life cycle. Here's everything we know about the socket and the compatible CPU coolers."
+    },
+    {
+      "url": "https://www.xda-developers.com/notebooklm-connects-to-claude-through-mcp",
+      "title": "NotebookLM now connects to Claude through MCP, and it's t...",
+      "description": "No more tab-hopping."
+    },
+    {
+      "url": "https://www.xda-developers.com/i-found-best-open-source-obsidian-alternatives",
+      "title": "I found these 5 incredible open source Obsidian alternati...",
+      "description": "If you're looking for an open-source alternative to Obsidian, check out this list for options."
+    },
+    {
+      "url": "https://www.xda-developers.com/single-utility-for-all-my-file-syncing",
+      "title": "I bet my workflow on a single utility for all my file syn...",
+      "description": "I now treat all my devices as one 'living desktop' via sync"
+    },
+    {
+      "url": "https://www.xda-developers.com/self-hosted-dashboards-that-can-change-your-life",
+      "title": "5 self-hosted dashboards that can change your life",
+      "description": "Your personal command center"
+    },
+    {
+      "url": "https://www.xda-developers.com/winlator-guide",
+      "title": "A beginner's guide to emulating Windows games on a smartp...",
+      "description": "Installing Winlator is fairly straightforward, but you'll need to modify several settings to get playable frame rates"
+    }
+  ]
+}

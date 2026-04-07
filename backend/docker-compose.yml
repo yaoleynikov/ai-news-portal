@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # The gatekeeper pulls RSS feeds every 30 mins and enqueues jobs
+  gatekeeper:
+    build: .
+    container_name: siliconfeed_gatekeeper
+    restart: unless-stopped
+    env_file:
+      - .env
+    command: ["node", "./src/gatekeeper/cron.js"]
+    # If cron.js exits after running, docker will restart it unless-stopped.
+    # To run it as a true internal cron loop instead of exiting, 
+    # we can wrap it or have something orchestrate it.
+    # We will assume a simple bash loop for this container.
+    entrypoint: >
+      /bin/sh -c "while true; do node ./src/gatekeeper/cron.js; echo 'Waiting 30 minutes...'; sleep 1800; done"
+    mem_limit: 150m # Keep memory utilization ultra-low
+    cpu_shares: 256 # Low priority
+
+  # The main worker handles text extraction, ML embeddings, OpenRouter processing, and WebP generation
+  worker:
+    build: .
+    container_name: siliconfeed_worker
+    restart: unless-stopped
+    env_file:
+      - .env
+    command: ["npm", "run", "worker"]
+    mem_limit: 400m # Needs a bit more RAM for the ONNX CPU model evaluation
+    cpu_shares: 768 # High priority within the N100 bounds
+    volumes:
+      - hf_cache:/app/.cache
+
+volumes:
+  hf_cache:

@@ -1,0 +1,523 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.tomshardware.com/reviews/lacie-rugged-raid-pro-4tb,5641.html",
+    "https://www.tomshardware.com/tech-industry/semiconductors/efabless-shuts-down-fate-of-tiny-tapeout-chip-production-projects-unclear",
+    "https://www.tomshardware.com/video-games/xbox/delisted-xbox-360-games-briefly-reappear-on-the-xbox-store",
+    "https://www.tomshardware.com/uk/sitemap-news.xml",
+    "https://www.tomshardware.com/reviews/samsung-t7-shield-portable-ssd-review",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/supermicros-datacenter-scale-liquid-cooling-solution-sets-the-stage-for-nvidia-blackwell",
+    "https://www.tomshardware.com/reviews/power-supplies-101,4193-23.html",
+    "https://www.tomshardware.com/pc-components/cpus/chinese-enthusiast-overclocks-amds-ryzen-7-9800x3d-to-7-33ghz-on-colorful-x870e-vulcan-motherboard-new-world-record-achieved-using-liquid-nitrogen-cooling",
+    "https://www.tomshardware.com/reviews/amd-radeon-rx-vega-64,5173.html",
+    "https://www.tomshardware.com/pc-components/gpus/nvidia-says-its-h100-h200-gpus-are-not-sold-out-despite-jensen-alluding-otherwise-during-earnings-call-company-clarifies-it-has-plenty-of-gpu-supply",
+    "https://www.tomshardware.com/tech-industry/semiconductors/china-may-have-reverse-engineered-euv-lithography-tool-in-covert-lab-report-claims-employees-given-fake-ids-to-avoid-secret-project-being-detected-prototypes-expected-in-2028",
+    "https://www.tomshardware.com/pc-components/cpus/intel-core-ultra-7-270k-plus-review/2",
+    "https://www.tomshardware.com/pc-components/cpus/intel-takes-the-wraps-off-panther-lake-first-18a-client-processor-brings-the-best-of-lunar-lake-and-arrow-lake-together-in-one-package",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-wipes-inbox-of-meta-ai-alignment-director-executive-finds-out-the-hard-way-how-spectacularly-efficient-ai-tool-is-at-maintaining-her-inbox",
+    "https://www.tomshardware.com/reviews/razer-kraken-v3-x",
+    "https://www.tomshardware.com/pc-components/ssds/kioxia-exceria-plus-g4-2tb-ssd-review/2",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/positron-ai-says-its-atlas-accelerator-beats-nvidia-h200-on-inference-in-just-33-percent-of-the-power-delivers-280-tokens-per-second-per-user-with-llama-3-1-8b-in-2000w-envelope",
+    "https://www.tomshardware.com/tech-industry/semiconductors/the-global-helium-shortage-is-a-direct-threat-to-chipmaking"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.tomshardware.com/reviews/lacie-rugged-raid-pro-4tb,5641.html",
+      "title": "LaCie Rugged RAID Pro 4TB Review: A Tough HDD Built for S...",
+      "description": "LaCie’s Rugged RAID Pro is a fast external HDD built to take on the elements, has an integrated UHS-II SC card reader, and comes with a data recovery protect..."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/efabless-shuts-down-fate-of-tiny-tapeout-chip-production-projects-unclear",
+      "title": "Efabless shuts down, fate of Tiny Tapeout chip production...",
+      "description": "Tiny Tapeout is exploring other avenues for project manufacturing."
+    },
+    {
+      "url": "https://www.tomshardware.com/3d-printing/3d-scanning/creality-sermoon-s1-3d-scanner-review",
+      "title": "Creality Sermoon S1 Review: Accessible 3D Scanning | Tom'...",
+      "description": "Creality’s 3D scanner gets a glow-up."
+    },
+    {
+      "url": "https://www.tomshardware.com/video-games/xbox/delisted-xbox-360-games-briefly-reappear-on-the-xbox-store",
+      "title": "Delisted Xbox 360 games briefly reappear on the Xbox Stor...",
+      "description": "Several previously removed titles appeared and vanished within hours."
+    },
+    {
+      "url": "https://www.tomshardware.com/uk/sitemap-news.xml"
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/samsung-t7-shield-portable-ssd-review",
+      "title": "Samsung T7 Shield Portable SSD Review: Tough and Consiste...",
+      "description": "Samsung’s T7 Shield brings reliability for content capture"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/supermicros-datacenter-scale-liquid-cooling-solution-sets-the-stage-for-nvidia-blackwell",
+      "title": "Supermicro's datacenter-scale liquid cooling solution set...",
+      "description": "Supermicro's new liquid cooling solution enables up to 96 B200 GPUs per rack."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/power-supplies-101,4193-23.html",
+      "title": "PSU 101: ATX, EPS, and 80 PLUS Specifications",
+      "description": "The objective of this article is to provide detailed information about the most crucial part of a personal computer (PC) system, its power supply unit. Follo..."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/chinese-enthusiast-overclocks-amds-ryzen-7-9800x3d-to-7-33ghz-on-colorful-x870e-vulcan-motherboard-new-world-record-achieved-using-liquid-nitrogen-cooling",
+      "title": "Chinese enthusiast overclocks AMD's Ryzen 7 9800X3D to 7....",
+      "description": "Breaking the previous record by just a few megahertz."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/amd-radeon-rx-vega-64,5173.html",
+      "title": "AMD Radeon Vega RX 64 8GB Review - Tom's Hardware | Tom's...",
+      "description": "Radeon RX Vega 64 is here, and we've been testing the card's performance, power, temperatures, and noise. Should it be your next high-end graphics upgrade?"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-says-its-h100-h200-gpus-are-not-sold-out-despite-jensen-alluding-otherwise-during-earnings-call-company-clarifies-it-has-plenty-of-gpu-supply",
+      "title": "Nvidia says its H100/H200 GPUs are not sold out, despite ...",
+      "description": "We have more than enough... to satisfy every order"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/china-may-have-reverse-engineered-euv-lithography-tool-in-covert-lab-report-claims-employees-given-fake-ids-to-avoid-secret-project-being-detected-prototypes-expected-in-2028",
+      "title": "China may have reverse engineered EUV lithography tool in...",
+      "description": "Well, kind of."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/intel-core-ultra-7-270k-plus-review/2",
+      "title": "Intel Core Ultra 270K Plus gaming benchmarks - Intel Core...",
+      "description": "Unbelievable productivity performance at an even more unbelievable price – shame gaming still takes a backseat."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/intel-takes-the-wraps-off-panther-lake-first-18a-client-processor-brings-the-best-of-lunar-lake-and-arrow-lake-together-in-one-package",
+      "title": "Intel takes the wraps off Panther Lake — first 18A client...",
+      "description": "Panther Lake brings the power efficiency and graphics performance of Lunar Lake and the platform flexibility of Arrow Lake all together on one SoC"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-wipes-inbox-of-meta-ai-alignment-director-executive-finds-out-the-hard-way-how-spectacularly-efficient-ai-tool-is-at-maintaining-her-inbox",
+      "title": "AI tool OpenClaw wipes the inbox of Meta's AI Alignment d...",
+      "description": "It's almost like we could all see this one coming."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/razer-kraken-v3-x",
+      "title": "Razer Kraken V3 X Review: Light Weight, Heavy Sound | Tom...",
+      "description": "Thumpin lightweight Razer Kraken V3 X delivers solid performance at an affordable price point."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/ssds/kioxia-exceria-plus-g4-2tb-ssd-review/2",
+      "title": "Kioxia Exceria Plus G4 2TB Performance Results - Kioxia E...",
+      "description": "Kioxia delivers a competent mid-level Gen 5 SSD"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/positron-ai-says-its-atlas-accelerator-beats-nvidia-h200-on-inference-in-just-33-percent-of-the-power-delivers-280-tokens-per-second-per-user-with-llama-3-1-8b-in-2000w-envelope",
+      "title": "Positron AI says its Atlas accelerator beats Nvidia H200 ...",
+      "description": "But only in inference workloads."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/the-global-helium-shortage-is-a-direct-threat-to-chipmaking",
+      "title": "The global helium shortage is a direct threat to the chip...",
+      "description": "Qatar's shutdown removed a third of global supply overnight, and chip fabs are weeks away from feeling it."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidias-new-ai-chatbot-falls-victim-to-high-severity-security-vulnerabilities-urgent-chatrtx-patch-issued",
+      "title": "Nvidia's new ChatGPT-like AI chatbot falls victim to high...",
+      "description": "ChatRTX 0.2 and all prior versions have these vulnerabilities, but the latest version of 0.2 with the latest installer fixes them"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/claude-code-deletes-developers-production-setup-including-its-database-and-snapshots-2-5-years-of-records-were-nuked-in-an-instant",
+      "title": "Claude Code deletes developers' production setup, includi...",
+      "description": "Story has a happy ending of sorts, but should serve as a cautionary tale."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/apple-iphone-6-plus-review,3976-14.html",
+      "title": "Apple iPhone 6 And iPhone 6 Plus CPU And System Performance",
+      "description": "The iPhone 6 and 6 Plus are bigger and better than ever, but are they a worthy upgrade for existing iPhone users? What if you previously passed over the iPho..."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/xreal-air-2",
+      "title": "Xreal Air 2 Review: Greatly Improved, Well-Rounded AR Gla...",
+      "description": "The Xreal Air 2 makes meaningful improvements to the original Air"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-fueled-ordering-frenzy-creates-apple-mac-shortage-delivery-for-high-unified-memory-units-now-ranges-from-6-days-to-6-weeks",
+      "title": "OpenClaw-fueled ordering frenzy creates Apple Mac shortag...",
+      "description": "AI is coming for high-end Mac Studios and Mac minis, too."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/shortages-of-crucial-chip-packaging-material-threatens-ai-accelerator-supply-chains-nittobos-fukushima-plant-is-tripling-capacity-but-itll-take-years-before-market",
+      "title": "Shortages of crucial chip packaging material threatens AI...",
+      "description": "The T-glass supply is becoming an issue for the AI revolution, and the market is unlikely to unwind until 2027 at the earliest."
+    },
+    {
+      "url": "https://www.tomshardware.com/desktops/pc-building/passively-cooled-ryzen-ai-max-395-pc-uses-entire-chassis-as-a-10-pound-heatsink-talented-builder-turns-framework-desktop-mainboard-into-a-silent-powerful-work-of-pc-art",
+      "title": "Passively cooled Ryzen AI Max+ 395 PC uses entire chassis...",
+      "description": "It didn't throttle at 100W, but made the DIYer too nervous at 120W."
+    },
+    {
+      "url": "https://www.tomshardware.com/monitors/gaming-monitors/dell-s3225qc-32-inch-4k-qd-oled-monitor-review",
+      "title": "Dell S3225QC 32-inch 4K QD-OLED Monitor Review: Compellin...",
+      "description": "The Dell S3225QC is a 32-inch 4K QD-OLED monitor with 120 Hz, HDR10, Dolby Vision, Adaptive-Sync, wide gamut color, and spatial audio."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/air-cooling/heres-a-behind-the-scenes-look-at-how-a-cpu-air-cooler-is-made-deepcool-gives-a-start-to-finish-tour-of-its-main-production-facility",
+      "title": "Here’s a behind the scenes look at how a CPU air cooler i...",
+      "description": "You’ll never take cooling for granted after seeing how complex the making is."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/antvr-mix-ar-headset-launches-kickstarter,37056.html",
+      "title": "AntVR Launches Its Compact, Wide-FOV MIX AR Headset On Ki...",
+      "description": "AntVR today launched a Kickstarter campaign for its MIX AR developer kit. The new device offers a 96-degree field of view, boasts SteamVR compatibility, and ..."
+    },
+    {
+      "url": "https://www.tomshardware.com/features/displayport-vs-hdmi-better-for-gaming",
+      "title": "DisplayPort vs. HDMI: Which Is Better For Gaming? | Tom's...",
+      "description": "We look at bandwidth, resolution, refresh rate and more to see the differences between DisplayPort and HDMI connections."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/be-quiet-straight-power-11-650w-platinum-power-supply-review",
+      "title": "be quiet! Straight Power 11 650W Platinum Power Supply Re...",
+      "description": "The be quiet! Straight Power 11 Platinum with 650W capacity has a dead silent operation. Is this enough though, to help it meet the competition?"
+    },
+    {
+      "url": "https://www.tomshardware.com/news/google-deploys-cloud-tpu,36506.html",
+      "title": "Google Deploys TPU To Google Cloud Service | Tom's Hardware",
+      "description": "The deployment is still in beta, but customers of Google’s cloud computing service can now use the company’s dedicated AI processing hardware for their own m..."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/windows/every-microsoft-engineer-got-a-stopwatch-says-windows-veteran-reminiscing-about-companys-past-focus-on-speed-asserts-that-everything-was-timed-to-ensure-acceptable-performance-in-the-1980s",
+      "title": "'Every Microsoft engineer got a stopwatch,' says Windows ...",
+      "description": "Microsoft recently pledged to reinvigorate Windows performance, but will it issue free stopwatches again?"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/deepseek-reportedly-urged-by-chinese-authorities-to-train-new-model-on-huawei-hardware-after-multiple-failures-r2-training-to-switch-back-to-nvidia-hardware-while-ascend-gpus-handle-inference",
+      "title": "DeepSeek reportedly urged by Chinese authorities to train...",
+      "description": "DeepSeek reportedly could not run a successful training run on Huawei's Ascend chip"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/milk-v-titan-mini-ix-board-with-ur-dp1000-processor-shows-risc-v-ecosystem-taking-shape-m-2-ddr4-and-pcie-card-support-form-a-kit-that-you-can-use-out-of-the-box",
+      "title": "Milk-V Titan Mini-IX board with UR-DP1000 processor shows...",
+      "description": "RISC-V is coming along quite speedily."
+    },
+    {
+      "url": "https://www.tomshardware.com/monitors/gaming-monitors/benq-designvue-pd2770u-27-inch-4k-professional-monitor-review",
+      "title": "BenQ DesignVue PD2770U 27-inch 4K professional monitor re...",
+      "description": "The BenQ DesignVue PD2770U is a 27-inch 4K IPS Professional Monitor with HDR10, wide-gamut color, flexible color modes, a built-in calibrator, and software c..."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/liquid-cooling/sama-l70-review",
+      "title": "SAMA L70 Review: Competitive performance that punches abo...",
+      "description": "Affordable cooling at only $70, with thermal results that hold strong against more expensive, higher-tier competitors."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/micron-ssd-tlc-3d-nand,33137.html",
+      "title": "Micron Infuses 8TB 5100 Series SSDs With 3D TLC NAND | To...",
+      "description": "Micron is shaking things up a bit with its latest 5100 Series SSDs, which not only tip the scales with 8TB of storage but also bring a blistering 74,000 rand..."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/nvidias-20-billion-groq-deal-produces-its-first-chip",
+      "title": "How Nvidia's $20 billion Groq 3 LPU deal reshapes the Nvi...",
+      "description": "The Groq 3 LPU arrives as Rubin CPX appears to exit the roadmap."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/bitcoin-mining-make-money,3514-7.html",
+      "title": "Financial Aspects: Costs - All About Bitcoin Mining: Road...",
+      "description": "By now, you've probably heard all about Bitcoins. But what are they? And are people actually striking it rich \"mining\" these things? Today, we'll find out wi..."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/linux/linux-devs-start-removing-support-for-37-year-old-intel-486-cpu-head-honcho-linus-torvalds-says-zero-real-reason-to-continue-support",
+      "title": "Linux devs start removing support for 37-year-old Intel 4...",
+      "description": "Linus Torvalds recently telegraphed that there was ‘zero real reason’ to continue support for these ancient CPUs."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/chinese-military-reveals-drone-wolf-pack-capable-of-swarm-operations-robot-dogs-can-be-equipped-with-grenade-launchers-and-machine-guns-for-urban-combat",
+      "title": "Chinese military reveals drone wolf pack capable of swarm...",
+      "description": "These drone wolf packs are designed for urban combat and help Chinese soldiers clear areas without risking themselves."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/case-fans/best-pc-fans",
+      "title": "Best PC case fans tested 2026: Improve your airflow, sile...",
+      "description": "We’ve tested several recent PC fans to figure out which impellers are sellers and which spinners are sinners."
+    },
+    {
+      "url": "https://www.tomshardware.com/monitors/gaming-monitors/aoc-q27g4zd-qd-oled-240-hz-gaming-monitor-review",
+      "title": "AOC Q27G4ZD QD-OLED 240 Hz gaming monitor review: Fast, c...",
+      "description": "27-inch QD-OLED gaming monitor with 240 Hz, Adaptive-Sync, HDR10, and wide gamut color."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/ssds/samsung-announces-bm9k1-pcie-5-0-qlc-ssd",
+      "title": "Samsung preps PCIe 5.0 QLC SSD with a controller based on...",
+      "description": "Samsung's next QLC drive targets personal AI workloads with a 2027 launch."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/msi-radeon-rx-6600-8gb-deal",
+      "title": "MSI RX 6650 XT for $249 Represents the Best Current GPU V...",
+      "description": "An excellent price on a great graphics card"
+    },
+    {
+      "url": "https://www.tomshardware.com/desktops/gaming-pcs/best-ram-combo-deals-2026-make-pc-builds-and-upgrades-more-affordable-with-the-best-ram-bundle-deals-available",
+      "title": "Best RAM combo deals 2026 – make PC builds and upgrades m...",
+      "description": "RAM is still ridiculously expensive, but there are some incredible combo discounts that help take the sting out of a new PC build."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/microsoft-office/at-least-80-different-microsoft-copilot-products-have-been-mapped-out-by-expert-but-there-may-be-more-than-100-microsoft-doesnt-have-a-singular-list-available-so-ai-consultant-mapped-out-the-myriad-products",
+      "title": "80 different Microsoft Copilot products have been mapped ...",
+      "description": "An artificial intelligence aficionado has unearthed and charted 80 Copilot products that Microsoft has developed and marketed., You board a plane. You glance..."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/notebook-hard-drive-review,3270-11.html",
+      "title": "Power And Performance Per Watt - Four 2.5\" Hard Drives Fr...",
+      "description": "Thanks to advances in manufacturing and 4 KB sectors, we finally have 2.5\" hard drives with 500 GB per platter and a notebook-friendly 9.5 mm Z-height. Thank..."
+    },
+    {
+      "url": "https://www.tomshardware.com/video-games/nintendo/nintendo-is-restricting-the-switch-2s-usb-c-port-most-third-party-docks-and-accessories-wont-work-thanks-to-proprietary-protocols",
+      "title": "Nintendo is restricting the Switch 2's USB-C port — most ...",
+      "description": "Third-party docks are locked out"
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/ddr-dram-faq,4154-7.html",
+      "title": "What Is Flex Mode? - DDR DRAM FAQs And Troubleshooting Gu...",
+      "description": "DRAM is probably one of least understood components in a computer. Here are answers to our readers’ most common questions about memory."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/elegoo-neptune-3-pro",
+      "title": "Elegoo Neptune 3 Pro Review: Affordable Direct Drive, Aut...",
+      "description": "The Neptune 3 Pro adds more features while remaining an excellent value."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking",
+      "title": "GPU price tracking 2026: Lowest price on every graphics c...",
+      "description": "Whether you're after a GPU from AMD, Nvidia, or Intel, graphics card prices fluctuate a lot. It's hard to sniff out a good GPU deal, so we list the lowest av..."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/amds-zen-5-avx-512-performance-tested-zen-5-performs-significantly-better-than-zen-4-on-linux-without-consuming-any-more-power",
+      "title": "AMD's Zen 5 AVX-512 performance tested — Zen 5 performs s...",
+      "description": "A far cry from Intel's original AVX-512 implementation"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/power-supplies/msi-mag-a1200pls-pcie5-1200w-power-supply-review",
+      "title": "MSI MAG A1200PLS PCIE5 1200W power supply review: A compe...",
+      "description": "Strong cold efficiency numbers with excellent build presentation"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/samsung-foundry-renames-3nm-process-technology-to-2nm-production-node-following-industry-trends-report",
+      "title": "Samsung Foundry renames '3nm' process tech to '2nm,' rewr...",
+      "description": "The process formerly known as SF3 has now been renamed to SF2."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/arm-to-sell-its-new-agi-cpu-in-china-we-would-expect-the-demand-for-this-product-to-be-just-as-strong-in-china-as-it-is-in-the-rest-of-the-world",
+      "title": "Arm to sell its new AGI CPU in China — 'we would expect t...",
+      "description": "Despite sanctions that limit IP licensing."
+    },
+    {
+      "url": "https://www.tomshardware.com/laptops/gaming-laptops/lenovo-legion-pro-7i-gen-10-review-pricey-and-luxurious-gaming-laptop",
+      "title": "Lenovo's new Legion costs less than Razer's Blade, with a...",
+      "description": "While pricey, the Legion Pro 7i Gen 10’s sublime screen and luxurious features make it an attractive choice."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/windows/early-windows-11-25h2-benchmarks-confirm-the-update-provides-no-performance-improvements-over-24h2",
+      "title": "Early Windows 11 25H2 benchmarks confirm the update provi...",
+      "description": "Makes sense, considering 25H2 is based on the same source code as 24H2."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/history-of-computers,4518-3.html",
+      "title": "The Pascaline Calculator (17th Century) - A Computer Hist...",
+      "description": "In this article, we shed light on the most important moments in computer history, acknowledging the people that have contributed to this evolution."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/alibaba-ai-chip-goes-head-to-head-with-nvidia-h20",
+      "title": "Alibaba’s AI chip goes head-to-head with Nvidia H20 in st...",
+      "description": "Alibaba’s semiconductor unit, T-Head, has reportedly developed a new AI processor that it claims matches the performance of Nvidia's H20."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/amd-announces-ryzen-z2-series-processors-for-handhelds-more-performance-better-efficiency-coming-soon",
+      "title": "AMD announces Ryzen Z2 series processors for handhelds — ...",
+      "description": "Up to eight cores and 16 threads with a 16 CU RDNA 3.5 GPU."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/windows/microsoft-forces-updates-to-windows-11-25h2-update-for-pcs-running-on-24h2",
+      "title": "Microsoft to force updates to Windows 11 25H2 for PCs wit...",
+      "description": "Microsoft forces 25H2 rollout ahead of 24H2 end-of-support"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/googles-agentic-ai-wipes-users-entire-hard-drive-without-permission-after-misinterpreting-instructions-to-clear-a-cache-i-am-deeply-deeply-sorry-this-is-a-critical-failure-on-my-part",
+      "title": "Google's Agentic AI wipes user's entire HDD without permi...",
+      "description": "The user even made a screen recording to document his troubles"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/pc-cases/hyte-x50-case-review/2",
+      "title": "Hyte X50 tested with FA12 fans - Hyte X50 Case Review: ro...",
+      "description": "Hyte’s X50 proves that your PC case doesn’t have to be boring"
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/adata-xpg-lancer-rgb-ddr5-6000-c40-2x16gb-review",
+      "title": "Adata XPG Lancer RGB DDR5-6000 C40 2x16GB Review: Samsung...",
+      "description": "With some tuning and the correct motherboard, the memory kit hits DDR5-6600."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/price-of-nvidias-vera-rubin-nvl72-racks-skyrockets-to-as-much-as-usd8-8-million-apiece-but-server-makers-margins-will-be-tight-nvidia-is-moving-closer-to-shipping-entire-full-scale-systems",
+      "title": "Price of Nvidia's Vera Rubin NVL72 racks skyrockets to as...",
+      "description": "Nvidia and other chipmakers will still make plenty of cash."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/oculink-outpaces-thunderbolt-5-in-nvidia-rtx-5070-ti-tests-latter-up-to-14-percent-slower-on-average-in-gaming-benchmarks",
+      "title": "OCuLink outpaces Thunderbolt 5 in Nvidia RTX 5070 Ti test...",
+      "description": "OCuLink or Thunderbolt? That is the question!"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/usb-flash-drives/unpowered-flash-drive-data-retention-test-shows-promising-results-after-six-years-results-show-no-data-corruption-on-usb-sticks-challenging-conventional-wisdom",
+      "title": "Unpowered SSD data retention test shows promising results...",
+      "description": "Probably the biggest lesson is to not buy knock-off drives, and keep them stashed in decent conditions."
+    },
+    {
+      "url": "https://www.tomshardware.com/how-to/turn-old-router-into-extender",
+      "title": "How to Turn an Old Router into a Wi-Fi Extender or Switch...",
+      "description": "Don’t throw that router in the trash yet."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/snapdragon-x-elite-shows-2x-higher-multi-threaded-performance-than-apple-m2-in-new-benchmarks",
+      "title": "Snapdragon X Elite shows 2X higher multi-threaded perform...",
+      "description": "A Snapdragon X Elite-powered Microsoft Surface Laptop 7 scored 7,923.5 points in multi-threaded benchmark results, beating the Apple M2's 3,822.3 points."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/what-is-gddr7-memory",
+      "title": "What is GDDR7 memory — everything you need to know about ...",
+      "description": "Powering the next generation of graphics cards."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/best-gpus,4380.html",
+      "title": "Best Graphics Cards for Gaming in 2026 | Tom's Hardware",
+      "description": "Here are the best graphics cards for gaming, from high-end to budget solutions."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/psu-buying-guide,2916-3.html",
+      "title": "Power Supply Buyer's Guide: Efficiency",
+      "description": "How does a power supply work? Why is it important to choose a sufficiently powerful and efficient model? We guide you through discussions of efficiency and t..."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/qatar-helium-shutdown-puts-chip-supply-chain-on-a-two-week-clock",
+      "title": "Qatar helium shutdown puts chip supply chain on a two-wee...",
+      "description": "No restart in sight."
+    },
+    {
+      "url": "https://www.tomshardware.com/peripherals/gaming-keyboards/logitech-g915-x-tkl-review",
+      "title": "Logitech G915 X TKL Review: The same, but better? | Tom's...",
+      "description": "It looks identical, but it's what's on the inside that counts."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/lucky-buyer-scores-ten-nvidia-gtx-1070-gpus-for-usd100-nine-out-of-10-are-working-after-a-good-bath",
+      "title": "Lucky buyer scores ten Nvidia GTX 1070 GPUs for $100 — ni...",
+      "description": "Not everyone can be lucky, but it is a great find!"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/ddr5/russian-enthusiasts-are-building-their-own-ddr5-ram-amidst-the-worldwide-shortage-as-easy-as-sourcing-your-own-memory-modules-and-soldering-them-on-empty-pcbs",
+      "title": "Russian enthusiasts planning do-it-yourself DDR5 memory a...",
+      "description": "DIY DDR5."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/pimax-vision-8k-plus/3",
+      "title": "Test Results and Conclusion - Pimax Vision 8K Plus Review...",
+      "description": "The Pimax Vision 8K Plus is a high resolution VR headset that’s also light and reasonably comfortable. It's good for enthusiasts but not the average Joe."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cpus/core-i9-14900kf-overclocked-to-9-13-ghz-to-become-the-highest-clocked-cpu-of-all-time-13-mhz-faster-than-the-previous-record-holder",
+      "title": "Core i9-14900KF overclocked to 9.13 GHz to become the hig...",
+      "description": "9,130.33 MHz to be exact"
+    },
+    {
+      "url": "https://www.tomshardware.com/news/data-storage-data-transfer-sperm-dna,14089.html",
+      "title": "Useless Fact: Each Sperm Carries 37.5 MB of DNA Data | To...",
+      "description": "Did you know that each sperm carries the equivalent of 37.5 MB of DNA data? Imagine the throughput of hundreds of million sperm!"
+    },
+    {
+      "url": "https://www.tomshardware.com/video-games/pc-gaming/valve-makes-almost-usd50-million-per-employee-raking-in-more-cash-per-person-than-google-amazon-or-microsoft-gaming-giants-350-employees-on-track-to-generate-usd17-billion-this-year",
+      "title": "Valve makes almost $50 million per employee, raking in mo...",
+      "description": "Valve's unique approach to corporate governance is probably the reason why it's such an efficient company."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/purported-amd-ryzen-7000-cpu-delidded",
+      "title": "Purported AMD Ryzen 7000 CPU Delidded | Tom's Hardware",
+      "description": "Solder residue looks odd but aligns with AMD's illustrations."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-google-openai-and-anthropic-join-forces-to-form-agentic-ai-alliance-according-to-report-organization-backed-by-the-linux-foundation-is-set-to-create-open-source-standards-for-ai-agents",
+      "title": "Microsoft, Google, OpenAI, and Anthropic join forces to f...",
+      "description": "The biggest names in AI are set to form an open source alliance"
+    },
+    {
+      "url": "https://www.tomshardware.com/networking/super-long-range-wi-fi-works-at-a-range-of-18-miles-halow-standard-aces-a-real-world-test-despite-high-interference",
+      "title": "Super long-range Wi-Fi works at a range of 1.8 miles — Ha...",
+      "description": "Tested with a real-time video call."
+    },
+    {
+      "url": "https://www.tomshardware.com/software/linux/best-linux-distros-for-reviving-an-old-pc",
+      "title": "Best Linux distros for reviving an old PC | Tom's Hardware",
+      "description": "Installing the right version of Linux can breathe new life into an aging system."
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/benevolent-facebook-trader-exchanges-192gb-of-ddr5-worth-usd1-400-for-one-rtx-5070-ti-says-selling-at-such-a-high-price-would-have-been-unethical-despite-huge-loss",
+      "title": "Benevolent Facebook trader exchanges 192GB of DDR5 worth ...",
+      "description": "Best I could do would be two 5070 Tis."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/nvidia-gsync-monitor-glossary-definition-explained,6008.html",
+      "title": "What Is a G-Sync Monitor? Nvidia G-Sync Explained | Tom's...",
+      "description": "What’s the meaning of G-Sync? Nvidia's Adaptive-Sync for monitors, laptops and TVs -- including G-Sync Compatible, G-Sync Ultimate and how it differs from Fr..."
+    },
+    {
+      "url": "https://www.tomshardware.com/3d-printing/how-to-use-orca-slicer",
+      "title": "How to Use Orca Slicer | Tom's Hardware",
+      "description": "A Step-by-Step Tutorial for Orca Slicer"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-non-committal-on-plans-to-solve-gpu-pricing-squeeze-ceo-jensen-huang-floats-bringing-ai-tech-to-older-models",
+      "title": "CEO Jensen Huang says Nvidia could potentially resurrect ...",
+      "description": "It's a good idea."
+    },
+    {
+      "url": "https://www.tomshardware.com/laptops/the-worlds-first-risc-v-laptop-gets-a-big-update-deepcomputing-doubled-the-core-count-increased-clocks-to-2-ghz-and-added-ai-capabilities",
+      "title": "The world’s first RISC-V laptop gets a big upgrade — Deep...",
+      "description": "This RISC-V laptop gives devs and engineers more power in a portable form factor."
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/patriot-viper-steel-rgb-ddr4-3600-c20-2x16gb-review",
+      "title": "Patriot Viper Steel RGB DDR4-3600 C20 2x16GB Review: Expe...",
+      "description": "Patriot has given its iconic Viper Steel memory the RGB treatment, but is the performance on point?"
+    },
+    {
+      "url": "https://www.tomshardware.com/reviews/intel-kaby-lake-core-i7-7700k-i7-7700-i5-7600k-i5-7600,4870-11.html",
+      "title": "Intel Core i5-7600: Power Consumption And Temperatures",
+      "description": "Intel's Kaby Lake falls into the comes bearing the tuned 14nm+ process, a revamped graphics engine and a new chipset."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/old-rtx-3080-gpus-repurposed-for-chinese-ai-market-with-20gb-and-blower-style-cooling",
+      "title": "Old RTX 3080 GPUs repurposed and modded for Chinese marke...",
+      "description": "A lot of these are probably old mining cards."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/air-cooling/fsp-mp5-and-np7-air-coolers-review",
+      "title": "FSP MP7 and NP5 Air Coolers Review: Simple and effective ...",
+      "description": "FSP’s NP5 performs very well for an entry-level cooler, especially when noise-normalized."
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/cooling/half-of-tested-pc-watercoolers-dont-use-the-premium-materials-advertised-like-copper-report",
+      "title": "Half of tested PC watercoolers don’t use the premium mate...",
+      "description": "Igor's Lab reckons the carelessness of AiO cooler brands is primarily to blame."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/wd-easystore-5tb-portable-hard-drive-deal-80-dollars-off",
+      "title": "WD's Huge 5TB Easystore Portable Hard Drive is now under ...",
+      "description": "Right now at Best Buy, you can save $80 on the WD Easystore 5TB portable hard drive — taking the price down to just $99.99."
+    },
+    {
+      "url": "https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb",
+      "title": "How to Boot Raspberry Pi 4 / 400 From an SSD or Flash Dri...",
+      "description": "A firmware update lets you use any USB device to boot a Raspberry Pi 4 / 400."
+    },
+    {
+      "url": "https://www.tomshardware.com/news/nvidia-increases-concurrent-nvenc-sessions-on-consumer-gpus",
+      "title": "Nvidia Lifts Some Video Encoding Limitations from Consume...",
+      "description": "Nvidia quietly boosts the video encoding capabilities of its GPUs."
+    },
+    {
+      "url": "https://www.tomshardware.com/monitors/portable-monitors/hands-on-with-modos-tech-13-3-inch-e-paper-monitors",
+      "title": "Hands-on with Modos Tech 13.3-inch e-paper monitors — we ...",
+      "description": "Crowdfunded e-paper monitors under scrutiny."
+    }
+  ]
+}

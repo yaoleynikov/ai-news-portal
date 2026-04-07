@@ -1,0 +1,506 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [],
+  "allLinks": [
+    {
+      "url": "https://www.androidauthority.com/huawei-freebuds-pro-4-review-3516701",
+      "title": "The FreeBuds Pro 4 are HUAWEI’s finest earbuds to date - ...",
+      "description": "In our HUAWEI FreeBuds Pro 4 review we explain why these earbuds are an ideal choice for those seeking premium performance without breaking the bank."
+    },
+    {
+      "url": "https://www.androidauthority.com/apple-iphone-fold-in-production-rumor-3655190",
+      "title": "Heat is on for Android rivals as iPhone Fold reportedly e...",
+      "description": "With Samsung’s Galaxy Fold 8 Wide on the horizon, this new iPhone Fold production rumor adds more tension to the foldable race."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-tensor-g5-benchmarks-3590355",
+      "title": "Pixel 10's Tensor G5 deep dive: All the info Google didn'...",
+      "description": "CPU and GPU cores, performance benchmarks, and much more. Here's what Google didn't tell you about the Pixel 10's Tensor G5 processor."
+    },
+    {
+      "url": "https://www.androidauthority.com/snapdragon-8-elite-gaming-test-3499719",
+      "title": "Snapdragon 8 Elite gaming tests: Do you really need it fo...",
+      "description": "Qualcomm's Snapdragon 8 Elite promises huge performance gains, but do these actually translate to better frame rates in Android games?"
+    },
+    {
+      "url": "https://www.androidauthority.com/why-2026-smartphones-wont-have-game-changing-camera-tech-3627733",
+      "title": "Why 2026 smartphones won't have this game-changing camera...",
+      "description": "We saw the first one-inch camera sensors for smartphones several years ago, but why haven't they gained more traction?"
+    },
+    {
+      "url": "https://www.androidauthority.com/google-pixel-buds-pro-2-review-3484813",
+      "title": "Google Pixel Buds Pro 2 review: Better than the original ...",
+      "description": "The original Pixel Buds Pro were some of my favorite earbuds ever. Here's how the new Pixel Buds Pro 2 managed to perfect that formula even more."
+    },
+    {
+      "url": "https://www.androidauthority.com/transfer-photos-android-windows-pc-3160952",
+      "title": "How to transfer photos from Android to a Windows PC - And...",
+      "description": "You can keep copies of your favorite photos on separate drives so you never lose them. Here's how to transfer photos from Android to PC."
+    },
+    {
+      "url": "https://www.androidauthority.com/oneplus-12-gaming-phone-3408269",
+      "title": "The OnePlus 12 is a great gaming phone in disguise",
+      "description": "It might not talk like a gaming phone, but the OnePlus 12 packs the specs and performance to walk like the best gaming phones around."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-photos-video-playback-speed-3655319",
+      "title": "Google Photos adds video playback speed controls on Android",
+      "description": "Google Photos is finally rolling out variable video playback speeds on Android, allowing users to adjust speeds from 0.25x to 2x."
+    },
+    {
+      "url": "https://www.androidauthority.com/youtube-144p-quality-issue-3536898",
+      "title": "YouTube is struggling, and it’s not your internet (Update...",
+      "description": "YouTube streams are automatically playing in 144p and 360p despite users having a strong and stable internet connection. A fix is incoming."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-pixel-10-storage-specs-3589059",
+      "title": "Google's Pixel 10 has a secret weapon for long-term stora...",
+      "description": "Google has given the Pixel 10 some major storage upgrades that boost its performance and endurance. Here's what you need to know."
+    },
+    {
+      "url": "https://www.androidauthority.com/xiaomi-mi-11-teardown-1207212",
+      "title": "Xiaomi Mi 11 teardown shows it's easier to repair than S2...",
+      "description": "The Xiaomi Mi 11 is a little easier to fix than the Galaxy S21 Ultra, according to an iFixit teardown. But it's still a pain to repair."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-terminal-emulators-android-1201492",
+      "title": "The best terminal emulators for Android - Android Authority",
+      "description": "Android is a modern OS, but sometimes you need to hit up the good old command line. Here are the best terminal emulators for Android."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-workspace-cli-openclaw-3647054",
+      "title": "Google is working to give OpenClaw easier access to Gmail...",
+      "description": "Google has published a new command-line interface for Google Workspace aimed at making those apps more accessible for agentic AI."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-tv-streamer-processor-3468418",
+      "title": "Exclusive: This is the chipset used in the new Google TV ...",
+      "description": "Android Authority has evidence that the Google TV Streamer is using a chip from MediaTek, not Amlogic as previously believed."
+    },
+    {
+      "url": "https://www.androidauthority.com/what-is-x86-64-v3-3415395",
+      "title": "What is x86-64-v3? Understanding the x86-64 microarchitec...",
+      "description": "The term x86-64-v3 is once again the talk of Linux town, but what does it mean, and should you be concerned about it? Learn more here."
+    },
+    {
+      "url": "https://www.androidauthority.com/windows-ipad-3312314",
+      "title": "I installed Windows on my iPad so you don't have to - And...",
+      "description": "As the resident tinkerer, I installed Windows on my iPad to be more productive. Dozens of hours of frustration later, here's my experience."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-exynos-2400-explained-3354040",
+      "title": "Exynos 2400: Everything you should know about Samsung's c...",
+      "description": "Samsung returned to custom mobile processor development with the Exynos 2400 inside the Samsung Galaxy S24 and S24 Plus. Here's what to know."
+    },
+    {
+      "url": "https://www.androidauthority.com/poled-vs-amoled-792869",
+      "title": "POLED vs AMOLED: Which one is better?",
+      "description": "Should the choice of a POLED vs AMOLED display factor into your next smartphone purchase? Keep reading to find out the differences."
+    },
+    {
+      "url": "https://www.androidauthority.com/gboard-features-3533885",
+      "title": "I leveled up my typing game with these 7 simple Gboard fe...",
+      "description": "There are plenty of Gboard features available that'll improve your typing speed and productivity. Recently, I reviewed these to bolster mine."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-play-pc-3648159",
+      "title": "Google Play targets PC gamers with some big upgrades - An...",
+      "description": "You'll soon be able to buy once and enjoy games from Google Play on both your PC and phone."
+    },
+    {
+      "url": "https://www.androidauthority.com/change-notification-sounds-iphone-3176189",
+      "title": "How to change the notification sound on the iPhone - Andr...",
+      "description": "When using your phone, the notification sounds will quickly become tedious. Here's how to change the notification sound on an iPhone."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-galaxy-s26-pwm-dimming-3643875",
+      "title": "Galaxy S26 series may not be ideal for users sensitive to...",
+      "description": "Samsung has confirmed that the display's flicker behavior on the Galaxy S26 series remains unchanged from that of the Galaxy S25 series."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-phones-secret-wi-fi-settings-connectivity-labs-how-enable-3570045",
+      "title": "Your Samsung phone has a secret Wi-Fi menu. Here's how to...",
+      "description": "Have a Samsung phone? Here's how to find a hidden Wi-Fi settings menu with some surprisingly helpful features."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-tensor-g5-3583168",
+      "title": "Google announces Tensor G5: What's new with the Pixel 10 ...",
+      "description": "Google has announced the Tensor G5 processor, which powers the Pixel 10 series. But is it looking like a winner? Here's what we know."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-gemini-material-color-theme-3655366",
+      "title": "Gemini could finally catch up to other Google apps with t...",
+      "description": "Gemini, which is part of the Google app, may soon have a colorful interface using a standard Android feature."
+    },
+    {
+      "url": "https://www.androidauthority.com/nano-banana-pro-launch-3617913",
+      "title": "Nano Banana Pro is the next big upgrade to Google’s image...",
+      "description": "Google has launched Nano Banana Pro, its new image model built on top of Gemini 3 Pro. Check out all the new features it brings to the table!"
+    },
+    {
+      "url": "https://www.androidauthority.com/see-posts-you-liked-facebook-3236021",
+      "title": "How to see posts you liked on Facebook - Android Authority",
+      "description": "If you ever have the need to see posts you liked on Facebook, then the site has a page listing them all. You just need to know where to look."
+    },
+    {
+      "url": "https://www.androidauthority.com/galaxy-ai-social-composer-3544596",
+      "title": "This Galaxy AI tool isn't available in most countries, an...",
+      "description": "Samsung offers a bunch of AI features as part of Galaxy AI, but not every feature is available globally, like Social Composer."
+    },
+    {
+      "url": "https://www.androidauthority.com/switch-emulator-eden-update-0-1-0-3635419",
+      "title": "The best Switch emulator now runs Metroid Prime 4 more sm...",
+      "description": "Nintendo Switch emulator Eden just dropped version 0.1.0, with compatibility improvements making Metroid Prime 4 run like a dream."
+    },
+    {
+      "url": "https://www.androidauthority.com/snapdragon-8-elite-battery-life-3497693",
+      "title": "Snapdragon 8 Elite real-world battery tests: Massive effi...",
+      "description": "Qualcomm touts big performance gains for the Snapdragon 8 Elite, but vastly improved energy efficiency is the real reason to upgrade."
+    },
+    {
+      "url": "https://www.androidauthority.com/t-mobile-security-update-older-devices-3655078",
+      "title": "T-Mobile’s latest update may cause issues for some older ...",
+      "description": "If you're rocking a phone that's near the decade mark you might start to run into problems with T-Mobile's network after a new update."
+    },
+    {
+      "url": "https://www.androidauthority.com/install-ubuntu-on-your-android-smartphone-765408",
+      "title": "How to install Ubuntu Linux on your Android device",
+      "description": "Get even more from your Android device by running a desktop OS! Lots of options including Debian (no root), Ubuntu, and Kali Linux."
+    },
+    {
+      "url": "https://www.androidauthority.com/dji-flip-3516528",
+      "title": "DJI launches compact Flip drone with impressive folding d...",
+      "description": "DJI's got a new drone aimed at vloggers that folds down for easy storage in your bag and supports six AI-powered autonomous filming modes."
+    },
+    {
+      "url": "https://www.androidauthority.com/password-monitor-1235069",
+      "title": "My phone scared me into changing my passwords",
+      "description": "A mobile alert on my phone pointed out that some of my passwords had been compromised. I'm glad a took heed of the warnings."
+    },
+    {
+      "url": "https://www.androidauthority.com/oneplus-15-update-benchmarks-3621249",
+      "title": "OnePlus 15 overheating fix tested — here are the results ...",
+      "description": "OnePlus claims to have fixed the OnePlus 15’s overheating with an update. I retest performance and thermals to see if it's really better."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-ecosystem-3639496",
+      "title": "Is Samsung's ecosystem worth the investment? - Android Au...",
+      "description": "Samsung makes a device in every product category you can think of, but is it worth investing in that ecosystem?"
+    },
+    {
+      "url": "https://www.androidauthority.com/mac-android-emulator-3460118",
+      "title": "My search for a great Android emulator for my Mac took me...",
+      "description": "My quest to run Plants vs Zombies 2 on a Mac took me down a rabbit hole of exploring Android emulators for the Mac. Here's what I discovered."
+    },
+    {
+      "url": "https://www.androidauthority.com/record-audio-android-3188243",
+      "title": "How to record audio on your Android phone - Android Autho...",
+      "description": "You can use your phone to record voice notes, reminders, and even entire songs. Here's how to record internal audio on Android."
+    },
+    {
+      "url": "https://www.androidauthority.com/mudita-kompakt-hands-on-ces-2026-3631800",
+      "title": "Mudita Kompakt hands-on: The minimal Android phone I've w...",
+      "description": "There are plenty of minimalist Android phones on the market, but the Mudita Kompakt may be the best one yet."
+    },
+    {
+      "url": "https://www.androidauthority.com/oneplus-15-vs-galaxy-s26-ultra-3615087",
+      "title": "Should you buy the OnePlus 15 or wait for the Galaxy S26 ...",
+      "description": "The OnePlus 15 is here, but are you better off waiting for the Galaxy S26 Ultra? Let's take a closer look at how they compare."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-photo-cleaner-apps-android-1218866",
+      "title": "The best photo cleaner apps to keep your storage clear - ...",
+      "description": "We all take a lot of photos and sometimes it comes time to clean up the old DCIM folder. Here are the best photo cleaner apps for Android."
+    },
+    {
+      "url": "https://www.androidauthority.com/mkbhd-panels-wallpaper-app-alternatives-3620996",
+      "title": "5 wallpaper apps you should use instead of MKBHD's Panels...",
+      "description": "MKBHD's Panels app is shutting down. Looking for a new wallpaper app to replace it? I found five excellent choices."
+    },
+    {
+      "url": "https://www.androidauthority.com/honor-magic-v6-appears-at-winter-olympics-3642453",
+      "title": "This upcoming Galaxy Z Fold 8 rival just made a surprise ...",
+      "description": "HONOR has yet to launch the Magic V6, but this gold medalist Winter Olympian was spotted using the foldable."
+    },
+    {
+      "url": "https://www.androidauthority.com/shadps4-v0-15-0-update-3650383",
+      "title": "This PlayStation 4 emulator is rapidly growing its playab...",
+      "description": "The shadPS4 v0.15.0 update improves Bloodborne and Driveclub while boasting triple the playable game library over last year. Check it out!"
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-galaxy-s23-ultra-charging-speed-45w-3280776",
+      "title": "Galaxy S23 Ultra charging speed and power tested: A big i...",
+      "description": "We tested the Samsung Galaxy S23 Ultra charging speed at 45W power determine if the phone has improved over its controversial predecessor."
+    },
+    {
+      "url": "https://www.androidauthority.com/steam-deck-fsr-3344464",
+      "title": "What is FSR scaling on Steam Deck, and how do you use it?",
+      "description": "FSR can make Steam Deck games look their best while keeping framerates high. Here's what it is, how it works, and how to use it."
+    },
+    {
+      "url": "https://www.androidauthority.com/kenji-nx-android-emulator-updates-3639823",
+      "title": "This Switch emulator for Android now offers better Snapdr...",
+      "description": "The Kenji-NX emulator lets you play Nintendo Switch games on Android, and it's just received a hefty update."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-apps-alternatives-3636368",
+      "title": "5 privacy-focused alternatives to popular Google apps",
+      "description": "If you want to de-Google your life, here's where to start. Check out the 5 best alternatives to popular Google apps."
+    },
+    {
+      "url": "https://www.androidauthority.com/gemini-2-point-5-flash-3546052",
+      "title": "New Gemini 2.5 Flash model lets you decide how hard it th...",
+      "description": "Gemini 2.5 Flash gives developers control over cost, speed, and performance with Google’s first hybrid reasoning model."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-android-keyboard-swiftkey-gboard-poll-results-3637959",
+      "title": "This is the best Android keyboard app, as decided by our ...",
+      "description": "It’s SwiftKey vs Gboard in our battle of the best Android keyboards, but which comes out on top? According to readers, the winner is clear."
+    },
+    {
+      "url": "https://www.androidauthority.com/pixel-11-series-problems-google-needs-fix-3654824",
+      "title": "The 5 biggest problems Google needs to fix with the Pixel...",
+      "description": "Google's Pixel 11 series is shaping up nicely. However, if the phones are to be truly great, they need to fix these 5 problems."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-emulators-for-android-315958",
+      "title": "The 14 best emulators for Android in 2025 - Android Autho...",
+      "description": "Older games are filled with nostalgia for most gamers, and now you can play the classics on mobile with the best emulators for Android."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-galaxy-watch-4-problems-solutions-3027760",
+      "title": "Most common Samsung Galaxy Watch 4 problems and fixes",
+      "description": "In this extensive how-to guide, we help you solve your Samsung Galaxy Watch 4 problems and offer potential solutions."
+    },
+    {
+      "url": "https://www.androidauthority.com/learning-apps-i-recommend-3570385",
+      "title": "6 free Android apps I use to learn something new every day",
+      "description": "I use these learning apps to dive into quick lessons about the topics I'm interested in, from coding to trivia facts."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-gaming-phones-2026-3632010",
+      "title": "The best gaming phones of 2026: Play faster and better",
+      "description": "Mobile gaming is better and more accessible than ever, but only if you pick the best gaming phone for your needs."
+    },
+    {
+      "url": "https://www.androidauthority.com/ayn-odin-2-linux-support-3529916",
+      "title": "The Odin2 can now get better emulators, thanks to Linux -...",
+      "description": "The Odin2 has officially been opened up to Linux distributions, enabling more and better emulation supports for the popular handhelds."
+    },
+    {
+      "url": "https://www.androidauthority.com/gemini-lyria-3-pro-rollout-3652057",
+      "title": "Gemini can now turn your musical ideas into 3-minute song...",
+      "description": "Google is rolling out the new Lyria 3 Pro song-generation model in the Gemini app with better musical composition techniques."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-pixel-8a-first-impressions-3442332",
+      "title": "Google Pixel 8a hands-on impressions: 5 things I like (an...",
+      "description": "The Pixel 8a is another great budget phone from Google, but after a few days of testing, I can tell it's not quite perfect!"
+    },
+    {
+      "url": "https://www.androidauthority.com/google-photos-ai-enhance-editor-3654991",
+      "title": "Google Photos could limit Pixel-exclusive AI editing feat...",
+      "description": "Google is splitting this Pixel-exclusive feature to prevent choice fatigue."
+    },
+    {
+      "url": "https://www.androidauthority.com/android-15-app-archiving-storage-full-pixel-3490684",
+      "title": "Android 15 has a cool trick to save my 'storage full' Pixel",
+      "description": "I often see the dreaded \"storage full\" notification on my 128GB Pixel phone, and Android 15 brings a new app archiving feature to help me combat this."
+    },
+    {
+      "url": "https://www.androidauthority.com/smartphone-battery-life-drain-causes-1071423",
+      "title": "Battery life: Guide to everything that affects and drains...",
+      "description": "There are a million articles about saving battery. Instead, here's a list of all the things that can drain your battery so you know."
+    },
+    {
+      "url": "https://www.androidauthority.com/lg-rollable-teardown-3654951",
+      "title": "JerryRigEverything tore down LG's canceled rollable, and ...",
+      "description": "A teardown of the scrapped LG rollable shows an over-engineered marvel of a phone that makes anything we've seen recently look super boring!"
+    },
+    {
+      "url": "https://www.androidauthority.com/quick-share-for-windows-wifi-direct-3494451",
+      "title": "Google quietly fixed the biggest problem with Quick Share...",
+      "description": "Tired of slow file transfer speeds? Quick Share for Windows no longer needs your Windows PC and Android phone to be on the same network."
+    },
+    {
+      "url": "https://www.androidauthority.com/gorilla-glass-comparison-886866",
+      "title": "Gorilla Glass vs Dragontrail vs Ceramic Shield and beyond",
+      "description": "Gorilla Glass isn't the only screen protection, but is it the best? We compare Gorilla Glass to Dragontrail Glass, Ceramic Shield, and more."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-pixel-8-pro-wi-fi-bluetooth-march-update-issues-3654983",
+      "title": "Pixel 8 Pro owners are literally icing their phones to fi...",
+      "description": "Pixel 8 Pro Wi-Fi issues are mounting after the March 2026 update, and some users are using ice packs to fix their connectivity. Here's why!"
+    },
+    {
+      "url": "https://www.androidauthority.com/fairphone-gen-6-us-grapheneos-criticism-3578792",
+      "title": "GrapheneOS makers take a knife to this 'Google-free' phon...",
+      "description": "The Fairphone Gen 6 launches in the US next month with /e/OS, but the GrapheneOS team has attacked the phone's security."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-smartphone-battery-life-3562028",
+      "title": "The best smartphones you can buy for long battery life",
+      "description": "I've tested smartphones big and small to find the best ones to last you through more than a full day of use."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-tv-streamer-remote-chromecast-compatibility-3484734",
+      "title": "You can now buy the new Google TV Streamer remote separat...",
+      "description": "The new $20 Google TV Streamer remote is compatible with the 4K and HD Chromecasts with Google TV, making it an attractive upgrade."
+    },
+    {
+      "url": "https://www.androidauthority.com/huawei-pura-80-ultra-preview-camera-test-3579650",
+      "title": "HUAWEI Pura 80 Ultra: My favorite camera phone of 2025, b...",
+      "description": "With a one-inch primary sensor, this camera phone is one of the best of the year so far. But one thing is stopping me from buying it."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-galaxy-s26-ai-features-coming-to-s25-3655034",
+      "title": "Your Galaxy S25 is about to get the S26’s best features f...",
+      "description": "Galaxy S25 users won’t miss out on call screening for long."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-search-ai-mode-out-today-3559262",
+      "title": "Google supercharges search with powerful new AI Mode, and...",
+      "description": "Google has announced that an AI Mode is coming to your search bar from today, and here's what you should know."
+    },
+    {
+      "url": "https://www.androidauthority.com/smartphones-have-a-second-os-317800",
+      "title": "Smartphones use a 2nd CPU and 2nd OS in their baseband pr...",
+      "description": "At the heart of every smartphone there is a baseband processor which contains a general purpose ARM processor and runs its own operating system."
+    },
+    {
+      "url": "https://www.androidauthority.com/lock-screen-wallpaper-trick-flip-cards-vivo-3603758",
+      "title": "This might be my favorite lock screen feature on Android ...",
+      "description": "Many Android brands are now focusing on lock screen customization, but this new lock screen wallpaper feature is my favorite addition."
+    },
+    {
+      "url": "https://www.androidauthority.com/phone-update-policies-1658633",
+      "title": "Phone update policies from every major company - Android ...",
+      "description": "System and security updates for your Android phone are important but what are the phone update policies of the major OEMs?"
+    },
+    {
+      "url": "https://www.androidauthority.com/how-samsung-foldables-changed-three-years-3648323",
+      "title": "I used the Samsung Galaxy Z Fold 7 and Fold 4 in 2026",
+      "description": "Samsung foldables have come a long way since the original ill-fated Galaxy Z Fold, but the recent leaps are especially massive."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-galaxy-glasses-battery-certification-3655162",
+      "title": "Samsung’s Galaxy Glasses just passed a major launch miles...",
+      "description": "Samsung's smart glasses now feel closer than ever."
+    },
+    {
+      "url": "https://www.androidauthority.com/s27-pro-s-pen-3655063",
+      "title": "Samsung's rumored S27 Pro would kill the S Pen's future i...",
+      "description": "Once the only reason to get an Ultra is S Pen support, sales will instantly shift over to the more affordable Pro."
+    },
+    {
+      "url": "https://www.androidauthority.com/character-ai-not-working-3393551",
+      "title": "Character.ai not working? Here's how you can try to fix it",
+      "description": "Is Character.ai not working? This could be due to many reasons. Let's go over the main ones and help you find a solution."
+    },
+    {
+      "url": "https://www.androidauthority.com/custom-roms-unifiedattestation-play-integrity-3647852",
+      "title": "No banking apps on your custom ROM? This new initiative c...",
+      "description": "One of the biggest issues with custom ROMs is that you typically can't run banking apps. But this initiative could change things."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-sega-genesis-emulators-692225",
+      "title": "The best SEGA emulators for Android - Android Authority",
+      "description": "If you're in the mood for nostalgia and your flavor is SEGA, we think you'll enjoy the best SEGA Genesis emulators for Android!"
+    },
+    {
+      "url": "https://www.androidauthority.com/youtube-background-play-broken-3636179",
+      "title": "YouTube may be blocking background play on third-party br...",
+      "description": "YouTube's background play feature has stopped working on Samsung Internet, Microsoft Edge, Brave, and other browsers."
+    },
+    {
+      "url": "https://www.androidauthority.com/nova-lifetime-deal-before-it-ends-3641474",
+      "title": "Grab Nova Launcher Prime now if you don't want to end up ...",
+      "description": "Nova Launcher is changing under its new owners, and you might want to grab a lifetime license before it goes away forever."
+    },
+    {
+      "url": "https://www.androidauthority.com/claude-ai-experiences-outage-3655092",
+      "title": "Is Claude down for you? You're not alone - Android Authority",
+      "description": "Users are reporting that Anthropic's Claude AI assistant is down. The company has confirmed that the AI is experiencing issues."
+    },
+    {
+      "url": "https://www.androidauthority.com/chrome-browser-split-view-fix-3654564",
+      "title": "Chrome is fixing split view so you stop accidentally trig...",
+      "description": "The Chrome team has announced that it will make changes to the split view feature to prevent accidental activations."
+    },
+    {
+      "url": "https://www.androidauthority.com/pixel-10-qi2-power-banks-baseus-picogo-am31-3615040",
+      "title": "I tested Qi2 power banks for my Pixel 10; only one of the...",
+      "description": "I spent a month testing and carrying several Qi2 power banks for my Pixel 10 Pro and Pro XL, but only one of them won a permanent place in my pocket."
+    },
+    {
+      "url": "https://www.androidauthority.com/gemini-not-working-fix-3445398",
+      "title": "Is Gemini not working for you? Here's how you can fix it",
+      "description": "Google's Gemini offers some of the best AI chatbot experiences available today but that doesn't mean it can't go down. Here's how to fix it."
+    },
+    {
+      "url": "https://www.androidauthority.com/android-17-vpn-split-tunneling-3652497",
+      "title": "Android 17 could finally fix one of the most annoying VPN...",
+      "description": "Android 17 Beta 3 introduces standardized split tunneling for VPNs at the system level, making it easier and more reliable for all users."
+    },
+    {
+      "url": "https://www.androidauthority.com/install-user-app-as-system-app-how-to-93522",
+      "title": "How to install user apps as Android system apps - Android...",
+      "description": "3 ways to install apps on your Android device"
+    },
+    {
+      "url": "https://www.androidauthority.com/gemini-traffic-share-chatgpt-3616075",
+      "title": "Gemini is catching up to ChatGPT in generative AI, data s...",
+      "description": "Over the last year, Gemini appears to have taken a bite out of ChatGPT's traffic share, suggesting the AI race is getting closer."
+    },
+    {
+      "url": "https://www.androidauthority.com/android-16-vpn-bug-3650394",
+      "title": "Android 16 has a silent VPN-killer bug, claim multiple pr...",
+      "description": "Multiple VPN providers are reporting a silent bug on Android 16 that breaks VPN connections after updates."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-idle-games-incremental-games-android-3263710",
+      "title": "11 best idle games for Android for incremental fans - And...",
+      "description": "Sometimes it's fun to watch the game play itself, and there's nothing wrong with that. Here are the best idle incremental games for Android."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-play-services-1094356",
+      "title": "Google Play Services: Everything you need to know - Andro...",
+      "description": "Google Play Services is one of the most powerful pieces of software that people hardly know anything about. Learn everything you need here."
+    },
+    {
+      "url": "https://www.androidauthority.com/ok-google-not-working-1018903",
+      "title": "OK Google not working? Here's how to fix it - Android Aut...",
+      "description": "Here are a few fixes to try out if OK Google isn't working on your Android device, no technical expertise required."
+    },
+    {
+      "url": "https://www.androidauthority.com/samsung-secure-folder-908758",
+      "title": "Samsung Secure Folder — Everything you need to know",
+      "description": "Samsung Secure Folder protects your sensitive data from prying eyes. Learn how to set it up, use it, and more."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-pixel-10-ambient-eq-3565289",
+      "title": "Exclusive: Google Pixel 10 could be bringing back Ambient EQ",
+      "description": "The upcoming Google Pixel 10 series is set to bring back the Ambient EQ feature back from the Pixel 4 series. Here's what we know about it!"
+    },
+    {
+      "url": "https://www.androidauthority.com/netflix-voice-chat-games-apk-teardown-3652602",
+      "title": "Netflix is coming for Discord with this social gaming fea...",
+      "description": "Code within the Netflix Android app suggests a new voice chat feature is coming to the games catalog using Agora's real-time voice chat API."
+    },
+    {
+      "url": "https://www.androidauthority.com/morphe-youtube-revanced-3629859",
+      "title": "Don't want to pay for YouTube Premium? Morphe picks up wh...",
+      "description": "Looking for an alternative to the official YouTube app? A group of Revanced developers have left the project and released Morphe."
+    },
+    {
+      "url": "https://www.androidauthority.com/google-calculators-material-expressive-3590250",
+      "title": "Google Calculator is getting new buttons with its Materia...",
+      "description": "Material 3 Expressive redesign is rolling out for the Google Calculator app, bringing new button style and a font change."
+    },
+    {
+      "url": "https://www.androidauthority.com/best-apple-watch-series-9-faces-3370162",
+      "title": "The best Apple Watch Series 9 faces - Android Authority",
+      "description": "Thanks to watchOS 10, there are a few newer Apple Watch Series 9 faces to consider and plenty of oldies we still love."
+    }
+  ]
+}

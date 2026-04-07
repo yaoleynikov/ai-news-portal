@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  jsonLd?: object;
+  canonicalUrl?: string;
+}
+
+const { title, description, ogImage = '/default-og.webp', jsonLd, canonicalUrl } = Astro.props;
+const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site || 'https://siliconfeed.online').toString();
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO -->
+    <title>{title} | SiliconFeed</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={currentCanonical} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="article" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- View Transitions -->
+    <ViewTransitions />
+
+    <!-- JSON-LD -->
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress" style="position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0%; z-index: 1000; transition: width 0.1s ease-out;"></div>
+    
+    <div class="noise-overlay"></div>
+    
+    <header class="glass" style="margin: 20px auto; max-width: 1200px; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 100px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+      <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.04em;">SiliconFeed <span style="color: var(--accent);">.</span></a>
+      <nav>
+        <a href="/about" style="margin-left: 20px; color: var(--text-muted); font-weight: 500;">О проекте</a>
+      </nav>
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+      <slot />
+    </main>
+    
+    <footer style="text-align: center; margin-top: 100px; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-light);">
+      <p style="font-weight: 500; font-size: 0.9rem;">© {new Date().getFullYear()} SiliconFeed. Автономная нейросетевая редакция.</p>
+    </footer>
+
+    <script is:inline>
+      // Persistent scroll event listener for the progress bar across ViewTransitions
+      document.addEventListener('astro:page-load', () => {
+        const progressBar = document.getElementById('reading-progress');
+        if (!progressBar) return;
+        
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          if (scrollHeight > 0) {
+            const progress = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+          } else {
+            progressBar.style.width = '0%';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

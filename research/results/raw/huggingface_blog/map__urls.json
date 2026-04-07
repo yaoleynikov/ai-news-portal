@@ -1,0 +1,512 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://huggingface.co/blog/idefics2",
+    "https://huggingface.co/blog/Miracleplus01/week-articles",
+    "https://huggingface.co/blog/smolagents-can-see",
+    "https://huggingface.co/blog/lewis-tunstall-interview",
+    "https://huggingface.co/blog/tastelikefeet/swift-evalscope-qwen3"
+  ],
+  "allLinks": [
+    {
+      "url": "https://huggingface.co/blog/idefics2",
+      "title": "Introducing Idefics2: A Powerful 8B Vision-Language Model...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/Miracleplus01/week-articles",
+      "title": "本周最值得关注的论文TOP10",
+      "description": "A Blog post by Miracleplus on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/smolagents-can-see",
+      "title": "We now support VLMs in smolagents!",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/lewis-tunstall-interview",
+      "title": "Machine Learning Experts - Lewis Tunstall",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/tastelikefeet/swift-evalscope-qwen3",
+      "title": "Qwen3 X ModelScope Toolkit: Faster Training + Comprehensi...",
+      "description": "A Blog post by tastelikefeet on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/falcon-180b",
+      "title": "Spread Your Wings: Falcon 180B is here",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/agentbox-master/firecracker-vs-docker-tech-boundary",
+      "title": "Firecracker vs Docker: The Technical Boundary Between Mic...",
+      "description": "A Blog post by AgentBox on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/ai-action-wh-2025",
+      "title": "AI Policy @🤗: Response to the White House AI Action Plan...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/accelerated-inference",
+      "title": "How we sped up transformer inference 100x for 🤗 API cust...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/wuerstchen",
+      "title": "Introducing Würstchen: Fast Diffusion for Image Generation",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/outlines-core",
+      "title": "Releasing Outlines-core 0.1.0: structured generation in R...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/burtenshaw/google-gemma3-gemma-code",
+      "title": "Custom Vibe Coding Quest Part 2: 🚙 Fine-Tuning Gemma 3 f...",
+      "description": "A Blog post by ben burtenshaw on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/Kseniase/mcp",
+      "title": "🦸🏻#14: What Is MCP, and Why Is Everyone – Suddenly!– Ta...",
+      "description": "A Blog post by Ksenia Se on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/hugging-face-endpoints-on-azure",
+      "title": "Hugging Face Collaborates with Microsoft to launch Huggin...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/intel-sapphire-rapids-inference",
+      "title": "Accelerating PyTorch Transformers with Intel Sapphire Rap...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/dvgodoy/fine-tuning-llm-hugging-face",
+      "title": "Fine-Tuning Your First Large Language Model (LLM) with Py...",
+      "description": "A Blog post by Daniel Voigt Godoy on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/mclenhard/running-codex-on-kubernetes",
+      "title": "Running Codex on Kubernetes",
+      "description": "A Blog post by Matthew Lenhard on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/zh/vlms",
+      "title": "视觉语言模型详解",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/fasttext",
+      "title": "Welcome fastText to the Hugging Face Hub",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/assisted-generation-support-gaudi",
+      "title": "Faster assisted generation support for Intel Gaudi",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/annotated-diffusion",
+      "title": "The Annotated Diffusion Model",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/autotrain-image-classification",
+      "title": "Image Classification with AutoTrain",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/safecoder-vs-closed-source-code-assistants",
+      "title": "SafeCoder vs. Closed-source Code Assistants",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/leaderboard-bigcodebench",
+      "title": "BigCodeBench: The Next Generation of HumanEval",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/smolvlm",
+      "title": "SmolVLM - small yet mighty Vision Language Model",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/deep-rl-pg",
+      "title": "Policy Gradient with PyTorch",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/the_n_implementation_details_of_rlhf_with_ppo",
+      "title": "The N Implementation Details of RLHF with PPO",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/helloerikaaa/fastrad",
+      "title": "fastrad: GPU-Native Radiomics at 25× the Speed of PyRadio...",
+      "description": "A Blog post by Erika on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/grimjim/normative-ontological-prompt-engineering",
+      "title": "NOPE: Normative Ontological Prompt Engineering",
+      "description": "A Blog post by Jim Lai on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/davehusk/technical-framework-for-building-an-agi",
+      "title": "Technical Framework for Building an AGI",
+      "description": "A Blog post by Dave Husk on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/helmet",
+      "title": "Introducing HELMET: Holistically Evaluating Long-context ...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/Arm/arm-at-pytorch-conference",
+      "title": "Arm will be @ PyTorch Conference, Join Us!",
+      "description": "A Blog post by Arm on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/xlscout-case-study",
+      "title": "XLSCOUT Unveils ParaEmbed 2.0: a Powerful Embedding Model...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/collaborative-training",
+      "title": "Deep Learning over the Internet: Training Language Models...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/content-and-code/training-a-lora-for-z-image-turbo",
+      "title": "Engineering Notes: Training a LoRA for Z-Image Turbo with...",
+      "description": "A Blog post by Shawn on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/not-lain/kv-caching",
+      "title": "KV Caching Explained: Optimizing Transformer Inference Ef...",
+      "description": "A Blog post by Not Lain on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/habana",
+      "title": "Habana Labs and Hugging Face Partner to Accelerate Transf...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/kernel-builder",
+      "title": "From Zero to GPU: A Guide to Building and Scaling Product...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/diffusers-turns-1",
+      "title": "Happy 1st anniversary 🤗 Diffusers!",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/zh/chinese-ai-expansion",
+      "title": "中国 AI 出海现状概述",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/ServiceNow-AI/sygra-data-gen-framework",
+      "title": "SyGra: The One-Stop Framework for Building Data for LLMs ...",
+      "description": "A Blog post by ServiceNow-AI on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/mixtral",
+      "title": "Welcome Mixtral - a SOTA Mixture of Experts on Hugging Face",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/sd3-5",
+      "title": "Diffusers welcomes Stable Diffusion 3.5 Large",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/juiceb0xc0de/chaos-vs-redundancy",
+      "title": "LoRA Redundancy: A Problem Of The Past?(clickbait?)",
+      "description": "A Blog post by R on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/MiniMax-AI/forge-scalable-agent-rl-framework-and-algorithm",
+      "title": "Forge: Scalable Agent RL Framework and Algorithm",
+      "description": "A Blog post by MiniMax on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/sagemaker-huggingface-embedding",
+      "title": "Introducing the Hugging Face Embedding Container for Amaz...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/rapidfireai",
+      "title": "20x Faster TRL Fine-tuning with RapidFire AI",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/huggingface/one-year-since-the-deepseek-moment-blog-2",
+      "title": "Architectural Choices in China's Open-Source AI Ecosystem...",
+      "description": "A Blog post by Hugging Face on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/balaatdell/gtc2026-insights-through-deh-lens",
+      "title": "GTC 2026 Insights: Through the Dell Enterprise Hub Lens",
+      "description": "A Blog post by Balachandran Rajendran on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/neph1/ltx-lora",
+      "title": "LTX-Video LoRA training study (Single image/style training)",
+      "description": "A Blog post by Rickard Edén on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/sdxl_ort_inference",
+      "title": "Accelerating SD Turbo and SDXL Turbo Inference with ONNX ...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/leaderboard-decodingtrust",
+      "title": "An Introduction to AI Secure LLM Safety Leaderboard",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/proflead/chatgpt-alternative",
+      "title": "A Powerful ChatGPT Alternative — And It’s 100% FREE!",
+      "description": "A Blog post by Vladislav Guzey on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/Kseniase/reflection",
+      "title": "🦸🏻#12: How Do Agents Learn from Their Own Mistakes? The...",
+      "description": "A Blog post by Ksenia Se on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/Shrijanagain/sktailabs",
+      "title": "🌈 **SKT AI LABS** 🌈",
+      "description": "A Blog post by ѕкт αι ℓαвѕ on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/smolvlm2",
+      "title": "SmolVLM2: Bringing Video Understanding to Every Device",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/nvidia/gr00t-n1-5-so101-tuning",
+      "title": "Post-Training Isaac GR00T N1.5 for LeRobot SO-101 Arm",
+      "description": "A Blog post by NVIDIA on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/CohereLabs/cohere-transcribe-03-2026-release",
+      "title": "Introducing Cohere-transcribe: state-of-the-art speech re...",
+      "description": "A Blog post by Cohere Labs on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/silma-ai/arabic-llm-models-list",
+      "title": "Arabic LLM Models",
+      "description": "A Blog post by SILMA AI - Arabic Language Models on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/olympic-coder-lmstudio",
+      "title": "Open R1: How to use OlympicCoder locally for coding",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/porting-fsmt",
+      "title": "Porting fairseq wmt19 translation system to transformers",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/leaderboard-hallucinations",
+      "title": "The Hallucinations Leaderboard, an Open Effort to Measure...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/scaling-secrets-management",
+      "title": "How Hugging Face Scaled Secrets Management for AI Infrast...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/kelseye/training-strategies-of-z-image-turbo",
+      "title": "Training strategies of Z-Image-Turbo",
+      "description": "A Blog post by kelseye.xh on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/pratikbhavsar/agent-leaderboard",
+      "title": "Agent Leaderboard: Evaluating AI Agents in Multi-Domain S...",
+      "description": "A Blog post by Pratik Bhavsar on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/textgen-pipe-gaudi",
+      "title": "Text-Generation Pipeline on Intel® Gaudi® 2 AI Accelerator",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/ngxson/make-your-own-rag",
+      "title": "Code a simple RAG from scratch",
+      "description": "A Blog post by Xuan-Son Nguyen on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/accelerate-nd-parallel",
+      "title": "Accelerate ND-Parallel: A guide to Efficient Multi-GPU Tr...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/Svngoku/agentic-coding-trends-2026",
+      "title": "2026 Agentic Coding Trends -  Implementation Guide (Techn...",
+      "description": "A Blog post by NIONGOLO Chrys Fé-Marty on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/manu/colpali",
+      "title": "ColPali: Efficient Document Retrieval with Vision Languag...",
+      "description": "A Blog post by Manuel Faysse on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/kelseye/eval-qwen3-next",
+      "title": "Evaluating the Qwen3-Next Model",
+      "description": "A Blog post by kelseye.xh on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/decision-transformers",
+      "title": "Introducing Decision Transformers on Hugging Face 🤗",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/ml-for-games-2",
+      "title": "AI for Game Development: Creating a Farming Game in 5 Day...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/encoder-decoder",
+      "title": "Transformer-based Encoder-Decoder Models",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/image-search-datasets",
+      "title": "Image search with 🤗 datasets",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/simple-considerations",
+      "title": "Simple considerations for simple people building fancy ne...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/optimum-inference",
+      "title": "Accelerated Inference with Optimum and Transformers Pipel...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/mmbert",
+      "title": "mmBERT: ModernBERT goes Multilingual",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/if",
+      "title": "Running IF with 🧨 diffusers on a Free Tier Google Colab",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/ariG23498/rlhf-to-dpo",
+      "title": "Simplifying Alignment: From RLHF to Direct Preference Opt...",
+      "description": "A Blog post by Aritra Roy Gosthipaty on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/open-r1/update-2",
+      "title": "Open R1: Update #2",
+      "description": "A Blog post by Open R1 on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/big-bench-audio-release",
+      "title": "Evaluating Audio Reasoning with Big Bench Audio",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/audioldm2",
+      "title": "AudioLDM 2, but faster ⚡️",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/diffusers-quantization",
+      "title": "Exploring Quantization Backends in Diffusers",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science., We’re on a journey to advance and democratize ar..."
+    },
+    {
+      "url": "https://huggingface.co/blog/fine-tune-segformer",
+      "title": "Fine-Tune a Semantic Segmentation Model with a Custom Dat...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/FINAL-Bench/world-model",
+      "title": "Introducing WM Bench: A Benchmark for Cognitive Intellige...",
+      "description": "A Blog post by FINAL_Bench on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/sirluk/llm-sequence-packing",
+      "title": "Efficient LLM Pretraining: Packed Sequences and Masked At...",
+      "description": "A Blog post by Lukas on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/game-jam",
+      "title": "Announcing the Open Source AI Game Jam 🎮",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/deploy-deepfloydif-using-bentoml",
+      "title": "Deploying Hugging Face Models with BentoML: DeepFloyd IF ...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/encrypted-llm",
+      "title": "Towards Encrypted Large Language Models with FHE",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/rearchitecting-uploads-and-downloads",
+      "title": "Rearchitecting Hugging Face Uploads and Downloads",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/bigcode/arena",
+      "title": "BigCodeArena: Judging code generations end to end with co...",
+      "description": "A Blog post by BigCode on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/dcarpintero/design-patterns-for-building-agentic-workflows",
+      "title": "Design Patterns for Building Agentic Workflows",
+      "description": "A Blog post by Diego Carpintero on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/protectai",
+      "title": "Hugging Face Teams Up with Protect AI: Enhancing Model Se...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/gradio-mcp",
+      "title": "How to Build an MCP Server with Gradio",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/josh-a/zero-optimization-strategies",
+      "title": "ZeRO Optimization Strategies for Large-Scale Model Traini...",
+      "description": "A Blog post by Josh Angel on Hugging Face"
+    },
+    {
+      "url": "https://huggingface.co/blog/supercharge-customer-service-with-machine-learning",
+      "title": "Supercharged Customer Service with Machine Learning",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/video_gen",
+      "title": "State of open video generation models in Diffusers",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/spaces-dev-mode",
+      "title": "Introducing Spaces Dev Mode for a seamless developer expe...",
+      "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+    },
+    {
+      "url": "https://huggingface.co/blog/norwooodsystems/faster-whisper-vs-canary-qwen-2-5b",
+      "title": "Faster-Whisper vs. NVIDIA Canary-Qwen-2.5B: Which One Sho...",
+      "description": "A Blog post by Norwood Systems on Hugging Face"
+    }
+  ]
+}

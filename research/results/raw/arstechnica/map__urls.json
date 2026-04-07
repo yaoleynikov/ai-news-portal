@@ -1,0 +1,517 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://arstechnica.com/space/2025/09/a-new-report-finds-chinas-space-program-will-soon-equal-that-of-the-us",
+    "https://arstechnica.com/space/2025/12/after-years-of-resisting-it-spacex-now-plans-to-go-public-why",
+    "https://arstechnica.com/gadgets/2025/01/ces-2025-teases-alarming-smart-tv-future-loaded-with-unwanted-software-gimmicks",
+    "https://arstechnica.com/cars/2026/04/a-production-ford-sets-third-fastest-time-ever-at-the-nurburgring",
+    "https://arstechnica.com/gadgets/2025/04/the-2025-moto-g-stylus-has-a-sharper-display-and-enhanced-stylus-for-400",
+    "https://arstechnica.com/space/2026/04/as-artemis-ii-zooms-to-the-moon-everything-seems-to-be-going-swimmingly",
+    "https://arstechnica.com/tech-policy/2026/03/elon-musk-loses-big-in-court-x-boycott-perfectly-legal",
+    "https://arstechnica.com/health/2026/03/rfk-jr-s-fda-expected-to-lift-restrictions-on-risky-unproven-peptides",
+    "https://arstechnica.com/tech-policy/2026/04/official-white-house-app-developer-also-a-ufo-conspiracy-theorist",
+    "https://arstechnica.com/space/2026/04/artemis-ii-is-unlikely-to-be-the-cultural-touchstone-apollo-8-was-and-thats-ok",
+    "https://arstechnica.com/gaming/2024/10/the-true-cost-of-game-piracy-20-percent-of-revenue-according-to-a-new-study",
+    "https://arstechnica.com/science/2026/04/research-roundup-7-cool-science-stories-we-almost-missed-3",
+    "https://arstechnica.com/space/2024/10/rocket-report-sneak-peek-at-the-business-end-of-new-glenn-france-to-fly-frog",
+    "https://arstechnica.com/cars/2026/03/f1-in-japan-oh-no-what-have-they-done-to-all-the-fast-corners",
+    "https://arstechnica.com/cars/2018/06/757148-volkswagen-makes-racing-history-with-record-breaking-electric-race-car",
+    "https://arstechnica.com/science/2026/04/ice-age-dice-show-early-native-americans-may-have-understood-probability",
+    "https://arstechnica.com/cars/2018/06/porsche-shatters-the-nurburgring-record-we-thought-was-unbreakable",
+    "https://arstechnica.com/gaming/2022/10/video-game-voice-actors-struggles-extend-well-past-bayonetta-3-drama"
+  ],
+  "allLinks": [
+    {
+      "url": "https://arstechnica.com/space/2025/09/a-new-report-finds-chinas-space-program-will-soon-equal-that-of-the-us",
+      "title": "A new report finds China’s space program will soon equal ...",
+      "description": "China \"poised to overtake us in the next five to 10 years if we don't do something.\""
+    },
+    {
+      "url": "https://arstechnica.com/post_tag-sitemap6.xml"
+    },
+    {
+      "url": "https://arstechnica.com/post_tag-sitemap9.xml"
+    },
+    {
+      "url": "https://arstechnica.com/cars",
+      "title": "Category: Cars - Ars Technica",
+      "description": "All things automotive..."
+    },
+    {
+      "url": "https://arstechnica.com/science",
+      "title": "Category: Science - Ars Technica",
+      "description": "Science &"
+    },
+    {
+      "url": "https://arstechnica.com/space/2025/12/after-years-of-resisting-it-spacex-now-plans-to-go-public-why",
+      "title": "After years of resisting it, SpaceX now plans to go publi...",
+      "description": "Much of the AI race comes down to amassing and deploying assets.\""
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2025/01/ces-2025-teases-alarming-smart-tv-future-loaded-with-unwanted-software-gimmicks",
+      "title": "Why I’m disappointed with the TVs at CES 2025 - Ars Technica",
+      "description": "Op-ed: TVs miss opportunity for real improvement by prioritizing corporate needs."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/04/a-production-ford-sets-third-fastest-time-ever-at-the-nurburgring",
+      "title": "This Ford is the quickest production car at the Nürburgri...",
+      "description": "Only three race cars have ever gone quicker around this famous track."
+    },
+    {
+      "url": "https://arstechnica.com/author/andrew_cunningham",
+      "title": "Author: Andrew Cunningham - Ars Technica",
+      "description": "Andrew is a Senior Technology Reporter at Ars Technica with a focus on consumer tech, including in-depth reviews and updates about operating systems like..."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2025/04/the-2025-moto-g-stylus-has-a-sharper-display-and-enhanced-stylus-for-400",
+      "title": "The 2025 Moto G Stylus has a sharper display and “enhance...",
+      "description": "The Moto G Stylus 2025 is coming April 17 for the same price as last year's model."
+    },
+    {
+      "url": "https://arstechnica.com/space/2026/04/as-artemis-ii-zooms-to-the-moon-everything-seems-to-be-going-swimmingly",
+      "title": "As Artemis II zooms to the Moon, everything seems to be g...",
+      "description": "The cabin was colder on Thursday, but the crew has been able to adjust the temperature."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/refurbished-lenovo-minipcs-with-intel-i7-8th-gen.1505557",
+      "title": "Refurbished Lenovo MiniPCs with Intel i7 8th Gen | Ars Op...",
+      "description": "Hey, folks,\n\nI have been thinking about creating a home server for file storage, possibly media streaming or some other fun experiments to try. I don't plan..."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/03/elon-musk-loses-big-in-court-x-boycott-perfectly-legal",
+      "title": "Elon Musk loses big in court; X boycott perfectly legal -...",
+      "description": "X admonished for \"fishing expedition\" as judge dismisses ad boycott lawsuit."
+    },
+    {
+      "url": "https://arstechnica.com/health/2026/03/rfk-jr-s-fda-expected-to-lift-restrictions-on-risky-unproven-peptides",
+      "title": "RFK Jr. wants Americans to use peptides that were banned ...",
+      "description": "The FDA is reportedly planning to allow production of 14 previously banned peptides."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/04/official-white-house-app-developer-also-a-ufo-conspiracy-theorist",
+      "title": "Did Nazis escape on a UFO? Dev who asked the question jus...",
+      "description": "Did you know that Ohio is a hotbed of UFO activity?"
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/apple-will-introduce-vision-air-and-smart-glasses-in-2027-analyst-projects.1508133",
+      "title": "Apple will introduce Vision Air and smart glasses in 2027...",
+      "description": "Apple analyst Ming-Chi Quo lays out a whole roadmap for Apple XR devices.\n\nSee full article..."
+    },
+    {
+      "url": "https://arstechnica.com/space/2026/04/artemis-ii-is-unlikely-to-be-the-cultural-touchstone-apollo-8-was-and-thats-ok",
+      "title": "Artemis II is unlikely to be the cultural touchstone Apol...",
+      "description": "NASA has struggled to deal with the widespread sentiment that NASA has “been there, done that.\""
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2024/10/the-true-cost-of-game-piracy-20-percent-of-revenue-according-to-a-new-study",
+      "title": "The true cost of game piracy: 20 percent of revenue, acco...",
+      "description": "Analysis of Denuvo DRM cracking shows significant impacts on publishers' bottom lines."
+    },
+    {
+      "url": "https://arstechnica.com/science/2026/04/research-roundup-7-cool-science-stories-we-almost-missed-3",
+      "title": "Research roundup: 7 cool science stories we almost missed...",
+      "description": "Sperm gets lost in space; raccoons solve puzzles; the physics of folding a crepe; and more."
+    },
+    {
+      "url": "https://arstechnica.com/space/2024/10/rocket-report-sneak-peek-at-the-business-end-of-new-glenn-france-to-fly-frog",
+      "title": "Rocket Report: Sneak peek at the business end of New Glen...",
+      "description": "The vehicle's max design gimbal condition is during ascent when it has to fight high-altitude winds.\""
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/03/f1-in-japan-oh-no-what-have-they-done-to-all-the-fast-corners",
+      "title": "F1 in Japan: Oh no, what have they done to all the fast c...",
+      "description": "F1 cars don't have enough energy in a lap to attack fast corners, and that's bad."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2018/06/757148-volkswagen-makes-racing-history-with-record-breaking-electric-race-car",
+      "title": "7:57:148—Volkswagen makes racing history with record-brea...",
+      "description": "Electric power beats the internal combustion engine fair and square in major motorsport."
+    },
+    {
+      "url": "https://arstechnica.com/science/2026/04/ice-age-dice-show-early-native-americans-may-have-understood-probability",
+      "title": "Ice Age dice show early Native Americans may have underst...",
+      "description": "Ice Age hunter-gatherer \"were intentionally relying on random outcomes in repeatable, rule-based ways.\""
+    },
+    {
+      "url": "https://arstechnica.com/cars/2018/06/porsche-shatters-the-nurburgring-record-we-thought-was-unbreakable",
+      "title": "Porsche shatters the Nürburgring record we thought was un...",
+      "description": "Porsche's hybrid racing car continues its amazing farewell tour."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2022/10/video-game-voice-actors-struggles-extend-well-past-bayonetta-3-drama",
+      "title": "What Bayonetta 3’s drama tells us about the market for vi...",
+      "description": "Union was unable to secure demanded residual payments after their last strike."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2025/03/hp-avoids-monetary-damages-over-bricked-printers-in-class-action-settlement",
+      "title": "HP avoids monetary damages over bricked printers in class...",
+      "description": "HP has previously paid millions for bricking printers, but not this time."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/03/use-a-gun-or-beat-the-crap-out-of-him-ai-chatbot-urged-violence-study-finds",
+      "title": "\"Use a gun\" or \"beat the crap out of him\": AI chatbot urg...",
+      "description": "Character.AI deemed \"uniquely unsafe\" among 10 chatbots tested by CCDH."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2025/10/testing-apples-m5-ipad-pro-future-proofing-for-apples-perennial-overkill-tablet",
+      "title": "M5 iPad Pro tested: Stop me if you’ve heard this one befo...",
+      "description": "It's a gorgeous tablet, but what does an iPad need with more processing power?"
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/video-from-artemis-ii-flyby-of-the-moon-will-not-initially-look-spectacular.1512432/page-2#post-44353062",
+      "title": "Video from Artemis II flyby of the Moon will not initiall...",
+      "description": "\"Don't expect hi-res video.\" \n\nSee full article..."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2025/03/the-2026-mercedes-benz-cla-is-good-enough-to-make-a-believer-out-of-ev-skeptics",
+      "title": "The 2026 Mercedes-Benz CLA is good enough to make a belie...",
+      "description": "But if you're still skeptical, don't worry: There's a hybrid version, too."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2022/11/used-thin-client-pcs-are-an-unsexy-readily-available-raspberry-pi-alternative",
+      "title": "Used thin client PCs are an unsexy, readily available Ras...",
+      "description": "Turn yesterday's corporate computer into today's Pi-like system—with some work."
+    },
+    {
+      "url": "https://arstechnica.com/science/2026/04/trumps-next-budget-once-again-calls-for-massive-cuts-to-science",
+      "title": "Trump's next budget once again calls for massive cuts to ...",
+      "description": "Congress rejected huge cuts to science in 2026, but Trump is trying again."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2026/03/gamers-react-with-overwhelming-disgust-to-dlss-5s-generative-ai-glow-ups",
+      "title": "Gamers react with overwhelming disgust to DLSS 5's genera...",
+      "description": "Nvidia's next frame-gen tech goes way beyond upscaling, and not in a good way."
+    },
+    {
+      "url": "https://arstechnica.com/information-technology/2022/09/with-stable-diffusion-you-may-never-believe-what-you-see-online-again",
+      "title": "With Stable Diffusion, you may never believe what you see...",
+      "description": "AI image synthesis goes open source, with big implications."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2019/10/this-is-the-eighth-generation-volkswagen-golf",
+      "title": "Volkswagen unveils the all-new 2020 Golf hatchback - Ars ...",
+      "description": "But only the Golf GTI and Golf R are confirmed for the US."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/on-passkeys-for-login-in-2026.1511097",
+      "title": "On Passkeys for login in 2026 | Ars OpenForum",
+      "description": "I've been interested by passkeys, as a concept, but hesitant because I have macOS, Linux, iOS and Android devices, and I have been concerned about passkey..."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2023/08/us-judge-art-created-solely-by-artificial-intelligence-cannot-be-copyrighted",
+      "title": "US judge: Art created solely by artificial intelligence c...",
+      "description": "US copyright law protects only works of human creation,\" judge writes."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2025/11/original-mac-calculators-design-came-from-letting-steve-jobs-play-with-sliders-for-ten-minutes",
+      "title": "Original Mac calculator design came from letting Steve Jo...",
+      "description": "In 1982, a young Mac developer turned Jobs into a UI designer—and accidentally invented a new technique."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/24-inch-imac-review-there%E2%80%99s-still-no-step-three.1477225/page-11",
+      "title": "24-inch iMac review: There’s still no step three | Page 1...",
+      "description": "It's not Apple's best for power users, but it's a nice fit for everyone else.\n\nRead the whole story"
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/a-production-ford-sets-third-fastest-time-ever-at-the-n%C3%BCrburgring.1512394/#post-44347187",
+      "title": "A production Ford sets third-fastest time ever at the Nür...",
+      "description": "Only three race cars have ever gone quicker around this famous track.\n\n\nSee full article..."
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/03/gemini-burrows-deeper-into-google-workspace-with-revamped-document-creation-and-editing",
+      "title": "Gemini burrows deeper into Google Workspace with revamped...",
+      "description": "Gemini can now pull context from your files, emails, and more to create and edit documents."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/03/okcupid-match-pay-no-fine-for-sharing-user-photos-with-facial-recognition-firm",
+      "title": "OkCupid gave 3 million dating-app photos to facial recogn...",
+      "description": "OkCupid and Match settle with Trump FTC, don't have to pay any financial penalty."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/how-to-troubleshoot-vmware-vdi-connection-issues.1500302",
+      "title": "How To Troubleshoot VmWare VDI Connection Issues? | Ars O...",
+      "description": "Our users access another companies(at&t) system using VmWare Horizon Client. Our users are provided a company/work laptop we manage with \"always on\" VPN..."
+    },
+    {
+      "url": "https://arstechnica.com/science/2013/04/how-nasa-brought-the-monstrous-f-1-moon-rocket-back-to-life",
+      "title": "How NASA brought the monstrous F-1 “moon rocket” engine b...",
+      "description": "The story of young engineers who resurrected an engine nearly twice their age."
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/04/google-announces-gemma-4-open-ai-models-switches-to-apache-2-0-license",
+      "title": "Google announces Gemma 4 open AI models, switches to Apac...",
+      "description": "Gemma 4 brings the first major update to Google's open models in a year."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2026/01/review-amds-ryzen-7-9850x3d-is-a-little-faster-and-a-lot-more-power-hungry",
+      "title": "Ryzen 9850X3D review: AMD's bragging-rights gaming CPU ge...",
+      "description": "The tradeoffs in the $499 9850X3D make it hard to get excited about."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2021/04/oculus-quest-2-gets-official-wireless-vr-mode-120hz-support-via-patch",
+      "title": "Oculus Quest 2 gets official wireless-VR mode, 120 Hz sup...",
+      "description": "Vague dates, stern warnings, and Facebook's aspiration to VR-ize your home office."
+    },
+    {
+      "url": "https://arstechnica.com/science/2026/03/final-analysis-of-2025-iberian-blackout-policies-left-spain-at-risk",
+      "title": "Final analysis of 2025 Iberian blackout: Policies left Sp...",
+      "description": "Too much hardware was allowed to disconnect right at the edge of normal conditions."
+    },
+    {
+      "url": "https://arstechnica.com/health/2023/12/ai-companion-robot-helps-some-seniors-fight-loneliness-but-others-hate-it",
+      "title": "AI companion robot helps some seniors fight loneliness, b...",
+      "description": "There's limited evidence for health benefits so far; early work suggests no one-size-fits-all."
+    },
+    {
+      "url": "https://arstechnica.com/information-technology/2023/02/researchers-extract-training-images-from-stable-diffusion-but-its-difficult",
+      "title": "Paper: Stable Diffusion “memorizes” some images, sparking...",
+      "description": "But out of 300,000 high-probability images tested, researchers found a 0.03% memorization rate."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2018/09/google-celebrates-a-decade-of-google-chrome-launches-major-redesign",
+      "title": "Google celebrates a decade of Google Chrome, launches maj...",
+      "description": "The stable channel gets a new UI, a new new tab page, and more."
+    },
+    {
+      "url": "https://arstechnica.com/security/2024/06/supply-chain-attack-on-wordpress-plugins-affects-as-many-as-36000-sites",
+      "title": "Backdoor slipped into multiple WordPress plugins in ongoi...",
+      "description": "Malicious updates available from WordPress.org create attacker-controlled admin account."
+    },
+    {
+      "url": "https://arstechnica.com/security/2025/07/what-to-know-about-toolshell-the-sharepoint-threat-under-mass-exploitation",
+      "title": "What to know about ToolShell, the SharePoint threat under...",
+      "description": "Easy to exploit. Unauthenticated access. Massive reach. ToolShell has it all."
+    },
+    {
+      "url": "https://arstechnica.com/security/2024/04/hackers-make-millions-of-attempts-to-exploit-wordpress-plugin-vulnerability",
+      "title": "Hackers try to exploit WordPress plugin vulnerability tha...",
+      "description": "WP Automatic plugin patched, but release notes don't mention the critical fix."
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/03/the-end-of-sora-also-means-the-end-of-disneys-1-billion-openai-investment",
+      "title": "Disney cancels $1 billion OpenAI partnership amid Sora sh...",
+      "description": "Press reports suggest Disney was blindsided and that no money changed hands."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2024/05/judge-craig-wrights-claim-of-inventing-bitcoin-rests-on-lies-and-forgeries",
+      "title": "Judge: Craig Wright forged documents on “grand scale” to ...",
+      "description": "Wright \"lied repeatedly and extensively\" in response to forgery allegations."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/why-is-ars-content-drifting-left.1509432/page-3",
+      "title": "Why is ARS content drifting left?? | Page 3 | Ars OpenForum",
+      "description": "So called false balance on the one hand, and the incentivisation and disincentivisation of research through reward structures on the other hand, like..."
+    },
+    {
+      "url": "https://arstechnica.com/science/2010/10/chemical-origami-used-to-create-a-dna-mobius-strip",
+      "title": "Chemical origami used to create a DNA Möbius strip - Ars ...",
+      "description": "By carefully selecting DNA sequences, researchers produced self-assembling …"
+    },
+    {
+      "url": "https://arstechnica.com/tag/artificial-intelligence",
+      "title": "Tag: Artificial Intelligence - Ars Technica"
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2020/06/western-digitals-smr-disks-arent-great-but-theyre-not-garbage",
+      "title": "We put Western Digital’s dreaded SMR Red drive to the tes...",
+      "description": "Western Digital's SMR disks won't work for ZFS, but they're okay for most NASes."
+    },
+    {
+      "url": "https://arstechnica.com/space/2026/04/launch-day-has-arrived-for-nasas-artemis-ii-mission-heres-what-to-expect",
+      "title": "Launch day has arrived for NASA's Artemis II mission—here...",
+      "description": "It’ll go when the engines light at T-0.\""
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/marvels-guardians-of-the-galaxy-vol-3-spoilers.1491836",
+      "title": "Marvel's Guardians of the Galaxy Vol. 3 (SPOILERS) | Ars ...",
+      "description": "View: https://youtu.be/JqcncLPi9zw\n\n\nLink to the previous thread\n\nAfter nearly a decade(!), the trilogy's director moving on to be the co-CEO of the..."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/firmware-hacks-are-rejuvenating-spotify%E2%80%99s-car-thing-before-the-company-bricks-it.1504069",
+      "title": "Firmware hacks are rejuvenating Spotify’s Car Thing befor...",
+      "description": "It's more of a desktop thing now, but it has picked up some new features.\n\nSee full article..."
+    },
+    {
+      "url": "https://arstechnica.com/post_tag-sitemap14.xml"
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/04/used-ev-sales-spike-alongside-gas-prices",
+      "title": "Used EV sales spike alongside gas prices - Ars Technica",
+      "description": "The market for new cars has slumped as Americans look for deals on used EVs."
+    },
+    {
+      "url": "https://arstechnica.com/",
+      "title": "Ars Technica - Serving the Technologist since 1998. News,...",
+      "description": "News and reviews, covering IT, AI, science, space, health, gaming, cybersecurity, tech policy, computers, mobile devices, and operating systems."
+    },
+    {
+      "url": "https://arstechnica.com/science/2019/10/nobel-in-physics-is-a-two-fer-big-bang-and-exoplanets",
+      "title": "Nobel in physics is a two-fer: Big Bang and exoplanets - ...",
+      "description": "Two unrelated topics unevenly split this year's prizes."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2026/03/valve-compares-its-loot-boxes-to-labubus-in-lawsuit-defense",
+      "title": "Valve compares its loot boxes to Labubus in lawsuit defen...",
+      "description": "Steam maker says settling the case would be easier but would set a bad precedent."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2024/03/walmart-resurrects-the-m1-macbook-air-as-an-entry-level-699-laptop",
+      "title": "Walmart resurrects the M1 MacBook Air as an entry-level $...",
+      "description": "Price undercuts Apple's own refurbished pricing for the M1 Air."
+    },
+    {
+      "url": "https://arstechnica.com/ai/2024/10/is-china-pulling-ahead-in-ai-video-synthesis-we-put-minimax-to-the-test",
+      "title": "Is China pulling ahead in AI video synthesis? We put Mini...",
+      "description": "With China's AI video generators pushing memes into weird territory, it was time to test one out."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/02/im-not-for-sale-farmers-refuse-to-take-millions-in-data-center-deals",
+      "title": "Data center builders thought farmers would willingly sell...",
+      "description": "Even in a fragile farm economy, million-dollar offers can't sway dedicated farmers."
+    },
+    {
+      "url": "https://arstechnica.com/information-technology/2023/07/meta-launches-llama-2-an-open-source-ai-model-that-allows-commercial-applications",
+      "title": "Meta launches Llama 2, a source-available AI model that a...",
+      "description": "A family of pretrained and fine-tuned language models in sizes from 7 to 70 billion parameters."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/04/tesla-sales-grew-by-6-in-q1-but-company-has-an-overproduction-problem",
+      "title": "Tesla sales grew by 6% in Q1, but company has an overprod...",
+      "description": "Between January and March, Tesla built 50,000 more cars than it could sell."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2026/04/intel-is-going-all-in-on-advanced-chip-packaging",
+      "title": "Intel is going all-in on advanced chip packaging",
+      "description": "Intel is hoping to cash in on the AI boom."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2025/05/new-switch-2-specs-show-large-performance-dip-in-undocked-mode",
+      "title": "New Switch 2 specs show large performance dip in undocked...",
+      "description": "Digital Foundry also says Game Chat \"has a significant impact on system resources.\""
+    },
+    {
+      "url": "https://arstechnica.com/security/2024/11/microsoft-president-asks-trump-to-push-harder-against-russian-hacks",
+      "title": "Microsoft asks Trump for help with Russian hacks - Ars Te...",
+      "description": "Brad Smith wants US to take a tougher approach to state-sponsored cyberattacks."
+    },
+    {
+      "url": "https://arstechnica.com/space/2025/11/neutron-rockets-debut-slips-into-mid-2026-as-company-seeks-success-from-the-start",
+      "title": "Neutron rocket’s debut slips into mid-2026 as company see...",
+      "description": "Those who have failed to deliver are numerous.\""
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/04/kia-shows-off-small-cars-in-ny-the-2027-ev3-and-2027-seltos-hybrid",
+      "title": "Kia shows off small cars in NY: The 2027 EV3 and 2027 Sel...",
+      "description": "People want small, efficient cars, and it seems Kia is listening."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2017/03/report-nintendo-is-fixing-disconnecting-joy-cons-with-conductive-foam",
+      "title": "Nintendo offering “simple fix” for disconnecting Switch c...",
+      "description": "Newer controllers at retail may also feature a corrected antenna."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2017/07/ibm-pc-history-part-2",
+      "title": "The complete history of the IBM PC, part two: The DOS emp...",
+      "description": "The real victor was Microsoft, which built an empire on the back of a shadily acquired MS-DOS."
+    },
+    {
+      "url": "https://arstechnica.com/information-technology/2024/08/research-ai-model-unexpectedly-modified-its-own-code-to-extend-runtime",
+      "title": "Research AI system attempts to modify experiment code to ...",
+      "description": "Facing time constraints, Sakana's \"AI Scientist\" attempted to change limits placed by researchers."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2025/03/volkswagen-gets-the-message-cheap-stylish-evs-coming-from-2026",
+      "title": "Volkswagen gets the message: Cheap, stylish EVs coming fr...",
+      "description": "VW is preparing new front-wheel-drive EVs, the ID. 2all and ID. EVERY1."
+    },
+    {
+      "url": "https://arstechnica.com/security/2023/08/russia-targets-ukraine-with-new-android-backdoor-intel-agencies-say",
+      "title": "Russia targets Ukraine with new Android backdoor, intel a...",
+      "description": "Infamous Chisel\" has been targeting armed forces fighting Russia's military."
+    },
+    {
+      "url": "https://arstechnica.com/space",
+      "title": "Category: Space - Ars Technica"
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/02/on-the-road-with-nissans-new-e-power-hybrid-coming-to-the-2027-rogue",
+      "title": "50 mpg in a Nissan crossover? Testing the new E-Power hyb...",
+      "description": "Nissan imported some Qashqais from Europe so we could sample the hybrid system."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2023/05/google-bard-hits-over-180-countries-and-territories-none-are-in-the-eu",
+      "title": "Google Bard hits over 180 countries and territories—none ...",
+      "description": "Google is expanding Bard availability as the EU crafts landmark AI regulation."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2026/02/intel-panther-lake-core-ultra-review-intels-best-laptop-cpu-in-a-very-long-time",
+      "title": "Intel Panther Lake Core Ultra review: Intel's best laptop...",
+      "description": "Intel manages big boosts to CPU and GPU speed without blowing up battery life."
+    },
+    {
+      "url": "https://arstechnica.com/google/2025/12/google-releases-gemini-3-flash-promising-improved-intelligence-and-efficiency",
+      "title": "Google releases Gemini 3 Flash, promising improved intell...",
+      "description": "Google's Gemini 3 family is now complete with release of Gemini 3 Flash."
+    },
+    {
+      "url": "https://arstechnica.com/security/2024/07/mysterious-family-of-malware-hid-in-google-play-for-years",
+      "title": "Mysterious family of malware hid in Google Play for years...",
+      "description": "Mandrake's ability to go unnoticed was the result of designs not often seen in Android malware."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/ces-2025-teases-alarming-smart-tv-future-loaded-with-unwanted-software-gimmicks.1504977/page-6#post-44149228",
+      "title": "CES 2025 teases alarming smart TV future loaded with unwa...",
+      "description": "Op-ed: TVs miss opportunity for real improvement by prioritizing corporate needs.\n\nSee full article..."
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2020/02/man-who-refused-to-decrypt-hard-drives-is-free-after-four-years-in-jail",
+      "title": "Man who refused to decrypt hard drives is free after four...",
+      "description": "Court holds that jail time to force decryption can't last more than 18 months."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2024/09/ars-technica-system-guide-falling-prices-are-more-exciting-than-new-parts",
+      "title": "Ars Technica system guide: Falling prices are more exciti...",
+      "description": "Falling prices mean you can get more for your money than you could last year."
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2021/08/point-to-point-wi-fi-bridging-between-buildings-the-cheap-and-easy-way",
+      "title": "Point-to-point Wi-Fi bridging between buildings—the cheap...",
+      "description": "It cost us ~$100 to wirelessly connect two buildings across a small wooded area."
+    },
+    {
+      "url": "https://arstechnica.com/cars/2026/01/tesla-kills-models-s-and-x-to-build-humanoid-robots-instead",
+      "title": "Tesla kills Models S and X to build humanoid robots inste...",
+      "description": "EVs that were once industry-leading have long since been left behind."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/intel-pro-1000-mt-vs-gt.1391223",
+      "title": "Intel Pro/1000 MT vs GT | Ars OpenForum",
+      "description": "I have some legacy systems that could use a boost to gigabit network connectivity, but since their CPUs are a bit weak, I was thinking a card that does a..."
+    },
+    {
+      "url": "https://arstechnica.com/information-technology/2024/03/openais-gpt-5-may-launch-this-summer-upgrading-chatgpt-along-the-way",
+      "title": "GPT-5 might arrive this summer as a “materially better” u...",
+      "description": "Sources say to expect OpenAI's next major AI model mid-2024, according to a new report."
+    },
+    {
+      "url": "https://arstechnica.com/gaming/2016/12/decrypted-westworld-season-1s-final-note-was-a-bit-off-key",
+      "title": "Decrypted: Westworld season 1’s final note was a bit off ...",
+      "description": "In the new episode of our podcast, we talk about the good, the bad, and the WTF."
+    },
+    {
+      "url": "https://arstechnica.com/security/2026/03/self-propagating-malware-poisons-open-source-software-and-wipes-iran-based-machines",
+      "title": "Self-propagating malware poisons open source software and...",
+      "description": "Development houses: It's time to check your networks for infections."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/what-are-the-best-strategy-roleplaying-games-psp-ds-gba-snes-psx.113204",
+      "title": "What are the best strategy roleplaying games?  (PSP/DS/GB...",
+      "description": "Let me start off by answering my own question and saying Final Fantasy Tactics.  I've played that game (and beaten it) on both the original Playstation and..."
+    },
+    {
+      "url": "https://arstechnica.com/civis/threads/a-production-ford-sets-third-fastest-time-ever-at-the-n%C3%BCrburgring.1512394/#post-44347167",
+      "title": "A production Ford sets third-fastest time ever at the Nür...",
+      "description": "Only three race cars have ever gone quicker around this famous track.\n\n\nSee full article..."
+    }
+  ]
+}

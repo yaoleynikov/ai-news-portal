@@ -1,0 +1,510 @@
+{
+  "totalLinks": 100,
+  "articleUrls": [
+    "https://www.macrumors.com/2026/03/04/apple-releases-macos-tahoe-26-3-1",
+    "https://www.macrumors.com/2025/11/04/mac-studio-m5-ultra-2026",
+    "https://www.macrumors.com/2025/09/12/iphone-17-pro-mmwave-5g-antenna-window",
+    "https://www.macrumors.com/2024/10/29/m4-mac-mini-bottom-power-button",
+    "https://www.macrumors.com/2026/03/31/ollama-now-runs-faster-apple-silicon-macs"
+  ],
+  "allLinks": [
+    {
+      "url": "https://www.macrumors.com/2026/03/04/apple-releases-macos-tahoe-26-3-1",
+      "title": "Apple Releases macOS Tahoe 26.3.1 With Support for Studio...",
+      "description": "Apple today released macOS Tahoe 26.3.1, a minor update to the macOS Tahoe operating system that came out last September. macOS Tahoe 26.3.1 comes three week..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/11/04/mac-studio-m5-ultra-2026",
+      "title": "M5 Ultra Chip Coming to Mac Studio in 2026 - MacRumors",
+      "description": "Apple doesn't release an \"Ultra\" variant for every Apple silicon chip, but the company is planning to debut an M5 Ultra chip in 2026, reports Bloomberg. The ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/09/12/iphone-17-pro-mmwave-5g-antenna-window",
+      "title": "Apple Reintroduces mmWave 5G Antenna Window on iPhone 17 ...",
+      "description": "iPhone 17 Pro and iPhone 17 Pro Max models in the U.S. feature an antenna window on the top edge of the devices, for mmWave 5G signals to pass through. The s..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/m4-vs-m5-chip",
+      "title": "M4 vs. M5 Chip Buyer's Guide: How Much Better Really Is M...",
+      "description": "Apple's newly introduced M5 chip takes Apple silicon to the next level, delivering meaningful gains across CPU, GPU, and AI workloads, but how does it compar..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/10/29/m4-mac-mini-bottom-power-button",
+      "title": "M4 Mac Mini's Power Button Has New Bottom Location - MacR...",
+      "description": "The M4 Mac mini has an overhauled design that adds more ports in a slimmed down package, and to make everything fit, Apple needed a new place for the power b..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/m4-pro-vs-m5-macbook-pro",
+      "title": "M4 Pro vs. M5 MacBook Pro Buyer's Guide - MacRumors",
+      "description": "Apple sells two 14-inch MacBook Pro models at $1,599 and $1,999, but recently refreshed the lower-cost model with a new chip, so which should you choose?    ..."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/mac-pro",
+      "title": "Mac Pro: Should You Buy? Advice, Features, Price",
+      "description": "Apple released its new high-end, high-throughput M2 Ultra Mac Pro in June 2023. It starts at $6,999, so this machine is only for the most serious..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/iphone-16-vs-17",
+      "title": "iPhone 16 vs. iPhone 17 Buyer's Guide: 20 Upgrades Compar...",
+      "description": "The iPhone 17 launches this week with Apple's biggest display upgrade to a non-Pro model in years, some major camera improvements, faster performance, and bi..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/31/ollama-now-runs-faster-apple-silicon-macs",
+      "title": "Ollama Now Runs Faster on Macs Thanks to Apple's MLX Fram...",
+      "description": "Ollama, the popular app for running AI models locally on a computer, has released an update that takes advantage of Apple's own machine learning framework, M..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/08/07/amazon-9th-10th-gen-ipads",
+      "title": "Amazon Takes Up to $100 Off 9th and 10th Gen iPads, Start...",
+      "description": "Amazon today is offering up to $100 off the 9th generation and 10th generation iPads, starting as low as $229.00 for the former model. Most of the iPads in t..."
+    },
+    {
+      "url": "https://www.macrumors.com/2022/06/08/ipados-16-storage-as-virtual-memory",
+      "title": "iPadOS 16 Lets Apps Use Storage as Virtual RAM on M1 iPad...",
+      "description": "Apple is adding virtual memory swap to iPadOS 16, allowing apps on the recent iPad Pro and iPad Air models to use free and available storage as extra memory ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/02/apple-trade-in-values-changed",
+      "title": "Apple Changes Trade-In Values for iPhones, Macs, and More...",
+      "description": "Apple today updated its trade-in values for select iPhone, iPad, Mac, and Apple Watch models. Trade-ins can be completed on Apple's website, or at an Apple S..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/23/biggest-set-of-iphone-revamps-ever",
+      "title": "Apple Reportedly Preparing 'Biggest Set of iPhone Revamps...",
+      "description": "Apple is working on \"the biggest set of iPhone revamps in the product's history,\" according to the latest word from Bloomberg's Mark Gurman. Specifically, he..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/09/11/iphone-16-event-recap-video",
+      "title": "Missed the iPhone 16 Event? Apple Shared a Recap Video an...",
+      "description": "Apple held its iPhone 16 event this week, with the presentation running just over 90 minutes. If you missed the event, or want to revisit the key announcemen..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/set-dynamic-astronomy-lock-screen-wallpaper-ios",
+      "title": "iOS 16: How to Set a Dynamic Astronomy Lock Screen Wallpa...",
+      "description": "In iOS 16, Apple has added multiple options to customize the iPhone Lock Screen, including the ability to change the font and color, apply filters, and even ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/03/07/touch-id-set-to-return-next-year-new-iphone-model",
+      "title": "Touch ID Set to Return to Apple's iPhone Lineup Next Year...",
+      "description": "Touch ID, the fingerprint authentication technology that has been missing from Apple's flagship iPhone lineup since 2017, is reportedly set to make a comebac..."
+    },
+    {
+      "url": "https://www.macrumors.com/2017/06/20/apple-mac-trade-in-partner-phobio",
+      "title": "Apple Adds Phobio as New Mac Trade-In Partner - MacRumors",
+      "description": "Apple today updated its Mac recycling program to partner with a new company, replacing longtime partner PowerOn with Phobio, a company that promises a seamle..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/erase-and-factory-reset-your-mac",
+      "title": "How to Erase and Factory Reset a Pre-2017 Mac - MacRumors",
+      "description": "If you plan to give away, sell, or trade in your old Mac, the first thing you should do for security and practical reasons is erase the data on it and perfor..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/02/03/xcode-26-3-agentic-coding",
+      "title": "Xcode 26.3 Lets AI Agents From Anthropic and OpenAI Build...",
+      "description": "With Xcode 26.3, Apple is adding support for agentic coding, allowing developers to use tools like Anthropic's Claude Agent and OpenAI's Codex right in Xcode..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/06/macbook-air-m5-chip-benchmarks",
+      "title": "Here's How Much Faster MacBook Air Gets With M5 Chip vs. ...",
+      "description": "We now know how much faster the new MacBook Air with the M5 chip is compared to the previous model with an M4 chip, courtesy of a Geekbench 6 result shared b..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/02/apple-wwdc-2026-invites-lottery-winners",
+      "title": "Apple Sending WWDC 2026 Invites to Special Event Lottery ...",
+      "description": "Students and developers who won the lottery to attend the WWDC 2026 Special Event at Apple Park on June 8 have started receiving their invites. Apple is hold..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/10/15/apple-debuts-new-ipad-pro-with-m5",
+      "title": "Apple Debuts New iPad Pro With M5 Chip, Faster Charging, ...",
+      "description": "Apple today announced the next-generation iPad Pro, featuring the custom-designed M5, C1X, and N1 chips. The M5 chip has up to a 10-core CPU, with four perfo..."
+    },
+    {
+      "url": "https://www.macrumors.com/2022/09/29/camera-comparison-iphone-14-pro-max-vs-iphone-13-pro-max",
+      "title": "Camera Comparison: iPhone 14 Pro Max vs. iPhone 13 Pro Ma...",
+      "description": "The iPhone 14 Pro and Pro Max introduce some major improvements in camera technology, adding a 48-megapixel lens and low-light improvements across all lenses..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/how-much-mac-ram",
+      "title": "Apple Silicon Unified Memory: How Much Mac RAM Do You Nee...",
+      "description": "When choosing a new Mac, one of the most important decisions you'll make is how much memory to configure. This guide helps you to work out how much RAM you n..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/26/gemini-import-tool",
+      "title": "Google Launches Gemini Import Tool for Switching From Cha...",
+      "description": "Google is adding a new memory import feature to Gemini, making it easier for customers to switch to Gemini AI from another AI service. Users can import memor..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/auto-toggle-orientation-lock-iphone",
+      "title": "Automatically Toggle iPhone Orientation Lock for Specific...",
+      "description": "Tired of toggling your iPhone's Orientation Lock for certain apps? Keep reading to learn how you can make iOS do it for you automatically. In iOS, many apps ..."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/iphone-17-pro",
+      "title": "iPhone 17 Pro:  Everything We Know | MacRumors",
+      "description": "The iPhone 17 Pro models feature a new thermal design, an updated camera plateau, new camera technology, and an A19 Pro chip."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/11/10/apple-silicon-m1-to-m5-comparison",
+      "title": "Five Years of Apple Silicon: M1 to M5 Performance Compari...",
+      "description": "Today marks the fifth anniversary of the Apple silicon chip that replaced Intel chips in Apple's Mac lineup. The first Apple silicon chip, the M1, was unveil..."
+    },
+    {
+      "url": "https://www.macrumors.com/2021/09/17/iphone-13-order-carriers",
+      "title": "Deals: A Look at the iPhone 13 Sales Offered by AT&T, Ver...",
+      "description": "iPhone 13, iPhone 13 mini, iPhone 13 Pro, and iPhone 13 Pro Max pre-orders went live on Apple.com earlier today, and now you can also pre-order the newest Ap..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/02/04/new-roadmap-outlines-whats-next-for-nfc",
+      "title": "New Roadmap Outlines What's Next for NFC on iPhone - MacR...",
+      "description": "Apple could benefit from a new wave of NFC technology upgrades after the NFC Forum this week published a roadmap outlining faster data transfers, new securit..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/05/30/iphone-17-metalens-rumor",
+      "title": "iPhone 17 With a Smaller Dynamic Island? Here's What Rumo...",
+      "description": "All four iPhone 17 models will adopt metalens technology for Face ID, according to Jeff Pu, an Apple analyst at equity research firm GF Securities. He reveal..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/05/20/apple-boosts-iphone-trade-in-values-promotion",
+      "title": "Apple Promotion Boosts iPhone Trade-In Values for a Limit...",
+      "description": "Apple today launched a limited-time promotion that increases the trade-in values for select iPhone models in the United States when customers buy a new iPhon..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/m1",
+      "title": "Apple M1 Chip: Everything You Need to Know - MacRumors",
+      "description": "Apple in November 2020 released the first Macs with an Arm-based M1 chip, debuting 2020 13-inch MacBook Pro, MacBook Air, and Mac mini models. In early 2021,..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/apple-epic-games-supreme-court-petition",
+      "title": "Apple Asks Court to Pause App Store Fee Fight While It Pe...",
+      "description": "Apple plans to ask the United States Supreme Court to weigh in on the App Store fee restrictions and contempt of court ruling levied against it in the ongoin..."
+    },
+    {
+      "url": "https://www.macrumors.com/2021/12/13/iphone-13-depreciates-half-as-much-as-android",
+      "title": "iPhone 13 Depreciates Half as Much as Flagship Android Ri...",
+      "description": "The iPhone 13 lineup depreciates in value at almost half the rate of the Google Pixel 6, according to research by SellCell. The Pixel 6, Google's latest flag..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/17/samsung-to-discontinue-galaxy-z-trifold",
+      "title": "Samsung to Discontinue Galaxy Z TriFold After Just Three ...",
+      "description": "Samsung is set to discontinue the Galaxy Z TriFold globally after just three months on sale (via Bloomberg). The company will start by ceasing sales of the d..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/create-a-widget-stack",
+      "title": "How to Create a Widget Stack in iOS 14 - MacRumors",
+      "description": "In iOS 14, Apple made some dramatic changes to the Home Screen of iPhone and iPad. In particular, it introduced the concept of Home Screen widgets. Previousl..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/05/23/ios-18-leak-macbook-pro-m3-ultra-chip",
+      "title": "iOS 18 Leak Reveals Apple Tested MacBook Pros With M3 Ult...",
+      "description": "Apple's highest-end M3 Ultra chip is currently limited to the Mac Studio, but a new leak has revealed that Apple tested the chip in the MacBook Pro as well. ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/apple-watch-ultra-3-99-off",
+      "title": "Apple Watch Ultra 3 Gets First Major Discount of 2026 Wit...",
+      "description": "Amazon today has introduced fresh deals on the Apple Watch Ultra 3, providing $99 discounts on select models. It's been months since we last tracked any disc..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/09/26/iphone-16-pro-teardown-ifixit",
+      "title": "iFixit Teardown Provides Look Inside iPhone 16 Pro and iP...",
+      "description": "Earlier this week, repair site iFixit took apart the iPhone 16 and iPhone 16 Plus to demonstrate the new battery removal process that uses electricity for ad..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/06/24/ipados-18-format-external-drives",
+      "title": "iOS 18 and iPadOS 18 Include Support for Formatting Exter...",
+      "description": "Apple wants iPhone and iPad users to be able to format external drives connected to their device, without the need for a Mac, based on the latest find in the..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/11/iphone-18-pro-may-not-have-a-smaller-dynamic-island-after-all",
+      "title": "iPhone 18 Pro May Not Have a Smaller Dynamic Island After...",
+      "description": "Apple's iPhone 18 Pro models may not have a smaller Dynamic Island after all, despite rumors suggesting that it would see a reduction in size this year, acco..."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/iphone-17e",
+      "title": "iPhone 17e:  Everything We Know | MacRumors",
+      "description": "The iPhone 17e is Apple's entry-level $599 iPhone with A19 chip, Face ID, USB-C, single-lens rear camera, and more. Now with MagSafe."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/11/06/new-apple-trade-in-values",
+      "title": "Apple Adjusts Trade-In Values for iPhones, iPads, Macs, a...",
+      "description": "Apple today updated its trade-in values for select iPhone, iPad, Mac, and Apple Watch models. Trade-ins can be completed on Apple's website, or at an Apple S..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/macbook-neo-vs-air",
+      "title": "MacBook Neo vs. MacBook Air Buyer's Guide: 40 Differences...",
+      "description": "The MacBook Neo is now Apple's entry-level MacBook, undercutting the MacBook Air by $500. To deliver such a dramatically lower price, the MacBook Neo has a s..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/enable-live-activities-ios",
+      "title": "How to Enable Live Activities on iPhone - MacRumors",
+      "description": "With the release of iOS 16.1, Apple is launching its new Live Activities feature for iPhone Lock Screens and iPhone 14 Pro models with Dynamic Island. Keep r..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/iphone-ultra",
+      "title": "iPhone Ultra: Rumors About Apple's 2024 High-End iPhone 1...",
+      "description": "Apple in 2024 may introduce a new high-end iPhone 16 \"Ultra\" that would be sold alongside the iPhone 16, iPhone 16 Pro, and iPhone 16 Pro Max as a more expen..."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/macbook-pro",
+      "title": "MacBook Pro: Features, Buying Advice, and More",
+      "description": "The current 14- and 16-inch MacBook Pro models feature the M5, M5 Pro and M5 Max chips, Thunderbolt 5 on higher-end models, faster SSDs, and more."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/ios-17",
+      "title": "iOS 17: Features, Compatible Devices, and More",
+      "description": "Apple's iOS 17 update was released to the public on September 18, 2023."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/03/iphone-18-pro-new-features",
+      "title": "iPhone 18 Pro Launching Later This Year With These 12 New...",
+      "description": "While the iPhone 18 Pro and iPhone 18 Pro Max are not expected to launch for more than five more months, there are already plenty of rumors about the devices..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/03/16/iphone-under-screen-face-id-rumors",
+      "title": "iPhone With Under-Screen Face ID: Here's What the Latest ...",
+      "description": "When will the iPhone get under-screen Face ID? Rumors continue to surface. In April 2023, display industry analyst Ross Young shared a roadmap showing that i..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/pair-bluetooth-input-devices-macos-recovery",
+      "title": "How to Pair a Bluetooth Keyboard and Mouse in macOS Recov...",
+      "description": "All modern Macs with Apple silicon feature a built-in recovery system called macOS Recovery that includes various utilities that can be accessed before your ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2010/07/16/coverage-of-apples-iphone-4-press-conference",
+      "title": "Coverage of Apple's iPhone 4 Press Conference - MacRumors",
+      "description": "Backstage at Apple Town Hall (via mrvideobba)  Apple today is holding its iPhone 4 press conference where it is expected to address issues with the device's ..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/iphone-13-vs-iphone-14",
+      "title": "iPhone 13 vs. iPhone 14 Buyer's Guide: Apple's Mid-Range ...",
+      "description": "The iPhone 14 now sits in the middle of Apple's iPhone lineup below the iPhone 15 and iPhone 15 Pro, but above the iPhone SE and iPhone 13. The iPhone 13 sta..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/may-2024-apple-event",
+      "title": "May 2024 Apple Event on MacRumors",
+      "description": "May 2024 Apple Event articles on MacRumors.com"
+    },
+    {
+      "url": "https://www.macrumors.com/2013/06/20/best-buy-to-relaunch-iphone-44s-trade-ins-for-free-iphone-5",
+      "title": "Best Buy to Relaunch iPhone 4/4S Trade-Ins for 'Free' iPh...",
+      "description": "Back in June, Best Buy ran a single day promotion that allowed iPhone 4 and 4S owners to upgrade their phones to the iPhone 5. The company told USA..."
+    },
+    {
+      "url": "https://www.macrumors.com/sitemap/sitemap-post-2013.xml"
+    },
+    {
+      "url": "https://www.macrumors.com/review/m3-macbook-air",
+      "title": "MacBook Air Review - MacRumors",
+      "description": "The new 13-inch and 15-inch MacBook Air models with the M3 chip launch this Friday. Ahead of time, the first reviews and unboxing videos for the laptops have..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/apple-passeig-de-gracia-reopens-next-month",
+      "title": "Apple's Impressive Barcelona Store Reopens Next Month - M...",
+      "description": "Apple's beautiful Passeig de Gràcia store in the heart of Barcelona, Spain has been temporarily closed for renovations since mid-February, but the location i..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/11/13/apple-launches-iphone-passport-feature",
+      "title": "Apple Launches U.S. Passport Feature on iPhone - MacRumors",
+      "description": "Apple this week announced that iPhone users can now create a Digital ID in the Apple Wallet app based on information from their U.S. passport. To create and ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/12/11/shazam-popular-segments",
+      "title": "New Shazam Feature Will Reveal the Most Popular Moment of...",
+      "description": "Shazam today announced it is rolling out a new Popular Segments feature that reveals exactly which part of a song is most popular with listeners. For example..."
+    },
+    {
+      "url": "https://www.macrumors.com/review/studio-display-xdr",
+      "title": "Studio Display XDR Review - MacRumors",
+      "description": "With the Studio Display and Studio Display XDR set to launch on Wednesday, members of the media have started publishing their reviews of the new display opti..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/02/when-is-the-next-apple-event",
+      "title": "When is the Next Apple Event? - MacRumors",
+      "description": "Despite releasing more than 10 new products so far this year, Apple has yet to hold a traditional event with a live-streamed video in 2026. While anything is..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/iphone-fold-trial-production",
+      "title": "iPhone Fold Enters Trial Production Phase Ahead of 2026 L...",
+      "description": "Apple partner Foxconn has started trial production on the iPhone Fold, according to Chinese leaker Instant Digital. Trial production comes before mass produc..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/01/apple-ios-18-darksword-security-update",
+      "title": "Apple Issues Rare iOS 18 Security Update to Protect Again...",
+      "description": "Apple today released a new build of iOS 18.7.7 and iPadOS 18.7.7, presumably with a fix for the DarkSword exploit. Apple told Wired that it would release an ..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/iphone-15-pro-vs-iphone-16-pro",
+      "title": "iPhone 15 Pro vs. iPhone 16 Pro Buyer's Guide: 45+ Upgrad...",
+      "description": "The iPhone 16 Pro and iPhone 16 Pro Max are Apple's latest flagship devices, offering over 45 changes and improvements compared to their predecessors. Here's..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/ios-26-4-features",
+      "title": "iOS 26.4 Features: Everything New in iOS 26.4 - MacRumors",
+      "description": "The latest version of iOS 26, iOS 26.4, is now available for download. The update doesn't have the Siri feature set we were hoping for, but there are quite a..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/02/05/iphone-17-pro-max-vs-android-battery-life",
+      "title": "iPhone 17 Pro Max vs. Android Battery Life: New Test Reve...",
+      "description": "A broad new smartphone test has found that Apple devices lead the industry for battery life, with the iPhone 17 Pro Max ranking as the longest-lasting phone ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2023/04/06/best-buy-unlocked-iphones",
+      "title": "Best Buy Now Sells Unlocked iPhones, But Not the Latest M...",
+      "description": "Best Buy today announced that it now sells unlocked iPhones in the U.S., but only older models are available, including the iPhone 12, iPhone 13 mini, iPhone..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/ios-26-4-1-coming-soon",
+      "title": "iOS 26.4.1 Update for iPhones is Coming Soon - MacRumors",
+      "description": "Apple's software engineers are testing iOS 26.4.1, according to the MacRumors visitor logs, which have been a reliable indicator of upcoming iOS versions. iO..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/08/16/every-apple-secret-that-leaked-yesterday",
+      "title": "Every Apple Secret That Leaked Last Week - MacRumors",
+      "description": "Apple made a major slip last Wednesday when it accidentally included hardware identifiers in software code linking to numerous unannounced products. The leak..."
+    },
+    {
+      "url": "https://www.macrumors.com/2017/09/11/look-at-trade-in-values",
+      "title": "Here's a Look at Trade-In Values for Current iPhones if Y...",
+      "description": "With the launch of new iPhones right around the corner, many users will be looking at trading in their old iPhone models for a chance to reduce the..."
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/iphone-7",
+      "title": "iPhone 7: Everything we know",
+      "description": "Apple stopped selling the iPhone 7 on September 10, 2019"
+    },
+    {
+      "url": "https://www.macrumors.com/roundup/macos-10-15",
+      "title": "macOS Catalina: Everything you need to know",
+      "description": "Launched in October 2019, macOS Catalina is Apple's latest operating system for the Mac lineup. Features include cross-platform app support for..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/06/06/watchos-26-support-these-apple-watch-models",
+      "title": "watchOS 26 to Support These Apple Watch Models - MacRumors",
+      "description": "Apple's upcoming watchOS 26 software update will support all Apple Watch models that are compatible with watchOS 11, according to a private account on X with..."
+    },
+    {
+      "url": "https://www.macrumors.com/2014/05/28/apple-beats-deal-ending-partnerships",
+      "title": "Apple's Acquisition of Beats Electronics to End Several T...",
+      "description": "Apple's acquisition of Beats Electronics will include the severing of several deals and partnerships that the headphone and music company has..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/04/06/netflix-playground-kids-app",
+      "title": "Netflix Launches Free Kids Gaming App to Compete With App...",
+      "description": "Netflix today launched a new Netflix Playground app designed for kids who are eight and under. Playground offers a selection of games with popular characters..."
+    },
+    {
+      "url": "https://www.macrumors.com/2015/09/02/iphone-6-trade-in-options-2015",
+      "title": "How to Get the Best Resale Price for Your iPhone 6, 6 Plu...",
+      "description": "With the \"iPhone 6s\" and \"iPhone 6s Plus\" expected to be announced at Apple's September 9th media event, and released a few weeks later, now is the time for ..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/ios-26-airpods-auto-pause-media-when-asleep",
+      "title": "iOS 26: AirPods Auto-Pause Media When You Fall Asleep - M...",
+      "description": "Do you ever fall asleep with your Beats or AirPods still playing? If so, then Apple's new \"Pause Media When Falling Asleep\" feature in iOS 26 may be just for..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/09/apple-carplay-ultra-future-vehicles",
+      "title": "Apple's CarPlay Ultra Expanding to These Vehicle Brands N...",
+      "description": "Last year, Apple launched CarPlay Ultra, the long-awaited next-generation version of its CarPlay software system for vehicles. Nearly 10 months later, CarPla..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/03/19/iphone-16e-c1-modem-test",
+      "title": "Here's How the iPhone 16e's C1 Modem Stacks Up Against th...",
+      "description": "The iPhone 16e includes Apple's first custom-designed C1 modem, and since it's a new chip category for Apple, there have been questions about how the C1 meas..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/use-block-quotes-apple-notes",
+      "title": "How to Use Block Quotes in Apple Notes - MacRumors",
+      "description": "In iOS 17 and macOS Sonoma, Apple added new formatting options to Apple Notes, including block quotes and a new Monostyle style. Here's how to make use of th..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/iphone-15-vs-iphone-16e",
+      "title": "iPhone 15 vs. iPhone 16e Buyer's Guide: 25+ Differences C...",
+      "description": "The iPhone 16e and iPhone 15 now sit at the bottom of Apple's iPhone lineup at $599 and $699, respectively. While the 16e shares many important features with..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/04/macbook-neo-hands-on",
+      "title": "Hands-On With the New MacBook Neo - MacRumors",
+      "description": "Apple introduced an all-new affordable Mac today, the MacBook Neo. Members of the media were invited to try the new device and other Apple products at events..."
+    },
+    {
+      "url": "https://www.macrumors.com/2022/11/23/best-black-friday-iphone-deals",
+      "title": "Best Cyber Monday iPhone Deals Available Today - MacRumors",
+      "description": "Cellular carriers have always offered big savings on the newest iPhone models during the holidays, and Cyber Monday is no different. We're tracking notable o..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/02/19/apple-phases-out-lightning-port",
+      "title": "Apple Phases Out Lightning Port in iPhone Lineup With iPh...",
+      "description": "With the launch of the new iPhone 16e, Apple discontinued the iPhone 14, iPhone 14 Plus, and iPhone SE, eliminating the last two iPhone models that were equi..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/01/01/no-iphone-18-launch-this-year",
+      "title": "No iPhone 18 Launch This Year, Reports Suggest - MacRumors",
+      "description": "Apple is not expected to release a standard iPhone 18 model this year, according to a growing number of reports that suggest the company is planning a signif..."
+    },
+    {
+      "url": "https://www.macrumors.com/how-to/enable-disable-optimize-mac-storage",
+      "title": "How to Enable or Disable Optimize Mac Storage - MacRumors",
+      "description": "In macOS, Apple includes a feature that can optimize the storage on your Mac by reducing the amount of space that data takes up on your Mac's internal drive...."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/09/16/ios-26-whats-new-iphone-lock-screen",
+      "title": "iOS 26: All the New iPhone Lock Screen Customizations - M...",
+      "description": "Apple has now made iOS 26 available to download on compatible iPhone models, and if you just installed the new software, Apple has made some changes and feat..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/23/apple-small-sensor-for-security-rumor",
+      "title": "Apple Reportedly Working on 'Small Sensor for Managing Ho...",
+      "description": "Here's an interesting tidbit from Mark Gurman's profile of John Ternus for Bloomberg: Apple is apparently working on a smart home sensor. The article said Te..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/04/08/tsmc-to-step-up-u-s-production",
+      "title": "Apple Chipmaker TSMC to Receive $6.6 Billion Grant to Ste...",
+      "description": "The United States Commerce Department today announced a significant financial commitment to Apple chip supplier TSMC to make more chips in the U.S. (via Bloo..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/20th-anniversary-iphone",
+      "title": "Apple's 20th Anniversary iPhone: What We Know So Far - Ma...",
+      "description": "2027 will mark the 20th anniversary of the iPhone, and Apple is planning to celebrate with an all-new iPhone design. With the 10th anniversary of the iPhone,..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/05/08/ios-19-beta-is-one-month-away",
+      "title": "iOS 19 Beta is a Month Away With These New Features for Y...",
+      "description": "The first iOS 19 beta is just one month away, and there are already many new features and changes that are expected with it. Apple should seed the first iOS ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/12/16/apple-roadmap-all-screen-iphone-2027",
+      "title": "How Apple May Be Lining Up an All-Screen iPhone for 2027 ...",
+      "description": "Apple will debut next-generation under-screen camera technology in its first foldable iPhone expected next year, before adapting the tech for its all-screen ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/05/macbook-neo-pre-orders-release-date",
+      "title": "MacBook Neo: Pre-Orders and Release Date - MacRumors",
+      "description": "Apple this week unveiled the MacBook Neo, its most affordable MacBook ever. Below, we have outlined pre-order and release date information. The colorful MacB..."
+    },
+    {
+      "url": "https://www.macrumors.com/guide/epic-games-vs-apple",
+      "title": "Epic Games vs. Apple: Timeline of Events Surrounding Fort...",
+      "description": "Apple has faced increasing scrutiny over its App Store practices from both developers and regulators in recent months. One particularly vocal critic has been..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/03/apple-debuts-m5-pro-and-m5-max-chips",
+      "title": "Apple Debuts M5 Pro and M5 Max Chips - MacRumors",
+      "description": "Apple today unveiled the M5 Pro and M5 Max chips, featuring a new Fusion Architecture and up to 40 next-generation GPU cores. The chips are made using a new ..."
+    },
+    {
+      "url": "https://www.macrumors.com/2026/03/02/iphone-17e-smaller-details",
+      "title": "iPhone 17e: Smaller Details You Might Have Missed - MacRu...",
+      "description": "Apple has unveiled the iPhone 17e, with key upgrades over the iPhone 16e including the A19 chip, MagSafe, and the Ceramic Shield 2 for a more scratch-resista..."
+    },
+    {
+      "url": "https://www.macrumors.com/2024/09/19/iphone-16-battery-capacities-revealed",
+      "title": "iPhone 16 Battery Capacities Revealed - MacRumors",
+      "description": "Apple was able to introduce significant gains in battery life across the entire iPhone 16 lineup, and new regulatory information from Brazilian agency Anatel..."
+    },
+    {
+      "url": "https://www.macrumors.com/2025/09/17/ipados-26-multitasking-tips-and-tricks",
+      "title": "iPadOS 26 Multitasking Tips and Tricks - MacRumors",
+      "description": "iPadOS 26 introduces a whole new multitasking system that provides a Mac-like experience on the iPad. You can open multiple app windows at once, arrange them..."
+    }
+  ]
+}
