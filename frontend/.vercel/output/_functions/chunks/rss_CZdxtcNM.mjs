@@ -1,10 +1,10 @@
 import rss from '@astrojs/rss';
 
-export async function GET(context) {
+async function GET(context) {
   // In production, fetch via supabase.from('articles')
   return rss({
-    title: 'SiliconFeed',
-    description: 'Лента свежих IT и технологических новостей.',
+    title: 'SiliconFeed AI',
+    description: 'Полностью автономная лента свежих IT и AI новостей.',
     site: context.site,
     items: [
       {
@@ -17,3 +17,12 @@ export async function GET(context) {
     customData: `<language>ru</language>`,
   });
 }
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  GET
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
