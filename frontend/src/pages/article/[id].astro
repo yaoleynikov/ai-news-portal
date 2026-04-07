@@ -120,15 +120,15 @@ const faqLd = {
         <div style="background: var(--bg-surface); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
           <h4 style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">AI Индекс влияния</h4>
           <div style="display: flex; align-items: center; gap: 15px;">
-            <div style="font-size: 2.2rem; font-weight: 800; color: {article.sentiment >= 7 ? '#10b981' : article.sentiment <= 4 ? '#ef4444' : '#f59e0b'};">
+            <div style="font-size: 2.2rem; font-weight: 800; color: {article.sentiment >= 7 ? '#10b981' : (article.sentiment < 5 ? '#ef4444' : '#f59e0b')};">
               {article.sentiment}/10
             </div>
             <div style="flex: 1; background: var(--border-light); height: 8px; border-radius: 4px; overflow: hidden;">
-              <div style="height: 100%; width: {article.sentiment * 10}%; background: {article.sentiment >= 7 ? '#10b981' : article.sentiment <= 4 ? '#ef4444' : '#f59e0b'}; transition: width 1s ease-out;"></div>
+              <div style="height: 100%; width: {article.sentiment * 10}%; background: {article.sentiment >= 7 ? '#10b981' : (article.sentiment < 5 ? '#ef4444' : '#f59e0b')}; transition: width 1s ease-out;"></div>
             </div>
           </div>
           <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; font-weight: 500;">
-            {article.sentiment >= 7 ? '🚀 Бычий тренд (Позитив)' : article.sentiment <= 4 ? '📉 Медвежий тренд (Негатив)' : '⚖️ Нейтрально'}
+            {article.sentiment >= 7 ? '🚀 Бычий тренд (Позитив)' : (article.sentiment < 5 ? '📉 Медвежий тренд (Негатив)' : '⚖️ Нейтрально')}
           </div>
         </div>
 
