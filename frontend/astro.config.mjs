@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
