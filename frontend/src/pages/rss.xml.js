@@ -1,19 +1,18 @@
 import rss from '@astrojs/rss';
+import { ARTICLES } from '../data/news';
+import { articlePath } from '../lib/seo';
 
 export async function GET(context) {
-  // In production, fetch via supabase.from('articles')
   return rss({
     title: 'SiliconFeed',
     description: 'Лента свежих IT и технологических новостей.',
     site: context.site,
-    items: [
-      {
-        title: 'Openclaw запускает автономные фреймворки',
-        pubDate: new Date(),
-        description: 'Новая система обещает снизить нагрузку на серверы и позволить ИИ-агентам самостоятельно находить и переписывать новости без GPU-кластеров...',
-        link: `/article/uuid-1/`,
-      },
-    ],
-    customData: `<language>ru</language>`,
+    items: ARTICLES.map((a) => ({
+      title: a.title,
+      pubDate: new Date(a.created_at),
+      description: a.excerpt || a.dek,
+      link: articlePath(a.slug)
+    })),
+    customData: `<language>ru</language>`
   });
 }

@@ -1,19 +1,33 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import { NAV_TOPICS, rubricUrl } from '../lib/tags';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
-  jsonLd?: object;
+  jsonLd?: object | object[];
   canonicalUrl?: string;
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, ogImage = '/default-og.webp', jsonLd, canonicalUrl } = Astro.props;
+const {
+  title,
+  description,
+  ogImage = '/default-og.webp',
+  jsonLd,
+  canonicalUrl,
+  ogType = 'website'
+} = Astro.props;
+const pathname = Astro.url.pathname;
 const siteOrigin = Astro.site ?? new URL('https://siliconfeed.online');
 const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, siteOrigin).toString();
 const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteOrigin).toString();
+
+const year = new Date().getFullYear();
+const telegramHref = 'https://t.me/siliconfeed';
+const mailHref = 'mailto:hello@siliconfeed.online';
 ---
 
 <!DOCTYPE html>
@@ -23,58 +37,146 @@ const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO -->
     <title>{title} | SiliconFeed</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={currentCanonical} />
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageAbsolute} />
-    <meta property="og:type" content="article" />
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <meta property="og:type" content={ogType} />
 
-    <!-- View Transitions (Astro 5+) -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+
     <ClientRouter />
 
-    <!-- JSON-LD -->
-    {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    )}
+    {
+      jsonLd &&
+        (Array.isArray(jsonLd)
+          ? jsonLd.map((block) => <script type="application/ld+json" set:html={JSON.stringify(block)} />)
+          : <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />)
+    }
   </head>
   <body>
-    <!-- Reading Progress Bar -->
-    <div id="reading-progress" style="position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0%; z-index: 1000; transition: width 0.1s ease-out;"></div>
-    
-    <div class="noise-overlay"></div>
-    
-    <header class="glass" style="margin: 20px auto; max-width: 1200px; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 100px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
-      <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.04em;">SiliconFeed <span style="color: var(--accent);">.</span></a>
-      <nav>
-        <a href="/about" style="margin-left: 20px; color: var(--text-muted); font-weight: 500;">О проекте</a>
-      </nav>
+    <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="/" class="site-brand">
+          <svg class="site-brand__mark" width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path
+              class="site-brand__mark-valley"
+              d="M3 25.5Q16 22.5 29 25.5"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+            />
+            <rect
+              class="site-brand__mark-die"
+              x="6"
+              y="8"
+              width="12"
+              height="13"
+              rx="2.5"
+              stroke="currentColor"
+              stroke-width="1.75"
+            />
+            <path
+              class="site-brand__mark-stream"
+              d="M20 10.5h9M20 14.5h11M20 18.5h8"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="site-brand__text">SiliconFeed</span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <div class="site-nav__rubrics">
+            {
+              NAV_TOPICS.map(({ slug, label }) => (
+                <a
+                  href={rubricUrl(slug)}
+                  class:list={[
+                    'site-nav__rubric',
+                    { 'site-nav__rubric--current': pathname === `/rubric/${slug}` }
+                  ]}
+                >
+                  {label}
+                </a>
+              ))
+            }
+          </div>
+          <a href="/about" class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/about' }]}>
+            О проекте
+          </a>
+        </nav>
+      </div>
     </header>
 
-    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <main class="site-main">
       <slot />
     </main>
-    
-    <footer style="text-align: center; margin-top: 100px; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-light);">
-      <p style="font-weight: 500; font-size: 0.9rem;">© {new Date().getFullYear()} SiliconFeed. Независимое IT-издание.</p>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Рубрики</p>
+          <ul class="site-footer__list">
+            {
+              NAV_TOPICS.map(({ slug, label }) => (
+                <li>
+                  <a href={rubricUrl(slug)}>{label}</a>
+                </li>
+              ))
+            }
+            <li>
+              <a href="/">Главная лента</a>
+            </li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Издание</p>
+          <ul class="site-footer__list">
+            <li>
+              <a href="/about">О проекте</a>
+            </li>
+            <li>
+              <span class="site-footer__muted">© {year} SiliconFeed</span>
+            </li>
+          </ul>
+        </div>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Подписка</p>
+          <ul class="site-footer__list">
+            <li>
+              <a href={telegramHref} target="_blank" rel="noopener noreferrer">Telegram</a>
+            </li>
+            <li>
+              <a href="/rss.xml">RSS</a>
+            </li>
+            <li>
+              <a href={mailHref}>Рассылка (email)</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
 
     <script is:inline>
-      // Persistent scroll event listener for the progress bar across ViewTransitions
       document.addEventListener('astro:page-load', () => {
         const progressBar = document.getElementById('reading-progress');
         if (!progressBar) return;
-        
+
         window.addEventListener('scroll', () => {
           const scrollTop = window.scrollY || document.documentElement.scrollTop;
           const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;

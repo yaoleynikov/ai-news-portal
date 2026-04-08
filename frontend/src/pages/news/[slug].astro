@@ -1,0 +1,270 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { tagUrl, tagThemeSlug, topicOrTagUrl } from '../../lib/tags';
+import { ARTICLES, getArticleBySlug, getNavForSlug, getRelatedForSlug } from '../../data/news';
+import { absoluteUrl, articlePath } from '../../lib/seo';
+import { marked } from 'marked';
+import sanitizeHtml from 'sanitize-html';
+
+export function getStaticPaths() {
+  return ARTICLES.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const { slug } = Astro.params;
+const article = getArticleBySlug(slug ?? '');
+if (!article) {
+  throw new Error(`Unknown article slug: ${slug}`);
+}
+
+const relatedArticles = getRelatedForSlug(article.slug);
+const nav = getNavForSlug(article.slug);
+
+const rawHtml = marked.parse(article.content_md);
+const htmlContent = sanitizeHtml(rawHtml, {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+});
+
+const sentimentHigh = article.sentiment >= 7;
+const sentimentLow = article.sentiment < 5;
+const sentimentColor = sentimentHigh ? '#166534' : sentimentLow ? '#991b1b' : '#a16207';
+const sentimentLabel = sentimentHigh
+  ? 'Бычий тренд (позитив)'
+  : sentimentLow
+    ? 'Медвежий тренд (негатив)'
+    : 'Нейтрально';
+
+const kickerTag = article.tags[0] ?? 'Новости';
+const datePublished = new Date(article.created_at).toLocaleDateString('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+const dateModified = article.updated_at
+  ? new Date(article.updated_at).toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
+  : null;
+
+const description =
+  article.dek ||
+  `${article.content_md.substring(0, 160).replace(/[#*]/g, '').trim()}...`;
+
+const canonical = absoluteUrl(articlePath(article.slug), Astro.site ?? 'https://siliconfeed.online');
+
+const newsLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: article.title,
+  image: [article.cover_url],
+  datePublished: article.created_at,
+  dateModified: article.updated_at ?? article.created_at,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  author: [
+    {
+      '@type': 'Organization',
+      name: 'Редакция SiliconFeed',
+      url: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online')
+    }
+  ]
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Главная', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: kickerTag,
+      item: absoluteUrl(topicOrTagUrl(kickerTag), Astro.site ?? 'https://siliconfeed.online')
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: article.title,
+      item: canonical
+    }
+  ]
+};
+
+const faqLd =
+  article.faq && article.faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: article.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.a
+          }
+        }))
+      }
+    : null;
+
+const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumbLd];
+---
+
+<Layout
+  title={article.title}
+  description={description}
+  ogImage={article.cover_url}
+  ogType="article"
+  canonicalUrl={canonical}
+  jsonLd={jsonLdBlocks}
+>
+  <article class="glass article-sheet">
+    <img src={article.cover_url} alt={article.title} class="article-hero" loading="eager" />
+
+    <div class="article-body">
+      <a class="article-kicker" href={topicOrTagUrl(kickerTag)} data-tag-theme={tagThemeSlug(kickerTag)}>
+        {kickerTag}
+      </a>
+
+      <h1 class="article-title">{article.title}</h1>
+
+      <p class="article-dek">{article.dek}</p>
+
+      <div class="article-byline">
+        <span>Редакция SiliconFeed</span>
+        <span class="article-byline__sep" aria-hidden="true">·</span>
+        <time datetime={article.created_at}>{datePublished}</time>
+        {
+          dateModified && dateModified !== datePublished && (
+            <>
+              <span class="article-byline__sep" aria-hidden="true">·</span>
+              <span>
+                обновлено <time datetime={article.updated_at}>{dateModified}</time>
+              </span>
+            </>
+          )
+        }
+      </div>
+
+      <div class="article-meta">
+        {article.tags.map((tag) => (
+          <a href={tagUrl(tag)} class="tag-chip" data-tag-theme={tagThemeSlug(tag)}>
+            {tag}
+          </a>
+        ))}
+      </div>
+
+      <div class="article-layout">
+        <div class="article-main">
+          <div class="prose" set:html={htmlContent} />
+
+          <div class="article-signoff">
+            <span class="article-signoff__label">Редакция</span>
+            SiliconFeed — автоматизированная лента: факты сверяются с источниками, текст проходит нормализацию и краткую
+            справку для читателя.
+          </div>
+
+          <nav class="article-pagination" aria-label="Соседние материалы">
+            {
+              nav.prev ? (
+                <a href={articlePath(nav.prev.slug)} class="article-pagination__link">
+                  <span class="article-pagination__dir">Ранее</span>
+                  <span class="article-pagination__title">{nav.prev.title}</span>
+                </a>
+              ) : (
+                <div class="article-pagination__spacer" aria-hidden="true" />
+              )
+            }
+            {
+              nav.next ? (
+                <a href={articlePath(nav.next.slug)} class="article-pagination__link article-pagination__link--next">
+                  <span class="article-pagination__dir">Далее</span>
+                  <span class="article-pagination__title">{nav.next.title}</span>
+                </a>
+              ) : (
+                <div class="article-pagination__spacer" aria-hidden="true" />
+              )
+            }
+          </nav>
+        </div>
+
+        <aside class="aside-stack">
+          <div class="aside-panel">
+            <h4 class="aside-panel__label">Аналитический индекс</h4>
+            <div class="sentiment-row">
+              <span class="sentiment-score" style={`color: ${sentimentColor}`}>{article.sentiment}/10</span>
+              <div class="sentiment-track">
+                <div class="sentiment-fill" style={`width: ${article.sentiment * 10}%; background: ${sentimentColor}`} />
+              </div>
+            </div>
+            <p class="sentiment-caption">{sentimentLabel}</p>
+          </div>
+
+          <div class="aside-panel">
+            <h4 class="aside-panel__label">Досье (сводка)</h4>
+            {(article.entities || []).map((ent) => (
+              <div class="entity-block">
+                <div class="entity-name">{ent.name}</div>
+                <div class="entity-desc">{ent.desc}</div>
+              </div>
+            ))}
+          </div>
+        </aside>
+      </div>
+
+      <div class="section-rule">
+        {
+          article.faq && article.faq.length > 0 && (
+            <div style="margin-bottom: 2.5rem;">
+              <h3 class="section-title">Справка редакции (FAQ)</h3>
+              <div class="faq-list">
+                {article.faq.map((f) => (
+                  <details class="faq-item">
+                    <summary>{f.q}</summary>
+                    <div class="faq-item__body">{f.a}</div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <h3 class="section-title">Ещё в ленте</h3>
+        <div class="related-grid">
+          {relatedArticles.map((rel) => (
+            <a href={articlePath(rel.slug)} class="related-card">
+              <img src={rel.cover_url} alt={rel.title} loading="lazy" />
+              <div class="related-card__body">
+                <h4 class="related-card__title">{rel.title}</h4>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="article-source">
+        <p style="margin: 0 0 0.35rem;">
+          Материал подготовлен редакцией на основе открытых данных из внешних источников.
+        </p>
+        <a href={article.source_url} target="_blank" rel="nofollow noopener noreferrer">
+          Оригинал материала
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .article-main {
+    min-width: 0;
+  }
+
+  .entity-block + .entity-block {
+    margin-top: 0.875rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .article-meta {
+    margin-bottom: 1.75rem;
+  }
+</style>

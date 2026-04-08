@@ -1,92 +1,147 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { tagUrl, tagThemeSlug } from '../lib/tags';
+import { MOCK_ARTICLES } from '../data/mock-articles';
+import { absoluteUrl, articlePath } from '../lib/seo';
 
-// Mock articles for visual development
-const articles = [
-  {
-    id: "uuid-1",
-    title: "Openclaw запускает автономные фреймворки для новостных агентов",
-    excerpt: "Новая система обещает снизить нагрузку на серверы и позволить ИИ-агентам самостоятельно находить и переписывать новости без GPU-кластеров...",
-    cover_url: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200",
-    tags: ["AI", "Openclaw", "Automation"],
-    created_at: new Date().toISOString()
-  },
-  {
-    id: "uuid-2",
-    title: "Intel N100 становится стандартом для легковесных AI серверов",
-    excerpt: "Энергоэффективные процессоры N100 внезапно обрели популярность среди разработчиков автономных микросервисов, позволив строить кластеры за копейки...",
-    cover_url: "https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=1200",
-    tags: ["Hardware", "Intel", "Hosting"],
-    created_at: new Date(Date.now() - 86400000).toISOString()
-  }
-];
+const articles = MOCK_ARTICLES;
+const [featured, ...rest] = articles;
+
+function formatListDate(iso: string) {
+  return new Date(iso).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+const feedDateLabel = new Date().toLocaleDateString('ru-RU', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+});
+
+const siteOrigin = Astro.site ?? 'https://siliconfeed.online';
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'SiliconFeed',
+  url: absoluteUrl('/', siteOrigin),
+  description: 'Свежие инсайты из мира IT и искусственного интеллекта от автономной редакции SiliconFeed.'
+};
+
+const articleHref = featured ? articlePath(featured.slug) : '/';
+
+function formatFeaturedStamp(iso: string) {
+  return new Date(iso).toLocaleString('ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
 ---
 
-<Layout 
-  title="Главная" 
+<Layout
+  title="Главная"
   description="Свежие инсайты из мира IT и искусственного интеллекта от автономной редакции SiliconFeed."
+  ogType="website"
+  canonicalUrl={absoluteUrl('/', siteOrigin)}
+  jsonLd={websiteLd}
 >
-  <div style="margin-bottom: 60px; text-align: center; padding-top: 40px;">
-    <h1 style="font-size: 4rem; margin-bottom: 15px; color: var(--text-main); font-weight: 800; letter-spacing: -0.05em;">SiliconFeed</h1>
-    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; font-weight: 400;">Будущее IT журналистики. Автономно, быстро, объективно.</p>
-  </div>
+  <div class="home-page">
+    <h1 class="visually-hidden">SiliconFeed — лента IT и AI</h1>
 
-  <div class="grid">
-    {articles.map((article) => (
-      <a href={`/article/${article.id}`} class="glass card">
-        <img src={article.cover_url} alt={article.title} class="card-cover" loading="lazy" />
-        <div class="card-content">
-          <div class="tags">
-            {article.tags.map(tag => <span class="tag">{tag}</span>)}
+    <div class="home-feed-head">
+      <p class="home-feed-head__label">Сегодня в ленте</p>
+      <p class="home-feed-head__date">{feedDateLabel}</p>
+    </div>
+
+    {
+      featured && (
+        <div class="home-featured">
+          <div class="home-featured__visual">
+            <figure class="home-featured__media">
+              <img
+                src={featured.cover_url}
+                alt=""
+                class="home-featured__img"
+                width="800"
+                height="800"
+                loading="eager"
+              />
+              <a href={articleHref} class="home-featured__media-hit">
+                <span class="visually-hidden">{featured.title} — открыть материал</span>
+              </a>
+              <div class="home-featured__tags-overlay">
+                {featured.tags.map((tag) => (
+                  <a
+                    href={tagUrl(tag)}
+                    class="tag-chip tag-chip--hero"
+                    data-tag-theme={tagThemeSlug(tag)}
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            </figure>
           </div>
-          <h2 style="margin: 10px 0 15px 0; font-size: 1.5rem; line-height: 1.3;">{article.title}</h2>
-          <p style="color: var(--text-muted); margin: 0; font-size: 0.95rem;">{article.excerpt}</p>
+          <div class="home-featured__body">
+            <p class="home-featured__eyebrow">Главный материал</p>
+            <h2 class="home-featured__title">
+              <a href={articleHref} class="home-featured__title-link">
+                {featured.title}
+              </a>
+            </h2>
+            <p class="home-featured__excerpt">{featured.excerpt}</p>
+            <div class="home-featured__footer">
+              <time class="home-featured__stamp" datetime={featured.created_at}>
+                {formatFeaturedStamp(featured.created_at)}
+              </time>
+              <a href={articleHref} class="home-featured__read">
+                Читать →
+              </a>
+            </div>
+          </div>
         </div>
-      </a>
-    ))}
+      )
+    }
+
+    {
+      rest.length > 0 && (
+        <section class="home-river" aria-labelledby="home-river-heading">
+          <h2 id="home-river-heading" class="home-river__heading">
+            Далее
+          </h2>
+          <ul class="home-river__list">
+            {rest.map((article) => (
+              <li class="home-river__li">
+                <article class="home-river__item">
+                  <div class="home-river__text">
+                    <h3 class="home-river__title">
+                      <a href={articlePath(article.slug)} class="home-river__title-link">
+                        {article.title}
+                      </a>
+                    </h3>
+                    <p class="home-river__excerpt">{article.excerpt}</p>
+                    <time class="home-river__time" datetime={article.created_at}>
+                      {formatListDate(article.created_at)}
+                    </time>
+                    <div class="home-river__tags">
+                      {article.tags.map((tag) => (
+                        <a href={tagUrl(tag)} class="tag-chip tag-chip--compact" data-tag-theme={tagThemeSlug(tag)}>
+                          {tag}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </div>
 </Layout>
-
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-  }
-  .card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  .card-cover {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--border-light);
-  }
-  .card-content {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  .tags {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 20px;
-    background: var(--accent-glow);
-    color: var(--accent);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-</style>

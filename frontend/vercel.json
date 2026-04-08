@@ -1,4 +1,24 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro"
+  "framework": "astro",
+  "redirects": [
+    {
+      "source": "/article/uuid-1",
+      "destination": "/news/openclaw-news-agent-frameworks",
+      "permanent": true
+    },
+    {
+      "source": "/article/uuid-2",
+      "destination": "/news/intel-n100-lightweight-ai-servers",
+      "permanent": true
+    },
+    {
+      "source": "/article/uuid-3",
+      "destination": "/news/linux-foundation-open-ai-stacks",
+      "permanent": true
+    },
+    { "source": "/tag/ai", "destination": "/rubric/ai", "permanent": true },
+    { "source": "/tag/hardware", "destination": "/rubric/hardware", "permanent": true },
+    { "source": "/tag/open-source", "destination": "/rubric/open-source", "permanent": true }
+  ]
 }

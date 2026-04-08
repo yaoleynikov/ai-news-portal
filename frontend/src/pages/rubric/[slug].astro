@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { NAV_TOPICS, articleMatchesTopic, tagUrl, tagThemeSlug } from '../../lib/tags';
+import { MOCK_ARTICLES } from '../../data/mock-articles';
+import { articlePath } from '../../lib/seo';
+
+function rubricLabel(slug: string): string {
+  const topic = NAV_TOPICS.find((t) => t.slug === slug);
+  return topic?.label ?? slug;
+}
+
+export function getStaticPaths() {
+  return NAV_TOPICS.map((t) => ({ params: { slug: t.slug } }));
+}
+
+const { slug } = Astro.params;
+const label = slug ? rubricLabel(slug) : '';
+const list = MOCK_ARTICLES.filter((a) => articleMatchesTopic(a.tags, slug ?? ''));
+
+function formatListDate(iso: string) {
+  return new Date(iso).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+---
+
+<Layout
+  title={label ? `Рубрика: ${label}` : 'Рубрика'}
+  description={`Материалы SiliconFeed в рубрике «${label}».`}
+  ogType="website"
+>
+  <div class="tag-page">
+    <header class="tag-page__head">
+      <p class="tag-page__kicker">Рубрика</p>
+      <h1 class="tag-page__title">{label}</h1>
+      <p class="tag-page__lead">
+        Редакционная тема из шапки сайта; URL стабильны для SEO. Узкие метки смотрите в разделе тегов у материалов.
+      </p>
+    </header>
+
+    {
+      list.length === 0 ? (
+        <p class="tag-page__empty">
+          Пока нет материалов в этой рубрике — зайдите позже или откройте <a href="/">главную</a>.
+        </p>
+      ) : (
+        <ul class="tag-page__list">
+          {list.map((article) => (
+            <li class="tag-page__li">
+              <article class="tag-page__card">
+                <div class="tag-page__body">
+                  <h2 class="tag-page__card-title">
+                    <a href={articlePath(article.slug)}>{article.title}</a>
+                  </h2>
+                  <p class="tag-page__excerpt">{article.excerpt}</p>
+                  <time class="tag-page__time" datetime={article.created_at}>
+                    {formatListDate(article.created_at)}
+                  </time>
+                  <div class="tag-page__tags">
+                    {article.tags.map((t) => (
+                      <a href={tagUrl(t)} class="tag-chip tag-chip--compact" data-tag-theme={tagThemeSlug(t)}>
+                        {t}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <a href={articlePath(article.slug)} class="tag-page__thumb-link" aria-label={article.title}>
+                  <img src={article.cover_url} alt="" class="tag-page__thumb" width="160" height="100" loading="lazy" />
+                </a>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Layout>
