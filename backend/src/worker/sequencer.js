@@ -84,7 +84,7 @@ async function claimNextJob() {
 
   if (!rpcErr) {
     const row = normalizeJobRow(fromRpc);
-    if (row?.id) return { job: row, mode: 'rpc' };
+    if (row) return { job: row, mode: 'rpc' };
     return { job: null, mode: 'idle' };
   }
 
