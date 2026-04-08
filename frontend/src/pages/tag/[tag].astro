@@ -31,7 +31,7 @@ const years = publicationYears(list.length > 0 ? list : pool);
 const related = tag ? relatedTopicsForSlug(pool, tag, 14) : [];
 
 function formatListDate(iso: string) {
-  return new Date(iso).toLocaleDateString('ru-RU', {
+  return new Date(iso).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
@@ -40,23 +40,23 @@ function formatListDate(iso: string) {
 ---
 
 <Layout
-  title={label ? `Метка: ${label}` : 'Метка'}
-  description={`Материалы SiliconFeed с меткой «${label}».`}
+  title={label ? `Tag: ${label}` : 'Tag'}
+  description={`SiliconFeed stories tagged “${label}”.`}
   ogType="website"
   navArticlePool={pool}
 >
   <div class="tag-page">
     <header class="tag-page__head">
-      <nav class="tag-page__crumb" aria-label="Навигация">
-        <a href="/">Главная</a>
+      <nav class="tag-page__crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
         <span aria-hidden="true">/</span>
         <span class="tag-page__crumb-current">{label}</span>
       </nav>
-      <p class="tag-page__kicker">Метка</p>
+      <p class="tag-page__kicker">Tag</p>
       <h1 class="tag-page__title">{label}</h1>
       <p class="tag-page__lead">
-        Подборка по тегу. Рубрики и все метки — в выпадающем меню <strong>Темы</strong> в шапке; по текстам удобнее{' '}
-        <a href="/search">поиск</a>.
+        Stories with this tag. Sections and all tags live in the <strong>Topics</strong> menu; for full-text use{' '}
+        <a href="/search">search</a>.
       </p>
     </header>
 
@@ -64,16 +64,16 @@ function formatListDate(iso: string) {
       related.length > 0 && (
         <section class="tag-page__related" aria-labelledby="related-tags-heading">
           <h2 id="related-tags-heading" class="tag-page__related-title">
-            Связанные метки
+            Related tags
           </h2>
-          <p class="tag-page__related-lead">По пересечению с этими материалами — для перелинковки и навигации.</p>
+          <p class="tag-page__related-lead">Co-occur with these stories — for navigation and internal links.</p>
           <ul class="tag-page__related-list">
             {related.map((t) => (
               <li>
                 <a href={t.href} class="tag-page__related-link" data-tag-related={t.kind}>
                   <span>{t.label}</span>
                   <span class="tag-page__related-meta">
-                    {t.kind === 'rubric' ? 'рубрика' : 'метка'} · {t.count}
+                    {t.kind === 'rubric' ? 'section' : 'tag'} · {t.count}
                   </span>
                 </a>
               </li>
@@ -86,7 +86,7 @@ function formatListDate(iso: string) {
     {
       list.length === 0 ? (
         <p class="tag-page__empty">
-          Пока нет материалов с этой меткой — откройте меню «Темы» в шапке или <a href="/">главную</a>.
+          No stories for this tag yet — open <strong>Topics</strong> in the header or the <a href="/">home feed</a>.
         </p>
       ) : (
         <>

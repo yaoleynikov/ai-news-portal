@@ -15,14 +15,14 @@ const articles = await getListingArticles(40);
 const [featured, ...rest] = articles;
 
 function formatListDate(iso: string) {
-  return new Date(iso).toLocaleDateString('ru-RU', {
+  return new Date(iso).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
   });
 }
 
-const feedDateLabel = new Date().toLocaleDateString('ru-RU', {
+const feedDateLabel = new Date().toLocaleDateString('en-US', {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
@@ -35,13 +35,13 @@ const websiteLd = {
   '@type': 'WebSite',
   name: 'SiliconFeed',
   url: absoluteUrl('/', siteOrigin),
-  description: 'Свежие инсайты из мира IT и искусственного интеллекта от автономной редакции SiliconFeed.'
+  description: 'Fresh insights from IT and AI, from SiliconFeed’s automated newsroom.'
 };
 
 const articleHref = featured ? articlePath(featured.slug) : '/';
 
 function formatFeaturedStamp(iso: string) {
-  return new Date(iso).toLocaleString('ru-RU', {
+  return new Date(iso).toLocaleString('en-US', {
     day: 'numeric',
     month: 'short',
     hour: '2-digit',
@@ -51,18 +51,18 @@ function formatFeaturedStamp(iso: string) {
 ---
 
 <Layout
-  title="Главная"
-  description="Свежие инсайты из мира IT и искусственного интеллекта от автономной редакции SiliconFeed."
+  title="Home"
+  description="Fresh insights from IT and AI, from SiliconFeed’s automated newsroom."
   ogType="website"
   canonicalUrl={absoluteUrl('/', siteOrigin)}
   jsonLd={websiteLd}
   navArticlePool={articles}
 >
   <div class="home-page">
-    <h1 class="visually-hidden">SiliconFeed — лента IT и AI</h1>
+    <h1 class="visually-hidden">SiliconFeed — IT and AI news feed</h1>
 
     <div class="home-feed-head">
-      <p class="home-feed-head__label">Сегодня в ленте</p>
+      <p class="home-feed-head__label">In the feed today</p>
       <p class="home-feed-head__date">{feedDateLabel}</p>
     </div>
 
@@ -80,7 +80,7 @@ function formatFeaturedStamp(iso: string) {
                 loading="eager"
               />
               <a href={articleHref} class="home-featured__media-hit">
-                <span class="visually-hidden">{featured.title} — открыть материал</span>
+                <span class="visually-hidden">{featured.title} — open article</span>
               </a>
               <div class="home-featured__tags-overlay">
                 {featured.tags.map((tag) => (
@@ -96,7 +96,7 @@ function formatFeaturedStamp(iso: string) {
             </figure>
           </div>
           <div class="home-featured__body">
-            <p class="home-featured__eyebrow">Главный материал</p>
+            <p class="home-featured__eyebrow">Lead story</p>
             <h2 class="home-featured__title">
               <a href={articleHref} class="home-featured__title-link">
                 {featured.title}
@@ -108,7 +108,7 @@ function formatFeaturedStamp(iso: string) {
                 {formatFeaturedStamp(featured.created_at)}
               </time>
               <a href={articleHref} class="home-featured__read">
-                Читать →
+                Read →
               </a>
             </div>
           </div>
@@ -120,7 +120,7 @@ function formatFeaturedStamp(iso: string) {
       rest.length > 0 && (
         <section class="home-river" aria-labelledby="home-river-heading">
           <h2 id="home-river-heading" class="home-river__heading">
-            Далее
+            More
           </h2>
           <ul class="home-river__list">
             {rest.map((article) => (

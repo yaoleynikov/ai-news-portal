@@ -2,6 +2,22 @@ import fetch from 'node-fetch';
 import { config } from '../config.js';
 import { loadSharp } from './sharp-loader.js';
 
+/** Final cover dimensions (OG / cards). */
+const COVER_WIDTH = 1200;
+const COVER_HEIGHT = 630;
+
+/**
+ * Logo.dev raster logos are capped around ~800px; request WebP at that size so Sharp rarely upscales.
+ * @see https://docs.logo.dev/logo-images/get
+ */
+const LOGODEV_FETCH_SIZE = 800;
+
+/**
+ * Logo box on the cover: match the fetched raster width so a 800px asset is not blown up to 960px (old 0.8×1200).
+ * Logo is fit with `contain` inside this rectangle (margins are in the image, not CSS).
+ */
+const COMPANY_LOGO_BOX_FRAC = LOGODEV_FETCH_SIZE / COVER_WIDTH;
+
 /**
  * Creates a premium glassmorphic background using a raw domain logo
  * via Logo.dev, overlaid perfectly in the center.
@@ -13,9 +29,7 @@ async function generateCompanyCover(domain) {
     );
   }
 
-  // 1. Fetch the logo
-  // Logo.dev returns 404 if not found, we should handle it.
-  const logoUrl = `https://img.logo.dev/${domain}?token=${config.media.logoDevKey}&size=500&format=png`;
+  const logoUrl = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${config.media.logoDevKey}&size=${LOGODEV_FETCH_SIZE}&format=webp`;
   const response = await fetch(logoUrl);
   
   if (!response.ok) {
@@ -26,26 +40,25 @@ async function generateCompanyCover(domain) {
   const sharp = await loadSharp();
 
   if (!sharp) {
-    console.warn('[MEDIA] company cover: no sharp — using raw Logo.dev PNG');
+    console.warn('[MEDIA] company cover: no sharp — using raw Logo.dev WebP (no composite)');
     return {
       buffer: Buffer.from(logoBuffer),
-      contentType: 'image/png',
-      extension: 'png'
+      contentType: 'image/webp',
+      extension: 'webp'
     };
   }
 
-  // 2. We use sharp to create a sleek dark tech background
-  const width = 1200;
-  const height = 630;
+  const maxLogoW = Math.round(COVER_WIDTH * COMPANY_LOGO_BOX_FRAC);
+  const maxLogoH = Math.round(COVER_HEIGHT * COMPANY_LOGO_BOX_FRAC);
 
   const processedLogo = await sharp(Buffer.from(logoBuffer))
-    .resize(960, 504, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } })
+    .resize(maxLogoW, maxLogoH, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } })
     .toBuffer();
 
   const coverBuffer = await sharp({
     create: {
-      width,
-      height,
+      width: COVER_WIDTH,
+      height: COVER_HEIGHT,
       channels: 4,
       background: { r: 255, g: 255, b: 255, alpha: 1 }
     }
@@ -123,7 +136,7 @@ async function generateAbstractCover(keyword) {
       }
 
       const coverBuffer = await sharp(raw)
-        .resize(1200, 630, { fit: 'cover' })
+        .resize(COVER_WIDTH, COVER_HEIGHT, { fit: 'cover' })
         .webp({ quality: 85 })
         .toBuffer();
 

@@ -5,7 +5,7 @@ import type { MockArticle } from '../data/mock-articles';
 const CARD_FIELDS =
   'id, slug, title, content_md, tags, cover_url, created_at, source_url, faq, entities, sentiment, status';
 
-/** Публичный r2.dev этого проекта; используется только если в URL обложки host siliconfeed.r2.cloudflarestorage.com и env на хостинге пустой. */
+/** This project’s public r2.dev base; used only when the cover URL host is siliconfeed.r2.cloudflarestorage.com and env on the host is empty. */
 const SILICONFEED_R2_PUBLIC_DEFAULT = 'https://pub-ffc5900a06d64e009bb6babb2d096132.r2.dev';
 
 function r2PublicBaseForUrl(raw: string): string | undefined {
@@ -23,8 +23,8 @@ function r2PublicBaseForUrl(raw: string): string | undefined {
 }
 
 /**
- * Старые записи могли сохранить S3 API host (*.r2.cloudflarestorage.com), который не годится для <img src>.
- * На Vercel задайте R2_PUBLIC_URL или PUBLIC_R2_PUBLIC_URL (тот же базовый URL, что в backend/.env для воркера).
+ * Older rows may store the S3 API host (*.r2.cloudflarestorage.com), which is not valid for <img src>.
+ * On Vercel set R2_PUBLIC_URL or PUBLIC_R2_PUBLIC_URL (same base URL as backend/.env for the worker).
  */
 export function normalizeCoverUrl(url: string): string {
   const raw = typeof url === 'string' ? url.trim() : '';
@@ -52,7 +52,7 @@ const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
   })
 );
 
-/** Vercel serverless заполняет process.env; локально — import.meta.env.PUBLIC_* или .env. */
+/** Vercel serverless fills process.env; locally use import.meta.env.PUBLIC_* or .env. */
 function supabaseUrl(): string | undefined {
   if (typeof process !== 'undefined') {
     const u = process.env.PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
@@ -92,6 +92,22 @@ function excerptFromMarkdown(md: string, max = 220): string {
   return `${plain.slice(0, max - 1)}…`;
 }
 
+/** Strips the standard “At a glance” / legacy “Главное” heading block + bullets so dek does not duplicate the body. */
+function stripLeadingTakeawaysBlock(md: string): string {
+  const lines = md.split(/\r?\n/);
+  let i = 0;
+  while (i < lines.length && lines[i].trim() === '') i++;
+  if (i >= lines.length) return md;
+  const first = lines[i].trim();
+  if (!/^###\s*(Главное|At a glance|Key takeaways?|Summary|TL;DR)\s*:?$/i.test(first)) return md;
+  i++;
+  while (i < lines.length && lines[i].trim() === '') i++;
+  while (i < lines.length && /^\s*[-*]\s/.test(lines[i])) i++;
+  while (i < lines.length && lines[i].trim() === '') i++;
+  const rest = lines.slice(i).join('\n');
+  return rest.trim() ? rest : md;
+}
+
 export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | null {
   const slug = typeof row.slug === 'string' ? row.slug.trim() : '';
   if (!slug) return null;
@@ -115,7 +131,7 @@ export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | nu
       .filter((x): x is { name: string; desc: string } => x && typeof x === 'object' && 'name' in x)
       .map((x) => ({ name: String(x.name), desc: String((x as { desc?: string }).desc ?? '') }));
   }
-  const dek = excerptFromMarkdown(content_md, 260);
+  const dek = excerptFromMarkdown(stripLeadingTakeawaysBlock(content_md), 260);
   return {
     id,
     slug,
@@ -146,7 +162,7 @@ function toMock(a: NewsArticle): MockArticle {
   };
 }
 
-/** Карточки для главной, рубрик, тегов: из БД + запасной статический набор. */
+/** Listing cards for home, rubrics, tags: from DB plus static fallback. */
 export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
   const supabase = getServerClient();
   if (!supabase) return MOCK_FALLBACK;
@@ -280,7 +296,7 @@ export async function getPrevNextByDate(
   };
 }
 
-/** Для перелинковки «рядом по смыслу» — пул slug+tags из свежих материалов. */
+/** For semantic cross-linking: pool of slug+tags from recent articles. */
 export async function getTaxonomyArticlePool(limit = 120): Promise<{ slug: string; tags: string[] }[]> {
   const supabase = getServerClient();
   if (!supabase) {

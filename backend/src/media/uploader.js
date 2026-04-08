@@ -40,8 +40,8 @@ export async function uploadToR2(buffer, filename, mimeType = 'image/webp') {
     const publicUrlPrefix = fromEnv || fallback;
     if (!fromEnv) {
       console.warn(
-        '[UPLOADER] R2_PUBLIC_URL не задан — в cover_url попадёт S3 API host (*.r2.cloudflarestorage.com), браузер часто не отдаёт объект. ' +
-          'Укажите публичный URL бакета (R2 → Public access → r2.dev или свой домен), например https://pub-xxxx.r2.dev'
+        '[UPLOADER] R2_PUBLIC_URL is not set — cover_url will use the S3 API host (*.r2.cloudflarestorage.com); browsers often cannot load it. ' +
+          'Set the bucket public URL (R2 → Public access → r2.dev or custom domain), e.g. https://pub-xxxx.r2.dev'
       );
     }
     const path = filename.startsWith('/') ? filename : `/${filename}`;

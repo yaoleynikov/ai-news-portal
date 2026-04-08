@@ -6,20 +6,20 @@ interface Props {
 const { years } = Astro.props;
 ---
 
-<div class="listing-toolbar" data-listing-toolbar aria-label="Фильтр списка">
+<div class="listing-toolbar" data-listing-toolbar aria-label="List filters">
   <div class="listing-toolbar__inner">
     <label class="listing-toolbar__field">
-      <span class="listing-toolbar__label">Год</span>
+      <span class="listing-toolbar__label">Year</span>
       <select class="listing-toolbar__select" data-listing-year>
-        <option value="">Все годы</option>
+        <option value="">All years</option>
         {years.map((y) => <option value={String(y)}>{y}</option>)}
       </select>
     </label>
     <label class="listing-toolbar__field">
-      <span class="listing-toolbar__label">Сортировка</span>
+      <span class="listing-toolbar__label">Sort</span>
       <select class="listing-toolbar__select" data-listing-sort>
-        <option value="new">Сначала новые</option>
-        <option value="old">Сначала старые</option>
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
       </select>
     </label>
   </div>

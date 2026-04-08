@@ -3,7 +3,7 @@ import { listAllPublishedSlugs } from '../lib/articles-db';
 
 export const prerender = false;
 
-/** Отдельный sitemap только для /news/* — удобно подключать в Search Console. */
+/** Dedicated sitemap for /news/* only — easy to submit in Search Console. */
 export const GET: APIRoute = async ({ site }) => {
   const base = (site?.href ?? 'https://siliconfeed.online/').replace(/\/$/, '');
   const slugs = await listAllPublishedSlugs();

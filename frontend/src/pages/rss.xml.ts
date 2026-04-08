@@ -10,7 +10,7 @@ export const GET: APIRoute = async (context) => {
 
   return rss({
     title: 'SiliconFeed',
-    description: 'Лента свежих IT и технологических новостей.',
+    description: 'Fresh IT and technology news from SiliconFeed.',
     site: context.site ?? 'https://siliconfeed.online',
     items: articles.map((a) => ({
       title: a.title,
@@ -18,6 +18,6 @@ export const GET: APIRoute = async (context) => {
       description: a.excerpt,
       link: articlePath(a.slug)
     })),
-    customData: `<language>ru</language>`
+    customData: `<language>en</language>`
   });
 };

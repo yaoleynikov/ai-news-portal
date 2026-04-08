@@ -42,9 +42,7 @@ const exploreTopics = article
 
 let rawHtml = '';
 let htmlContent = '';
-let sentimentColor = '#a16207';
-let sentimentLabel = 'Нейтрально';
-let kickerTag = 'Новости';
+let kickerTag = 'News';
 let datePublished = '';
 let dateModified: string | null = null;
 let description = '';
@@ -57,23 +55,14 @@ if (article) {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
   });
 
-  const sentimentHigh = article.sentiment >= 7;
-  const sentimentLow = article.sentiment < 5;
-  sentimentColor = sentimentHigh ? '#166534' : sentimentLow ? '#991b1b' : '#a16207';
-  sentimentLabel = sentimentHigh
-    ? 'Бычий тренд (позитив)'
-    : sentimentLow
-      ? 'Медвежий тренд (негатив)'
-      : 'Нейтрально';
-
-  kickerTag = article.tags[0] ?? 'Новости';
-  datePublished = new Date(article.created_at).toLocaleDateString('ru-RU', {
+  kickerTag = article.tags[0] ?? 'News';
+  datePublished = new Date(article.created_at).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
   });
   dateModified = article.updated_at
-    ? new Date(article.updated_at).toLocaleDateString('ru-RU', {
+    ? new Date(article.updated_at).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
@@ -97,7 +86,7 @@ if (article) {
     author: [
       {
         '@type': 'Organization',
-        name: 'Редакция SiliconFeed',
+        name: 'SiliconFeed Editorial',
         url: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online')
       }
     ]
@@ -107,7 +96,7 @@ if (article) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Главная', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
       {
         '@type': 'ListItem',
         position: 2,
@@ -165,10 +154,8 @@ if (article) {
 
       <h1 class="article-title">{article.title}</h1>
 
-      <p class="article-dek">{article.dek}</p>
-
       <div class="article-byline">
-        <span>Редакция SiliconFeed</span>
+        <span>SiliconFeed Editorial</span>
         <span class="article-byline__sep" aria-hidden="true">·</span>
         <time datetime={article.created_at}>{datePublished}</time>
         {
@@ -176,7 +163,7 @@ if (article) {
             <>
               <span class="article-byline__sep" aria-hidden="true">·</span>
               <span>
-                обновлено <time datetime={article.updated_at}>{dateModified}</time>
+                updated <time datetime={article.updated_at}>{dateModified}</time>
               </span>
             </>
           )
@@ -192,9 +179,9 @@ if (article) {
       </div>
 
       <p class="article-meta-links">
-        Рубрики и метки — в меню «Темы» в шапке
+        Sections and tags — in the Topics menu
         <span class="article-meta-links__sep" aria-hidden="true">·</span>
-        <a href="/search">Поиск по ленте</a>
+        <a href="/search">Search the feed</a>
       </p>
 
       <div class="article-layout">
@@ -202,16 +189,16 @@ if (article) {
           <div class="prose" set:html={htmlContent} />
 
           <div class="article-signoff">
-            <span class="article-signoff__label">Редакция</span>
-            SiliconFeed — автоматизированная лента: факты сверяются с источниками, текст проходит нормализацию и краткую
-            справку для читателя.
+            <span class="article-signoff__label">Editorial</span>
+            SiliconFeed is an automated feed: facts are checked against sources; copy is normalized and lightly edited for
+            readers.
           </div>
 
-          <nav class="article-pagination" aria-label="Соседние материалы">
+          <nav class="article-pagination" aria-label="Adjacent stories">
             {
               nav?.prev ? (
                 <a href={articlePath(nav.prev.slug)} class="article-pagination__link">
-                  <span class="article-pagination__dir">Ранее</span>
+                  <span class="article-pagination__dir">Previous</span>
                   <span class="article-pagination__title">{nav.prev.title}</span>
                 </a>
               ) : (
@@ -221,7 +208,7 @@ if (article) {
             {
               nav?.next ? (
                 <a href={articlePath(nav.next.slug)} class="article-pagination__link article-pagination__link--next">
-                  <span class="article-pagination__dir">Далее</span>
+                  <span class="article-pagination__dir">Next</span>
                   <span class="article-pagination__title">{nav.next.title}</span>
                 </a>
               ) : (
@@ -233,18 +220,7 @@ if (article) {
 
         <aside class="aside-stack">
           <div class="aside-panel">
-            <h4 class="aside-panel__label">Аналитический индекс</h4>
-            <div class="sentiment-row">
-              <span class="sentiment-score" style={`color: ${sentimentColor}`}>{article.sentiment}/10</span>
-              <div class="sentiment-track">
-                <div class="sentiment-fill" style={`width: ${article.sentiment * 10}%; background: ${sentimentColor}`} />
-              </div>
-            </div>
-            <p class="sentiment-caption">{sentimentLabel}</p>
-          </div>
-
-          <div class="aside-panel">
-            <h4 class="aside-panel__label">Досье (сводка)</h4>
+            <h4 class="aside-panel__label">Briefing</h4>
             {(article.entities || []).map((ent) => (
               <div class="entity-block">
                 <div class="entity-name">{ent.name}</div>
@@ -256,13 +232,13 @@ if (article) {
           {
             exploreTopics.length > 0 && (
               <div class="aside-panel">
-                <h4 class="aside-panel__label">Рядом по смыслу</h4>
+                <h4 class="aside-panel__label">Related topics</h4>
                 <ul class="aside-topic-list">
                   {exploreTopics.map((t) => (
                     <li>
                       <a href={t.href} class="aside-topic-list__link">
                         {t.label}
-                        <span class="aside-topic-list__kind">{t.kind === 'rubric' ? 'рубрика' : 'метка'}</span>
+                        <span class="aside-topic-list__kind">{t.kind === 'rubric' ? 'section' : 'tag'}</span>
                       </a>
                     </li>
                   ))}
@@ -277,7 +253,7 @@ if (article) {
         {
           article.faq && article.faq.length > 0 && (
             <div style="margin-bottom: 2.5rem;">
-              <h3 class="section-title">Справка редакции (FAQ)</h3>
+              <h3 class="section-title">FAQ</h3>
               <div class="faq-list">
                 {article.faq.map((f) => (
                   <details class="faq-item">
@@ -290,7 +266,7 @@ if (article) {
           )
         }
 
-        <h3 class="section-title">Ещё в ленте</h3>
+        <h3 class="section-title">More in the feed</h3>
         <div class="related-grid">
           {relatedArticles.map((rel) => (
             <a href={articlePath(rel.slug)} class="related-card">
@@ -305,10 +281,10 @@ if (article) {
 
       <div class="article-source">
         <p style="margin: 0 0 0.35rem;">
-          Материал подготовлен редакцией на основе открытых данных из внешних источников.
+          Prepared by the editorial stack from public data and external sources.
         </p>
         <a href={article.source_url} target="_blank" rel="nofollow noopener noreferrer">
-          Оригинал материала
+          Original article
         </a>
       </div>
     </div>
@@ -316,8 +292,8 @@ if (article) {
 </Layout>
   ) : (
 <Layout
-  title="Страница не найдена"
-  description="Такого материала нет в ленте SiliconFeed."
+  title="Page not found"
+  description="This story is not in the SiliconFeed archive."
   ogType="website"
   canonicalUrl={absoluteUrl(Astro.url.pathname, Astro.site ?? 'https://siliconfeed.online')}
   noindex={true}
@@ -325,7 +301,7 @@ if (article) {
 >
   <div class="glass article-sheet" style="padding: 2rem; text-align: center;">
     <h1 class="article-title">404</h1>
-    <p>Материал не найден. Вернитесь на <a href="/">главную</a>.</p>
+    <p>Story not found. Go to the <a href="/">home feed</a>.</p>
   </div>
 </Layout>
   )

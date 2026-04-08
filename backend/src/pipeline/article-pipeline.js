@@ -41,7 +41,7 @@ async function checkDuplicate(embedding) {
  * @param {string} url
  * @param {{ dryRun?: boolean, skipDedup?: boolean, skipPublish?: boolean, localOnly?: boolean, saveCoverTo?: string, embedCoverBase64?: boolean }} [opts]
  *
- * `localOnly`: только извлечение + переписывание + обложка (без Supabase/R2). Для проверки качества без БД.
+ * `localOnly`: extract + rewrite + cover only (no Supabase/R2). For quality checks without DB.
  */
 export async function runArticlePipeline(url, opts = {}) {
   const localOnly = Boolean(opts.localOnly);

@@ -47,7 +47,8 @@ export const config = {
   },
   limits: {
     minChars: 500,
-    maxChars: 10000,
+    /** Max raw text length after scrape; higher = more context for the rewriter. */
+    maxChars: 14000,
     similarityThreshold: 0.85,
   },
   /** Canonical site origin for Telegram / Google links (no trailing slash). */

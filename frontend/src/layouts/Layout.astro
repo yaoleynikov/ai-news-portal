@@ -13,9 +13,9 @@ interface Props {
   jsonLd?: object | object[];
   canonicalUrl?: string;
   ogType?: 'website' | 'article';
-  /** HTTP 404 и т.п. — не индексировать */
+  /** 404 etc. — noindex */
   noindex?: boolean;
-  /** Пул материалов для меню «Темы» (иначе статический mock). */
+  /** Article pool for Themes menu (else static mock). */
   navArticlePool?: MockArticle[];
 }
 
@@ -46,7 +46,7 @@ const themesNavActive =
 ---
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -116,7 +116,7 @@ const themesNavActive =
           </svg>
           <span class="site-brand__text">SiliconFeed</span>
         </a>
-        <nav class="site-nav" aria-label="Основная навигация">
+        <nav class="site-nav" aria-label="Main navigation">
           <div class="site-nav__rubrics">
             {
               NAV_TOPICS.map(({ slug, label }) => (
@@ -142,18 +142,18 @@ const themesNavActive =
                 id="site-themes-btn"
                 data-themes-toggle
               >
-                Темы
+                Topics
               </button>
               <div
                 id="site-themes-panel"
                 class="site-nav__themes-panel"
                 hidden
                 role="region"
-                aria-label="Рубрики и метки"
+                aria-label="Sections and tags"
               >
                 <div class="site-nav__themes-panel-inner">
                   <div class="site-nav__themes-col">
-                    <p class="site-nav__themes-col-title">Рубрики</p>
+                    <p class="site-nav__themes-col-title">Sections</p>
                     <ul class="site-nav__themes-list site-nav__themes-list--rubrics">
                       {
                         themesRubrics.map((t) => (
@@ -168,7 +168,7 @@ const themesNavActive =
                     </ul>
                   </div>
                   <div class="site-nav__themes-col">
-                    <p class="site-nav__themes-col-title">Метки</p>
+                    <p class="site-nav__themes-col-title">Tags</p>
                     <ul class="site-nav__themes-list">
                       {
                         themesTags.map((t) => (
@@ -184,7 +184,7 @@ const themesNavActive =
                   </div>
                 </div>
                 <div class="site-nav__themes-footer">
-                  <a href="/search">Поиск по ленте</a>
+                  <a href="/search">Search the feed</a>
                 </div>
               </div>
             </div>
@@ -192,10 +192,10 @@ const themesNavActive =
               href="/search"
               class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/search' }]}
             >
-              Поиск
+              Search
             </a>
             <a href="/about" class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/about' }]}>
-              О проекте
+              About
             </a>
           </div>
         </nav>
@@ -209,7 +209,7 @@ const themesNavActive =
     <footer class="site-footer">
       <div class="site-footer__inner">
         <div class="site-footer__col">
-          <p class="site-footer__heading">Рубрики</p>
+          <p class="site-footer__heading">Sections</p>
           <ul class="site-footer__list">
             {
               NAV_TOPICS.map(({ slug, label }) => (
@@ -219,18 +219,18 @@ const themesNavActive =
               ))
             }
             <li>
-              <a href="/">Главная лента</a>
+              <a href="/">Home feed</a>
             </li>
             <li>
-              <a href="/search">Поиск</a>
+              <a href="/search">Search</a>
             </li>
           </ul>
         </div>
         <div class="site-footer__col">
-          <p class="site-footer__heading">Издание</p>
+          <p class="site-footer__heading">Publication</p>
           <ul class="site-footer__list">
             <li>
-              <a href="/about">О проекте</a>
+              <a href="/about">About</a>
             </li>
             <li>
               <span class="site-footer__muted">© {year} SiliconFeed</span>
@@ -238,7 +238,7 @@ const themesNavActive =
           </ul>
         </div>
         <div class="site-footer__col">
-          <p class="site-footer__heading">Подписка</p>
+          <p class="site-footer__heading">Follow</p>
           <ul class="site-footer__list">
             <li>
               <a href={telegramHref} target="_blank" rel="noopener noreferrer">Telegram</a>
@@ -247,7 +247,7 @@ const themesNavActive =
               <a href="/rss.xml">RSS</a>
             </li>
             <li>
-              <a href={mailHref}>Рассылка (email)</a>
+              <a href={mailHref}>Email list</a>
             </li>
           </ul>
         </div>

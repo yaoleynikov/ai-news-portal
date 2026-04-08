@@ -10,40 +10,40 @@ const years = publicationYears(pool);
 ---
 
 <Layout
-  title="Поиск"
-  description="Поиск материалов SiliconFeed по заголовку, анонсу и тегам."
+  title="Search"
+  description="Search SiliconFeed by headline, excerpt, and tags."
   ogType="website"
   navArticlePool={pool}
 >
   <div class="search-page">
     <header class="search-page__head">
-      <nav class="search-page__crumb" aria-label="Навигация">
-        <a href="/">Главная</a>
+      <nav class="search-page__crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
         <span aria-hidden="true">/</span>
-        <span class="search-page__crumb-current">Поиск</span>
+        <span class="search-page__crumb-current">Search</span>
       </nav>
-      <h1 class="search-page__title">Поиск по ленте</h1>
+      <h1 class="search-page__title">Search the feed</h1>
       <p class="search-page__lead">
-        Индекс обновляется при публикации сайта. Учитываются заголовок, анонс и теги. Список рубрик и меток — в меню{' '}
-        <strong>Темы</strong> в шапке.
+        The index updates as the site publishes. We match title, excerpt, and tags. Browse sections and tags from the{' '}
+        <strong>Topics</strong> menu.
       </p>
     </header>
 
     <div class="search-page__controls">
       <label class="search-page__field">
-        <span class="search-page__label">Запрос</span>
+        <span class="search-page__label">Query</span>
         <input
           type="search"
           class="search-page__input"
           id="search-q"
-          placeholder="Например, N100 или Linux"
+          placeholder="e.g. N100 or Linux"
           autocomplete="off"
         />
       </label>
       <label class="search-page__field">
-        <span class="search-page__label">Год</span>
+        <span class="search-page__label">Year</span>
         <select class="search-page__select" id="search-year">
-          <option value="">Все годы</option>
+          <option value="">All years</option>
           {years.map((y) => <option value={String(y)}>{y}</option>)}
         </select>
       </label>
@@ -51,7 +51,7 @@ const years = publicationYears(pool);
 
     <p class="search-page__status" id="search-status" aria-live="polite"></p>
     <ul class="search-page__list" id="search-results" hidden></ul>
-    <p class="search-page__empty" id="search-empty" hidden>Ничего не найдено — смените запрос или год.</p>
+    <p class="search-page__empty" id="search-empty" hidden>No results — try another query or year.</p>
   </div>
 
   <script is:inline>
@@ -94,7 +94,7 @@ const years = publicationYears(pool);
         const hits = index.filter((item) => matches(item, q, year));
         list.innerHTML = '';
         if (index.length === 0) {
-          status.textContent = 'Загрузка индекса…';
+          status.textContent = 'Loading index…';
           list.hidden = true;
           empty.hidden = true;
           return;
@@ -103,11 +103,11 @@ const years = publicationYears(pool);
         status.textContent =
           hits.length === 0
             ? filtered
-              ? 'Нет совпадений'
-              : `Все материалы: ${hits.length}`
+              ? 'No matches'
+              : `All stories: ${hits.length}`
             : filtered
-              ? `Найдено: ${hits.length}`
-              : `Все материалы: ${hits.length}`;
+              ? `Found: ${hits.length}`
+              : `All stories: ${hits.length}`;
         if (hits.length === 0) {
           list.hidden = true;
           empty.hidden = !filtered;
@@ -140,7 +140,7 @@ const years = publicationYears(pool);
           index = await r.json();
         } catch {
           index = [];
-          status.textContent = 'Не удалось загрузить индекс';
+          status.textContent = 'Could not load search index';
         }
         render();
       }

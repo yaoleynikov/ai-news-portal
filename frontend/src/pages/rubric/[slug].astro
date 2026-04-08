@@ -26,7 +26,7 @@ const years = publicationYears(list.length > 0 ? list : pool);
 const related = slug ? relatedTopicsForSlug(pool, slug, 14) : [];
 
 function formatListDate(iso: string) {
-  return new Date(iso).toLocaleDateString('ru-RU', {
+  return new Date(iso).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric'
@@ -35,23 +35,23 @@ function formatListDate(iso: string) {
 ---
 
 <Layout
-  title={label ? `Рубрика: ${label}` : 'Рубрика'}
-  description={`Материалы SiliconFeed в рубрике «${label}».`}
+  title={label ? `Section: ${label}` : 'Section'}
+  description={`SiliconFeed stories in the “${label}” section.`}
   ogType="website"
   navArticlePool={pool}
 >
   <div class="tag-page">
     <header class="tag-page__head">
-      <nav class="tag-page__crumb" aria-label="Навигация">
-        <a href="/">Главная</a>
+      <nav class="tag-page__crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
         <span aria-hidden="true">/</span>
         <span class="tag-page__crumb-current">{label}</span>
       </nav>
-      <p class="tag-page__kicker">Рубрика</p>
+      <p class="tag-page__kicker">Section</p>
       <h1 class="tag-page__title">{label}</h1>
       <p class="tag-page__lead">
-        Редакционный раздел. Остальные рубрики и метки — в меню <strong>Темы</strong> в шапке; по текстам —{' '}
-        <a href="/search">поиск</a>.
+        Editorial section. Other sections and tags are in the <strong>Topics</strong> menu; for full-text use{' '}
+        <a href="/search">search</a>.
       </p>
     </header>
 
@@ -59,16 +59,16 @@ function formatListDate(iso: string) {
       related.length > 0 && (
         <section class="tag-page__related" aria-labelledby="related-rubric-tags">
           <h2 id="related-rubric-tags" class="tag-page__related-title">
-            Связанные метки
+            Related tags
           </h2>
-          <p class="tag-page__related-lead">Встречаются рядом с материалами этой рубрики.</p>
+          <p class="tag-page__related-lead">Often appear alongside stories in this section.</p>
           <ul class="tag-page__related-list">
             {related.map((t) => (
               <li>
                 <a href={t.href} class="tag-page__related-link" data-tag-related={t.kind}>
                   <span>{t.label}</span>
                   <span class="tag-page__related-meta">
-                    {t.kind === 'rubric' ? 'рубрика' : 'метка'} · {t.count}
+                    {t.kind === 'rubric' ? 'section' : 'tag'} · {t.count}
                   </span>
                 </a>
               </li>
@@ -81,7 +81,7 @@ function formatListDate(iso: string) {
     {
       list.length === 0 ? (
         <p class="tag-page__empty">
-          Пока нет материалов в этой рубрике — меню «Темы» в шапке или <a href="/">главная</a>.
+          No stories in this section yet — try <strong>Topics</strong> in the header or the <a href="/">home feed</a>.
         </p>
       ) : (
         <>

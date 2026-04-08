@@ -14,7 +14,7 @@ export type TopicIndexEntry = {
   href: string;
 };
 
-/** Рубрики + все метки из материалов с числом статей и стабильными ссылками */
+/** Rubrics plus all tags from articles with counts and stable hrefs */
 export function buildTopicIndex(articles: ArticleTagSource[]): TopicIndexEntry[] {
   const rubricSlugs = new Set(NAV_TOPICS.map((t) => t.slug));
   const slugToLabel = new Map<string, string>();
@@ -48,7 +48,7 @@ export function buildTopicIndex(articles: ArticleTagSource[]): TopicIndexEntry[]
     });
   }
 
-  tags.sort((a, b) => a.label.localeCompare(b.label, 'ru'));
+  tags.sort((a, b) => a.label.localeCompare(b.label, 'en'));
   return [...rubrics, ...tags];
 }
 
@@ -60,7 +60,7 @@ export function publicationYears(articles: ArticleWithDate[]): number[] {
   return [...years].sort((a, b) => b - a);
 }
 
-/** Совместные теги у материалов с текущей меткой — для перелинковки */
+/** Tags co-occurring on articles with the current tag — for cross-linking */
 export function relatedTopicsForSlug(
   articles: ArticleTagSource[],
   currentSlug: string,
@@ -88,11 +88,11 @@ export function relatedTopicsForSlug(
       kind: (rubricSlugs.has(slug) ? 'rubric' : 'tag') as TopicKind,
       href: rubricSlugs.has(slug) ? rubricPath(slug) : tagPath(slug)
     }))
-    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'ru'))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'en'))
     .slice(0, limit);
 }
 
-/** Метки из других материалов, пересекающихся по тегам с текущим — перелинковка «вширь» */
+/** Tags from other articles that share tags with the current one — lateral cross-links */
 export function relatedTopicsForArticle(
   article: { slug: string; tags: string[] },
   all: { slug: string; tags: string[] }[],
@@ -123,6 +123,6 @@ export function relatedTopicsForArticle(
       kind: (rubricSlugs.has(slug) ? 'rubric' : 'tag') as TopicKind,
       href: rubricSlugs.has(slug) ? rubricPath(slug) : tagPath(slug)
     }))
-    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'ru'))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'en'))
     .slice(0, limit);
 }

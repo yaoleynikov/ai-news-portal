@@ -3,8 +3,8 @@
  * Usage:
  *   node scripts/run-once.mjs <url> [--local] [--dry-run] [--skip-dedup]
  *
- * --local   Без Supabase/R2: извлечь → OpenRouter → обложка; файл tmp/last-cover.webp или .png
- * --dry-run Полный пайплайн до обложки, без загрузки и insert (нужна БД для дедупа)
+ * --local   No Supabase/R2: extract → OpenRouter → cover; writes tmp/last-cover.webp or .png
+ * --dry-run Full pipeline through cover, no upload/insert (DB still used for dedup)
  */
 import dotenv from 'dotenv';
 import fs from 'node:fs';

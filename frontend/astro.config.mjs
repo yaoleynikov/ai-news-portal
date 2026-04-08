@@ -8,7 +8,7 @@ import rehypeSlug from 'rehype-slug';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://siliconfeed.online',
-  // Astro 5+: маршруты с `export const prerender = false` — SSR на Vercel; остальное статика.
+  // Routes with `export const prerender = false` are SSR on Vercel; the rest is static.
   adapter: vercel(),
   integrations: [sitemap()],
   markdown: {

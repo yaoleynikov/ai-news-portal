@@ -16,12 +16,12 @@ export function tagUrl(tag: string): string {
   return `/tag/${slugifyTag(tag)}`;
 }
 
-/** Редакционная рубрика из шапки (стабильные URL для SEO) */
+/** Editorial section from the nav (stable URLs for SEO) */
 export function rubricUrl(slug: TopicSlug | string): string {
   return rubricPath(slug);
 }
 
-/** Для крошек: если метка совпадает с рубрикой — ведём на /rubric/, иначе /tag/ */
+/** Breadcrumbs: if the tag matches a rubric, use /rubric/; otherwise /tag/ */
 export function topicOrTagUrl(tag: string): string {
   const s = slugifyTag(tag);
   if (NAV_TOPICS.some((t) => t.slug === s)) return rubricPath(s);
@@ -32,7 +32,7 @@ export function articleMatchesTopic(articleTags: string[], topicSlug: string): b
   return articleTags.some((t) => slugifyTag(t) === topicSlug);
 }
 
-/** Цветовая тема тега для UI (см. global.css [data-tag-theme]) */
+/** Tag color theme for the UI (see global.css [data-tag-theme]) */
 export type TagTheme = 'ai' | 'hardware' | 'open-source' | 'automation' | 'default';
 
 export function tagThemeSlug(tag: string): TagTheme {

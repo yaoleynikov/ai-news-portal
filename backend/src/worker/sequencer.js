@@ -190,7 +190,7 @@ export async function processQueue() {
 
       // 7. PUBLISH TO SOCIALS & INDEXING (canonical /news/[slug] matches frontend)
       const articleUrl = `${config.publicSiteUrl}/news/${publishedSlug}`;
-      const message = `🚀 *Новая статья!*\n\n*${rewritten.title}*\n\n[Читать на сайте](${articleUrl})`;
+      const message = `🚀 *New story*\n\n*${rewritten.title}*\n\n[Read on the site](${articleUrl})`;
 
       if (process.env.TG_BOT_TOKEN) {
         const token = process.env.TG_BOT_TOKEN;

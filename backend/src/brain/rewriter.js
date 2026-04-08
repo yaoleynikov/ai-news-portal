@@ -2,7 +2,11 @@ import fetch from 'node-fetch';
 import { config } from '../config.js';
 import { finalizeArticleSlug } from '../lib/slug.js';
 
-const MAX_INPUT_CHARS = 12000;
+function rewriterMaxTokens() {
+  const n = parseInt(process.env.REWRITER_MAX_TOKENS || '', 10);
+  if (Number.isFinite(n) && n >= 1024 && n <= 32000) return n;
+  return 10240;
+}
 
 /** OpenRouter / OpenAI-style message.content: string or array of parts */
 function messageTextContent(message) {
@@ -47,7 +51,7 @@ export function normalizeRewritten(parsed) {
     throw new Error('Rewriter: missing title or content_md');
   }
   let tags = Array.isArray(o.tags) ? o.tags.filter((t) => typeof t === 'string' && t.trim()) : [];
-  if (tags.length === 0) tags = ['IT'];
+  if (tags.length === 0) tags = ['Tech'];
   if (tags.length > 8) tags = tags.slice(0, 8);
 
   const cover_type = o.cover_type === 'company' ? 'company' : 'abstract';
@@ -70,8 +74,8 @@ export function normalizeRewritten(parsed) {
     .filter((x) => x.q && x.a);
   while (faq.length < 3) {
     faq.push({
-      q: 'О чём этот материал?',
-      a: 'Краткий пересказ ключевых тезисов из текста выше.'
+      q: 'What is this article about?',
+      a: 'A concise recap of the main points from the story above.'
     });
   }
   if (faq.length > 6) faq = faq.slice(0, 6);
@@ -109,7 +113,7 @@ export function normalizeRewritten(parsed) {
 }
 
 /**
- * Standardizes raw scraped text into high-quality IT/AI news.
+ * Standardizes raw scraped text into high-quality IT/AI news in English.
  * Output is STRICT JSON corresponding to our Supabase schema.
  */
 export async function rewriteArticle(title, content) {
@@ -118,25 +122,27 @@ export async function rewriteArticle(title, content) {
   }
 
   const body = typeof content === 'string' ? content : '';
-  const clipped = body.length > MAX_INPUT_CHARS ? body.substring(0, MAX_INPUT_CHARS) : body;
+  const maxIn = config.limits.maxChars;
+  const clipped = body.length > maxIn ? body.substring(0, maxIn) : body;
 
-  const prompt = `You are an elite Lead Tech Editor at a premium IT/AI news portal.
-Your task is to take a raw scraped article and rewrite it into a highly engaging, professional news piece in Russian.
-The tone should be modern, tech-savvy, and concise.
+  const prompt = `You are an elite Lead Tech Editor at a premium IT/AI news site.
+Your task is to take a raw scraped article and rewrite it into a deep, readable news piece in **English** (US/UK neutral).
+The tone should be modern and tech-savvy, but the piece must feel substantial — not a short digest.
 
 Rules:
-1. Provide a click-worthy, SEO-optimized title in Russian.
+1. Title in English: strong and clear for SEO. Use sentence case — capitalize only the first word and proper nouns (OpenAI, AWS, EU). Do NOT use title case on every word.
 2. The content MUST be valid Markdown only (no HTML).
-3. CRITICAL: Start the Markdown with an H3 heading "### Главное:" then exactly 3 bullet lines (- item) with the key takeaways.
-4. Then use ## for 2–4 section headings; keep total length readable (roughly 5–8 short paragraphs). Strip fluff and duplicated claims.
-5. Extract 3–5 concise tags (English or Russian, Title Case or short tokens).
-6. Cover strategy:
+3. CRITICAL: Start the Markdown with an H3 heading "### At a glance:" then exactly 3 bullet lines (- item) with the key takeaways.
+4. After that, use ## for 4–6 section headings. Each section should have 2–4 full paragraphs (several sentences each): context, details, implications for users or the market, and — where relevant — brief comparison or outlook. When the source is rich, target about 12–20 substantial paragraphs in total across sections; when the source is short, still aim for at least 8–10 paragraphs (do not pad with empty phrases).
+5. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead.
+6. Extract 3–6 concise tags in English.
+7. Cover strategy:
    - company: Only if the story is clearly about one well-known tech brand/product. cover_keyword MUST be a real domain like "openai.com" or "google.com" (no paths).
    - abstract: For general or multi-vendor topics. cover_keyword = short English metaphor phrase (5–12 words) for a photorealistic scene, no brand names.
-7. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]).
-8. Exactly 3 FAQ items (q/a in Russian), grounded in the article.
-9. entities: 2–6 notable companies or people from the text (name + one-line desc in Russian).
-10. sentiment: integer 1–10 (market/tech tone for investors/readers).
+8. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]).
+9. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners.
+10. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
+11. sentiment: integer 1–10 (market/tech tone for investors/readers).
 
 Output a single JSON object ONLY (no markdown fences, no commentary):
 {
@@ -182,7 +188,8 @@ ${clipped}
           { role: 'user', content: prompt }
         ],
         ...(useJsonObjectFormat ? { response_format: { type: 'json_object' } } : {}),
-        temperature: 0.45
+        temperature: 0.5,
+        max_tokens: rewriterMaxTokens()
       })
     });
 
@@ -198,9 +205,9 @@ ${clipped}
       const fr = choice?.finish_reason ?? '';
       const err = json.error?.message || '';
       const hint =
-        'Проверьте OPENROUTER_MODEL (бесплатные модели часто не отдают JSON); задайте платную или OPENROUTER_JSON_OBJECT=0.';
+        'Check OPENROUTER_MODEL (free tiers often omit JSON); use a paid model or set OPENROUTER_JSON_OBJECT=0.';
       throw new Error(
-        `OpenRouter: пустой ответ модели (finish_reason=${fr}${err ? `; ${err}` : ''}). ${hint}`
+        `OpenRouter: empty model response (finish_reason=${fr}${err ? `; ${err}` : ''}). ${hint}`
       );
     }
 

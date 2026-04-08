@@ -1,13 +1,13 @@
 /**
- * SEO и постоянные URL SiliconFeed
+ * SEO and stable URL scheme for SiliconFeed
  *
- * Схема:
- * - /news/[slug]     — материалы (латиница, дефисы; стабильный slug из CMS, не id)
- * - /rubric/[slug]   — редакционные рубрики из шапки (ai, hardware, open-source)
- * - /tag/[slug]      — все тематические метки, включая узкие (openclaw, intel, …)
+ * Routes:
+ * - /news/[slug]     — articles (Latin, hyphens; stable CMS slug, not id)
+ * - /rubric/[slug]   — editorial sections from the nav (ai, hardware, open-source)
+ * - /tag/[slug]      — all topic tags, including narrow ones (openclaw, intel, …)
  *
- * Правило: в навигации и хлебных крошках для «главных» тем ведём на rubric;
- * вторичные теги — только /tag/. В теле статьи — ссылки на /tag/ (как facet).
+ * Rule: in nav and breadcrumbs, primary topics link to /rubric/; secondary tags use /tag/ only.
+ * In article bodies, links use /tag/ as facets.
  */
 
 export const SITE_HOST = 'https://siliconfeed.online';
@@ -24,7 +24,7 @@ export function tagPath(slug: string): string {
   return `/tag/${slug}`;
 }
 
-/** Абсолютный URL для каноникала и JSON-LD */
+/** Absolute URL for canonical and JSON-LD */
 export function absoluteUrl(pathname: string, site: URL | string = SITE_HOST): string {
   const base = typeof site === 'string' ? site : site.origin;
   const path = pathname.startsWith('/') ? pathname : `/${pathname}`;

@@ -1,6 +1,5 @@
 /**
- * Единый источник материалов для ленты, SEO URL /news/[slug] и RSS.
- * В проде заменить на запрос к API/БД, slug хранить в записи.
+ * Fallback articles for /news/[slug], RSS, and related links when DB is unavailable.
  */
 
 export type NewsArticle = {
@@ -24,71 +23,71 @@ export const ARTICLES: NewsArticle[] = [
   {
     slug: 'openclaw-news-agent-frameworks',
     id: 'uuid-1',
-    title: 'Openclaw запускает автономные фреймворки для новостных агентов',
-    dek: 'Без GPU и тяжёлой инфраструктуры: как агентные пайплайны переносятся на дешёвое железо и открытые API.',
+    title: 'Openclaw launches autonomous frameworks for news agents',
+    dek: 'No GPU or heavy infra: how agent pipelines move to cheap hardware and open APIs.',
     excerpt:
-      'Новая система обещает снизить нагрузку на серверы и позволить ИИ-агентам самостоятельно находить и переписывать новости без GPU-кластеров...',
+      'The new stack promises lower server load and lets AI agents find and rewrite news without GPU clusters...',
     content_md:
-      '## Введение\n\nНовая система обещает снизить нагрузку на серверы и позволить ИИ-агентам самостоятельно находить и переписывать новости без GPU-кластеров. Это позволит компаниям существенно экономить на инфраструктуре.\n\n## Архитектура N100\n\nРабота на минималках стала возможна благодаря использованию моделей, которые помещаются в RAM и не требуют видеоускорителей. Такие решения идеально подходят для стартапов с нулевым бюджетом.',
+      '## Introduction\n\nThe new stack promises lower server load and lets AI agents find and rewrite news without GPU clusters. That can materially cut infrastructure spend.\n\n## N100 architecture\n\nRunning lean is possible with models that fit in RAM and skip discrete GPUs—ideal for zero-budget startups.',
     cover_url: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200',
     tags: ['AI', 'Openclaw', 'Automation'],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     source_url: 'https://techcrunch.com/2026/04/07/openclaw-framework/',
     faq: [
-      { q: 'Зачем нужен Openclaw?', a: 'Для снижения нагрузки на серверы ИИ-агентов.' },
-      { q: 'Какое оборудование требуется?', a: 'Достаточно энергоэффективного Intel N100 без GPU.' },
-      { q: 'Это бесплатно?', a: 'Используются бесплатные API, бюджет на инфраструктуру около нуля.' }
+      { q: 'Why Openclaw?', a: 'To reduce load on agent news servers.' },
+      { q: 'What hardware?', a: 'An efficient Intel N100 without a GPU is enough.' },
+      { q: 'Is it free?', a: 'It targets free APIs; infra budget can be near zero.' }
     ],
     entities: [
-      { name: 'Openclaw', desc: 'Фреймворк для агентов' },
-      { name: 'Intel', desc: 'Производитель чипов (N100)' }
+      { name: 'Openclaw', desc: 'Agent orchestration framework' },
+      { name: 'Intel', desc: 'Chipmaker (N100)' }
     ],
     sentiment: 8
   },
   {
     slug: 'intel-n100-lightweight-ai-servers',
     id: 'uuid-2',
-    title: 'Intel N100 становится стандартом для легковесных AI серверов',
-    dek: 'Микросерверы на N100 собирают энтузиасты и студии: низкое энергопотребление и цена платы важнее пикового FPS.',
+    title: 'Intel N100 becomes the default for lightweight AI servers',
+    dek: 'Microservers on N100 are popular with studios: low power and board price beat peak FPS.',
     excerpt:
-      'Энергоэффективные процессоры N100 внезапно обрели популярность среди разработчиков автономных микросервисов, позволив строить кластеры за копейки...',
+      'Efficient N100 CPUs are suddenly popular with builders of autonomous microservices, enabling clusters on a shoestring...',
     content_md:
-      '## Контекст\n\nПроцессоры линейки Intel N100 давно позиционировались как решения для тонких клиентов и встраиваемых систем. В 2026 году их массово используют для фоновых воркеров, очередей и лёгких LLM-инференсов на CPU.\n\n## Практика\n\nТипичный узел — 8–16 ГБ RAM, без дискретной видеокарты, Docker и минимальный Linux. Такой кластер из четырёх узлов часто обходится дешевле одной игровой видеокарты прошлого поколения.',
+      '## Context\n\nIntel N100 parts were long aimed at thin clients and embedded gear. In 2026 they commonly back workers, queues, and light CPU LLM inference.\n\n## Practice\n\nA typical node is 8–16 GB RAM, no discrete GPU, Docker, and a minimal Linux. A four-node cluster often costs less than last-gen gaming GPU.',
     cover_url: 'https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=1200',
     tags: ['Hardware', 'Intel', 'Hosting'],
     created_at: new Date(Date.now() - 86400000).toISOString(),
     source_url: 'https://example.com/intel-n100-ai-hosting',
     faq: [
-      { q: 'Хватит ли N100 для embeddings?', a: 'Для небольших батчей и офлайн-задач — да; для больших — смотрите latency и RAM.' },
-      { q: 'Где брать платы?', a: 'Мини-ПК и SBC на N100 продают крупные маркетплейсы и OEM-сборщики.' }
+      { q: 'Is N100 enough for embeddings?', a: 'For small batches and offline jobs—yes; watch latency and RAM at scale.' },
+      { q: 'Where to buy boards?', a: 'Mini PCs and N100 SBCs are sold by major marketplaces and OEMs.' }
     ],
     entities: [
-      { name: 'Intel N100', desc: 'Энергоэффективный x86 SoC' },
-      { name: 'Docker', desc: 'Контейнеризация сервисов' }
+      { name: 'Intel N100', desc: 'Efficient x86 SoC' },
+      { name: 'Docker', desc: 'Container runtime' }
     ],
     sentiment: 6
   },
   {
     slug: 'linux-foundation-open-ai-stacks',
     id: 'uuid-3',
-    title: 'Linux Foundation усиливает поддержку открытых AI-стеков',
-    dek: 'Единые профили контейнеров и проверяемые билды: зачем enterprise смотрит на открытый inference и кто платит за совместимость.',
+    title: 'Linux Foundation doubles down on open AI stacks',
+    dek: 'Shared container profiles and reproducible builds: why enterprises care about open inference and who pays for compatibility.',
     excerpt:
-      'Консорциум публикует дорожную карту совместимости для inference-серверов на открытом железе и в контейнерах OCI...',
+      'The consortium publishes a compatibility roadmap for inference servers on open hardware and OCI containers...',
     content_md:
-      '## Сдвиг в сторону открытости\n\nКрупные вендоры всё чаще публикуют reference-стеки для CPU-inference без закрытых runtime. Linux Foundation предлагает общие спецификации для OCI-образов и эталонные docker-compose для пилотов.\n\n## Что это меняет\n\nИнтеграторам проще сравнивать задержку и стоимость владения: одинаковые entrypoint, явные версии библиотек и воспроизводимые бенчмарки.',
+      '## Open by default\n\nVendors increasingly ship reference CPU-inference stacks without closed runtimes. Linux Foundation proposes shared OCI image specs and sample docker-compose for pilots.\n\n## What changes\n\nIntegrators can compare latency and TCO with identical entrypoints, pinned libraries, and reproducible benchmarks.',
     cover_url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200',
     tags: ['Open Source', 'AI', 'Linux'],
     created_at: new Date(Date.now() - 172800000).toISOString(),
     source_url: 'https://example.com/linux-foundation-open-ai',
     faq: [
-      { q: 'Это только для Linux?', a: 'Акцент на открытых стеках; образы OCI работают и в других средах.' },
-      { q: 'Где посмотреть спецификации?', a: 'Следите за репозиториями LF и рабочими группами по AI-инфраструктуре.' }
+      { q: 'Linux only?', a: 'Focus is open stacks; OCI images run elsewhere too.' },
+      { q: 'Where are specs?', a: 'Watch LF repos and working groups on AI infrastructure.' }
     ],
     entities: [
-      { name: 'Linux Foundation', desc: 'Консорциум открытых проектов' },
-      { name: 'OCI', desc: 'Стандарт контейнерных образов' }
+      { name: 'Linux Foundation', desc: 'Open-source consortium' },
+      { name: 'OCI', desc: 'Container image standard' }
     ],
     sentiment: 7
   }
