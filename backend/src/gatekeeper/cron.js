@@ -13,17 +13,20 @@ const FEEDS = [
 async function runGatekeeper() {
   console.log('[GATEKEEPER] Starting RSS Feed Scrape Cycle...');
   
-  // Self-Healing: Reset crashed/stuck worker jobs (processing for > 15 mins)
+  // Self-Healing: Reset stuck worker jobs (processing, no row update for > 15 mins).
+  // Requires migration 0003_jobs_updated_at.sql (updated_at + trigger).
+  // Long single jobs without DB updates may need a longer window or worker heartbeats.
   try {
     const fifteenMinsAgo = new Date(Date.now() - 15 * 60000).toISOString();
-    const { data: stuck } = await supabase
+    const { data: stuck, error: stuckErr } = await supabase
       .from('jobs')
       .update({ status: 'pending' })
       .eq('status', 'processing')
-      .lte('created_at', fifteenMinsAgo)
+      .lte('updated_at', fifteenMinsAgo)
       .select();
-      
-    if (stuck && stuck.length > 0) {
+    if (stuckErr) {
+      console.error('[GATEKEEPER] Stuck-job recovery query failed (apply migration 0003?):', stuckErr.message);
+    } else if (stuck && stuck.length > 0) {
       console.log(`[GATEKEEPER] Recovered ${stuck.length} stuck jobs.`);
     }
   } catch(e) {

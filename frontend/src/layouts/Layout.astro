@@ -11,7 +11,9 @@ interface Props {
 }
 
 const { title, description, ogImage = '/default-og.webp', jsonLd, canonicalUrl } = Astro.props;
-const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site || 'https://siliconfeed.online').toString();
+const siteOrigin = Astro.site ?? new URL('https://siliconfeed.online');
+const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, siteOrigin).toString();
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteOrigin).toString();
 ---
 
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ const currentCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageAbsolute} />
     <meta property="og:type" content="article" />
     
     <!-- Google Fonts -->

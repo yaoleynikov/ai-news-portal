@@ -12,7 +12,9 @@ sharp.concurrency(1);
  */
 async function generateCompanyCover(domain) {
   if (!config.media.logoDevKey) {
-    throw new Error('LOGODEV_API_KEY is not configured');
+    throw new Error(
+      'Logo.dev publishable key missing: set LOGODEV_API_KEY, LOGO_DEV_PUBLISHABLE_KEY, or LOGO_DEV_TOKEN (pk_... for img CDN)'
+    );
   }
 
   // 1. Fetch the logo
@@ -70,10 +72,16 @@ async function generateAbstractCover(keyword) {
   let attempts = 0;
   const maxAttempts = 3;
 
+  const hfModel = "black-forest-labs/FLUX.1-schnell";
+  // Legacy https://api-inference.huggingface.co returns 410; router is current.
+  const inferenceUrl =
+    config.ai.hfInferenceUrl ||
+    `https://router.huggingface.co/hf-inference/models/${hfModel}`;
+
   while (attempts < maxAttempts) {
     try {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+        inferenceUrl,
         {
           headers: {
             Authorization: `Bearer ${config.ai.hfKey}`,

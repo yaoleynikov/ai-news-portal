@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import { supabase, config } from '../config.js';
 import { extractArticleData } from '../scraper/extractor.js';
 import { generateEmbedding } from '../brain/embeddings.js';
@@ -5,13 +6,8 @@ import { rewriteArticle } from '../brain/rewriter.js';
 import { generateCover } from '../media/generator.js';
 import { uploadToR2 } from '../media/uploader.js';
 
-// Calculate cosine similarity locally in JS if pgvector match function is not implemented
-// However, we rely on Supabase RPC `match_articles` usually. For this implementation
-// we will do a direct vector distance check via RPC.
+/** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
 async function checkDuplicate(embedding) {
-  // We assume an RPC 'match_articles' exists in Supabase.
-  // If not, we just return false for now to allow execution.
-  // Real implementation: create an RPC in Supabase that takes query_embedding and threshold.
   try {
     const { data, error } = await supabase.rpc('match_articles', {
       query_embedding: `[${embedding.join(',')}]`,
@@ -20,17 +16,35 @@ async function checkDuplicate(embedding) {
     });
 
     if (error) {
-      console.warn('[SEQUENCER] Supabase RPC match_articles missing or failed, skipping dedup verification.');
-      return false; // Skip
+      console.warn('[SEQUENCER] match_articles RPC failed:', error.message);
+      return 'rpc_error';
     }
 
     if (data && data.length > 0) {
-      return true; // Semantic duplicate found
+      return 'duplicate';
     }
+    return 'ok';
   } catch (e) {
-    // Graceful degradation
+    console.warn('[SEQUENCER] match_articles exception:', e.message);
+    return 'rpc_error';
   }
-  return false;
+}
+
+async function sendTelegramMessage(botToken, chatId, text) {
+  const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
+  });
+  let body = {};
+  try {
+    body = await res.json();
+  } catch {
+    /* ignore */
+  }
+  if (!res.ok || body.ok === false) {
+    console.warn('[SEQUENCER] Telegram sendMessage failed:', res.status, body.description || JSON.stringify(body).slice(0, 200));
+  }
 }
 
 // Polling interval
@@ -40,6 +54,7 @@ export async function processQueue() {
   console.log('[SEQUENCER] Worker started. Waiting for jobs...');
 
   while (true) {
+    let job = null;
     try {
       // 1. ATOMIC JOB ACQUISITION (Simulated via Update with limit)
       // Lock a pending job
@@ -55,7 +70,7 @@ export async function processQueue() {
         continue; // Back to polling
       }
 
-      const job = jobs[0];
+      job = jobs[0];
       
       // Mark as processing
       await supabase
@@ -77,9 +92,18 @@ export async function processQueue() {
 
       // 3. EMBED & DEDUPLICATE
       const embedding = await generateEmbedding(extracted.title + '\n\n' + extracted.textContent.slice(0, 500));
-      const isDuplicate = await checkDuplicate(embedding);
+      const dedup = await checkDuplicate(embedding);
 
-      if (isDuplicate) {
+      if (dedup === 'rpc_error') {
+        console.log(`[SEQUENCER] Dedup RPC failed — failing job (fail-closed).`);
+        await supabase.from('jobs').update({
+          status: 'failed',
+          error_log: 'match_articles RPC failed; dedup could not run.'
+        }).eq('id', job.id);
+        continue;
+      }
+
+      if (dedup === 'duplicate') {
         console.log(`[SEQUENCER] Skip logic activated. Semantic duplicate detected.`);
         await supabase.from('jobs').update({ status: 'skipped_duplicate' }).eq('id', job.id);
         continue;
@@ -124,19 +148,12 @@ export async function processQueue() {
       const message = `🚀 *Новая статья!*\n\n*${rewritten.title}*\n\n[Читать на сайте](${articleUrl})`;
 
       if (process.env.TG_BOT_TOKEN) {
-        // Ping Admin
+        const token = process.env.TG_BOT_TOKEN;
         if (process.env.TG_ADMIN_CHAT_ID) {
-          fetch(`https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: process.env.TG_ADMIN_CHAT_ID, text: message, parse_mode: 'Markdown' })
-          });
+          await sendTelegramMessage(token, process.env.TG_ADMIN_CHAT_ID, message);
         }
-        // Ping Public Channel
         if (process.env.TG_CHANNEL_ID) {
-          fetch(`https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: process.env.TG_CHANNEL_ID, text: message, parse_mode: 'Markdown' })
-          });
+          await sendTelegramMessage(token, process.env.TG_CHANNEL_ID, message);
         }
       }
 
@@ -172,16 +189,18 @@ export async function processQueue() {
       console.error(`[SEQUENCER] Job Pipeline Error:`, err.message);
       
       // Update the Database with the formal error trace so it's not lost
-      try {
-        await supabase
-          .from('jobs')
-          .update({ 
-            status: 'failed', 
-            error_log: err.stack || err.message
-          })
-          .eq('id', job.id);
-      } catch (dbErr) {
-        console.error(`[SEQUENCER] Fatal: Failed to write error log to DB.`, dbErr.message);
+      if (job?.id) {
+        try {
+          await supabase
+            .from('jobs')
+            .update({ 
+              status: 'failed', 
+              error_log: err.stack || err.message
+            })
+            .eq('id', job.id);
+        } catch (dbErr) {
+          console.error(`[SEQUENCER] Fatal: Failed to write error log to DB.`, dbErr.message);
+        }
       }
 
       // Wait a bit on error to prevent hot loops

@@ -47,12 +47,20 @@ ${content.substring(0, 8000)} // Truncated to avoid context limit overflow
 `;
 
   try {
+    const headers = {
+      Authorization: `Bearer ${config.ai.openRouterKey}`,
+      'Content-Type': 'application/json',
+    };
+    if (config.ai.openRouterHttpReferer) {
+      headers['HTTP-Referer'] = config.ai.openRouterHttpReferer;
+    }
+    if (config.ai.openRouterAppTitle) {
+      headers['X-Title'] = config.ai.openRouterAppTitle;
+    }
+
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${config.ai.openRouterKey}`,
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         model: config.ai.openRouterModel,
         messages: [

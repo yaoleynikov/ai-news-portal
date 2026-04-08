@@ -5,7 +5,7 @@
 // Credit budget: 500 total
 // =============================================================================
 
-export const FIRECRAWL_API_KEY = "fc-1b04a890870a45ddad0156caa5694e57";
+export const FIRECRAWL_API_KEY = process.env.FIRECRAWL_API_KEY ?? "";
 
 // Delay between API calls (ms) to respect rate limits
 export const REQUEST_DELAY_MS = 2000;

@@ -352,6 +352,11 @@ async function main() {
 
   await ensureDir(RESULTS_DIR);
 
+  if (!FIRECRAWL_API_KEY.trim()) {
+    log("err", "FIRECRAWL_API_KEY is not set. Export it or use a research/.env file with your shell loader.");
+    process.exit(1);
+  }
+
   // Show credit estimate
   const estimate = estimateCredits();
   log("info", `Credit estimate: Tier1=${estimate.tier1}, Tier2=${estimate.tier2}, Tier3=${estimate.tier3}, Total=${estimate.total}`);
