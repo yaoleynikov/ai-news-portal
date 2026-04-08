@@ -52,18 +52,39 @@ async function sendTelegramMessage(botToken, chatId, text) {
 // Polling interval
 const POLL_INTERVAL_MS = 10000;
 
+/**
+ * PostgREST / composite `RETURNS jobs` rows sometimes arrive as array, nested key, or JSON string.
+ * @param {unknown} raw
+ * @returns {Record<string, unknown> | null}
+ */
+function normalizeJobRow(raw) {
+  if (raw == null) return null;
+  let cur = raw;
+  if (Array.isArray(cur)) cur = cur[0];
+  if (cur == null || typeof cur !== 'object') {
+    if (typeof cur === 'string') {
+      try {
+        const parsed = JSON.parse(cur);
+        return typeof parsed === 'object' && parsed != null ? /** @type {Record<string, unknown>} */ (parsed) : null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+  const o = /** @type {Record<string, unknown>} */ (cur);
+  const nested = o.dequeue_next_job ?? o.jobs;
+  if (nested != null && nested !== o) return normalizeJobRow(nested);
+  return o;
+}
+
 /** Prefer DB RPC `dequeue_next_job` (migration 0005); fall back if RPC missing. */
 async function claimNextJob() {
   const { data: fromRpc, error: rpcErr } = await supabase.rpc('dequeue_next_job');
 
   if (!rpcErr) {
-    const row =
-      fromRpc && typeof fromRpc === 'object'
-        ? Array.isArray(fromRpc)
-          ? fromRpc[0]
-          : fromRpc
-        : null;
-    if (row) return { job: row, mode: 'rpc' };
+    const row = normalizeJobRow(fromRpc);
+    if (row?.id) return { job: row, mode: 'rpc' };
     return { job: null, mode: 'idle' };
   }
 
@@ -114,10 +135,26 @@ export async function processQueue() {
       }
       job = claimed;
 
-      console.log(`\n[SEQUENCER] Processing Job: ${job.url}`);
+      const jobUrl = typeof job.url === 'string' ? job.url.trim() : '';
+      if (!/^https?:\/\//i.test(jobUrl)) {
+        console.warn('[SEQUENCER] Invalid or missing job.url; marking failed. Row keys:', job?.id ? Object.keys(job) : job);
+        if (job.id) {
+          await supabase
+            .from('jobs')
+            .update({
+              status: 'failed',
+              error_log: 'Invalid or missing job.url (check jobs row and dequeue_next_job RPC shape).'
+            })
+            .eq('id', job.id);
+        }
+        await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
+        continue;
+      }
+
+      console.log(`\n[SEQUENCER] Processing Job: ${jobUrl}`);
 
       // 2. EXTRACT
-      const extracted = await extractArticleData(job.url);
+      const extracted = await extractArticleData(jobUrl);
       console.log(`[SEQUENCER] Extracted: ${extracted.length} characters.`);
       
       if (extracted.length < config.limits.minChars || extracted.length > config.limits.maxChars) {
