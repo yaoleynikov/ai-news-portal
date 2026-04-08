@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import { createClient } from "@supabase/supabase-js";
 import fetch from "node-fetch";
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { normalizeGooglePrivateKey } from "../src/lib/pem.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const backendRoot = path.join(__dirname, "..");
@@ -83,13 +84,14 @@ if (!has(process.env.OPENROUTER_API_KEY)) {
     if (has(process.env.OPENROUTER_APP_TITLE)) {
       headers["X-Title"] = process.env.OPENROUTER_APP_TITLE;
     }
+    const useJsonObject = process.env.OPENROUTER_JSON_OBJECT === "1";
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers,
       body: JSON.stringify({
         model: process.env.OPENROUTER_MODEL || "openrouter/auto",
         messages: [{ role: "user", content: 'Reply with JSON: {"ok":true}' }],
-        response_format: { type: "json_object" },
+        ...(useJsonObject ? { response_format: { type: "json_object" } } : {}),
       }),
     });
     if (!res.ok) {
@@ -211,16 +213,19 @@ if (
   row("Google JWT", "skip", "GOOGLE_* missing");
 } else {
   try {
-    const { google } = await import("googleapis");
-    const jwtClient = new google.auth.JWT(
-      process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      null,
-      process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      ["https://www.googleapis.com/auth/indexing"],
-      null
-    );
-    await jwtClient.authorize();
-    row("Google JWT authorize", "pass");
+    const pem = normalizeGooglePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
+    if (!pem.includes("BEGIN") || !pem.includes("PRIVATE KEY")) {
+      row("Google JWT authorize", "fail", "GOOGLE_PRIVATE_KEY does not look like a PEM key");
+    } else {
+      const { google } = await import("googleapis");
+      const jwtClient = new google.auth.JWT({
+        email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        key: pem,
+        scopes: ["https://www.googleapis.com/auth/indexing"],
+      });
+      await jwtClient.authorize();
+      row("Google JWT authorize", "pass");
+    }
   } catch (e) {
     row("Google JWT authorize", "fail", e.message);
   }

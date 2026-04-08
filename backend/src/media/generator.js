@@ -1,10 +1,6 @@
 import fetch from 'node-fetch';
-import sharp from 'sharp';
 import { config } from '../config.js';
-
-// Extremely important for Intel N100 (4-core): 
-// We limit libvips to 1 thread so generating WebP doesn't lag the entire OS.
-sharp.concurrency(1);
+import { loadSharp } from './sharp-loader.js';
 
 /**
  * Creates a premium glassmorphic background using a raw domain logo
@@ -27,34 +23,38 @@ async function generateCompanyCover(domain) {
   }
 
   const logoBuffer = await response.arrayBuffer();
+  const sharp = await loadSharp();
+
+  if (!sharp) {
+    console.warn('[MEDIA] company cover: no sharp — using raw Logo.dev PNG');
+    return {
+      buffer: Buffer.from(logoBuffer),
+      contentType: 'image/png',
+      extension: 'png'
+    };
+  }
 
   // 2. We use sharp to create a sleek dark tech background
-  // For an aesthetic glassmorphism effect without a GPU:
-  // We'll create a dark gradient-like canvas (we use a solid color base and add noise if possible)
   const width = 1200;
   const height = 630;
 
-  // Enhance the logo size and center it (80% of 1200x630 is 960x504)
   const processedLogo = await sharp(Buffer.from(logoBuffer))
     .resize(960, 504, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } })
     .toBuffer();
 
-  // Create a base WebP cover
   const coverBuffer = await sharp({
     create: {
       width,
       height,
       channels: 4,
-      background: { r: 255, g: 255, b: 255, alpha: 1 } // Pure White background
+      background: { r: 255, g: 255, b: 255, alpha: 1 }
     }
   })
-    .composite([
-      { input: processedLogo, gravity: 'center' } // Place logo strictly in the center
-    ])
+    .composite([{ input: processedLogo, gravity: 'center' }])
     .webp({ quality: 85 })
     .toBuffer();
 
-  return coverBuffer;
+  return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
 }
 
 /**
@@ -103,18 +103,31 @@ async function generateAbstractCover(keyword) {
       }
 
       if (!response.ok) {
-        throw new Error(`HF API error: ${response.status} ${response.statusText}`);
+        const errText = await response.text();
+        throw new Error(`HF API error: ${response.status} ${errText.slice(0, 240)}`);
+      }
+
+      const ct = (response.headers.get('content-type') || '').toLowerCase();
+      if (!ct.includes('image')) {
+        const errText = await response.text();
+        throw new Error(`HF returned non-image (${ct || 'no content-type'}): ${errText.slice(0, 240)}`);
       }
 
       const imageBlob = await response.arrayBuffer();
+      const sharp = await loadSharp();
+      const raw = Buffer.from(imageBlob);
 
-      // Convert downloaded image to WebP strictly
-      const coverBuffer = await sharp(Buffer.from(imageBlob))
+      if (!sharp) {
+        console.warn('[MEDIA] abstract cover: no sharp — using HF image as PNG (no resize/WebP)');
+        return { buffer: raw, contentType: 'image/png', extension: 'png' };
+      }
+
+      const coverBuffer = await sharp(raw)
         .resize(1200, 630, { fit: 'cover' })
         .webp({ quality: 85 })
         .toBuffer();
 
-      return coverBuffer;
+      return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
 
     } catch (err) {
       console.error(`[MEDIA] Attempt ${attempts + 1} failed:`, err.message);
@@ -125,10 +138,32 @@ async function generateAbstractCover(keyword) {
   }
 }
 
+/**
+ * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string }>}
+ */
 export async function generateCover(type, keyword) {
   if (type === 'company') {
     return await generateCompanyCover(keyword);
-  } else {
-    return await generateAbstractCover(keyword);
+  }
+  return await generateAbstractCover(keyword);
+}
+
+export const FALLBACK_ABSTRACT_COVER_KEYWORD =
+  'abstract technology innovation neural network light particles cinematic';
+
+/**
+ * Company/logo covers often fail (401, missing domain). Fall back to abstract FLUX like the dev pipeline.
+ * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string, cover_fallback?: boolean }>}
+ */
+export async function generateCoverWithFallback(coverType, coverKeyword) {
+  try {
+    return await generateCover(coverType, coverKeyword);
+  } catch (err) {
+    if (coverType === 'company') {
+      console.warn('[MEDIA] company cover failed, fallback to abstract:', err.message);
+      const out = await generateCover('abstract', FALLBACK_ABSTRACT_COVER_KEYWORD);
+      return { ...out, cover_fallback: true };
+    }
+    throw err;
   }
 }

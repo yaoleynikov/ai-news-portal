@@ -26,7 +26,7 @@ services:
     env_file:
       - .env
     command: ["npm", "run", "worker"]
-    mem_limit: 400m # Needs a bit more RAM for the ONNX CPU model evaluation
+    mem_limit: 512m # ONNX @xenova model + sharp; raise if OOM on cold start
     cpu_shares: 768 # High priority within the N100 bounds
     volumes:
       - hf_cache:/app/.cache

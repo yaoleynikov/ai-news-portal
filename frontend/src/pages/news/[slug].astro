@@ -1,114 +1,151 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { tagUrl, tagThemeSlug, topicOrTagUrl } from '../../lib/tags';
-import { ARTICLES, getArticleBySlug, getNavForSlug, getRelatedForSlug } from '../../data/news';
 import { absoluteUrl, articlePath } from '../../lib/seo';
+import { relatedTopicsForArticle } from '../../lib/taxonomy';
+import {
+  getNewsArticleBySlug,
+  getRelatedArticles,
+  getPrevNextByDate,
+  getTaxonomyArticlePool,
+  getListingArticles
+} from '../../lib/articles-db';
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
 
-export function getStaticPaths() {
-  return ARTICLES.map((a) => ({ params: { slug: a.slug } }));
-}
+export const prerender = false;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=86400'
+);
 
 const { slug } = Astro.params;
-const article = getArticleBySlug(slug ?? '');
+const article = await getNewsArticleBySlug(slug ?? '');
+
 if (!article) {
-  throw new Error(`Unknown article slug: ${slug}`);
+  Astro.response.status = 404;
 }
 
-const relatedArticles = getRelatedForSlug(article.slug);
-const nav = getNavForSlug(article.slug);
+const listingPool = await getListingArticles(60);
+const taxonomyPool = await getTaxonomyArticlePool(150);
+const relatedArticles = article
+  ? await getRelatedArticles(article.slug, article.tags, 6)
+  : [];
+const nav = article
+  ? await getPrevNextByDate(article.created_at, article.slug)
+  : { prev: null, next: null };
 
-const rawHtml = marked.parse(article.content_md);
-const htmlContent = sanitizeHtml(rawHtml, {
-  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
-});
+const exploreTopics = article
+  ? relatedTopicsForArticle(article, taxonomyPool, 10)
+  : [];
 
-const sentimentHigh = article.sentiment >= 7;
-const sentimentLow = article.sentiment < 5;
-const sentimentColor = sentimentHigh ? '#166534' : sentimentLow ? '#991b1b' : '#a16207';
-const sentimentLabel = sentimentHigh
-  ? 'Бычий тренд (позитив)'
-  : sentimentLow
-    ? 'Медвежий тренд (негатив)'
-    : 'Нейтрально';
+let rawHtml = '';
+let htmlContent = '';
+let sentimentColor = '#a16207';
+let sentimentLabel = 'Нейтрально';
+let kickerTag = 'Новости';
+let datePublished = '';
+let dateModified: string | null = null;
+let description = '';
+let canonical = '';
+let jsonLdBlocks: object[] = [];
 
-const kickerTag = article.tags[0] ?? 'Новости';
-const datePublished = new Date(article.created_at).toLocaleDateString('ru-RU', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric'
-});
-const dateModified = article.updated_at
-  ? new Date(article.updated_at).toLocaleDateString('ru-RU', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
-  : null;
+if (article) {
+  rawHtml = marked.parse(article.content_md);
+  htmlContent = sanitizeHtml(rawHtml, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+  });
 
-const description =
-  article.dek ||
-  `${article.content_md.substring(0, 160).replace(/[#*]/g, '').trim()}...`;
+  const sentimentHigh = article.sentiment >= 7;
+  const sentimentLow = article.sentiment < 5;
+  sentimentColor = sentimentHigh ? '#166534' : sentimentLow ? '#991b1b' : '#a16207';
+  sentimentLabel = sentimentHigh
+    ? 'Бычий тренд (позитив)'
+    : sentimentLow
+      ? 'Медвежий тренд (негатив)'
+      : 'Нейтрально';
 
-const canonical = absoluteUrl(articlePath(article.slug), Astro.site ?? 'https://siliconfeed.online');
-
-const newsLd = {
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  headline: article.title,
-  image: [article.cover_url],
-  datePublished: article.created_at,
-  dateModified: article.updated_at ?? article.created_at,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  author: [
-    {
-      '@type': 'Organization',
-      name: 'Редакция SiliconFeed',
-      url: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online')
-    }
-  ]
-};
-
-const breadcrumbLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Главная', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: kickerTag,
-      item: absoluteUrl(topicOrTagUrl(kickerTag), Astro.site ?? 'https://siliconfeed.online')
-    },
-    {
-      '@type': 'ListItem',
-      position: 3,
-      name: article.title,
-      item: canonical
-    }
-  ]
-};
-
-const faqLd =
-  article.faq && article.faq.length > 0
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: article.faq.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: f.a
-          }
-        }))
-      }
+  kickerTag = article.tags[0] ?? 'Новости';
+  datePublished = new Date(article.created_at).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  dateModified = article.updated_at
+    ? new Date(article.updated_at).toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      })
     : null;
 
-const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumbLd];
+  description =
+    article.dek ||
+    `${article.content_md.substring(0, 160).replace(/[#*]/g, '').trim()}...`;
+
+  canonical = absoluteUrl(articlePath(article.slug), Astro.site ?? 'https://siliconfeed.online');
+
+  const newsLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: article.title,
+    image: [article.cover_url],
+    datePublished: article.created_at,
+    dateModified: article.updated_at ?? article.created_at,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    author: [
+      {
+        '@type': 'Organization',
+        name: 'Редакция SiliconFeed',
+        url: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online')
+      }
+    ]
+  };
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Главная', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: kickerTag,
+        item: absoluteUrl(topicOrTagUrl(kickerTag), Astro.site ?? 'https://siliconfeed.online')
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: canonical
+      }
+    ]
+  };
+
+  const faqLd =
+    article.faq && article.faq.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: article.faq.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: f.a
+            }
+          }))
+        }
+      : null;
+
+  jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumbLd];
+}
+
 ---
 
+{
+  article ? (
 <Layout
   title={article.title}
   description={description}
@@ -116,6 +153,7 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
   ogType="article"
   canonicalUrl={canonical}
   jsonLd={jsonLdBlocks}
+  navArticlePool={listingPool}
 >
   <article class="glass article-sheet">
     <img src={article.cover_url} alt={article.title} class="article-hero" loading="eager" />
@@ -153,6 +191,12 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
         ))}
       </div>
 
+      <p class="article-meta-links">
+        Рубрики и метки — в меню «Темы» в шапке
+        <span class="article-meta-links__sep" aria-hidden="true">·</span>
+        <a href="/search">Поиск по ленте</a>
+      </p>
+
       <div class="article-layout">
         <div class="article-main">
           <div class="prose" set:html={htmlContent} />
@@ -165,7 +209,7 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
 
           <nav class="article-pagination" aria-label="Соседние материалы">
             {
-              nav.prev ? (
+              nav?.prev ? (
                 <a href={articlePath(nav.prev.slug)} class="article-pagination__link">
                   <span class="article-pagination__dir">Ранее</span>
                   <span class="article-pagination__title">{nav.prev.title}</span>
@@ -175,7 +219,7 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
               )
             }
             {
-              nav.next ? (
+              nav?.next ? (
                 <a href={articlePath(nav.next.slug)} class="article-pagination__link article-pagination__link--next">
                   <span class="article-pagination__dir">Далее</span>
                   <span class="article-pagination__title">{nav.next.title}</span>
@@ -208,6 +252,24 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
               </div>
             ))}
           </div>
+
+          {
+            exploreTopics.length > 0 && (
+              <div class="aside-panel">
+                <h4 class="aside-panel__label">Рядом по смыслу</h4>
+                <ul class="aside-topic-list">
+                  {exploreTopics.map((t) => (
+                    <li>
+                      <a href={t.href} class="aside-topic-list__link">
+                        {t.label}
+                        <span class="aside-topic-list__kind">{t.kind === 'rubric' ? 'рубрика' : 'метка'}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
         </aside>
       </div>
 
@@ -252,6 +314,22 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
     </div>
   </article>
 </Layout>
+  ) : (
+<Layout
+  title="Страница не найдена"
+  description="Такого материала нет в ленте SiliconFeed."
+  ogType="website"
+  canonicalUrl={absoluteUrl(Astro.url.pathname, Astro.site ?? 'https://siliconfeed.online')}
+  noindex={true}
+  navArticlePool={listingPool}
+>
+  <div class="glass article-sheet" style="padding: 2rem; text-align: center;">
+    <h1 class="article-title">404</h1>
+    <p>Материал не найден. Вернитесь на <a href="/">главную</a>.</p>
+  </div>
+</Layout>
+  )
+}
 
 <style>
   .article-main {
@@ -265,6 +343,60 @@ const jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumb
   }
 
   .article-meta {
-    margin-bottom: 1.75rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .article-meta-links {
+    margin: 0 0 1.75rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .article-meta-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .article-meta-links a:hover {
+    color: var(--accent);
+  }
+
+  .article-meta-links__sep {
+    margin: 0 0.35rem;
+    color: var(--text-faint);
+  }
+
+  .aside-topic-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aside-topic-list li + li {
+    margin-top: 0.5rem;
+  }
+
+  .aside-topic-list__link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .aside-topic-list__link:hover {
+    color: var(--accent);
+  }
+
+  .aside-topic-list__kind {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
   }
 </style>

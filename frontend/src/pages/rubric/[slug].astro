@@ -1,21 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ListingToolbar from '../../components/ListingToolbar.astro';
 import { NAV_TOPICS, articleMatchesTopic, tagUrl, tagThemeSlug } from '../../lib/tags';
-import { MOCK_ARTICLES } from '../../data/mock-articles';
 import { articlePath } from '../../lib/seo';
+import { publicationYears, relatedTopicsForSlug } from '../../lib/taxonomy';
+import { getListingArticles } from '../../lib/articles-db';
+
+export const prerender = false;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=3600'
+);
 
 function rubricLabel(slug: string): string {
   const topic = NAV_TOPICS.find((t) => t.slug === slug);
   return topic?.label ?? slug;
 }
 
-export function getStaticPaths() {
-  return NAV_TOPICS.map((t) => ({ params: { slug: t.slug } }));
-}
-
+const pool = await getListingArticles(80);
 const { slug } = Astro.params;
 const label = slug ? rubricLabel(slug) : '';
-const list = MOCK_ARTICLES.filter((a) => articleMatchesTopic(a.tags, slug ?? ''));
+const list = pool.filter((a) => articleMatchesTopic(a.tags, slug ?? ''));
+const years = publicationYears(list.length > 0 ? list : pool);
+const related = slug ? relatedTopicsForSlug(pool, slug, 14) : [];
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('ru-RU', {
@@ -30,25 +38,62 @@ function formatListDate(iso: string) {
   title={label ? `Рубрика: ${label}` : 'Рубрика'}
   description={`Материалы SiliconFeed в рубрике «${label}».`}
   ogType="website"
+  navArticlePool={pool}
 >
   <div class="tag-page">
     <header class="tag-page__head">
+      <nav class="tag-page__crumb" aria-label="Навигация">
+        <a href="/">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span class="tag-page__crumb-current">{label}</span>
+      </nav>
       <p class="tag-page__kicker">Рубрика</p>
       <h1 class="tag-page__title">{label}</h1>
       <p class="tag-page__lead">
-        Редакционная тема из шапки сайта; URL стабильны для SEO. Узкие метки смотрите в разделе тегов у материалов.
+        Редакционный раздел. Остальные рубрики и метки — в меню <strong>Темы</strong> в шапке; по текстам —{' '}
+        <a href="/search">поиск</a>.
       </p>
     </header>
 
     {
+      related.length > 0 && (
+        <section class="tag-page__related" aria-labelledby="related-rubric-tags">
+          <h2 id="related-rubric-tags" class="tag-page__related-title">
+            Связанные метки
+          </h2>
+          <p class="tag-page__related-lead">Встречаются рядом с материалами этой рубрики.</p>
+          <ul class="tag-page__related-list">
+            {related.map((t) => (
+              <li>
+                <a href={t.href} class="tag-page__related-link" data-tag-related={t.kind}>
+                  <span>{t.label}</span>
+                  <span class="tag-page__related-meta">
+                    {t.kind === 'rubric' ? 'рубрика' : 'метка'} · {t.count}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
       list.length === 0 ? (
         <p class="tag-page__empty">
-          Пока нет материалов в этой рубрике — зайдите позже или откройте <a href="/">главную</a>.
+          Пока нет материалов в этой рубрике — меню «Темы» в шапке или <a href="/">главная</a>.
         </p>
       ) : (
-        <ul class="tag-page__list">
+        <>
+          <ListingToolbar years={years} />
+          <ul class="tag-page__list" data-listing-list>
           {list.map((article) => (
-            <li class="tag-page__li">
+            <li
+              class="tag-page__li"
+              data-listing-item
+              data-ts={new Date(article.created_at).getTime()}
+              data-year={new Date(article.created_at).getFullYear()}
+            >
               <article class="tag-page__card">
                 <div class="tag-page__body">
                   <h2 class="tag-page__card-title">
@@ -73,6 +118,7 @@ function formatListDate(iso: string) {
             </li>
           ))}
         </ul>
+        </>
       )
     }
   </div>

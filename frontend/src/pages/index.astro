@@ -1,10 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { tagUrl, tagThemeSlug } from '../lib/tags';
-import { MOCK_ARTICLES } from '../data/mock-articles';
 import { absoluteUrl, articlePath } from '../lib/seo';
+import { getListingArticles } from '../lib/articles-db';
 
-const articles = MOCK_ARTICLES;
+export const prerender = false;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=60, stale-while-revalidate=3600'
+);
+
+const articles = await getListingArticles(40);
 const [featured, ...rest] = articles;
 
 function formatListDate(iso: string) {
@@ -49,6 +56,7 @@ function formatFeaturedStamp(iso: string) {
   ogType="website"
   canonicalUrl={absoluteUrl('/', siteOrigin)}
   jsonLd={websiteLd}
+  navArticlePool={articles}
 >
   <div class="home-page">
     <h1 class="visually-hidden">SiliconFeed — лента IT и AI</h1>

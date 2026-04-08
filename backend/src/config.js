@@ -49,7 +49,9 @@ export const config = {
     minChars: 500,
     maxChars: 10000,
     similarityThreshold: 0.85,
-  }
+  },
+  /** Canonical site origin for Telegram / Google links (no trailing slash). */
+  publicSiteUrl: (process.env.PUBLIC_SITE_URL || 'https://siliconfeed.online').replace(/\/$/, ''),
 };
 
 // Initialize centralized Supabase Client with service role to bypass RLS for background jobs

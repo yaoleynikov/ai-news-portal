@@ -15,10 +15,11 @@
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^10.0.4",
+    "@supabase/supabase-js": "^2.102.1",
     "astro": "^6.1.4",
     "marked": "^18.0.0",
-    "sanitize-html": "^2.17.2",
     "rehype-slug": "^6.0.0",
-    "remark-toc": "^9.0.0"
+    "remark-toc": "^9.0.0",
+    "sanitize-html": "^2.17.2"
   }
 }

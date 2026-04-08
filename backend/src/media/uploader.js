@@ -35,11 +35,17 @@ export async function uploadToR2(buffer, filename, mimeType = 'image/webp') {
 
     await client.send(command);
 
-    // If you have a custom domain attached to R2, you'd construct the URL like this:
-    // This assumes the bucket is public or mapped to a custom domain.
-    // In production, configure the public URL prefix in .env.
-    const publicUrlPrefix = process.env.R2_PUBLIC_URL || `https://${config.media.r2.bucket}.r2.cloudflarestorage.com`;
-    return `${publicUrlPrefix}/${filename}`;
+    const fromEnv = (process.env.R2_PUBLIC_URL || '').trim().replace(/\/$/, '');
+    const fallback = `https://${config.media.r2.bucket}.r2.cloudflarestorage.com`;
+    const publicUrlPrefix = fromEnv || fallback;
+    if (!fromEnv) {
+      console.warn(
+        '[UPLOADER] R2_PUBLIC_URL не задан — в cover_url попадёт S3 API host (*.r2.cloudflarestorage.com), браузер часто не отдаёт объект. ' +
+          'Укажите публичный URL бакета (R2 → Public access → r2.dev или свой домен), например https://pub-xxxx.r2.dev'
+      );
+    }
+    const path = filename.startsWith('/') ? filename : `/${filename}`;
+    return `${publicUrlPrefix.replace(/\/$/, '')}${path}`;
   } catch (err) {
     console.error(`[UPLOADER] Failed to upload ${filename}:`, err.message);
     throw err;

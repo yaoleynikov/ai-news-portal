@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { publicationYears } from '../lib/taxonomy';
+import { getListingArticles } from '../lib/articles-db';
+
+export const prerender = false;
+
+const pool = await getListingArticles(80);
+const years = publicationYears(pool);
+---
+
+<Layout
+  title="Поиск"
+  description="Поиск материалов SiliconFeed по заголовку, анонсу и тегам."
+  ogType="website"
+  navArticlePool={pool}
+>
+  <div class="search-page">
+    <header class="search-page__head">
+      <nav class="search-page__crumb" aria-label="Навигация">
+        <a href="/">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span class="search-page__crumb-current">Поиск</span>
+      </nav>
+      <h1 class="search-page__title">Поиск по ленте</h1>
+      <p class="search-page__lead">
+        Индекс обновляется при публикации сайта. Учитываются заголовок, анонс и теги. Список рубрик и меток — в меню{' '}
+        <strong>Темы</strong> в шапке.
+      </p>
+    </header>
+
+    <div class="search-page__controls">
+      <label class="search-page__field">
+        <span class="search-page__label">Запрос</span>
+        <input
+          type="search"
+          class="search-page__input"
+          id="search-q"
+          placeholder="Например, N100 или Linux"
+          autocomplete="off"
+        />
+      </label>
+      <label class="search-page__field">
+        <span class="search-page__label">Год</span>
+        <select class="search-page__select" id="search-year">
+          <option value="">Все годы</option>
+          {years.map((y) => <option value={String(y)}>{y}</option>)}
+        </select>
+      </label>
+    </div>
+
+    <p class="search-page__status" id="search-status" aria-live="polite"></p>
+    <ul class="search-page__list" id="search-results" hidden></ul>
+    <p class="search-page__empty" id="search-empty" hidden>Ничего не найдено — смените запрос или год.</p>
+  </div>
+
+  <script is:inline>
+    document.addEventListener('astro:page-load', () => {
+      const input = document.getElementById('search-q');
+      const yearSel = document.getElementById('search-year');
+      const list = document.getElementById('search-results');
+      const empty = document.getElementById('search-empty');
+      const status = document.getElementById('search-status');
+      if (
+        !(input instanceof HTMLInputElement) ||
+        !(yearSel instanceof HTMLSelectElement) ||
+        !(list instanceof HTMLUListElement) ||
+        !(empty instanceof HTMLParagraphElement) ||
+        !(status instanceof HTMLParagraphElement)
+      ) {
+        return;
+      }
+
+      let index = [];
+      let debounce = null;
+
+      function norm(s) {
+        return (s || '').toLowerCase();
+      }
+
+      function matches(item, q, year) {
+        if (year) {
+          const y = new Date(item.created_at).getFullYear();
+          if (String(y) !== year) return false;
+        }
+        if (!q) return true;
+        const hay = norm([item.title, item.excerpt, ...(item.tags || [])].join(' '));
+        return hay.includes(q);
+      }
+
+      function render() {
+        const q = norm(input.value.trim());
+        const year = yearSel.value;
+        const hits = index.filter((item) => matches(item, q, year));
+        list.innerHTML = '';
+        if (index.length === 0) {
+          status.textContent = 'Загрузка индекса…';
+          list.hidden = true;
+          empty.hidden = true;
+          return;
+        }
+        const filtered = q || year;
+        status.textContent =
+          hits.length === 0
+            ? filtered
+              ? 'Нет совпадений'
+              : `Все материалы: ${hits.length}`
+            : filtered
+              ? `Найдено: ${hits.length}`
+              : `Все материалы: ${hits.length}`;
+        if (hits.length === 0) {
+          list.hidden = true;
+          empty.hidden = !filtered;
+          return;
+        }
+        empty.hidden = true;
+        list.hidden = false;
+        for (const item of hits) {
+          const li = document.createElement('li');
+          li.className = 'search-page__li';
+          const y = new Date(item.created_at).getFullYear();
+          const tagStr = (item.tags || []).join(', ');
+          const link = document.createElement('a');
+          link.href = item.path;
+          link.textContent = item.title;
+          const excerpt = document.createElement('p');
+          excerpt.className = 'search-page__excerpt';
+          excerpt.textContent = item.excerpt || '';
+          const meta = document.createElement('div');
+          meta.className = 'search-page__meta';
+          meta.textContent = String(y) + (tagStr ? ' · ' + tagStr : '');
+          li.append(link, excerpt, meta);
+          list.appendChild(li);
+        }
+      }
+
+      async function load() {
+        try {
+          const r = await fetch('/search-index.json');
+          index = await r.json();
+        } catch {
+          index = [];
+          status.textContent = 'Не удалось загрузить индекс';
+        }
+        render();
+      }
+
+      input.addEventListener('input', () => {
+        clearTimeout(debounce);
+        debounce = setTimeout(render, 200);
+      });
+      yearSel.addEventListener('change', render);
+      load();
+    });
+  </script>
+</Layout>

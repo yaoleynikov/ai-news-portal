@@ -1,0 +1,72 @@
+---
+interface Props {
+  years: number[];
+}
+
+const { years } = Astro.props;
+---
+
+<div class="listing-toolbar" data-listing-toolbar aria-label="Фильтр списка">
+  <div class="listing-toolbar__inner">
+    <label class="listing-toolbar__field">
+      <span class="listing-toolbar__label">Год</span>
+      <select class="listing-toolbar__select" data-listing-year>
+        <option value="">Все годы</option>
+        {years.map((y) => <option value={String(y)}>{y}</option>)}
+      </select>
+    </label>
+    <label class="listing-toolbar__field">
+      <span class="listing-toolbar__label">Сортировка</span>
+      <select class="listing-toolbar__select" data-listing-sort>
+        <option value="new">Сначала новые</option>
+        <option value="old">Сначала старые</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<script>
+  function applyListingFilters(toolbar: HTMLElement) {
+    const page = toolbar.closest('.tag-page');
+    const list = page?.querySelector('[data-listing-list]');
+    if (!(list instanceof HTMLElement)) return;
+
+    const yearSel = toolbar.querySelector('[data-listing-year]');
+    const sortSel = toolbar.querySelector('[data-listing-sort]');
+    if (!(yearSel instanceof HTMLSelectElement) || !(sortSel instanceof HTMLSelectElement)) return;
+
+    const year = yearSel.value;
+    const sort = sortSel.value;
+    const items = [...list.querySelectorAll<HTMLElement>('[data-listing-item]')];
+
+    for (const li of items) {
+      const y = li.dataset.year ?? '';
+      const match = !year || y === year;
+      li.hidden = !match;
+    }
+
+    const visible = items.filter((li) => !li.hidden);
+    const hidden = items.filter((li) => li.hidden);
+    const mult = sort === 'old' ? 1 : -1;
+    visible.sort((a, b) => mult * (Number(b.dataset.ts) - Number(a.dataset.ts)));
+
+    for (const li of visible) {
+      list.appendChild(li);
+    }
+    for (const li of hidden) {
+      list.appendChild(li);
+    }
+  }
+
+  function wireToolbar(toolbar: HTMLElement) {
+    const yearSel = toolbar.querySelector('[data-listing-year]');
+    const sortSel = toolbar.querySelector('[data-listing-sort]');
+    yearSel?.addEventListener('change', () => applyListingFilters(toolbar));
+    sortSel?.addEventListener('change', () => applyListingFilters(toolbar));
+    applyListingFilters(toolbar);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-listing-toolbar]').forEach(wireToolbar);
+  });
+</script>

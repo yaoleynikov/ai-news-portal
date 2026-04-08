@@ -1,18 +1,23 @@
+import type { APIRoute } from 'astro';
 import rss from '@astrojs/rss';
-import { ARTICLES } from '../data/news';
+import { getListingArticles } from '../lib/articles-db';
 import { articlePath } from '../lib/seo';
 
-export async function GET(context) {
+export const prerender = false;
+
+export const GET: APIRoute = async (context) => {
+  const articles = await getListingArticles(60);
+
   return rss({
     title: 'SiliconFeed',
     description: 'Лента свежих IT и технологических новостей.',
-    site: context.site,
-    items: ARTICLES.map((a) => ({
+    site: context.site ?? 'https://siliconfeed.online',
+    items: articles.map((a) => ({
       title: a.title,
       pubDate: new Date(a.created_at),
-      description: a.excerpt || a.dek,
+      description: a.excerpt,
       link: articlePath(a.slug)
     })),
     customData: `<language>ru</language>`
   });
-}
+};

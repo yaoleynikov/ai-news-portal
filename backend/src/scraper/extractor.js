@@ -10,9 +10,9 @@ export async function extractArticleData(url) {
   try {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
       },
-      timeout: 10000 // 10 second timeout
+      signal: AbortSignal.timeout(25000)
     });
 
     if (!response.ok) {

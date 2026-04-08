@@ -1,0 +1,339 @@
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { ARTICLES, getArticleBySlug as getStaticArticleBySlug, type NewsArticle } from '../data/news';
+import type { MockArticle } from '../data/mock-articles';
+
+const CARD_FIELDS =
+  'id, slug, title, content_md, tags, cover_url, created_at, source_url, faq, entities, sentiment, status';
+
+/** Публичный r2.dev этого проекта; используется только если в URL обложки host siliconfeed.r2.cloudflarestorage.com и env на хостинге пустой. */
+const SILICONFEED_R2_PUBLIC_DEFAULT = 'https://pub-ffc5900a06d64e009bb6babb2d096132.r2.dev';
+
+function r2PublicBaseForUrl(raw: string): string | undefined {
+  const fromVite = (import.meta.env.PUBLIC_R2_PUBLIC_URL as string | undefined)?.trim().replace(/\/$/, '');
+  if (fromVite) return fromVite;
+  const proc = typeof process !== 'undefined' ? process.env : undefined;
+  const fromNode =
+    proc?.['R2_PUBLIC_URL']?.trim().replace(/\/$/, '') ||
+    proc?.['PUBLIC_R2_PUBLIC_URL']?.trim().replace(/\/$/, '');
+  if (fromNode) return fromNode;
+  if (/siliconfeed\.r2\.cloudflarestorage\.com/i.test(raw)) {
+    return SILICONFEED_R2_PUBLIC_DEFAULT.replace(/\/$/, '');
+  }
+  return undefined;
+}
+
+/**
+ * Старые записи могли сохранить S3 API host (*.r2.cloudflarestorage.com), который не годится для <img src>.
+ * На Vercel задайте R2_PUBLIC_URL или PUBLIC_R2_PUBLIC_URL (тот же базовый URL, что в backend/.env для воркера).
+ */
+export function normalizeCoverUrl(url: string): string {
+  const raw = typeof url === 'string' ? url.trim() : '';
+  if (!raw) return '';
+  if (!/r2\.cloudflarestorage\.com/i.test(raw)) return raw;
+  const base = r2PublicBaseForUrl(raw);
+  if (!base) return raw;
+  try {
+    const u = new URL(raw);
+    return `${base}${u.pathname}${u.search}`;
+  } catch {
+    return raw;
+  }
+}
+
+const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
+  ({ id, slug, title, excerpt, cover_url, tags, created_at }) => ({
+    id,
+    slug,
+    title,
+    excerpt,
+    cover_url,
+    tags,
+    created_at
+  })
+);
+
+/** Vercel serverless заполняет process.env; локально — import.meta.env.PUBLIC_* или .env. */
+function supabaseUrl(): string | undefined {
+  if (typeof process !== 'undefined') {
+    const u = process.env.PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+    if (u?.trim()) return u.trim();
+  }
+  const p = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
+  return p?.trim() || undefined;
+}
+
+function supabaseKey(): string | undefined {
+  if (typeof process !== 'undefined') {
+    const k =
+      process.env.PUBLIC_SUPABASE_ANON_KEY ||
+      process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      process.env.SUPABASE_KEY;
+    if (k?.trim()) return k.trim();
+  }
+  const p = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+  return p?.trim() || undefined;
+}
+
+function getServerClient(): SupabaseClient | null {
+  const url = supabaseUrl();
+  const key = supabaseKey();
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
+
+function excerptFromMarkdown(md: string, max = 220): string {
+  const plain = md
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (plain.length <= max) return plain;
+  return `${plain.slice(0, max - 1)}…`;
+}
+
+export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | null {
+  const slug = typeof row.slug === 'string' ? row.slug.trim() : '';
+  if (!slug) return null;
+  const id = String(row.id ?? '');
+  const title = String(row.title ?? '');
+  const content_md = String(row.content_md ?? '');
+  const tags = Array.isArray(row.tags) ? (row.tags as string[]).filter((t) => typeof t === 'string') : [];
+  const cover_url = normalizeCoverUrl(typeof row.cover_url === 'string' ? row.cover_url : '');
+  const created_at = typeof row.created_at === 'string' ? row.created_at : new Date().toISOString();
+  const source_url = typeof row.source_url === 'string' ? row.source_url : '';
+  const sentiment = typeof row.sentiment === 'number' ? row.sentiment : 5;
+  let faq: { q: string; a: string }[] = [];
+  if (Array.isArray(row.faq)) {
+    faq = row.faq
+      .filter((x): x is { q: string; a: string } => x && typeof x === 'object' && 'q' in x && 'a' in x)
+      .map((x) => ({ q: String(x.q), a: String(x.a) }));
+  }
+  let entities: { name: string; desc: string }[] = [];
+  if (Array.isArray(row.entities)) {
+    entities = row.entities
+      .filter((x): x is { name: string; desc: string } => x && typeof x === 'object' && 'name' in x)
+      .map((x) => ({ name: String(x.name), desc: String((x as { desc?: string }).desc ?? '') }));
+  }
+  const dek = excerptFromMarkdown(content_md, 260);
+  return {
+    id,
+    slug,
+    title,
+    dek,
+    excerpt: dek.slice(0, 200),
+    content_md,
+    cover_url,
+    tags,
+    created_at,
+    updated_at: typeof row.updated_at === 'string' ? row.updated_at : undefined,
+    source_url,
+    faq,
+    entities,
+    sentiment
+  };
+}
+
+function toMock(a: NewsArticle): MockArticle {
+  return {
+    id: a.id,
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.excerpt,
+    cover_url: a.cover_url,
+    tags: a.tags,
+    created_at: a.created_at
+  };
+}
+
+/** Карточки для главной, рубрик, тегов: из БД + запасной статический набор. */
+export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
+  const supabase = getServerClient();
+  if (!supabase) return MOCK_FALLBACK;
+
+  const { data, error } = await supabase
+    .from('articles')
+    .select(CARD_FIELDS)
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error || !data?.length) {
+    return MOCK_FALLBACK;
+  }
+
+  const out: MockArticle[] = [];
+  for (const row of data) {
+    const a = rowToNewsArticle(row as Record<string, unknown>);
+    if (a) out.push(toMock(a));
+  }
+  return out.length ? out : MOCK_FALLBACK;
+}
+
+export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
+  if (!slug) return null;
+  const supabase = getServerClient();
+  if (!supabase) {
+    return getStaticArticleBySlug(slug) ?? null;
+  }
+
+  const { data, error } = await supabase
+    .from('articles')
+    .select(CARD_FIELDS)
+    .eq('status', 'published')
+    .eq('slug', slug)
+    .maybeSingle();
+
+  if (error || !data) {
+    return getStaticArticleBySlug(slug) ?? null;
+  }
+
+  return rowToNewsArticle(data as Record<string, unknown>);
+}
+
+export async function getRelatedArticles(
+  excludeSlug: string,
+  tagHints: string[],
+  limit = 6
+): Promise<{ slug: string; title: string; cover_url: string }[]> {
+  const supabase = getServerClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from('articles')
+    .select('slug, title, cover_url, tags, created_at')
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .neq('slug', excludeSlug)
+    .order('created_at', { ascending: false })
+    .limit(40);
+
+  if (error || !data?.length) return [];
+
+  const hints = new Set(tagHints.map((t) => t.toLowerCase()));
+  const scored = data
+    .filter((r) => typeof r.slug === 'string')
+    .map((r) => {
+      const tags = Array.isArray(r.tags) ? (r.tags as string[]) : [];
+      let score = 0;
+      for (const t of tags) {
+        if (hints.has(t.toLowerCase())) score += 2;
+      }
+      return {
+        slug: r.slug as string,
+        title: String(r.title ?? ''),
+        cover_url: normalizeCoverUrl(String(r.cover_url ?? '')),
+        score,
+        t: new Date(String(r.created_at ?? 0)).getTime()
+      };
+    })
+    .sort((a, b) => b.score - a.score || b.t - a.t)
+    .slice(0, limit);
+
+  return scored.map(({ slug, title, cover_url }) => ({ slug, title, cover_url }));
+}
+
+export async function getPrevNextByDate(
+  createdAt: string,
+  excludeSlug: string
+): Promise<{ prev: { slug: string; title: string } | null; next: { slug: string; title: string } | null }> {
+  const supabase = getServerClient();
+  if (!supabase) {
+    return { prev: null, next: null };
+  }
+
+  const t = createdAt;
+
+  const { data: older } = await supabase
+    .from('articles')
+    .select('slug, title, created_at')
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .neq('slug', excludeSlug)
+    .lt('created_at', t)
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  const { data: newer } = await supabase
+    .from('articles')
+    .select('slug, title, created_at')
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .neq('slug', excludeSlug)
+    .gt('created_at', t)
+    .order('created_at', { ascending: true })
+    .limit(1);
+
+  const prevRow = older?.[0];
+  const nextRow = newer?.[0];
+
+  return {
+    prev:
+      prevRow && typeof prevRow.slug === 'string'
+        ? { slug: prevRow.slug, title: String(prevRow.title ?? '') }
+        : null,
+    next:
+      nextRow && typeof nextRow.slug === 'string'
+        ? { slug: nextRow.slug, title: String(nextRow.title ?? '') }
+        : null
+  };
+}
+
+/** Для перелинковки «рядом по смыслу» — пул slug+tags из свежих материалов. */
+export async function getTaxonomyArticlePool(limit = 120): Promise<{ slug: string; tags: string[] }[]> {
+  const supabase = getServerClient();
+  if (!supabase) {
+    return ARTICLES.map((a) => ({ slug: a.slug, tags: a.tags }));
+  }
+
+  const { data, error } = await supabase
+    .from('articles')
+    .select('slug, tags')
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error || !data?.length) {
+    return ARTICLES.map((a) => ({ slug: a.slug, tags: a.tags }));
+  }
+
+  return data
+    .filter((r) => typeof r.slug === 'string')
+    .map((r) => ({
+      slug: r.slug as string,
+      tags: Array.isArray(r.tags) ? (r.tags as string[]) : []
+    }));
+}
+
+export async function listAllPublishedSlugs(): Promise<string[]> {
+  const supabase = getServerClient();
+  if (!supabase) return ARTICLES.map((a) => a.slug);
+
+  const { data, error } = await supabase.from('articles').select('slug').eq('status', 'published').not('slug', 'is', null);
+
+  if (error || !data) return ARTICLES.map((a) => a.slug);
+  return data.map((r) => r.slug).filter((s): s is string => typeof s === 'string');
+}
+
+export async function getArticleIdSlugMap(): Promise<Map<string, string>> {
+  const supabase = getServerClient();
+  const map = new Map<string, string>();
+  if (!supabase) {
+    for (const a of ARTICLES) map.set(a.id, a.slug);
+    return map;
+  }
+
+  const { data, error } = await supabase.from('articles').select('id, slug').eq('status', 'published').not('slug', 'is', null);
+
+  if (!error && data) {
+    for (const r of data) {
+      if (r.id && r.slug) map.set(String(r.id), String(r.slug));
+    }
+  }
+  if (map.size === 0) {
+    for (const a of ARTICLES) map.set(a.id, a.slug);
+  }
+  return map;
+}

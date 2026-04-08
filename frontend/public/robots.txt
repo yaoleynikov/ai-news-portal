@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://siliconfeed.online/sitemap-index.xml
+Sitemap: https://siliconfeed.online/news-sitemap.xml

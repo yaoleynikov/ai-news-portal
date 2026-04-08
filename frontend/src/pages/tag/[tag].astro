@@ -1,8 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { NAV_TOPICS, articleMatchesTopic, slugifyTag, tagUrl, tagThemeSlug } from '../../lib/tags';
-import { MOCK_ARTICLES } from '../../data/mock-articles';
+import ListingToolbar from '../../components/ListingToolbar.astro';
+import { NAV_TOPICS, articleMatchesTopic, tagUrl, tagThemeSlug } from '../../lib/tags';
 import { articlePath } from '../../lib/seo';
+import { publicationYears, relatedTopicsForSlug } from '../../lib/taxonomy';
+import { getListingArticles } from '../../lib/articles-db';
+
+export const prerender = false;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=3600'
+);
 
 function tagLabel(slug: string): string {
   const topic = NAV_TOPICS.find((t) => t.slug === slug);
@@ -13,17 +22,13 @@ function tagLabel(slug: string): string {
     .join(' ');
 }
 
-export function getStaticPaths() {
-  const allSlugs = new Set<string>();
-  NAV_TOPICS.forEach((t) => allSlugs.add(t.slug));
-  MOCK_ARTICLES.forEach((a) => a.tags.forEach((t) => allSlugs.add(slugifyTag(t))));
-  return [...allSlugs].map((slug) => ({ params: { tag: slug } }));
-}
-
+const pool = await getListingArticles(80);
 const { tag } = Astro.params;
 const label = tag ? tagLabel(tag) : '';
 
-const list = MOCK_ARTICLES.filter((a) => articleMatchesTopic(a.tags, tag ?? ''));
+const list = pool.filter((a) => articleMatchesTopic(a.tags, tag ?? ''));
+const years = publicationYears(list.length > 0 ? list : pool);
+const related = tag ? relatedTopicsForSlug(pool, tag, 14) : [];
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('ru-RU', {
@@ -38,24 +43,62 @@ function formatListDate(iso: string) {
   title={label ? `Метка: ${label}` : 'Метка'}
   description={`Материалы SiliconFeed с меткой «${label}».`}
   ogType="website"
+  navArticlePool={pool}
 >
   <div class="tag-page">
     <header class="tag-page__head">
+      <nav class="tag-page__crumb" aria-label="Навигация">
+        <a href="/">Главная</a>
+        <span aria-hidden="true">/</span>
+        <span class="tag-page__crumb-current">{label}</span>
+      </nav>
       <p class="tag-page__kicker">Метка</p>
       <h1 class="tag-page__title">{label}</h1>
       <p class="tag-page__lead">
-        Подборка по тегу из материалов. Редакционные рубрики (AI, Hardware, Open Source) — в разделе{' '}
-        <a href="/rubric/ai">рубрик</a>.
+        Подборка по тегу. Рубрики и все метки — в выпадающем меню <strong>Темы</strong> в шапке; по текстам удобнее{' '}
+        <a href="/search">поиск</a>.
       </p>
     </header>
 
     {
+      related.length > 0 && (
+        <section class="tag-page__related" aria-labelledby="related-tags-heading">
+          <h2 id="related-tags-heading" class="tag-page__related-title">
+            Связанные метки
+          </h2>
+          <p class="tag-page__related-lead">По пересечению с этими материалами — для перелинковки и навигации.</p>
+          <ul class="tag-page__related-list">
+            {related.map((t) => (
+              <li>
+                <a href={t.href} class="tag-page__related-link" data-tag-related={t.kind}>
+                  <span>{t.label}</span>
+                  <span class="tag-page__related-meta">
+                    {t.kind === 'rubric' ? 'рубрика' : 'метка'} · {t.count}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
       list.length === 0 ? (
-        <p class="tag-page__empty">Пока нет материалов в этой рубрике — зайдите позже или откройте <a href="/">главную</a>.</p>
+        <p class="tag-page__empty">
+          Пока нет материалов с этой меткой — откройте меню «Темы» в шапке или <a href="/">главную</a>.
+        </p>
       ) : (
-        <ul class="tag-page__list">
+        <>
+          <ListingToolbar years={years} />
+          <ul class="tag-page__list" data-listing-list>
           {list.map((article) => (
-            <li class="tag-page__li">
+            <li
+              class="tag-page__li"
+              data-listing-item
+              data-ts={new Date(article.created_at).getTime()}
+              data-year={new Date(article.created_at).getFullYear()}
+            >
               <article class="tag-page__card">
                 <div class="tag-page__body">
                   <h2 class="tag-page__card-title">
@@ -80,153 +123,8 @@ function formatListDate(iso: string) {
             </li>
           ))}
         </ul>
+        </>
       )
     }
   </div>
 </Layout>
-
-<style>
-  .tag-page {
-    max-width: 100%;
-  }
-
-  .tag-page__head {
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .tag-page__kicker {
-    margin: 0 0 0.35rem;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-  }
-
-  .tag-page__title {
-    margin: 0 0 0.5rem;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  .tag-page__lead {
-    margin: 0;
-    max-width: 36rem;
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    color: var(--text-muted);
-    font-family: var(--font-reading);
-  }
-
-  .tag-page__empty {
-    margin: 0;
-    padding: 2rem 0;
-    font-size: 1rem;
-    color: var(--text-muted);
-    font-family: var(--font-reading);
-    line-height: 1.6;
-  }
-
-  .tag-page__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .tag-page__li {
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .tag-page__card {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 104px;
-    gap: 1rem 1.25rem;
-    padding: 1.15rem 0;
-    align-items: start;
-  }
-
-  @media (min-width: 480px) {
-    .tag-page__card {
-      grid-template-columns: minmax(0, 1fr) 140px;
-    }
-  }
-
-  .tag-page__body {
-    min-width: 0;
-  }
-
-  .tag-page__card-title {
-    margin: 0 0 0.4rem;
-    font-size: 1.0625rem;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-  }
-
-  .tag-page__card-title a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .tag-page__card-title a:hover {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .tag-page__excerpt {
-    margin: 0;
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--text-excerpt);
-    font-family: var(--font-reading);
-  }
-
-  .tag-page__time {
-    display: block;
-    margin-top: 0.45rem;
-    font-size: 0.8125rem;
-    font-family: var(--font-ui);
-    font-weight: 500;
-    color: var(--text-faint);
-    letter-spacing: 0.01em;
-  }
-
-  .tag-page__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin-top: 0.55rem;
-  }
-
-  .tag-page__thumb-link {
-    display: block;
-    flex-shrink: 0;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    line-height: 0;
-  }
-
-  .tag-page__thumb-link:hover {
-    border-color: var(--border-strong);
-  }
-
-  .tag-page__thumb {
-    width: 100%;
-    height: 72px;
-    object-fit: cover;
-    display: block;
-  }
-
-  @media (min-width: 480px) {
-    .tag-page__thumb {
-      height: 88px;
-    }
-  }
-</style>

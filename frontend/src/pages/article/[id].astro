@@ -1,34 +1,19 @@
 ---
 /**
- * Старые URL /article/[uuid] → постоянный редирект на /news/[slug].
- * На Vercel дублируется 301 в vercel.json для краевых случаев кэша.
+ * /article/[uuid] → 301 на /news/[slug] (и для статических демо-id, и для UUID из Supabase).
  */
-import { getArticleById } from '../../data/news';
+import { getArticleIdSlugMap } from '../../lib/articles-db';
 import { articlePath } from '../../lib/seo';
 
-export function getStaticPaths() {
-  return [
-    { params: { id: 'uuid-1' } },
-    { params: { id: 'uuid-2' } },
-    { params: { id: 'uuid-3' } }
-  ];
+export const prerender = false;
+
+const id = Astro.params.id ?? '';
+const map = await getArticleIdSlugMap();
+const slug = map.get(id);
+
+if (slug) {
+  return Astro.redirect(articlePath(slug), 301);
 }
 
-const article = getArticleById(Astro.params.id ?? '');
-const target = article ? articlePath(article.slug) : '/';
-const canonical = new URL(target, Astro.site ?? 'https://siliconfeed.online').toString();
+return Astro.redirect('/', 302);
 ---
-
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href={canonical} />
-    <meta http-equiv="refresh" content={`0;url=${target}`} />
-    <title>Перенаправление…</title>
-  </head>
-  <body>
-    <p><a href={target}>Перейти к материалу</a></p>
-  </body>
-</html>

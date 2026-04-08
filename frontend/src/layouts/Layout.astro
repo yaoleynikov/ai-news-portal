@@ -2,6 +2,9 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import { NAV_TOPICS, rubricUrl } from '../lib/tags';
+import { MOCK_ARTICLES } from '../data/mock-articles';
+import type { MockArticle } from '../data/mock-articles';
+import { buildTopicIndex } from '../lib/taxonomy';
 
 interface Props {
   title: string;
@@ -10,6 +13,10 @@ interface Props {
   jsonLd?: object | object[];
   canonicalUrl?: string;
   ogType?: 'website' | 'article';
+  /** HTTP 404 и т.п. — не индексировать */
+  noindex?: boolean;
+  /** Пул материалов для меню «Темы» (иначе статический mock). */
+  navArticlePool?: MockArticle[];
 }
 
 const {
@@ -18,7 +25,9 @@ const {
   ogImage = '/default-og.webp',
   jsonLd,
   canonicalUrl,
-  ogType = 'website'
+  ogType = 'website',
+  noindex = false,
+  navArticlePool
 } = Astro.props;
 const pathname = Astro.url.pathname;
 const siteOrigin = Astro.site ?? new URL('https://siliconfeed.online');
@@ -28,6 +37,12 @@ const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
 const year = new Date().getFullYear();
 const telegramHref = 'https://t.me/siliconfeed';
 const mailHref = 'mailto:hello@siliconfeed.online';
+
+const topicIndex = buildTopicIndex(navArticlePool ?? MOCK_ARTICLES);
+const themesRubrics = topicIndex.filter((t) => t.kind === 'rubric');
+const themesTags = topicIndex.filter((t) => t.kind === 'tag');
+const themesNavActive =
+  pathname.startsWith('/tag/') || pathname.startsWith('/rubric/');
 ---
 
 <!DOCTYPE html>
@@ -42,6 +57,7 @@ const mailHref = 'mailto:hello@siliconfeed.online';
     <title>{title} | SiliconFeed</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={currentCanonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -116,9 +132,72 @@ const mailHref = 'mailto:hello@siliconfeed.online';
               ))
             }
           </div>
-          <a href="/about" class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/about' }]}>
-            О проекте
-          </a>
+          <div class="site-nav__extras">
+            <div class="site-nav__dropdown">
+              <button
+                type="button"
+                class:list={['site-nav__themes-btn', { 'site-nav__themes-btn--current': themesNavActive }]}
+                aria-expanded="false"
+                aria-controls="site-themes-panel"
+                id="site-themes-btn"
+                data-themes-toggle
+              >
+                Темы
+              </button>
+              <div
+                id="site-themes-panel"
+                class="site-nav__themes-panel"
+                hidden
+                role="region"
+                aria-label="Рубрики и метки"
+              >
+                <div class="site-nav__themes-panel-inner">
+                  <div class="site-nav__themes-col">
+                    <p class="site-nav__themes-col-title">Рубрики</p>
+                    <ul class="site-nav__themes-list site-nav__themes-list--rubrics">
+                      {
+                        themesRubrics.map((t) => (
+                          <li>
+                            <a href={t.href} class="site-nav__themes-link">
+                              <span>{t.label}</span>
+                              <span class="site-nav__themes-count">{t.count}</span>
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                  <div class="site-nav__themes-col">
+                    <p class="site-nav__themes-col-title">Метки</p>
+                    <ul class="site-nav__themes-list">
+                      {
+                        themesTags.map((t) => (
+                          <li>
+                            <a href={t.href} class="site-nav__themes-link">
+                              <span>{t.label}</span>
+                              <span class="site-nav__themes-count">{t.count}</span>
+                            </a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </div>
+                <div class="site-nav__themes-footer">
+                  <a href="/search">Поиск по ленте</a>
+                </div>
+              </div>
+            </div>
+            <a
+              href="/search"
+              class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/search' }]}
+            >
+              Поиск
+            </a>
+            <a href="/about" class:list={['site-nav__about', { 'site-nav__about--current': pathname === '/about' }]}>
+              О проекте
+            </a>
+          </div>
         </nav>
       </div>
     </header>
@@ -141,6 +220,9 @@ const mailHref = 'mailto:hello@siliconfeed.online';
             }
             <li>
               <a href="/">Главная лента</a>
+            </li>
+            <li>
+              <a href="/search">Поиск</a>
             </li>
           </ul>
         </div>
@@ -173,6 +255,50 @@ const mailHref = 'mailto:hello@siliconfeed.online';
     </footer>
 
     <script is:inline>
+      (function () {
+        if (window.__siliconfeedThemesNav) return;
+        window.__siliconfeedThemesNav = true;
+
+        document.addEventListener('click', (e) => {
+          const panel = document.getElementById('site-themes-panel');
+          const btn = document.getElementById('site-themes-btn');
+          if (!(panel instanceof HTMLElement) || !(btn instanceof HTMLButtonElement)) return;
+
+          if (e.target.closest('#site-themes-panel a')) {
+            panel.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+            return;
+          }
+
+          if (e.target.closest('[data-themes-toggle]')) {
+            e.stopPropagation();
+            const open = btn.getAttribute('aria-expanded') === 'true';
+            panel.hidden = open;
+            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+            return;
+          }
+
+          if (btn.getAttribute('aria-expanded') === 'true' && !panel.contains(e.target)) {
+            panel.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key !== 'Escape') return;
+          const panel = document.getElementById('site-themes-panel');
+          const btn = document.getElementById('site-themes-btn');
+          if (
+            panel instanceof HTMLElement &&
+            btn instanceof HTMLButtonElement &&
+            btn.getAttribute('aria-expanded') === 'true'
+          ) {
+            panel.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      })();
+
       document.addEventListener('astro:page-load', () => {
         const progressBar = document.getElementById('reading-progress');
         if (!progressBar) return;
