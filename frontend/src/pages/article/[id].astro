@@ -2,10 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 
 // Placeholder logic for dynamic generation or SSR
-// export async function getStaticPaths() {
-//   const { data: articles } = await supabase.from('articles').select('id');
-//   return articles.map(article => ({ params: { id: article.id } }));
-// }
+export function getStaticPaths() {
+  return [
+    { params: { id: "uuid-1" } },
+    { params: { id: "uuid-2" } }
+  ];
+}
 
 const { id } = Astro.params;
 
