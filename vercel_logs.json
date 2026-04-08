@@ -1,0 +1,100 @@
+﻿[
+{"type":"stdout","created":1775602508778,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Running build in Washington, D.C., USA (East) â iad1","id":"1775602508778504683476500000","date":1775602508778,"serial":"1775602508778504683476500000"}}
+,
+{"type":"stdout","created":1775602508778,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Build machine configuration: 2 cores, 8 GB","id":"1775602508778504683476500001","date":1775602508778,"serial":"1775602508778504683476500001"}}
+,
+{"type":"stdout","created":1775602508995,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Cloning github.com/yaoleynikov/ai-news-portal (Branch: main, Commit: 05b6c01)","id":"1775602508995504683476500000","date":1775602508995,"serial":"1775602508995504683476500000"}}
+,
+{"type":"stdout","created":1775602508996,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Previous build caches not available.","id":"1775602508996504683476500001","date":1775602508996,"serial":"1775602508996504683476500001"}}
+,
+{"type":"stdout","created":1775602510012,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Cloning completed: 1.017s","id":"1775602510012504683476500000","date":1775602510012,"serial":"1775602510012504683476500000"}}
+,
+{"type":"stderr","created":1775602510532,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Warning: Detected \"engines\": { \"node\": \">=22.12.0\" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version","id":"1775602510532632353876200000","date":1775602510532,"serial":"1775602510532632353876200000"}}
+,
+{"type":"stdout","created":1775602510533,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Running \"vercel build\"","id":"1775602510533632353876200000","date":1775602510533,"serial":"1775602510533632353876200000"}}
+,
+{"type":"stderr","created":1775602511177,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Vercel CLI 50.38.2","id":"1775602511177632353876200000","date":1775602511177,"serial":"1775602511177632353876200000"}}
+,
+{"type":"stderr","created":1775602511703,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Warning: Detected \"engines\": { \"node\": \">=22.12.0\" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version","id":"1775602511703632353876200000","date":1775602511703,"serial":"1775602511703632353876200000"}}
+,
+{"type":"stdout","created":1775602511709,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Installing dependencies...","id":"1775602511709632353876200000","date":1775602511709,"serial":"1775602511709632353876200000"}}
+,
+{"type":"stdout","created":1775602560638,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602560638632353876200000","date":1775602560638,"serial":"1775602560638632353876200000"}}
+,
+{"type":"stdout","created":1775602560639,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"added 320 packages in 49s","id":"1775602560639632353876200000","date":1775602560639,"serial":"1775602560639632353876200000"}}
+,
+{"type":"stdout","created":1775602560640,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602560640632353876200000","date":1775602560640,"serial":"1775602560640632353876200000"}}
+,
+{"type":"stdout","created":1775602560641,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"151 packages are looking for funding","id":"1775602560641632353876200000","date":1775602560641,"serial":"1775602560641632353876200000"}}
+,
+{"type":"stdout","created":1775602560641,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"  run `npm fund` for details","id":"1775602560641632353876200001","date":1775602560641,"serial":"1775602560641632353876200001"}}
+,
+{"type":"stdout","created":1775602560702,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Running \"npm run build\"","id":"1775602560702632353876200000","date":1775602560702,"serial":"1775602560702632353876200000"}}
+,
+{"type":"stdout","created":1775602560811,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602560811632353876200000","date":1775602560811,"serial":"1775602560811632353876200000"}}
+,
+{"type":"stdout","created":1775602560812,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"> frontend@0.0.1 build","id":"1775602560812632353876200000","date":1775602560812,"serial":"1775602560812632353876200000"}}
+,
+{"type":"stdout","created":1775602560812,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"> astro build","id":"1775602560812632353876200001","date":1775602560812,"serial":"1775602560812632353876200001"}}
+,
+{"type":"stdout","created":1775602560813,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602560813632353876200000","date":1775602560813,"serial":"1775602560813632353876200000"}}
+,
+{"type":"stdout","created":1775602561921,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[types]\u001b[39m Generated \u001b[2m165ms\u001b[22m","id":"1775602561921632353876200000","date":1775602561921,"serial":"1775602561921632353876200000"}}
+,
+{"type":"stdout","created":1775602561923,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m output: \u001b[34m\"server\"\u001b[39m","id":"1775602561923632353876200000","date":1775602561923,"serial":"1775602561923632353876200000"}}
+,
+{"type":"stdout","created":1775602561924,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m mode: \u001b[34m\"server\"\u001b[39m","id":"1775602561924632353876200000","date":1775602561924,"serial":"1775602561924632353876200000"}}
+,
+{"type":"stdout","created":1775602561924,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m directory: \u001b[34m/vercel/path0/frontend/dist/\u001b[39m","id":"1775602561924632353876200001","date":1775602561924,"serial":"1775602561924632353876200001"}}
+,
+{"type":"stdout","created":1775602561925,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m adapter: \u001b[32m@astrojs/vercel\u001b[39m","id":"1775602561925632353876200000","date":1775602561925,"serial":"1775602561925632353876200000"}}
+,
+{"type":"stdout","created":1775602561925,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m Collecting build info...","id":"1775602561925632353876200001","date":1775602561925,"serial":"1775602561925632353876200001"}}
+,
+{"type":"stdout","created":1775602561926,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m \u001b[32mâ Completed in 189ms.\u001b[39m","id":"1775602561926632353876200000","date":1775602561926,"serial":"1775602561926632353876200000"}}
+,
+{"type":"stdout","created":1775602561928,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:01\u001b[22m \u001b[34m[build]\u001b[39m Building server entrypoints...","id":"1775602561928632353876200000","date":1775602561928,"serial":"1775602561928632353876200000"}}
+,
+{"type":"stdout","created":1775602562857,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m22:56:02\u001b[22m \u001b[34m[vite]\u001b[39m \u001b[32mâ built in 873ms\u001b[39m","id":"1775602562857632353876200000","date":1775602562857,"serial":"1775602562857632353876200000"}}
+,
+{"type":"stderr","created":1775602563681,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[31m\u001b[1m22:56:03\u001b[22m [ERROR] [vite]\u001b[39m \u001b[31mâ\u001b[39m Build failed in 823ms","id":"1775602563681632353876200000","date":1775602563681,"serial":"1775602563681632353876200000"}}
+,
+{"type":"stderr","created":1775602563821,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"src/layouts/Layout.astro (3:9): \"ViewTransitions\" is not exported by \"\u0000astro:transitions\", imported by \"src/layouts/Layout.astro\".","id":"1775602563821632353876200000","date":1775602563821,"serial":"1775602563821632353876200000"}}
+,
+{"type":"stderr","created":1775602563822,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"file: /vercel/path0/frontend/src/layouts/Layout.astro:3:9","id":"1775602563822632353876200000","date":1775602563822,"serial":"1775602563822632353876200000"}}
+,
+{"type":"stderr","created":1775602563822,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602563822632353876200001","date":1775602563822,"serial":"1775602563822632353876200001"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"1: ---","id":"1775602563823632353876200000","date":1775602563823,"serial":"1775602563823632353876200000"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"2: import '../styles/global.css';","id":"1775602563823632353876200001","date":1775602563823,"serial":"1775602563823632353876200001"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"3: import { ViewTransitions } from 'astro:transitions';","id":"1775602563823632353876200002","date":1775602563823,"serial":"1775602563823632353876200002"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"            ^","id":"1775602563823632353876200003","date":1775602563823,"serial":"1775602563823632353876200003"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"4: ","id":"1775602563823632353876200004","date":1775602563823,"serial":"1775602563823632353876200004"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"5: interface Props {","id":"1775602563823632353876200005","date":1775602563823,"serial":"1775602563823632353876200005"}}
+,
+{"type":"stderr","created":1775602563823,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"","id":"1775602563823632353876200006","date":1775602563823,"serial":"1775602563823632353876200006"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"  \u001b[1mLocation:\u001b[22m","id":"1775602563824632353876200000","date":1775602563824,"serial":"1775602563824632353876200000"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"    \u001b[4m/vercel/path0/frontend/src/layouts/Layout.astro:3:9\u001b[24m","id":"1775602563824632353876200001","date":1775602563824,"serial":"1775602563824632353876200001"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"  \u001b[1mStack trace:\u001b[22m","id":"1775602563824632353876200002","date":1775602563824,"serial":"1775602563824632353876200002"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"\u001b[2m    at getRollupError (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/parseAst.js:406:41)","id":"1775602563824632353876200003","date":1775602563824,"serial":"1775602563824632353876200003"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"    at Module.error (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17380:16)","id":"1775602563824632353876200004","date":1775602563824,"serial":"1775602563824632353876200004"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"    at ModuleScope.findVariable (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:15403:39)","id":"1775602563824632353876200005","date":1775602563824,"serial":"1775602563824632353876200005"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"    at FunctionBodyScope.findVariable (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5676:38)","id":"1775602563824632353876200006","date":1775602563824,"serial":"1775602563824632353876200006"}}
+,
+{"type":"stderr","created":1775602563824,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"    at CallExpression.bind (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2828:28)\u001b[22m","id":"1775602563824632353876200007","date":1775602563824,"serial":"1775602563824632353876200007"}}
+,
+{"type":"stderr","created":1775602563848,"payload":{"deploymentId":"dpl_BSxYBFmZVaDSJKQW2NTrMaEJpm3j","info":{"type":"build","name":"bld_ba0hpfxqr","entrypoint":"."},"text":"Error: Command \"npm run build\" exited with 1","id":"1775602563848632353876200000","date":1775602563848,"serial":"1775602563848632353876200000"}}
+]
+

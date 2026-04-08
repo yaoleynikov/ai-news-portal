@@ -55,7 +55,7 @@ const newsLd = {
   "dateModified": article.created_at,
   "author": [{
       "@type": "Organization",
-      "name": "SiliconFeed AI",
+      "name": "Редакция SiliconFeed",
       "url": "https://siliconfeed.online"
   }]
 };
@@ -118,7 +118,7 @@ const faqLd = {
       <aside style="position: sticky; top: 30px; display: flex; flex-direction: column; gap: 20px;">
         <!-- Sentiment Meter -->
         <div style="background: var(--bg-surface); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-          <h4 style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">AI Индекс влияния</h4>
+          <h4 style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Аналитический индекс</h4>
           <div style="display: flex; align-items: center; gap: 15px;">
             <div style="font-size: 2.2rem; font-weight: 800; color: {article.sentiment >= 7 ? '#10b981' : (article.sentiment < 5 ? '#ef4444' : '#f59e0b')};">
               {article.sentiment}/10
@@ -153,7 +153,7 @@ const faqLd = {
       <!-- FAQ Accordion -->
       {article.faq && article.faq.length > 0 && (
         <div style="margin-bottom: 50px;">
-          <h3 style="font-size: 1.5rem; margin-bottom: 25px;">Частые вопросы (AI-досье):</h3>
+          <h3 style="font-size: 1.5rem; margin-bottom: 25px;">Справка редакции (FAQ):</h3>
           <div style="display: flex; flex-direction: column; gap: 15px;">
             {article.faq.map(f => (
               <details style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 15px 20px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
@@ -183,7 +183,7 @@ const faqLd = {
     <!-- Legal & Attribution source link -->
     <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.85rem;">
       <p style="color: var(--text-muted);">
-        В основе данной новости лежат данные из внешнего источника. Сгенерировано нейросетью.
+        Материал подготовлен редакцией на основе открытых данных из внешних источников.
         <br />
         <a href={article.source_url} target="_blank" rel="nofollow noopener noreferrer" style="color: var(--accent); text-decoration: underline; font-weight: 500;">
           Оригинал материала
