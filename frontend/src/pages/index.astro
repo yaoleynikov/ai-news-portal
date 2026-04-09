@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Pagination from '../components/Pagination.astro';
 import { tagUrl, tagThemeSlug } from '../lib/tags';
 import { absoluteUrl, articlePath } from '../lib/seo';
-import { getListingArticles } from '../lib/articles-db';
+import { getHomeListingPage, getListingArticles, parseListingPageParam } from '../lib/articles-db';
 
 export const prerender = false;
 
@@ -11,8 +12,9 @@ Astro.response.headers.set(
   'public, s-maxage=60, stale-while-revalidate=3600'
 );
 
-const articles = await getListingArticles(40);
-const [featured, ...rest] = articles;
+const requestedPage = parseListingPageParam(Astro.url.searchParams.get('page'));
+const { featured, river: rest, totalPages, page } = await getHomeListingPage(requestedPage);
+const articles = await getListingArticles(60);
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -54,7 +56,7 @@ function formatFeaturedStamp(iso: string) {
   title="Home"
   description="Fresh insights from IT and AI, from SiliconFeed’s automated newsroom."
   ogType="website"
-  canonicalUrl={absoluteUrl('/', siteOrigin)}
+  canonicalUrl={absoluteUrl(canonicalPath, siteOrigin)}
   jsonLd={websiteLd}
   navArticlePool={articles}
 >
@@ -75,8 +77,8 @@ function formatFeaturedStamp(iso: string) {
                 src={featured.cover_url}
                 alt=""
                 class="home-featured__img"
-                width="800"
-                height="800"
+                width="1200"
+                height="630"
                 loading="eager"
               />
               <a href={articleHref} class="home-featured__media-hit">
@@ -144,10 +146,25 @@ function formatFeaturedStamp(iso: string) {
                       ))}
                     </div>
                   </div>
+                  <a
+                    href={articlePath(article.slug)}
+                    class="home-river__thumb-link"
+                    aria-label={`${article.title} — open article`}
+                  >
+                    <img
+                      src={article.cover_url}
+                      alt=""
+                      class="home-river__thumb"
+                      width="140"
+                      height="100"
+                      loading="lazy"
+                    />
+                  </a>
                 </article>
               </li>
             ))}
           </ul>
+          <Pagination page={page} totalPages={totalPages} />
         </section>
       )
     }

@@ -162,6 +162,115 @@ function toMock(a: NewsArticle): MockArticle {
   };
 }
 
+/** River size under the lead story on the home page (page 1 shows lead + this many cards). */
+export const HOME_RIVER_PAGE_SIZE = 15;
+/** Rubric and tag listing page size. */
+export const LISTING_PAGE_SIZE = 15;
+/** Max articles loaded when filtering by tag/section in memory (same slugify rule as `articleMatchesTopic`). */
+export const TOPIC_LISTING_FETCH_CAP = 2000;
+
+function sortedMockFallback(): MockArticle[] {
+  return [...MOCK_FALLBACK].sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+}
+
+export async function getPublishedArticleCount(): Promise<number> {
+  const supabase = getServerClient();
+  if (!supabase) return sortedMockFallback().length;
+
+  const { count, error } = await supabase
+    .from('articles')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'published')
+    .not('slug', 'is', null);
+
+  if (error || count == null) return sortedMockFallback().length;
+  return count;
+}
+
+/**
+ * Published listing slice, newest first. `offset` is 0-based in the full ordered list.
+ */
+export async function getListingArticlesRange(offset: number, limit: number): Promise<MockArticle[]> {
+  if (limit <= 0) return [];
+  const supabase = getServerClient();
+  if (!supabase) {
+    return sortedMockFallback().slice(offset, offset + limit);
+  }
+
+  const end = offset + limit - 1;
+  const { data, error } = await supabase
+    .from('articles')
+    .select(CARD_FIELDS)
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .order('created_at', { ascending: false })
+    .range(offset, end);
+
+  if (error || !data?.length) {
+    return sortedMockFallback().slice(offset, offset + limit);
+  }
+
+  const out: MockArticle[] = [];
+  for (const row of data) {
+    const a = rowToNewsArticle(row as Record<string, unknown>);
+    if (a) out.push(toMock(a));
+  }
+  return out;
+}
+
+export function parseListingPageParam(raw: string | null): number {
+  const n = parseInt(raw ?? '1', 10);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.floor(n);
+}
+
+export function homeListingTotalPages(totalArticles: number): number {
+  if (totalArticles <= 0) return 1;
+  const first = Math.min(totalArticles, 1 + HOME_RIVER_PAGE_SIZE);
+  const rest = totalArticles - first;
+  if (rest <= 0) return 1;
+  return 1 + Math.ceil(rest / HOME_RIVER_PAGE_SIZE);
+}
+
+function homeListingRange(page: number, totalArticles: number): { offset: number; limit: number } {
+  if (page <= 1) {
+    return { offset: 0, limit: Math.min(totalArticles, 1 + HOME_RIVER_PAGE_SIZE) };
+  }
+  const first = Math.min(totalArticles, 1 + HOME_RIVER_PAGE_SIZE);
+  const offset = first + (page - 2) * HOME_RIVER_PAGE_SIZE;
+  const limit = Math.min(HOME_RIVER_PAGE_SIZE, Math.max(0, totalArticles - offset));
+  return { offset, limit };
+}
+
+export async function getHomeListingPage(requestedPage: number): Promise<{
+  featured: MockArticle | null;
+  river: MockArticle[];
+  total: number;
+  totalPages: number;
+  page: number;
+}> {
+  const total = await getPublishedArticleCount();
+  const totalPages = homeListingTotalPages(total);
+  const page = Math.min(requestedPage, totalPages);
+  const { offset, limit } = homeListingRange(page, total);
+  const rows = await getListingArticlesRange(offset, limit);
+
+  if (page <= 1) {
+    const [first, ...rest] = rows;
+    return {
+      featured: first ?? null,
+      river: rest,
+      total,
+      totalPages,
+      page
+    };
+  }
+
+  return { featured: null, river: rows, total, totalPages, page };
+}
+
 /** Listing cards for home, rubrics, tags: from DB plus static fallback. */
 export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
   const supabase = getServerClient();

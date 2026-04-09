@@ -25,6 +25,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      # Gatekeeper container already polls RSS; disable duplicate polling in worker.
+      GATEKEEPER_INTERVAL_MS: "0"
     command: ["npm", "run", "worker"]
     mem_limit: 512m # ONNX @xenova model + sharp; raise if OOM on cold start
     cpu_shares: 768 # High priority within the N100 bounds

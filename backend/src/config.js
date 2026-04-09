@@ -49,7 +49,8 @@ export const config = {
     minChars: 500,
     /** Max raw text length after scrape; higher = more context for the rewriter. */
     maxChars: 14000,
-    similarityThreshold: 0.85,
+    /** Stricter = fewer near-duplicate stories (embedding match in match_articles). */
+    similarityThreshold: 0.88,
   },
   /** Canonical site origin for Telegram / Google links (no trailing slash). */
   publicSiteUrl: (process.env.PUBLIC_SITE_URL || 'https://siliconfeed.online').replace(/\/$/, ''),

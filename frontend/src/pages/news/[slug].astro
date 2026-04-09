@@ -13,6 +13,21 @@ import {
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
 
+function mergeArticleAnchorRel(attribs: Record<string, string>): Record<string, string> {
+  const out = { ...attribs };
+  const parts = new Set(
+    String(out.rel ?? '')
+      .split(/\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+  );
+  for (const r of ['nofollow', 'noopener', 'noreferrer']) {
+    parts.add(r);
+  }
+  out.rel = [...parts].join(' ');
+  return out;
+}
+
 export const prerender = false;
 
 Astro.response.headers.set(
@@ -52,7 +67,17 @@ let jsonLdBlocks: object[] = [];
 if (article) {
   rawHtml = marked.parse(article.content_md);
   htmlContent = sanitizeHtml(rawHtml, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      a: ['href', 'name', 'target', 'rel']
+    },
+    transformTags: {
+      a: (tagName, attribs) => ({
+        tagName,
+        attribs: mergeArticleAnchorRel(attribs)
+      })
+    }
   });
 
   kickerTag = article.tags[0] ?? 'News';
@@ -145,7 +170,14 @@ if (article) {
   navArticlePool={listingPool}
 >
   <article class="glass article-sheet">
-    <img src={article.cover_url} alt={article.title} class="article-hero" loading="eager" />
+    <img
+      src={article.cover_url}
+      alt={article.title}
+      class="article-hero"
+      width="1200"
+      height="630"
+      loading="eager"
+    />
 
     <div class="article-body">
       <a class="article-kicker" href={topicOrTagUrl(kickerTag)} data-tag-theme={tagThemeSlug(kickerTag)}>

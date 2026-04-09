@@ -1,10 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ListingToolbar from '../../components/ListingToolbar.astro';
+import Pagination from '../../components/Pagination.astro';
 import { NAV_TOPICS, articleMatchesTopic, tagUrl, tagThemeSlug } from '../../lib/tags';
-import { articlePath } from '../../lib/seo';
+import { absoluteUrl, articlePath } from '../../lib/seo';
 import { publicationYears, relatedTopicsForSlug } from '../../lib/taxonomy';
-import { getListingArticles } from '../../lib/articles-db';
+import {
+  getListingArticles,
+  LISTING_PAGE_SIZE,
+  parseListingPageParam,
+  TOPIC_LISTING_FETCH_CAP
+} from '../../lib/articles-db';
 
 export const prerender = false;
 
@@ -18,12 +24,21 @@ function rubricLabel(slug: string): string {
   return topic?.label ?? slug;
 }
 
-const pool = await getListingArticles(80);
+const requestedPage = parseListingPageParam(Astro.url.searchParams.get('page'));
+const pool = await getListingArticles(TOPIC_LISTING_FETCH_CAP);
 const { slug } = Astro.params;
 const label = slug ? rubricLabel(slug) : '';
-const list = pool.filter((a) => articleMatchesTopic(a.tags, slug ?? ''));
-const years = publicationYears(list.length > 0 ? list : pool);
+const listFull = pool.filter((a) => articleMatchesTopic(a.tags, slug ?? ''));
+const totalPages =
+  listFull.length === 0 ? 1 : Math.max(1, Math.ceil(listFull.length / LISTING_PAGE_SIZE));
+const page = Math.min(requestedPage, totalPages);
+const listStart = (page - 1) * LISTING_PAGE_SIZE;
+const list = listFull.slice(listStart, listStart + LISTING_PAGE_SIZE);
+const years = publicationYears(listFull.length > 0 ? listFull : pool);
 const related = slug ? relatedTopicsForSlug(pool, slug, 14) : [];
+
+const siteOrigin = Astro.site ?? 'https://siliconfeed.online';
+const canonicalPath = page > 1 ? `${Astro.url.pathname}?page=${page}` : Astro.url.pathname;
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -118,6 +133,7 @@ function formatListDate(iso: string) {
             </li>
           ))}
         </ul>
+          <Pagination page={page} totalPages={totalPages} />
         </>
       )
     }

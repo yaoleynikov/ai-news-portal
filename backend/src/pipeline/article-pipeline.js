@@ -7,6 +7,7 @@ import { rewriteArticle } from '../brain/rewriter.js';
 import { generateCoverWithFallback, FALLBACK_ABSTRACT_COVER_KEYWORD } from '../media/generator.js';
 import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
+import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 
 function coverSavePath(requestedPath, extension) {
   const resolved = path.resolve(requestedPath);
@@ -182,6 +183,16 @@ export async function runArticlePipeline(url, opts = {}) {
     result.articleId = inserted?.id ?? null;
     if (inserted?.slug) result.public_url = `${config.publicSiteUrl}/news/${inserted.slug}`;
     result.steps.push('publish');
+
+    if (result.public_url && isGoogleIndexingConfigured()) {
+      const idx = await notifyGoogleUrlUpdated(result.public_url);
+      if (idx.ok) result.steps.push('google_indexing');
+      else {
+        result.steps.push(`google_indexing_failed:${(idx.error || 'unknown').slice(0, 120)}`);
+        console.warn('[PIPELINE] Google Indexing API:', idx.error);
+      }
+    }
+
     result.ok = true;
     return result;
   } catch (err) {

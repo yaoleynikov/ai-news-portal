@@ -1,0 +1,51 @@
+---
+interface Props {
+  page: number;
+  totalPages: number;
+}
+
+const { page, totalPages } = Astro.props;
+
+if (totalPages <= 1) {
+  return null;
+}
+
+const base = Astro.url;
+
+function hrefFor(p: number): string {
+  const u = new URL(base.pathname + base.search, base.origin);
+  if (p <= 1) u.searchParams.delete('page');
+  else u.searchParams.set('page', String(p));
+  const q = u.searchParams.toString();
+  return u.pathname + (q ? `?${q}` : '');
+}
+
+const prevHref = page > 1 ? hrefFor(page - 1) : null;
+const nextHref = page < totalPages ? hrefFor(page + 1) : null;
+---
+
+<nav class="pagination" aria-label="Pagination">
+  <div class="pagination__inner">
+    {
+      prevHref ? (
+        <a href={prevHref} class="pagination__link pagination__link--prev" rel="prev">
+          ← Previous
+        </a>
+      ) : (
+        <span class="pagination__spacer" aria-hidden="true" />
+      )
+    }
+    <span class="pagination__status">
+      Page {page} of {totalPages}
+    </span>
+    {
+      nextHref ? (
+        <a href={nextHref} class="pagination__link pagination__link--next" rel="next">
+          Next →
+        </a>
+      ) : (
+        <span class="pagination__spacer" aria-hidden="true" />
+      )
+    }
+  </div>
+</nav>

@@ -1,12 +1,14 @@
-import fetch from 'node-fetch';
 import { supabase, config } from '../config.js';
+import { sendTelegramMessage } from '../lib/telegram.js';
+import { runGatekeeper } from '../gatekeeper/cron.js';
 import { extractArticleData } from '../scraper/extractor.js';
 import { generateEmbedding } from '../brain/embeddings.js';
 import { rewriteArticle } from '../brain/rewriter.js';
 import { generateCoverWithFallback } from '../media/generator.js';
 import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
-import { normalizeGooglePrivateKey } from '../lib/pem.js';
+import { getPublishQuotaExceeded, publishLimitConfig } from '../lib/publish-limits.js';
+import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 
 /** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
 async function checkDuplicate(embedding) {
@@ -29,23 +31,6 @@ async function checkDuplicate(embedding) {
   } catch (e) {
     console.warn('[SEQUENCER] match_articles exception:', e.message);
     return 'rpc_error';
-  }
-}
-
-async function sendTelegramMessage(botToken, chatId, text) {
-  const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' })
-  });
-  let body = {};
-  try {
-    body = await res.json();
-  } catch {
-    /* ignore */
-  }
-  if (!res.ok || body.ok === false) {
-    console.warn('[SEQUENCER] Telegram sendMessage failed:', res.status, body.description || JSON.stringify(body).slice(0, 200));
   }
 }
 
@@ -78,13 +63,21 @@ function normalizeJobRow(raw) {
   return o;
 }
 
+/** Supabase/PostgREST may return a composite `jobs` row with all-null fields when the RPC effectively returns NULL. */
+function isClaimableJob(row) {
+  if (!row || typeof row !== 'object') return false;
+  if (row.id == null || row.id === '') return false;
+  const u = typeof row.url === 'string' ? row.url.trim() : '';
+  return /^https?:\/\//i.test(u);
+}
+
 /** Prefer DB RPC `dequeue_next_job` (migration 0005); fall back if RPC missing. */
 async function claimNextJob() {
   const { data: fromRpc, error: rpcErr } = await supabase.rpc('dequeue_next_job');
 
   if (!rpcErr) {
     const row = normalizeJobRow(fromRpc);
-    if (row) return { job: row, mode: 'rpc' };
+    if (isClaimableJob(row)) return { job: row, mode: 'rpc' };
     return { job: null, mode: 'idle' };
   }
 
@@ -119,15 +112,36 @@ async function claimNextJob() {
     return { job: null, mode: 'legacy' };
   }
 
+  if (!isClaimableJob(updated)) {
+    console.warn('[SEQUENCER] Legacy claim returned an invalid job row; skipping.');
+    return { job: null, mode: 'legacy' };
+  }
+
   return { job: updated, mode: 'legacy' };
 }
 
 export async function processQueue() {
+  const lim = publishLimitConfig();
+  if (lim.perHour > 0 || lim.perDay > 0) {
+    console.log(
+      `[SEQUENCER] Publish limits: ${lim.perHour}/hour (rolling 60m), ${lim.perDay}/day (UTC midnight). Set to 0 to disable either. Worker runs forever but sleeps when capped.`
+    );
+  } else {
+    console.log('[SEQUENCER] Publish limits: disabled (both hourly and daily caps are 0).');
+  }
   console.log('[SEQUENCER] Worker started. Waiting for jobs...');
 
   while (true) {
     let job = null;
     try {
+      const quota = await getPublishQuotaExceeded();
+      if (quota.exceeded) {
+        const sec = Math.ceil(quota.sleepMs / 1000);
+        console.log(`[SEQUENCER] ${quota.reason} — sleeping ${sec}s`);
+        await new Promise((r) => setTimeout(r, quota.sleepMs));
+        continue;
+      }
+
       const { job: claimed } = await claimNextJob();
       if (!claimed) {
         await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
@@ -232,37 +246,18 @@ export async function processQueue() {
       if (process.env.TG_BOT_TOKEN) {
         const token = process.env.TG_BOT_TOKEN;
         if (process.env.TG_ADMIN_CHAT_ID) {
-          await sendTelegramMessage(token, process.env.TG_ADMIN_CHAT_ID, message);
+          await sendTelegramMessage(token, process.env.TG_ADMIN_CHAT_ID, message, { parseMode: 'Markdown' });
         }
         if (process.env.TG_CHANNEL_ID) {
-          await sendTelegramMessage(token, process.env.TG_CHANNEL_ID, message);
+          await sendTelegramMessage(token, process.env.TG_CHANNEL_ID, message, { parseMode: 'Markdown' });
         }
       }
 
-      // 8. GOOGLE INDEXING API PING
-      if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
-        try {
-          // Dynamic import of googleapis to save memory if not used
-          const { google } = await import('googleapis');
-          const jwtClient = new google.auth.JWT({
-            email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            key: normalizeGooglePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
-            scopes: ['https://www.googleapis.com/auth/indexing'],
-          });
-          
-          await jwtClient.authorize();
-          const indexing = google.indexing({ version: 'v3', auth: jwtClient });
-          
-          await indexing.urlNotifications.publish({
-            requestBody: {
-              url: articleUrl,
-              type: 'URL_UPDATED'
-            }
-          });
-          console.log(`[SEQUENCER] SEO: Pushed URL to Google Indexing API`);
-        } catch (idxErr) {
-          console.warn(`[SEQUENCER] SEO Google Indexing failed:`, idxErr.message);
-        }
+      const idx = await notifyGoogleUrlUpdated(articleUrl);
+      if (idx.ok) {
+        console.log(`[SEQUENCER] Google Indexing API: URL_UPDATED ${articleUrl}`);
+      } else if (isGoogleIndexingConfigured()) {
+        console.warn(`[SEQUENCER] Google Indexing API failed:`, idx.error);
       }
 
     } catch (err) {
@@ -289,7 +284,29 @@ export async function processQueue() {
   }
 }
 
+/** Embedded RSS → jobs polling when running `npm run worker` without a separate gatekeeper container. */
+function gatekeeperIntervalMs() {
+  const v = process.env.GATEKEEPER_INTERVAL_MS;
+  if (v === undefined || v === '') return 30 * 60 * 1000;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function startEmbeddedGatekeeper() {
+  const ms = gatekeeperIntervalMs();
+  if (ms <= 0) {
+    console.log('[SEQUENCER] Embedded RSS gatekeeper off (GATEKEEPER_INTERVAL_MS<=0).');
+    return;
+  }
+  console.log(`[SEQUENCER] Embedded RSS gatekeeper every ${Math.round(ms / 60000)} min`);
+  const run = () =>
+    runGatekeeper().catch((e) => console.error('[GATEKEEPER] embedded:', e.message));
+  setTimeout(run, 10_000);
+  setInterval(run, ms);
+}
+
 // Execute worker if called directly
 if (process.argv[1] && process.argv[1].endsWith('sequencer.js')) {
+  startEmbeddedGatekeeper();
   processQueue();
 }

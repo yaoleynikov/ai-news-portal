@@ -38,6 +38,91 @@ function unwrapJsonContent(raw) {
 }
 
 /**
+ * Models often emit raw newlines/tabs inside JSON string values; `JSON.parse` rejects them.
+ * Escape those only while inside quoted strings (respect \\ and \").
+ */
+function escapeRawControlsInJsonStrings(text) {
+  let out = '';
+  let inStr = false;
+  let esc = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (esc) {
+      out += c;
+      esc = false;
+      continue;
+    }
+    if (c === '\\') {
+      out += c;
+      esc = true;
+      continue;
+    }
+    if (c === '"') {
+      inStr = !inStr;
+      out += c;
+      continue;
+    }
+    if (inStr) {
+      const code = c.charCodeAt(0);
+      if (c === '\r' && text[i + 1] === '\n') {
+        i++;
+        out += '\\n';
+        continue;
+      }
+      if (c === '\n' || c === '\r') {
+        out += '\\n';
+        continue;
+      }
+      if (c === '\t') {
+        out += '\\t';
+        continue;
+      }
+      if (code < 0x20 || code === 0x7f) {
+        out += ' ';
+        continue;
+      }
+    }
+    out += c;
+  }
+  return out;
+}
+
+function parseRewriterModelJson(unwrapped) {
+  try {
+    return JSON.parse(unwrapped);
+  } catch (first) {
+    try {
+      return JSON.parse(escapeRawControlsInJsonStrings(unwrapped));
+    } catch {
+      throw first;
+    }
+  }
+}
+
+/**
+ * Capitalize the first letter of `##` / `###` lines if the model emitted all-lowercase headings.
+ * Skips "### At a glance:".
+ */
+export function ensureHeadingSentenceStart(md) {
+  if (typeof md !== 'string' || !md) return md;
+  return md
+    .split(/\r?\n/)
+    .map((line) => {
+      const m = /^(#{2,3})\s+(.*)$/.exec(line);
+      if (!m) return line;
+      const hashes = m[1];
+      const rest = m[2];
+      if (/^\s*At a glance\b/i.test(rest)) return line;
+      const trimmed = rest.trimStart();
+      if (!trimmed.length || !/^[a-z]/.test(trimmed[0])) return line;
+      const leadLen = rest.length - trimmed.length;
+      const lead = rest.slice(0, leadLen);
+      return `${hashes} ${lead}${trimmed[0].toUpperCase()}${trimmed.slice(1)}`;
+    })
+    .join('\n');
+}
+
+/**
  * @param {unknown} parsed
  */
 export function normalizeRewritten(parsed) {
@@ -46,7 +131,8 @@ export function normalizeRewritten(parsed) {
   }
   const o = /** @type {Record<string, unknown>} */ (parsed);
   const title = typeof o.title === 'string' ? o.title.trim() : '';
-  const content_md = typeof o.content_md === 'string' ? o.content_md.trim() : '';
+  let content_md = typeof o.content_md === 'string' ? o.content_md.trim() : '';
+  content_md = ensureHeadingSentenceStart(content_md);
   if (!title || !content_md) {
     throw new Error('Rewriter: missing title or content_md');
   }
@@ -133,16 +219,22 @@ Rules:
 1. Title in English: strong and clear for SEO. Use sentence case — capitalize only the first word and proper nouns (OpenAI, AWS, EU). Do NOT use title case on every word.
 2. The content MUST be valid Markdown only (no HTML).
 3. CRITICAL: Start the Markdown with an H3 heading "### At a glance:" then exactly 3 bullet lines (- item) with the key takeaways.
-4. After that, use ## for 4–6 section headings. Each section should have 2–4 full paragraphs (several sentences each): context, details, implications for users or the market, and — where relevant — brief comparison or outlook. When the source is rich, target about 12–20 substantial paragraphs in total across sections; when the source is short, still aim for at least 8–10 paragraphs (do not pad with empty phrases).
-5. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead.
-6. Extract 3–6 concise tags in English.
-7. Cover strategy:
+4. After that, add \`##\` headings **only when the topic actually shifts** — never on a fixed rhythm, character count, or to pad length. Each \`##\` must introduce a block with **at least two paragraphs** (3+ sentences each) unless the source is extremely thin.
+   - Strong source: up to 5–7 \`##\` sections, each with real substance; aim for ~12–20 solid paragraphs total after "At a glance".
+   - Weak/short source: prefer **1–3** \`##\` sections (e.g. one \`## What happened\` plus \`## Why it matters\`) — **do not** invent many empty sections.
+5. **Depth:** After "At a glance", write **at least six full body paragraphs** for any story with more than a headline. Never output a 3–4 sentence "micro-article" when the scraped text contains more facts — expand with context, who is affected, history, and what to watch next.
+6. **Heading style:** Every \`##\` and \`###\` line uses **sentence case** (first word + proper nouns like WireGuard, Microsoft capitalized). Do **not** use all-lowercase heading lines.
+7. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead.
+8. Extract 3–6 concise tags in English.
+9. Cover strategy:
    - company: Only if the story is clearly about one well-known tech brand/product. cover_keyword MUST be a real domain like "openai.com" or "google.com" (no paths).
    - abstract: For general or multi-vendor topics. cover_keyword = short English metaphor phrase (5–12 words) for a photorealistic scene, no brand names.
-8. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]).
-9. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners.
-10. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
-11. sentiment: integer 1–10 (market/tech tone for investors/readers).
+10. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]).
+11. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners.
+12. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
+13. sentiment: integer 1–10 (market/tech tone for investors/readers).
+
+14. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
 
 Output a single JSON object ONLY (no markdown fences, no commentary):
 {
@@ -212,7 +304,7 @@ ${clipped}
     }
 
     const unwrapped = unwrapJsonContent(rawResult);
-    const parsed = JSON.parse(unwrapped);
+    const parsed = parseRewriterModelJson(unwrapped);
     return normalizeRewritten(parsed);
   } catch (err) {
     console.error('[REWRITER] Rewrite operation failed:', err.message);
