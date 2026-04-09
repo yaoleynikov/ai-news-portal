@@ -1,7 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { tagUrl, tagThemeSlug, topicOrTagUrl } from '../../lib/tags';
-import { absoluteUrl, articlePath } from '../../lib/seo';
+import {
+  absoluteUrl,
+  articlePath,
+  mergeMarkdownAnchorRelForContent,
+  resolveSiteOrigin
+} from '../../lib/seo';
 import { relatedTopicsForArticle } from '../../lib/taxonomy';
 import {
   getNewsArticleBySlug,
@@ -65,6 +70,7 @@ let canonical = '';
 let jsonLdBlocks: object[] = [];
 
 if (article) {
+  const contentSiteOrigin = resolveSiteOrigin(Astro.site);
   rawHtml = marked.parse(article.content_md);
   htmlContent = sanitizeHtml(rawHtml, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
@@ -75,7 +81,7 @@ if (article) {
     transformTags: {
       a: (tagName, attribs) => ({
         tagName,
-        attribs: mergeArticleAnchorRel(attribs)
+        attribs: mergeMarkdownAnchorRelForContent(attribs, contentSiteOrigin)
       })
     }
   });

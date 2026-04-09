@@ -7,7 +7,7 @@ import { rewriteArticle } from '../brain/rewriter.js';
 import { generateCoverWithFallback } from '../media/generator.js';
 import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
-import { getPublishQuotaExceeded, publishLimitConfig } from '../lib/publish-limits.js';
+import { getPublishQuotaExceeded, getResolvedPublishLimitConfig } from '../lib/publish-limits.js';
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 
 /** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
@@ -121,10 +121,10 @@ async function claimNextJob() {
 }
 
 export async function processQueue() {
-  const lim = publishLimitConfig();
+  const lim = await getResolvedPublishLimitConfig();
   if (lim.perHour > 0 || lim.perDay > 0) {
     console.log(
-      `[SEQUENCER] Publish limits: ${lim.perHour}/hour (rolling 60m), ${lim.perDay}/day (UTC midnight). Set to 0 to disable either. Worker runs forever but sleeps when capped.`
+      `[SEQUENCER] Publish limits (DB row or .env): ${lim.perHour}/hour (rolling 60m), ${lim.perDay}/day (UTC midnight). Use 0 to disable either. Change via Telegram: npm run telegram:limits`
     );
   } else {
     console.log('[SEQUENCER] Publish limits: disabled (both hourly and daily caps are 0).');

@@ -32,6 +32,7 @@ const feedDateLabel = new Date().toLocaleDateString('en-US', {
 });
 
 const siteOrigin = Astro.site ?? 'https://siliconfeed.online';
+const canonicalPath = page > 1 ? `${Astro.url.pathname}?page=${page}` : Astro.url.pathname;
 const websiteLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',

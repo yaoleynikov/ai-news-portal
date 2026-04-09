@@ -30,3 +30,58 @@ export function absoluteUrl(pathname: string, site: URL | string = SITE_HOST): s
   const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
   return new URL(path, base.endsWith('/') ? base : `${base}/`).toString();
 }
+
+/** Origin for same-site checks (Astro `site` from config, else {@link SITE_HOST}). */
+export function resolveSiteOrigin(site: URL | undefined): string {
+  if (site instanceof URL) return site.origin;
+  const base = SITE_HOST.trim().replace(/\/+$/, '') || 'https://siliconfeed.online';
+  return new URL(`${base}/`).origin;
+}
+
+/**
+ * True when `href` points outside this site (http/https or protocol-relative).
+ * Root-relative `/…` and `mailto:` / `tel:` are not external.
+ */
+export function isExternalArticleBodyHref(href: string, siteOrigin: string): boolean {
+  const raw = typeof href === 'string' ? href.trim() : '';
+  if (!raw || raw.startsWith('#')) return false;
+  if (/^(mailto|tel):/i.test(raw)) return false;
+
+  const want = siteOrigin.toLowerCase();
+  try {
+    if (raw.startsWith('//')) {
+      return new URL(`https:${raw}`).origin.toLowerCase() !== want;
+    }
+    if (raw.startsWith('/')) {
+      return false;
+    }
+    return new URL(raw, `${siteOrigin}/`).origin.toLowerCase() !== want;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Markdown body links only: add nofollow + noopener + noreferrer for **external** targets.
+ * Internal links keep their attributes unchanged (does not affect nav/footer elsewhere).
+ */
+export function mergeMarkdownAnchorRelForContent(
+  attribs: Record<string, string>,
+  siteOrigin: string
+): Record<string, string> {
+  if (!isExternalArticleBodyHref(attribs.href ?? '', siteOrigin)) {
+    return { ...attribs };
+  }
+  const out = { ...attribs };
+  const parts = new Set(
+    String(out.rel ?? '')
+      .split(/\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+  );
+  for (const r of ['nofollow', 'noopener', 'noreferrer']) {
+    parts.add(r);
+  }
+  out.rel = [...parts].join(' ');
+  return out;
+}

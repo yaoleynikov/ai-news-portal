@@ -9,6 +9,7 @@
     "gatekeeper": "node src/gatekeeper/cron.js",
     "agent:cycle": "node scripts/agent-cycle.mjs",
     "agent:http": "node scripts/agent-http-server.mjs",
+    "telegram:limits": "node scripts/telegram-limits-bot.mjs",
     "index:ping": "node scripts/ping-indexing.mjs",
     "smoke": "node scripts/smoke.mjs",
     "pipeline": "node scripts/run-once.mjs",

@@ -9,15 +9,139 @@ function envUInt(name, defaultVal) {
 }
 
 /**
- * @returns {{ perHour: number, perDay: number, capSleepMs: number }}
- * Use **0** for perHour or perDay to disable that cap (defaults are conservative).
+ * Defaults from .env only (used when DB row missing or as merge base).
+ * Target ~30/day → 2/hour; override via DB (Telegram) or env.
  */
-export function publishLimitConfig() {
+export function publishLimitEnvDefaults() {
   return {
-    perHour: envUInt('PUBLISH_LIMIT_PER_HOUR', 6),
-    perDay: envUInt('PUBLISH_LIMIT_PER_DAY', 28),
+    perHour: envUInt('PUBLISH_LIMIT_PER_HOUR', 2),
+    perDay: envUInt('PUBLISH_LIMIT_PER_DAY', 30),
     capSleepMs: envUInt('PUBLISH_CAP_SLEEP_MS', 600000)
   };
+}
+
+/** @deprecated Use {@link publishLimitEnvDefaults} or {@link getResolvedPublishLimitConfig}. */
+export function publishLimitConfig() {
+  return publishLimitEnvDefaults();
+}
+
+let cache = { at: 0, limits: /** @type {null | { perHour: number, perDay: number, capSleepMs: number }} */ (null) };
+const CACHE_MS = 45_000;
+
+export function invalidatePublishLimitsCache() {
+  cache = { at: 0, limits: null };
+}
+
+/** @returns {Promise<{ per_hour: number, per_day: number, cap_sleep_ms: number } | null>} */
+async function fetchPublishLimitsRow() {
+  const { data, error } = await supabase
+    .from('worker_publish_limits')
+    .select('per_hour, per_day, cap_sleep_ms')
+    .eq('id', 1)
+    .maybeSingle();
+
+  if (error) {
+    if (/relation|does not exist|schema cache/i.test(error.message || '')) {
+      console.warn('[publish-limits] worker_publish_limits table missing — apply migration 0008; using .env only.');
+    } else {
+      console.warn('[publish-limits] DB read failed:', error.message);
+    }
+    return null;
+  }
+  if (!data) return null;
+  return {
+    per_hour: Number(data.per_hour),
+    per_day: Number(data.per_day),
+    cap_sleep_ms: Number(data.cap_sleep_ms)
+  };
+}
+
+/**
+ * Effective limits: single DB row (id=1) if present, else .env defaults.
+ * Cached ~45s to avoid extra queries on the worker hot path.
+ */
+export async function getResolvedPublishLimitConfig() {
+  const now = Date.now();
+  if (cache.limits && now - cache.at < CACHE_MS) {
+    return cache.limits;
+  }
+
+  const env = publishLimitEnvDefaults();
+  const row = await fetchPublishLimitsRow();
+
+  const limits = row
+    ? {
+        perHour: row.per_hour,
+        perDay: row.per_day,
+        capSleepMs: row.cap_sleep_ms
+      }
+    : env;
+
+  cache = { at: now, limits };
+  return limits;
+}
+
+/** For Telegram /limits: env defaults, DB row, and effective caps (refreshes worker cache). */
+export async function getPublishLimitsStatus() {
+  const envDefaults = publishLimitEnvDefaults();
+  const row = await fetchPublishLimitsRow();
+  const effective = row
+    ? { perHour: row.per_hour, perDay: row.per_day, capSleepMs: row.cap_sleep_ms }
+    : envDefaults;
+  cache = { at: Date.now(), limits: effective };
+  return { envDefaults, dbRow: row, effective };
+}
+
+/**
+ * Upsert id=1 with partial fields. Validates ranges; merges with existing row or env defaults.
+ * @param {{ perHour?: number, perDay?: number, capSleepMs?: number }} patch
+ */
+export async function updateWorkerPublishLimits(patch) {
+  const env = publishLimitEnvDefaults();
+  const existing = (await fetchPublishLimitsRow()) ?? {
+    per_hour: env.perHour,
+    per_day: env.perDay,
+    cap_sleep_ms: env.capSleepMs
+  };
+
+  let per_hour = existing.per_hour;
+  let per_day = existing.per_day;
+  let cap_sleep_ms = existing.cap_sleep_ms;
+
+  if (patch.perHour !== undefined) {
+    const n = Number(patch.perHour);
+    if (!Number.isFinite(n) || n < 0 || n > 500) {
+      throw new Error('perHour must be 0..500 (0 = hourly cap off)');
+    }
+    per_hour = Math.floor(n);
+  }
+  if (patch.perDay !== undefined) {
+    const n = Number(patch.perDay);
+    if (!Number.isFinite(n) || n < 0 || n > 5000) {
+      throw new Error('perDay must be 0..5000 (0 = daily cap off)');
+    }
+    per_day = Math.floor(n);
+  }
+  if (patch.capSleepMs !== undefined) {
+    const n = Number(patch.capSleepMs);
+    if (!Number.isFinite(n) || n < 10_000 || n > 3_600_000) {
+      throw new Error('capSleepMs must be 10000..3600000 (10s..1h)');
+    }
+    cap_sleep_ms = Math.floor(n);
+  }
+
+  const payload = {
+    id: 1,
+    per_hour,
+    per_day,
+    cap_sleep_ms,
+    updated_at: new Date().toISOString()
+  };
+
+  const { error } = await supabase.from('worker_publish_limits').upsert(payload, { onConflict: 'id' });
+  if (error) throw new Error(error.message);
+  invalidatePublishLimitsCache();
+  return payload;
 }
 
 async function countPublishedSince(iso) {
@@ -38,7 +162,7 @@ async function countPublishedSince(iso) {
  * @returns {Promise<{ exceeded: boolean, reason: string, sleepMs: number }>}
  */
 export async function getPublishQuotaExceeded() {
-  const { perHour, perDay, capSleepMs } = publishLimitConfig();
+  const { perHour, perDay, capSleepMs } = await getResolvedPublishLimitConfig();
   const now = Date.now();
 
   if (perDay > 0) {
