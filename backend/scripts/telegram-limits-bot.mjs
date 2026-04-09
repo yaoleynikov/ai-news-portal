@@ -63,7 +63,7 @@ function helpText() {
     `/setday N — per UTC day (0=off)\n` +
     `/sleepmin N — sleep N min when hourly cap hit\n` +
     `/set H D [M] — hour, day, optional sleep min\n\n` +
-    `Example: /set 2 30 10 → 2/hr, 30/day, 10m sleep`
+    `Example: /set 2 0 10 → 2/hr, no daily cap, 10m sleep`
   );
 }
 

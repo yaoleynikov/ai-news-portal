@@ -189,17 +189,30 @@ CREATE POLICY "Allow public read published articles"
   USING (status = 'published');
 
 -- --- 0008_worker_publish_limits.sql ---
--- Runtime caps for the worker (Telegram bot can update). Defaults ~30/day, 2/hour.
+-- Runtime caps for the worker (Telegram bot can update). Default: 2/hour, daily cap off (0).
 CREATE TABLE IF NOT EXISTS public.worker_publish_limits (
   id smallint PRIMARY KEY DEFAULT 1 CHECK (id = 1),
   per_hour integer NOT NULL DEFAULT 2,
-  per_day integer NOT NULL DEFAULT 30,
+  per_day integer NOT NULL DEFAULT 0,
   cap_sleep_ms integer NOT NULL DEFAULT 600000,
   updated_at timestamptz NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
 INSERT INTO public.worker_publish_limits (id, per_hour, per_day, cap_sleep_ms)
-VALUES (1, 2, 30, 600000)
+VALUES (1, 2, 0, 600000)
 ON CONFLICT (id) DO NOTHING;
 
 ALTER TABLE public.worker_publish_limits ENABLE ROW LEVEL SECURITY;
+
+-- --- 0009_worker_publish_limits_2_per_hour.sql ---
+-- Existing row: 2/hour, daily cap off.
+UPDATE public.worker_publish_limits
+SET
+  per_hour = 2,
+  per_day = 0,
+  updated_at = timezone('utc'::text, now())
+WHERE id = 1;
+
+-- --- 0010_worker_publish_limits_per_day_default_zero.sql ---
+ALTER TABLE public.worker_publish_limits
+  ALTER COLUMN per_day SET DEFAULT 0;

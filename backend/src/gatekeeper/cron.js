@@ -4,12 +4,24 @@ import { FEEDS } from './feeds.js';
 
 const parser = new Parser();
 
-const DEFAULT_MAX_ENQUEUE_PER_CYCLE = 10;
+const DEFAULT_MAX_ENQUEUE_PER_CYCLE = 6;
 
 /** Max items taken from each feed per cycle (newest first). */
 function itemsPerFeed() {
-  const n = Number(process.env.RSS_ITEMS_PER_FEED ?? 5);
-  return Number.isFinite(n) && n > 0 ? Math.min(n, 50) : 5;
+  const n = Number(process.env.RSS_ITEMS_PER_FEED ?? 3);
+  return Number.isFinite(n) && n > 0 ? Math.min(n, 50) : 3;
+}
+
+/**
+ * After dedup, keep only this many freshest URLs (by RSS date) for DB checks + enqueue.
+ * Stops pulling 100+ links when daily publish is ~30. Set high only if you need a deep backlog.
+ */
+function maxCandidatesAfterDedup() {
+  const v = process.env.GATEKEEPER_MAX_CANDIDATES;
+  if (v === undefined || v === '') return 36;
+  const n = parseInt(String(v).trim(), 10);
+  if (!Number.isFinite(n) || n < 1) return 36;
+  return Math.min(n, 300);
 }
 
 /**
@@ -119,6 +131,8 @@ async function fetchQueuedUrlSet() {
  * @property {number} skippedAlreadyInQueue
  * @property {boolean} skippedDueToBacklog
  * @property {number} pendingBacklog
+ * @property {number} candidatesBeforeCap
+ * @property {number} skippedDueToCandidateCap
  */
 
 /**
@@ -142,7 +156,9 @@ export async function runGatekeeper() {
     skippedDueToEnqueueCap: 0,
     skippedAlreadyInQueue: 0,
     skippedDueToBacklog: false,
-    pendingBacklog: 0
+    pendingBacklog: 0,
+    candidatesBeforeCap: 0,
+    skippedDueToCandidateCap: 0
   };
 
   try {
@@ -187,7 +203,7 @@ export async function runGatekeeper() {
   const queuedUrls = await fetchQueuedUrlSet();
 
   const perFeed = itemsPerFeed();
-  /** @type {{ url: string, source_name: string }[]} */
+  /** @type {{ url: string, source_name: string, pubMs: number }[]} */
   const candidates = [];
 
   for (const feed of FEEDS) {
@@ -198,7 +214,8 @@ export async function runGatekeeper() {
       for (const item of latest) {
         const url = normalizeArticleUrl(item.link || '');
         if (!url || !looksLikeArticlePath(url)) continue;
-        candidates.push({ url, source_name: feed.name });
+        const pubMs = itemPubMs(item);
+        candidates.push({ url, source_name: feed.name, pubMs });
       }
     } catch (err) {
       const msg = `${feed.name}: ${err.message}`;
@@ -207,12 +224,24 @@ export async function runGatekeeper() {
     }
   }
 
-  const seen = new Set();
-  const unique = [];
+  /** Same URL in several feeds → keep newest pubDate */
+  const byUrl = new Map();
   for (const c of candidates) {
-    if (seen.has(c.url)) continue;
-    seen.add(c.url);
-    unique.push(c);
+    const prev = byUrl.get(c.url);
+    if (!prev || c.pubMs > prev.pubMs) byUrl.set(c.url, c);
+  }
+  const merged = [...byUrl.values()].sort(
+    (a, b) => b.pubMs - a.pubMs || a.url.localeCompare(b.url)
+  );
+
+  const candCap = maxCandidatesAfterDedup();
+  stats.candidatesBeforeCap = merged.length;
+  const unique = merged.slice(0, candCap);
+  stats.skippedDueToCandidateCap = Math.max(0, merged.length - unique.length);
+  if (stats.skippedDueToCandidateCap > 0) {
+    console.log(
+      `[GATEKEEPER] Candidate cap: keeping ${unique.length}/${merged.length} newest (GATEKEEPER_MAX_CANDIDATES=${candCap})`
+    );
   }
 
   stats.candidatesTotal = unique.length;
@@ -254,9 +283,17 @@ export async function runGatekeeper() {
   const qNote =
     stats.skippedAlreadyInQueue > 0 ? ` already_in_jobs_queue=${stats.skippedAlreadyInQueue}` : '';
   console.log(
-    `[GATEKEEPER] Cycle done. candidates=${stats.candidatesTotal} enqueued=${stats.enqueued} already_published=${stats.skippedPublished} already_queued=${stats.skippedAlreadyQueued}${qNote}${capNote}`
+    `[GATEKEEPER] Cycle done. candidates=${stats.candidatesTotal} (raw_unique=${stats.candidatesBeforeCap}) enqueued=${stats.enqueued} already_published=${stats.skippedPublished} already_queued=${stats.skippedAlreadyQueued}${qNote}${capNote}`
   );
   return stats;
+}
+
+/** @param {{ isoDate?: string, pubDate?: string }} item */
+function itemPubMs(item) {
+  const raw = item?.isoDate || item?.pubDate;
+  if (!raw) return 0;
+  const t = new Date(raw).getTime();
+  return Number.isFinite(t) ? t : 0;
 }
 
 if (process.argv[1] && process.argv[1].endsWith('cron.js')) {

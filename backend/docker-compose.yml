@@ -1,36 +1,25 @@
-version: '3.8'
+# SiliconFeed — только worker в Docker (встроенный RSS gatekeeper ~каждые 30 мин).
+#
+# Нужен backend/.env (не коммитить). Секреты: Supabase, OpenRouter, Logo.dev, HF, R2,
+# опционально Telegram / Google Indexing — см. .env.example.
+#
+# Запуск:
+#   cd backend
+#   cp .env.example .env && отредактировать .env
+#   docker compose up -d --build
+#
+# Не ставить GATEKEEPER_INTERVAL_MS=0 — иначе RSS не подтянется без отдельного процесса вне Docker.
+# База — облачный Supabase; Postgres здесь не поднимается.
 
 services:
-  # The gatekeeper pulls RSS feeds every 30 mins and enqueues jobs
-  gatekeeper:
-    build: .
-    container_name: siliconfeed_gatekeeper
-    restart: unless-stopped
-    env_file:
-      - .env
-    command: ["node", "./src/gatekeeper/cron.js"]
-    # If cron.js exits after running, docker will restart it unless-stopped.
-    # To run it as a true internal cron loop instead of exiting, 
-    # we can wrap it or have something orchestrate it.
-    # We will assume a simple bash loop for this container.
-    entrypoint: >
-      /bin/sh -c "while true; do node ./src/gatekeeper/cron.js; echo 'Waiting 30 minutes...'; sleep 1800; done"
-    mem_limit: 150m # Keep memory utilization ultra-low
-    cpu_shares: 256 # Low priority
-
-  # The main worker handles text extraction, ML embeddings, OpenRouter processing, and WebP generation
   worker:
     build: .
-    container_name: siliconfeed_worker
+    container_name: siliconfeed-worker
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      # Gatekeeper container already polls RSS; disable duplicate polling in worker.
-      GATEKEEPER_INTERVAL_MS: "0"
     command: ["npm", "run", "worker"]
-    mem_limit: 512m # ONNX @xenova model + sharp; raise if OOM on cold start
-    cpu_shares: 768 # High priority within the N100 bounds
+    mem_limit: 768m
     volumes:
       - hf_cache:/app/.cache
 

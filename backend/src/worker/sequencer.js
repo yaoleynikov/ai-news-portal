@@ -9,6 +9,7 @@ import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
 import { getPublishQuotaExceeded, getResolvedPublishLimitConfig } from '../lib/publish-limits.js';
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
+import { startDailyStatsScheduler } from '../stats/daily-report.js';
 
 /** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
 async function checkDuplicate(embedding) {
@@ -36,6 +37,8 @@ async function checkDuplicate(embedding) {
 
 // Polling interval
 const POLL_INTERVAL_MS = 10000;
+/** Log a hint if we are idle this many polls while jobs look pending (claim/RPC issue). */
+const IDLE_LOG_EVERY_POLLS = 6;
 
 /**
  * PostgREST / composite `RETURNS jobs` rows sometimes arrive as array, nested key, or JSON string.
@@ -120,16 +123,80 @@ async function claimNextJob() {
   return { job: updated, mode: 'legacy' };
 }
 
+async function countJobsWithStatus(status) {
+  const { count, error } = await supabase
+    .from('jobs')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', status);
+  if (error) {
+    console.warn('[SEQUENCER] jobs count failed:', error.message);
+    return null;
+  }
+  return typeof count === 'number' ? count : 0;
+}
+
+async function countPublishedSinceUtc(iso) {
+  const { count, error } = await supabase
+    .from('articles')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'published')
+    .gte('created_at', iso);
+  if (error) {
+    console.warn('[SEQUENCER] articles count failed:', error.message);
+    return null;
+  }
+  return typeof count === 'number' ? count : 0;
+}
+
+/** Why the queue can look “dead”: caps block claiming entirely. */
+async function logStartupDiagnostics(lim) {
+  const now = Date.now();
+  const dayStart = new Date(now);
+  dayStart.setUTCHours(0, 0, 0, 0);
+  const hourAgoIso = new Date(now - 60 * 60 * 1000).toISOString();
+  const dayStartIso = dayStart.toISOString();
+
+  const [pending, processing, pubDay, pubHour] = await Promise.all([
+    countJobsWithStatus('pending'),
+    countJobsWithStatus('processing'),
+    countPublishedSinceUtc(dayStartIso),
+    countPublishedSinceUtc(hourAgoIso)
+  ]);
+
+  console.log(
+    `[SEQUENCER] Queue: pending=${pending ?? '?'} processing=${processing ?? '?'} | ` +
+      `published UTC today=${pubDay ?? '?'} (daily cap ${lim.perDay || 'off'}) | ` +
+      `last 60m=${pubHour ?? '?'} (hourly cap ${lim.perHour || 'off'})`
+  );
+
+  if (lim.perDay > 0 && pubDay != null && pubDay >= lim.perDay) {
+    console.warn(
+      `[SEQUENCER] Daily publish cap ALREADY hit (${pubDay}/${lim.perDay} since UTC midnight). ` +
+        `Worker will not process jobs until tomorrow UTC or you raise the cap (env PUBLISH_LIMIT_PER_DAY / DB worker_publish_limits, or 0=off).`
+    );
+  }
+  if (lim.perHour > 0 && pubHour != null && pubHour >= lim.perHour) {
+    console.warn(
+      `[SEQUENCER] Hourly cap ALREADY hit (${pubHour}/${lim.perHour} rolling). ` +
+        `Worker sleeps until the window moves or cap is raised.`
+    );
+  }
+}
+
 export async function processQueue() {
   const lim = await getResolvedPublishLimitConfig();
   if (lim.perHour > 0 || lim.perDay > 0) {
+    const dayStr = lim.perDay > 0 ? `${lim.perDay}/day (UTC midnight)` : 'no daily cap';
     console.log(
-      `[SEQUENCER] Publish limits (DB row or .env): ${lim.perHour}/hour (rolling 60m), ${lim.perDay}/day (UTC midnight). Use 0 to disable either. Change via Telegram: npm run telegram:limits`
+      `[SEQUENCER] Publish limits (DB row or .env): ${lim.perHour}/hour (rolling 60m), ${dayStr}. Set cap to 0 to turn that limit off. Telegram: npm run telegram:limits`
     );
   } else {
-    console.log('[SEQUENCER] Publish limits: disabled (both hourly and daily caps are 0).');
+    console.log('[SEQUENCER] Publish limits: both caps off (unlimited).');
   }
-  console.log('[SEQUENCER] Worker started. Waiting for jobs...');
+  await logStartupDiagnostics(lim);
+  console.log('[SEQUENCER] Worker started. Polling for jobs...');
+
+  let idlePolls = 0;
 
   while (true) {
     let job = null;
@@ -137,16 +204,32 @@ export async function processQueue() {
       const quota = await getPublishQuotaExceeded();
       if (quota.exceeded) {
         const sec = Math.ceil(quota.sleepMs / 1000);
-        console.log(`[SEQUENCER] ${quota.reason} — sleeping ${sec}s`);
+        const pend = await countJobsWithStatus('pending');
+        console.log(
+          `[SEQUENCER] ${quota.reason} — sleeping ${sec}s | pending jobs waiting in DB: ${pend ?? '?'} (they are NOT processed while capped)`
+        );
         await new Promise((r) => setTimeout(r, quota.sleepMs));
         continue;
       }
 
-      const { job: claimed } = await claimNextJob();
+      const { job: claimed, mode: claimMode } = await claimNextJob();
       if (!claimed) {
-        await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
+        idlePolls++;
+        if (idlePolls % IDLE_LOG_EVERY_POLLS === 0) {
+          const pend = await countJobsWithStatus('pending');
+          if (pend != null && pend > 0) {
+            console.warn(
+              `[SEQUENCER] ${pend} pending job(s) but claim returned none (${claimMode}). ` +
+                `Check Supabase migration 0005 (dequeue_next_job), service_role key, and jobs.url (must be https).`
+            );
+          } else {
+            console.log(`[SEQUENCER] Idle — no pending jobs (gatekeeper will enqueue on its schedule).`);
+          }
+        }
+        await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
         continue;
       }
+      idlePolls = 0;
       job = claimed;
 
       const jobUrl = typeof job.url === 'string' ? job.url.trim() : '';
@@ -308,5 +391,6 @@ function startEmbeddedGatekeeper() {
 // Execute worker if called directly
 if (process.argv[1] && process.argv[1].endsWith('sequencer.js')) {
   startEmbeddedGatekeeper();
+  startDailyStatsScheduler();
   processQueue();
 }

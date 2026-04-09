@@ -10,12 +10,12 @@ function envUInt(name, defaultVal) {
 
 /**
  * Defaults from .env only (used when DB row missing or as merge base).
- * Target ~30/day → 2/hour; override via DB (Telegram) or env.
+ * Product default: **2 publishes per rolling 60 minutes**; **no daily cap** (perDay=0).
  */
 export function publishLimitEnvDefaults() {
   return {
     perHour: envUInt('PUBLISH_LIMIT_PER_HOUR', 2),
-    perDay: envUInt('PUBLISH_LIMIT_PER_DAY', 30),
+    perDay: envUInt('PUBLISH_LIMIT_PER_DAY', 0),
     capSleepMs: envUInt('PUBLISH_CAP_SLEEP_MS', 600000)
   };
 }

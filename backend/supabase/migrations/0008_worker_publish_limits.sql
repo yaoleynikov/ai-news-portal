@@ -2,13 +2,13 @@
 CREATE TABLE IF NOT EXISTS public.worker_publish_limits (
   id smallint PRIMARY KEY DEFAULT 1 CHECK (id = 1),
   per_hour integer NOT NULL DEFAULT 2,
-  per_day integer NOT NULL DEFAULT 30,
+  per_day integer NOT NULL DEFAULT 0,
   cap_sleep_ms integer NOT NULL DEFAULT 600000,
   updated_at timestamptz NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
 INSERT INTO public.worker_publish_limits (id, per_hour, per_day, cap_sleep_ms)
-VALUES (1, 2, 30, 600000)
+VALUES (1, 2, 0, 600000)
 ON CONFLICT (id) DO NOTHING;
 
 ALTER TABLE public.worker_publish_limits ENABLE ROW LEVEL SECURITY;

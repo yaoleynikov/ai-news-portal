@@ -18,6 +18,8 @@
   --reading-max: 40rem;
   /** Home lead + article hero: one shared crop (OG-style, shorter than 1:1). */
   --hero-cover-aspect: 1200 / 630;
+  /** Behind all cover/thumbnail images (letterboxing, transparent PNG). */
+  --cover-backdrop: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +35,7 @@
     --border-strong: #3a3a3a;
     --accent: #64b5f6;
     --accent-muted: #90caf9;
+    --cover-backdrop: #ffffff;
   }
 }
 
@@ -702,6 +705,7 @@ a:hover {
   border: 1px solid var(--border);
   overflow: hidden;
   line-height: 0;
+  background: var(--cover-backdrop);
 }
 
 .tag-page__thumb-link:hover {
@@ -712,7 +716,9 @@ a:hover {
   width: 100%;
   height: 72px;
   object-fit: cover;
+  object-position: center;
   display: block;
+  background: var(--cover-backdrop);
 }
 
 @media (min-width: 480px) {
@@ -959,6 +965,7 @@ a:hover {
   height: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  background: var(--cover-backdrop);
 }
 
 .prose code {
@@ -1145,9 +1152,11 @@ a.article-kicker[data-tag-theme='automation'] {
   width: 100%;
   aspect-ratio: var(--hero-cover-aspect);
   object-fit: cover;
+  object-position: center;
   display: block;
   border-bottom: 1px solid var(--border);
   margin: 0;
+  background: var(--cover-backdrop);
 }
 
 .article-body {
@@ -1325,8 +1334,10 @@ a.article-kicker[data-tag-theme='automation'] {
   width: 100%;
   height: 140px;
   object-fit: cover;
+  object-position: center;
   display: block;
   border-bottom: 1px solid var(--border);
+  background: var(--cover-backdrop);
 }
 
 .related-card__body {
@@ -1567,7 +1578,7 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   min-width: 0;
   width: 100%;
   aspect-ratio: var(--hero-cover-aspect);
-  background: #ffffff;
+  background: var(--cover-backdrop);
 }
 
 .home-featured__media {
@@ -1576,7 +1587,7 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   margin: 0;
   border: 0;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--cover-backdrop);
 }
 
 /* Full-bleed hit layer: don’t wrap figure in <a> when inner tag links exist */
@@ -1623,6 +1634,7 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   object-fit: cover;
   object-position: center;
   display: block;
+  background: var(--cover-backdrop);
   transition: transform 0.5s ease;
 }
 
@@ -1857,6 +1869,7 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   text-decoration: none;
   color: inherit;
   outline: none;
+  background: var(--cover-backdrop);
 }
 
 .home-river__thumb-link:hover {
@@ -1875,6 +1888,7 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   object-fit: cover;
   object-position: center;
   display: block;
+  background: var(--cover-backdrop);
 }
 
 /* Static page (about) */

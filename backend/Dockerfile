@@ -22,9 +22,14 @@ RUN npm ci --omit=dev
 # Copy the rest of the backend source code
 COPY . .
 
-# Set strict permissions or non-root user if needed
-RUN chown -R node:node /app
-USER node
+RUN chown -R node:node /app \
+  && mkdir -p /app/.cache \
+  && chown node:node /app/.cache \
+  && chmod +x /app/docker-entrypoint.sh
 
-# We don't specify CMD or ENTRYPOINT here since we will use 
-# docker-compose.yml to spin up two separate logical containers (cron + worker)
+# Entrypoint fixes permissions on mounted volume, then drops to node.
+USER root
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+# Single process: job worker (sequencer.js) with embedded RSS gatekeeper unless GATEKEEPER_INTERVAL_MS=0.
+CMD ["npm", "run", "worker"]
