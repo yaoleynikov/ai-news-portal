@@ -1605,19 +1605,26 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   border-color: var(--border-strong);
 }
 
-@media (min-width: 768px) {
-  .home-featured {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
 .home-featured__visual {
   position: relative;
   min-width: 0;
   width: 100%;
   aspect-ratio: var(--hero-cover-aspect);
   background: var(--cover-backdrop);
+}
+
+@media (min-width: 768px) {
+  .home-featured {
+    grid-template-columns: 1fr 1fr;
+    /* stretch: left column matches text height (was start → void under shorter visual) */
+    align-items: stretch;
+  }
+
+  .home-featured__visual {
+    /* Row height comes from the text column; fill it so edge-tint bg covers the full cell */
+    aspect-ratio: unset;
+    min-height: 0;
+  }
 }
 
 .home-featured__media {
