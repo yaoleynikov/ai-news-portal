@@ -1,7 +1,7 @@
 /**
  * Pick a backdrop color for letterboxed logo covers: prefer average of corner patches (true flat
  * background on app-style squares); fall back to dominant border color on the 64×64 thumb.
- * Cross-origin images without CORS taint the canvas; getImageData then throws (caught — CSS fallback).
+ * Needs crossOrigin="anonymous" on the <img> when the image host sends CORS headers (see coverEdgeTintImgAttrs); otherwise the canvas is tainted and backdrop stays the CSS fallback.
  */
 const QUANT = 28;
 /** Pixels per corner when estimating flat backdrop (inside letterboxed draw rect). */

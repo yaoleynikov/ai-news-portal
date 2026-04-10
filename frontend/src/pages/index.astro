@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Pagination from '../components/Pagination.astro';
 import { tagUrl, tagThemeSlug } from '../lib/tags';
-import { absoluteUrl, articlePath } from '../lib/seo';
+import { absoluteUrl, articlePath, resolveSiteOrigin } from '../lib/seo';
 import {
+  coverEdgeTintImgAttrs,
   coverImageRequestAttrs,
   getHomeListingPage,
   getListingArticles,
@@ -89,7 +90,7 @@ function formatFeaturedStamp(iso: string) {
                     height="630"
                     loading="eager"
                     decoding="async"
-                    {...coverImageRequestAttrs}
+                    {...coverEdgeTintImgAttrs(featured.cover_url, resolveSiteOrigin(Astro.site))}
                   />
                 </div>
               ) : (

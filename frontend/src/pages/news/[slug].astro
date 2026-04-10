@@ -9,6 +9,7 @@ import {
 } from '../../lib/seo';
 import { relatedTopicsForArticle } from '../../lib/taxonomy';
 import {
+  coverEdgeTintImgAttrs,
   coverImageRequestAttrs,
   getNewsArticleBySlug,
   getRelatedArticles,
@@ -188,7 +189,7 @@ if (article) {
             height="630"
             loading="eager"
             decoding="async"
-            {...coverImageRequestAttrs}
+            {...coverEdgeTintImgAttrs(article.cover_url, resolveSiteOrigin(Astro.site))}
           />
         </div>
       ) : (

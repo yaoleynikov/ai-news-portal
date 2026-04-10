@@ -358,6 +358,8 @@ export async function processQueue() {
       console.log(`[SEQUENCER] Generating Cover (${rewritten.cover_type}: ${rewritten.cover_keyword})...`);
       const cover = await generateCoverWithFallback(rewritten.cover_type, rewritten.cover_keyword);
       const coverBuffer = cover.buffer;
+      /** Logo failed but FLUX ran — must not keep `company` or the site uses logo letterboxing on a photo. */
+      const coverTypePublished = cover.cover_fallback ? 'abstract' : rewritten.cover_type;
 
       const slugKw = cover.cover_fallback ? 'abstract_fallback' : rewritten.cover_keyword;
       const filename = `covers/${Date.now()}-${slugKw.replace(/[^a-z0-9]/gi, '_')}.${cover.extension}`;
@@ -375,7 +377,7 @@ export async function processQueue() {
           content_md: rewritten.content_md,
           tags: rewritten.tags,
           cover_url: coverUrl,
-          cover_type: rewritten.cover_type,
+          cover_type: coverTypePublished,
           embedding: `[${embedding.join(',')}]`,
           faq: rewritten.faq || [],
           entities: rewritten.entities || [],

@@ -25,24 +25,49 @@ const COMPANY_LOGO_FRAC_OF_MIN_SIDE = 0.8;
  */
 const LOGODEV_FETCH_SIZE = 800;
 
+function normalizeLogoDomainKeyword(keyword) {
+  const s = String(keyword ?? '').trim();
+  if (!s) return '';
+  try {
+    if (/^https?:\/\//i.test(s)) {
+      return new URL(s).hostname.toLowerCase();
+    }
+  } catch {
+    /* ignore */
+  }
+  return s
+    .replace(/^https?:\/\//i, '')
+    .split('/')[0]
+    .split('?')[0]
+    .toLowerCase();
+}
+
 /**
- * Company cover: centered logo with edge padding; logo max extent ≤ 80% of the shorter cover side.
+ * img.logo.dev may miss one hostname; try related brands (e.g. YouTube stories tagged google.com).
  */
-async function generateCompanyCover(domain) {
-  if (!config.media.logoDevKey) {
-    throw new Error(
-      'Logo.dev publishable key missing: set LOGODEV_API_KEY, LOGO_DEV_PUBLISHABLE_KEY, or LOGO_DEV_TOKEN (pk_... for img CDN)'
-    );
+function logoDevDomainsTryList(primary) {
+  const aliases = {
+    'google.com': ['google.com', 'youtube.com'],
+    'youtube.com': ['youtube.com', 'google.com'],
+    'meta.com': ['meta.com', 'facebook.com'],
+    'fb.com': ['facebook.com', 'meta.com']
+  };
+  const chain = aliases[primary] ?? [primary];
+  const out = [];
+  const seen = new Set();
+  for (const d of chain) {
+    const x = String(d).trim().toLowerCase();
+    if (!x || seen.has(x)) continue;
+    seen.add(x);
+    out.push(x);
   }
+  return out;
+}
 
-  const logoUrl = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${config.media.logoDevKey}&size=${LOGODEV_FETCH_SIZE}&format=webp`;
-  const response = await fetch(logoUrl);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch logo for domain ${domain}: ${response.status}`);
-  }
-
-  const logoBuffer = await response.arrayBuffer();
+/**
+ * Composite 1200×630 canvas from a Logo.dev raster.
+ */
+async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
   const sharp = await loadSharp();
 
   if (!sharp) {
@@ -80,6 +105,44 @@ async function generateCompanyCover(domain) {
     .toBuffer();
 
   return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
+}
+
+/**
+ * Company cover: centered logo with edge padding; logo max extent ≤ 80% of the shorter cover side.
+ */
+async function generateCompanyCover(domainInput) {
+  if (!config.media.logoDevKey) {
+    throw new Error(
+      'Logo.dev publishable key missing: set LOGODEV_API_KEY, LOGO_DEV_PUBLISHABLE_KEY, or LOGO_DEV_TOKEN (pk_... for img CDN)'
+    );
+  }
+
+  const primary = normalizeLogoDomainKeyword(domainInput);
+  if (!primary) {
+    throw new Error('company cover: empty cover_keyword (expected a domain like google.com)');
+  }
+
+  const candidates = logoDevDomainsTryList(primary);
+  let lastErr;
+  for (const domain of candidates) {
+    const logoUrl = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${config.media.logoDevKey}&size=${LOGODEV_FETCH_SIZE}&format=webp`;
+    try {
+      const response = await fetch(logoUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const buf = await response.arrayBuffer();
+      console.log(`[MEDIA] company cover: Logo.dev ok for ${domain}`);
+      return await composeCompanyCoverFromLogoBuffer(buf);
+    } catch (e) {
+      lastErr = e;
+      console.warn(`[MEDIA] company cover: img.logo.dev/${domain} failed — ${e.message}`);
+    }
+  }
+
+  throw new Error(
+    `Logo.dev failed for [${candidates.join(', ')}] — last: ${lastErr?.message ?? 'unknown'} (use a publishable pk_ token; sk_ often returns 401 on img CDN)`
+  );
 }
 
 /** Ordered HF tokens: primary then optional secondary (deduped). */
@@ -169,6 +232,7 @@ async function generateAbstractCoverWithKey(keyword, bearerKey, inferenceUrl) {
         return { buffer: raw, contentType: 'image/png', extension: 'png' };
       }
 
+      // HF often emits a square; crop to landscape hero / OG shape.
       const coverBuffer = await sharp(raw)
         .resize(COVER_WIDTH, COVER_HEIGHT, { fit: 'cover' })
         .webp({ quality: 85 })
@@ -250,7 +314,10 @@ export async function generateCoverWithFallback(coverType, coverKeyword) {
     return await generateCover(coverType, coverKeyword);
   } catch (err) {
     if (coverType === 'company') {
-      console.warn('[MEDIA] company cover failed, fallback to abstract:', err.message);
+      console.warn(
+        '[MEDIA] company cover failed → FLUX abstract fallback (fix Logo.dev key/domain or check logs above):',
+        err.message
+      );
       const out = await generateCover('abstract', FALLBACK_ABSTRACT_COVER_KEYWORD);
       return { ...out, cover_fallback: true };
     }

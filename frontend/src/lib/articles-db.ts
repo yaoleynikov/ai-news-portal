@@ -46,6 +46,80 @@ export function normalizeCoverUrl(url: string): string {
  */
 export const coverImageRequestAttrs = { referrerpolicy: 'no-referrer' } as const;
 
+function r2PublicHostnameFromEnv(): string | null {
+  const fromVite = (import.meta.env.PUBLIC_R2_PUBLIC_URL as string | undefined)?.trim().replace(/\/$/, '');
+  if (fromVite) {
+    try {
+      return new URL(fromVite).hostname.toLowerCase();
+    } catch {
+      /* ignore */
+    }
+  }
+  const proc = typeof process !== 'undefined' ? process.env : undefined;
+  const fromNode =
+    proc?.['R2_PUBLIC_URL']?.trim().replace(/\/$/, '') ||
+    proc?.['PUBLIC_R2_PUBLIC_URL']?.trim().replace(/\/$/, '');
+  if (fromNode) {
+    try {
+      return new URL(fromNode).hostname.toLowerCase();
+    } catch {
+      /* ignore */
+    }
+  }
+  return null;
+}
+
+/** Hosts where crossOrigin="anonymous" breaks <img> (no ACAO on image responses). */
+function hostBlocksCrossOriginImg(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  return h === 'cdn.samsung.com' || h.endsWith('.cdn.samsung.com');
+}
+
+/**
+ * Attributes for <img> inside [data-cover-edge]: Referer stripped + crossOrigin when the host is
+ * expected to allow CORS on images so cover-edge-frame.ts can read pixels (otherwise backdrop stays --cover-backdrop).
+ */
+export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<string, string> {
+  const raw = normalizeCoverUrl(typeof url === 'string' ? url.trim() : '');
+  const out: Record<string, string> = { referrerpolicy: 'no-referrer' };
+  if (!raw) return out;
+  let hostname: string;
+  try {
+    hostname = new URL(raw).hostname.toLowerCase();
+  } catch {
+    return out;
+  }
+
+  if (hostBlocksCrossOriginImg(hostname)) return out;
+
+  if (siteOrigin) {
+    try {
+      if (hostname === new URL(siteOrigin).hostname.toLowerCase()) {
+        out.crossorigin = 'anonymous';
+        return out;
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+
+  const r2h = r2PublicHostnameFromEnv();
+  if (r2h && hostname === r2h) {
+    out.crossorigin = 'anonymous';
+    return out;
+  }
+  if (hostname.endsWith('.r2.dev')) {
+    out.crossorigin = 'anonymous';
+    return out;
+  }
+  if (hostname === 'img.logo.dev' || hostname.endsWith('.cloudinary.com') || hostname === 'cloudinary.com') {
+    out.crossorigin = 'anonymous';
+    return out;
+  }
+
+  return out;
+}
+
 const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
   ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at }) => ({
     id,

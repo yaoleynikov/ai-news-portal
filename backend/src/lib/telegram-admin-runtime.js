@@ -9,7 +9,8 @@ import {
   findArticleFromUserText,
   deleteArticleById,
   rewriteArticleRow,
-  regenerateArticleCoverFromNote
+  regenerateArticleCoverFromNote,
+  toggleArticleCoverType
 } from './article-telegram-actions.js';
 
 /** @type {Map<string, { mode: 'image_wait'; articleId: string }>} */
@@ -83,7 +84,8 @@ function articleKeyboard(articleId) {
         { text: '🗑 Удалить', callback_data: `sf:d:${id}` },
         { text: '✏️ Рерайт', callback_data: `sf:r:${id}` },
         { text: '🖼 Обложка', callback_data: `sf:i:${id}` }
-      ]
+      ],
+      [{ text: '🔁 Тип: лого ⟷ фото', callback_data: `sf:t:${id}` }]
     ]
   };
 }
@@ -249,7 +251,7 @@ async function handleCallback(token, adminId, cb) {
   }
 
   const data = typeof cb.data === 'string' ? cb.data : '';
-  const m = /^sf:([dri]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
+  const m = /^sf:([drit]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
   if (!m) {
     await answerCb(token, cb.id, 'Неверная кнопка');
     return;
@@ -318,6 +320,32 @@ async function handleCallback(token, adminId, cb) {
         chatId,
         'Напиши одним сообщением, какой должна быть обложка — я соберу из этого промпт для генератора.\n/cancel — отмена.'
       );
+      return;
+    }
+    if (act === 't') {
+      console.log('[telegram-admin] Смена типа обложки:', row.slug || articleId, 'cover_type=', row.cover_type);
+      await answerCb(token, cb.id, 'Меняю обложку…');
+      const prog = makeProgressMessenger(token, chatId);
+      try {
+        const out = await toggleArticleCoverType(supabase, row, {
+          onProgress: (line) => prog.show(line)
+        });
+        chatState.delete(String(chatId));
+        const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (abstract)';
+        let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
+        if (out.direction === 'to_company' && out.domain_used) {
+          tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — оставлено FLUX)' : ''}${tail}`;
+        }
+        await prog.show(`✅ Тип обложки переключён${tail}`);
+      } catch (e) {
+        console.error('[telegram-admin] Смена типа: ошибка', e?.message || e);
+        try {
+          await prog.show(`❌ Смена типа: ${e.message || e}`);
+        } catch {
+          await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
+        }
+      }
+      return;
     }
   } catch (e) {
     console.error('[telegram-admin] Действие', act, 'ошибка:', e?.message || e);
