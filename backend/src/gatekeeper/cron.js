@@ -1,6 +1,8 @@
 import Parser from 'rss-parser';
 import { supabase } from '../config.js';
+import { normalizeArticleUrl } from '../lib/article-url.js';
 import { FEEDS } from './feeds.js';
+import { enqueueShortRewriteRefreshJobs } from './short-rewrite-refresh.js';
 
 const parser = new Parser();
 
@@ -55,21 +57,7 @@ function chunk(arr, size) {
   return out;
 }
 
-/** Stable article URL for dedup (strip hash, common UTM params). */
-export function normalizeArticleUrl(raw) {
-  const s = typeof raw === 'string' ? raw.trim() : '';
-  if (!/^https?:\/\//i.test(s)) return '';
-  try {
-    const u = new URL(s);
-    u.hash = '';
-    for (const k of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid']) {
-      u.searchParams.delete(k);
-    }
-    return u.toString();
-  } catch {
-    return s;
-  }
-}
+export { normalizeArticleUrl };
 
 function looksLikeArticlePath(url) {
   try {
@@ -285,6 +273,18 @@ export async function runGatekeeper() {
   console.log(
     `[GATEKEEPER] Cycle done. candidates=${stats.candidatesTotal} (raw_unique=${stats.candidatesBeforeCap}) enqueued=${stats.enqueued} already_published=${stats.skippedPublished} already_queued=${stats.skippedAlreadyQueued}${qNote}${capNote}`
   );
+
+  try {
+    const sr = await enqueueShortRewriteRefreshJobs(supabase, stats);
+    if (sr.enqueued > 0 || sr.scanned > 0) {
+      console.log(
+        `[GATEKEEPER] Short-rewrite audit: scanned=${sr.scanned} requeued=${sr.enqueued} skip_in_queue=${sr.skippedQueued}`
+      );
+    }
+  } catch (e) {
+    console.warn('[GATEKEEPER] Short-rewrite audit failed:', e?.message || e);
+  }
+
   return stats;
 }
 

@@ -1,6 +1,8 @@
 import { supabase, config } from '../config.js';
 import { sendTelegramMessage } from '../lib/telegram.js';
 import { runGatekeeper } from '../gatekeeper/cron.js';
+import { normalizeArticleUrl } from '../lib/article-url.js';
+import { clipSourceForRewriter } from '../lib/rewrite-length-quality.js';
 import { extractArticleData } from '../scraper/extractor.js';
 import { generateEmbedding } from '../brain/embeddings.js';
 import { rewriteArticle } from '../brain/rewriter.js';
@@ -319,19 +321,102 @@ export async function processQueue() {
         continue;
       }
 
-      console.log(`\n[SEQUENCER] Processing Job: ${jobUrl}`);
+      const jobIntent = String(job.intent ?? 'ingest').toLowerCase().trim() || 'ingest';
+      console.log(
+        `\n[SEQUENCER] Processing Job: ${jobUrl}${jobIntent !== 'ingest' ? ` [intent=${jobIntent}]` : ''}`
+      );
 
       // 2. EXTRACT
       const extracted = await extractArticleData(jobUrl);
       console.log(`[SEQUENCER] Extracted: ${extracted.length} characters.`);
-      
+
       if (extracted.length < config.limits.minChars || extracted.length > config.limits.maxChars) {
         console.log(`[SEQUENCER] Skip logic activated. Length out of bounds.`);
         await supabase.from('jobs').update({ status: 'skipped_length' }).eq('id', job.id);
         continue;
       }
 
-      // 3. EMBED & DEDUPLICATE
+      const clippedSource = clipSourceForRewriter(extracted.textContent);
+
+      // ——— Refresh: re-rewrite existing published row (short-rewrite audit); skip semantic dedup ———
+      if (jobIntent === 'refresh') {
+        const urlKeys = [...new Set([jobUrl, normalizeArticleUrl(jobUrl)].filter(Boolean))];
+        const { data: matchRows } = await supabase
+          .from('articles')
+          .select('id, slug')
+          .in('source_url', urlKeys)
+          .eq('status', 'published')
+          .limit(1);
+        const art = matchRows?.[0];
+
+        if (!art?.id) {
+          await supabase
+            .from('jobs')
+            .update({
+              status: 'failed',
+              error_log: 'refresh: no published article for this source_url'
+            })
+            .eq('id', job.id);
+          continue;
+        }
+
+        const embedding = await generateEmbedding(
+          extracted.title + '\n\n' + extracted.textContent.slice(0, 500)
+        );
+
+        console.log(`[SEQUENCER] Calling OpenRouter rewrite (refresh)…`);
+        const rewritten = await rewriteArticle(extracted.title, extracted.textContent);
+
+        console.log(
+          `[SEQUENCER] Generating Cover (${rewritten.cover_type}: ${rewritten.cover_keyword})…`
+        );
+        const cover = await generateCoverWithFallback(rewritten.cover_type, rewritten.cover_keyword);
+        const coverBuffer = cover.buffer;
+        const coverTypePublished = cover.cover_fallback ? 'abstract' : rewritten.cover_type;
+        const slugKw = cover.cover_fallback ? 'abstract_fallback' : rewritten.cover_keyword;
+        const filename = `covers/${Date.now()}-${slugKw.replace(/[^a-z0-9]/gi, '_')}.${cover.extension}`;
+        const coverUrl = await uploadToR2(coverBuffer, filename, cover.contentType);
+        console.log(`[SEQUENCER] Uploaded Cover: ${coverUrl}`);
+
+        const { error: updErr } = await supabase
+          .from('articles')
+          .update({
+            title: rewritten.title,
+            content_md: rewritten.content_md,
+            tags: rewritten.tags,
+            dek: rewritten.dek,
+            primary_rubric: rewritten.primary_rubric,
+            cover_url: coverUrl,
+            cover_type: coverTypePublished,
+            embedding: `[${embedding.join(',')}]`,
+            faq: rewritten.faq || [],
+            entities: rewritten.entities || [],
+            sentiment: rewritten.sentiment || 5,
+            source_extract: clippedSource
+          })
+          .eq('id', art.id);
+
+        if (updErr) {
+          throw new Error(`Publisher Update Error: ${updErr.message}`);
+        }
+
+        await supabase.from('jobs').update({ status: 'completed' }).eq('id', job.id);
+        console.log(
+          `[SEQUENCER] Refreshed article /news/${art.slug} (short-rewrite audit). Job done: ${job.url}`
+        );
+
+        const articleUrl = `${config.publicSiteUrl}/news/${art.slug}`;
+        const idx = await notifyGoogleUrlUpdated(articleUrl);
+        if (idx.ok) {
+          console.log(`[SEQUENCER] Google Indexing API: URL_UPDATED ${articleUrl}`);
+        } else if (isGoogleIndexingConfigured()) {
+          console.warn(`[SEQUENCER] Google Indexing API failed:`, idx.error);
+        }
+
+        continue;
+      }
+
+      // 3. EMBED & DEDUPLICATE (ingest)
       const embedding = await generateEmbedding(extracted.title + '\n\n' + extracted.textContent.slice(0, 500));
       const dedup = await checkDuplicate(embedding);
 
@@ -385,7 +470,8 @@ export async function processQueue() {
           entities: rewritten.entities || [],
           sentiment: rewritten.sentiment || 5,
           status: 'published',
-          slug: rewritten.slug
+          slug: rewritten.slug,
+          source_extract: clippedSource
         });
         articleId = inserted.id;
         publishedSlug = inserted.slug;

@@ -9,6 +9,7 @@ import { generateEmbedding } from '../brain/embeddings.js';
 import { config } from '../config.js';
 import { buildFluxPromptFromEditorNote } from './flux-prompt-from-note.js';
 import { notifyGoogleUrlDeleted, notifyGoogleUrlUpdated } from './google-indexing.js';
+import { clipSourceForRewriter } from './rewrite-length-quality.js';
 
 function stripHostOrigin(url) {
   return String(url || '')
@@ -235,6 +236,7 @@ export async function rewriteArticleRow(supabase, row, options = {}) {
 
   await onProgress('⏳ OpenRouter: рерайт (обычно 30 с — 2 мин)…');
   console.log('[article-telegram-actions] OpenRouter rewrite…', { source });
+  const sourceForClip = typeof body === 'string' ? body : '';
   const rewritten = await rewriteArticle(title, body);
   await onProgress(`⏳ Ответ модели: ${rewritten.content_md.length} симв. Считаю embedding…`);
   console.log(
@@ -262,7 +264,8 @@ export async function rewriteArticleRow(supabase, row, options = {}) {
       entities: rewritten.entities,
       sentiment: rewritten.sentiment,
       cover_type: rewritten.cover_type,
-      embedding: `[${emb.join(',')}]`
+      embedding: `[${emb.join(',')}]`,
+      source_extract: clipSourceForRewriter(sourceForClip)
     })
     .eq('id', id);
 

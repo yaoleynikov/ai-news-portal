@@ -7,6 +7,7 @@ import { rewriteArticle } from '../brain/rewriter.js';
 import { generateCoverWithFallback, FALLBACK_ABSTRACT_COVER_KEYWORD } from '../media/generator.js';
 import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
+import { clipSourceForRewriter } from '../lib/rewrite-length-quality.js';
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 
 function coverSavePath(requestedPath, extension) {
@@ -105,6 +106,7 @@ export async function runArticlePipeline(url, opts = {}) {
       }
     }
 
+    const clippedSource = clipSourceForRewriter(extracted.textContent);
     const rewritten = await rewriteArticle(extracted.title, extracted.textContent);
     result.rewritten = {
       title: rewritten.title,
@@ -176,7 +178,8 @@ export async function runArticlePipeline(url, opts = {}) {
         entities: rewritten.entities || [],
         sentiment: rewritten.sentiment || 5,
         status: 'published',
-        slug: rewritten.slug
+        slug: rewritten.slug,
+        source_extract: clippedSource
       });
     } catch (insertErr) {
       result.error = `insert:${insertErr.message}`;
