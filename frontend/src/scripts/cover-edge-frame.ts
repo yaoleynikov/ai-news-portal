@@ -3,7 +3,7 @@
  * fall back to dominant border color.
  * Downscale uses imageSmoothingEnabled=false so flat backgrounds are not tinted by bilinear blend
  * from logo edges (64×64 + smoothing was shifting greens). Larger internal size reduces rounding error.
- * Needs crossOrigin="anonymous" when the image host sends CORS (see coverEdgeTintImgAttrs).
+ * Uses crossOrigin only when coverEdgeTintImgAttrs sets it; R2 public URLs load without CORS so the image never hard-fails.
  */
 /** Internal analysis size (not visible). Larger = stabler color; still cheap. */
 const SAMPLE = 128;

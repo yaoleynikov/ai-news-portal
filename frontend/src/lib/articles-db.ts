@@ -93,6 +93,8 @@ function hostBlocksCrossOriginImg(hostname: string): boolean {
 /**
  * Attributes for <img> inside [data-cover-edge]: Referer stripped + crossOrigin when the host is
  * expected to allow CORS on images so cover-edge-frame.ts can read pixels (otherwise backdrop stays --cover-backdrop).
+ * R2 public URLs (*.r2.dev / env host) intentionally omit crossOrigin: CORS mode fails the whole image if ACAO is missing
+ * on any response (seen as first-load flake); without crossOrigin the image always paints and tint is best-effort.
  */
 export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<string, string> {
   const raw = normalizeCoverUrl(typeof url === 'string' ? url.trim() : '');
@@ -120,12 +122,9 @@ export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<
 
   const r2h = r2PublicHostnameFromEnv();
   if (r2h && hostname === r2h) {
-    out.crossorigin = 'anonymous';
     return out;
   }
-  /* Bucket must send Access-Control-Allow-Origin for your site (R2 → CORS in dashboard). */
   if (hostname.endsWith('.r2.dev')) {
-    out.crossorigin = 'anonymous';
     return out;
   }
   if (hostname === 'img.logo.dev' || hostname.endsWith('.cloudinary.com') || hostname === 'cloudinary.com') {
