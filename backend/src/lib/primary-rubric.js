@@ -11,23 +11,316 @@ export function normalizePrimaryRubric(v) {
   return 'other';
 }
 
+/** @param {string} t */
+function tagSlug(t) {
+  return String(t || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+}
+
+/** Whole-tag slug is exactly one of the nav rubrics (after slugify). */
+const RUBRIC_ORDER = ['ai', 'hardware', 'open-source'];
+
+const HARDWARE_SEGMENTS = new Set([
+  'hardware',
+  'intel',
+  'nvidia',
+  'amd',
+  'arm',
+  'risc-v',
+  'riscv',
+  'cpu',
+  'gpu',
+  'vram',
+  'ram',
+  'ddr',
+  'ssd',
+  'motherboard',
+  'chip',
+  'chips',
+  'chipset',
+  'soc',
+  'foundry',
+  'tsmc',
+  'workstation',
+  'accelerator',
+  'accelerators',
+  'npu',
+  'tpu',
+  'fpga',
+  'apple-silicon',
+  'm4',
+  'm3',
+  'm2',
+  'm1',
+  'snapdragon',
+  'exynos',
+  'mediatek',
+  'qualcomm'
+]);
+
+const HARDWARE_SUBSTR = [
+  'intel',
+  'nvidia',
+  'geforce',
+  'radeon',
+  'ryzen',
+  'xeon',
+  'threadripper',
+  'apple-silicon',
+  'risc-v',
+  'motherboard',
+  'workstation-gpu'
+];
+
+const OS_SEGMENTS = new Set([
+  'linux',
+  'kernel',
+  'opensource',
+  'foss',
+  'debian',
+  'fedora',
+  'ubuntu',
+  'redhat',
+  'gnu',
+  'gpl',
+  'apache',
+  'mozilla',
+  'git'
+]);
+
+const OS_SUBSTR = ['open-source', 'open source', 'linux-kernel', 'kernel-', '-kernel', 'github'];
+
+/** Hyphen-separated token inside a tag slug (avoids false positives like "paid" → "ai"). */
+const AI_SEGMENTS = new Set([
+  'ai',
+  'ml',
+  'nlp',
+  'llm',
+  'llms',
+  'vlm',
+  'slm',
+  'gpt',
+  'openai',
+  'chatgpt',
+  'claude',
+  'anthropic',
+  'gemini',
+  'mistral',
+  'grok',
+  'copilot',
+  'deepmind',
+  'tensorflow',
+  'pytorch',
+  'huggingface',
+  'hf',
+  'midjourney',
+  'stable-diffusion',
+  'neural',
+  'embeddings',
+  'embedding',
+  'transformer',
+  'transformers',
+  'reasoning',
+  'generative',
+  'chatbot',
+  'sora',
+  'dall-e',
+  'dalle',
+  'bard',
+  'llama',
+  'mixtral',
+  'perplexity',
+  'cursor',
+  'codex',
+  'agents',
+  'agentic',
+  'agent',
+  'automl',
+  'openclaw',
+  'inference',
+  'finetuning',
+  'fine-tuning',
+  'multimodal',
+  'vision',
+  'foundation',
+  'hallucination',
+  'prompt',
+  'tokens',
+  'tokenization',
+  'rag',
+  'vector',
+  'semantic',
+  'synthetic',
+  'deepfake',
+  'tts',
+  'asr',
+  'openai-api',
+  'chat-bot',
+  'chatbots',
+  'diffusion',
+  'samsung-galaxy-ai',
+  'galaxy-ai',
+  'avatar',
+  'avatars',
+  'generative-ai',
+  'gen-ai',
+  'genai',
+  'language-model',
+  'largelanguagemodel',
+  'llmops',
+  'moe',
+  'mixture-of-experts',
+  'benchmark',
+  'alignment',
+  'safety',
+  'superintelligence',
+  'agi',
+  'veo',
+  'imagen',
+  'flux',
+  'sdxl',
+  'lora',
+  'qlora',
+  'quantization',
+  'distillation',
+  'pretrain',
+  'pre-training',
+  'dataset',
+  'datasets',
+  'synthetic-data',
+  'computer-vision',
+  'ocr',
+  'speech',
+  'voice',
+  'assistant',
+  'assistants',
+  'orchestration',
+  'workflow',
+  'langchain',
+  'langgraph',
+  'crewai',
+  'autogpt',
+  'news-agent',
+  'ai-news',
+  'tech-ai',
+  'mlops',
+  'data-science'
+]);
+
+const AI_PHRASES = [
+  'machine-learning',
+  'deep-learning',
+  'artificial-intelligence',
+  'large-language',
+  'generative-ai',
+  'gen-ai',
+  'computer-vision',
+  'natural-language',
+  'ai-agent',
+  'ai-agents',
+  'ai-accelerator',
+  'ai-accelerators',
+  'ai-ethics',
+  'ai-education',
+  'ai-avatar',
+  'ai-avatars',
+  'open-ai',
+  'gpt-4',
+  'gpt-3',
+  'gpt4',
+  'gpt3',
+  'chat-gpt',
+  'text-to-image',
+  'text-to-video',
+  'voice-cloning',
+  'neural-net',
+  'neural-network',
+  'neural-networks',
+  'foundation-model',
+  'foundation-models',
+  'multimodal',
+  'reasoning-model',
+  'slm',
+  'small-language'
+];
+
 /**
+ * @param {string[]} slugs — already slugified tag strings
+ * @returns {boolean}
+ */
+function hasHardwareSignal(slugs) {
+  for (const s of slugs) {
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (HARDWARE_SEGMENTS.has(seg)) return true;
+    }
+    for (const h of HARDWARE_SUBSTR) {
+      if (s.includes(h)) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasOpenSourceSignal(slugs) {
+  for (const s of slugs) {
+    if (s === 'github' || s.includes('github')) return true;
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (OS_SEGMENTS.has(seg)) return true;
+    }
+    for (const p of OS_SUBSTR) {
+      if (s.includes(p.replace(/\s+/g, '-'))) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasAiSignal(slugs) {
+  for (const s of slugs) {
+    if (/(^|-)ai($|-)/.test(s)) return true;
+    for (const p of AI_PHRASES) {
+      if (s.includes(p)) return true;
+    }
+    const segments = s.split('-').filter(Boolean);
+    for (const seg of segments) {
+      if (AI_SEGMENTS.has(seg)) return true;
+    }
+    if (segments.includes('machine') && segments.includes('learning')) return true;
+    if (segments.includes('artificial') && segments.includes('intelligence')) return true;
+    if (segments.includes('large') && segments.includes('language')) return true;
+    if (segments.includes('deep') && segments.includes('learning')) return true;
+    if (s.includes('llm')) return true;
+    if (s.includes('gpt')) return true;
+  }
+  return false;
+}
+
+/**
+ * Pick one primary rubric from tags (editorial / SEO). Order: explicit rubric tag → hardware →
+ * open-source → broad AI signals → other.
+ *
  * @param {string[]} tags
  * @returns {string}
  */
 export function inferPrimaryRubricFromTags(tags) {
-  const slugs = (Array.isArray(tags) ? tags : []).map((t) =>
-    String(t || '')
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-  );
-  const order = ['ai', 'hardware', 'open-source'];
-  for (const r of order) {
+  const slugs = (Array.isArray(tags) ? tags : []).map(tagSlug).filter(Boolean);
+
+  for (const r of RUBRIC_ORDER) {
     if (slugs.includes(r)) return r;
   }
-  if (slugs.some((s) => s === 'openclaw' || s.includes('llm') || s.includes('gpt'))) return 'ai';
-  if (slugs.some((s) => s.includes('intel') || s.includes('nvidia') || s.includes('cpu'))) return 'hardware';
-  if (slugs.some((s) => s.includes('linux') || s.includes('kernel') || s === 'github')) return 'open-source';
+
+  if (hasHardwareSignal(slugs)) return 'hardware';
+  /* Before open-source: many ML stacks are discussed alongside Linux/GitHub. */
+  if (hasAiSignal(slugs)) return 'ai';
+  if (hasOpenSourceSignal(slugs)) return 'open-source';
+
   return 'other';
 }

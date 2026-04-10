@@ -3,7 +3,7 @@
  *
  * Usage:
  *   node scripts/backfill-dek-rubric.mjs              # only rows missing/invalid rubric
- *   node scripts/backfill-dek-rubric.mjs --force      # overwrite all published
+ *   node scripts/backfill-dek-rubric.mjs --force      # overwrite all published (use after changing infer rules)
  *   node scripts/backfill-dek-rubric.mjs --dry-run    # print only
  */
 import dotenv from 'dotenv';
