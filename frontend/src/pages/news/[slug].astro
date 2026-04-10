@@ -38,9 +38,10 @@ function mergeArticleAnchorRel(attribs: Record<string, string>): Record<string, 
 
 export const prerender = false;
 
+/* Align with home: long SWR on article HTML hid updates to cover_url / cover_type after Telegram edits. */
 Astro.response.headers.set(
   'Cache-Control',
-  'public, s-maxage=120, stale-while-revalidate=86400'
+  'public, s-maxage=60, stale-while-revalidate=3600'
 );
 
 const { slug } = Astro.params;
