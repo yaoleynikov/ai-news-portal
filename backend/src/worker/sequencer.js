@@ -10,6 +10,7 @@ import { insertPublishedArticleRow } from '../lib/slug.js';
 import { getPublishQuotaExceeded, getResolvedPublishLimitConfig } from '../lib/publish-limits.js';
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 import { startDailyStatsScheduler } from '../stats/daily-report.js';
+import { spinTelegramAdminWithWorker } from '../lib/telegram-admin-runtime.js';
 
 /** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
 async function checkDuplicate(embedding) {
@@ -148,8 +149,8 @@ async function countPublishedSinceUtc(iso) {
   return typeof count === 'number' ? count : 0;
 }
 
-/** Why the queue can look “dead”: caps block claiming entirely. */
-async function logStartupDiagnostics(lim) {
+/** Snapshot for startup logs + optional Telegram (single DB round-trip). */
+async function fetchStartupQueueSnapshot() {
   const now = Date.now();
   const dayStart = new Date(now);
   dayStart.setUTCHours(0, 0, 0, 0);
@@ -163,21 +164,89 @@ async function logStartupDiagnostics(lim) {
     countPublishedSinceUtc(hourAgoIso)
   ]);
 
+  return {
+    pending,
+    processing,
+    pubDay,
+    pubHour,
+    dayStartIso,
+    startedAtIso: new Date(now).toISOString()
+  };
+}
+
+function embeddedGatekeeperSummary() {
+  const ms = gatekeeperIntervalMs();
+  if (ms <= 0) return 'embedded RSS gatekeeper: off';
+  return `embedded RSS gatekeeper: every ${Math.round(ms / 60000)} min`;
+}
+
+function escHtmlBrief(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/**
+ * Telegram when the worker process starts. Set TG_WORKER_STARTUP_NOTIFY=0 to disable.
+ */
+async function sendTelegramWorkerStartup(lim, snap) {
+  const off = String(process.env.TG_WORKER_STARTUP_NOTIFY || '')
+    .trim()
+    .toLowerCase();
+  if (off === '0' || off === 'false' || off === 'off') return;
+
+  const token = process.env.TG_BOT_TOKEN?.trim();
+  const chatId = process.env.TG_ADMIN_CHAT_ID?.trim();
+  if (!token || !chatId) return;
+
+  const dayCap = lim.perDay > 0 ? `${lim.perDay} (UTC day)` : 'off';
+  const hourCap = lim.perHour > 0 ? `${lim.perHour} (rolling 60m)` : 'off';
+
+  const lines = [
+    '🟢 <b>SiliconFeed worker</b> started',
+    '',
+    `<b>Queue:</b> pending ${snap.pending ?? '?'}, processing ${snap.processing ?? '?'}`,
+    `<b>Published</b> since UTC midnight: ${snap.pubDay ?? '?'} <i>(cap ${escHtmlBrief(dayCap)})</i>`,
+    `<b>Published</b> last 60 min: ${snap.pubHour ?? '?'} <i>(cap ${escHtmlBrief(hourCap)})</i>`,
+    '',
+    `<b>${escHtmlBrief(embeddedGatekeeperSummary())}</b>`,
+    `<b>Site:</b> ${escHtmlBrief(config.publicSiteUrl)}`,
+    '',
+    `<i>${escHtmlBrief(snap.startedAtIso)}</i>`
+  ];
+
+  if (lim.perDay > 0 && snap.pubDay != null && snap.pubDay >= lim.perDay) {
+    lines.push('', '⚠️ <b>Daily cap already hit</b> — jobs wait until UTC day rolls or cap is raised.');
+  } else if (lim.perHour > 0 && snap.pubHour != null && snap.pubHour >= lim.perHour) {
+    lines.push('', '⚠️ <b>Hourly cap already hit</b> — worker sleeps until the window moves.');
+  }
+
+  try {
+    const ok = await sendTelegramMessage(token, chatId, lines.join('\n'), { parseMode: 'HTML' });
+    if (!ok) console.warn('[SEQUENCER] Telegram startup notify: sendMessage returned false');
+  } catch (e) {
+    console.warn('[SEQUENCER] Telegram startup notify failed:', e?.message || e);
+  }
+}
+
+/** Why the queue can look “dead”: caps block claiming entirely. */
+function logStartupDiagnostics(lim, snap) {
   console.log(
-    `[SEQUENCER] Queue: pending=${pending ?? '?'} processing=${processing ?? '?'} | ` +
-      `published UTC today=${pubDay ?? '?'} (daily cap ${lim.perDay || 'off'}) | ` +
-      `last 60m=${pubHour ?? '?'} (hourly cap ${lim.perHour || 'off'})`
+    `[SEQUENCER] Queue: pending=${snap.pending ?? '?'} processing=${snap.processing ?? '?'} | ` +
+      `published UTC today=${snap.pubDay ?? '?'} (daily cap ${lim.perDay || 'off'}) | ` +
+      `last 60m=${snap.pubHour ?? '?'} (hourly cap ${lim.perHour || 'off'})`
   );
 
-  if (lim.perDay > 0 && pubDay != null && pubDay >= lim.perDay) {
+  if (lim.perDay > 0 && snap.pubDay != null && snap.pubDay >= lim.perDay) {
     console.warn(
-      `[SEQUENCER] Daily publish cap ALREADY hit (${pubDay}/${lim.perDay} since UTC midnight). ` +
+      `[SEQUENCER] Daily publish cap ALREADY hit (${snap.pubDay}/${lim.perDay} since UTC midnight). ` +
         `Worker will not process jobs until tomorrow UTC or you raise the cap (env PUBLISH_LIMIT_PER_DAY / DB worker_publish_limits, or 0=off).`
     );
   }
-  if (lim.perHour > 0 && pubHour != null && pubHour >= lim.perHour) {
+  if (lim.perHour > 0 && snap.pubHour != null && snap.pubHour >= lim.perHour) {
     console.warn(
-      `[SEQUENCER] Hourly cap ALREADY hit (${pubHour}/${lim.perHour} rolling). ` +
+      `[SEQUENCER] Hourly cap ALREADY hit (${snap.pubHour}/${lim.perHour} rolling). ` +
         `Worker sleeps until the window moves or cap is raised.`
     );
   }
@@ -193,7 +262,9 @@ export async function processQueue() {
   } else {
     console.log('[SEQUENCER] Publish limits: both caps off (unlimited).');
   }
-  await logStartupDiagnostics(lim);
+  const startupSnap = await fetchStartupQueueSnapshot();
+  logStartupDiagnostics(lim, startupSnap);
+  await sendTelegramWorkerStartup(lim, startupSnap);
   console.log('[SEQUENCER] Worker started. Polling for jobs...');
 
   let idlePolls = 0;
@@ -392,5 +463,6 @@ function startEmbeddedGatekeeper() {
 if (process.argv[1] && process.argv[1].endsWith('sequencer.js')) {
   startEmbeddedGatekeeper();
   startDailyStatsScheduler();
+  spinTelegramAdminWithWorker();
   processQueue();
 }

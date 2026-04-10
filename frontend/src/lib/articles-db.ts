@@ -3,7 +3,7 @@ import { ARTICLES, getArticleBySlug as getStaticArticleBySlug, type NewsArticle 
 import type { MockArticle } from '../data/mock-articles';
 
 const CARD_FIELDS =
-  'id, slug, title, content_md, tags, cover_url, created_at, source_url, faq, entities, sentiment, status';
+  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status';
 
 /** This project’s public r2.dev base; used only when the cover URL host is siliconfeed.r2.cloudflarestorage.com and env on the host is empty. */
 const SILICONFEED_R2_PUBLIC_DEFAULT = 'https://pub-ffc5900a06d64e009bb6babb2d096132.r2.dev';
@@ -41,12 +41,13 @@ export function normalizeCoverUrl(url: string): string {
 }
 
 const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
-  ({ id, slug, title, excerpt, cover_url, tags, created_at }) => ({
+  ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at }) => ({
     id,
     slug,
     title,
     excerpt,
     cover_url,
+    cover_type,
     tags,
     created_at
   })
@@ -116,6 +117,9 @@ export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | nu
   const content_md = String(row.content_md ?? '');
   const tags = Array.isArray(row.tags) ? (row.tags as string[]).filter((t) => typeof t === 'string') : [];
   const cover_url = normalizeCoverUrl(typeof row.cover_url === 'string' ? row.cover_url : '');
+  const ct = row.cover_type;
+  const cover_type: 'company' | 'abstract' | undefined =
+    ct === 'company' || ct === 'abstract' ? ct : undefined;
   const created_at = typeof row.created_at === 'string' ? row.created_at : new Date().toISOString();
   const source_url = typeof row.source_url === 'string' ? row.source_url : '';
   const sentiment = typeof row.sentiment === 'number' ? row.sentiment : 5;
@@ -140,6 +144,7 @@ export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | nu
     excerpt: dek.slice(0, 200),
     content_md,
     cover_url,
+    cover_type,
     tags,
     created_at,
     updated_at: typeof row.updated_at === 'string' ? row.updated_at : undefined,
@@ -157,6 +162,7 @@ function toMock(a: NewsArticle): MockArticle {
     title: a.title,
     excerpt: a.excerpt,
     cover_url: a.cover_url,
+    cover_type: a.cover_type,
     tags: a.tags,
     created_at: a.created_at
   };

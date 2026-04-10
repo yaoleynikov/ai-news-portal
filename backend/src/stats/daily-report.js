@@ -130,26 +130,189 @@ async function fetchNewsPageRows(auth, siteUrl, ymd) {
 }
 
 /**
+ * Top search queries for the day (by clicks).
  * @param {import('google-auth-library').JWT} auth
  */
-async function fetchGa4Day(auth, propertyNumericId, ymd) {
+async function fetchGscTopQueries(auth, siteUrl, ymd, limit = 8) {
+  const { google } = await import('googleapis');
+  const webmasters = google.webmasters({ version: 'v3', auth });
+  const body = {
+    startDate: ymd,
+    endDate: ymd,
+    type: 'web',
+    dimensions: ['query'],
+    rowLimit: 40
+  };
+  let res;
+  try {
+    res = await webmasters.searchanalytics.query({
+      siteUrl,
+      requestBody: { ...body, dataState: 'all' }
+    });
+  } catch {
+    res = await webmasters.searchanalytics.query({ siteUrl, requestBody: body });
+  }
+  const rows = res.data.rows || [];
+  rows.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
+  return rows.slice(0, limit).map((r) => ({
+    query: (r.keys && r.keys[0]) || '',
+    clicks: r.clicks ?? 0,
+    impressions: r.impressions ?? 0,
+    position: r.position
+  }));
+}
+
+function mapMetricRow(res) {
+  const names = (res.data.metricHeaders || []).map((h) => h.name);
+  const vals = res.data.rows?.[0]?.metricValues || [];
+  const out = {};
+  names.forEach((n, i) => {
+    out[n] = vals[i]?.value ?? '0';
+  });
+  return out;
+}
+
+function formatDurationSeconds(val) {
+  const s = parseFloat(String(val).replace(',', '.'));
+  if (!Number.isFinite(s) || s < 0) return '—';
+  if (s < 60) return `${Math.round(s)}s`;
+  const m = Math.floor(s / 60);
+  const sec = Math.round(s % 60);
+  return `${m}m ${sec}s`;
+}
+
+function formatRate(val) {
+  const x = parseFloat(String(val).replace(',', '.'));
+  if (!Number.isFinite(x)) return '—';
+  return `${(x * 100).toFixed(1)}%`;
+}
+
+/**
+ * GA4 overview metrics (single day, no dimensions).
+ * @param {import('google-auth-library').JWT} auth
+ */
+async function fetchGa4Overview(auth, propertyNumericId, ymd) {
   const { google } = await import('googleapis');
   const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
-  const name = String(propertyNumericId).trim();
+  const property = `properties/${String(propertyNumericId).trim()}`;
+  const metrics = [
+    { name: 'activeUsers' },
+    { name: 'newUsers' },
+    { name: 'sessions' },
+    { name: 'screenPageViews' },
+    { name: 'averageSessionDuration' },
+    { name: 'engagementRate' },
+    { name: 'eventCount' }
+  ];
+  const body = {
+    dateRanges: [{ startDate: ymd, endDate: ymd }],
+    metrics
+  };
+  try {
+    const res = await analyticsdata.properties.runReport({ property, requestBody: body });
+    return mapMetricRow(res);
+  } catch {
+    const res = await analyticsdata.properties.runReport({
+      property,
+      requestBody: {
+        dateRanges: [{ startDate: ymd, endDate: ymd }],
+        metrics: metrics.slice(0, 5)
+      }
+    });
+    return mapMetricRow(res);
+  }
+}
+
+/**
+ * Sessions by default channel group (Organic Search, Direct, …).
+ * @param {import('google-auth-library').JWT} auth
+ */
+async function fetchGa4ChannelBreakdown(auth, propertyNumericId, ymd, limit = 6) {
+  const { google } = await import('googleapis');
+  const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
+  const property = `properties/${String(propertyNumericId).trim()}`;
   const res = await analyticsdata.properties.runReport({
-    property: `properties/${name}`,
+    property,
     requestBody: {
       dateRanges: [{ startDate: ymd, endDate: ymd }],
-      metrics: [{ name: 'activeUsers' }, { name: 'sessions' }, { name: 'screenPageViews' }]
+      dimensions: [{ name: 'sessionDefaultChannelGroup' }],
+      metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
+      orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+      limit
     }
   });
-  const row = res.data.rows?.[0];
-  const vals = row?.metricValues || [];
-  return {
-    activeUsers: vals[0]?.value ?? '0',
-    sessions: vals[1]?.value ?? '0',
-    screenPageViews: vals[2]?.value ?? '0'
-  };
+  const rows = res.data.rows || [];
+  return rows.map((row) => ({
+    channel: row.dimensionValues?.[0]?.value ?? '—',
+    sessions: row.metricValues?.[0]?.value ?? '0',
+    users: row.metricValues?.[1]?.value ?? '0'
+  }));
+}
+
+/**
+ * Top page paths by views (site-wide).
+ * @param {import('google-auth-library').JWT} auth
+ */
+async function fetchGa4TopPaths(auth, propertyNumericId, ymd, limit = 8) {
+  const { google } = await import('googleapis');
+  const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
+  const property = `properties/${String(propertyNumericId).trim()}`;
+  const res = await analyticsdata.properties.runReport({
+    property,
+    requestBody: {
+      dateRanges: [{ startDate: ymd, endDate: ymd }],
+      dimensions: [{ name: 'pagePath' }],
+      metrics: [{ name: 'screenPageViews' }, { name: 'activeUsers' }],
+      orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
+      limit
+    }
+  });
+  const rows = res.data.rows || [];
+  return rows.map((row) => ({
+    path: row.dimensionValues?.[0]?.value ?? '—',
+    views: row.metricValues?.[0]?.value ?? '0',
+    users: row.metricValues?.[1]?.value ?? '0'
+  }));
+}
+
+/**
+ * Top /news/… paths only.
+ * @param {import('google-auth-library').JWT} auth
+ */
+async function fetchGa4TopNewsPaths(auth, propertyNumericId, ymd, limit = 6) {
+  const { google } = await import('googleapis');
+  const analyticsdata = google.analyticsdata({ version: 'v1beta', auth });
+  const property = `properties/${String(propertyNumericId).trim()}`;
+  const res = await analyticsdata.properties.runReport({
+    property,
+    requestBody: {
+      dateRanges: [{ startDate: ymd, endDate: ymd }],
+      dimensions: [{ name: 'pagePath' }],
+      metrics: [{ name: 'screenPageViews' }],
+      dimensionFilter: {
+        filter: {
+          fieldName: 'pagePath',
+          stringFilter: { matchType: 'CONTAINS', value: '/news/' }
+        }
+      },
+      orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
+      limit
+    }
+  });
+  const rows = res.data.rows || [];
+  return rows.map((row) => ({
+    path: row.dimensionValues?.[0]?.value ?? '—',
+    views: row.metricValues?.[0]?.value ?? '0'
+  }));
+}
+
+async function fetchPendingJobsCount() {
+  const { count, error } = await supabase
+    .from('jobs')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'pending');
+  if (error) return null;
+  return typeof count === 'number' ? count : 0;
 }
 
 /**
@@ -195,8 +358,10 @@ function buildMessage({
   reportDateYmd,
   timeZone,
   articles,
+  pendingJobs,
   gscTotals,
   gscNews,
+  gscQueries,
   ga4,
   inspections,
   gscError,
@@ -206,6 +371,11 @@ function buildMessage({
   const lines = [];
   lines.push(`📊 <b>SiliconFeed</b> — ${escHtml(reportDateYmd)} (${escHtml(timeZone)})`);
   lines.push('');
+  if (pendingJobs != null) {
+    lines.push(`<b>Очередь</b> (jobs pending): <b>${pendingJobs}</b>`);
+    lines.push('');
+  }
+
   lines.push(`<b>Новые статьи</b> (созданы за день): ${articles.length}`);
   const maxList = 15;
   for (let i = 0; i < Math.min(articles.length, maxList); i++) {
@@ -224,10 +394,22 @@ function buildMessage({
   } else if (gscTotals) {
     lines.push(`Клики: <b>${gscTotals.clicks}</b>`);
     lines.push(`Показы: <b>${gscTotals.impressions}</b>`);
+    lines.push(`CTR (сводно): ${gscTotals.ctr ? (gscTotals.ctr * 100).toFixed(2) + '%' : '—'}`);
     lines.push(`Средняя позиция: ${gscTotals.position ? gscTotals.position.toFixed(1) : '—'}`);
     lines.push(
       `Страниц <code>/news/…</code> с показами в этот день: <b>${gscNews?.count ?? 0}</b> <i>(показ в выдаче ≠ гарантия индекса)</i>`
     );
+    if (gscQueries?.length) {
+      lines.push('');
+      lines.push('<b>Топ запросов</b> (клики):');
+      for (const q of gscQueries) {
+        if (!q.query) continue;
+        const pos = q.position != null ? q.position.toFixed(1) : '—';
+        lines.push(
+          `• ${escHtml(q.query.slice(0, 80))}${q.query.length > 80 ? '…' : ''} — <b>${q.clicks}</b> clk, ${q.impressions} imp, pos ~${pos}`
+        );
+      }
+    }
   }
 
   if (inspections?.length) {
@@ -245,12 +427,56 @@ function buildMessage({
 
   lines.push('');
   lines.push('<b>Посетители</b> (GA4, календарный день свойства)');
-  if (gaError) {
+  const hasGa =
+    ga4?.overview ||
+    (ga4?.channels?.length ?? 0) > 0 ||
+    (ga4?.topPaths?.length ?? 0) > 0 ||
+    (ga4?.topNews?.length ?? 0) > 0;
+  if (gaError && !hasGa) {
     lines.push(`<i>нет данных:</i> ${escHtml(gaError)}`);
-  } else if (ga4) {
-    lines.push(`Активные пользователи: <b>${escHtml(ga4.activeUsers)}</b>`);
-    lines.push(`Сессии: ${escHtml(ga4.sessions)}`);
-    lines.push(`Просмотры: ${escHtml(ga4.screenPageViews)}`);
+  } else {
+    const o = ga4?.overview;
+    if (o) {
+      lines.push(`Активные: <b>${escHtml(o.activeUsers)}</b> · Новые: ${escHtml(o.newUsers)}`);
+      lines.push(`Сессии: ${escHtml(o.sessions)} · Просмотры: ${escHtml(o.screenPageViews)}`);
+      if (o.averageSessionDuration != null) {
+        lines.push(`Средняя длина сессии: ${escHtml(formatDurationSeconds(o.averageSessionDuration))}`);
+      }
+      if (o.engagementRate != null) {
+        lines.push(`Вовлечённость (engagement rate): ${escHtml(formatRate(o.engagementRate))}`);
+      }
+      if (o.eventCount != null) {
+        lines.push(`События (event count): ${escHtml(o.eventCount)}`);
+      }
+    }
+    if (ga4?.channels?.length) {
+      lines.push('');
+      lines.push('<b>Каналы</b> (sessions):');
+      for (const ch of ga4.channels) {
+        lines.push(`• ${escHtml(ch.channel)} — ${escHtml(ch.sessions)} sess, ${escHtml(ch.users)} users`);
+      }
+    }
+    if (ga4?.topNews?.length) {
+      lines.push('');
+      lines.push('<b>Топ новостей</b> (просмотры, путь):');
+      for (const p of ga4.topNews) {
+        const short = p.path.length > 56 ? `${p.path.slice(0, 54)}…` : p.path;
+        lines.push(`• <code>${escHtml(short)}</code> — ${escHtml(p.views)} views`);
+      }
+    }
+    if (ga4?.topPaths?.length) {
+      lines.push('');
+      lines.push('<b>Топ страниц</b> (просмотры):');
+      for (const p of ga4.topPaths) {
+        const short = p.path.length > 52 ? `${p.path.slice(0, 50)}…` : p.path;
+        lines.push(
+          `• <code>${escHtml(short)}</code> — ${escHtml(p.views)} views, ${escHtml(p.users)} users`
+        );
+      }
+    }
+    if (gaError && hasGa) {
+      lines.push('', `<i>часть GA4 недоступна (обзор):</i> ${escHtml(gaError)}`);
+    }
   }
 
   lines.push('');
@@ -286,17 +512,22 @@ export async function runDailyStatsReport(opts = {}) {
   }
 
   const { startIso, endExclusiveIso } = reportDayBounds(reportDateYmd, timeZone);
-  const articles = await fetchArticlesForDay(startIso, endExclusiveIso);
+  const [articles, pendingJobs] = await Promise.all([
+    fetchArticlesForDay(startIso, endExclusiveIso),
+    fetchPendingJobsCount()
+  ]);
 
   let gscTotals = null;
   let gscNews = null;
+  let gscQueries = [];
   let gscError = null;
-  let ga4 = null;
+  /** @type {{ overview: Record<string, string>|null, channels: object[], topPaths: object[], topNews: object[] }} */
+  const ga4 = { overview: null, channels: [], topPaths: [], topNews: [] };
   let gaError = null;
   let inspections = [];
   let inspectError = null;
 
-  const auth = await getGoogleReportingAuth().catch((e) => null);
+  const auth = await getGoogleReportingAuth().catch(() => null);
   const siteUrl = gscSiteUrl();
 
   if (!auth) {
@@ -304,8 +535,14 @@ export async function runDailyStatsReport(opts = {}) {
     gaError = gscError;
   } else {
     try {
-      gscTotals = await fetchSearchTotals(auth, siteUrl, reportDateYmd);
-      gscNews = await fetchNewsPageRows(auth, siteUrl, reportDateYmd);
+      const [totals, news, queries] = await Promise.all([
+        fetchSearchTotals(auth, siteUrl, reportDateYmd),
+        fetchNewsPageRows(auth, siteUrl, reportDateYmd),
+        fetchGscTopQueries(auth, siteUrl, reportDateYmd, 8)
+      ]);
+      gscTotals = totals;
+      gscNews = news;
+      gscQueries = queries;
     } catch (e) {
       gscError = e?.message || String(e);
     }
@@ -314,11 +551,17 @@ export async function runDailyStatsReport(opts = {}) {
     if (!gaProp) {
       gaError = 'GA4_PROPERTY_ID не задан (числовой ID ресурса в GA4, не G-…)';
     } else {
-      try {
-        ga4 = await fetchGa4Day(auth, gaProp, reportDateYmd);
-      } catch (e) {
-        gaError = e?.message || String(e);
-      }
+      const [rO, rC, rP, rN] = await Promise.allSettled([
+        fetchGa4Overview(auth, gaProp, reportDateYmd),
+        fetchGa4ChannelBreakdown(auth, gaProp, reportDateYmd),
+        fetchGa4TopPaths(auth, gaProp, reportDateYmd),
+        fetchGa4TopNewsPaths(auth, gaProp, reportDateYmd)
+      ]);
+      if (rO.status === 'fulfilled') ga4.overview = rO.value;
+      else gaError = rO.reason?.message || String(rO.reason);
+      if (rC.status === 'fulfilled') ga4.channels = rC.value;
+      if (rP.status === 'fulfilled') ga4.topPaths = rP.value;
+      if (rN.status === 'fulfilled') ga4.topNews = rN.value;
     }
 
     if (envTruthy(process.env.STATS_URL_INSPECT)) {
@@ -349,8 +592,10 @@ export async function runDailyStatsReport(opts = {}) {
     reportDateYmd,
     timeZone,
     articles,
+    pendingJobs,
     gscTotals,
     gscNews,
+    gscQueries,
     ga4,
     inspections,
     gscError,

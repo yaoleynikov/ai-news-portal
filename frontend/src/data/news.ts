@@ -10,6 +10,8 @@ export type NewsArticle = {
   excerpt: string;
   content_md: string;
   cover_url: string;
+  /** From pipeline: company logo tile vs photoreal FLUX cover */
+  cover_type?: 'company' | 'abstract';
   tags: string[];
   created_at: string;
   updated_at?: string;

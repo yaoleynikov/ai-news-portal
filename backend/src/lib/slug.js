@@ -1,5 +1,18 @@
 import { randomBytes } from 'node:crypto';
 
+/** Known glued segments the model sometimes emits (e.g. news + samsung). */
+const SLUG_SEGMENT_FIXES = new Map([['newssamsung', 'news-samsung']]);
+
+/**
+ * @param {string} slug
+ */
+function repairSlugSegments(slug) {
+  return slug
+    .split('-')
+    .map((seg) => SLUG_SEGMENT_FIXES.get(seg.toLowerCase()) ?? seg)
+    .join('-');
+}
+
 /**
  * Latin kebab-case slug for URLs. Model may suggest `slug`; we validate and fall back if needed.
  * @param {unknown} modelSlug
@@ -8,6 +21,7 @@ import { randomBytes } from 'node:crypto';
 export function finalizeArticleSlug(modelSlug, title) {
   let s = typeof modelSlug === 'string' ? modelSlug.trim().toLowerCase() : '';
   s = s.replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  s = repairSlugSegments(s);
   if (s.length >= 3 && s.length <= 96) return s.slice(0, 80);
 
   const latin = String(title || '')

@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { config } from '../config.js';
+import { FALLBACK_ABSTRACT_COVER_KEYWORD } from '../media/generator.js';
 import { finalizeArticleSlug } from '../lib/slug.js';
 
 function rewriterMaxTokens() {
@@ -144,7 +145,7 @@ export function normalizeRewritten(parsed) {
   let cover_keyword =
     typeof o.cover_keyword === 'string' && o.cover_keyword.trim()
       ? o.cover_keyword.trim()
-      : 'futuristic technology innovation';
+      : FALLBACK_ABSTRACT_COVER_KEYWORD;
   if (cover_keyword.length > 200) cover_keyword = cover_keyword.slice(0, 200);
 
   let faq = Array.isArray(o.faq) ? o.faq : [];
@@ -218,23 +219,24 @@ The tone should be modern and tech-savvy, but the piece must feel substantial �
 Rules:
 1. Title in English: strong and clear for SEO. Use sentence case — capitalize only the first word and proper nouns (OpenAI, AWS, EU). Do NOT use title case on every word.
 2. The content MUST be valid Markdown only (no HTML).
-3. CRITICAL: Start the Markdown with an H3 heading "### At a glance:" then exactly 3 bullet lines (- item) with the key takeaways.
-4. After that, add \`##\` headings **only when the topic actually shifts** — never on a fixed rhythm, character count, or to pad length. Each \`##\` must introduce a block with **at least two paragraphs** (3+ sentences each) unless the source is extremely thin.
+3. **Factual fidelity:** Copy-preserving beats paraphrase. Keep every concrete datum from the source: product and model names, version numbers, dates, regions/countries, prices, statistics, quotes (attributed), and **any enumerated lists** (devices, features, steps). If the source lists phones, SKUs, or beta regions, reproduce them as Markdown bullet or numbered lists — do not collapse them into vague prose. Never drop the list that is the core of the story.
+4. CRITICAL: Start the Markdown with an H3 heading "### At a glance:" then exactly 3 bullet lines (- item) with the key takeaways (may name specific models/regions if that is the news).
+5. After that, add \`##\` headings **only when the topic actually shifts** — never on a fixed rhythm, character count, or to pad length. Each \`##\` must introduce a block with **at least two paragraphs** (3+ sentences each) unless the source is extremely thin.
    - Strong source: up to 5–7 \`##\` sections, each with real substance; aim for ~12–20 solid paragraphs total after "At a glance".
    - Weak/short source: prefer **1–3** \`##\` sections (e.g. one \`## What happened\` plus \`## Why it matters\`) — **do not** invent many empty sections.
-5. **Depth:** After "At a glance", write **at least six full body paragraphs** for any story with more than a headline. Never output a 3–4 sentence "micro-article" when the scraped text contains more facts — expand with context, who is affected, history, and what to watch next.
-6. **Heading style:** Every \`##\` and \`###\` line uses **sentence case** (first word + proper nouns like WireGuard, Microsoft capitalized). Do **not** use all-lowercase heading lines.
-7. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead.
-8. Extract 3–6 concise tags in English.
-9. Cover strategy:
+6. **Depth:** After "At a glance", write **at least six full body paragraphs** for any story with more than a headline. Never output a 3–4 sentence "micro-article" when the scraped text contains more facts — expand with context, who is affected, history, and what to watch next, **without removing** the specific enumerations above.
+7. **Heading style:** Every \`##\` and \`###\` line uses **sentence case** (first word + proper nouns like WireGuard, Microsoft capitalized). Do **not** use all-lowercase heading lines.
+8. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead — but **do not** omit lists or numbers already in the source.
+9. Extract 3–6 concise tags in English.
+10. Cover strategy (text is sent to an image model; it must be **literal and grounded**, not sci-fi):
    - company: Only if the story is clearly about one well-known tech brand/product. cover_keyword MUST be a real domain like "openai.com" or "google.com" (no paths).
-   - abstract: For general or multi-vendor topics. cover_keyword = short English metaphor phrase (5–12 words) for a photorealistic scene, no brand names.
-10. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]).
-11. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners.
-12. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
-13. sentiment: integer 1–10 (market/tech tone for investors/readers).
+   - abstract: For general or multi-vendor topics. cover_keyword = one **concrete, present-day** scene (10–18 words): real lighting, ordinary environments (office, street, home desk, hands holding a phone, lab bench, conference room). Describe what would plausibly appear in a news photo for this topic. **Forbidden** in cover_keyword: "futuristic", "sci-fi", "cyberpunk", "hologram", "neon city", "space", "android robot", "laser", "matrix", "digital warrior", "metaphor for". No brand names or logos in cover_keyword.
+11. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]). Every word must be its own segment — never glue two words (wrong: newssamsung-admin; right: news-samsung-admin).
+12. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners; include specifics (models, regions) when the article lists them.
+13. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
+14. sentiment: integer 1–10 (market/tech tone for investors/readers).
 
-14. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
+15. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
 
 Output a single JSON object ONLY (no markdown fences, no commentary):
 {
@@ -303,9 +305,21 @@ ${clipped}
       );
     }
 
+    const finishReason = String(choice?.finish_reason ?? '');
     const unwrapped = unwrapJsonContent(rawResult);
     const parsed = parseRewriterModelJson(unwrapped);
-    return normalizeRewritten(parsed);
+    const normalized = normalizeRewritten(parsed);
+    if (finishReason === 'length') {
+      console.warn(
+        `[REWRITER] finish_reason=length (truncated). content_md chars=${normalized.content_md.length} slug=${normalized.slug}`
+      );
+    }
+    if (clipped.length > 2500 && normalized.content_md.length < 800) {
+      console.warn(
+        `[REWRITER] Short rewrite vs input: out=${normalized.content_md.length} in=${clipped.length} slug=${normalized.slug} — check model, max_tokens, or JSON parse`
+      );
+    }
+    return normalized;
   } catch (err) {
     console.error('[REWRITER] Rewrite operation failed:', err.message);
     throw err;

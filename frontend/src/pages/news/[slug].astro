@@ -176,14 +176,34 @@ if (article) {
   navArticlePool={listingPool}
 >
   <article class="glass article-sheet">
-    <img
-      src={article.cover_url}
-      alt={article.title}
-      class="article-hero"
-      width="1200"
-      height="630"
-      loading="eager"
-    />
+    {
+      article.cover_type === 'company' ? (
+        <div class="cover-edge-frame article-hero-bleed" data-cover-edge>
+          <img
+            src={article.cover_url}
+            alt={article.title}
+            class="cover-edge-frame__img article-hero"
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+            crossorigin="anonymous"
+          />
+        </div>
+      ) : (
+        <div class="article-hero-bleed article-hero-bleed--photo">
+          <img
+            src={article.cover_url}
+            alt={article.title}
+            class="article-hero article-hero--cover"
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      )
+    }
 
     <div class="article-body">
       <a class="article-kicker" href={topicOrTagUrl(kickerTag)} data-tag-theme={tagThemeSlug(kickerTag)}>

@@ -265,6 +265,13 @@ const gaMeasurementId =
       </div>
     </footer>
 
+    <script>
+      import { initCoverEdgeFrames } from '../scripts/cover-edge-frame';
+      const runCoverEdgeFrames = () => initCoverEdgeFrames();
+      runCoverEdgeFrames();
+      document.addEventListener('astro:page-load', runCoverEdgeFrames);
+    </script>
+
     <script is:inline>
       (function () {
         if (window.__siliconfeedThemesNav) return;

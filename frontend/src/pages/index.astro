@@ -74,14 +74,30 @@ function formatFeaturedStamp(iso: string) {
         <div class="home-featured">
           <div class="home-featured__visual">
             <figure class="home-featured__media">
-              <img
-                src={featured.cover_url}
-                alt=""
-                class="home-featured__img"
-                width="1200"
-                height="630"
-                loading="eager"
-              />
+              {featured.cover_type === 'company' ? (
+                <div class="cover-edge-frame cover-edge-frame--featured-inner" data-cover-edge>
+                  <img
+                    src={featured.cover_url}
+                    alt=""
+                    class="cover-edge-frame__img home-featured__img"
+                    width="1200"
+                    height="630"
+                    loading="eager"
+                    decoding="async"
+                    crossorigin="anonymous"
+                  />
+                </div>
+              ) : (
+                <img
+                  src={featured.cover_url}
+                  alt=""
+                  class="home-featured__img home-featured__img--bleed"
+                  width="1200"
+                  height="630"
+                  loading="eager"
+                  decoding="async"
+                />
+              )}
               <a href={articleHref} class="home-featured__media-hit">
                 <span class="visually-hidden">{featured.title} — open article</span>
               </a>

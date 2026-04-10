@@ -30,6 +30,7 @@ export const config = {
     openRouterHttpReferer: process.env.OPENROUTER_HTTP_REFERER,
     openRouterAppTitle: process.env.OPENROUTER_APP_TITLE,
     hfKey: process.env.HF_API_KEY,
+    hfKey2: process.env.HF_API_KEY2,
     hfInferenceUrl: process.env.HF_INFERENCE_URL,
   },
   media: {

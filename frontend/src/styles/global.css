@@ -1148,15 +1148,54 @@ a.article-kicker[data-tag-theme='automation'] {
   background: var(--bg-surface);
 }
 
-.article-hero {
+/* Cover: client script samples edge color; image ≤80% box height, sides match background */
+.cover-edge-frame {
+  background: var(--cover-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-hero-bleed {
   width: 100%;
   aspect-ratio: var(--hero-cover-aspect);
+  border-bottom: 1px solid var(--border);
+}
+
+.article-hero-bleed--photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.article-hero-bleed--photo .article-hero--cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  border-bottom: 1px solid var(--border);
+}
+
+.cover-edge-frame__img {
+  display: block;
+  max-height: 80%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   margin: 0;
-  background: var(--cover-backdrop);
+  background: transparent;
+}
+
+.article-hero.cover-edge-frame__img {
+  border: 0;
+}
+
+.cover-edge-frame--featured-inner {
+  position: absolute;
+  inset: 0;
 }
 
 .article-body {
@@ -1627,18 +1666,35 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   pointer-events: auto;
 }
 
-/* Cover asset already has padding (generator); here we just fill the box */
+/* Lead cover: edge-tint frame + contain @ 80% height (see cover-edge-frame.ts) */
 .home-featured__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
   object-position: center;
   display: block;
-  background: var(--cover-backdrop);
+  background: transparent;
   transition: transform 0.5s ease;
 }
 
 .home-featured:hover .home-featured__img {
+  transform: scale(1.03);
+}
+
+.home-featured__img--bleed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-featured:hover .home-featured__img--bleed {
   transform: scale(1.03);
 }
 
