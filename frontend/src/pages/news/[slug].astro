@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { tagUrl, tagThemeSlug, topicOrTagUrl } from '../../lib/tags';
+import { tagUrl, tagThemeSlug, kickerFromArticle, type TagTheme } from '../../lib/tags';
 import {
   absoluteUrl,
   articlePath,
@@ -9,13 +9,13 @@ import {
 } from '../../lib/seo';
 import { relatedTopicsForArticle } from '../../lib/taxonomy';
 import {
+  clipListingExcerpt,
   coverEdgeTintImgAttrs,
   coverImageRequestAttrs,
   getNewsArticleBySlug,
   getRelatedArticles,
   getPrevNextByDate,
-  getTaxonomyArticlePool,
-  getListingArticles
+  getTaxonomyArticlePool
 } from '../../lib/articles-db';
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
@@ -49,7 +49,6 @@ if (!article) {
   Astro.response.status = 404;
 }
 
-const listingPool = await getListingArticles(60);
 const taxonomyPool = await getTaxonomyArticlePool(150);
 const relatedArticles = article
   ? await getRelatedArticles(article.slug, article.tags, 6)
@@ -64,7 +63,9 @@ const exploreTopics = article
 
 let rawHtml = '';
 let htmlContent = '';
-let kickerTag = 'News';
+let kickerLabel = 'News';
+let kickerHref = '/';
+let kickerTheme: TagTheme = 'default';
 let datePublished = '';
 let dateModified: string | null = null;
 let description = '';
@@ -88,7 +89,10 @@ if (article) {
     }
   });
 
-  kickerTag = article.tags[0] ?? 'News';
+  const kicker = kickerFromArticle(article);
+  kickerLabel = kicker.label;
+  kickerHref = kicker.href;
+  kickerTheme = kicker.theme;
   datePublished = new Date(article.created_at).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -102,9 +106,10 @@ if (article) {
       })
     : null;
 
-  description =
+  const rawMeta =
     article.dek ||
-    `${article.content_md.substring(0, 160).replace(/[#*]/g, '').trim()}...`;
+    `${article.content_md.substring(0, 200).replace(/[#*]/g, '').replace(/\s+/g, ' ').trim()}`;
+  description = clipListingExcerpt(rawMeta, 158);
 
   canonical = absoluteUrl(articlePath(article.slug), Astro.site ?? 'https://siliconfeed.online');
 
@@ -115,6 +120,7 @@ if (article) {
     image: [article.cover_url],
     datePublished: article.created_at,
     dateModified: article.updated_at ?? article.created_at,
+    articleSection: kickerLabel,
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
     author: [
       {
@@ -133,8 +139,8 @@ if (article) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: kickerTag,
-        item: absoluteUrl(topicOrTagUrl(kickerTag), Astro.site ?? 'https://siliconfeed.online')
+        name: kickerLabel,
+        item: absoluteUrl(kickerHref, Astro.site ?? 'https://siliconfeed.online')
       },
       {
         '@type': 'ListItem',
@@ -175,7 +181,6 @@ if (article) {
   ogType="article"
   canonicalUrl={canonical}
   jsonLd={jsonLdBlocks}
-  navArticlePool={listingPool}
 >
   <article class="glass article-sheet">
     {
@@ -209,8 +214,8 @@ if (article) {
     }
 
     <div class="article-body">
-      <a class="article-kicker" href={topicOrTagUrl(kickerTag)} data-tag-theme={tagThemeSlug(kickerTag)}>
-        {kickerTag}
+      <a class="article-kicker" href={kickerHref} data-tag-theme={kickerTheme}>
+        {kickerLabel}
       </a>
 
       <h1 class="article-title">{article.title}</h1>
@@ -358,7 +363,6 @@ if (article) {
   ogType="website"
   canonicalUrl={absoluteUrl(Astro.url.pathname, Astro.site ?? 'https://siliconfeed.online')}
   noindex={true}
-  navArticlePool={listingPool}
 >
   <div class="glass article-sheet" style="padding: 2rem; text-align: center;">
     <h1 class="article-title">404</h1>

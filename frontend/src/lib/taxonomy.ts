@@ -1,7 +1,7 @@
-import { NAV_TOPICS, articleMatchesTopic, slugifyTag } from './tags';
+import { NAV_TOPICS, articleInRubric, articleMatchesTopic, slugifyTag } from './tags';
 import { rubricPath, tagPath } from './seo';
 
-type ArticleTagSource = { tags: string[] };
+type ArticleTagSource = { tags: string[]; primary_rubric?: string | null };
 type ArticleWithDate = { created_at: string };
 
 export type TopicKind = 'rubric' | 'tag';
@@ -32,7 +32,7 @@ export function buildTopicIndex(articles: ArticleTagSource[]): TopicIndexEntry[]
     slug,
     label,
     kind: 'rubric' as const,
-    count: articles.filter((a) => articleMatchesTopic(a.tags, slug)).length,
+    count: articles.filter((a) => articleInRubric(a, slug)).length,
     href: rubricPath(slug)
   }));
 
@@ -67,7 +67,7 @@ export function relatedTopicsForSlug(
   limit = 12
 ): { slug: string; label: string; count: number; href: string; kind: TopicKind }[] {
   const rubricSlugs = new Set(NAV_TOPICS.map((t) => t.slug));
-  const inTopic = articles.filter((a) => articleMatchesTopic(a.tags, currentSlug));
+  const inTopic = articles.filter((a) => articleInRubric(a, currentSlug));
   const acc = new Map<string, { label: string; count: number }>();
 
   for (const article of inTopic) {

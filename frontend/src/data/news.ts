@@ -8,6 +8,8 @@ export type NewsArticle = {
   title: string;
   dek: string;
   excerpt: string;
+  /** Editorial section: ai | hardware | open-source | other — matches /rubric/* */
+  primary_rubric?: string;
   content_md: string;
   cover_url: string;
   /** From pipeline: company logo tile vs photoreal FLUX cover */
@@ -33,6 +35,7 @@ export const ARTICLES: NewsArticle[] = [
       '## Introduction\n\nThe new stack promises lower server load and lets AI agents find and rewrite news without GPU clusters. That can materially cut infrastructure spend.\n\n## N100 architecture\n\nRunning lean is possible with models that fit in RAM and skip discrete GPUs—ideal for zero-budget startups.',
     cover_url: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200',
     tags: ['AI', 'Openclaw', 'Automation'],
+    primary_rubric: 'ai',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     source_url: 'https://techcrunch.com/2026/04/07/openclaw-framework/',
@@ -58,6 +61,7 @@ export const ARTICLES: NewsArticle[] = [
       '## Context\n\nIntel N100 parts were long aimed at thin clients and embedded gear. In 2026 they commonly back workers, queues, and light CPU LLM inference.\n\n## Practice\n\nA typical node is 8–16 GB RAM, no discrete GPU, Docker, and a minimal Linux. A four-node cluster often costs less than last-gen gaming GPU.',
     cover_url: 'https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=1200',
     tags: ['Hardware', 'Intel', 'Hosting'],
+    primary_rubric: 'hardware',
     created_at: new Date(Date.now() - 86400000).toISOString(),
     source_url: 'https://example.com/intel-n100-ai-hosting',
     faq: [
@@ -81,6 +85,7 @@ export const ARTICLES: NewsArticle[] = [
       '## Open by default\n\nVendors increasingly ship reference CPU-inference stacks without closed runtimes. Linux Foundation proposes shared OCI image specs and sample docker-compose for pilots.\n\n## What changes\n\nIntegrators can compare latency and TCO with identical entrypoints, pinned libraries, and reproducible benchmarks.',
     cover_url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200',
     tags: ['Open Source', 'AI', 'Linux'],
+    primary_rubric: 'open-source',
     created_at: new Date(Date.now() - 172800000).toISOString(),
     source_url: 'https://example.com/linux-foundation-open-ai',
     faq: [

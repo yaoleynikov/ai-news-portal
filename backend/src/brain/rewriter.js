@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import { config } from '../config.js';
 import { FALLBACK_ABSTRACT_COVER_KEYWORD } from '../media/generator.js';
 import { finalizeArticleSlug } from '../lib/slug.js';
+import { normalizePrimaryRubric } from '../lib/primary-rubric.js';
 
 function rewriterMaxTokens() {
   const n = parseInt(process.env.REWRITER_MAX_TOKENS || '', 10);
@@ -186,6 +187,20 @@ export function normalizeRewritten(parsed) {
 
   const slug = finalizeArticleSlug(o.slug, title);
 
+  let dek = typeof o.dek === 'string' ? o.dek.replace(/\s+/g, ' ').trim() : '';
+  if (dek.length > 280) dek = `${dek.slice(0, 276).trim()}…`;
+  if (dek.length < 24) {
+    const plain = content_md
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/[*_`]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 240);
+    dek = plain.length >= 40 ? `${plain.slice(0, 236).trim()}…` : title.slice(0, 200);
+  }
+  const primary_rubric = normalizePrimaryRubric(o.primary_rubric);
+
   return {
     title,
     slug,
@@ -193,6 +208,8 @@ export function normalizeRewritten(parsed) {
     tags,
     cover_type,
     cover_keyword,
+    dek,
+    primary_rubric,
     faq,
     entities,
     sentiment
@@ -235,8 +252,10 @@ Rules:
 12. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners; include specifics (models, regions) when the article lists them.
 13. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
 14. sentiment: integer 1–10 (market/tech tone for investors/readers).
+15. dek: **Plain text only** (no Markdown), 1–2 sentences summarizing the story for cards, RSS, and meta description; max ~220 characters; must stand alone without reading the article; no leading "This article" filler.
+16. primary_rubric: exactly one string — **"ai"** (ML, agents, models, search, avatars), **"hardware"** (chips, devices, GPUs, phones), **"open-source"** (licenses, Linux, community projects, Git), or **"other"** (legal/antitrust, streaming/media business, politics, security incidents, or anything that does not fit the three). This drives the site section URL (/rubric/…) for SEO.
 
-15. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
+17. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
 
 Output a single JSON object ONLY (no markdown fences, no commentary):
 {
@@ -244,6 +263,8 @@ Output a single JSON object ONLY (no markdown fences, no commentary):
   "slug": "string",
   "content_md": "string",
   "tags": ["string"],
+  "dek": "string",
+  "primary_rubric": "ai",
   "cover_type": "company",
   "cover_keyword": "string",
   "faq": [{"q": "string", "a": "string"}],

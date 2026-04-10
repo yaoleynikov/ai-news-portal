@@ -7,7 +7,6 @@ import {
   coverEdgeTintImgAttrs,
   coverImageRequestAttrs,
   getHomeListingPage,
-  getListingArticles,
   parseListingPageParam
 } from '../lib/articles-db';
 
@@ -65,7 +64,6 @@ function formatFeaturedStamp(iso: string) {
   ogType="website"
   canonicalUrl={absoluteUrl(canonicalPath, siteOrigin)}
   jsonLd={websiteLd}
-  navArticlePool={articles}
 >
   <div class="home-page">
     <h1 class="visually-hidden">SiliconFeed — IT and AI news feed</h1>

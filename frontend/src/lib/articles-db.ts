@@ -3,7 +3,7 @@ import { ARTICLES, getArticleBySlug as getStaticArticleBySlug, type NewsArticle 
 import type { MockArticle } from '../data/mock-articles';
 
 const CARD_FIELDS =
-  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status';
+  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status, dek, primary_rubric, updated_at';
 
 /** This project’s public r2.dev base; used only when the cover URL host is siliconfeed.r2.cloudflarestorage.com and env on the host is empty. */
 const SILICONFEED_R2_PUBLIC_DEFAULT = 'https://pub-ffc5900a06d64e009bb6babb2d096132.r2.dev';
@@ -108,6 +108,7 @@ export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<
     out.crossorigin = 'anonymous';
     return out;
   }
+  /* Bucket must send Access-Control-Allow-Origin for your site (R2 → CORS in dashboard). */
   if (hostname.endsWith('.r2.dev')) {
     out.crossorigin = 'anonymous';
     return out;
@@ -121,7 +122,7 @@ export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<
 }
 
 const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
-  ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at }) => ({
+  ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at, primary_rubric }) => ({
     id,
     slug,
     title,
@@ -129,7 +130,8 @@ const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
     cover_url,
     cover_type,
     tags,
-    created_at
+    created_at,
+    primary_rubric
   })
 );
 
@@ -171,6 +173,27 @@ function excerptFromMarkdown(md: string, max = 220): string {
     .trim();
   if (plain.length <= max) return plain;
   return `${plain.slice(0, max - 1)}…`;
+}
+
+/** ~2–3 lines in home river / cards; trim on word boundary when possible. */
+export const LISTING_EXCERPT_MAX_CHARS = 220;
+
+export function clipListingExcerpt(text: string, max = LISTING_EXCERPT_MAX_CHARS): string {
+  const t = String(text || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (t.length <= max) return t;
+  const slice = t.slice(0, max - 1);
+  const cut = slice.lastIndexOf(' ');
+  const base = cut > Math.floor(max * 0.45) ? slice.slice(0, cut) : slice;
+  return `${base}…`;
+}
+
+const STORED_RUBRIC_SLUGS = new Set(['ai', 'hardware', 'open-source', 'other']);
+
+function normalizeStoredPrimaryRubric(v: unknown): string | undefined {
+  const s = typeof v === 'string' ? v.trim().toLowerCase() : '';
+  return STORED_RUBRIC_SLUGS.has(s) ? s : undefined;
 }
 
 /** Strips the standard “At a glance” / legacy “Главное” heading block + bullets so dek does not duplicate the body. */
@@ -215,13 +238,18 @@ export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | nu
       .filter((x): x is { name: string; desc: string } => x && typeof x === 'object' && 'name' in x)
       .map((x) => ({ name: String(x.name), desc: String((x as { desc?: string }).desc ?? '') }));
   }
-  const dek = excerptFromMarkdown(stripLeadingTakeawaysBlock(content_md), 260);
+  const storedDek = typeof row.dek === 'string' ? row.dek.replace(/\s+/g, ' ').trim() : '';
+  const fallbackDek = excerptFromMarkdown(stripLeadingTakeawaysBlock(content_md), 280);
+  const dek = storedDek || fallbackDek;
+  const excerpt = clipListingExcerpt(dek);
+  const primary_rubric = normalizeStoredPrimaryRubric(row.primary_rubric);
   return {
     id,
     slug,
     title,
     dek,
-    excerpt: dek.slice(0, 200),
+    excerpt,
+    primary_rubric,
     content_md,
     cover_url,
     cover_type,
@@ -244,7 +272,8 @@ function toMock(a: NewsArticle): MockArticle {
     cover_url: a.cover_url,
     cover_type: a.cover_type,
     tags: a.tags,
-    created_at: a.created_at
+    created_at: a.created_at,
+    primary_rubric: a.primary_rubric
   };
 }
 
@@ -254,6 +283,37 @@ export const HOME_RIVER_PAGE_SIZE = 15;
 export const LISTING_PAGE_SIZE = 15;
 /** Max articles loaded when filtering by tag/section in memory (same slugify rule as `articleMatchesTopic`). */
 export const TOPIC_LISTING_FETCH_CAP = 2000;
+/** Header Topics menu: how many published rows to scan for section/tag counts (needs `primary_rubric` from DB). */
+export const TOPIC_NAV_INDEX_CAP = TOPIC_LISTING_FETCH_CAP;
+
+export type TopicIndexPoolArticle = { tags: string[]; primary_rubric?: string };
+
+/**
+ * Lightweight rows for `buildTopicIndex` — not the same as listing cards (no 60-item cap from home).
+ */
+export async function getTopicIndexPool(): Promise<TopicIndexPoolArticle[]> {
+  const supabase = getServerClient();
+  if (!supabase) {
+    return ARTICLES.map((a) => ({ tags: a.tags, primary_rubric: a.primary_rubric }));
+  }
+
+  const { data, error } = await supabase
+    .from('articles')
+    .select('tags, primary_rubric')
+    .eq('status', 'published')
+    .not('slug', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(TOPIC_NAV_INDEX_CAP);
+
+  if (error || !data?.length) {
+    return ARTICLES.map((a) => ({ tags: a.tags, primary_rubric: a.primary_rubric }));
+  }
+
+  return data.map((row) => ({
+    tags: Array.isArray(row.tags) ? (row.tags as string[]) : [],
+    primary_rubric: normalizeStoredPrimaryRubric(row.primary_rubric)
+  }));
+}
 
 function sortedMockFallback(): MockArticle[] {
   return [...MOCK_FALLBACK].sort(
@@ -492,29 +552,40 @@ export async function getPrevNextByDate(
 }
 
 /** For semantic cross-linking: pool of slug+tags from recent articles. */
-export async function getTaxonomyArticlePool(limit = 120): Promise<{ slug: string; tags: string[] }[]> {
+export async function getTaxonomyArticlePool(
+  limit = 120
+): Promise<{ slug: string; tags: string[]; primary_rubric?: string }[]> {
   const supabase = getServerClient();
   if (!supabase) {
-    return ARTICLES.map((a) => ({ slug: a.slug, tags: a.tags }));
+    return ARTICLES.map((a) => ({
+      slug: a.slug,
+      tags: a.tags,
+      primary_rubric: a.primary_rubric
+    }));
   }
 
   const { data, error } = await supabase
     .from('articles')
-    .select('slug, tags')
+    .select('slug, tags, primary_rubric')
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
 
   if (error || !data?.length) {
-    return ARTICLES.map((a) => ({ slug: a.slug, tags: a.tags }));
+    return ARTICLES.map((a) => ({
+      slug: a.slug,
+      tags: a.tags,
+      primary_rubric: a.primary_rubric
+    }));
   }
 
   return data
     .filter((r) => typeof r.slug === 'string')
     .map((r) => ({
       slug: r.slug as string,
-      tags: Array.isArray(r.tags) ? (r.tags as string[]) : []
+      tags: Array.isArray(r.tags) ? (r.tags as string[]) : [],
+      primary_rubric: normalizeStoredPrimaryRubric(r.primary_rubric)
     }));
 }
 

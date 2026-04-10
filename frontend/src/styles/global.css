@@ -357,8 +357,10 @@ a:hover {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Only a handful of rows; a short max-height hid “More” (other) below scroll. */
 .site-nav__themes-list--rubrics {
-  max-height: min(30vh, 10rem);
+  max-height: none;
+  overflow-y: visible;
 }
 
 .site-nav__themes-link {
@@ -1342,8 +1344,9 @@ a.article-kicker[data-tag-theme='automation'] {
 .related-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--border);
+  gap: 0;
+  /* Match card fill so empty tracks (short last row) are not a grey slab */
+  background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1355,7 +1358,8 @@ a.article-kicker[data-tag-theme='automation'] {
   text-decoration: none;
   color: inherit;
   border-radius: 0;
-  box-shadow: none;
+  /* 1px “gutters” without relying on grid gap + border-colored canvas (avoids holes) */
+  box-shadow: 1px 0 0 var(--border), 0 1px 0 var(--border);
 }
 
 .related-card:hover {

@@ -167,6 +167,8 @@ export async function runArticlePipeline(url, opts = {}) {
         title: rewritten.title,
         content_md: rewritten.content_md,
         tags: rewritten.tags,
+        dek: rewritten.dek,
+        primary_rubric: rewritten.primary_rubric,
         cover_url: coverUrl,
         cover_type: coverTypePublished,
         embedding: `[${embedding.join(',')}]`,

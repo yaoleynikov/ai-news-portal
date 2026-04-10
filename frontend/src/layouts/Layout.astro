@@ -2,9 +2,8 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import { NAV_TOPICS, rubricUrl } from '../lib/tags';
-import { MOCK_ARTICLES } from '../data/mock-articles';
-import type { MockArticle } from '../data/mock-articles';
 import { buildTopicIndex } from '../lib/taxonomy';
+import { getTopicIndexPool } from '../lib/articles-db';
 
 interface Props {
   title: string;
@@ -15,8 +14,6 @@ interface Props {
   ogType?: 'website' | 'article';
   /** 404 etc. — noindex */
   noindex?: boolean;
-  /** Article pool for Themes menu (else static mock). */
-  navArticlePool?: MockArticle[];
 }
 
 const {
@@ -26,8 +23,7 @@ const {
   jsonLd,
   canonicalUrl,
   ogType = 'website',
-  noindex = false,
-  navArticlePool
+  noindex = false
 } = Astro.props;
 const pathname = Astro.url.pathname;
 const siteOrigin = Astro.site ?? new URL('https://siliconfeed.online');
@@ -38,7 +34,7 @@ const year = new Date().getFullYear();
 const telegramHref = 'https://t.me/siliconfeed';
 const mailHref = 'mailto:hello@siliconfeed.online';
 
-const topicIndex = buildTopicIndex(navArticlePool ?? MOCK_ARTICLES);
+const topicIndex = buildTopicIndex(await getTopicIndexPool());
 const themesRubrics = topicIndex.filter((t) => t.kind === 'rubric');
 const themesTags = topicIndex.filter((t) => t.kind === 'tag');
 const themesNavActive =

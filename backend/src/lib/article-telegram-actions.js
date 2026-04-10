@@ -256,6 +256,8 @@ export async function rewriteArticleRow(supabase, row, options = {}) {
       title: rewritten.title,
       content_md: rewritten.content_md,
       tags: rewritten.tags,
+      dek: rewritten.dek,
+      primary_rubric: rewritten.primary_rubric,
       faq: rewritten.faq,
       entities: rewritten.entities,
       sentiment: rewritten.sentiment,
