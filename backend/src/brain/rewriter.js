@@ -10,6 +10,41 @@ function rewriterMaxTokens() {
   return 10240;
 }
 
+function rewriterMaxAttempts() {
+  const n = parseInt(process.env.REWRITER_MAX_ATTEMPTS || '', 10);
+  if (Number.isFinite(n) && n >= 1 && n <= 6) return n;
+  return 3;
+}
+
+/**
+ * Whether to run another OpenRouter call: truncation, or body far too short vs clipped source.
+ * @param {number} inputLen clipped source character count
+ * @param {number} contentMdLen normalized content_md length
+ * @param {string} finishReason choice.finish_reason
+ */
+export function needsRewriterLengthRetry(inputLen, contentMdLen, finishReason) {
+  const fr = String(finishReason || '');
+  if (fr === 'length') return true;
+  if (contentMdLen >= 2600) return false;
+  if (inputLen < 1100) return false;
+  if (inputLen >= 1500 && contentMdLen < 650) return true;
+  if (inputLen >= 2200 && contentMdLen < 950) return true;
+  if (inputLen >= 1400 && inputLen <= 9000 && contentMdLen < inputLen * 0.38) return true;
+  return false;
+}
+
+function rewriterRetrySuffix(prevOutLen, inputLen, finishReason) {
+  const fr = String(finishReason || '');
+  const extra =
+    fr === 'length'
+      ? ' The last run hit the output token limit (truncated JSON).'
+      : '';
+  return `
+
+---
+**EDITOR RETRY (required):**${extra} The previous attempt's "content_md" field was too short (~${prevOutLen} characters) for a source of ~${inputLen} characters. Rewrite again from the same TITLE and CONTENT above. Output the **full** article: multiple H2 (##) sections, long paragraphs, every list and number from the source — not a blurb. One complete JSON object only (no markdown fences).`;
+}
+
 /** OpenRouter / OpenAI-style message.content: string or array of parts */
 function messageTextContent(message) {
   if (!message) return '';
@@ -304,33 +339,31 @@ CONTENT:
 ${clipped}
 `;
 
-  try {
-    const headers = {
-      Authorization: `Bearer ${config.ai.openRouterKey}`,
-      'Content-Type': 'application/json',
-    };
-    if (config.ai.openRouterHttpReferer) {
-      headers['HTTP-Referer'] = config.ai.openRouterHttpReferer;
-    }
-    if (config.ai.openRouterAppTitle) {
-      headers['X-Title'] = config.ai.openRouterAppTitle;
-    }
+  const headers = {
+    Authorization: `Bearer ${config.ai.openRouterKey}`,
+    'Content-Type': 'application/json',
+  };
+  if (config.ai.openRouterHttpReferer) {
+    headers['HTTP-Referer'] = config.ai.openRouterHttpReferer;
+  }
+  if (config.ai.openRouterAppTitle) {
+    headers['X-Title'] = config.ai.openRouterAppTitle;
+  }
 
-    /** Opt-in: some models (e.g. openrouter/free) ignore or break on `response_format: json_object`. */
-    const useJsonObjectFormat = process.env.OPENROUTER_JSON_OBJECT === '1';
+  /** Opt-in: some models (e.g. openrouter/free) ignore or break on `response_format: json_object`. */
+  const useJsonObjectFormat = process.env.OPENROUTER_JSON_OBJECT === '1';
 
+  async function callOpenRouter(userPrompt, maxTokens) {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers,
       body: JSON.stringify({
         model: config.ai.openRouterModel,
-        messages: [
-          { role: 'user', content: prompt }
-        ],
+        messages: [{ role: 'user', content: userPrompt }],
         ...(useJsonObjectFormat ? { response_format: { type: 'json_object' } } : {}),
         temperature: 0.5,
-        max_tokens: rewriterMaxTokens()
-      })
+        max_tokens: maxTokens,
+      }),
     });
 
     if (!response.ok) {
@@ -355,17 +388,47 @@ ${clipped}
     const unwrapped = unwrapJsonContent(rawResult);
     const parsed = parseRewriterModelJson(unwrapped);
     const normalized = normalizeRewritten(parsed);
-    if (finishReason === 'length') {
+    return { normalized, finishReason };
+  }
+
+  try {
+    const maxAttempts = rewriterMaxAttempts();
+    let maxTokens = rewriterMaxTokens();
+    let userPrompt = prompt;
+    let finishReason = '';
+    let normalized;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const { normalized: n, finishReason: fr } = await callOpenRouter(userPrompt, maxTokens);
+      normalized = n;
+      finishReason = fr;
+
+      if (finishReason === 'length') {
+        console.warn(
+          `[REWRITER] finish_reason=length (truncated). content_md chars=${normalized.content_md.length} slug=${normalized.slug} attempt=${attempt + 1}/${maxAttempts}`
+        );
+      }
+
+      const needRetry = needsRewriterLengthRetry(clipped.length, normalized.content_md.length, finishReason);
+      if (!needRetry || attempt >= maxAttempts - 1) {
+        if (clipped.length > 2500 && normalized.content_md.length < 800) {
+          console.warn(
+            `[REWRITER] Short rewrite vs input: out=${normalized.content_md.length} in=${clipped.length} slug=${normalized.slug} — check model, max_tokens, or model behavior`
+          );
+        }
+        return normalized;
+      }
+
       console.warn(
-        `[REWRITER] finish_reason=length (truncated). content_md chars=${normalized.content_md.length} slug=${normalized.slug}`
+        `[REWRITER] Retrying rewrite (${attempt + 2}/${maxAttempts}): out=${normalized.content_md.length} in=${clipped.length} finish_reason=${finishReason} max_tokens=${maxTokens} slug=${normalized.slug}`
       );
+      userPrompt = prompt + rewriterRetrySuffix(normalized.content_md.length, clipped.length, finishReason);
+      if (finishReason === 'length') {
+        maxTokens = Math.min(32000, Math.floor(maxTokens * 1.55));
+      } else {
+        maxTokens = Math.min(32000, Math.floor(maxTokens * 1.12));
+      }
     }
-    if (clipped.length > 2500 && normalized.content_md.length < 800) {
-      console.warn(
-        `[REWRITER] Short rewrite vs input: out=${normalized.content_md.length} in=${clipped.length} slug=${normalized.slug} — check model, max_tokens, or JSON parse`
-      );
-    }
-    return normalized;
   } catch (err) {
     console.error('[REWRITER] Rewrite operation failed:', err.message);
     throw err;
