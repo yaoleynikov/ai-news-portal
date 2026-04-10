@@ -1,0 +1,3 @@
+# Deploy scripts must run on Linux (Debian); force LF in repo.
+backend/deploy/install-debian-once.sh text eol=lf
+backend/deploy/siliconfeed-docker.service.in text eol=lf
