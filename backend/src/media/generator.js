@@ -64,17 +64,19 @@ function logoDevDomainsTryList(primary) {
   return out;
 }
 
-/** Logo edge / near-edge opaque pixels → dominant RGB for cover canvas (fallback: white). */
+/** Logo raster → dominant RGB for cover canvas (fallback: white). */
 const LOGO_EDGE_SAMPLE_MAX_SIDE = 320;
 const LOGO_EDGE_ALPHA_MIN = 120;
-const LOGO_EDGE_HIST_QUANT = 14;
+const LOGO_EDGE_HIST_QUANT = 10;
+const LOGO_INTERIOR_MIN_SAMPLES = 36;
+const LOGO_CORRIDOR_MIN_SAMPLES = 28;
 const LOGO_EDGE_MIN_SAMPLES_OUTER = 28;
 const LOGO_EDGE_MIN_SAMPLES_FALLBACK = 8;
 
 /**
  * @param {import('sharp')} sharp
  * @param {ArrayBuffer | Buffer} logoBuffer
- * @returns {Promise<{ r: number; g: number; b: number } | null>}
+ * @returns {Promise<{ r: number; g: number; b: number; source: string } | null>}
  */
 async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
   let data;
@@ -103,51 +105,105 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
   const q = (c) => Math.round(Math.min(255, Math.max(0, c)) / LOGO_EDGE_HIST_QUANT) * LOGO_EDGE_HIST_QUANT;
   const pixKey = (r, g, b) => ((q(r) & 255) << 16) | ((q(g) & 255) << 8) | (q(b) & 255);
 
-  const counts = new Map();
-  const addAt = (x, y) => {
+  const sumCounts = (m) => [...m.values()].reduce((a, b) => a + b, 0);
+
+  function dominantFromCounts(counts) {
+    let bestK = 0;
+    let bestN = -1;
+    for (const [k, n] of counts) {
+      if (n > bestN) {
+        bestN = n;
+        bestK = k;
+      }
+    }
+    if (bestN < 1) return null;
+    const r = (bestK >> 16) & 255;
+    const g = (bestK >> 8) & 255;
+    const b = bestK & 255;
+    return { r, g, b };
+  }
+
+  function addToCounts(counts, x, y) {
     if (x < 0 || y < 0 || x >= W || y >= H) return;
     const i = (y * W + x) * 4;
     if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
     const k = pixKey(data[i], data[i + 1], data[i + 2]);
     counts.set(k, (counts.get(k) ?? 0) + 1);
-  };
+  }
 
+  let minX = W;
+  let minY = H;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+  if (maxX < minX) return null;
+
+  const bw = maxX - minX + 1;
+  const bh = maxY - minY + 1;
+
+  // 1) Interior of opaque bbox — real “plate” fill (avoids dark anti-alias on the outer rim).
+  const inset = Math.max(2, Math.floor(Math.min(bw, bh) * 0.11));
+  const ix0 = minX + inset;
+  const iy0 = minY + inset;
+  const ix1 = maxX - inset;
+  const iy1 = maxY - inset;
+  if (ix0 <= ix1 && iy0 <= iy1) {
+    const interior = new Map();
+    for (let y = iy0; y <= iy1; y++) {
+      for (let x = ix0; x <= ix1; x++) {
+        addToCounts(interior, x, y);
+      }
+    }
+    if (sumCounts(interior) >= LOGO_INTERIOR_MIN_SAMPLES) {
+      const rgb = dominantFromCounts(interior);
+      if (rgb) return { ...rgb, source: 'interior' };
+    }
+  }
+
+  // 2) Corridor inside bbox: skip a few px from the edge (fringe), stay inside solid fill.
+  const dLo = Math.max(2, Math.floor(Math.min(bw, bh) * 0.055));
+  const dHi = Math.max(dLo + 3, Math.floor(Math.min(bw, bh) * 0.3));
+  const corridor = new Map();
+  for (let y = minY; y <= maxY; y++) {
+    for (let x = minX; x <= maxX; x++) {
+      const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
+      if (d > dLo && d <= dHi) addToCounts(corridor, x, y);
+    }
+  }
+  if (sumCounts(corridor) >= LOGO_CORRIDOR_MIN_SAMPLES) {
+    const rgb = dominantFromCounts(corridor);
+    if (rgb) return { ...rgb, source: 'corridor' };
+  }
+
+  // 3) Outer border of full bitmap (opaque logos flush to canvas edge).
+  const counts = new Map();
   const border = Math.max(3, Math.floor(Math.min(W, H) * 0.07));
   for (let y = 0; y < H; y++) {
     for (let x = 0; x < W; x++) {
       if (x < border || x >= W - border || y < border || y >= H - border) {
-        addAt(x, y);
+        addToCounts(counts, x, y);
       }
     }
   }
-
-  const sumCounts = (m) => [...m.values()].reduce((a, b) => a + b, 0);
   let total = sumCounts(counts);
 
+  // 4) Last resort: thin outer ring of bbox (old behavior).
   if (total < LOGO_EDGE_MIN_SAMPLES_OUTER) {
     counts.clear();
-    let minX = W;
-    let minY = H;
-    let maxX = -1;
-    let maxY = -1;
-    for (let y = 0; y < H; y++) {
-      for (let x = 0; x < W; x++) {
-        const i = (y * W + x) * 4;
-        if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
-        if (x < minX) minX = x;
-        if (x > maxX) maxX = x;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
-      }
-    }
-    if (maxX < minX) return null;
-    const bw = maxX - minX + 1;
-    const bh = maxY - minY + 1;
     const frame = Math.max(2, Math.min(20, Math.floor(Math.min(bw, bh) * 0.14)));
     for (let y = minY; y <= maxY; y++) {
       for (let x = minX; x <= maxX; x++) {
         const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-        if (d <= frame) addAt(x, y);
+        if (d <= frame) addToCounts(counts, x, y);
       }
     }
     total = sumCounts(counts);
@@ -155,18 +211,9 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
 
   if (total < LOGO_EDGE_MIN_SAMPLES_FALLBACK) return null;
 
-  let bestK = 0;
-  let bestN = -1;
-  for (const [k, n] of counts) {
-    if (n > bestN) {
-      bestN = n;
-      bestK = k;
-    }
-  }
-  const r = (bestK >> 16) & 255;
-  const g = (bestK >> 8) & 255;
-  const b = bestK & 255;
-  return { r, g, b };
+  const rgb = dominantFromCounts(counts);
+  if (!rgb) return null;
+  return { ...rgb, source: 'border-or-frame' };
 }
 
 /**
@@ -191,10 +238,12 @@ async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
   const logoBox = Math.min(targetLogoSide, innerW, innerH);
 
   const backdropRgb = await sampleLogoEdgeBackdropRgb(sharp, logoBuffer);
-  const canvasBg = backdropRgb ?? { r: 255, g: 255, b: 255 };
+  const canvasBg = backdropRgb
+    ? { r: backdropRgb.r, g: backdropRgb.g, b: backdropRgb.b }
+    : { r: 255, g: 255, b: 255 };
   if (backdropRgb) {
     console.log(
-      `[MEDIA] company cover: canvas backdrop rgb(${canvasBg.r},${canvasBg.g},${canvasBg.b}) from logo edges`
+      `[MEDIA] company cover: canvas backdrop rgb(${canvasBg.r},${canvasBg.g},${canvasBg.b}) (${backdropRgb.source})`
     );
   }
 
