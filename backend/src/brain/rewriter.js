@@ -105,6 +105,30 @@ function parseRewriterModelJson(unwrapped) {
  * Capitalize the first letter of `##` / `###` lines if the model emitted all-lowercase headings.
  * Skips "### At a glance:".
  */
+/**
+ * Remove a trailing FAQ section from Markdown body. FAQ is stored only in JSON `faq`;
+ * duplicating it here causes double FAQ on /news/[slug].
+ */
+export function stripFaqSectionFromContentMd(md) {
+  if (typeof md !== 'string' || !md) return md;
+  const lines = md.split(/\r?\n/);
+  let cut = -1;
+  for (let i = 0; i < lines.length; i++) {
+    const t = lines[i].trim();
+    if (/^#{1,6}\s+(faqs?|frequently asked questions)\s*:?\s*$/i.test(t)) {
+      cut = i;
+      break;
+    }
+  }
+  if (cut < 0) return md;
+  return lines
+    .slice(0, cut)
+    .join('\n')
+    .replace(/[ \t]+\r?\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trimEnd();
+}
+
 export function ensureHeadingSentenceStart(md) {
   if (typeof md !== 'string' || !md) return md;
   return md
@@ -135,6 +159,7 @@ export function normalizeRewritten(parsed) {
   const title = typeof o.title === 'string' ? o.title.trim() : '';
   let content_md = typeof o.content_md === 'string' ? o.content_md.trim() : '';
   content_md = ensureHeadingSentenceStart(content_md);
+  content_md = stripFaqSectionFromContentMd(content_md);
   if (!title || !content_md) {
     throw new Error('Rewriter: missing title or content_md');
   }
@@ -249,7 +274,7 @@ Rules:
    - company: Only if the story is clearly about one well-known tech brand/product. cover_keyword MUST be a real domain like "openai.com" or "google.com" (no paths).
    - abstract: For general or multi-vendor topics. cover_keyword = one **concrete, present-day** scene (10–18 words): real lighting, ordinary environments (office, street, home desk, hands holding a phone, lab bench, conference room). Describe what would plausibly appear in a news photo for this topic. **Forbidden** in cover_keyword: "futuristic", "sci-fi", "cyberpunk", "hologram", "neon city", "space", "android robot", "laser", "matrix", "digital warrior", "metaphor for". No brand names or logos in cover_keyword.
 11. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]). Every word must be its own segment — never glue two words (wrong: newssamsung-admin; right: news-samsung-admin).
-12. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners; include specifics (models, regions) when the article lists them.
+12. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners; include specifics (models, regions) when the article lists them. Put FAQ **only** in the JSON \`faq\` array — **never** add a "## FAQs", "## FAQ", "### FAQ", or any Q&A block inside \`content_md\`. The Markdown body must end with your last substantive section (e.g. conclusion); the site renders \`faq\` separately.
 13. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
 14. sentiment: integer 1–10 (market/tech tone for investors/readers).
 15. dek: **Plain text only** (no Markdown), 1–2 sentences summarizing the story for cards, RSS, and meta description; max ~220 characters; must stand alone without reading the article; no leading "This article" filler.
