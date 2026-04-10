@@ -2,11 +2,13 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { ARTICLES, getArticleBySlug as getStaticArticleBySlug, type NewsArticle } from '../data/news';
 import type { MockArticle } from '../data/mock-articles';
 
-/** After migration 0011; fallback select uses CORE only if these columns are missing. */
+/**
+ * After migration 0011; fallback select when `dek` / `updated_at` are missing.
+ * Include `primary_rubric` so /rubric/* matches Topics counts (articleInRubric prefers DB rubric over tags).
+ */
 const CARD_FIELDS_CORE =
-  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status';
-const CARD_FIELDS =
-  `${CARD_FIELDS_CORE}, dek, primary_rubric, updated_at`;
+  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status, primary_rubric';
+const CARD_FIELDS = `${CARD_FIELDS_CORE}, dek, updated_at`;
 
 function shouldRetryArticleSelectWithoutNewColumns(error: { message?: string; code?: string } | null): boolean {
   if (!error) return false;
