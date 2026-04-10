@@ -2,8 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Pagination from '../components/Pagination.astro';
 import { tagUrl, tagThemeSlug } from '../lib/tags';
-import { absoluteUrl, articlePath } from '../lib/seo';
-import { getHomeListingPage, getListingArticles, parseListingPageParam } from '../lib/articles-db';
+import { absoluteUrl, articlePath, resolveSiteOrigin } from '../lib/seo';
+import {
+  coverNeedsAnonymousCrossOrigin,
+  getHomeListingPage,
+  getListingArticles,
+  parseListingPageParam
+} from '../lib/articles-db';
 
 export const prerender = false;
 
@@ -84,7 +89,9 @@ function formatFeaturedStamp(iso: string) {
                     height="630"
                     loading="eager"
                     decoding="async"
-                    crossorigin="anonymous"
+                    {...(coverNeedsAnonymousCrossOrigin(featured.cover_url, resolveSiteOrigin(Astro.site))
+                      ? { crossorigin: 'anonymous' }
+                      : {})}
                   />
                 </div>
               ) : (

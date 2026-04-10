@@ -9,6 +9,7 @@ import {
 } from '../../lib/seo';
 import { relatedTopicsForArticle } from '../../lib/taxonomy';
 import {
+  coverNeedsAnonymousCrossOrigin,
   getNewsArticleBySlug,
   getRelatedArticles,
   getPrevNextByDate,
@@ -187,7 +188,9 @@ if (article) {
             height="630"
             loading="eager"
             decoding="async"
-            crossorigin="anonymous"
+            {...(coverNeedsAnonymousCrossOrigin(article.cover_url, resolveSiteOrigin(Astro.site))
+              ? { crossorigin: 'anonymous' }
+              : {})}
           />
         </div>
       ) : (
