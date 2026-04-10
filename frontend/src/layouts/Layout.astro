@@ -92,7 +92,7 @@ const gaMeasurementId =
   <body>
     <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
 
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="site-header__inner">
         <a href="/" class="site-brand">
           <svg class="site-brand__mark" width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -123,7 +123,23 @@ const gaMeasurementId =
           </svg>
           <span class="site-brand__text">SiliconFeed</span>
         </a>
-        <nav class="site-nav" aria-label="Main navigation">
+        <button
+          type="button"
+          class="site-nav-burger"
+          id="site-nav-burger"
+          aria-expanded="false"
+          aria-controls="site-main-nav"
+          aria-label="Open menu"
+        >
+          <span class="visually-hidden">Menu</span>
+          <span class="site-nav-burger__icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+        <div class="site-nav-backdrop" id="site-nav-backdrop" hidden aria-hidden="true"></div>
+        <nav class="site-nav" id="site-main-nav" aria-label="Main navigation">
           <div class="site-nav__rubrics">
             {
               NAV_TOPICS.map(({ slug, label }) => (
@@ -310,6 +326,90 @@ const gaMeasurementId =
             panel.hidden = true;
             btn.setAttribute('aria-expanded', 'false');
           }
+        });
+      })();
+
+      (function () {
+        if (window.__siliconfeedMobileNav) return;
+        window.__siliconfeedMobileNav = true;
+
+        const mq = window.matchMedia('(max-width: 767px)');
+
+        function els() {
+          return {
+            header: document.getElementById('site-header'),
+            burger: document.getElementById('site-nav-burger'),
+            backdrop: document.getElementById('site-nav-backdrop'),
+            themesBtn: document.getElementById('site-themes-btn'),
+            themesPanel: document.getElementById('site-themes-panel'),
+          };
+        }
+
+        function closeThemesIfOpen() {
+          const { themesBtn, themesPanel } = els();
+          if (
+            themesBtn instanceof HTMLButtonElement &&
+            themesPanel instanceof HTMLElement &&
+            themesBtn.getAttribute('aria-expanded') === 'true'
+          ) {
+            themesPanel.hidden = true;
+            themesBtn.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        function setMobileNavOpen(open) {
+          const { header, burger, backdrop } = els();
+          if (!(header instanceof HTMLElement) || !(burger instanceof HTMLButtonElement)) return;
+          header.classList.toggle('site-header--nav-open', open);
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          if (backdrop instanceof HTMLElement) {
+            backdrop.hidden = !open;
+            backdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+          }
+          document.body.style.overflow = open ? 'hidden' : '';
+          if (open) closeThemesIfOpen();
+        }
+
+        function toggleMobileNav() {
+          const { header } = els();
+          if (!(header instanceof HTMLElement)) return;
+          setMobileNavOpen(!header.classList.contains('site-header--nav-open'));
+        }
+
+        document.addEventListener('click', (e) => {
+          if (!mq.matches) return;
+          const t = e.target;
+          if (!(t instanceof Node)) return;
+          if (t.closest && t.closest('#site-nav-burger')) {
+            e.preventDefault();
+            toggleMobileNav();
+            return;
+          }
+          if (t instanceof Element && t.id === 'site-nav-backdrop') {
+            setMobileNavOpen(false);
+            return;
+          }
+          if (t.closest && t.closest('#site-main-nav a[href]')) {
+            setMobileNavOpen(false);
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key !== 'Escape') return;
+          const { header } = els();
+          if (header instanceof HTMLElement && header.classList.contains('site-header--nav-open')) {
+            setMobileNavOpen(false);
+            e.preventDefault();
+          }
+        });
+
+        mq.addEventListener('change', () => {
+          if (!mq.matches) setMobileNavOpen(false);
+        });
+
+        document.addEventListener('astro:page-load', () => {
+          setMobileNavOpen(false);
         });
       })();
 
