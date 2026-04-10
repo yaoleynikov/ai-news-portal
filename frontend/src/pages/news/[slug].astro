@@ -188,9 +188,7 @@ if (article) {
             height="630"
             loading="eager"
             decoding="async"
-            {...(coverNeedsAnonymousCrossOrigin(article.cover_url, resolveSiteOrigin(Astro.site))
-              ? { crossorigin: 'anonymous' }
-              : {})}
+            {...coverImageRequestAttrs}
           />
         </div>
       ) : (
