@@ -9,7 +9,7 @@ import {
 } from '../../lib/seo';
 import { relatedTopicsForArticle } from '../../lib/taxonomy';
 import {
-  coverNeedsAnonymousCrossOrigin,
+  coverImageRequestAttrs,
   getNewsArticleBySlug,
   getRelatedArticles,
   getPrevNextByDate,
@@ -203,6 +203,7 @@ if (article) {
             height="630"
             loading="eager"
             decoding="async"
+            {...coverImageRequestAttrs}
           />
         </div>
       )
@@ -331,7 +332,7 @@ if (article) {
         <div class="related-grid">
           {relatedArticles.map((rel) => (
             <a href={articlePath(rel.slug)} class="related-card">
-              <img src={rel.cover_url} alt={rel.title} loading="lazy" />
+              <img src={rel.cover_url} alt={rel.title} loading="lazy" {...coverImageRequestAttrs} />
               <div class="related-card__body">
                 <h4 class="related-card__title">{rel.title}</h4>
               </div>

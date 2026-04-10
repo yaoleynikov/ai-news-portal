@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Pagination from '../components/Pagination.astro';
 import { tagUrl, tagThemeSlug } from '../lib/tags';
-import { absoluteUrl, articlePath, resolveSiteOrigin } from '../lib/seo';
+import { absoluteUrl, articlePath } from '../lib/seo';
 import {
   coverNeedsAnonymousCrossOrigin,
   getHomeListingPage,
@@ -89,9 +89,7 @@ function formatFeaturedStamp(iso: string) {
                     height="630"
                     loading="eager"
                     decoding="async"
-                    {...(coverNeedsAnonymousCrossOrigin(featured.cover_url, resolveSiteOrigin(Astro.site))
-                      ? { crossorigin: 'anonymous' }
-                      : {})}
+                    {...coverImageRequestAttrs}
                   />
                 </div>
               ) : (
@@ -103,6 +101,7 @@ function formatFeaturedStamp(iso: string) {
                   height="630"
                   loading="eager"
                   decoding="async"
+                  {...coverImageRequestAttrs}
                 />
               )}
               <a href={articleHref} class="home-featured__media-hit">
@@ -182,6 +181,7 @@ function formatFeaturedStamp(iso: string) {
                       width="140"
                       height="100"
                       loading="lazy"
+                      {...coverImageRequestAttrs}
                     />
                   </a>
                 </article>

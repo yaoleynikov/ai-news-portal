@@ -41,41 +41,10 @@ export function normalizeCoverUrl(url: string): string {
 }
 
 /**
- * Set crossOrigin="anonymous" on cover <img> only when the host is expected to allow CORS on images.
- * Many third-party CDNs omit Access-Control-Allow-Origin; with anonymous CORS mode the image can fail to decode on the page while still opening in a new tab.
+ * Remote cover <img>: do not set crossOrigin (no CORS mode on the image request).
+ * Strip Referer so CDNs that hotlink-block by referrer still serve the asset (direct URL in a tab sends no site referrer).
  */
-export function coverNeedsAnonymousCrossOrigin(url: string, siteOrigin?: string): boolean {
-  const raw = normalizeCoverUrl(typeof url === 'string' ? url.trim() : '');
-  if (!raw) return false;
-  let hostname: string;
-  try {
-    hostname = new URL(raw).hostname.toLowerCase();
-  } catch {
-    return false;
-  }
-
-  if (siteOrigin) {
-    try {
-      const siteHost = new URL(siteOrigin).hostname.toLowerCase();
-      if (hostname === siteHost) return true;
-    } catch {
-      /* ignore */
-    }
-  }
-
-  if (hostname.endsWith('.r2.dev')) return true;
-
-  const base = r2PublicBaseForUrl(raw);
-  if (base) {
-    try {
-      if (hostname === new URL(base).hostname.toLowerCase()) return true;
-    } catch {
-      /* ignore */
-    }
-  }
-
-  return false;
-}
+export const coverImageRequestAttrs = { referrerpolicy: 'no-referrer' } as const;
 
 const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
   ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at }) => ({

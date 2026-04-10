@@ -6,6 +6,7 @@ import { NAV_TOPICS, articleMatchesTopic, tagUrl, tagThemeSlug } from '../../lib
 import { absoluteUrl, articlePath } from '../../lib/seo';
 import { publicationYears, relatedTopicsForSlug } from '../../lib/taxonomy';
 import {
+  coverImageRequestAttrs,
   getListingArticles,
   LISTING_PAGE_SIZE,
   parseListingPageParam,
@@ -127,7 +128,15 @@ function formatListDate(iso: string) {
                   </div>
                 </div>
                 <a href={articlePath(article.slug)} class="tag-page__thumb-link" aria-label={article.title}>
-                  <img src={article.cover_url} alt="" class="tag-page__thumb" width="160" height="100" loading="lazy" />
+                  <img
+                    src={article.cover_url}
+                    alt=""
+                    class="tag-page__thumb"
+                    width="160"
+                    height="100"
+                    loading="lazy"
+                    {...coverImageRequestAttrs}
+                  />
                 </a>
               </article>
             </li>
