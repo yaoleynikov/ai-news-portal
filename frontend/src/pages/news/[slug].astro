@@ -17,6 +17,7 @@ import {
   getPrevNextByDate,
   getTaxonomyArticlePool
 } from '../../lib/articles-db';
+import { sampleCoverEdgeBackdropServer } from '../../lib/cover-edge-color.server';
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
 
@@ -170,6 +171,11 @@ if (article) {
   jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumbLd];
 }
 
+let companyCoverBackdrop: string | null = null;
+if (article?.cover_type === 'company' && article.cover_url) {
+  companyCoverBackdrop = await sampleCoverEdgeBackdropServer(article.cover_url);
+}
+
 ---
 
 {
@@ -185,7 +191,12 @@ if (article) {
   <article class="glass article-sheet">
     {
       article.cover_type === 'company' ? (
-        <div class="cover-edge-frame article-hero-bleed" data-cover-edge>
+        <div
+          class="cover-edge-frame article-hero-bleed"
+          data-cover-edge
+          data-cover-edge-done={companyCoverBackdrop ? '1' : undefined}
+          style={companyCoverBackdrop ? { backgroundColor: companyCoverBackdrop } : undefined}
+        >
           <img
             src={article.cover_url}
             alt={article.title}

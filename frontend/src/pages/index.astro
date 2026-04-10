@@ -9,6 +9,7 @@ import {
   getHomeListingPage,
   parseListingPageParam
 } from '../lib/articles-db';
+import { sampleCoverEdgeBackdropServer } from '../lib/cover-edge-color.server';
 
 export const prerender = false;
 
@@ -47,6 +48,11 @@ const websiteLd = {
 
 const articleHref = featured ? articlePath(featured.slug) : '/';
 
+let featuredCompanyBackdrop: string | null = null;
+if (featured?.cover_type === 'company' && featured.cover_url) {
+  featuredCompanyBackdrop = await sampleCoverEdgeBackdropServer(featured.cover_url);
+}
+
 function formatFeaturedStamp(iso: string) {
   return new Date(iso).toLocaleString('en-US', {
     day: 'numeric',
@@ -78,7 +84,12 @@ function formatFeaturedStamp(iso: string) {
           <div class="home-featured__visual">
             <figure class="home-featured__media">
               {featured.cover_type === 'company' ? (
-                <div class="cover-edge-frame cover-edge-frame--featured-inner" data-cover-edge>
+                <div
+                  class="cover-edge-frame cover-edge-frame--featured-inner"
+                  data-cover-edge
+                  data-cover-edge-done={featuredCompanyBackdrop ? '1' : undefined}
+                  style={featuredCompanyBackdrop ? { backgroundColor: featuredCompanyBackdrop } : undefined}
+                >
                   <img
                     src={featured.cover_url}
                     alt=""

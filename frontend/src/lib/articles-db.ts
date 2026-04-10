@@ -135,6 +135,19 @@ export function coverEdgeTintImgAttrs(url: string, siteOrigin?: string): Record<
   return out;
 }
 
+/**
+ * SSR / server fetch for cover tint: only these hosts (mitigate SSRF when downloading by URL).
+ */
+export function isCoverHostAllowedForServerImageFetch(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  if (h.endsWith('.r2.dev')) return true;
+  if (h.endsWith('.r2.cloudflarestorage.com')) return true;
+  if (h === 'img.logo.dev' || h.endsWith('.cloudinary.com') || h === 'cloudinary.com') return true;
+  const r2h = r2PublicHostnameFromEnv();
+  if (r2h && h === r2h) return true;
+  return false;
+}
+
 const MOCK_FALLBACK: MockArticle[] = ARTICLES.map(
   ({ id, slug, title, excerpt, cover_url, cover_type, tags, created_at, primary_rubric }) => ({
     id,
