@@ -1,18 +1,25 @@
 /**
- * Pick a backdrop color for letterboxed logo covers: prefer average of corner patches (true flat
- * background on app-style squares); fall back to dominant border color on the 64×64 thumb.
- * Needs crossOrigin="anonymous" on the <img> when the image host sends CORS headers (see coverEdgeTintImgAttrs); otherwise the canvas is tainted and backdrop stays the CSS fallback.
+ * Pick a backdrop color for letterboxed logo covers: prefer corners of the downscaled thumb;
+ * fall back to dominant border color.
+ * Downscale uses imageSmoothingEnabled=false so flat backgrounds are not tinted by bilinear blend
+ * from logo edges (64×64 + smoothing was shifting greens). Larger internal size reduces rounding error.
+ * Needs crossOrigin="anonymous" when the image host sends CORS (see coverEdgeTintImgAttrs).
  */
-const QUANT = 28;
-/** Pixels per corner when estimating flat backdrop (inside letterboxed draw rect). */
-const CORNER_PATCH = 4;
+/** Internal analysis size (not visible). Larger = stabler color; still cheap. */
+const SAMPLE = 128;
+/** Histogram bin size for border fallback only (finer than old 28 to preserve hue). */
+const HIST_QUANT = 12;
+/** Pixels per corner (thumb space), scales slightly with draw size. */
+const CORNER_PATCH_MIN = 8;
+const CORNER_PATCH_MAX = 14;
 /** If corner patches disagree strongly (photo / gradient), use border histogram instead. */
 const CORNER_MAX_SPREAD_SQ = 55 * 55 * 3;
 
-function quantKey(r: number, g: number, b: number): number {
-  const rq = Math.round(r / QUANT) * QUANT;
-  const gq = Math.round(g / QUANT) * QUANT;
-  const bq = Math.round(b / QUANT) * QUANT;
+function quantKeyHist(r: number, g: number, b: number): number {
+  const q = HIST_QUANT;
+  const rq = Math.round(r / q) * q;
+  const gq = Math.round(g / q) * q;
+  const bq = Math.round(b / q) * q;
   return ((rq & 255) << 16) | ((gq & 255) << 8) | (bq & 255);
 }
 
@@ -21,6 +28,11 @@ function rgbFromKey(key: number): string {
   const g = (key >> 8) & 255;
   const b = key & 255;
   return `rgb(${r},${g},${b})`;
+}
+
+function rgbClamped(r: number, g: number, b: number): string {
+  const c = (n: number) => Math.max(0, Math.min(255, Math.round(n)));
+  return `rgb(${c(r)},${c(g)},${c(b)})`;
 }
 
 type RGB = { r: number; g: number; b: number };
@@ -69,8 +81,12 @@ function sampleCornerBackdrop(
   dw: number,
   dh: number
 ): string {
-  const pw = Math.min(CORNER_PATCH, dw);
-  const ph = Math.min(CORNER_PATCH, dh);
+  const side = Math.max(
+    CORNER_PATCH_MIN,
+    Math.min(CORNER_PATCH_MAX, Math.floor(Math.min(dw, dh) / 5))
+  );
+  const pw = Math.min(side, dw);
+  const ph = Math.min(side, dh);
   if (pw < 2 || ph < 2) return '';
 
   const xR = ox + dw - pw;
@@ -103,17 +119,17 @@ function sampleCornerBackdrop(
   r /= patches.length;
   g /= patches.length;
   b /= patches.length;
-  return rgbFromKey(quantKey(Math.round(r), Math.round(g), Math.round(b)));
+  return rgbClamped(r, g, b);
 }
 
 function sampleBorderDominant(data: Uint8ClampedArray, W: number, H: number): string {
   const counts = new Map<number, number>();
-  const border = 2;
+  const border = Math.max(2, Math.floor(Math.min(W, H) * 0.03));
 
   const add = (i: number) => {
     const a = data[i + 3];
     if (a < 120) return;
-    const k = quantKey(data[i], data[i + 1], data[i + 2]);
+    const k = quantKeyHist(data[i], data[i + 1], data[i + 2]);
     counts.set(k, (counts.get(k) ?? 0) + 1);
   };
 
@@ -142,8 +158,8 @@ export function sampleEdgeDominantColor(
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D
 ): string {
-  const W = 64;
-  const H = 64;
+  const W = SAMPLE;
+  const H = SAMPLE;
   canvas.width = W;
   canvas.height = H;
   const iw = img.naturalWidth;
@@ -156,6 +172,7 @@ export function sampleEdgeDominantColor(
   const ox = Math.floor((W - dw) / 2);
   const oy = Math.floor((H - dh) / 2);
   ctx.clearRect(0, 0, W, H);
+  ctx.imageSmoothingEnabled = false;
   ctx.drawImage(img, ox, oy, dw, dh);
 
   const data = ctx.getImageData(0, 0, W, H).data;
