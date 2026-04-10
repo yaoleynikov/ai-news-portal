@@ -44,7 +44,9 @@ const themesTags = topicIndex.filter((t) => t.kind === 'tag');
 const themesNavActive =
   pathname.startsWith('/tag/') || pathname.startsWith('/rubric/');
 
-const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
+/** GA4 web stream; override via PUBLIC_GA_MEASUREMENT_ID on Vercel if needed. */
+const gaMeasurementId =
+  (import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined)?.trim() || 'G-0456HS5LSV';
 ---
 
 <!DOCTYPE html>
@@ -77,17 +79,12 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | und
 
     <ClientRouter />
 
-    {
-      gaMeasurementId && (
-        <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
-          <script
-            is:inline
-            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
-          />
-        </>
-      )
-    }
+    <!-- Google tag (gtag.js) -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
+    <script
+      is:inline
+      set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`}
+    />
 
     {
       jsonLd &&
