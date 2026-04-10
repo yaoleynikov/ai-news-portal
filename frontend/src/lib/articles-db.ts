@@ -2,8 +2,23 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { ARTICLES, getArticleBySlug as getStaticArticleBySlug, type NewsArticle } from '../data/news';
 import type { MockArticle } from '../data/mock-articles';
 
+/** After migration 0011; fallback select uses CORE only if these columns are missing. */
+const CARD_FIELDS_CORE =
+  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status';
 const CARD_FIELDS =
-  'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status, dek, primary_rubric, updated_at';
+  `${CARD_FIELDS_CORE}, dek, primary_rubric, updated_at`;
+
+function shouldRetryArticleSelectWithoutNewColumns(error: { message?: string; code?: string } | null): boolean {
+  if (!error) return false;
+  const msg = String(error.message || '').toLowerCase();
+  const code = String((error as { code?: string }).code || '');
+  return (
+    code === 'PGRST204' ||
+    code === '42703' ||
+    (msg.includes('column') && (msg.includes('does not exist') || msg.includes('unknown'))) ||
+    msg.includes('schema cache')
+  );
+}
 
 /** This project’s public r2.dev base; used only when the cover URL host is siliconfeed.r2.cloudflarestorage.com and env on the host is empty. */
 const SILICONFEED_R2_PUBLIC_DEFAULT = 'https://pub-ffc5900a06d64e009bb6babb2d096132.r2.dev';
@@ -297,7 +312,7 @@ export async function getTopicIndexPool(): Promise<TopicIndexPoolArticle[]> {
     return ARTICLES.map((a) => ({ tags: a.tags, primary_rubric: a.primary_rubric }));
   }
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('articles')
     .select('tags, primary_rubric')
     .eq('status', 'published')
@@ -305,13 +320,25 @@ export async function getTopicIndexPool(): Promise<TopicIndexPoolArticle[]> {
     .order('created_at', { ascending: false })
     .limit(TOPIC_NAV_INDEX_CAP);
 
+  if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+    ({ data, error } = await supabase
+      .from('articles')
+      .select('tags')
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(TOPIC_NAV_INDEX_CAP));
+  }
+
   if (error || !data?.length) {
     return ARTICLES.map((a) => ({ tags: a.tags, primary_rubric: a.primary_rubric }));
   }
 
   return data.map((row) => ({
     tags: Array.isArray(row.tags) ? (row.tags as string[]) : [],
-    primary_rubric: normalizeStoredPrimaryRubric(row.primary_rubric)
+    primary_rubric: normalizeStoredPrimaryRubric(
+      (row as { primary_rubric?: unknown }).primary_rubric
+    )
   }));
 }
 
@@ -346,13 +373,23 @@ export async function getListingArticlesRange(offset: number, limit: number): Pr
   }
 
   const end = offset + limit - 1;
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('articles')
     .select(CARD_FIELDS)
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
     .range(offset, end);
+
+  if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+    ({ data, error } = await supabase
+      .from('articles')
+      .select(CARD_FIELDS_CORE)
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('created_at', { ascending: false })
+      .range(offset, end));
+  }
 
   if (error || !data?.length) {
     return sortedMockFallback().slice(offset, offset + limit);
@@ -381,6 +418,11 @@ export function homeListingTotalPages(totalArticles: number): number {
 }
 
 function homeListingRange(page: number, totalArticles: number): { offset: number; limit: number } {
+  /* Count can be 0 while rows still exist (RLS quirks); never use limit 0 on page 1 or the river stays empty. */
+  if (totalArticles <= 0) {
+    if (page <= 1) return { offset: 0, limit: 1 + HOME_RIVER_PAGE_SIZE };
+    return { offset: 0, limit: 0 };
+  }
   if (page <= 1) {
     return { offset: 0, limit: Math.min(totalArticles, 1 + HOME_RIVER_PAGE_SIZE) };
   }
@@ -422,13 +464,23 @@ export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
   const supabase = getServerClient();
   if (!supabase) return MOCK_FALLBACK;
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('articles')
     .select(CARD_FIELDS)
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+    ({ data, error } = await supabase
+      .from('articles')
+      .select(CARD_FIELDS_CORE)
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(limit));
+  }
 
   if (error || !data?.length) {
     return MOCK_FALLBACK;
@@ -449,12 +501,21 @@ export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | 
     return getStaticArticleBySlug(slug) ?? null;
   }
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('articles')
     .select(CARD_FIELDS)
     .eq('status', 'published')
     .eq('slug', slug)
     .maybeSingle();
+
+  if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+    ({ data, error } = await supabase
+      .from('articles')
+      .select(CARD_FIELDS_CORE)
+      .eq('status', 'published')
+      .eq('slug', slug)
+      .maybeSingle());
+  }
 
   if (error || !data) {
     return getStaticArticleBySlug(slug) ?? null;
@@ -564,13 +625,23 @@ export async function getTaxonomyArticlePool(
     }));
   }
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from('articles')
     .select('slug, tags, primary_rubric')
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+    ({ data, error } = await supabase
+      .from('articles')
+      .select('slug, tags')
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(limit));
+  }
 
   if (error || !data?.length) {
     return ARTICLES.map((a) => ({
@@ -585,7 +656,9 @@ export async function getTaxonomyArticlePool(
     .map((r) => ({
       slug: r.slug as string,
       tags: Array.isArray(r.tags) ? (r.tags as string[]) : [],
-      primary_rubric: normalizeStoredPrimaryRubric(r.primary_rubric)
+      primary_rubric: normalizeStoredPrimaryRubric(
+        (r as { primary_rubric?: unknown }).primary_rubric
+      )
     }));
 }
 

@@ -19,7 +19,6 @@ Astro.response.headers.set(
 
 const requestedPage = parseListingPageParam(Astro.url.searchParams.get('page'));
 const { featured, river: rest, totalPages, page } = await getHomeListingPage(requestedPage);
-const articles = await getListingArticles(60);
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {
