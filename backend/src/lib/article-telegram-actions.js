@@ -386,7 +386,35 @@ const AGGREGATOR_HOST_SUBSTRINGS = [
   'cnet'
 ];
 
-function guessLogoDomainFromRow(row) {
+/**
+ * Ввод админа → hostname для Logo.dev (`openai.com`). Поддержка URL и `www.`.
+ * @param {string} raw
+ * @returns {string | null}
+ */
+export function normalizeUserLogoDomain(raw) {
+  let s = String(raw || '')
+    .replace(/^\uFEFF/, '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .trim();
+  if (!s) return null;
+  if (/^https?:\/\//i.test(s)) {
+    try {
+      s = new URL(s).hostname;
+    } catch {
+      return null;
+    }
+  } else {
+    s = s.split(/[\s/?#]/)[0].trim();
+  }
+  s = s.replace(/^www\./i, '').toLowerCase();
+  if (!s || s.includes('..')) return null;
+  if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(s)) return null;
+  const blocked = AGGREGATOR_HOST_SUBSTRINGS.some((x) => s.includes(x));
+  if (blocked) return null;
+  return s;
+}
+
+export function guessLogoDomainFromRow(row) {
   const title = String(row.title || '');
   const ent = Array.isArray(row.entities)
     ? row.entities.map((e) => (e && typeof e.name === 'string' ? e.name : '')).join(' ')
@@ -426,7 +454,8 @@ function abstractKeywordForToggleFromRow(row) {
  * Flip cover_type + regenerate: company (Logo.dev) ↔ abstract (FLUX from article text).
  * @param {import('@supabase/supabase-js').SupabaseClient} supabase
  * @param {Record<string, unknown>} row
- * @param {{ onProgress?: (line: string) => void | Promise<void> }} [options]
+ * @param {{ onProgress?: (line: string) => void | Promise<void>; logoDomain?: string }} [options]
+ *   `logoDomain` — явный hostname для Logo.dev, если автоугадать не удалось (Telegram).
  */
 export async function toggleArticleCoverType(supabase, row, options = {}) {
   const onProgress =
@@ -459,10 +488,15 @@ export async function toggleArticleCoverType(supabase, row, options = {}) {
   }
 
   await onProgress('⏳ Было фото → ищу бренд для лого…');
-  const domain = guessLogoDomainFromRow(row);
+  const rawManual = typeof options.logoDomain === 'string' ? options.logoDomain.trim() : '';
+  const manual = rawManual ? normalizeUserLogoDomain(options.logoDomain) : null;
+  if (rawManual && !manual) {
+    throw new Error('Некорректный домен для Logo.dev. Пример: company.com или https://company.com');
+  }
+  const domain = manual ?? guessLogoDomainFromRow(row);
   if (!domain) {
     throw new Error(
-      'Не смог определить домен для Logo.dev (агрегатор или неизвестный бренд). Сделай ✏️ Рерайт или 🖼 Обложка с текстом.'
+      'Не смог определить домен для Logo.dev (агрегатор или неизвестный бренд). В Telegram можно ввести домен вручную или отменить; иначе ✏️ Рерайт / 🖼 Обложка.'
     );
   }
   await onProgress(`⏳ Logo.dev: ${domain}…`);

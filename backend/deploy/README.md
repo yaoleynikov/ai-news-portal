@@ -55,6 +55,34 @@ cd /path/to/backend && docker compose up -d --build
 
 Это единственная регулярная операция при изменении backend; при желании её можно повесить на cron или CI.
 
+### Быстро выкатить доработку на сервер (Docker)
+
+На **своём ПК**: закоммитьте и запушьте изменения в Git (`git push`).
+
+На **VM** (путь как у вас в Proxmox, ниже — `/opt/siliconfeed`):
+
+```bash
+cd /opt/siliconfeed
+git pull
+cd backend
+sudo docker compose up -d --build
+```
+
+Пересборка образа нужна, когда менялись `Dockerfile`, `package.json`, `package-lock.json` или код в `backend/src` (и всё, что копируется в образ). Если правили **только** `backend/.env`, достаточно пересоздать контейнер:
+
+```bash
+cd /opt/siliconfeed/backend
+sudo docker compose up -d
+```
+
+Проверка логов:
+
+```bash
+sudo docker compose logs -f worker
+```
+
+Выход из потока логов: **Ctrl+C** (контейнер не останавливается).
+
 ## Включить службу Docker при загрузке ОС
 
 Пакет `docker-ce` при установке через официальный репозиторий обычно уже делает `systemctl enable docker`. Проверка:

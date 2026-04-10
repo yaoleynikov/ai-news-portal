@@ -10,10 +10,12 @@ import {
   deleteArticleById,
   rewriteArticleRow,
   regenerateArticleCoverFromNote,
-  toggleArticleCoverType
+  toggleArticleCoverType,
+  guessLogoDomainFromRow,
+  normalizeUserLogoDomain
 } from './article-telegram-actions.js';
 
-/** @type {Map<string, { mode: 'image_wait'; articleId: string }>} */
+/** @type {Map<string, { mode: 'image_wait'; articleId: string } | { mode: 'logo_domain_wait'; articleId: string }>} */
 const chatState = new Map();
 
 function pollSec() {
@@ -87,6 +89,13 @@ function articleKeyboard(articleId) {
       ],
       [{ text: '🔁 Тип: лого ⟷ фото', callback_data: `sf:t:${id}` }]
     ]
+  };
+}
+
+function logoDomainCancelKeyboard(articleId) {
+  const id = String(articleId).toLowerCase();
+  return {
+    inline_keyboard: [[{ text: '✖ Отмена', callback_data: `sf:x:${id}` }]]
   };
 }
 
@@ -184,6 +193,49 @@ async function handleMessage(token, adminId, msg) {
   }
 
   const pending = chatState.get(String(chatId));
+  if (pending?.mode === 'logo_domain_wait') {
+    const dom = normalizeUserLogoDomain(text);
+    if (!dom) {
+      await sendPlain(
+        token,
+        chatId,
+        'Не похоже на домен. Пришли hostname одной строкой, например `openai.com` или `https://company.com`\n/cancel — отмена.',
+        { parse_mode: 'Markdown' }
+      );
+      return;
+    }
+    chatState.delete(String(chatId));
+    const prog = makeProgressMessenger(token, chatId);
+    try {
+      await prog.show('⏳ Загружаю статью из БД…');
+      const { data: row, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('id', pending.articleId)
+        .maybeSingle();
+      if (error) throw new Error(error.message);
+      if (!row) throw new Error('Статья не найдена');
+      const out = await toggleArticleCoverType(supabase, row, {
+        logoDomain: dom,
+        onProgress: (line) => prog.show(line)
+      });
+      const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (abstract)';
+      let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
+      if (out.direction === 'to_company' && out.domain_used) {
+        tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — оставлено FLUX)' : ''}${tail}`;
+      }
+      await prog.show(`✅ Тип обложки переключён${tail}`);
+    } catch (e) {
+      console.error('[telegram-admin] Домен для лого: ошибка', e?.message || e);
+      try {
+        await prog.show(`❌ Смена типа: ${e.message || e}`);
+      } catch {
+        await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
+      }
+    }
+    return;
+  }
+
   if (pending?.mode === 'image_wait') {
     chatState.delete(String(chatId));
     console.log('[telegram-admin] Обложка: старт для id=', pending.articleId, 'заметка:', text.slice(0, 120));
@@ -251,7 +303,7 @@ async function handleCallback(token, adminId, cb) {
   }
 
   const data = typeof cb.data === 'string' ? cb.data : '';
-  const m = /^sf:([drit]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
+  const m = /^sf:([dritx]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
   if (!m) {
     await answerCb(token, cb.id, 'Неверная кнопка');
     return;
@@ -324,6 +376,21 @@ async function handleCallback(token, adminId, cb) {
     }
     if (act === 't') {
       console.log('[telegram-admin] Смена типа обложки:', row.slug || articleId, 'cover_type=', row.cover_type);
+      if (row.cover_type !== 'company' && !guessLogoDomainFromRow(row)) {
+        await answerCb(token, cb.id, 'Жду домен');
+        chatState.set(String(chatId), { mode: 'logo_domain_wait', articleId });
+        await sendPlain(
+          token,
+          chatId,
+          'Не смог угадать домен для Logo.dev (агрегатор в URL или неочевидный бренд).\n\nПришли **домен одной строкой** — как в Logo.dev, например `anthropic.com` или `https://stripe.com`\n/cancel — отмена.',
+          {
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true,
+            reply_markup: logoDomainCancelKeyboard(articleId)
+          }
+        );
+        return;
+      }
       await answerCb(token, cb.id, 'Меняю обложку…');
       const prog = makeProgressMessenger(token, chatId);
       try {
@@ -345,6 +412,20 @@ async function handleCallback(token, adminId, cb) {
           await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
         }
       }
+      return;
+    }
+    if (act === 'x') {
+      const pend = chatState.get(String(chatId));
+      if (
+        pend?.mode === 'logo_domain_wait' &&
+        String(pend.articleId).toLowerCase() === String(articleId).toLowerCase()
+      ) {
+        chatState.delete(String(chatId));
+        await answerCb(token, cb.id, 'Отменено');
+        await sendPlain(token, chatId, 'Ок, смена типа на лого отменена.');
+        return;
+      }
+      await answerCb(token, cb.id);
       return;
     }
   } catch (e) {
