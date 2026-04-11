@@ -121,11 +121,15 @@ export async function runArticlePipeline(url, opts = {}) {
     };
     result.steps.push('rewrite');
 
-    const cover = await generateCoverWithFallback(rewritten.cover_type, rewritten.cover_keyword);
+    const cover = await generateCoverWithFallback(rewritten.cover_type, rewritten.cover_keyword, {
+      title: rewritten.title,
+      content_md: rewritten.content_md
+    });
     const coverTypePublished = cover.cover_fallback ? 'abstract' : rewritten.cover_type;
     if (cover.cover_fallback) {
       result.rewritten.cover_fallback = true;
-      result.rewritten.cover_keyword_used = FALLBACK_ABSTRACT_COVER_KEYWORD;
+      result.rewritten.cover_keyword_used =
+        cover.abstract_keyword_used ?? FALLBACK_ABSTRACT_COVER_KEYWORD;
     }
 
     const coverBuffer = cover.buffer;

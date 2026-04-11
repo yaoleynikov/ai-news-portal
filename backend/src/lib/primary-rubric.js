@@ -1,5 +1,12 @@
 /** Must match frontend NAV_TOPICS slugs + catch-all. */
-export const PRIMARY_RUBRIC_SLUGS = ['ai', 'hardware', 'open-source', 'other'];
+export const PRIMARY_RUBRIC_SLUGS = [
+  'ai',
+  'hardware',
+  'open-source',
+  'security',
+  'energy',
+  'other'
+];
 
 /**
  * @param {unknown} v
@@ -19,8 +26,8 @@ function tagSlug(t) {
     .replace(/\s+/g, '-');
 }
 
-/** Whole-tag slug is exactly one of the nav rubrics (after slugify). */
-const RUBRIC_ORDER = ['ai', 'hardware', 'open-source'];
+/** Whole-tag slug is exactly one of the nav rubrics (after slugify). First match wins. */
+const RUBRIC_ORDER = ['ai', 'hardware', 'open-source', 'security', 'energy'];
 
 const HARDWARE_SEGMENTS = new Set([
   'hardware',
@@ -209,6 +216,102 @@ const AI_SEGMENTS = new Set([
   'data-science'
 ]);
 
+const SECURITY_SEGMENTS = new Set([
+  'security',
+  'cybersecurity',
+  'cyber',
+  'malware',
+  'ransomware',
+  'spyware',
+  'phishing',
+  'breach',
+  'firewall',
+  'infosec',
+  'zeroday',
+  'encryption',
+  'vpn',
+  'apt',
+  'cve',
+  'botnet',
+  'ddos',
+  'pentest',
+  'siem',
+  'soc',
+  'oauth',
+  '2fa',
+  'mfa',
+  'zerotrust'
+]);
+
+const SECURITY_SUBSTR = [
+  'cybersecurity',
+  'cyber-security',
+  'cyber-attack',
+  'data-breach',
+  'data breach',
+  'zero-day',
+  'zero day',
+  'state-sponsored',
+  'patch-tuesday',
+  'vulnerability-disclosure',
+  'supply-chain-attack',
+  'ransomware',
+  'malware',
+  'phishing',
+  'spyware',
+  'infosec',
+  'pentest',
+  'encryption-key',
+  'side-channel',
+  'bug-bounty'
+];
+
+const ENERGY_SEGMENTS = new Set([
+  'energy',
+  'battery',
+  'batteries',
+  'lithium',
+  'cathode',
+  'anode',
+  'solar',
+  'wind',
+  'grid',
+  'renewable',
+  'renewables',
+  'hydrogen',
+  'cleantech',
+  'emission',
+  'emissions',
+  'refinery',
+  'ev',
+  'charger',
+  'charging',
+  'photovoltaic',
+  'inverter',
+  'megawatt',
+  'gigafactory'
+]);
+
+const ENERGY_SUBSTR = [
+  'electric-vehicle',
+  'ev-battery',
+  'battery-recycling',
+  'clean-energy',
+  'renewable-energy',
+  'power-grid',
+  'offshore-wind',
+  'solar-panel',
+  'lithium-ion',
+  'carbon-neutral',
+  'net-zero',
+  'climate-tech',
+  'energy-storage',
+  'charging-network',
+  'hydrogen-fuel',
+  'wind-farm',
+  'solar-farm'
+];
+
 const AI_PHRASES = [
   'machine-learning',
   'deep-learning',
@@ -304,8 +407,40 @@ function hasAiSignal(slugs) {
 }
 
 /**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasSecuritySignal(slugs) {
+  for (const s of slugs) {
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (SECURITY_SEGMENTS.has(seg)) return true;
+    }
+    for (const p of SECURITY_SUBSTR) {
+      if (s.includes(p.replace(/\s+/g, '-'))) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasEnergySignal(slugs) {
+  for (const s of slugs) {
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (ENERGY_SEGMENTS.has(seg)) return true;
+    }
+    for (const p of ENERGY_SUBSTR) {
+      if (s.includes(p.replace(/\s+/g, '-'))) return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Pick one primary rubric from tags (editorial / SEO). Order: explicit rubric tag → hardware →
- * open-source → broad AI signals → other.
+ * security → energy → open-source → broad AI signals → other.
  *
  * @param {string[]} tags
  * @returns {string}
@@ -318,9 +453,11 @@ export function inferPrimaryRubricFromTags(tags) {
   }
 
   if (hasHardwareSignal(slugs)) return 'hardware';
+  if (hasSecuritySignal(slugs)) return 'security';
+  if (hasEnergySignal(slugs)) return 'energy';
   /* Before open-source: many ML stacks are discussed alongside Linux/GitHub. */
-  if (hasAiSignal(slugs)) return 'ai';
   if (hasOpenSourceSignal(slugs)) return 'open-source';
+  if (hasAiSignal(slugs)) return 'ai';
 
   return 'other';
 }

@@ -1,8 +1,12 @@
 import fetch from 'node-fetch';
 import { config } from '../config.js';
-import { FALLBACK_ABSTRACT_COVER_KEYWORD } from '../media/generator.js';
+import {
+  FALLBACK_ABSTRACT_COVER_KEYWORD,
+  buildAbstractFallbackKeywordFromArticle
+} from '../media/generator.js';
 import { finalizeArticleSlug } from '../lib/slug.js';
 import { normalizePrimaryRubric } from '../lib/primary-rubric.js';
+import { normalizeUserLogoDomain } from '../lib/logo-domain.js';
 
 function rewriterMaxTokens() {
   const n = parseInt(process.env.REWRITER_MAX_TOKENS || '', 10);
@@ -45,6 +49,20 @@ function rewriterRetrySuffix(prevOutLen, inputLen, finishReason) {
 **EDITOR RETRY (required):**${extra} The previous attempt's "content_md" field was too short (~${prevOutLen} characters) for a source of ~${inputLen} characters. Rewrite again from the same TITLE and CONTENT above. Output the **full** article: multiple H2 (##) sections, long paragraphs, every list and number from the source — not a blurb. One complete JSON object only (no markdown fences).`;
 }
 
+function openRouterHeaders() {
+  const headers = {
+    Authorization: `Bearer ${config.ai.openRouterKey}`,
+    'Content-Type': 'application/json'
+  };
+  if (config.ai.openRouterHttpReferer) {
+    headers['HTTP-Referer'] = config.ai.openRouterHttpReferer;
+  }
+  if (config.ai.openRouterAppTitle) {
+    headers['X-Title'] = config.ai.openRouterAppTitle;
+  }
+  return headers;
+}
+
 /** OpenRouter / OpenAI-style message.content: string or array of parts */
 function messageTextContent(message) {
   if (!message) return '';
@@ -65,13 +83,67 @@ function messageTextContent(message) {
   return '';
 }
 
-/** Strip ```json fences if the model wraps output */
+/**
+ * Strip ``` / ```json fences. Handles whole-message fences and the first fenced block anywhere
+ * (models often prepend markdown, then a JSON code block).
+ */
 function unwrapJsonContent(raw) {
   if (typeof raw !== 'string') return '';
   const s = raw.trim();
-  const fence = s.match(/^```(?:json)?\s*([\s\S]*?)```$/im);
-  if (fence) return fence[1].trim();
+  const full = s.match(/^```(?:json)?\s*([\s\S]*?)```$/im);
+  if (full) return full[1].trim();
+  const any = s.match(/```(?:json)?\s*([\s\S]*?)```/im);
+  if (any) {
+    const inner = any[1].trim();
+    if (inner.startsWith('{')) return inner;
+  }
   return s;
+}
+
+/**
+ * When the model prints prose or "### At a glance:" before the JSON object, take the first
+ * top-level `{ ... }` using brace depth (strings respected).
+ */
+function extractBalancedJsonObject(text) {
+  if (typeof text !== 'string' || !text) return null;
+  const start = text.indexOf('{');
+  if (start < 0) return null;
+  let depth = 0;
+  let inStr = false;
+  let esc = false;
+  for (let i = start; i < text.length; i++) {
+    const c = text[i];
+    if (esc) {
+      esc = false;
+      continue;
+    }
+    if (inStr) {
+      if (c === '\\') {
+        esc = true;
+        continue;
+      }
+      if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') {
+      inStr = true;
+      continue;
+    }
+    if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) return text.slice(start, i + 1);
+    }
+  }
+  return null;
+}
+
+/** Prefer fenced JSON, then first balanced object in the rest of the response. */
+function prepareRewriterJsonText(raw) {
+  const unwrapped = unwrapJsonContent(raw);
+  const extracted = extractBalancedJsonObject(unwrapped);
+  if (extracted) return extracted;
+  return unwrapped.trim();
 }
 
 /**
@@ -137,10 +209,6 @@ function parseRewriterModelJson(unwrapped) {
 }
 
 /**
- * Capitalize the first letter of `##` / `###` lines if the model emitted all-lowercase headings.
- * Skips "### At a glance:".
- */
-/**
  * Remove a trailing FAQ section from Markdown body. FAQ is stored only in JSON `faq`;
  * duplicating it here causes double FAQ on /news/[slug].
  */
@@ -203,11 +271,27 @@ export function normalizeRewritten(parsed) {
   if (tags.length > 8) tags = tags.slice(0, 8);
 
   const cover_type = o.cover_type === 'company' ? 'company' : 'abstract';
+  const rawCompanyLogo =
+    typeof o.company_logo_domain === 'string' ? o.company_logo_domain.trim() : '';
   let cover_keyword =
     typeof o.cover_keyword === 'string' && o.cover_keyword.trim()
       ? o.cover_keyword.trim()
-      : FALLBACK_ABSTRACT_COVER_KEYWORD;
-  if (cover_keyword.length > 200) cover_keyword = cover_keyword.slice(0, 200);
+      : '';
+
+  if (cover_type === 'company') {
+    const dField = rawCompanyLogo ? normalizeUserLogoDomain(rawCompanyLogo) : null;
+    const dKw = cover_keyword ? normalizeUserLogoDomain(cover_keyword) : null;
+    const chosen = dField || dKw;
+    if (chosen) {
+      cover_keyword = chosen;
+    } else if (!cover_keyword) {
+      cover_keyword = '';
+    }
+    if (cover_keyword.length > 200) cover_keyword = cover_keyword.slice(0, 200);
+  } else {
+    if (!cover_keyword) cover_keyword = FALLBACK_ABSTRACT_COVER_KEYWORD;
+    if (cover_keyword.length > 200) cover_keyword = cover_keyword.slice(0, 200);
+  }
 
   let faq = Array.isArray(o.faq) ? o.faq : [];
   faq = faq
@@ -276,6 +360,114 @@ export function normalizeRewritten(parsed) {
   };
 }
 
+function abstractSceneFallbackForDowngrade(title, content_md) {
+  return buildAbstractFallbackKeywordFromArticle(title, content_md) ?? FALLBACK_ABSTRACT_COVER_KEYWORD;
+}
+
+/**
+ * Ultra-narrow guard: only headline/dek shapes we know caused a wrong single-brand logo.
+ * Broad phrases like "experts weigh in" also appear on real single-company stories — those stay on prompt + repair only.
+ * @param {{ title: string; dek: string }} n
+ */
+function companyCoverMisleadingForStoryShape(n) {
+  const t = `${n.title} ${n.dek}`.toLowerCase();
+  return /\bquantum\s+encryption\b/.test(t) && /\bapocalypse\b/.test(t);
+}
+
+/**
+ * Second-pass: tiny JSON-only call when main rewrite chose company but apex domain missing/invalid.
+ */
+async function repairLogoDomainExtract({ title, dek, entities, snippet }) {
+  const useJsonObjectFormat = process.env.OPENROUTER_JSON_OBJECT === '1';
+  const model =
+    process.env.OPENROUTER_LOGO_DOMAIN_MODEL?.trim() || config.ai.openRouterModel;
+  const names = Array.isArray(entities)
+    ? entities.map((e) => `${e.name}: ${e.desc}`.trim()).join(' | ')
+    : '';
+  const user = `Return one JSON object only, no markdown fences.
+If (and only if) one tech/social brand clearly owns the headline as a product/company story, output its apex domain for Logo.dev. If the story is an expert roundup, multi-stakeholder explainer, industry-wide threat (e.g. quantum vs encryption, Q-day), or no single logo fairly represents the whole piece — output null.
+Not: a competitor named for comparison, a news outlet, or a random famous company mentioned among many peers.
+Format: {"domain":"lowercase-apex.tld"} or {"domain":null}.
+
+TITLE: ${title}
+DEK: ${dek}
+ENTITIES: ${names.slice(0, 900)}
+TEXT: ${snippet}`;
+
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: openRouterHeaders(),
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: user }],
+      ...(useJsonObjectFormat ? { response_format: { type: 'json_object' } } : {}),
+      temperature: 0.1,
+      max_tokens: 120
+    })
+  });
+  if (!response.ok) return null;
+  const json = await response.json();
+  const rawResult = messageTextContent(json.choices?.[0]?.message).trim();
+  if (!rawResult) return null;
+  let parsed;
+  try {
+    parsed = parseRewriterModelJson(prepareRewriterJsonText(rawResult));
+  } catch {
+    return null;
+  }
+  if (!parsed || typeof parsed !== 'object') return null;
+  const dom = /** @type {{ domain?: unknown }} */ (parsed).domain;
+  if (dom == null) return null;
+  if (typeof dom !== 'string') return null;
+  return dom.trim();
+}
+
+/**
+ * Ensures company rows carry a valid Logo.dev apex domain; repair LLM pass or downgrade to abstract.
+ * @param {Awaited<ReturnType<typeof normalizeRewritten>>} normalized
+ */
+async function finalizeCompanyLogoDomain(normalized) {
+  if (normalized.cover_type !== 'company') return;
+  if (companyCoverMisleadingForStoryShape(normalized)) {
+    console.warn('[REWRITER] company → abstract (guard: quantum encryption + apocalypse — avoid misleading single-brand logo)');
+    normalized.cover_type = 'abstract';
+    normalized.cover_keyword = abstractSceneFallbackForDowngrade(
+      normalized.title,
+      normalized.content_md
+    );
+    return;
+  }
+  let d = normalizeUserLogoDomain(normalized.cover_keyword);
+  if (d) {
+    normalized.cover_keyword = d;
+    return;
+  }
+  console.warn('[REWRITER] company cover: missing valid apex domain → logo repair pass');
+  try {
+    const snippet = normalized.content_md.replace(/\s+/g, ' ').trim().slice(0, 2500);
+    const raw = await repairLogoDomainExtract({
+      title: normalized.title,
+      dek: normalized.dek,
+      entities: normalized.entities,
+      snippet
+    });
+    d = normalizeUserLogoDomain(raw);
+    if (d) {
+      normalized.cover_keyword = d;
+      console.log('[REWRITER] logo domain resolved via repair:', d);
+      return;
+    }
+  } catch (e) {
+    console.warn('[REWRITER] logo repair error:', e?.message || e);
+  }
+  console.warn('[REWRITER] company → abstract (logo domain unresolved)');
+  normalized.cover_type = 'abstract';
+  normalized.cover_keyword = abstractSceneFallbackForDowngrade(
+    normalized.title,
+    normalized.content_md
+  );
+}
+
 /**
  * Standardizes raw scraped text into high-quality IT/AI news in English.
  * Output is STRICT JSON corresponding to our Supabase schema.
@@ -305,17 +497,19 @@ Rules:
 7. **Heading style:** Every \`##\` and \`###\` line uses **sentence case** (first word + proper nouns like WireGuard, Microsoft capitalized). Do **not** use all-lowercase heading lines.
 8. Do not repeat the same fact in different words across sections; add new angles (how it works, who it affects, limitations, timeline) instead — but **do not** omit lists or numbers already in the source.
 9. Extract 3–6 concise tags in English.
-10. Cover strategy (text is sent to an image model; it must be **literal and grounded**, not sci-fi):
-   - company: Only if the story is clearly about one well-known tech brand/product. cover_keyword MUST be a real domain like "openai.com" or "google.com" (no paths).
-   - abstract: For general or multi-vendor topics. cover_keyword = one **concrete, present-day** scene (10–18 words): real lighting, ordinary environments (office, street, home desk, hands holding a phone, lab bench, conference room). Describe what would plausibly appear in a news photo for this topic. **Forbidden** in cover_keyword: "futuristic", "sci-fi", "cyberpunk", "hologram", "neon city", "space", "android robot", "laser", "matrix", "digital warrior", "metaphor for". No brand names or logos in cover_keyword.
+10. Cover — **two different fields** (do not overload one string):
+   - **company:** Use **only** when **one** brand/product/platform is clearly **the** subject of the headline (their launch, policy, outage, earnings, or a story framed around that actor). Set \`company_logo_domain\` to its real **apex domain** and \`cover_keyword\` to the **same** domain. Never a competitor, parent company, or news outlet. If the lead is about platform A but B and C are named as rivals, domain is still **A**.
+   - **NOT company** (use **abstract** instead) when: the piece is an **expert roundup**, **survey of views**, **"how to prepare"** / **explainer** about an **industry-wide** or **society-wide** issue; **standards bodies** (NIST, IETF) and **several companies** appear as **co-equal** voices; the headline is about a **concept or threat** (e.g. encryption apocalypse, Q-day, regulation wave) rather than **one company's** product story. **Example:** "Quantum encryption apocalypse: experts weigh in…" → **abstract** (e.g. security operations floor, key-management or research setting — no brand logo); **do not** pick one quoted vendor's domain when many actors frame the same industry-wide topic.
+   - **abstract:** Set \`company_logo_domain\` to \`null\`. \`cover_keyword\` = **one photorealistic scene** (about 12–22 words) a press photographer could shoot for this story: real setting, industry, or infrastructure — not a decorative metaphor. **Do not** default to generic stock shots (laptop on desk, coffee cup, hands typing, bland office) unless the article is truly about desk work. **Forbidden:** "futuristic", "sci-fi", "cyberpunk", "hologram", "neon city", "space", "android robot", "laser", "matrix", "digital warrior", "metaphor for". No domain-only strings in \`cover_keyword\` for abstract.
 11. slug: one unique URL slug in English, lowercase kebab-case (a-z, 0-9, hyphens), 3–60 chars, no year spam; derived from the topic (for /news/[slug]). Every word must be its own segment — never glue two words (wrong: newssamsung-admin; right: news-samsung-admin).
 12. Exactly 3 FAQ items (q/a in English), grounded in the article; answers should be informative (3–6 sentences each), not one-liners; include specifics (models, regions) when the article lists them. Put FAQ **only** in the JSON \`faq\` array — **never** add a "## FAQs", "## FAQ", "### FAQ", or any Q&A block inside \`content_md\`. The Markdown body must end with your last substantive section (e.g. conclusion); the site renders \`faq\` separately.
 13. entities: 4–8 notable companies, products, or people from the text (name + one-line description in English).
 14. sentiment: integer 1–10 (market/tech tone for investors/readers).
 15. dek: **Plain text only** (no Markdown), 1–2 sentences summarizing the story for cards, RSS, and meta description; max ~220 characters; must stand alone without reading the article; no leading "This article" filler.
-16. primary_rubric: exactly one string — **"ai"** (ML, agents, models, search, avatars), **"hardware"** (chips, devices, GPUs, phones), **"open-source"** (licenses, Linux, community projects, Git), or **"other"** (legal/antitrust, streaming/media business, politics, security incidents, or anything that does not fit the three). This drives the site section URL (/rubric/…) for SEO.
+16. primary_rubric: exactly one string — **"ai"** (ML, agents, models, search, avatars), **"hardware"** (chips, devices, GPUs, phones), **"open-source"** (licenses, Linux, community projects, Git), **"security"** (cybersecurity, privacy, breaches, malware, infosec), **"energy"** (batteries, EVs, grid, solar/wind, cleantech, climate-related infrastructure), or **"other"** (legal/antitrust, streaming/media business, politics, or anything that does not fit the above). This drives the site section URL (/rubric/…) for SEO.
 
 17. JSON only: never put raw line breaks or tab characters inside string values — use \\n and \\t inside quotes (or emit one-line minified JSON).
+17b. Do not print article Markdown or "### At a glance" **outside** the JSON. Those belong **only** inside the \`content_md\` string. No preamble or postscript around the object.
 
 Output a single JSON object ONLY (no markdown fences, no commentary):
 {
@@ -326,7 +520,8 @@ Output a single JSON object ONLY (no markdown fences, no commentary):
   "dek": "string",
   "primary_rubric": "ai",
   "cover_type": "company",
-  "cover_keyword": "string",
+  "company_logo_domain": "example.com",
+  "cover_keyword": "example.com",
   "faq": [{"q": "string", "a": "string"}],
   "entities": [{"name": "string", "desc": "string"}],
   "sentiment": 7
@@ -339,24 +534,13 @@ CONTENT:
 ${clipped}
 `;
 
-  const headers = {
-    Authorization: `Bearer ${config.ai.openRouterKey}`,
-    'Content-Type': 'application/json',
-  };
-  if (config.ai.openRouterHttpReferer) {
-    headers['HTTP-Referer'] = config.ai.openRouterHttpReferer;
-  }
-  if (config.ai.openRouterAppTitle) {
-    headers['X-Title'] = config.ai.openRouterAppTitle;
-  }
-
   /** Opt-in: some models (e.g. openrouter/free) ignore or break on `response_format: json_object`. */
   const useJsonObjectFormat = process.env.OPENROUTER_JSON_OBJECT === '1';
 
   async function callOpenRouter(userPrompt, maxTokens) {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
-      headers,
+      headers: openRouterHeaders(),
       body: JSON.stringify({
         model: config.ai.openRouterModel,
         messages: [{ role: 'user', content: userPrompt }],
@@ -385,8 +569,8 @@ ${clipped}
     }
 
     const finishReason = String(choice?.finish_reason ?? '');
-    const unwrapped = unwrapJsonContent(rawResult);
-    const parsed = parseRewriterModelJson(unwrapped);
+    const jsonText = prepareRewriterJsonText(rawResult);
+    const parsed = parseRewriterModelJson(jsonText);
     const normalized = normalizeRewritten(parsed);
     return { normalized, finishReason };
   }
@@ -400,6 +584,7 @@ ${clipped}
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       const { normalized: n, finishReason: fr } = await callOpenRouter(userPrompt, maxTokens);
+      await finalizeCompanyLogoDomain(n);
       normalized = n;
       finishReason = fr;
 
@@ -434,3 +619,6 @@ ${clipped}
     throw err;
   }
 }
+
+/** For `node scripts/rewriter-json-smoke.mjs` — JSON extraction without calling OpenRouter. */
+export { prepareRewriterJsonText, parseRewriterModelJson };

@@ -15,6 +15,8 @@
     "stats:report": "node scripts/stats-daily-report.mjs",
     "ga4:smoke": "node scripts/ga4-smoke.mjs",
     "smoke": "node scripts/smoke.mjs",
+    "rewriter:smoke-json": "node scripts/rewriter-json-smoke.mjs",
+    "cover-prompt:smoke": "node scripts/cover-prompt-smoke.mjs",
     "pipeline": "node scripts/run-once.mjs",
     "dev:pipeline": "node scripts/dev-pipeline-server.mjs",
     "db:print-migrations": "node scripts/print-migrations.mjs",

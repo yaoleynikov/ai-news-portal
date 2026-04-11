@@ -4,12 +4,14 @@ export const NAV_TOPICS = [
   { slug: 'ai', label: 'AI' },
   { slug: 'hardware', label: 'Hardware' },
   { slug: 'open-source', label: 'Open Source' },
+  { slug: 'security', label: 'Security' },
+  { slug: 'energy', label: 'Energy' },
   { slug: 'other', label: 'More' }
 ] as const;
 
 export type TopicSlug = (typeof NAV_TOPICS)[number]['slug'];
 
-const MAIN_RUBRIC_SLUGS: readonly TopicSlug[] = ['ai', 'hardware', 'open-source'];
+const MAIN_RUBRIC_SLUGS: readonly TopicSlug[] = ['ai', 'hardware', 'open-source', 'security', 'energy'];
 
 export function slugifyTag(tag: string): string {
   return tag.trim().toLowerCase().replace(/\s+/g, '-');
@@ -55,7 +57,14 @@ export function articleInRubric(
 }
 
 /** Tag color theme for the UI (see global.css [data-tag-theme]) */
-export type TagTheme = 'ai' | 'hardware' | 'open-source' | 'automation' | 'default';
+export type TagTheme =
+  | 'ai'
+  | 'hardware'
+  | 'open-source'
+  | 'security'
+  | 'energy'
+  | 'automation'
+  | 'default';
 
 export function tagThemeSlug(tag: string): TagTheme {
   const s = slugifyTag(tag);
@@ -70,6 +79,8 @@ function rubricThemeFromSlug(slug: string): TagTheme {
   if (slug === 'ai') return 'ai';
   if (slug === 'hardware') return 'hardware';
   if (slug === 'open-source') return 'open-source';
+  if (slug === 'security') return 'security';
+  if (slug === 'energy') return 'energy';
   return 'default';
 }
 

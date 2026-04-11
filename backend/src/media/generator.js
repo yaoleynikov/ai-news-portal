@@ -1,10 +1,19 @@
 import fetch from 'node-fetch';
 import { config } from '../config.js';
+
+/** Native fetch (Node 18+) handles multipart FormData reliably; node-fetch can mis-bind boundaries on some Linux setups. */
+const httpFetch = typeof globalThis.fetch === 'function' ? globalThis.fetch.bind(globalThis) : fetch;
+import { generateImageAiHorde } from './aihorde-generate.js';
 import { loadSharp } from './sharp-loader.js';
 
 /** Final cover dimensions (OG / cards). */
 const COVER_WIDTH = 1200;
 const COVER_HEIGHT = 630;
+
+const CF_FLUX2_KLEIN_MODEL = '@cf/black-forest-labs/flux-2-klein-4b';
+
+/** Max prompt length for Workers AI image models (safe vs API limits). */
+const CF_IMAGE_PROMPT_MAX_CHARS = 2000;
 
 /**
  * Logo.dev raster size cap (~800); request high enough for downscale without blur.
@@ -102,6 +111,152 @@ async function generateCompanyCover(domainInput) {
   );
 }
 
+/**
+ * Plain-text slice from article for abstract image when there is no good cover_keyword
+ * (e.g. company/logo path failed and we must still generate a hero).
+ * @param {string} [title]
+ * @param {string} [content_md]
+ * @returns {string | null} null if too thin to prompt safely
+ */
+export function buildAbstractFallbackKeywordFromArticle(title, content_md) {
+  const plain = String(content_md || '')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 500);
+  const t = String(title || '').trim();
+  const s = `${t}. ${plain}`.trim();
+  if (s.length < 55) return null;
+  return s.slice(0, 480);
+}
+
+/**
+ * Shared text-to-image brief: HF uses a single string; AI Horde uses positive###negative.
+ * @param {string} keyword
+ */
+export function buildAbstractImagePrompt(keyword) {
+  const positive = [
+    'Editorial news photography, photorealistic, natural daylight or soft indoor light,',
+    'contemporary real world 2020s setting.',
+    'Depict the concrete subject in the brief — do not replace it with an unrelated generic stock scene',
+    '(laptop on desk, coffee mug, hands typing, bland open-plan office) unless the brief explicitly describes that.',
+    `Brief — no brand logos or readable text: ${keyword}.`,
+    'Do not add unrelated sci-fi or fantasy elements unless the brief explicitly requires them.'
+  ].join(' ');
+  const negative = [
+    'science fiction, futuristic armor, cyborgs, robots, holograms, neon cyberpunk,',
+    'space stations, glowing wireframe heads, fantasy weapons, abstract particles,',
+    'text, typography, words, letters, UI screenshots, app mockups, watermarks, blurry, low quality, deformed hands,',
+    'generic unrelated laptop close-up, random coffee cup stock photo, meaningless coworking blur'
+  ].join(' ');
+  return { positive, negative, hfInputs: `${positive} ${negative}` };
+}
+
+/**
+ * Crop/resize raw raster to site cover aspect (1200×630 WebP).
+ * @param {Buffer} raw
+ */
+async function finalizeAbstractCoverRasterBuffer(raw) {
+  const sharp = await loadSharp();
+  if (!sharp) {
+    console.warn('[MEDIA] abstract cover: no sharp — using raw image as PNG (no resize/WebP)');
+    return { buffer: raw, contentType: 'image/png', extension: 'png' };
+  }
+  const coverBuffer = await sharp(raw)
+    .resize(COVER_WIDTH, COVER_HEIGHT, { fit: 'cover' })
+    .webp({ quality: 85 })
+    .toBuffer();
+  return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
+}
+
+/**
+ * Abstract cover via Cloudflare Workers AI — FLUX.2 Klein 4b (multipart REST).
+ * @see https://developers.cloudflare.com/workers-ai/models/flux-2-klein-4b/
+ */
+async function generateAbstractCoverCloudflareKlein(keyword) {
+  const accountId = config.ai.cloudflareAccountId;
+  const token = config.ai.cloudflareApiToken;
+  if (!accountId || !token) {
+    throw new Error('Cloudflare Workers AI: set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN');
+  }
+
+  const promptFull = buildAbstractImagePrompt(keyword).hfInputs;
+  const prompt =
+    promptFull.length > CF_IMAGE_PROMPT_MAX_CHARS
+      ? `${promptFull.slice(0, CF_IMAGE_PROMPT_MAX_CHARS - 1)}…`
+      : promptFull;
+
+  const w = config.ai.flux2KleinWidth;
+  const h = config.ai.flux2KleinHeight;
+  const steps = config.ai.flux2KleinSteps;
+
+  const form = new FormData();
+  form.append('prompt', prompt);
+  form.append('width', String(w));
+  form.append('height', String(h));
+  form.append('steps', String(steps));
+
+  // Model name must stay literal in the path (encoding breaks routing: "No route for that URI").
+  const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/${CF_FLUX2_KLEIN_MODEL}`;
+
+  console.log(
+    `[MEDIA] Cloudflare Workers AI abstract cover (${CF_FLUX2_KLEIN_MODEL} ${w}×${h}, steps=${steps})…`
+  );
+
+  const response = await httpFetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: form
+  });
+
+  const text = await response.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error(`Cloudflare AI: non-JSON response HTTP ${response.status}: ${text.slice(0, 280)}`);
+  }
+
+  if (!json.success) {
+    const msg =
+      (Array.isArray(json.errors) && json.errors.map((e) => e?.message || e).join('; ')) ||
+      json.messages?.join?.('; ') ||
+      text.slice(0, 400);
+    throw new Error(`Cloudflare AI error HTTP ${response.status}: ${msg}`);
+  }
+
+  let imageB64 = '';
+  if (json.result && typeof json.result === 'object' && typeof json.result.image === 'string') {
+    imageB64 = json.result.image.trim();
+  } else if (typeof json.result === 'string') {
+    imageB64 = json.result.trim();
+  }
+  if (!imageB64) {
+    const hint =
+      json.result && typeof json.result === 'object'
+        ? Object.keys(json.result).join(',')
+        : typeof json.result;
+    throw new Error(`Cloudflare AI: missing image in result (${hint})`);
+  }
+
+  let raw;
+  try {
+    raw = Buffer.from(imageB64, 'base64');
+  } catch (e) {
+    throw new Error(`Cloudflare AI: invalid base64 image (${e?.message || e})`);
+  }
+  if (!raw.length) {
+    throw new Error('Cloudflare AI: empty image buffer');
+  }
+
+  console.log(`[MEDIA] Cloudflare FLUX.2 Klein: received ${raw.length} bytes → cover resize`);
+  return finalizeAbstractCoverRasterBuffer(raw);
+}
+
 /** Ordered HF tokens: primary then optional secondary (deduped). */
 function hfBearerKeys() {
   const k1 = config.ai.hfKey?.trim();
@@ -126,15 +281,7 @@ function shouldTryAlternateHfKey(httpStatus, bodySnippet) {
  * One HF token: 503 cold-start retries on this key only; other HTTP errors throw (may trigger key fallback outside).
  */
 async function generateAbstractCoverWithKey(keyword, bearerKey, inferenceUrl) {
-  const prompt = [
-    'Editorial news photography, photorealistic, natural daylight or soft indoor light,',
-    'contemporary real world 2020s setting, grounded everyday scene.',
-    `Subject and mood must match this brief (no brand logos or readable text): ${keyword}.`,
-    'Avoid: science fiction, futuristic armor, cyborgs, robots, holograms, neon cyberpunk,',
-    'space stations, glowing wireframe heads, fantasy weapons, abstract particles,',
-    'unless the brief explicitly requires that exact topic.',
-    'NO text, NO typography, NO words, NO letters, NO UI screenshots, NO app mockups.'
-  ].join(' ');
+  const prompt = buildAbstractImagePrompt(keyword).hfInputs;
 
   const maxAttempts = 3;
   let attempts = 0;
@@ -181,21 +328,8 @@ async function generateAbstractCoverWithKey(keyword, bearerKey, inferenceUrl) {
       }
 
       const imageBlob = await response.arrayBuffer();
-      const sharp = await loadSharp();
       const raw = Buffer.from(imageBlob);
-
-      if (!sharp) {
-        console.warn('[MEDIA] abstract cover: no sharp — using HF image as PNG (no resize/WebP)');
-        return { buffer: raw, contentType: 'image/png', extension: 'png' };
-      }
-
-      // HF often emits a square; crop to landscape hero / OG shape.
-      const coverBuffer = await sharp(raw)
-        .resize(COVER_WIDTH, COVER_HEIGHT, { fit: 'cover' })
-        .webp({ quality: 85 })
-        .toBuffer();
-
-      return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
+      return finalizeAbstractCoverRasterBuffer(raw);
     } catch (err) {
       if (err.hfHttpStatus != null) {
         throw err;
@@ -211,10 +345,37 @@ async function generateAbstractCoverWithKey(keyword, bearerKey, inferenceUrl) {
 }
 
 /**
+ * Abstract cover via AI Horde (free GPU pool), then optional HF FLUX fallback.
+ */
+async function generateAbstractCoverAiHorde(keyword) {
+  const apiKey = config.ai.aihordeKey?.trim();
+  if (!apiKey) {
+    throw new Error('AIHORDE_API_KEY is not configured');
+  }
+  const { positive, negative } = buildAbstractImagePrompt(keyword);
+  const promptFull = `${positive}###${negative}`;
+
+  console.log(
+    `[MEDIA] AI Horde abstract cover (models: ${config.ai.aihordeModels.join(' → ')})…`
+  );
+
+  const raw = await generateImageAiHorde(promptFull, {
+    baseUrl: config.ai.aihordeBaseUrl,
+    apiKey,
+    clientAgent: config.ai.aihordeClientAgent,
+    pollMs: config.ai.aihordePollMs,
+    perAttemptMs: config.ai.aihordePerModelMs,
+    models: config.ai.aihordeModels
+  });
+
+  return finalizeAbstractCoverRasterBuffer(raw);
+}
+
+/**
  * Generates an abstract featured image using FLUX.1-schnell via HF API.
  * Retries 503 on the same key; on quota-style HTTP errors tries HF_API_KEY2 if set.
  */
-async function generateAbstractCover(keyword) {
+async function generateAbstractCoverHf(keyword) {
   const keys = hfBearerKeys();
   if (keys.length === 0) {
     throw new Error('HF_API_KEY is not configured');
@@ -249,6 +410,52 @@ async function generateAbstractCover(keyword) {
   throw lastErr || new Error('HF abstract cover: all keys exhausted');
 }
 
+let warnedCloudflareAbstractMissing = false;
+
+async function generateAbstractCover(keyword) {
+  const kw = String(keyword ?? '').replace(/\s+/g, ' ').trim();
+  const brief = buildAbstractImagePrompt(keyword).hfInputs;
+  const kwMax = 500;
+  const briefMax = 1400;
+  console.log(
+    `[MEDIA] abstract cover — image prompt (cover_keyword ${kw.length} chars, full brief ${brief.length} chars):\n` +
+      `  cover_keyword: ${kw.slice(0, kwMax)}${kw.length > kwMax ? '…' : ''}\n` +
+      `  model_brief: ${brief.slice(0, briefMax)}${brief.length > briefMax ? '…' : ''}`
+  );
+
+  const cfOk = Boolean(config.ai.cloudflareAccountId?.trim() && config.ai.cloudflareApiToken?.trim());
+  if (!cfOk && !warnedCloudflareAbstractMissing) {
+    warnedCloudflareAbstractMissing = true;
+    console.warn(
+      '[MEDIA] Cloudflare Workers AI не настроен (CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN в backend/.env) — abstract-обложки идут через AI Horde / HF'
+    );
+  }
+  if (cfOk) {
+    try {
+      return await generateAbstractCoverCloudflareKlein(keyword);
+    } catch (err) {
+      console.warn('[MEDIA] Cloudflare FLUX.2 Klein failed:', err.message || err);
+    }
+  }
+
+  const hordeKey = config.ai.aihordeKey?.trim();
+  if (hordeKey) {
+    try {
+      return await generateAbstractCoverAiHorde(keyword);
+    } catch (err) {
+      console.warn('[MEDIA] AI Horde failed:', err.message || err);
+      const keys = hfBearerKeys();
+      if (keys.length > 0) {
+        console.warn('[MEDIA] Falling back to Hugging Face FLUX…');
+        return await generateAbstractCoverHf(keyword);
+      }
+      throw err;
+    }
+  }
+
+  return await generateAbstractCoverHf(keyword);
+}
+
 /**
  * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string }>}
  */
@@ -259,24 +466,34 @@ export async function generateCover(type, keyword) {
   return await generateAbstractCover(keyword);
 }
 
+/** Last-resort brief when article text is too short to derive a scene (no hard tie to any one story). */
 export const FALLBACK_ABSTRACT_COVER_KEYWORD =
-  'journalist desk with laptop and coffee mug in bright office window light, calm professional mood';
+  'documentary-style technology news photograph, real industrial or engineering setting with visible equipment or infrastructure, natural light, editorial mood, no logos or readable text';
 
 /**
- * Company/logo covers often fail (401, missing domain). Fall back to abstract FLUX like the dev pipeline.
- * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string, cover_fallback?: boolean }>}
+ * Company/logo covers often fail (401, missing domain). Fall back to abstract image like the dev pipeline.
+ * @param {{ title?: string, content_md?: string }} [articleContext] If company cover fails, used to build the abstract brief from the story instead of the generic last resort.
+ * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string, cover_fallback?: boolean, abstract_keyword_used?: string }>}
  */
-export async function generateCoverWithFallback(coverType, coverKeyword) {
+export async function generateCoverWithFallback(coverType, coverKeyword, articleContext) {
   try {
     return await generateCover(coverType, coverKeyword);
   } catch (err) {
     if (coverType === 'company') {
       console.warn(
-        '[MEDIA] company cover failed → FLUX abstract fallback (fix Logo.dev key/domain or check logs above):',
+        '[MEDIA] company cover failed → abstract image fallback (Cloudflare Klein / AI Horde / HF; fix Logo.dev if company logos matter):',
         err.message
       );
-      const out = await generateCover('abstract', FALLBACK_ABSTRACT_COVER_KEYWORD);
-      return { ...out, cover_fallback: true };
+      const fromArticle = buildAbstractFallbackKeywordFromArticle(
+        articleContext?.title,
+        articleContext?.content_md
+      );
+      const abstractKw = fromArticle ?? FALLBACK_ABSTRACT_COVER_KEYWORD;
+      if (fromArticle) {
+        console.log('[MEDIA] abstract fallback prompt derived from article title/body (chars=%s)', fromArticle.length);
+      }
+      const out = await generateCover('abstract', abstractKw);
+      return { ...out, cover_fallback: true, abstract_keyword_used: abstractKw };
     }
     throw err;
   }

@@ -8,7 +8,7 @@ export type NewsArticle = {
   title: string;
   dek: string;
   excerpt: string;
-  /** Editorial section: ai | hardware | open-source | other — matches /rubric/* */
+  /** Editorial section: ai | hardware | open-source | security | energy | other — matches /rubric/* */
   primary_rubric?: string;
   content_md: string;
   cover_url: string;

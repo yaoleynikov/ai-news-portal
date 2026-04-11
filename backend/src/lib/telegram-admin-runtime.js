@@ -15,7 +15,7 @@ import {
   normalizeUserLogoDomain
 } from './article-telegram-actions.js';
 
-/** @type {Map<string, { mode: 'image_wait'; articleId: string } | { mode: 'logo_domain_wait'; articleId: string }>} */
+/** @type {Map<string, { mode: 'image_wait'; articleId: string } | { mode: 'logo_domain_wait'; articleId: string } | { mode: 'logo_pick'; articleId: string; suggestedDomain: string }>} */
 const chatState = new Map();
 
 function pollSec() {
@@ -95,10 +95,10 @@ function articleKeyboard(articleId) {
 }
 
 function formatTelegramLogoDone(out) {
-  const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (fallback FLUX)';
+  const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (abstract)';
   let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
   if (out.domain_used) {
-    tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — FLUX)' : ''}${tail}`;
+    tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — подставлено фото)' : ''}${tail}`;
   }
   return `✅ Лого обновлено${tail}`;
 }
@@ -107,6 +107,21 @@ function logoDomainCancelKeyboard(articleId) {
   const id = String(articleId).toLowerCase();
   return {
     inline_keyboard: [[{ text: '✖ Отмена', callback_data: `sf:x:${id}` }]]
+  };
+}
+
+/** Подтверждение авто-домена Logo.dev или переход к ручному вводу. callback_data ≤ 64 байт. */
+function logoPickKeyboard(articleId, suggestedDomain) {
+  const id = String(articleId).toLowerCase();
+  const short = String(suggestedDomain || '').slice(0, 28);
+  return {
+    inline_keyboard: [
+      [
+        { text: `✅ ${short}`, callback_data: `sf:lu:${id}` },
+        { text: '✏️ Другой домен', callback_data: `sf:lm:${id}` }
+      ],
+      [{ text: '✖ Отмена', callback_data: `sf:x:${id}` }]
+    ]
   };
 }
 
@@ -204,6 +219,44 @@ async function handleMessage(token, adminId, msg) {
   }
 
   const pending = chatState.get(String(chatId));
+  if (pending?.mode === 'logo_pick') {
+    const dom = normalizeUserLogoDomain(text);
+    if (!dom) {
+      await sendPlain(
+        token,
+        chatId,
+        'Пришли **домен** одной строкой (например `x.com`), или нажми кнопку выше.\n/cancel — отмена.',
+        { parse_mode: 'Markdown' }
+      );
+      return;
+    }
+    chatState.delete(String(chatId));
+    const prog = makeProgressMessenger(token, chatId);
+    try {
+      await prog.show('⏳ Загружаю статью из БД…');
+      const { data: row, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('id', pending.articleId)
+        .maybeSingle();
+      if (error) throw new Error(error.message);
+      if (!row) throw new Error('Статья не найдена');
+      const out = await regenerateArticleCompanyLogo(supabase, row, {
+        logoDomain: dom,
+        onProgress: (line) => prog.show(line)
+      });
+      await prog.show(formatTelegramLogoDone(out));
+    } catch (e) {
+      console.error('[telegram-admin] Лого (ручной домен после выбора):', e?.message || e);
+      try {
+        await prog.show(`❌ Лого: ${e.message || e}`);
+      } catch {
+        await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
+      }
+    }
+    return;
+  }
+
   if (pending?.mode === 'logo_domain_wait') {
     const dom = normalizeUserLogoDomain(text);
     if (!dom) {
@@ -309,7 +362,8 @@ async function handleCallback(token, adminId, cb) {
   }
 
   const data = typeof cb.data === 'string' ? cb.data : '';
-  const m = /^sf:([drilx]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
+  const uuidRe = '([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})';
+  const m = new RegExp(`^sf:([a-z]+):${uuidRe}$`, 'i').exec(data);
   if (!m) {
     await answerCb(token, cb.id, 'Неверная кнопка');
     return;
@@ -376,20 +430,69 @@ async function handleCallback(token, adminId, cb) {
       await sendPlain(
         token,
         chatId,
-        '**Картинка AI (FLUX):** одним сообщением опиши желаемую обложку — это попадёт в промпт (можно кратко: настроение, объекты, сцена).\n\nМожно отправить **.** или **-** без текста — тогда промпт соберётся только из заголовка и текста статьи.\n/cancel — отмена.',
+        '**Картинка AI:** одним сообщением опиши желаемую обложку — это попадёт в промпт (можно кратко: настроение, объекты, сцена).\n\nМожно отправить **.** или **-** без текста — тогда промпт соберётся только из заголовка и текста статьи.\n/cancel — отмена.',
         { parse_mode: 'Markdown' }
+      );
+      return;
+    }
+    if (act === 'lu') {
+      await answerCb(token, cb.id, 'Лого…');
+      const st = chatState.get(String(chatId));
+      let domain =
+        st?.mode === 'logo_pick' &&
+        String(st.articleId).toLowerCase() === String(articleId).toLowerCase() &&
+        typeof st.suggestedDomain === 'string'
+          ? st.suggestedDomain
+          : null;
+      if (!domain) domain = guessLogoDomainFromRow(row);
+      if (!domain) {
+        await sendPlain(token, chatId, 'Домен не найден — пришли hostname текстом или «Другой домен».');
+        return;
+      }
+      chatState.delete(String(chatId));
+      const prog = makeProgressMessenger(token, chatId);
+      try {
+        await prog.show(`⏳ Logo.dev: ${domain}…`);
+        const out = await regenerateArticleCompanyLogo(supabase, row, {
+          logoDomain: domain,
+          onProgress: (line) => prog.show(line)
+        });
+        await prog.show(formatTelegramLogoDone(out));
+      } catch (e) {
+        console.error('[telegram-admin] Лого (подтверждение):', e?.message || e);
+        try {
+          await prog.show(`❌ Лого: ${e.message || e}`);
+        } catch {
+          await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
+        }
+      }
+      return;
+    }
+    if (act === 'lm') {
+      await answerCb(token, cb.id);
+      chatState.set(String(chatId), { mode: 'logo_domain_wait', articleId });
+      await sendPlain(
+        token,
+        chatId,
+        'Пришли **домен для Logo.dev** одной строкой: `x.com`, `reddit.com` или `https://company.com`\n/cancel — отмена.',
+        {
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+          reply_markup: logoDomainCancelKeyboard(articleId)
+        }
       );
       return;
     }
     if (act === 'l') {
       console.log('[telegram-admin] Лого Logo.dev:', row.slug || articleId, 'cover_type=', row.cover_type);
-      if (!guessLogoDomainFromRow(row)) {
+      const guess = guessLogoDomainFromRow(row);
+      if (!guess) {
         await answerCb(token, cb.id, 'Жду домен');
         chatState.set(String(chatId), { mode: 'logo_domain_wait', articleId });
         await sendPlain(
           token,
           chatId,
-          'Не нашёл домен для Logo.dev (агрегатор в URL или неочевидный бренд).\n\nПришли **домен одной строкой**, например `oppo.com` или `https://stripe.com`\n/cancel — отмена.',
+          'Автоподбор домена не сработал (агрегатор в URL или неочевидный бренд).\n\nПришли **домен одной строкой**, например `oppo.com` или `https://stripe.com`\n/cancel — отмена.',
           {
             parse_mode: 'Markdown',
             disable_web_page_preview: true,
@@ -398,23 +501,22 @@ async function handleCallback(token, adminId, cb) {
         );
         return;
       }
-      await answerCb(token, cb.id, 'Лого…');
-      const prog = makeProgressMessenger(token, chatId);
-      try {
-        await prog.show('⏳ Лого: готовлю обложку…');
-        const out = await regenerateArticleCompanyLogo(supabase, row, {
-          onProgress: (line) => prog.show(line)
-        });
-        chatState.delete(String(chatId));
-        await prog.show(formatTelegramLogoDone(out));
-      } catch (e) {
-        console.error('[telegram-admin] Лого: ошибка', e?.message || e);
-        try {
-          await prog.show(`❌ Лого: ${e.message || e}`);
-        } catch {
-          await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
+      await answerCb(token, cb.id);
+      chatState.set(String(chatId), {
+        mode: 'logo_pick',
+        articleId,
+        suggestedDomain: guess
+      });
+      await sendPlain(
+        token,
+        chatId,
+        `**Logo.dev** — проверь домен.\n\nАвтоподбор: \`${guess}\`\n• **Подтвердить** — грузим это лого.\n• **Другой домен** — введи hostname вручную.\n• Можно сразу прислать домен текстом.`,
+        {
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+          reply_markup: logoPickKeyboard(articleId, guess)
         }
-      }
+      );
       return;
     }
     if (act === 'x') {
@@ -441,6 +543,9 @@ async function handleCallback(token, adminId, cb) {
 export async function runTelegramAdminPollLoop(token, adminId) {
   let offset = 0;
   const timeout = pollSec();
+  /** @type {number} */
+  let lastConflictLogAt = 0;
+  const CONFLICT_LOG_EVERY_MS = 5 * 60 * 1000;
   for (;;) {
     try {
       const j = await telegramApi(token, 'getUpdates', {
@@ -449,6 +554,20 @@ export async function runTelegramAdminPollLoop(token, adminId) {
         allowed_updates: ['message', 'callback_query']
       });
       if (!j.ok) {
+        const desc = String(j.description || '');
+        const conflict =
+          j.error_code === 409 || /conflict|terminated by other getupdates/i.test(desc);
+        if (conflict) {
+          const now = Date.now();
+          if (now - lastConflictLogAt >= CONFLICT_LOG_EVERY_MS) {
+            lastConflictLogAt = now;
+            console.warn(
+              '[telegram-admin] getUpdates Conflict — с этим TG_BOT_TOKEN уже идёт long poll в другом процессе. Остановите дубликат: второй docker worker, `npm run telegram:admin`, `npm run telegram:limits` или локальный воркер.'
+            );
+          }
+          await new Promise((r) => setTimeout(r, 30000));
+          continue;
+        }
         console.warn('[telegram-admin] getUpdates:', j.description || j);
         await new Promise((r) => setTimeout(r, 5000));
         continue;

@@ -1335,6 +1335,16 @@ a.article-kicker[data-tag-theme='automation'] {
   color: var(--tag-au-fg);
 }
 
+a.article-kicker[data-tag-theme='security'] {
+  border-left-color: var(--tag-se-bd);
+  color: var(--tag-se-fg);
+}
+
+a.article-kicker[data-tag-theme='energy'] {
+  border-left-color: var(--tag-en-bd);
+  color: var(--tag-en-fg);
+}
+
 .article-dek {
   font-family: var(--font-reading);
   font-size: 1.125rem;
@@ -1727,6 +1737,12 @@ a.article-kicker[data-tag-theme='automation'] {
   --tag-au-fg: #4a148c;
   --tag-au-bg: #f3e5f5;
   --tag-au-bd: #ce93d8;
+  --tag-se-fg: #b71c1c;
+  --tag-se-bg: #ffebee;
+  --tag-se-bd: #ef9a9a;
+  --tag-en-fg: #006064;
+  --tag-en-bg: #e0f7fa;
+  --tag-en-bd: #4dd0e1;
   --tag-def-fg: #424242;
   --tag-def-bg: #f0f0f0;
   --tag-def-bd: #bdbdbd;
@@ -1746,6 +1762,12 @@ a.article-kicker[data-tag-theme='automation'] {
     --tag-au-fg: #ce93d8;
     --tag-au-bg: #25142d;
     --tag-au-bd: #6a1b9a;
+    --tag-se-fg: #ff8a80;
+    --tag-se-bg: #3e1618;
+    --tag-se-bd: #c62828;
+    --tag-en-fg: #80deea;
+    --tag-en-bg: #0d2829;
+    --tag-en-bd: #00838f;
     --tag-def-fg: #cfcfcf;
     --tag-def-bg: #1e1e1e;
     --tag-def-bd: #555;
@@ -1807,6 +1829,18 @@ a.tag-chip[data-tag-theme='automation'] {
   border-color: var(--tag-au-bd);
 }
 
+a.tag-chip[data-tag-theme='security'] {
+  color: var(--tag-se-fg);
+  background: var(--tag-se-bg);
+  border-color: var(--tag-se-bd);
+}
+
+a.tag-chip[data-tag-theme='energy'] {
+  color: var(--tag-en-fg);
+  background: var(--tag-en-bg);
+  border-color: var(--tag-en-bd);
+}
+
 a.tag-chip--compact {
   font-size: 0.5625rem;
   padding: 0.18rem 0.4rem;
@@ -1845,6 +1879,14 @@ a.tag-chip.tag-chip--hero[data-tag-theme='open-source'] {
 
 a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   border-color: color-mix(in srgb, var(--tag-au-bd) 55%, white);
+}
+
+a.tag-chip.tag-chip--hero[data-tag-theme='security'] {
+  border-color: color-mix(in srgb, var(--tag-se-bd) 55%, white);
+}
+
+a.tag-chip.tag-chip--hero[data-tag-theme='energy'] {
+  border-color: color-mix(in srgb, var(--tag-en-bd) 55%, white);
 }
 
 .entity-name {

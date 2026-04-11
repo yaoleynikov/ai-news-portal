@@ -1,7 +1,12 @@
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
 
-// Setup environment variables
+const __configDir = path.dirname(fileURLToPath(import.meta.url));
+/** backend/.env — грузим явно, чтобы воркер/Telegram видели ключи при любом process.cwd() (Docker, systemd, запуск из корня репо). */
+const backendEnvPath = path.join(__configDir, '..', '.env');
+dotenv.config({ path: backendEnvPath });
 dotenv.config();
 
 /** Service role JWT only (not the anon key). Alias: SUPABASE_KEY matches common .env layouts. */
@@ -32,6 +37,33 @@ export const config = {
     hfKey: process.env.HF_API_KEY,
     hfKey2: process.env.HF_API_KEY2,
     hfInferenceUrl: process.env.HF_INFERENCE_URL,
+    /** AI Horde (free crowd GPU); abstract covers when set. */
+    aihordeKey: process.env.AIHORDE_API_KEY,
+    aihordeBaseUrl: (process.env.AIHORDE_API_URL || 'https://aihorde.net/api/v2').replace(/\/$/, ''),
+    aihordeClientAgent:
+      process.env.AIHORDE_CLIENT_AGENT || 'SiliconFeed:1.0:https://siliconfeed.online',
+    aihordeModels: (process.env.AIHORDE_MODELS ||
+      'Deliberate 3.0,Flux.1-Schnell fp8 (Compact),Realistic Vision,Juggernaut XL')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+    aihordePollMs: Math.min(10000, Math.max(1000, Number(process.env.AIHORDE_POLL_MS) || 2000)),
+    aihordePerModelMs: Math.min(
+      3600000,
+      Math.max(60000, Number(process.env.AIHORDE_PER_MODEL_TIMEOUT_MS) || 900000)
+    ),
+    /** Cloudflare Workers AI (REST) — FLUX.2 Klein 4b for abstract covers */
+    cloudflareAccountId: process.env.CLOUDFLARE_ACCOUNT_ID?.trim(),
+    cloudflareApiToken: process.env.CLOUDFLARE_API_TOKEN?.trim(),
+    flux2KleinWidth: Math.min(
+      2048,
+      Math.max(512, Number(process.env.CF_FLUX2_KLEIN_WIDTH) || 1024)
+    ),
+    flux2KleinHeight: Math.min(
+      2048,
+      Math.max(512, Number(process.env.CF_FLUX2_KLEIN_HEIGHT) || 1024)
+    ),
+    flux2KleinSteps: Math.min(50, Math.max(1, Number(process.env.CF_FLUX2_KLEIN_STEPS) || 25)),
   },
   media: {
     // img.logo.dev expects the publishable key (pk_...). Secret keys (sk_...) often return 401 on image CDN.

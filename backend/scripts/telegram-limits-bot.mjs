@@ -34,12 +34,28 @@ async function tgSend(chatId, text) {
 
 async function loop() {
   let offset = 0;
+  let lastConflictLogAt = 0;
+  const CONFLICT_LOG_EVERY_MS = 5 * 60 * 1000;
   for (;;) {
     try {
       const url = `https://api.telegram.org/bot${token}/getUpdates?offset=${offset}&timeout=${POLL_SEC}`;
       const res = await fetch(url);
       const j = await res.json();
       if (!j.ok) {
+        const desc = String(j.description || '');
+        const conflict =
+          j.error_code === 409 || /conflict|terminated by other getupdates/i.test(desc);
+        if (conflict) {
+          const now = Date.now();
+          if (now - lastConflictLogAt >= CONFLICT_LOG_EVERY_MS) {
+            lastConflictLogAt = now;
+            console.warn(
+              '[telegram-limits] getUpdates Conflict — тот же токен уже опрашивается воркером или другим ботом. Остановите дубликат.'
+            );
+          }
+          await new Promise((r) => setTimeout(r, 30000));
+          continue;
+        }
         console.warn('[telegram-limits] getUpdates:', j.description || j);
         await new Promise((r) => setTimeout(r, 5000));
         continue;

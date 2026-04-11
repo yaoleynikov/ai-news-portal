@@ -25,7 +25,7 @@ if (!url || !key) {
 
 const dry = process.argv.includes('--dry-run');
 const force = process.argv.includes('--force');
-const valid = new Set(['ai', 'hardware', 'open-source', 'other']);
+const valid = new Set(['ai', 'hardware', 'open-source', 'security', 'energy', 'other']);
 
 const supabase = createClient(url, key);
 const pageSize = 500;

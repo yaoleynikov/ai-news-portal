@@ -10,6 +10,9 @@ import { config } from '../config.js';
 import { buildFluxPromptFromEditorNote } from './flux-prompt-from-note.js';
 import { notifyGoogleUrlDeleted, notifyGoogleUrlUpdated } from './google-indexing.js';
 import { clipSourceForRewriter } from './rewrite-length-quality.js';
+import { normalizeUserLogoDomain, guessLogoDomainFromRow } from './logo-domain.js';
+
+export { normalizeUserLogoDomain, guessLogoDomainFromRow } from './logo-domain.js';
 
 function stripHostOrigin(url) {
   return String(url || '')
@@ -282,7 +285,7 @@ export async function rewriteArticleRow(supabase, row, options = {}) {
 }
 
 /**
- * FLUX cover from editor note; sets cover_type abstract.
+ * Abstract cover from editor note (Cloudflare FLUX.2 Klein when configured, else Horde/HF); sets cover_type abstract.
  * @param {import('@supabase/supabase-js').SupabaseClient} supabase
  * @param {Record<string, unknown>} row
  * @param {string} editorNote
@@ -303,10 +306,12 @@ export async function regenerateArticleCoverFromNote(supabase, row, editorNote, 
     contentPreview: String(row.content_md || ''),
     editorNote
   });
-  await onProgress(`⏳ Промпт готов (${prompt.length} симв.), генерация FLUX…\n— ${prompt.slice(0, 220)}${prompt.length > 220 ? '…' : ''}`);
-  console.log('[article-telegram-actions] Промпт для FLUX:', prompt.slice(0, 160));
+  await onProgress(
+    `⏳ Промпт готов (${prompt.length} симв.), генерация обложки (Workers AI Klein / резерв Horde·HF)…\n— ${prompt.slice(0, 220)}${prompt.length > 220 ? '…' : ''}`
+  );
+  console.log('[article-telegram-actions] Промпт обложки:', prompt.slice(0, 160));
 
-  console.log('[article-telegram-actions] HF / генерация изображения…');
+  console.log('[article-telegram-actions] Генерация изображения (generateCover abstract)…');
   const cover = await generateCoverWithFallback('abstract', prompt);
   await onProgress('⏳ Изображение готово, загрузка в R2…');
   const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);
@@ -333,110 +338,6 @@ export async function regenerateArticleCoverFromNote(supabase, row, editorNote, 
   }
 
   return { cover_url: coverUrl, prompt_used: prompt };
-}
-
-/** Title + entities + source URL → guess Logo.dev domain (aggregators excluded). */
-const LOGO_DOMAIN_RULES = [
-  { re: /\b(youtube|google|alphabet|deepmind|android|chrome|pixel|gemini)\b/i, domain: 'google.com' },
-  { re: /\b(openai|chatgpt)\b/i, domain: 'openai.com' },
-  { re: /\b(meta|facebook|instagram|whatsapp|oculus|quest)\b/i, domain: 'meta.com' },
-  { re: /\b(microsoft|azure|windows|xbox|bing)\b/i, domain: 'microsoft.com' },
-  { re: /\b(apple|iphone|ipad|macos|ios|swiftui)\b/i, domain: 'apple.com' },
-  { re: /\b(samsung|galaxy)\b/i, domain: 'samsung.com' },
-  { re: /\b(nvidia|geforce|cuda)\b/i, domain: 'nvidia.com' },
-  { re: /\b(intel|xeon|core ultra)\b/i, domain: 'intel.com' },
-  { re: /\b(amd|ryzen|radeon)\b/i, domain: 'amd.com' },
-  { re: /\b(amazon|aws|alexa)\b/i, domain: 'amazon.com' },
-  { re: /\b(netflix)\b/i, domain: 'netflix.com' },
-  { re: /\b(spotify)\b/i, domain: 'spotify.com' },
-  { re: /\b(tiktok)\b/i, domain: 'tiktok.com' },
-  { re: /\b(x\.com|twitter)\b/i, domain: 'x.com' },
-  { re: /\b(telegram)\b/i, domain: 'telegram.org' },
-  { re: /\b(docker)\b/i, domain: 'docker.com' },
-  { re: /\b(github)\b/i, domain: 'github.com' },
-  { re: /\b(gitlab)\b/i, domain: 'gitlab.com' },
-  { re: /\b(stripe)\b/i, domain: 'stripe.com' },
-  { re: /\b(cloudflare)\b/i, domain: 'cloudflare.com' },
-  { re: /\b(sony|playstation)\b/i, domain: 'sony.com' },
-  { re: /\b(uber)\b/i, domain: 'uber.com' },
-  { re: /\b(lyft)\b/i, domain: 'lyft.com' },
-  { re: /\b(slack)\b/i, domain: 'slack.com' },
-  { re: /\b(discord)\b/i, domain: 'discord.com' },
-  { re: /\b(notion)\b/i, domain: 'notion.so' },
-  { re: /\b(figma)\b/i, domain: 'figma.com' }
-];
-
-const AGGREGATOR_HOST_SUBSTRINGS = [
-  'theverge',
-  'techcrunch',
-  'arstechnica',
-  'wired.com',
-  'engadget',
-  '9to5google',
-  '9to5mac',
-  'macrumors',
-  'bbc.',
-  'reuters',
-  'apnews',
-  'theguardian',
-  'nytimes',
-  'bloomberg',
-  'cnbc',
-  'zdnet',
-  'cnet'
-];
-
-/**
- * Ввод админа → hostname для Logo.dev (`openai.com`). Поддержка URL и `www.`.
- * @param {string} raw
- * @returns {string | null}
- */
-export function normalizeUserLogoDomain(raw) {
-  let s = String(raw || '')
-    .replace(/^\uFEFF/, '')
-    .replace(/[\u200B-\u200D\uFEFF]/g, '')
-    .trim();
-  if (!s) return null;
-  if (/^https?:\/\//i.test(s)) {
-    try {
-      s = new URL(s).hostname;
-    } catch {
-      return null;
-    }
-  } else {
-    s = s.split(/[\s/?#]/)[0].trim();
-  }
-  s = s.replace(/^www\./i, '').toLowerCase();
-  if (!s || s.includes('..')) return null;
-  if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(s)) return null;
-  const blocked = AGGREGATOR_HOST_SUBSTRINGS.some((x) => s.includes(x));
-  if (blocked) return null;
-  return s;
-}
-
-export function guessLogoDomainFromRow(row) {
-  const title = String(row.title || '');
-  const ent = Array.isArray(row.entities)
-    ? row.entities.map((e) => (e && typeof e.name === 'string' ? e.name : '')).join(' ')
-    : '';
-  const hay = `${title} ${ent}`;
-
-  for (const { re, domain } of LOGO_DOMAIN_RULES) {
-    if (re.test(hay)) return domain;
-  }
-
-  const sourceUrl = typeof row.source_url === 'string' ? row.source_url.trim() : '';
-  if (!sourceUrl) return null;
-  try {
-    const host = new URL(sourceUrl).hostname.replace(/^www\./i, '').toLowerCase();
-    if (!host) return null;
-    const blocked = AGGREGATOR_HOST_SUBSTRINGS.some((s) => host.includes(s));
-    if (blocked) return null;
-    if (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) return host;
-  } catch {
-    /* ignore */
-  }
-  return null;
 }
 
 function abstractKeywordForToggleFromRow(row) {
@@ -471,11 +372,14 @@ export async function regenerateArticleCompanyLogo(supabase, row, options = {}) 
   const domain = manual ?? guessLogoDomainFromRow(row);
   if (!domain) {
     throw new Error(
-      'Не смог определить домен для Logo.dev (агрегатор или неизвестный бренд). Укажи домен вручную в Telegram или смени источник.'
+      'Нет домена для Logo.dev: в cover_keyword нет валидного apex-домена (рерайтер для company должен записать его туда). Укажи домен вручную в Telegram или сделай рерайт.'
     );
   }
   await onProgress(`⏳ Logo.dev: ${domain}…`);
-  const cover = await generateCoverWithFallback('company', domain);
+  const cover = await generateCoverWithFallback('company', domain, {
+    title: String(row.title || ''),
+    content_md: String(row.content_md || '')
+  });
   const coverTypePublished = cover.cover_fallback ? 'abstract' : 'company';
   await onProgress('⏳ Загрузка в R2…');
   const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);
@@ -501,7 +405,7 @@ export async function regenerateArticleCompanyLogo(supabase, row, options = {}) 
 }
 
 /**
- * Flip cover_type + regenerate: company (Logo.dev) ↔ abstract (FLUX from article text).
+ * Flip cover_type + regenerate: company (Logo.dev) ↔ abstract (Klein / Horde / HF from article text).
  * @param {import('@supabase/supabase-js').SupabaseClient} supabase
  * @param {Record<string, unknown>} row
  * @param {{ onProgress?: (line: string) => void | Promise<void>; logoDomain?: string }} [options]
@@ -516,7 +420,7 @@ export async function toggleArticleCoverType(supabase, row, options = {}) {
   const currentIsCompany = row.cover_type === 'company';
 
   if (currentIsCompany) {
-    await onProgress('⏳ Было лого → генерирую фото (FLUX) по тексту статьи…');
+    await onProgress('⏳ Было лого → генерирую фото по тексту статьи (Klein / резерв)…');
     const keyword = abstractKeywordForToggleFromRow(row);
     const cover = await generateCoverWithFallback('abstract', keyword);
     const coverTypePublished = 'abstract';

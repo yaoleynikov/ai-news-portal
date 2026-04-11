@@ -218,7 +218,14 @@ export function clipListingExcerpt(text: string, max = LISTING_EXCERPT_MAX_CHARS
   return `${base}…`;
 }
 
-const STORED_RUBRIC_SLUGS = new Set(['ai', 'hardware', 'open-source', 'other']);
+const STORED_RUBRIC_SLUGS = new Set([
+  'ai',
+  'hardware',
+  'open-source',
+  'security',
+  'energy',
+  'other'
+]);
 
 function normalizeStoredPrimaryRubric(v: unknown): string | undefined {
   const s = typeof v === 'string' ? v.trim().toLowerCase() : '';
