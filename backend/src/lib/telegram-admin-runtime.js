@@ -10,7 +10,7 @@ import {
   deleteArticleById,
   rewriteArticleRow,
   regenerateArticleCoverFromNote,
-  toggleArticleCoverType,
+  regenerateArticleCompanyLogo,
   guessLogoDomainFromRow,
   normalizeUserLogoDomain
 } from './article-telegram-actions.js';
@@ -84,12 +84,23 @@ function articleKeyboard(articleId) {
     inline_keyboard: [
       [
         { text: '🗑 Удалить', callback_data: `sf:d:${id}` },
-        { text: '✏️ Рерайт', callback_data: `sf:r:${id}` },
-        { text: '🖼 Обложка', callback_data: `sf:i:${id}` }
+        { text: '✏️ Рерайт', callback_data: `sf:r:${id}` }
       ],
-      [{ text: '🔁 Тип: лого ⟷ фото', callback_data: `sf:t:${id}` }]
+      [
+        { text: '🖼 Картинка AI', callback_data: `sf:i:${id}` },
+        { text: '🏢 Лого', callback_data: `sf:l:${id}` }
+      ]
     ]
   };
+}
+
+function formatTelegramLogoDone(out) {
+  const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (fallback FLUX)';
+  let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
+  if (out.domain_used) {
+    tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — FLUX)' : ''}${tail}`;
+  }
+  return `✅ Лого обновлено${tail}`;
 }
 
 function logoDomainCancelKeyboard(articleId) {
@@ -215,20 +226,15 @@ async function handleMessage(token, adminId, msg) {
         .maybeSingle();
       if (error) throw new Error(error.message);
       if (!row) throw new Error('Статья не найдена');
-      const out = await toggleArticleCoverType(supabase, row, {
+      const out = await regenerateArticleCompanyLogo(supabase, row, {
         logoDomain: dom,
         onProgress: (line) => prog.show(line)
       });
-      const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (abstract)';
-      let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
-      if (out.direction === 'to_company' && out.domain_used) {
-        tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — оставлено FLUX)' : ''}${tail}`;
-      }
-      await prog.show(`✅ Тип обложки переключён${tail}`);
+      await prog.show(formatTelegramLogoDone(out));
     } catch (e) {
       console.error('[telegram-admin] Домен для лого: ошибка', e?.message || e);
       try {
-        await prog.show(`❌ Смена типа: ${e.message || e}`);
+        await prog.show(`❌ Лого: ${e.message || e}`);
       } catch {
         await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
       }
@@ -303,7 +309,7 @@ async function handleCallback(token, adminId, cb) {
   }
 
   const data = typeof cb.data === 'string' ? cb.data : '';
-  const m = /^sf:([dritx]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
+  const m = /^sf:([drilx]):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(data);
   if (!m) {
     await answerCb(token, cb.id, 'Неверная кнопка');
     return;
@@ -370,19 +376,20 @@ async function handleCallback(token, adminId, cb) {
       await sendPlain(
         token,
         chatId,
-        'Напиши одним сообщением, какой должна быть обложка — я соберу из этого промпт для генератора.\n/cancel — отмена.'
+        '**Картинка AI (FLUX):** одним сообщением опиши желаемую обложку — это попадёт в промпт (можно кратко: настроение, объекты, сцена).\n\nМожно отправить **.** или **-** без текста — тогда промпт соберётся только из заголовка и текста статьи.\n/cancel — отмена.',
+        { parse_mode: 'Markdown' }
       );
       return;
     }
-    if (act === 't') {
-      console.log('[telegram-admin] Смена типа обложки:', row.slug || articleId, 'cover_type=', row.cover_type);
-      if (row.cover_type !== 'company' && !guessLogoDomainFromRow(row)) {
+    if (act === 'l') {
+      console.log('[telegram-admin] Лого Logo.dev:', row.slug || articleId, 'cover_type=', row.cover_type);
+      if (!guessLogoDomainFromRow(row)) {
         await answerCb(token, cb.id, 'Жду домен');
         chatState.set(String(chatId), { mode: 'logo_domain_wait', articleId });
         await sendPlain(
           token,
           chatId,
-          'Не смог угадать домен для Logo.dev (агрегатор в URL или неочевидный бренд).\n\nПришли **домен одной строкой** — как в Logo.dev, например `anthropic.com` или `https://stripe.com`\n/cancel — отмена.',
+          'Не нашёл домен для Logo.dev (агрегатор в URL или неочевидный бренд).\n\nПришли **домен одной строкой**, например `oppo.com` или `https://stripe.com`\n/cancel — отмена.',
           {
             parse_mode: 'Markdown',
             disable_web_page_preview: true,
@@ -391,23 +398,19 @@ async function handleCallback(token, adminId, cb) {
         );
         return;
       }
-      await answerCb(token, cb.id, 'Меняю обложку…');
+      await answerCb(token, cb.id, 'Лого…');
       const prog = makeProgressMessenger(token, chatId);
       try {
-        const out = await toggleArticleCoverType(supabase, row, {
+        await prog.show('⏳ Лого: готовлю обложку…');
+        const out = await regenerateArticleCompanyLogo(supabase, row, {
           onProgress: (line) => prog.show(line)
         });
         chatState.delete(String(chatId));
-        const typeRu = out.cover_type === 'company' ? 'лого (company)' : 'фото (abstract)';
-        let tail = `\nТип в БД: ${typeRu}\n${out.cover_url}`;
-        if (out.direction === 'to_company' && out.domain_used) {
-          tail = `\nДомен Logo.dev: ${out.domain_used}${out.used_fallback_image ? ' (лого не вышло — оставлено FLUX)' : ''}${tail}`;
-        }
-        await prog.show(`✅ Тип обложки переключён${tail}`);
+        await prog.show(formatTelegramLogoDone(out));
       } catch (e) {
-        console.error('[telegram-admin] Смена типа: ошибка', e?.message || e);
+        console.error('[telegram-admin] Лого: ошибка', e?.message || e);
         try {
-          await prog.show(`❌ Смена типа: ${e.message || e}`);
+          await prog.show(`❌ Лого: ${e.message || e}`);
         } catch {
           await sendPlain(token, chatId, `Ошибка: ${e.message || e}`);
         }
@@ -422,7 +425,7 @@ async function handleCallback(token, adminId, cb) {
       ) {
         chatState.delete(String(chatId));
         await answerCb(token, cb.id, 'Отменено');
-        await sendPlain(token, chatId, 'Ок, смена типа на лого отменена.');
+        await sendPlain(token, chatId, 'Ок, лого отменено.');
         return;
       }
       await answerCb(token, cb.id);

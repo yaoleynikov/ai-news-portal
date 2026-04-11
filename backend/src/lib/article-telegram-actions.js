@@ -451,6 +451,56 @@ function abstractKeywordForToggleFromRow(row) {
 }
 
 /**
+ * Обложка company (Logo.dev) + загрузка в R2. Домен из `logoDomain` или автоугадать из строки.
+ * @param {import('@supabase/supabase-js').SupabaseClient} supabase
+ * @param {Record<string, unknown>} row
+ * @param {{ onProgress?: (line: string) => void | Promise<void>; logoDomain?: string }} [options]
+ */
+export async function regenerateArticleCompanyLogo(supabase, row, options = {}) {
+  const onProgress =
+    typeof options.onProgress === 'function' ? options.onProgress : async () => {};
+
+  const id = String(row.id);
+  const slug = typeof row.slug === 'string' ? row.slug : 'article';
+
+  const rawManual = typeof options.logoDomain === 'string' ? options.logoDomain.trim() : '';
+  const manual = rawManual ? normalizeUserLogoDomain(options.logoDomain) : null;
+  if (rawManual && !manual) {
+    throw new Error('Некорректный домен для Logo.dev. Пример: company.com или https://company.com');
+  }
+  const domain = manual ?? guessLogoDomainFromRow(row);
+  if (!domain) {
+    throw new Error(
+      'Не смог определить домен для Logo.dev (агрегатор или неизвестный бренд). Укажи домен вручную в Telegram или смени источник.'
+    );
+  }
+  await onProgress(`⏳ Logo.dev: ${domain}…`);
+  const cover = await generateCoverWithFallback('company', domain);
+  const coverTypePublished = cover.cover_fallback ? 'abstract' : 'company';
+  await onProgress('⏳ Загрузка в R2…');
+  const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);
+  const filename = `covers/${Date.now()}-tg-logo-${safe}.${cover.extension}`;
+  const coverUrl = await uploadToR2(cover.buffer, filename, cover.contentType);
+  await onProgress('⏳ Обновляю базу…');
+  const { error } = await supabase
+    .from('articles')
+    .update({ cover_url: coverUrl, cover_type: coverTypePublished })
+    .eq('id', id);
+  if (error) throw new Error(error.message);
+  if (slug) {
+    const articleUrl = `${stripHostOrigin(config.publicSiteUrl)}/news/${slug}`;
+    notifyGoogleUrlUpdated(articleUrl).catch(() => {});
+  }
+  return {
+    cover_url: coverUrl,
+    cover_type: coverTypePublished,
+    direction: 'to_company',
+    domain_used: domain,
+    used_fallback_image: Boolean(cover.cover_fallback)
+  };
+}
+
+/**
  * Flip cover_type + regenerate: company (Logo.dev) ↔ abstract (FLUX from article text).
  * @param {import('@supabase/supabase-js').SupabaseClient} supabase
  * @param {Record<string, unknown>} row
@@ -488,41 +538,7 @@ export async function toggleArticleCoverType(supabase, row, options = {}) {
   }
 
   await onProgress('⏳ Было фото → ищу бренд для лого…');
-  const rawManual = typeof options.logoDomain === 'string' ? options.logoDomain.trim() : '';
-  const manual = rawManual ? normalizeUserLogoDomain(options.logoDomain) : null;
-  if (rawManual && !manual) {
-    throw new Error('Некорректный домен для Logo.dev. Пример: company.com или https://company.com');
-  }
-  const domain = manual ?? guessLogoDomainFromRow(row);
-  if (!domain) {
-    throw new Error(
-      'Не смог определить домен для Logo.dev (агрегатор или неизвестный бренд). В Telegram можно ввести домен вручную или отменить; иначе ✏️ Рерайт / 🖼 Обложка.'
-    );
-  }
-  await onProgress(`⏳ Logo.dev: ${domain}…`);
-  const cover = await generateCoverWithFallback('company', domain);
-  const coverTypePublished = cover.cover_fallback ? 'abstract' : 'company';
-  await onProgress('⏳ Загрузка в R2…');
-  const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);
-  const filename = `covers/${Date.now()}-tg-flip-${safe}.${cover.extension}`;
-  const coverUrl = await uploadToR2(cover.buffer, filename, cover.contentType);
-  await onProgress('⏳ Обновляю базу…');
-  const { error } = await supabase
-    .from('articles')
-    .update({ cover_url: coverUrl, cover_type: coverTypePublished })
-    .eq('id', id);
-  if (error) throw new Error(error.message);
-  if (slug) {
-    const articleUrl = `${stripHostOrigin(config.publicSiteUrl)}/news/${slug}`;
-    notifyGoogleUrlUpdated(articleUrl).catch(() => {});
-  }
-  return {
-    cover_url: coverUrl,
-    cover_type: coverTypePublished,
-    direction: 'to_company',
-    domain_used: domain,
-    used_fallback_image: Boolean(cover.cover_fallback)
-  };
+  return regenerateArticleCompanyLogo(supabase, row, options);
 }
 
 /**
