@@ -312,7 +312,11 @@ export async function regenerateArticleCoverFromNote(supabase, row, editorNote, 
   console.log('[article-telegram-actions] Промпт обложки:', prompt.slice(0, 160));
 
   console.log('[article-telegram-actions] Генерация изображения (generateCover abstract)…');
-  const cover = await generateCoverWithFallback('abstract', prompt);
+  const cover = await generateCoverWithFallback('abstract', prompt, {
+    skipCoverSceneExpand: true,
+    title: String(row.title || ''),
+    content_md: String(row.content_md || '')
+  });
   await onProgress('⏳ Изображение готово, загрузка в R2…');
   const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);
   const filename = `covers/${Date.now()}-tg-${safe}.${cover.extension}`;
@@ -422,7 +426,13 @@ export async function toggleArticleCoverType(supabase, row, options = {}) {
   if (currentIsCompany) {
     await onProgress('⏳ Было лого → генерирую фото по тексту статьи (Klein / резерв)…');
     const keyword = abstractKeywordForToggleFromRow(row);
-    const cover = await generateCoverWithFallback('abstract', keyword);
+    const cover = await generateCoverWithFallback('abstract', keyword, {
+      title: String(row.title || ''),
+      dek: String(row.dek || ''),
+      primary_rubric: String(row.primary_rubric || ''),
+      tags: Array.isArray(row.tags) ? row.tags : [],
+      content_md: String(row.content_md || '')
+    });
     const coverTypePublished = 'abstract';
     await onProgress('⏳ Загрузка в R2…');
     const safe = slug.replace(/[^a-z0-9-_]/gi, '_').slice(0, 48);

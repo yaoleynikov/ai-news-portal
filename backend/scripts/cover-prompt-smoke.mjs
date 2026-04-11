@@ -5,6 +5,7 @@
 import { normalizeRewritten } from '../src/brain/rewriter.js';
 import {
   buildAbstractImagePrompt,
+  buildAbstractImagePromptForKlein,
   buildAbstractFallbackKeywordFromArticle,
   FALLBACK_ABSTRACT_COVER_KEYWORD
 } from '../src/media/generator.js';
@@ -17,11 +18,13 @@ function section(title) {
 
 function showCase(name, keyword) {
   const brief = buildAbstractImagePrompt(keyword).hfInputs;
+  const klein = buildAbstractImagePromptForKlein(keyword);
   console.log(`\n--- ${name} ---`);
   console.log('cover_keyword / seed length:', String(keyword).length);
   console.log('keyword (first 320 chars):\n', String(keyword).slice(0, 320) + (String(keyword).length > 320 ? '…' : ''));
   console.log('\nmodel_brief length:', brief.length);
   console.log('model_brief (first 900 chars):\n', brief.slice(0, 900) + (brief.length > 900 ? '…' : ''));
+  console.log('\nCloudflare Klein prompt (first 900 chars):\n', klein.slice(0, 900) + (klein.length > 900 ? '…' : ''));
 }
 
 const baseArticle = {

@@ -45,7 +45,7 @@ export async function buildFluxPromptFromEditorNote({ title, contentPreview, edi
   const model =
     process.env.OPENROUTER_PROMPT_MODEL?.trim() || config.ai.openRouterModel || 'openrouter/auto';
 
-  const user = `Write ONE English image prompt (max 40 words) for FLUX: photorealistic editorial/news photo, natural light, real-world present day. The scene must match the article title and snippet (industry, place, hardware) — not a random generic laptop-on-desk or coffee-cup stock shot unless the note is about desk work. No readable text, logos, or UI. No sci-fi or neon unless the editor note explicitly asks.
+  const user = `Write ONE English image prompt (max 40 words) for FLUX: photorealistic editorial/news photo, natural light, real-world present day — a real scene a photographer could shoot, not a chart, graph, infographic, or presentation/slide look. The scene must match the article title and snippet (industry, place, hardware) — not a random generic laptop-on-desk or coffee-cup stock shot unless the note is about desk work. No words, letters, logos, or readable UI if possible (screens off or soft glow only). No sci-fi or neon unless the editor note explicitly asks.
 
 Article title: ${title || 'unknown'}
 Article body snippet: ${flatPreview || '(none)'}

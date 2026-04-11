@@ -1,26 +1,8 @@
 /**
  * Apex hostnames for Logo.dev — shared by rewriter repair, Telegram admin, article actions.
- * Blocks obvious news-aggregators so we never fetch their logos as “the story”.
+ * Validates only shape (normalize URL / strip `www.` / sane hostname); no substring blocklists
+ * that could reject real brands (e.g. `cnet.com` matched `includes('cnet')`).
  */
-export const AGGREGATOR_HOST_SUBSTRINGS = [
-  'theverge',
-  'techcrunch',
-  'arstechnica',
-  'wired.com',
-  'engadget',
-  '9to5google',
-  '9to5mac',
-  'macrumors',
-  'bbc.',
-  'reuters',
-  'apnews',
-  'theguardian',
-  'nytimes',
-  'bloomberg',
-  'cnbc',
-  'zdnet',
-  'cnet'
-];
 
 /**
  * Admin / DB input → hostname for Logo.dev (`openai.com`). URL and `www.` supported.
@@ -45,7 +27,6 @@ export function normalizeUserLogoDomain(raw) {
   s = s.replace(/^www\./i, '').toLowerCase();
   if (!s || s.includes('..')) return null;
   if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(s)) return null;
-  if (AGGREGATOR_HOST_SUBSTRINGS.some((x) => s.includes(x))) return null;
   return s;
 }
 

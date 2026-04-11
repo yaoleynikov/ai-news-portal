@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { config } from '../config.js';
+import { resolveAbstractCoverSceneKeyword } from '../lib/cover-scene-expand.js';
 
 /** Native fetch (Node 18+) handles multipart FormData reliably; node-fetch can mis-bind boundaries on some Linux setups. */
 const httpFetch = typeof globalThis.fetch === 'function' ? globalThis.fetch.bind(globalThis) : fetch;
@@ -139,19 +140,35 @@ export function buildAbstractFallbackKeywordFromArticle(title, content_md) {
 export function buildAbstractImagePrompt(keyword) {
   const positive = [
     'Editorial news photography, photorealistic, natural daylight or soft indoor light,',
-    'contemporary real world 2020s setting.',
+    'contemporary real world 2020s setting — a real photo of a real scene, not a chart, graph, infographic, or presentation slide.',
     'Depict the concrete subject in the brief — do not replace it with an unrelated generic stock scene',
     '(laptop on desk, coffee mug, hands typing, bland open-plan office) unless the brief explicitly describes that.',
-    `Brief — no brand logos or readable text: ${keyword}.`,
+    `Brief — avoid words and logos: ${keyword}.`,
     'Do not add unrelated sci-fi or fantasy elements unless the brief explicitly requires them.'
   ].join(' ');
   const negative = [
     'science fiction, futuristic armor, cyborgs, robots, holograms, neon cyberpunk,',
     'space stations, glowing wireframe heads, fantasy weapons, abstract particles,',
-    'text, typography, words, letters, UI screenshots, app mockups, watermarks, blurry, low quality, deformed hands,',
+    'chart, graph, plot, data visualization, infographic, dashboard, slide deck, presentation, keynote, powerpoint style,',
+    'text, typography, words, letters, captions, subtitles, signage, UI screenshots, app mockups, watermarks, blurry, low quality, deformed hands,',
     'generic unrelated laptop close-up, random coffee cup stock photo, meaningless coworking blur'
   ].join(' ');
   return { positive, negative, hfInputs: `${positive} ${negative}` };
+}
+
+/**
+ * Klein (Cloudflare): scene first so the model anchors on subject; explicit bans inline (no separate negative API field in docs).
+ * @param {string} keyword
+ */
+export function buildAbstractImagePromptForKlein(keyword) {
+  const scene = String(keyword ?? '').replace(/\s+/g, ' ').trim();
+  return [
+    `Scene (required): ${scene}.`,
+    'Photorealistic editorial news photograph, natural or believable indoor light, contemporary real world — not a chart, graph, infographic, or presentation slide.',
+    'No words or letters: no signage, labels, captions, logos, or readable UI (screens off, blurred glow only, or out of frame).',
+    'No holograms, robots, neon cyberpunk, sci-fi armor, space stations, or fantasy unless the scene line explicitly requires it.',
+    'Do not substitute an unrelated generic laptop close-up, coffee cup, or empty coworking blur.'
+  ].join(' ');
 }
 
 /**
@@ -182,7 +199,7 @@ async function generateAbstractCoverCloudflareKlein(keyword) {
     throw new Error('Cloudflare Workers AI: set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN');
   }
 
-  const promptFull = buildAbstractImagePrompt(keyword).hfInputs;
+  const promptFull = buildAbstractImagePromptForKlein(keyword);
   const prompt =
     promptFull.length > CF_IMAGE_PROMPT_MAX_CHARS
       ? `${promptFull.slice(0, CF_IMAGE_PROMPT_MAX_CHARS - 1)}…`
@@ -414,13 +431,15 @@ let warnedCloudflareAbstractMissing = false;
 
 async function generateAbstractCover(keyword) {
   const kw = String(keyword ?? '').replace(/\s+/g, ' ').trim();
-  const brief = buildAbstractImagePrompt(keyword).hfInputs;
+  const briefKlein = buildAbstractImagePromptForKlein(keyword);
+  const briefLegacy = buildAbstractImagePrompt(keyword).hfInputs;
   const kwMax = 500;
   const briefMax = 1400;
   console.log(
-    `[MEDIA] abstract cover — image prompt (cover_keyword ${kw.length} chars, full brief ${brief.length} chars):\n` +
-      `  cover_keyword: ${kw.slice(0, kwMax)}${kw.length > kwMax ? '…' : ''}\n` +
-      `  model_brief: ${brief.slice(0, briefMax)}${brief.length > briefMax ? '…' : ''}`
+    `[MEDIA] abstract cover — image prompt (scene ${kw.length} chars):\n` +
+      `  scene: ${kw.slice(0, kwMax)}${kw.length > kwMax ? '…' : ''}\n` +
+      `  klein_prompt: ${briefKlein.slice(0, briefMax)}${briefKlein.length > briefMax ? '…' : ''}\n` +
+      `  horde_hf_brief: ${briefLegacy.slice(0, Math.min(600, briefLegacy.length))}${briefLegacy.length > 600 ? '…' : ''}`
   );
 
   const cfOk = Boolean(config.ai.cloudflareAccountId?.trim() && config.ai.cloudflareApiToken?.trim());
@@ -468,16 +487,43 @@ export async function generateCover(type, keyword) {
 
 /** Last-resort brief when article text is too short to derive a scene (no hard tie to any one story). */
 export const FALLBACK_ABSTRACT_COVER_KEYWORD =
-  'documentary-style technology news photograph, real industrial or engineering setting with visible equipment or infrastructure, natural light, editorial mood, no logos or readable text';
+  'documentary-style technology news photograph, real industrial or engineering setting with visible equipment or infrastructure, natural light, editorial mood, no charts or presentation graphics, no words or logos';
 
 /**
  * Company/logo covers often fail (401, missing domain). Fall back to abstract image like the dev pipeline.
- * @param {{ title?: string, content_md?: string }} [articleContext] If company cover fails, used to build the abstract brief from the story instead of the generic last resort.
+ * @param {{
+ *   title?: string,
+ *   dek?: string,
+ *   primary_rubric?: string,
+ *   tags?: string[],
+ *   content_md?: string,
+ *   skipCoverSceneExpand?: boolean
+ * }} [articleContext] Used for abstract scene expansion + company→abstract fallback text.
  * @returns {Promise<{ buffer: Buffer, contentType: string, extension: string, cover_fallback?: boolean, abstract_keyword_used?: string }>}
  */
-export async function generateCoverWithFallback(coverType, coverKeyword, articleContext) {
+export async function generateCoverWithFallback(coverType, coverKeyword, articleContext = {}) {
   try {
-    return await generateCover(coverType, coverKeyword);
+    let kw = coverKeyword;
+    if (coverType === 'abstract') {
+      kw = await resolveAbstractCoverSceneKeyword({
+        title: articleContext.title,
+        dek: articleContext.dek,
+        primary_rubric: articleContext.primary_rubric,
+        tags: articleContext.tags,
+        cover_keyword: String(coverKeyword ?? ''),
+        content_md: articleContext.content_md,
+        skipCoverSceneExpand: articleContext.skipCoverSceneExpand === true
+      });
+      const orig = String(coverKeyword ?? '').replace(/\s+/g, ' ').trim();
+      if (kw !== orig) {
+        console.log(
+          '[MEDIA] abstract cover: scene keyword expanded for image (%s → %s chars)',
+          orig.length,
+          String(kw).length
+        );
+      }
+    }
+    return await generateCover(coverType, kw);
   } catch (err) {
     if (coverType === 'company') {
       console.warn(
@@ -488,10 +534,19 @@ export async function generateCoverWithFallback(coverType, coverKeyword, article
         articleContext?.title,
         articleContext?.content_md
       );
-      const abstractKw = fromArticle ?? FALLBACK_ABSTRACT_COVER_KEYWORD;
+      const rawAbstract = fromArticle ?? FALLBACK_ABSTRACT_COVER_KEYWORD;
       if (fromArticle) {
         console.log('[MEDIA] abstract fallback prompt derived from article title/body (chars=%s)', fromArticle.length);
       }
+      const abstractKw = await resolveAbstractCoverSceneKeyword({
+        title: articleContext?.title,
+        dek: articleContext?.dek,
+        primary_rubric: articleContext?.primary_rubric,
+        tags: articleContext?.tags,
+        cover_keyword: rawAbstract,
+        content_md: articleContext?.content_md,
+        skipCoverSceneExpand: articleContext?.skipCoverSceneExpand === true
+      });
       const out = await generateCover('abstract', abstractKw);
       return { ...out, cover_fallback: true, abstract_keyword_used: abstractKw };
     }

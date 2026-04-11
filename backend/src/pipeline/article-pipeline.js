@@ -123,6 +123,9 @@ export async function runArticlePipeline(url, opts = {}) {
 
     const cover = await generateCoverWithFallback(rewritten.cover_type, rewritten.cover_keyword, {
       title: rewritten.title,
+      dek: rewritten.dek,
+      primary_rubric: rewritten.primary_rubric,
+      tags: rewritten.tags,
       content_md: rewritten.content_md
     });
     const coverTypePublished = cover.cover_fallback ? 'abstract' : rewritten.cover_type;
