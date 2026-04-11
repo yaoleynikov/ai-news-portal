@@ -25,6 +25,27 @@ const COMPANY_LOGO_FRAC_OF_MIN_SIDE = 0.8;
  */
 const LOGODEV_FETCH_SIZE = 800;
 
+/**
+ * RGBA из `.raw()` — явно не premultiplied (иначе sharp может исказить при кодировании).
+ * @param {number} W
+ * @param {number} H
+ */
+function sharpRawRgbaInput(W, H) {
+  return {
+    raw: {
+      width: W,
+      height: H,
+      channels: 4,
+      premultiplied: false
+    }
+  };
+}
+
+/** Промежуточный лого после правок пикселей: lossy WebP даёт сдвиг YUV на тёмно-серых → шов к заливке холста. */
+const COMPANY_LOGO_PIPELINE_WEBP = { lossless: true };
+/** Один проход сжатия на финале; без агрессивного chroma subsample для ровных кромок. */
+const COMPANY_COVER_OUTPUT_WEBP = { quality: 94, smartSubsample: false, effort: 4 };
+
 function normalizeLogoDomainKeyword(keyword) {
   const s = String(keyword ?? '').trim();
   if (!s) return '';
@@ -219,16 +240,17 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
   let H;
   let raw;
   try {
-    const img = sharp(buf).ensureAlpha();
-    const meta = await img.metadata();
-    if (!meta.width || !meta.height) return null;
-    W = meta.width;
-    H = meta.height;
     let out;
     try {
       out = await sharp(buf).ensureAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
     } catch {
       out = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    }
+    W = out.info.width;
+    H = out.info.height;
+    if (!W || !H || out.data.length !== W * H * 4) {
+      console.warn('[MEDIA] company cover: logo raw/buffer dimension mismatch');
+      return null;
     }
     raw = Buffer.from(out.data);
   } catch (e) {
@@ -347,8 +369,8 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
     }
     const rgb = meanAccToRgb(anyAcc, 1);
     if (!rgb) return null;
-    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
-      .webp()
+    const processedBuffer = await sharp(raw, sharpRawRgbaInput(W, H))
+      .webp(COMPANY_LOGO_PIPELINE_WEBP)
       .toBuffer();
     return { canvasBg: rgb, source: 'solid-bbox-fallback-mode', processedBuffer };
   }
@@ -393,8 +415,8 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
         }
       }
     }
-    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
-      .webp()
+    const processedBuffer = await sharp(raw, sharpRawRgbaInput(W, H))
+      .webp(COMPANY_LOGO_PIPELINE_WEBP)
       .toBuffer();
     return {
       canvasBg: { r: innerRgb.r, g: innerRgb.g, b: innerRgb.b },
@@ -404,8 +426,8 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
   }
 
   if (outerRgb) {
-    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
-      .webp()
+    const processedBuffer = await sharp(raw, sharpRawRgbaInput(W, H))
+      .webp(COMPANY_LOGO_PIPELINE_WEBP)
       .toBuffer();
     return {
       canvasBg: { r: outerRgb.r, g: outerRgb.g, b: outerRgb.b },
@@ -422,8 +444,8 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
   }
   const rgb = meanAccToRgb(anyAcc, 1);
   if (!rgb) return null;
-  const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
-    .webp()
+  const processedBuffer = await sharp(raw, sharpRawRgbaInput(W, H))
+    .webp(COMPANY_LOGO_PIPELINE_WEBP)
     .toBuffer();
   return { canvasBg: rgb, source: 'solid-bbox-fallback-mode', processedBuffer };
 }
@@ -464,6 +486,7 @@ async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
       fit: 'contain',
       background: { r: 255, g: 255, b: 255, alpha: 0 }
     })
+    .webp(COMPANY_LOGO_PIPELINE_WEBP)
     .toBuffer();
 
   const coverBuffer = await sharp({
@@ -475,7 +498,7 @@ async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
     }
   })
     .composite([{ input: processedLogo, gravity: 'center' }])
-    .webp({ quality: 85 })
+    .webp(COMPANY_COVER_OUTPUT_WEBP)
     .toBuffer();
 
   return { buffer: coverBuffer, contentType: 'image/webp', extension: 'webp' };
