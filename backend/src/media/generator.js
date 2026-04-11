@@ -21,40 +21,9 @@ const COMPANY_LOGO_FRAC_OF_MIN_SIDE = 0.8;
 
 /**
  * Logo.dev raster size cap (~800); request high enough for downscale without blur.
- * Prefer PNG first: docs list transparency for PNG; WebP from CDN is often still opaque for some brands.
  * @see https://docs.logo.dev/logo-images/get
  */
 const LOGODEV_FETCH_SIZE = 800;
-
-/**
- * @param {string} domain
- * @param {string} token publishable pk_
- * @returns {Promise<ArrayBuffer>}
- */
-async function fetchLogoDevRasterForCover(domain, token) {
-  const base = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${encodeURIComponent(token)}&size=${LOGODEV_FETCH_SIZE}`;
-  const order = [
-    { format: 'png', label: 'png' },
-    { format: 'webp', label: 'webp' }
-  ];
-  let lastErr;
-  for (const { format, label } of order) {
-    try {
-      const response = await fetch(`${base}&format=${format}`);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      const buf = await response.arrayBuffer();
-      if (!buf.byteLength) throw new Error('empty body');
-      console.log(`[MEDIA] company cover: Logo.dev ok for ${domain} (${label})`);
-      return buf;
-    } catch (e) {
-      lastErr = e;
-      console.warn(`[MEDIA] company cover: img.logo.dev/${domain} format=${label} — ${e.message}`);
-    }
-  }
-  throw lastErr ?? new Error('Logo.dev fetch failed');
-}
 
 function normalizeLogoDomainKeyword(keyword) {
   const s = String(keyword ?? '').trim();
@@ -95,14 +64,20 @@ function logoDevDomainsTryList(primary) {
   return out;
 }
 
-/** Logo raster → dominant RGB for cover canvas (fallback: white). */
+/** Logo raster → RGB for cover canvas. */
 const LOGO_EDGE_SAMPLE_MAX_SIDE = 320;
 const LOGO_EDGE_ALPHA_MIN = 120;
+const LOGO_ALPHA_TRANSPARENT = 128;
+/** Доля «пустых» пикселей: если выше — считаем, что вокруг марки прозрачность. */
+const LOGO_TRANSPARENT_RATIO = 0.055;
 const LOGO_EDGE_HIST_QUANT = 10;
-const LOGO_INTERIOR_MIN_SAMPLES = 36;
-const LOGO_CORRIDOR_MIN_SAMPLES = 28;
-const LOGO_EDGE_MIN_SAMPLES_OUTER = 28;
-const LOGO_EDGE_MIN_SAMPLES_FALLBACK = 8;
+/** Два ряда от границы непрозрачного bbox: Chebyshev-расстояние 0 и 1. */
+const LOGO_SOLID_RING_DEPTH = 2;
+const LOGO_RING_MIN_SAMPLES = 8;
+
+function logoLuminance(r, g, b) {
+  return 0.299 * r + 0.587 * g + 0.114 * b;
+}
 
 /**
  * @param {import('sharp')} sharp
@@ -133,6 +108,16 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
     return null;
   }
 
+  const totalPx = W * H;
+  let transparentCount = 0;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      if (data[i + 3] < LOGO_ALPHA_TRANSPARENT) transparentCount++;
+    }
+  }
+  const transparentRatio = transparentCount / totalPx;
+
   const q = (c) => Math.round(Math.min(255, Math.max(0, c)) / LOGO_EDGE_HIST_QUANT) * LOGO_EDGE_HIST_QUANT;
   const pixKey = (r, g, b) => ((q(r) & 255) << 16) | ((q(g) & 255) << 8) | (q(b) & 255);
 
@@ -154,7 +139,7 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
     return { r, g, b };
   }
 
-  function addToCounts(counts, x, y) {
+  function addOpaquePixel(counts, x, y) {
     if (x < 0 || y < 0 || x >= W || y >= H) return;
     const i = (y * W + x) * 4;
     if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
@@ -162,6 +147,27 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
     counts.set(k, (counts.get(k) ?? 0) + 1);
   }
 
+  // Прозрачность вокруг: контрастный фон, иначе светлое лого теряется на светлом холсте.
+  if (transparentRatio >= LOGO_TRANSPARENT_RATIO) {
+    let sumL = 0;
+    let n = 0;
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const i = (y * W + x) * 4;
+        if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+        sumL += logoLuminance(data[i], data[i + 1], data[i + 2]);
+        n++;
+      }
+    }
+    if (n < 8) return { r: 255, g: 255, b: 255, source: 'transparent-fallback-white' };
+    const avgL = sumL / n;
+    if (avgL >= 168) {
+      return { r: 0, g: 0, b: 0, source: 'transparent-light-glyph' };
+    }
+    return { r: 255, g: 255, b: 255, source: 'transparent-dark-glyph' };
+  }
+
+  // Без прозрачности: два ряда пикселей по периметру непрозрачного прямоугольника → самый частый цвет.
   let minX = W;
   let minY = H;
   let maxX = -1;
@@ -178,73 +184,45 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
   }
   if (maxX < minX) return null;
 
-  const bw = maxX - minX + 1;
-  const bh = maxY - minY + 1;
-
-  // 1) Interior of opaque bbox — real “plate” fill (avoids dark anti-alias on the outer rim).
-  const inset = Math.max(2, Math.floor(Math.min(bw, bh) * 0.11));
-  const ix0 = minX + inset;
-  const iy0 = minY + inset;
-  const ix1 = maxX - inset;
-  const iy1 = maxY - inset;
-  if (ix0 <= ix1 && iy0 <= iy1) {
-    const interior = new Map();
-    for (let y = iy0; y <= iy1; y++) {
-      for (let x = ix0; x <= ix1; x++) {
-        addToCounts(interior, x, y);
-      }
-    }
-    if (sumCounts(interior) >= LOGO_INTERIOR_MIN_SAMPLES) {
-      const rgb = dominantFromCounts(interior);
-      if (rgb) return { ...rgb, source: 'interior' };
-    }
-  }
-
-  // 2) Corridor inside bbox: skip a few px from the edge (fringe), stay inside solid fill.
-  const dLo = Math.max(2, Math.floor(Math.min(bw, bh) * 0.055));
-  const dHi = Math.max(dLo + 3, Math.floor(Math.min(bw, bh) * 0.3));
-  const corridor = new Map();
+  const ring = new Map();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d > dLo && d <= dHi) addToCounts(corridor, x, y);
-    }
-  }
-  if (sumCounts(corridor) >= LOGO_CORRIDOR_MIN_SAMPLES) {
-    const rgb = dominantFromCounts(corridor);
-    if (rgb) return { ...rgb, source: 'corridor' };
-  }
-
-  // 3) Outer border of full bitmap (opaque logos flush to canvas edge).
-  const counts = new Map();
-  const border = Math.max(3, Math.floor(Math.min(W, H) * 0.07));
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      if (x < border || x >= W - border || y < border || y >= H - border) {
-        addToCounts(counts, x, y);
+      if (d < LOGO_SOLID_RING_DEPTH) {
+        addOpaquePixel(ring, x, y);
       }
     }
   }
-  let total = sumCounts(counts);
 
-  // 4) Last resort: thin outer ring of bbox (old behavior).
-  if (total < LOGO_EDGE_MIN_SAMPLES_OUTER) {
-    counts.clear();
-    const frame = Math.max(2, Math.min(20, Math.floor(Math.min(bw, bh) * 0.14)));
-    for (let y = minY; y <= maxY; y++) {
-      for (let x = minX; x <= maxX; x++) {
-        const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-        if (d <= frame) addToCounts(counts, x, y);
-      }
-    }
-    total = sumCounts(counts);
+  if (sumCounts(ring) >= LOGO_RING_MIN_SAMPLES) {
+    const rgb = dominantFromCounts(ring);
+    if (rgb) return { ...rgb, source: 'solid-2row-ring-mode' };
   }
 
-  if (total < LOGO_EDGE_MIN_SAMPLES_FALLBACK) return null;
+  // Маленький bbox: расширяем кольцо до 3 px
+  const ringWide = new Map();
+  for (let y = minY; y <= maxY; y++) {
+    for (let x = minX; x <= maxX; x++) {
+      const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
+      if (d < 3) addOpaquePixel(ringWide, x, y);
+    }
+  }
+  if (sumCounts(ringWide) >= LOGO_RING_MIN_SAMPLES) {
+    const rgb = dominantFromCounts(ringWide);
+    if (rgb) return { ...rgb, source: 'solid-3px-ring-mode' };
+  }
 
-  const rgb = dominantFromCounts(counts);
+  // Совсем крошечный марк: любой непрозрачный пиксель
+  const any = new Map();
+  for (let y = minY; y <= maxY; y++) {
+    for (let x = minX; x <= maxX; x++) {
+      addOpaquePixel(any, x, y);
+    }
+  }
+  if (sumCounts(any) < 1) return null;
+  const rgb = dominantFromCounts(any);
   if (!rgb) return null;
-  return { ...rgb, source: 'border-or-frame' };
+  return { ...rgb, source: 'solid-bbox-fallback-mode' };
 }
 
 /**
@@ -318,8 +296,14 @@ async function generateCompanyCover(domainInput) {
   const candidates = logoDevDomainsTryList(primary);
   let lastErr;
   for (const domain of candidates) {
+    const logoUrl = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${config.media.logoDevKey}&size=${LOGODEV_FETCH_SIZE}&format=webp`;
     try {
-      const buf = await fetchLogoDevRasterForCover(domain, config.media.logoDevKey);
+      const response = await fetch(logoUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const buf = await response.arrayBuffer();
+      console.log(`[MEDIA] company cover: Logo.dev ok for ${domain}`);
       return await composeCompanyCoverFromLogoBuffer(buf);
     } catch (e) {
       lastErr = e;
