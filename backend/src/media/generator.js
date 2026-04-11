@@ -21,9 +21,40 @@ const COMPANY_LOGO_FRAC_OF_MIN_SIDE = 0.8;
 
 /**
  * Logo.dev raster size cap (~800); request high enough for downscale without blur.
+ * Prefer PNG first: docs list transparency for PNG; WebP from CDN is often still opaque for some brands.
  * @see https://docs.logo.dev/logo-images/get
  */
 const LOGODEV_FETCH_SIZE = 800;
+
+/**
+ * @param {string} domain
+ * @param {string} token publishable pk_
+ * @returns {Promise<ArrayBuffer>}
+ */
+async function fetchLogoDevRasterForCover(domain, token) {
+  const base = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${encodeURIComponent(token)}&size=${LOGODEV_FETCH_SIZE}`;
+  const order = [
+    { format: 'png', label: 'png' },
+    { format: 'webp', label: 'webp' }
+  ];
+  let lastErr;
+  for (const { format, label } of order) {
+    try {
+      const response = await fetch(`${base}&format=${format}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const buf = await response.arrayBuffer();
+      if (!buf.byteLength) throw new Error('empty body');
+      console.log(`[MEDIA] company cover: Logo.dev ok for ${domain} (${label})`);
+      return buf;
+    } catch (e) {
+      lastErr = e;
+      console.warn(`[MEDIA] company cover: img.logo.dev/${domain} format=${label} — ${e.message}`);
+    }
+  }
+  throw lastErr ?? new Error('Logo.dev fetch failed');
+}
 
 function normalizeLogoDomainKeyword(keyword) {
   const s = String(keyword ?? '').trim();
@@ -287,14 +318,8 @@ async function generateCompanyCover(domainInput) {
   const candidates = logoDevDomainsTryList(primary);
   let lastErr;
   for (const domain of candidates) {
-    const logoUrl = `https://img.logo.dev/${encodeURIComponent(domain)}?token=${config.media.logoDevKey}&size=${LOGODEV_FETCH_SIZE}&format=webp`;
     try {
-      const response = await fetch(logoUrl);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      const buf = await response.arrayBuffer();
-      console.log(`[MEDIA] company cover: Logo.dev ok for ${domain}`);
+      const buf = await fetchLogoDevRasterForCover(domain, config.media.logoDevKey);
       return await composeCompanyCoverFromLogoBuffer(buf);
     } catch (e) {
       lastErr = e;
