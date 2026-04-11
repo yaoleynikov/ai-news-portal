@@ -969,6 +969,8 @@ a:hover {
 }
 
 .tag-page__card-title a {
+  display: inline-block;
+  max-width: 100%;
   color: inherit;
   text-decoration: none;
 }
@@ -1137,6 +1139,8 @@ a:hover {
 }
 
 .search-page__li a {
+  display: inline-block;
+  max-width: 100%;
   color: var(--text-main);
   text-decoration: none;
   font-weight: 600;
@@ -1448,6 +1452,8 @@ a.article-kicker[data-tag-theme='energy'] {
 }
 
 .article-pagination__title {
+  display: inline-block;
+  width: 100%;
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.3;
@@ -1545,7 +1551,7 @@ a.article-kicker[data-tag-theme='energy'] {
   max-width: 42rem;
 }
 
-/* Article headlines: first character uppercase (sentence-case copy from the feed). */
+/* First letter uppercase. ::first-letter needs a block-level box — title links use inline-block above. */
 .article-title::first-letter,
 .home-featured__title-link::first-letter,
 .home-river__title-link::first-letter,
@@ -2100,6 +2106,8 @@ a.tag-chip.tag-chip--hero[data-tag-theme='energy'] {
 }
 
 .home-featured__title-link {
+  display: inline-block;
+  max-width: 100%;
   color: inherit;
   text-decoration: none;
   transition: opacity 0.15s ease;
@@ -2236,6 +2244,8 @@ a.tag-chip.tag-chip--hero[data-tag-theme='energy'] {
 }
 
 .home-river__title-link {
+  display: inline-block;
+  max-width: 100%;
   color: inherit;
   text-decoration: none;
   transition: opacity 0.15s ease;
