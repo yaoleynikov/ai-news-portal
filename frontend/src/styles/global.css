@@ -1455,10 +1455,6 @@ a.article-kicker[data-tag-theme='energy'] {
   color: var(--text-main);
 }
 
-.article-pagination__title::first-letter {
-  text-transform: uppercase;
-}
-
 .article-pagination__spacer {
   background: var(--bg-surface);
 }
@@ -1547,6 +1543,17 @@ a.article-kicker[data-tag-theme='energy'] {
   line-height: 1.12;
   margin: 0 0 0.85rem;
   max-width: 42rem;
+}
+
+/* Article headlines: first character uppercase (sentence-case copy from the feed). */
+.article-title::first-letter,
+.home-featured__title-link::first-letter,
+.home-river__title-link::first-letter,
+.tag-page__card-title a::first-letter,
+.related-card__title::first-letter,
+.article-pagination__title::first-letter,
+.search-page__li > a:first-of-type::first-letter {
+  text-transform: uppercase;
 }
 
 .article-layout {
