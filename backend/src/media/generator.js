@@ -68,15 +68,17 @@ function logoDevDomainsTryList(primary) {
 const LOGO_EDGE_ALPHA_MIN = 120;
 const LOGO_ALPHA_TRANSPARENT = 128;
 const LOGO_TRANSPARENT_RATIO = 0.055;
-const LOGO_EDGE_HIST_QUANT = 10;
 /** Два ряда от bbox — цвет внешней кромки файла. */
 const LOGO_SOLID_RING_DEPTH = 2;
 const LOGO_RING_MIN_SAMPLES = 8;
-/** Внутрь от края bbox: зона «плашки» без внешней рамки (и без белого текста). */
+/** Внутрь от края bbox: запасная зона для цвета «внутри» (на широких баннерах часто всё ещё рамка). */
 const LOGO_PLATE_INSET_FRAC = 0.065;
 const LOGO_PLATE_MIN_SAMPLES = 48;
-/** Если расстояние в RGB между кромкой и плашкой больше — двухслойная карточка (как Oppo). */
-const LOGO_TWO_TONE_MIN_RGB_DIST = 26;
+/** Центр bbox: квадрат со стороной frac×min(bw,bh) — цвет плашки под маркой без полей рамки. */
+const LOGO_CORE_FRAC_OF_MIN = 0.34;
+const LOGO_CORE_MIN_SAMPLES = 18;
+/** Кромка vs центр: заметный зазор (Oppo: тёплый серый у лого и ~40 на рамке дают < 26 в Euclidean). */
+const LOGO_TWO_TONE_MIN_RGB_DIST = 12;
 /** Полоса у края bbox, куда подменяем цвет кромки на цвет плашки. */
 const LOGO_FLATTEN_BAND_FRAC = 0.12;
 const LOGO_LUM_WHITE_INK = 238;
@@ -90,6 +92,32 @@ function rgbDistSq(r1, g1, b1, r2, g2, b2) {
   const dg = g1 - g2;
   const db = b1 - b2;
   return dr * dr + dg * dg + db * db;
+}
+
+/** @returns {{ sr: number; sg: number; sb: number; n: number }} */
+function emptyMeanAcc() {
+  return { sr: 0, sg: 0, sb: 0, n: 0 };
+}
+
+function meanAccToRgb(acc, minN) {
+  if (acc.n < minN) return null;
+  return {
+    r: Math.max(0, Math.min(255, Math.round(acc.sr / acc.n))),
+    g: Math.max(0, Math.min(255, Math.round(acc.sg / acc.n))),
+    b: Math.max(0, Math.min(255, Math.round(acc.sb / acc.n)))
+  };
+}
+
+function addPixelToMean(acc, rawBuf, i, skipWhiteInk) {
+  if (rawBuf[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
+  const r = rawBuf[i];
+  const gch = rawBuf[i + 1];
+  const b = rawBuf[i + 2];
+  if (skipWhiteInk && logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) return;
+  acc.sr += r;
+  acc.sg += gch;
+  acc.sb += b;
+  acc.n++;
 }
 
 /**
@@ -109,42 +137,16 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
     if (!meta.width || !meta.height) return null;
     W = meta.width;
     H = meta.height;
-    const out = await img.raw().toBuffer({ resolveWithObject: true });
+    let out;
+    try {
+      out = await sharp(buf).ensureAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+    } catch {
+      out = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    }
     raw = Buffer.from(out.data);
   } catch (e) {
     console.warn('[MEDIA] company cover: logo raster decode failed:', e?.message || e);
     return null;
-  }
-
-  const q = (c) => Math.round(Math.min(255, Math.max(0, c)) / LOGO_EDGE_HIST_QUANT) * LOGO_EDGE_HIST_QUANT;
-  const pixKey = (r, g, b) => ((q(r) & 255) << 16) | ((q(g) & 255) << 8) | (q(b) & 255);
-
-  const sumCounts = (m) => [...m.values()].reduce((a, b) => a + b, 0);
-
-  function dominantFromCounts(counts) {
-    let bestK = 0;
-    let bestN = -1;
-    for (const [k, n] of counts) {
-      if (n > bestN) {
-        bestN = n;
-        bestK = k;
-      }
-    }
-    if (bestN < 1) return null;
-    const r = (bestK >> 16) & 255;
-    const g = (bestK >> 8) & 255;
-    const b = bestK & 255;
-    return { r, g, b };
-  }
-
-  function addHist(counts, i, skipWhiteInk) {
-    if (raw[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
-    const r = raw[i];
-    const gch = raw[i + 1];
-    const b = raw[i + 2];
-    if (skipWhiteInk && logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) return;
-    const k = pixKey(r, gch, b);
-    counts.set(k, (counts.get(k) ?? 0) + 1);
   }
 
   const totalPx = W * H;
@@ -198,36 +200,49 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
 
   const bw = maxX - minX + 1;
   const bh = maxY - minY + 1;
-  const ring = new Map();
+  const ringAcc = emptyMeanAcc();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d < LOGO_SOLID_RING_DEPTH) addHist(ring, (y * W + x) * 4, false);
+      if (d < LOGO_SOLID_RING_DEPTH) addPixelToMean(ringAcc, raw, (y * W + x) * 4, false);
     }
   }
 
   const inset = Math.max(3, Math.floor(Math.min(bw, bh) * LOGO_PLATE_INSET_FRAC));
-  const plate = new Map();
+  const plateAcc = emptyMeanAcc();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d >= inset) addHist(plate, (y * W + x) * 4, true);
+      if (d >= inset) addPixelToMean(plateAcc, raw, (y * W + x) * 4, true);
     }
   }
 
-  const outerRgb = dominantFromCounts(ring);
-  const plateRgb = dominantFromCounts(plate);
-  const ringN = sumCounts(ring);
-  const plateN = sumCounts(plate);
+  const coreSide = Math.max(8, Math.floor(Math.min(bw, bh) * LOGO_CORE_FRAC_OF_MIN));
+  const halfCore = Math.floor(coreSide / 2);
+  const cx = Math.floor((minX + maxX) / 2);
+  const cy = Math.floor((minY + maxY) / 2);
+  const coreAcc = emptyMeanAcc();
+  for (let y = cy - halfCore; y <= cy + halfCore; y++) {
+    if (y < minY || y > maxY) continue;
+    for (let x = cx - halfCore; x <= cx + halfCore; x++) {
+      if (x < minX || x > maxX) continue;
+      addPixelToMean(coreAcc, raw, (y * W + x) * 4, true);
+    }
+  }
+
+  const ringN = ringAcc.n;
+  const outerRgb = meanAccToRgb(ringAcc, LOGO_RING_MIN_SAMPLES);
+  const plateRgb = meanAccToRgb(plateAcc, LOGO_PLATE_MIN_SAMPLES);
+  const coreRgb = meanAccToRgb(coreAcc, LOGO_CORE_MIN_SAMPLES);
 
   if (!outerRgb) {
-    const any = new Map();
+    const anyAcc = emptyMeanAcc();
     for (let y = minY; y <= maxY; y++) {
       for (let x = minX; x <= maxX; x++) {
-        addHist(any, (y * W + x) * 4, false);
+        addPixelToMean(anyAcc, raw, (y * W + x) * 4, false);
       }
     }
-    const rgb = dominantFromCounts(any);
+    const rgb = meanAccToRgb(anyAcc, 1);
     if (!rgb) return null;
     const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
       .webp()
@@ -235,15 +250,21 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
     return { canvasBg: rgb, source: 'solid-bbox-fallback-mode', processedBuffer };
   }
 
+  let innerRgb = null;
+  if (coreRgb) {
+    innerRgb = coreRgb;
+  } else if (plateRgb) {
+    innerRgb = plateRgb;
+  }
+
   const twoTone =
-    plateRgb &&
-    plateN >= LOGO_PLATE_MIN_SAMPLES &&
+    innerRgb &&
     ringN >= LOGO_RING_MIN_SAMPLES &&
     Math.sqrt(
-      rgbDistSq(outerRgb.r, outerRgb.g, outerRgb.b, plateRgb.r, plateRgb.g, plateRgb.b)
+      rgbDistSq(outerRgb.r, outerRgb.g, outerRgb.b, innerRgb.r, innerRgb.g, innerRgb.b)
     ) >= LOGO_TWO_TONE_MIN_RGB_DIST;
 
-  if (twoTone && plateRgb) {
+  if (twoTone && innerRgb) {
     const band = Math.max(3, Math.floor(Math.min(bw, bh) * LOGO_FLATTEN_BAND_FRAC));
     for (let y = minY; y <= maxY; y++) {
       for (let x = minX; x <= maxX; x++) {
@@ -256,11 +277,11 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
         const b = raw[i + 2];
         if (logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) continue;
         const dOut = rgbDistSq(r, gch, b, outerRgb.r, outerRgb.g, outerRgb.b);
-        const dPl = rgbDistSq(r, gch, b, plateRgb.r, plateRgb.g, plateRgb.b);
-        if (dOut <= dPl + 120) {
-          raw[i] = plateRgb.r;
-          raw[i + 1] = plateRgb.g;
-          raw[i + 2] = plateRgb.b;
+        const dIn = rgbDistSq(r, gch, b, innerRgb.r, innerRgb.g, innerRgb.b);
+        if (dOut <= dIn + 120) {
+          raw[i] = innerRgb.r;
+          raw[i + 1] = innerRgb.g;
+          raw[i + 2] = innerRgb.b;
         }
       }
     }
@@ -268,7 +289,7 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
       .webp()
       .toBuffer();
     return {
-      canvasBg: { r: plateRgb.r, g: plateRgb.g, b: plateRgb.b },
+      canvasBg: { r: innerRgb.r, g: innerRgb.g, b: innerRgb.b },
       source: 'solid-two-tone-flatten-plate',
       processedBuffer
     };
@@ -280,18 +301,18 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
       .toBuffer();
     return {
       canvasBg: { r: outerRgb.r, g: outerRgb.g, b: outerRgb.b },
-      source: 'solid-2row-ring-mode',
+      source: 'solid-ring-mean-srgb',
       processedBuffer
     };
   }
 
-  const any = new Map();
+  const anyAcc = emptyMeanAcc();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
-      addHist(any, (y * W + x) * 4, false);
+      addPixelToMean(anyAcc, raw, (y * W + x) * 4, false);
     }
   }
-  const rgb = dominantFromCounts(any);
+  const rgb = meanAccToRgb(anyAcc, 1);
   if (!rgb) return null;
   const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
     .webp()
