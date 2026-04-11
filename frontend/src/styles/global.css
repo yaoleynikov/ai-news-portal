@@ -324,11 +324,56 @@ a:hover {
     padding: 1rem 0 3rem;
   }
 
-  .home-page,
   .tag-page,
   .search-page {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  /* Home: full-bleed list + lead image; gutters only on typography blocks */
+  .home-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .home-feed-head {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-featured {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+
+  .home-featured__body {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-featured__tags-overlay {
+    left: max(0.85rem, env(safe-area-inset-left, 0px));
+    right: max(0.85rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-river__heading {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-river__text {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-river .pagination {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .home-river .pagination__inner {
+    max-width: none;
   }
 
   .static-page.static-page--boxed {
@@ -503,10 +548,9 @@ a:hover {
     align-self: stretch;
     min-height: 0;
     aspect-ratio: var(--hero-cover-aspect);
-    width: calc(100% + 2rem);
-    max-width: none;
-    margin-left: -1rem;
-    margin-right: -1rem;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     border-radius: 0;
     border-left: none;
     border-right: none;

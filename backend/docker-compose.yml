@@ -3,10 +3,11 @@
 # Нужен backend/.env (не коммитить). Секреты: Supabase, OpenRouter, Logo.dev, HF, R2,
 # опционально Telegram / Google Indexing — см. .env.example.
 #
-# Запуск:
-#   cd backend
-#   cp .env.example .env && отредактировать .env
-#   docker compose up -d --build
+# Ручной запуск:
+#   cd backend && cp .env.example .env  → заполнить → docker compose up -d --build
+#
+# Автозапуск после перезагрузки сервера (один раз): backend/deploy/install-debian-once.sh
+# и см. backend/deploy/README.md
 #
 # Не ставить GATEKEEPER_INTERVAL_MS=0 — иначе RSS не подтянется без отдельного процесса вне Docker.
 # База — облачный Supabase; Postgres здесь не поднимается.
@@ -16,12 +17,19 @@ services:
     build: .
     container_name: siliconfeed-worker
     restart: unless-stopped
+    init: true
+    stop_grace_period: 90s
     env_file:
       - .env
     command: ["npm", "run", "worker"]
     mem_limit: 768m
     volumes:
       - hf_cache:/app/.cache
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "4"
 
 volumes:
   hf_cache:

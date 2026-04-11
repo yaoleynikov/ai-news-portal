@@ -64,59 +64,57 @@ function logoDevDomainsTryList(primary) {
   return out;
 }
 
-/** Logo raster → RGB for cover canvas. */
-const LOGO_EDGE_SAMPLE_MAX_SIDE = 320;
+/** Logo raster → canvas color + (для «рамка + плашка») выровнять растр под плашку. */
 const LOGO_EDGE_ALPHA_MIN = 120;
 const LOGO_ALPHA_TRANSPARENT = 128;
-/** Доля «пустых» пикселей: если выше — считаем, что вокруг марки прозрачность. */
 const LOGO_TRANSPARENT_RATIO = 0.055;
 const LOGO_EDGE_HIST_QUANT = 10;
-/** Два ряда от границы непрозрачного bbox: Chebyshev-расстояние 0 и 1. */
+/** Два ряда от bbox — цвет внешней кромки файла. */
 const LOGO_SOLID_RING_DEPTH = 2;
 const LOGO_RING_MIN_SAMPLES = 8;
+/** Внутрь от края bbox: зона «плашки» без внешней рамки (и без белого текста). */
+const LOGO_PLATE_INSET_FRAC = 0.065;
+const LOGO_PLATE_MIN_SAMPLES = 48;
+/** Если расстояние в RGB между кромкой и плашкой больше — двухслойная карточка (как Oppo). */
+const LOGO_TWO_TONE_MIN_RGB_DIST = 26;
+/** Полоса у края bbox, куда подменяем цвет кромки на цвет плашки. */
+const LOGO_FLATTEN_BAND_FRAC = 0.12;
+const LOGO_LUM_WHITE_INK = 238;
 
 function logoLuminance(r, g, b) {
   return 0.299 * r + 0.587 * g + 0.114 * b;
 }
 
+function rgbDistSq(r1, g1, b1, r2, g2, b2) {
+  const dr = r1 - r2;
+  const dg = g1 - g2;
+  const db = b1 - b2;
+  return dr * dr + dg * dg + db * db;
+}
+
 /**
+ * Полноразмерный растр: цвет холста и при необходимости буфер с выровненной рамкой.
  * @param {import('sharp')} sharp
  * @param {ArrayBuffer | Buffer} logoBuffer
- * @returns {Promise<{ r: number; g: number; b: number; source: string } | null>}
+ * @returns {Promise<{ canvasBg: { r: number; g: number; b: number }; source: string; processedBuffer: Buffer } | null>}
  */
-async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
-  let data;
+async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
+  const buf = Buffer.from(logoBuffer);
   let W;
   let H;
+  let raw;
   try {
-    const buf = Buffer.from(logoBuffer);
     const img = sharp(buf).ensureAlpha();
     const meta = await img.metadata();
     if (!meta.width || !meta.height) return null;
-    const scale = Math.min(1, LOGO_EDGE_SAMPLE_MAX_SIDE / Math.max(meta.width, meta.height));
-    const rw = Math.max(1, Math.round(meta.width * scale));
-    const rh = Math.max(1, Math.round(meta.height * scale));
-    const out = await img
-      .resize(rw, rh, { kernel: sharp.kernel.nearest })
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    data = out.data;
-    W = out.info.width;
-    H = out.info.height;
+    W = meta.width;
+    H = meta.height;
+    const out = await img.raw().toBuffer({ resolveWithObject: true });
+    raw = Buffer.from(out.data);
   } catch (e) {
-    console.warn('[MEDIA] company cover: edge backdrop sample failed:', e?.message || e);
+    console.warn('[MEDIA] company cover: logo raster decode failed:', e?.message || e);
     return null;
   }
-
-  const totalPx = W * H;
-  let transparentCount = 0;
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      const i = (y * W + x) * 4;
-      if (data[i + 3] < LOGO_ALPHA_TRANSPARENT) transparentCount++;
-    }
-  }
-  const transparentRatio = transparentCount / totalPx;
 
   const q = (c) => Math.round(Math.min(255, Math.max(0, c)) / LOGO_EDGE_HIST_QUANT) * LOGO_EDGE_HIST_QUANT;
   const pixKey = (r, g, b) => ((q(r) & 255) << 16) | ((q(g) & 255) << 8) | (q(b) & 255);
@@ -139,35 +137,49 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
     return { r, g, b };
   }
 
-  function addOpaquePixel(counts, x, y) {
-    if (x < 0 || y < 0 || x >= W || y >= H) return;
-    const i = (y * W + x) * 4;
-    if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
-    const k = pixKey(data[i], data[i + 1], data[i + 2]);
+  function addHist(counts, i, skipWhiteInk) {
+    if (raw[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
+    const r = raw[i];
+    const gch = raw[i + 1];
+    const b = raw[i + 2];
+    if (skipWhiteInk && logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) return;
+    const k = pixKey(r, gch, b);
     counts.set(k, (counts.get(k) ?? 0) + 1);
   }
 
-  // Прозрачность вокруг: контрастный фон, иначе светлое лого теряется на светлом холсте.
+  const totalPx = W * H;
+  let transparentCount = 0;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      if (raw[i + 3] < LOGO_ALPHA_TRANSPARENT) transparentCount++;
+    }
+  }
+  const transparentRatio = transparentCount / totalPx;
+
   if (transparentRatio >= LOGO_TRANSPARENT_RATIO) {
     let sumL = 0;
     let n = 0;
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const i = (y * W + x) * 4;
-        if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
-        sumL += logoLuminance(data[i], data[i + 1], data[i + 2]);
+        if (raw[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+        sumL += logoLuminance(raw[i], raw[i + 1], raw[i + 2]);
         n++;
       }
     }
-    if (n < 8) return { r: 255, g: 255, b: 255, source: 'transparent-fallback-white' };
-    const avgL = sumL / n;
-    if (avgL >= 168) {
-      return { r: 0, g: 0, b: 0, source: 'transparent-light-glyph' };
-    }
-    return { r: 255, g: 255, b: 255, source: 'transparent-dark-glyph' };
+    const avgL = n > 0 ? sumL / n : 255;
+    const canvasBg =
+      n < 8 ? { r: 255, g: 255, b: 255 } : avgL >= 168 ? { r: 0, g: 0, b: 0 } : { r: 255, g: 255, b: 255 };
+    const source =
+      n < 8 ? 'transparent-fallback-white' : avgL >= 168 ? 'transparent-light-glyph' : 'transparent-dark-glyph';
+    return {
+      canvasBg,
+      source,
+      processedBuffer: buf
+    };
   }
 
-  // Без прозрачности: два ряда пикселей по периметру непрозрачного прямоугольника → самый частый цвет.
   let minX = W;
   let minY = H;
   let maxX = -1;
@@ -175,7 +187,7 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
   for (let y = 0; y < H; y++) {
     for (let x = 0; x < W; x++) {
       const i = (y * W + x) * 4;
-      if (data[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+      if (raw[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
       if (y < minY) minY = y;
@@ -184,45 +196,107 @@ async function sampleLogoEdgeBackdropRgb(sharp, logoBuffer) {
   }
   if (maxX < minX) return null;
 
+  const bw = maxX - minX + 1;
+  const bh = maxY - minY + 1;
   const ring = new Map();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d < LOGO_SOLID_RING_DEPTH) {
-        addOpaquePixel(ring, x, y);
-      }
+      if (d < LOGO_SOLID_RING_DEPTH) addHist(ring, (y * W + x) * 4, false);
     }
   }
 
-  if (sumCounts(ring) >= LOGO_RING_MIN_SAMPLES) {
-    const rgb = dominantFromCounts(ring);
-    if (rgb) return { ...rgb, source: 'solid-2row-ring-mode' };
-  }
-
-  // Маленький bbox: расширяем кольцо до 3 px
-  const ringWide = new Map();
+  const inset = Math.max(3, Math.floor(Math.min(bw, bh) * LOGO_PLATE_INSET_FRAC));
+  const plate = new Map();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d < 3) addOpaquePixel(ringWide, x, y);
+      if (d >= inset) addHist(plate, (y * W + x) * 4, true);
     }
   }
-  if (sumCounts(ringWide) >= LOGO_RING_MIN_SAMPLES) {
-    const rgb = dominantFromCounts(ringWide);
-    if (rgb) return { ...rgb, source: 'solid-3px-ring-mode' };
+
+  const outerRgb = dominantFromCounts(ring);
+  const plateRgb = dominantFromCounts(plate);
+  const ringN = sumCounts(ring);
+  const plateN = sumCounts(plate);
+
+  if (!outerRgb) {
+    const any = new Map();
+    for (let y = minY; y <= maxY; y++) {
+      for (let x = minX; x <= maxX; x++) {
+        addHist(any, (y * W + x) * 4, false);
+      }
+    }
+    const rgb = dominantFromCounts(any);
+    if (!rgb) return null;
+    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
+      .webp()
+      .toBuffer();
+    return { canvasBg: rgb, source: 'solid-bbox-fallback-mode', processedBuffer };
   }
 
-  // Совсем крошечный марк: любой непрозрачный пиксель
+  const twoTone =
+    plateRgb &&
+    plateN >= LOGO_PLATE_MIN_SAMPLES &&
+    ringN >= LOGO_RING_MIN_SAMPLES &&
+    Math.sqrt(
+      rgbDistSq(outerRgb.r, outerRgb.g, outerRgb.b, plateRgb.r, plateRgb.g, plateRgb.b)
+    ) >= LOGO_TWO_TONE_MIN_RGB_DIST;
+
+  if (twoTone && plateRgb) {
+    const band = Math.max(3, Math.floor(Math.min(bw, bh) * LOGO_FLATTEN_BAND_FRAC));
+    for (let y = minY; y <= maxY; y++) {
+      for (let x = minX; x <= maxX; x++) {
+        const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
+        if (d >= band) continue;
+        const i = (y * W + x) * 4;
+        if (raw[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+        const r = raw[i];
+        const gch = raw[i + 1];
+        const b = raw[i + 2];
+        if (logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) continue;
+        const dOut = rgbDistSq(r, gch, b, outerRgb.r, outerRgb.g, outerRgb.b);
+        const dPl = rgbDistSq(r, gch, b, plateRgb.r, plateRgb.g, plateRgb.b);
+        if (dOut <= dPl + 120) {
+          raw[i] = plateRgb.r;
+          raw[i + 1] = plateRgb.g;
+          raw[i + 2] = plateRgb.b;
+        }
+      }
+    }
+    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
+      .webp()
+      .toBuffer();
+    return {
+      canvasBg: { r: plateRgb.r, g: plateRgb.g, b: plateRgb.b },
+      source: 'solid-two-tone-flatten-plate',
+      processedBuffer
+    };
+  }
+
+  if (ringN >= LOGO_RING_MIN_SAMPLES) {
+    const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
+      .webp()
+      .toBuffer();
+    return {
+      canvasBg: { r: outerRgb.r, g: outerRgb.g, b: outerRgb.b },
+      source: 'solid-2row-ring-mode',
+      processedBuffer
+    };
+  }
+
   const any = new Map();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
-      addOpaquePixel(any, x, y);
+      addHist(any, (y * W + x) * 4, false);
     }
   }
-  if (sumCounts(any) < 1) return null;
   const rgb = dominantFromCounts(any);
   if (!rgb) return null;
-  return { ...rgb, source: 'solid-bbox-fallback-mode' };
+  const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
+    .webp()
+    .toBuffer();
+  return { canvasBg: rgb, source: 'solid-bbox-fallback-mode', processedBuffer };
 }
 
 /**
@@ -246,17 +320,16 @@ async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
   const targetLogoSide = Math.round(COVER_MIN_SIDE * COMPANY_LOGO_FRAC_OF_MIN_SIDE);
   const logoBox = Math.min(targetLogoSide, innerW, innerH);
 
-  const backdropRgb = await sampleLogoEdgeBackdropRgb(sharp, logoBuffer);
-  const canvasBg = backdropRgb
-    ? { r: backdropRgb.r, g: backdropRgb.g, b: backdropRgb.b }
-    : { r: 255, g: 255, b: 255 };
-  if (backdropRgb) {
+  const prep = await prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer);
+  const canvasBg = prep?.canvasBg ?? { r: 255, g: 255, b: 255 };
+  const rasterForResize = prep?.processedBuffer ?? Buffer.from(logoBuffer);
+  if (prep) {
     console.log(
-      `[MEDIA] company cover: canvas backdrop rgb(${canvasBg.r},${canvasBg.g},${canvasBg.b}) (${backdropRgb.source})`
+      `[MEDIA] company cover: canvas backdrop rgb(${canvasBg.r},${canvasBg.g},${canvasBg.b}) (${prep.source})`
     );
   }
 
-  const processedLogo = await sharp(Buffer.from(logoBuffer))
+  const processedLogo = await sharp(rasterForResize)
     .resize(logoBox, logoBox, {
       fit: 'contain',
       background: { r: 255, g: 255, b: 255, alpha: 0 }
