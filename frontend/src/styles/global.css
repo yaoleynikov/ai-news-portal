@@ -2149,7 +2149,6 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
 
 .home-river__item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 104px;
   gap: 1rem 1.25rem;
   padding: 1.15rem 0;
   align-items: stretch;
@@ -2157,9 +2156,11 @@ a.tag-chip.tag-chip--hero[data-tag-theme='automation'] {
   transition: background-color 0.15s ease;
 }
 
-@media (min-width: 480px) {
+/* Two-column river row only at tablet+; unscoped rules were overriding the mobile stack and left empty space on the right. */
+@media (min-width: 768px) {
   .home-river__item {
     grid-template-columns: minmax(0, 1fr) 140px;
+    grid-template-areas: none;
   }
 }
 
