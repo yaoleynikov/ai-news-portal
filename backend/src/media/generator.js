@@ -110,6 +110,11 @@ const LOGO_TWO_TONE_MIN_RGB_DIST = 8;
 /** Полоса у края bbox для подмены светлой рамки на цвет плашки (широкие тизеры). */
 const LOGO_FLATTEN_BAND_FRAC = 0.2;
 const LOGO_LUM_WHITE_INK = 238;
+/**
+ * Flatten сравнивает расстояние до серых inner/outer; без фильтра зелёный/цветной бренд
+ * оказывается «ближе» к одному из серых и перезаписывается в серый — лого превращается в монохром.
+ */
+const LOGO_FLATTEN_MAX_RGB_CHROMA = 22;
 
 function logoLuminance(r, g, b) {
   return 0.299 * r + 0.587 * g + 0.114 * b;
@@ -120,6 +125,13 @@ function rgbDistSq(r1, g1, b1, r2, g2, b2) {
   const dg = g1 - g2;
   const db = b1 - b2;
   return dr * dr + dg * dg + db * db;
+}
+
+/** Почти серый фон рамки/плашки; цветные пиксели (логотип) не трогаем. */
+function pixelIsFlattenableGray(r, g, b) {
+  const mx = Math.max(r, g, b);
+  const mn = Math.min(r, g, b);
+  return mx - mn <= LOGO_FLATTEN_MAX_RGB_CHROMA;
 }
 
 /**
@@ -406,6 +418,7 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
         const gch = raw[i + 1];
         const b = raw[i + 2];
         if (logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) continue;
+        if (!pixelIsFlattenableGray(r, gch, b)) continue;
         const dOut = rgbDistSq(r, gch, b, outerRgb.r, outerRgb.g, outerRgb.b);
         const dIn = rgbDistSq(r, gch, b, innerRgb.r, innerRgb.g, innerRgb.b);
         if (dOut <= dIn + 200) {
