@@ -68,7 +68,11 @@ function logoDevDomainsTryList(primary) {
 const LOGO_EDGE_ALPHA_MIN = 120;
 const LOGO_ALPHA_TRANSPARENT = 128;
 const LOGO_TRANSPARENT_RATIO = 0.055;
-/** Два ряда от bbox — цвет внешней кромки файла. */
+/** Четыре квадрата до 32×32 в углах opaque bbox — общая мода RGB (квант) по непрозрачным пикселям. */
+const LOGO_EDGE_PATCH_SIDE = 32;
+const LOGO_EDGE_PATCH_QUANT = 8;
+const LOGO_EDGE_PATCH_MIN_SAMPLES = 20;
+/** Два ряда от bbox — запасной цвет кромки, если патчи пустые. */
 const LOGO_SOLID_RING_DEPTH = 2;
 const LOGO_RING_MIN_SAMPLES = 8;
 /** Внутрь от края bbox: запасная зона для цвета «внутри» (на широких баннерах часто всё ещё рамка). */
@@ -77,10 +81,13 @@ const LOGO_PLATE_MIN_SAMPLES = 48;
 /** Центр bbox: квадрат со стороной frac×min(bw,bh) — цвет плашки под маркой без полей рамки. */
 const LOGO_CORE_FRAC_OF_MIN = 0.34;
 const LOGO_CORE_MIN_SAMPLES = 18;
-/** Кромка vs центр: заметный зазор (Oppo: тёплый серый у лого и ~40 на рамке дают < 26 в Euclidean). */
-const LOGO_TWO_TONE_MIN_RGB_DIST = 12;
-/** Полоса у края bbox, куда подменяем цвет кромки на цвет плашки. */
-const LOGO_FLATTEN_BAND_FRAC = 0.12;
+/** Пиксели темнее этого (L) считаем «фоном плашки», не светлым полем/ореолом вокруг текста. */
+const LOGO_INNER_BG_LUM_MAX = 108;
+const LOGO_INNER_DARK_MIN_SAMPLES = 6;
+/** Кромка vs плашка: после mean по кольцу легко слиться с разбавленным core; порог ниже. */
+const LOGO_TWO_TONE_MIN_RGB_DIST = 8;
+/** Полоса у края bbox для подмены светлой рамки на цвет плашки (широкие тизеры). */
+const LOGO_FLATTEN_BAND_FRAC = 0.2;
 const LOGO_LUM_WHITE_INK = 238;
 
 function logoLuminance(r, g, b) {
@@ -92,6 +99,70 @@ function rgbDistSq(r1, g1, b1, r2, g2, b2) {
   const dg = g1 - g2;
   const db = b1 - b2;
   return dr * dr + dg * dg + db * db;
+}
+
+/**
+ * Самый частый цвет по четырём квадратам side×side (side ≤ 32) в углах opaque bbox.
+ * Совпадает со схемой «патчи в четырёх углах»; для целого тизера bbox = весь непрозрачный прямоугольник.
+ * @returns {{ r: number; g: number; b: number; n: number } | null}
+ */
+function dominantRgbFromFourCornerPatches32Bbox(rawBuf, W, minX, maxX, minY, maxY) {
+  const bw = maxX - minX + 1;
+  const bh = maxY - minY + 1;
+  const side = Math.min(LOGO_EDGE_PATCH_SIDE, bw, bh);
+  if (side < 2) return null;
+
+  const q = LOGO_EDGE_PATCH_QUANT;
+  const keyOf = (r, g, b) => {
+    const rq = Math.round(Math.min(255, Math.max(0, r)) / q) * q;
+    const gq = Math.round(Math.min(255, Math.max(0, g)) / q) * q;
+    const bq = Math.round(Math.min(255, Math.max(0, b)) / q) * q;
+    return ((rq & 255) << 16) | ((gq & 255) << 8) | (bq & 255);
+  };
+
+  const counts = new Map();
+  const addRect = (x0, y0) => {
+    let xa = x0;
+    let ya = y0;
+    if (xa < minX) xa = minX;
+    if (ya < minY) ya = minY;
+    if (xa > maxX - side + 1) xa = maxX - side + 1;
+    if (ya > maxY - side + 1) ya = maxY - side + 1;
+    const x1 = xa + side;
+    const y1 = ya + side;
+    for (let y = ya; y < y1; y++) {
+      for (let x = xa; x < x1; x++) {
+        const i = (y * W + x) * 4;
+        if (rawBuf[i + 3] < LOGO_EDGE_ALPHA_MIN) continue;
+        const k = keyOf(rawBuf[i], rawBuf[i + 1], rawBuf[i + 2]);
+        counts.set(k, (counts.get(k) ?? 0) + 1);
+      }
+    }
+  };
+
+  addRect(minX, minY);
+  addRect(maxX - side + 1, minY);
+  addRect(minX, maxY - side + 1);
+  addRect(maxX - side + 1, maxY - side + 1);
+
+  let total = 0;
+  for (const n of counts.values()) total += n;
+  if (total < LOGO_EDGE_PATCH_MIN_SAMPLES) return null;
+
+  let bestK = 0;
+  let bestN = -1;
+  for (const [k, n] of counts) {
+    if (n > bestN) {
+      bestN = n;
+      bestK = k;
+    }
+  }
+  return {
+    r: (bestK >> 16) & 255,
+    g: (bestK >> 8) & 255,
+    b: bestK & 255,
+    n: total
+  };
 }
 
 /** @returns {{ sr: number; sg: number; sb: number; n: number }} */
@@ -120,10 +191,26 @@ function addPixelToMean(acc, rawBuf, i, skipWhiteInk) {
   acc.n++;
 }
 
+/** Только тёмный фон плашки (отсекаем белый текст и светлые серые поля в core/plate). */
+function addPixelToMeanInnerBg(acc, rawBuf, i) {
+  if (rawBuf[i + 3] < LOGO_EDGE_ALPHA_MIN) return;
+  const r = rawBuf[i];
+  const gch = rawBuf[i + 1];
+  const b = rawBuf[i + 2];
+  const L = logoLuminance(r, gch, b);
+  if (L >= LOGO_LUM_WHITE_INK) return;
+  if (L > LOGO_INNER_BG_LUM_MAX) return;
+  acc.sr += r;
+  acc.sg += gch;
+  acc.sb += b;
+  acc.n++;
+}
+
 /**
- * Полноразмерный растр: цвет холста и при необходимости буфер с выровненной рамкой.
+ * Анализ **только** растра с Logo.dev (как пришёл с CDN), до сборки 1200×630.
+ * Opaque bbox, угловые 32×32, two-tone и т.д. — всё в координатах этого файла, не готового баннера.
  * @param {import('sharp')} sharp
- * @param {ArrayBuffer | Buffer} logoBuffer
+ * @param {ArrayBuffer | Buffer} logoBuffer — байты ответа img.logo.dev (webp/png)
  * @returns {Promise<{ canvasBg: { r: number; g: number; b: number }; source: string; processedBuffer: Buffer } | null>}
  */
 async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
@@ -210,10 +297,15 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
 
   const inset = Math.max(3, Math.floor(Math.min(bw, bh) * LOGO_PLATE_INSET_FRAC));
   const plateAcc = emptyMeanAcc();
+  const plateInnerDarkAcc = emptyMeanAcc();
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       const d = Math.min(x - minX, maxX - x, y - minY, maxY - y);
-      if (d >= inset) addPixelToMean(plateAcc, raw, (y * W + x) * 4, true);
+      if (d >= inset) {
+        const idx = (y * W + x) * 4;
+        addPixelToMean(plateAcc, raw, idx, true);
+        addPixelToMeanInnerBg(plateInnerDarkAcc, raw, idx);
+      }
     }
   }
 
@@ -222,18 +314,29 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
   const cx = Math.floor((minX + maxX) / 2);
   const cy = Math.floor((minY + maxY) / 2);
   const coreAcc = emptyMeanAcc();
+  const coreInnerDarkAcc = emptyMeanAcc();
   for (let y = cy - halfCore; y <= cy + halfCore; y++) {
     if (y < minY || y > maxY) continue;
     for (let x = cx - halfCore; x <= cx + halfCore; x++) {
       if (x < minX || x > maxX) continue;
-      addPixelToMean(coreAcc, raw, (y * W + x) * 4, true);
+      const idx = (y * W + x) * 4;
+      addPixelToMean(coreAcc, raw, idx, true);
+      addPixelToMeanInnerBg(coreInnerDarkAcc, raw, idx);
     }
   }
 
   const ringN = ringAcc.n;
-  const outerRgb = meanAccToRgb(ringAcc, LOGO_RING_MIN_SAMPLES);
+  const ringOuterRgb = meanAccToRgb(ringAcc, LOGO_RING_MIN_SAMPLES);
+  const edgeDom = dominantRgbFromFourCornerPatches32Bbox(raw, W, minX, maxX, minY, maxY);
+  const outerRgb = edgeDom
+    ? { r: edgeDom.r, g: edgeDom.g, b: edgeDom.b }
+    : ringOuterRgb;
+  const outerSampleN = edgeDom ? edgeDom.n : ringN;
+
   const plateRgb = meanAccToRgb(plateAcc, LOGO_PLATE_MIN_SAMPLES);
   const coreRgb = meanAccToRgb(coreAcc, LOGO_CORE_MIN_SAMPLES);
+  const coreInnerDarkRgb = meanAccToRgb(coreInnerDarkAcc, LOGO_INNER_DARK_MIN_SAMPLES);
+  const plateInnerDarkRgb = meanAccToRgb(plateInnerDarkAcc, LOGO_INNER_DARK_MIN_SAMPLES);
 
   if (!outerRgb) {
     const anyAcc = emptyMeanAcc();
@@ -251,15 +354,20 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
   }
 
   let innerRgb = null;
-  if (coreRgb) {
+  if (coreInnerDarkRgb) {
+    innerRgb = coreInnerDarkRgb;
+  } else if (coreRgb) {
     innerRgb = coreRgb;
+  } else if (plateInnerDarkRgb) {
+    innerRgb = plateInnerDarkRgb;
   } else if (plateRgb) {
     innerRgb = plateRgb;
   }
 
   const twoTone =
     innerRgb &&
-    ringN >= LOGO_RING_MIN_SAMPLES &&
+    outerRgb &&
+    (outerSampleN >= LOGO_RING_MIN_SAMPLES || ringN >= LOGO_RING_MIN_SAMPLES) &&
     Math.sqrt(
       rgbDistSq(outerRgb.r, outerRgb.g, outerRgb.b, innerRgb.r, innerRgb.g, innerRgb.b)
     ) >= LOGO_TWO_TONE_MIN_RGB_DIST;
@@ -278,7 +386,7 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
         if (logoLuminance(r, gch, b) >= LOGO_LUM_WHITE_INK) continue;
         const dOut = rgbDistSq(r, gch, b, outerRgb.r, outerRgb.g, outerRgb.b);
         const dIn = rgbDistSq(r, gch, b, innerRgb.r, innerRgb.g, innerRgb.b);
-        if (dOut <= dIn + 120) {
+        if (dOut <= dIn + 200) {
           raw[i] = innerRgb.r;
           raw[i + 1] = innerRgb.g;
           raw[i + 2] = innerRgb.b;
@@ -295,13 +403,13 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
     };
   }
 
-  if (ringN >= LOGO_RING_MIN_SAMPLES) {
+  if (outerRgb) {
     const processedBuffer = await sharp(raw, { raw: { width: W, height: H, channels: 4 } })
       .webp()
       .toBuffer();
     return {
       canvasBg: { r: outerRgb.r, g: outerRgb.g, b: outerRgb.b },
-      source: 'solid-ring-mean-srgb',
+      source: edgeDom ? 'solid-corners32-dominant' : 'solid-ring-mean-srgb',
       processedBuffer
     };
   }
@@ -321,7 +429,8 @@ async function prepareCompanyLogoCanvasAndRaster(sharp, logoBuffer) {
 }
 
 /**
- * Composite 1200×630 canvas from a Logo.dev raster.
+ * Собрать OG-баннер: сначала `prepareCompanyLogoCanvasAndRaster(logoBuffer)` по **исходному** лого с Logo.dev,
+ * затем resize + заливка холста. Готовый webp нигде не читается для выбора фона.
  */
 async function composeCompanyCoverFromLogoBuffer(logoBuffer) {
   const sharp = await loadSharp();
