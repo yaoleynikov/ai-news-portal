@@ -2,6 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.siliconfeed.online" }],
+      "destination": "https://siliconfeed.online/:path*",
+      "permanent": true
+    },
     { "source": "/topics", "destination": "/", "permanent": true },
     {
       "source": "/article/uuid-1",
