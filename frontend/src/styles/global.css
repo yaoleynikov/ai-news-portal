@@ -2350,3 +2350,35 @@ a.tag-chip.tag-chip--hero[data-tag-theme='energy'] {
 .static-page__p:last-child {
   margin-bottom: 0;
 }
+
+.static-page__h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+  font-family: var(--font-ui);
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.static-page__list {
+  margin: 0 0 1.15rem;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-family: var(--font-reading);
+}
+
+.static-page__list li {
+  margin-bottom: 0.65rem;
+}
+
+.static-page__list li:last-child {
+  margin-bottom: 0;
+}
+
+.static-page__legal-note {
+  font-size: 0.9375rem !important;
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+}
