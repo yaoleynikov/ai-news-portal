@@ -31,6 +31,15 @@ export function absoluteUrl(pathname: string, site: URL | string = SITE_HOST): s
   return new URL(path, base.endsWith('/') ? base : `${base}/`).toString();
 }
 
+/** Absolute URL for remote covers and static assets (pass-through if already `http(s)://`). */
+export function absoluteMediaUrl(url: string, site: URL | string = SITE_HOST): string | null {
+  const raw = typeof url === 'string' ? url.trim() : '';
+  if (!raw) return null;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  const path = raw.startsWith('/') ? raw : `/${raw}`;
+  return absoluteUrl(path, site);
+}
+
 /** Origin for same-site checks (Astro `site` from config, else {@link SITE_HOST}). */
 export function resolveSiteOrigin(site: URL | undefined): string {
   if (site instanceof URL) return site.origin;

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { tagUrl, tagThemeSlug, kickerFromArticle, type TagTheme } from '../../lib/tags';
 import {
+  absoluteMediaUrl,
   absoluteUrl,
   articlePath,
   mergeMarkdownAnchorRelForContent,
@@ -115,11 +116,15 @@ if (article) {
 
   canonical = absoluteUrl(articlePath(article.slug), Astro.site ?? 'https://siliconfeed.online');
 
+  const siteForLd = Astro.site ?? 'https://siliconfeed.online';
+  const coverAbsolute = absoluteMediaUrl(article.cover_url, siteForLd);
+  const logoAbsolute = absoluteUrl('/logo-512.png', siteForLd);
+
   const newsLd = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: article.title,
-    image: [article.cover_url],
+    ...(coverAbsolute ? { image: [coverAbsolute] } : {}),
     datePublished: article.created_at,
     dateModified: article.updated_at ?? article.created_at,
     articleSection: kickerLabel,
@@ -128,21 +133,32 @@ if (article) {
       {
         '@type': 'Organization',
         name: 'SiliconFeed Editorial',
-        url: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online')
+        url: absoluteUrl('/', siteForLd)
       }
-    ]
+    ],
+    publisher: {
+      '@type': 'Organization',
+      name: 'SiliconFeed',
+      url: absoluteUrl('/', siteForLd),
+      logo: {
+        '@type': 'ImageObject',
+        url: logoAbsolute,
+        width: 512,
+        height: 512
+      }
+    }
   };
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/', Astro.site ?? 'https://siliconfeed.online') },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/', siteForLd) },
       {
         '@type': 'ListItem',
         position: 2,
         name: kickerLabel,
-        item: absoluteUrl(kickerHref, Astro.site ?? 'https://siliconfeed.online')
+        item: absoluteUrl(kickerHref, siteForLd)
       },
       {
         '@type': 'ListItem',
