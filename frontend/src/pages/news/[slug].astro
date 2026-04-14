@@ -54,7 +54,7 @@ if (!article) {
 
 const taxonomyPool = await getTaxonomyArticlePool(150);
 const relatedArticles = article
-  ? await getRelatedArticles(article.slug, article.tags, 6)
+  ? await getRelatedArticles(article.slug, article.tags, 8)
   : [];
 const nav = article
   ? await getPrevNextByDate(article.created_at, article.slug)
@@ -186,6 +186,25 @@ if (article) {
       : null;
 
   jsonLdBlocks = faqLd ? [newsLd, breadcrumbLd, faqLd] : [newsLd, breadcrumbLd];
+
+  if (relatedArticles.length > 0) {
+    const relatedFeedLd = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'More in the feed',
+      numberOfItems: relatedArticles.length,
+      itemListElement: relatedArticles.map((rel, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'WebPage',
+          name: rel.title,
+          url: absoluteUrl(articlePath(rel.slug), siteForLd)
+        }
+      }))
+    };
+    jsonLdBlocks = [...jsonLdBlocks, relatedFeedLd];
+  }
 }
 
 let companyCoverBackdrop: string | null = null;
@@ -360,17 +379,17 @@ if (article?.cover_type === 'company' && article.cover_url) {
           )
         }
 
-        <h3 class="section-title">More in the feed</h3>
-        <div class="related-grid">
+        <h3 class="section-title" id="more-in-feed-heading">More in the feed</h3>
+        <nav class="related-grid" aria-labelledby="more-in-feed-heading">
           {relatedArticles.map((rel) => (
             <a href={articlePath(rel.slug)} class="related-card">
-              <img src={rel.cover_url} alt={rel.title} loading="lazy" {...coverImageRequestAttrs} />
+              <img src={rel.cover_url} alt="" loading="lazy" {...coverImageRequestAttrs} />
               <div class="related-card__body">
                 <h4 class="related-card__title">{rel.title}</h4>
               </div>
             </a>
           ))}
-        </div>
+        </nav>
       </div>
 
       <div class="article-source">

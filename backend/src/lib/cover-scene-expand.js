@@ -40,6 +40,12 @@ function contextualSceneBias(p) {
   if (rubric === 'security' || /\b(cyber|malware|breach|ransom|infosec|encryption|firewall)\b/.test(blob)) {
     return 'Security / infosec: prefer a real SOC or NOC with analysts, or a server room aisle — monitors show soft non-readable glow only, no charts, dashboards, or presentation graphics on screen; no sci-fi armor or holograms.';
   }
+  if (rubric === 'business' || /\b(antitrust|merger|acquisition|earnings|ipo|layoff|quarterly|stock market)\b/.test(blob)) {
+    return 'Business / markets: prefer a calm trading floor or modern office conference room — natural or soft overhead light, no readable tickers or slides on screens.';
+  }
+  if (rubric === 'media' || /\b(gaming|esports|console|streamer|hollywood|film festival)\b/.test(blob)) {
+    return 'Apps & media: prefer a living room with soft TV glow (no readable UI), handheld gaming on a sofa, or a cinema lobby exterior — not a HUD or sci-fi gamer cave.';
+  }
   if (rubric === 'energy' || /\b(battery|ev\b|solar|grid|wind farm|charger)\b/.test(blob)) {
     return 'Energy / cleantech: prefer real infrastructure (substation yard, solar array field, EV charging bay, factory floor) in daylight — not fantasy tech.';
   }

@@ -13,30 +13,11 @@ import { getPublishQuotaExceeded, getResolvedPublishLimitConfig } from '../lib/p
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
 import { startDailyStatsScheduler } from '../stats/daily-report.js';
 import { spinTelegramAdminWithWorker } from '../lib/telegram-admin-runtime.js';
-
-/** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
-async function checkDuplicate(embedding) {
-  try {
-    const { data, error } = await supabase.rpc('match_articles', {
-      query_embedding: `[${embedding.join(',')}]`,
-      match_threshold: config.limits.similarityThreshold,
-      match_count: 1
-    });
-
-    if (error) {
-      console.warn('[SEQUENCER] match_articles RPC failed:', error.message);
-      return 'rpc_error';
-    }
-
-    if (data && data.length > 0) {
-      return 'duplicate';
-    }
-    return 'ok';
-  } catch (e) {
-    console.warn('[SEQUENCER] match_articles exception:', e.message);
-    return 'rpc_error';
-  }
-}
+import {
+  buildDedupEmbedInput,
+  checkSemanticDuplicate,
+  checkTitleFingerprintDuplicate
+} from '../lib/dedup.js';
 
 // Polling interval
 const POLL_INTERVAL_MS = 10000;
@@ -360,9 +341,7 @@ export async function processQueue() {
           continue;
         }
 
-        const embedding = await generateEmbedding(
-          extracted.title + '\n\n' + extracted.textContent.slice(0, 500)
-        );
+        const embedding = await generateEmbedding(buildDedupEmbedInput(extracted));
 
         console.log(`[SEQUENCER] Calling OpenRouter rewrite (refresh)…`);
         const rewritten = await rewriteArticle(extracted.title, extracted.textContent);
@@ -422,9 +401,24 @@ export async function processQueue() {
         continue;
       }
 
-      // 3. EMBED & DEDUPLICATE (ingest)
-      const embedding = await generateEmbedding(extracted.title + '\n\n' + extracted.textContent.slice(0, 500));
-      const dedup = await checkDuplicate(embedding);
+      // 3. TITLE FINGERPRINT + EMBED + SEMANTIC DEDUP (ingest)
+      const titleDedup = await checkTitleFingerprintDuplicate(supabase, extracted.title);
+      if (titleDedup === 'rpc_error') {
+        console.log(`[SEQUENCER] Title fingerprint RPC failed — failing job (fail-closed).`);
+        await supabase.from('jobs').update({
+          status: 'failed',
+          error_log: 'match_article_title_fingerprint RPC failed; dedup could not run.'
+        }).eq('id', job.id);
+        continue;
+      }
+      if (titleDedup === 'duplicate') {
+        console.log(`[SEQUENCER] Skip logic activated. Title fingerprint duplicate (recent same headline).`);
+        await supabase.from('jobs').update({ status: 'skipped_duplicate' }).eq('id', job.id);
+        continue;
+      }
+
+      const embedding = await generateEmbedding(buildDedupEmbedInput(extracted));
+      const dedup = await checkSemanticDuplicate(supabase, embedding);
 
       if (dedup === 'rpc_error') {
         console.log(`[SEQUENCER] Dedup RPC failed — failing job (fail-closed).`);

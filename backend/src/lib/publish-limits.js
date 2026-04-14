@@ -10,11 +10,11 @@ function envUInt(name, defaultVal) {
 
 /**
  * Defaults from .env only (used when DB row missing or as merge base).
- * Product default: **2 publishes per rolling 60 minutes**; **no daily cap** (perDay=0).
+ * Product default: **3 publishes per rolling 60 minutes**; **no daily cap** (perDay=0).
  */
 export function publishLimitEnvDefaults() {
   return {
-    perHour: envUInt('PUBLISH_LIMIT_PER_HOUR', 2),
+    perHour: envUInt('PUBLISH_LIMIT_PER_HOUR', 3),
     perDay: envUInt('PUBLISH_LIMIT_PER_DAY', 0),
     capSleepMs: envUInt('PUBLISH_CAP_SLEEP_MS', 600000)
   };

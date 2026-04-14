@@ -5,6 +5,8 @@ export const PRIMARY_RUBRIC_SLUGS = [
   'open-source',
   'security',
   'energy',
+  'business',
+  'media',
   'other'
 ];
 
@@ -27,7 +29,7 @@ function tagSlug(t) {
 }
 
 /** Whole-tag slug is exactly one of the nav rubrics (after slugify). First match wins. */
-const RUBRIC_ORDER = ['ai', 'hardware', 'open-source', 'security', 'energy'];
+const RUBRIC_ORDER = ['ai', 'hardware', 'open-source', 'security', 'energy', 'business', 'media'];
 
 const HARDWARE_SEGMENTS = new Set([
   'hardware',
@@ -312,6 +314,123 @@ const ENERGY_SUBSTR = [
   'solar-farm'
 ];
 
+const BUSINESS_SEGMENTS = new Set([
+  'antitrust',
+  'merger',
+  'acquisition',
+  'acquisitions',
+  'earnings',
+  'layoffs',
+  'layoff',
+  'revenue',
+  'lawsuit',
+  'ipo',
+  'valuation',
+  'fundraising',
+  'tariff',
+  'tariffs',
+  'sanctions',
+  'subsidy',
+  'bankruptcy',
+  'restructuring',
+  'buyback',
+  'dividend',
+  'guidance',
+  'ftc',
+  'doj',
+  'litigation',
+  'monopoly',
+  'settlement',
+  'investigation',
+  'quarterly',
+  'shareholder',
+  'stakeholder',
+  'spinoff',
+  'spin-off',
+  'takeover',
+  'lbo'
+]);
+
+const BUSINESS_SUBSTR = [
+  'antitrust',
+  'merger',
+  'acquisition',
+  'earnings-call',
+  'quarterly-earnings',
+  'stock-price',
+  'share-price',
+  'market-cap',
+  'layoffs',
+  'revenue-growth',
+  'profit-warning',
+  'class-action',
+  'regulatory-filing',
+  'eu-fine',
+  'trade-war',
+  'venture-capital',
+  'vc-funding',
+  'funding-round',
+  'series-a',
+  'series-b',
+  'series-c',
+  'going-public',
+  'insider-trading',
+  'price-fixing',
+  'sec-filing',
+  '10-k',
+  '10-q',
+  '8-k'
+];
+
+const MEDIA_SEGMENTS = new Set([
+  'streaming',
+  'netflix',
+  'spotify',
+  'hbo',
+  'disney',
+  'hulu',
+  'esports',
+  'gaming',
+  'playstation',
+  'xbox',
+  'nintendo',
+  'steam',
+  'fortnite',
+  'minecraft',
+  'twitch',
+  'youtube',
+  'podcast',
+  'podcasts',
+  'hollywood',
+  'television',
+  'broadcast',
+  'broadcaster',
+  'soundtrack',
+  'cinemacon',
+  'showrunner',
+  'streamer',
+  'cord-cutting'
+]);
+
+const MEDIA_SUBSTR = [
+  'video-streaming',
+  'music-streaming',
+  'streaming-service',
+  'streaming-platform',
+  'tv-series',
+  'tv-show',
+  'late-night',
+  'box-office',
+  'film-festival',
+  'video-game',
+  'video-games',
+  'game-launch',
+  'game-release',
+  'console-launch',
+  'live-stream',
+  'content-creator'
+];
+
 const AI_PHRASES = [
   'machine-learning',
   'deep-learning',
@@ -439,8 +558,40 @@ function hasEnergySignal(slugs) {
 }
 
 /**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasBusinessSignal(slugs) {
+  for (const s of slugs) {
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (BUSINESS_SEGMENTS.has(seg)) return true;
+    }
+    for (const p of BUSINESS_SUBSTR) {
+      if (s.includes(p.replace(/\s+/g, '-'))) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @param {string[]} slugs
+ * @returns {boolean}
+ */
+function hasMediaSignal(slugs) {
+  for (const s of slugs) {
+    for (const seg of s.split('-').filter(Boolean)) {
+      if (MEDIA_SEGMENTS.has(seg)) return true;
+    }
+    for (const p of MEDIA_SUBSTR) {
+      if (s.includes(p.replace(/\s+/g, '-'))) return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Pick one primary rubric from tags (editorial / SEO). Order: explicit rubric tag → hardware →
- * security → energy → open-source → broad AI signals → other.
+ * security → energy → open-source → broad AI → business → media → other.
  *
  * @param {string[]} tags
  * @returns {string}
@@ -458,6 +609,8 @@ export function inferPrimaryRubricFromTags(tags) {
   /* Before open-source: many ML stacks are discussed alongside Linux/GitHub. */
   if (hasOpenSourceSignal(slugs)) return 'open-source';
   if (hasAiSignal(slugs)) return 'ai';
+  if (hasBusinessSignal(slugs)) return 'business';
+  if (hasMediaSignal(slugs)) return 'media';
 
   return 'other';
 }

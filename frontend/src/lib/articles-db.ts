@@ -224,6 +224,8 @@ const STORED_RUBRIC_SLUGS = new Set([
   'open-source',
   'security',
   'energy',
+  'business',
+  'media',
   'other'
 ]);
 
@@ -548,7 +550,7 @@ export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | 
 export async function getRelatedArticles(
   excludeSlug: string,
   tagHints: string[],
-  limit = 6
+  limit = 8
 ): Promise<{ slug: string; title: string; cover_url: string }[]> {
   const supabase = getServerClient();
   if (!supabase) return [];

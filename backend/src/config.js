@@ -82,8 +82,29 @@ export const config = {
     minChars: 500,
     /** Max raw text length after scrape; higher = more context for the rewriter. */
     maxChars: 14000,
-    /** Stricter = fewer near-duplicate stories (embedding match in match_articles). */
-    similarityThreshold: 0.88,
+    /**
+     * Semantic dedup: match_articles keeps rows where cosine similarity > this value.
+     * Lower = stricter (more jobs skipped as near-duplicates). Override: DEDUP_SIMILARITY_THRESHOLD.
+     */
+    similarityThreshold: (() => {
+      const raw = process.env.DEDUP_SIMILARITY_THRESHOLD;
+      if (raw === undefined || raw === '') return 0.83;
+      const n = Number(raw);
+      if (!Number.isFinite(n)) return 0.83;
+      return Math.min(0.97, Math.max(0.5, n));
+    })(),
+    /** Characters of scraped body mixed into the dedup embedding (after title). */
+    dedupEmbedMaxChars: (() => {
+      const n = Number(process.env.DEDUP_EMBED_MAX_CHARS);
+      if (!Number.isFinite(n) || n < 200) return 1400;
+      return Math.min(8000, Math.floor(n));
+    })(),
+    /** Title fingerprint dedup window (hours). */
+    dedupTitleLookbackHours: (() => {
+      const n = Number(process.env.DEDUP_TITLE_LOOKBACK_HOURS);
+      if (!Number.isFinite(n) || n < 1) return 168;
+      return Math.min(24 * 60, Math.floor(n));
+    })()
   },
   /** Canonical site origin for Telegram / Google links (no trailing slash). */
   publicSiteUrl: (process.env.PUBLIC_SITE_URL || 'https://siliconfeed.online').replace(/\/$/, ''),

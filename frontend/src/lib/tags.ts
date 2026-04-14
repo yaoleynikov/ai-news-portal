@@ -1,17 +1,36 @@
 import { rubricPath } from './seo';
 
-export const NAV_TOPICS = [
+/** Always visible in the header (desktop + mobile drawer). */
+export const NAV_RUBRICS_TOP = [
   { slug: 'ai', label: 'AI' },
   { slug: 'hardware', label: 'Hardware' },
-  { slug: 'open-source', label: 'Open Source' },
-  { slug: 'security', label: 'Security' },
-  { slug: 'energy', label: 'Energy' },
-  { slug: 'other', label: 'More' }
+  { slug: 'security', label: 'Security & privacy' },
+  { slug: 'business', label: 'Business & policy' }
 ] as const;
+
+/** Under the header “More” sections menu. */
+export const NAV_RUBRICS_MORE = [
+  { slug: 'open-source', label: 'Open source' },
+  { slug: 'energy', label: 'Climate & energy' },
+  { slug: 'media', label: 'Apps & media' },
+  { slug: 'other', label: 'Other' }
+] as const;
+
+/** Full section list (order = Topics panel + footer). */
+export const NAV_TOPICS = [...NAV_RUBRICS_TOP, ...NAV_RUBRICS_MORE] as const;
 
 export type TopicSlug = (typeof NAV_TOPICS)[number]['slug'];
 
-const MAIN_RUBRIC_SLUGS: readonly TopicSlug[] = ['ai', 'hardware', 'open-source', 'security', 'energy'];
+/** Rubrics that define the catch-all `other` bucket when `primary_rubric` is missing (tag fallback). */
+const MAIN_RUBRIC_SLUGS: readonly Exclude<TopicSlug, 'other'>[] = [
+  'ai',
+  'hardware',
+  'security',
+  'business',
+  'open-source',
+  'energy',
+  'media'
+];
 
 export function slugifyTag(tag: string): string {
   return tag.trim().toLowerCase().replace(/\s+/g, '-');
@@ -63,6 +82,8 @@ export type TagTheme =
   | 'open-source'
   | 'security'
   | 'energy'
+  | 'business'
+  | 'media'
   | 'automation'
   | 'default';
 
@@ -71,6 +92,10 @@ export function tagThemeSlug(tag: string): TagTheme {
   if (s === 'ai' || s === 'openclaw') return 'ai';
   if (s === 'hardware' || s === 'intel') return 'hardware';
   if (s === 'open-source' || s === 'linux') return 'open-source';
+  if (s === 'security') return 'security';
+  if (s === 'energy') return 'energy';
+  if (s === 'business') return 'business';
+  if (s === 'media') return 'media';
   if (s === 'automation') return 'automation';
   return 'default';
 }
@@ -81,6 +106,8 @@ function rubricThemeFromSlug(slug: string): TagTheme {
   if (slug === 'open-source') return 'open-source';
   if (slug === 'security') return 'security';
   if (slug === 'energy') return 'energy';
+  if (slug === 'business') return 'business';
+  if (slug === 'media') return 'media';
   return 'default';
 }
 

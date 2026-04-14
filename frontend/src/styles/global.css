@@ -288,6 +288,93 @@ a:hover {
   text-decoration: none;
 }
 
+/* Header: extra rubrics under “More” (sections menu) */
+.site-nav__rubrics-more {
+  position: relative;
+}
+
+.site-nav__rubrics-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.2;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.site-nav__rubrics-more-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle);
+}
+
+.site-nav__rubrics-more-btn[aria-expanded='true'],
+.site-nav__rubrics-more-btn--current {
+  color: var(--bg-base);
+  font-weight: 600;
+  background: var(--text-main);
+}
+
+.site-nav__rubrics-more-chevron {
+  font-size: 0.65em;
+  opacity: 0.85;
+  transform: translateY(1px);
+}
+
+.site-nav__rubrics-more-panel[hidden] {
+  display: none !important;
+}
+
+.site-nav__rubrics-more-panel {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  min-width: 13.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  z-index: 240;
+  padding: 0.35rem 0;
+}
+
+.site-nav__rubrics-more-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__rubrics-more-link {
+  display: block;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.site-nav__rubrics-more-link:hover {
+  background: var(--bg-subtle);
+  color: var(--accent);
+}
+
+.site-nav__rubrics-more-link--current {
+  font-weight: 600;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
 .site-nav__about {
   font-size: 0.8125rem;
   font-weight: 500;
@@ -451,8 +538,33 @@ a:hover {
     border-bottom: 1px solid var(--border);
   }
 
-  .site-nav__rubric:last-child {
-    border-bottom: none;
+  .site-nav__rubrics-more {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-nav__rubrics-more-btn {
+    width: 100%;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0.65rem 0.15rem;
+    border-radius: 0;
+  }
+
+  .site-nav__rubrics-more-panel {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 0.35rem;
+    padding: 0.25rem 0;
+    box-shadow: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    max-height: min(55vh, 16rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .site-nav__extras {
@@ -1349,6 +1461,16 @@ a.article-kicker[data-tag-theme='energy'] {
   color: var(--tag-en-fg);
 }
 
+a.article-kicker[data-tag-theme='business'] {
+  border-left-color: var(--tag-bu-bd);
+  color: var(--tag-bu-fg);
+}
+
+a.article-kicker[data-tag-theme='media'] {
+  border-left-color: var(--tag-md-bd);
+  color: var(--tag-md-fg);
+}
+
 .article-dek {
   font-family: var(--font-reading);
   font-size: 1.125rem;
@@ -1669,13 +1791,20 @@ a.article-kicker[data-tag-theme='energy'] {
 
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /* Two columns on small viewports so eight related items form full rows (better scan + no “missing tiles”). */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   /* Match card fill so empty tracks (short last row) are not a grey slab */
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .related-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .related-card {
@@ -1756,6 +1885,12 @@ a.article-kicker[data-tag-theme='energy'] {
   --tag-en-fg: #006064;
   --tag-en-bg: #e0f7fa;
   --tag-en-bd: #4dd0e1;
+  --tag-bu-fg: #4a148c;
+  --tag-bu-bg: #f3e5f5;
+  --tag-bu-bd: #ba68c8;
+  --tag-md-fg: #bf360c;
+  --tag-md-bg: #fbe9e7;
+  --tag-md-bd: #ff8a65;
   --tag-def-fg: #424242;
   --tag-def-bg: #f0f0f0;
   --tag-def-bd: #bdbdbd;
@@ -1781,6 +1916,12 @@ a.article-kicker[data-tag-theme='energy'] {
     --tag-en-fg: #80deea;
     --tag-en-bg: #0d2829;
     --tag-en-bd: #00838f;
+    --tag-bu-fg: #e1bee7;
+    --tag-bu-bg: #25142d;
+    --tag-bu-bd: #8e24aa;
+    --tag-md-fg: #ffab91;
+    --tag-md-bg: #331a14;
+    --tag-md-bd: #d84315;
     --tag-def-fg: #cfcfcf;
     --tag-def-bg: #1e1e1e;
     --tag-def-bd: #555;
@@ -1852,6 +1993,18 @@ a.tag-chip[data-tag-theme='energy'] {
   color: var(--tag-en-fg);
   background: var(--tag-en-bg);
   border-color: var(--tag-en-bd);
+}
+
+a.tag-chip[data-tag-theme='business'] {
+  color: var(--tag-bu-fg);
+  background: var(--tag-bu-bg);
+  border-color: var(--tag-bu-bd);
+}
+
+a.tag-chip[data-tag-theme='media'] {
+  color: var(--tag-md-fg);
+  background: var(--tag-md-bg);
+  border-color: var(--tag-md-bd);
 }
 
 a.tag-chip--compact {

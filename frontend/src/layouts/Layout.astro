@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
-import { NAV_TOPICS, rubricUrl } from '../lib/tags';
+import { NAV_RUBRICS_TOP, NAV_RUBRICS_MORE, NAV_TOPICS, rubricUrl } from '../lib/tags';
 import { buildTopicIndex } from '../lib/taxonomy';
 import { getTopicIndexPool } from '../lib/articles-db';
 
@@ -39,6 +39,8 @@ const themesRubrics = topicIndex.filter((t) => t.kind === 'rubric');
 const themesTags = topicIndex.filter((t) => t.kind === 'tag');
 const themesNavActive =
   pathname.startsWith('/tag/') || pathname.startsWith('/rubric/');
+const moreRubricSlugs = NAV_RUBRICS_MORE.map((t) => t.slug);
+const rubricsMoreNavActive = moreRubricSlugs.some((s) => pathname === `/rubric/${s}`);
 
 /** GA4 web stream; override via PUBLIC_GA_MEASUREMENT_ID on Vercel if needed. */
 const gaMeasurementId =
@@ -144,7 +146,7 @@ const gaMeasurementId =
         <nav class="site-nav" id="site-main-nav" aria-label="Main navigation">
           <div class="site-nav__rubrics">
             {
-              NAV_TOPICS.map(({ slug, label }) => (
+              NAV_RUBRICS_TOP.map(({ slug, label }) => (
                 <a
                   href={rubricUrl(slug)}
                   class:list={[
@@ -156,6 +158,47 @@ const gaMeasurementId =
                 </a>
               ))
             }
+            <div class="site-nav__rubrics-more">
+              <button
+                type="button"
+                class:list={[
+                  'site-nav__rubrics-more-btn',
+                  { 'site-nav__rubrics-more-btn--current': rubricsMoreNavActive }
+                ]}
+                id="site-rubrics-more-btn"
+                aria-expanded="false"
+                aria-controls="site-rubrics-more-panel"
+                aria-haspopup="true"
+                data-rubrics-more-toggle
+              >
+                More<span class="site-nav__rubrics-more-chevron" aria-hidden="true">▾</span>
+              </button>
+              <div
+                id="site-rubrics-more-panel"
+                class="site-nav__rubrics-more-panel"
+                hidden
+                role="region"
+                aria-label="More sections"
+              >
+                <ul class="site-nav__rubrics-more-list">
+                  {
+                    NAV_RUBRICS_MORE.map(({ slug, label }) => (
+                      <li>
+                        <a
+                          href={rubricUrl(slug)}
+                          class:list={[
+                            'site-nav__rubrics-more-link',
+                            { 'site-nav__rubrics-more-link--current': pathname === `/rubric/${slug}` }
+                          ]}
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="site-nav__extras">
             <div class="site-nav__dropdown">
@@ -297,43 +340,94 @@ const gaMeasurementId =
         if (window.__siliconfeedThemesNav) return;
         window.__siliconfeedThemesNav = true;
 
-        document.addEventListener('click', (e) => {
+        function closeThemesDropdown() {
           const panel = document.getElementById('site-themes-panel');
           const btn = document.getElementById('site-themes-btn');
-          if (!(panel instanceof HTMLElement) || !(btn instanceof HTMLButtonElement)) return;
-
-          if (e.target.closest('#site-themes-panel a')) {
+          if (panel instanceof HTMLElement && btn instanceof HTMLButtonElement) {
             panel.hidden = true;
             btn.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        function closeRubricsMoreDropdown() {
+          const panel = document.getElementById('site-rubrics-more-panel');
+          const btn = document.getElementById('site-rubrics-more-btn');
+          if (panel instanceof HTMLElement && btn instanceof HTMLButtonElement) {
+            panel.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        document.addEventListener('click', (e) => {
+          const themesPanel = document.getElementById('site-themes-panel');
+          const themesBtn = document.getElementById('site-themes-btn');
+          const morePanel = document.getElementById('site-rubrics-more-panel');
+          const moreBtn = document.getElementById('site-rubrics-more-btn');
+
+          if (e.target.closest('#site-themes-panel a')) {
+            closeThemesDropdown();
+            return;
+          }
+
+          if (e.target.closest('#site-rubrics-more-panel a')) {
+            closeRubricsMoreDropdown();
             return;
           }
 
           if (e.target.closest('[data-themes-toggle]')) {
             e.stopPropagation();
-            const open = btn.getAttribute('aria-expanded') === 'true';
-            panel.hidden = open;
-            btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+            if (!(themesPanel instanceof HTMLElement) || !(themesBtn instanceof HTMLButtonElement)) return;
+            const open = themesBtn.getAttribute('aria-expanded') === 'true';
+            if (open) {
+              themesPanel.hidden = true;
+              themesBtn.setAttribute('aria-expanded', 'false');
+            } else {
+              closeRubricsMoreDropdown();
+              themesPanel.hidden = false;
+              themesBtn.setAttribute('aria-expanded', 'true');
+            }
             return;
           }
 
-          if (btn.getAttribute('aria-expanded') === 'true' && !panel.contains(e.target)) {
-            panel.hidden = true;
-            btn.setAttribute('aria-expanded', 'false');
+          if (e.target.closest('[data-rubrics-more-toggle]')) {
+            e.stopPropagation();
+            if (!(morePanel instanceof HTMLElement) || !(moreBtn instanceof HTMLButtonElement)) return;
+            const open = moreBtn.getAttribute('aria-expanded') === 'true';
+            if (open) {
+              morePanel.hidden = true;
+              moreBtn.setAttribute('aria-expanded', 'false');
+            } else {
+              closeThemesDropdown();
+              morePanel.hidden = false;
+              moreBtn.setAttribute('aria-expanded', 'true');
+            }
+            return;
+          }
+
+          if (
+            themesPanel instanceof HTMLElement &&
+            themesBtn instanceof HTMLButtonElement &&
+            themesBtn.getAttribute('aria-expanded') === 'true' &&
+            !themesPanel.contains(e.target) &&
+            !themesBtn.contains(e.target)
+          ) {
+            closeThemesDropdown();
+          }
+          if (
+            morePanel instanceof HTMLElement &&
+            moreBtn instanceof HTMLButtonElement &&
+            moreBtn.getAttribute('aria-expanded') === 'true' &&
+            !morePanel.contains(e.target) &&
+            !moreBtn.contains(e.target)
+          ) {
+            closeRubricsMoreDropdown();
           }
         });
 
         document.addEventListener('keydown', (e) => {
           if (e.key !== 'Escape') return;
-          const panel = document.getElementById('site-themes-panel');
-          const btn = document.getElementById('site-themes-btn');
-          if (
-            panel instanceof HTMLElement &&
-            btn instanceof HTMLButtonElement &&
-            btn.getAttribute('aria-expanded') === 'true'
-          ) {
-            panel.hidden = true;
-            btn.setAttribute('aria-expanded', 'false');
-          }
+          closeThemesDropdown();
+          closeRubricsMoreDropdown();
         });
       })();
 
@@ -362,6 +456,16 @@ const gaMeasurementId =
           ) {
             themesPanel.hidden = true;
             themesBtn.setAttribute('aria-expanded', 'false');
+          }
+          const moreBtn = document.getElementById('site-rubrics-more-btn');
+          const morePanel = document.getElementById('site-rubrics-more-panel');
+          if (
+            moreBtn instanceof HTMLButtonElement &&
+            morePanel instanceof HTMLElement &&
+            moreBtn.getAttribute('aria-expanded') === 'true'
+          ) {
+            morePanel.hidden = true;
+            moreBtn.setAttribute('aria-expanded', 'false');
           }
         }
 

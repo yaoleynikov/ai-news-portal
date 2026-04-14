@@ -9,33 +9,17 @@ import { uploadToR2 } from '../media/uploader.js';
 import { insertPublishedArticleRow } from '../lib/slug.js';
 import { clipSourceForRewriter } from '../lib/rewrite-length-quality.js';
 import { notifyGoogleUrlUpdated, isGoogleIndexingConfigured } from '../lib/google-indexing.js';
+import {
+  buildDedupEmbedInput,
+  checkSemanticDuplicate,
+  checkTitleFingerprintDuplicate
+} from '../lib/dedup.js';
 
 function coverSavePath(requestedPath, extension) {
   const resolved = path.resolve(requestedPath);
   const dir = path.dirname(resolved);
   const base = path.basename(resolved, path.extname(resolved));
   return path.join(dir, `${base}.${extension}`);
-}
-
-/** @returns {Promise<'ok'|'duplicate'|'rpc_error'>} */
-async function checkDuplicate(embedding) {
-  try {
-    const { data, error } = await supabase.rpc('match_articles', {
-      query_embedding: `[${embedding.join(',')}]`,
-      match_threshold: config.limits.similarityThreshold,
-      match_count: 1
-    });
-
-    if (error) {
-      console.warn('[PIPELINE] match_articles RPC failed:', error.message);
-      return 'rpc_error';
-    }
-    if (data && data.length > 0) return 'duplicate';
-    return 'ok';
-  } catch (e) {
-    console.warn('[PIPELINE] match_articles exception:', e.message);
-    return 'rpc_error';
-  }
 }
 
 /**
@@ -86,16 +70,27 @@ export async function runArticlePipeline(url, opts = {}) {
 
     let embedding = null;
     if (!localOnly) {
-      embedding = await generateEmbedding(
-        extracted.title + '\n\n' + extracted.textContent.slice(0, 500)
-      );
+      if (!skipDedup) {
+        const titleDedup = await checkTitleFingerprintDuplicate(supabase, extracted.title);
+        result.steps.push(`dedup_title:${titleDedup}`);
+        if (titleDedup === 'rpc_error') {
+          result.error = 'dedup_title_rpc_failed';
+          return result;
+        }
+        if (titleDedup === 'duplicate') {
+          result.error = 'duplicate_title';
+          return result;
+        }
+      }
+
+      embedding = await generateEmbedding(buildDedupEmbedInput(extracted));
       result.steps.push('embed');
     }
 
     if (!skipDedup && embedding) {
-      const dedup = await checkDuplicate(embedding);
+      const dedup = await checkSemanticDuplicate(supabase, embedding);
       result.dedup = dedup;
-      result.steps.push(`dedup:${dedup}`);
+      result.steps.push(`dedup_semantic:${dedup}`);
       if (dedup === 'rpc_error') {
         result.error = 'dedup_rpc_failed';
         return result;
