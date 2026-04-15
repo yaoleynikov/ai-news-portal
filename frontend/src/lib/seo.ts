@@ -3,7 +3,7 @@
  *
  * Routes:
  * - /news/[slug]     — articles (Latin, hyphens; stable CMS slug, not id)
- * - /rubric/[slug]   — editorial sections from the nav (ai, hardware, open-source, security, energy, other)
+ * - /rubric/[slug]   — editorial sections from the nav (see NAV_TOPICS in lib/tags)
  * - /tag/[slug]      — all topic tags, including narrow ones (openclaw, intel, …)
  *
  * Rule: in nav and breadcrumbs, primary topics link to /rubric/; secondary tags use /tag/ only.

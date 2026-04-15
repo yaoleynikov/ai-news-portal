@@ -685,14 +685,82 @@ export async function getTaxonomyArticlePool(
     }));
 }
 
-export async function listAllPublishedSlugs(): Promise<string[]> {
+/** PostgREST default page size; paginate so the news sitemap never truncates. */
+const SITEMAP_NEWS_PAGE_SIZE = 1000;
+
+export type SitemapNewsEntry = { slug: string; lastmod: string };
+
+function lastmodDayFromRow(row: { updated_at?: unknown; created_at?: unknown }): string {
+  const u = row.updated_at;
+  const c = row.created_at;
+  const iso =
+    typeof u === 'string' && u.trim()
+      ? u
+      : typeof c === 'string' && c.trim()
+        ? c
+        : new Date().toISOString();
+  return iso.slice(0, 10);
+}
+
+/**
+ * All published article URLs for `/news-sitemap.xml`, with real `lastmod` (day granularity).
+ */
+export async function listPublishedNewsForSitemap(): Promise<SitemapNewsEntry[]> {
   const supabase = getServerClient();
-  if (!supabase) return ARTICLES.map((a) => a.slug);
+  if (!supabase) {
+    return ARTICLES.map((a) => ({
+      slug: a.slug,
+      lastmod: lastmodDayFromRow({ updated_at: a.updated_at, created_at: a.created_at })
+    }));
+  }
 
-  const { data, error } = await supabase.from('articles').select('slug').eq('status', 'published').not('slug', 'is', null);
+  const out: SitemapNewsEntry[] = [];
+  const seen = new Set<string>();
+  let offset = 0;
 
-  if (error || !data) return ARTICLES.map((a) => a.slug);
-  return data.map((r) => r.slug).filter((s): s is string => typeof s === 'string');
+  for (;;) {
+    let { data, error } = await supabase
+      .from('articles')
+      .select('slug, updated_at, created_at')
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('created_at', { ascending: false })
+      .range(offset, offset + SITEMAP_NEWS_PAGE_SIZE - 1);
+
+    if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
+      ({ data, error } = await supabase
+        .from('articles')
+        .select('slug, created_at')
+        .eq('status', 'published')
+        .not('slug', 'is', null)
+        .order('created_at', { ascending: false })
+        .range(offset, offset + SITEMAP_NEWS_PAGE_SIZE - 1));
+    }
+
+    if (error || !data?.length) break;
+
+    for (const row of data) {
+      const slug = typeof row.slug === 'string' ? row.slug.trim() : '';
+      if (!slug || seen.has(slug)) continue;
+      seen.add(slug);
+      out.push({ slug, lastmod: lastmodDayFromRow(row as { updated_at?: unknown; created_at?: unknown }) });
+    }
+
+    if (data.length < SITEMAP_NEWS_PAGE_SIZE) break;
+    offset += SITEMAP_NEWS_PAGE_SIZE;
+  }
+
+  if (out.length === 0) {
+    return ARTICLES.map((a) => ({
+      slug: a.slug,
+      lastmod: lastmodDayFromRow({ updated_at: a.updated_at, created_at: a.created_at })
+    }));
+  }
+  return out;
+}
+
+export async function listAllPublishedSlugs(): Promise<string[]> {
+  return (await listPublishedNewsForSitemap()).map((e) => e.slug);
 }
 
 export async function getArticleIdSlugMap(): Promise<Map<string, string>> {
