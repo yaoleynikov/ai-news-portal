@@ -10,6 +10,14 @@ const CARD_FIELDS_CORE =
   'id, slug, title, content_md, tags, cover_url, cover_type, created_at, source_url, faq, entities, sentiment, status, primary_rubric';
 const CARD_FIELDS = `${CARD_FIELDS_CORE}, dek, updated_at`;
 
+/**
+ * Listings and cards: no `content_md` / `faq` / `entities` — massive Supabase egress savings on
+ * /rubric/*, /tag/* (up to TOPIC_LISTING_FETCH_CAP rows per request). Excerpt comes from `dek` or title.
+ */
+const LISTING_CARD_FIELDS_CORE =
+  'id, slug, title, tags, cover_url, cover_type, created_at, source_url, sentiment, status, primary_rubric';
+const LISTING_CARD_FIELDS = `${LISTING_CARD_FIELDS_CORE}, dek, updated_at`;
+
 function shouldRetryArticleSelectWithoutNewColumns(error: { message?: string; code?: string } | null): boolean {
   if (!error) return false;
   const msg = String(error.message || '').toLowerCase();
@@ -279,7 +287,7 @@ export function rowToNewsArticle(row: Record<string, unknown>): NewsArticle | nu
   const storedDek = typeof row.dek === 'string' ? row.dek.replace(/\s+/g, ' ').trim() : '';
   const fallbackDek = excerptFromMarkdown(stripLeadingTakeawaysBlock(content_md), 280);
   const dek = storedDek || fallbackDek;
-  const excerpt = clipListingExcerpt(dek);
+  const excerpt = clipListingExcerpt(dek || title);
   const primary_rubric = normalizeStoredPrimaryRubric(row.primary_rubric);
   return {
     id,
@@ -398,7 +406,7 @@ export async function getListingArticlesRange(offset: number, limit: number): Pr
   const end = offset + limit - 1;
   let { data, error } = await supabase
     .from('articles')
-    .select(CARD_FIELDS)
+    .select(LISTING_CARD_FIELDS)
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
@@ -407,7 +415,7 @@ export async function getListingArticlesRange(offset: number, limit: number): Pr
   if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
     ({ data, error } = await supabase
       .from('articles')
-      .select(CARD_FIELDS_CORE)
+      .select(LISTING_CARD_FIELDS_CORE)
       .eq('status', 'published')
       .not('slug', 'is', null)
       .order('created_at', { ascending: false })
@@ -489,7 +497,7 @@ export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
 
   let { data, error } = await supabase
     .from('articles')
-    .select(CARD_FIELDS)
+    .select(LISTING_CARD_FIELDS)
     .eq('status', 'published')
     .not('slug', 'is', null)
     .order('created_at', { ascending: false })
@@ -498,7 +506,7 @@ export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
   if (error && shouldRetryArticleSelectWithoutNewColumns(error)) {
     ({ data, error } = await supabase
       .from('articles')
-      .select(CARD_FIELDS_CORE)
+      .select(LISTING_CARD_FIELDS_CORE)
       .eq('status', 'published')
       .not('slug', 'is', null)
       .order('created_at', { ascending: false })
@@ -515,6 +523,91 @@ export async function getListingArticles(limit = 80): Promise<MockArticle[]> {
     if (a) out.push(toMock(a));
   }
   return out.length ? out : MOCK_FALLBACK;
+}
+
+/** Co-occurring tags for relatedTopicsForSlug — matches TopicIndexPoolArticle shape */
+export type TopicListingRelatedSource = { tags: string[]; primary_rubric?: string };
+
+export type TopicListingPagePayload = {
+  list: MockArticle[];
+  total: number;
+  years: number[];
+  relatedSources: TopicListingRelatedSource[];
+};
+
+function rpcRowsToMocks(rows: unknown): MockArticle[] {
+  if (!Array.isArray(rows)) return [];
+  const out: MockArticle[] = [];
+  for (const row of rows) {
+    const a = rowToNewsArticle(row as Record<string, unknown>);
+    if (a) out.push(toMock(a));
+  }
+  return out;
+}
+
+function rpcParseYears(raw: unknown): number[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((y): y is number => typeof y === 'number' && Number.isFinite(y));
+}
+
+function rpcParseRelatedSources(raw: unknown): TopicListingRelatedSource[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((r) => {
+    const o = r as Record<string, unknown>;
+    const tags = Array.isArray(o.tags) ? o.tags.filter((t): t is string => typeof t === 'string') : [];
+    const pr = normalizeStoredPrimaryRubric(o.primary_rubric);
+    return pr ? { tags, primary_rubric: pr } : { tags };
+  });
+}
+
+/**
+ * Single RPC for /rubric/* — filters in Postgres, returns one page + facets (no 2000-row download).
+ * Returns null if RPC missing (migration not applied) so callers can fall back.
+ */
+export async function fetchRubricPagePayload(
+  topicSlug: string,
+  page: number
+): Promise<TopicListingPagePayload | null> {
+  const supabase = getServerClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase.rpc('rubric_page_payload', {
+    p_topic_slug: topicSlug,
+    p_page_num: page,
+    p_page_size: LISTING_PAGE_SIZE
+  });
+
+  if (error || data == null || typeof data !== 'object') return null;
+
+  const o = data as Record<string, unknown>;
+  return {
+    list: rpcRowsToMocks(o.rows),
+    total: Number(o.total ?? 0),
+    years: rpcParseYears(o.years),
+    relatedSources: rpcParseRelatedSources(o.related_sources)
+  };
+}
+
+/** Single RPC for /tag/* — same egress profile as rubric_page_payload. */
+export async function fetchTagPagePayload(tagSlug: string, page: number): Promise<TopicListingPagePayload | null> {
+  const supabase = getServerClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase.rpc('tag_page_payload', {
+    p_tag_slug: tagSlug,
+    p_page_num: page,
+    p_page_size: LISTING_PAGE_SIZE
+  });
+
+  if (error || data == null || typeof data !== 'object') return null;
+
+  const o = data as Record<string, unknown>;
+  return {
+    list: rpcRowsToMocks(o.rows),
+    total: Number(o.total ?? 0),
+    years: rpcParseYears(o.years),
+    relatedSources: rpcParseRelatedSources(o.related_sources)
+  };
 }
 
 export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {

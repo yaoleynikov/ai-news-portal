@@ -2,11 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import ListingToolbar from '../../components/ListingToolbar.astro';
 import Pagination from '../../components/Pagination.astro';
+import type { MockArticle } from '../../data/mock-articles';
 import { NAV_TOPICS, articleInRubric, tagUrl, tagThemeSlug } from '../../lib/tags';
-import { absoluteUrl, articlePath } from '../../lib/seo';
+import { articlePath } from '../../lib/seo';
 import { publicationYears, relatedTopicsForSlug } from '../../lib/taxonomy';
 import {
   coverImageRequestAttrs,
+  fetchRubricPagePayload,
   getListingArticles,
   LISTING_PAGE_SIZE,
   parseListingPageParam,
@@ -17,7 +19,7 @@ export const prerender = false;
 
 Astro.response.headers.set(
   'Cache-Control',
-  'public, s-maxage=120, stale-while-revalidate=3600'
+  'public, s-maxage=300, stale-while-revalidate=3600'
 );
 
 function rubricLabel(slug: string): string {
@@ -26,25 +28,45 @@ function rubricLabel(slug: string): string {
 }
 
 const requestedPage = parseListingPageParam(Astro.url.searchParams.get('page'));
-const pool = await getListingArticles(TOPIC_LISTING_FETCH_CAP);
 const { slug } = Astro.params;
 const rubricSlug = slug ?? '';
 const validRubric = NAV_TOPICS.some((t) => t.slug === rubricSlug);
 if (!validRubric) {
   Astro.response.status = 404;
 }
-const label = rubricSlug ? rubricLabel(rubricSlug) : '';
-const listFull = validRubric ? pool.filter((a) => articleInRubric(a, rubricSlug)) : [];
-const totalPages =
-  listFull.length === 0 ? 1 : Math.max(1, Math.ceil(listFull.length / LISTING_PAGE_SIZE));
-const page = Math.min(requestedPage, totalPages);
-const listStart = (page - 1) * LISTING_PAGE_SIZE;
-const list = listFull.slice(listStart, listStart + LISTING_PAGE_SIZE);
-const years = publicationYears(listFull.length > 0 ? listFull : pool);
-const related = rubricSlug && validRubric ? relatedTopicsForSlug(pool, rubricSlug, 14) : [];
 
-const siteOrigin = Astro.site ?? 'https://siliconfeed.online';
-const canonicalPath = page > 1 ? `${Astro.url.pathname}?page=${page}` : Astro.url.pathname;
+const label = rubricSlug ? rubricLabel(rubricSlug) : '';
+
+let list: MockArticle[] = [];
+let page = requestedPage;
+let totalPages = 1;
+let years: number[] = [];
+let related: ReturnType<typeof relatedTopicsForSlug> = [];
+
+if (validRubric) {
+  let rpc = await fetchRubricPagePayload(rubricSlug, requestedPage);
+  if (rpc) {
+    totalPages = rpc.total === 0 ? 1 : Math.max(1, Math.ceil(rpc.total / LISTING_PAGE_SIZE));
+    page = Math.min(requestedPage, totalPages);
+    if (page !== requestedPage) {
+      rpc = await fetchRubricPagePayload(rubricSlug, page);
+    }
+    if (rpc) {
+      list = rpc.list;
+      years = rpc.years;
+      related = relatedTopicsForSlug(rpc.relatedSources, rubricSlug, 14);
+    }
+  } else {
+    const pool = await getListingArticles(TOPIC_LISTING_FETCH_CAP);
+    const listFull = pool.filter((a) => articleInRubric(a, rubricSlug));
+    totalPages = listFull.length === 0 ? 1 : Math.max(1, Math.ceil(listFull.length / LISTING_PAGE_SIZE));
+    page = Math.min(requestedPage, totalPages);
+    const listStart = (page - 1) * LISTING_PAGE_SIZE;
+    list = listFull.slice(listStart, listStart + LISTING_PAGE_SIZE);
+    years = publicationYears(listFull.length > 0 ? listFull : pool);
+    related = relatedTopicsForSlug(pool, rubricSlug, 14);
+  }
+}
 
 function formatListDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', {

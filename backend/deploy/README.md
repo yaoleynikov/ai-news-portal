@@ -5,6 +5,30 @@
 Здесь только **backend-воркер** в Docker: RSS → очередь `jobs` → скрейп → рерайт → обложка → Supabase/R2 → Telegram / Google Indexing.  
 Фронт (например Vercel) ходит в ту же Supabase; главная и лента обновляются за счёт короткого CDN-кеша (`s-maxage` порядка минуты), отдельный webhook для «подтянуть новость» не обязателен.
 
+## Миграция 0017 (egress: рубрики и теги) — сделайте после `git pull`
+
+Новый SQL: `backend/supabase/migrations/0017_listing_page_payload_rpcs.sql` — функции `rubric_page_payload` и `tag_page_payload`. Без них фронт на Vercel **сам откатится** на старый режим (тяжёлая выборка), но **лучше применить миграцию к проекту Supabase**.
+
+**Вариант A — Supabase Dashboard**
+
+1. Откройте [Supabase Dashboard](https://supabase.com/dashboard) → ваш проект → **SQL Editor**.
+2. Создайте новый запрос, вставьте **весь** текст файла `0017_listing_page_payload_rpcs.sql` из репозитория.
+3. Выполните (**Run**). Ошибок быть не должно; появятся функции `rubric_page_payload`, `tag_page_payload` и вспомогательные.
+
+**Вариант B — Supabase CLI** (если проект уже связан с `supabase link`)
+
+```bash
+cd backend
+npx supabase db push
+```
+
+**Проверка**
+
+- В SQL Editor: `select public.rubric_page_payload('ai', 1, 15);` — должен вернуться `jsonb` с полями `total`, `rows`, `years`, `related_sources`.
+- Сайт: откройте `/rubric/ai` и любой `/tag/...` — раздел и «Related tags» ведут себя как раньше; в **Usage → Egress** нагрузка должна снизиться при том же трафике.
+
+---
+
 ## Что уже работает без вашего участия
 
 | Что | Как |

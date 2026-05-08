@@ -60,14 +60,19 @@ export function publicationYears(articles: ArticleWithDate[]): number[] {
   return [...years].sort((a, b) => b - a);
 }
 
-/** Tags co-occurring on articles with the current tag — for cross-linking */
+/** Tags co-occurring on articles in the current topic — use scope `tag` on /tag/* so membership matches tag facets, not only primary_rubric. */
 export function relatedTopicsForSlug(
   articles: ArticleTagSource[],
   currentSlug: string,
-  limit = 12
+  limit = 12,
+  scope: 'rubric' | 'tag' = 'rubric'
 ): { slug: string; label: string; count: number; href: string; kind: TopicKind }[] {
   const rubricSlugs = new Set(NAV_TOPICS.map((t) => t.slug));
-  const inTopic = articles.filter((a) => articleInRubric(a, currentSlug));
+  const inTopic = articles.filter((a) =>
+    scope === 'tag'
+      ? articleMatchesTopic(a.tags, currentSlug)
+      : articleInRubric(a, currentSlug)
+  );
   const acc = new Map<string, { label: string; count: number }>();
 
   for (const article of inTopic) {
