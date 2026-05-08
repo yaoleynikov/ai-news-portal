@@ -29,6 +29,8 @@ npx supabase db push
 
 ---
 
+Если при первом запуске `0017` была ошибка **`column a.updated_at does not exist`**: в вашей БД у `public.articles` нет `updated_at` (фронт терпит это через retry). Подтяните репозиторий и выполните в SQL Editor **`0018_listing_rpc_fix_no_updated_at.sql`** (или весь обновлённый `0017` без `updated_at`) — он только пересоздаёт `rubric_page_payload` и `tag_page_payload` без этой колонки.
+
 ## Что уже работает без вашего участия
 
 | Что | Как |
